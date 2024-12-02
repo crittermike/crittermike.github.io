@@ -21,17 +21,21 @@
         }
         .input-group {
             margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         input {
-            width: 100%;
+            flex: 1;
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
+            min-width: 120px;
         }
         button {
-            width: 100%;
+            flex: 1;
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -40,6 +44,7 @@
             font-size: 16px;
             cursor: pointer;
             margin-bottom: 5px;
+            min-width: 120px;
         }
         button:hover {
             background-color: #45a049;
@@ -72,6 +77,32 @@
         button.delete:hover {
             background-color: #c82333;
         }
+        button.edit {
+            background-color: #ffc107;
+            padding: 6px 12px;
+            width: auto;
+            margin: 0;
+        }
+        button.edit:hover {
+            background-color: #e0a800;
+        }
+        button.icon {
+            background: transparent;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: auto;
+            min-width: unset;
+            margin: 0;
+        }
+        button.icon:hover {
+            transform: scale(1.1);
+            background: transparent;
+        }
+        button.edit:hover, button.delete:hover {
+            background: transparent;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +134,30 @@
 
     <script>
         let totalCals = 0;
+        let foods = [];  // Array to track all food entries
+
+        // Load saved data when page loads
+        window.addEventListener('load', () => {
+            const savedFoods = localStorage.getItem('foods');
+            if (savedFoods) {
+                foods = JSON.parse(savedFoods);
+                foods.forEach(food => {
+                    const foodList = document.getElementById('foodList');
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td>${food.name}</td>
+                        <td>${food.calories}</td>
+                        <td>
+                            <button onclick="editFood(this)" class="icon edit" title="Edit">✏️</button>
+                            <button onclick="deleteFood(this)" class="icon delete" title="Delete">🗑️</button>
+                        </td>
+                    `;
+                    foodList.appendChild(newRow);
+                    totalCals += food.calories;
+                });
+                document.getElementById('totalCalories').textContent = totalCals;
+            }
+        });
 
         function addFood(event) {
             event.preventDefault();
@@ -115,17 +170,25 @@
             }
 
             const food = { name: foodName, calories: calories };
+            foods.push(food);  // Add to foods array
+            
             const foodList = document.getElementById('foodList');
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
                 <td>${foodName}</td>
                 <td>${calories}</td>
-                <td><button onclick="deleteFood(this)" class="delete">Delete</button></td>
+                <td>
+                    <button onclick="editFood(this)" class="icon edit" title="Edit">✏️</button>
+                    <button onclick="deleteFood(this)" class="icon delete" title="Delete">🗑️</button>
+                </td>
             `;
             foodList.appendChild(newRow);
 
             totalCals += calories;
             document.getElementById('totalCalories').textContent = totalCals;
+
+            // Save to localStorage
+            localStorage.setItem('foods', JSON.stringify(foods));
 
             // Clear inputs
             document.getElementById('foodName').value = '';
@@ -134,7 +197,13 @@
 
         function deleteFood(button) {
             const row = button.closest('tr');
+            const foodName = row.cells[0].textContent;
             const calories = parseInt(row.cells[1].textContent);
+            
+            // Remove from foods array
+            foods = foods.filter(food => 
+                !(food.name === foodName && food.calories === calories)
+            );
             
             // Update total calories
             totalCals -= calories;
@@ -142,12 +211,35 @@
             
             // Remove the row
             row.remove();
+
+            // Save updated foods to localStorage
+            localStorage.setItem('foods', JSON.stringify(foods));
         }
 
         function clearAll() {
-            document.getElementById('foodList').innerHTML = '';
-            totalCals = 0;
-            document.getElementById('totalCalories').textContent = '0';
+            if (confirm('Are you sure you want to clear all entries?')) {
+                document.getElementById('foodList').innerHTML = '';
+                foods = [];
+                totalCals = 0;
+                document.getElementById('totalCalories').textContent = '0';
+                localStorage.removeItem('foods');
+            }
+        }
+
+        function editFood(button) {
+            const row = button.closest('tr');
+            const foodName = row.cells[0].textContent;
+            const calories = row.cells[1].textContent;
+            
+            // Populate the form with current values
+            document.getElementById('foodName').value = foodName;
+            document.getElementById('calories').value = calories;
+            
+            // Remove the old entry
+            deleteFood(button);
+            
+            // Focus on the food name input
+            document.getElementById('foodName').focus();
         }
     </script>
 </body>
