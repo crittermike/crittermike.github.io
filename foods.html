@@ -282,6 +282,14 @@
             }
             localStorage.setItem('lastSaveDate', today);
         }
+
+        // Add this to your existing JavaScript
+        document.getElementById('foodName').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission
+                document.getElementById('calories').focus();
+            }
+        });
     </script>
 </body>
 </html>
