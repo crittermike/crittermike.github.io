@@ -146,6 +146,13 @@
                 display: block;
             }
         }
+        button.pin {
+            background: transparent;
+            opacity: 0.3;
+        }
+        button.pin.pinned {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +177,6 @@
             <tr>
                 <th>Food</th>
                 <th>Calories</th>
-                <th>Time</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -224,7 +230,8 @@
             const food = { 
                 name: foodName.slice(0, 50),
                 calories,
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                pinned: false
             };
             foods.push(food);
             
@@ -237,12 +244,11 @@
         function addFoodToTable(food) {
             const foodList = document.getElementById('foodList');
             const newRow = document.createElement('tr');
-            const time = new Date(food.date).toLocaleTimeString();
             newRow.innerHTML = `
                 <td>${food.name}</td>
                 <td>${food.calories}</td>
-                <td><small>${time}</small></td>
                 <td>
+                    <button onclick="togglePin(this)" class="icon pin ${food.pinned ? 'pinned' : ''}" title="Pin">📌</button>
                     <button onclick="editFood(this)" class="icon edit" title="Edit">✏️</button>
                     <button onclick="deleteFood(this)" class="icon delete" title="Delete">🗑️</button>
                 </td>
@@ -277,10 +283,12 @@
 
         function clearAll(showConfirmation = true) {
             if (!showConfirmation || confirm('Are you sure you want to clear all entries?')) {
+                const pinnedFoods = foods.filter(food => food.pinned);
                 document.getElementById('foodList').innerHTML = '';
-                foods = [];
+                foods = pinnedFoods;
+                pinnedFoods.forEach(addFoodToTable);
                 updateTotalCalories();
-                localStorage.removeItem('foods');
+                saveToLocalStorage();
             }
         }
 
@@ -309,9 +317,30 @@
             const today = new Date().toDateString();
             
             if (lastSaved && lastSaved !== today) {
-                clearAll(false); // false = don't show confirmation
+                const pinnedFoods = foods.filter(food => food.pinned);
+                foods = pinnedFoods;
+                document.getElementById('foodList').innerHTML = '';
+                pinnedFoods.forEach(addFoodToTable);
+                updateTotalCalories();
+                saveToLocalStorage();
             }
             localStorage.setItem('lastSaveDate', today);
+        }
+
+        function togglePin(button) {
+            const row = button.closest('tr');
+            const foodName = row.cells[0].textContent;
+            const calories = parseInt(row.cells[1].textContent);
+            
+            const foodIndex = foods.findIndex(food => 
+                food.name === foodName && food.calories === calories
+            );
+            
+            if (foodIndex !== -1) {
+                foods[foodIndex].pinned = !foods[foodIndex].pinned;
+                button.classList.toggle('pinned');
+                saveToLocalStorage();
+            }
         }
 
         // Add this to your existing JavaScript
