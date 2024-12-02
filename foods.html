@@ -103,6 +103,21 @@
         button.edit:hover, button.delete:hover {
             background: transparent;
         }
+        .row-delete {
+            animation: fadeOut 0.3s ease-out;
+        }
+        .row-add {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -124,6 +139,7 @@
             <tr>
                 <th>Food</th>
                 <th>Calories</th>
+                <th>Time</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -134,65 +150,73 @@
 
     <script>
         let totalCals = 0;
-        let foods = [];  // Array to track all food entries
+        let foods = [];
 
-        // Load saved data when page loads
+        // Single load event listener that handles both initialization tasks
         window.addEventListener('load', () => {
-            const savedFoods = localStorage.getItem('foods');
-            if (savedFoods) {
-                foods = JSON.parse(savedFoods);
-                foods.forEach(food => {
-                    const foodList = document.getElementById('foodList');
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td>${food.name}</td>
-                        <td>${food.calories}</td>
-                        <td>
-                            <button onclick="editFood(this)" class="icon edit" title="Edit">✏️</button>
-                            <button onclick="deleteFood(this)" class="icon delete" title="Delete">🗑️</button>
-                        </td>
-                    `;
-                    foodList.appendChild(newRow);
-                    totalCals += food.calories;
-                });
-                document.getElementById('totalCalories').textContent = totalCals;
+            loadSavedFoods();
+            checkForNewDay();
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                document.querySelector('form button[type="submit"]').click();
             }
         });
 
+        function loadSavedFoods() {
+            try {
+                const savedFoods = localStorage.getItem('foods');
+                if (savedFoods) {
+                    foods = JSON.parse(savedFoods);
+                    foods.forEach(addFoodToTable);
+                    updateTotalCalories();
+                }
+            } catch (e) {
+                console.error('Failed to load saved foods:', e);
+                foods = [];
+            }
+        }
+
         function addFood(event) {
             event.preventDefault();
-            const foodName = document.getElementById('foodName').value;
+            
+            const foodName = document.getElementById('foodName').value.trim();
             const calories = parseInt(document.getElementById('calories').value);
 
-            if (!foodName || !calories) {
-                alert('Please fill in both fields');
+            if (!foodName || !calories || calories < 0 || calories > 5000) {
+                alert('Please enter a valid food name and calories (0-5000)');
                 return;
             }
 
-            const food = { name: foodName, calories: calories };
-            foods.push(food);  // Add to foods array
+            const food = { 
+                name: foodName.slice(0, 50),
+                calories,
+                date: new Date().toISOString()
+            };
+            foods.push(food);
             
+            addFoodToTable(food);
+            updateTotalCalories();
+            saveToLocalStorage();
+            clearForm();
+        }
+
+        function addFoodToTable(food) {
             const foodList = document.getElementById('foodList');
             const newRow = document.createElement('tr');
+            const time = new Date(food.date).toLocaleTimeString();
             newRow.innerHTML = `
-                <td>${foodName}</td>
-                <td>${calories}</td>
+                <td>${food.name}</td>
+                <td>${food.calories}</td>
+                <td><small>${time}</small></td>
                 <td>
                     <button onclick="editFood(this)" class="icon edit" title="Edit">✏️</button>
                     <button onclick="deleteFood(this)" class="icon delete" title="Delete">🗑️</button>
                 </td>
             `;
             foodList.appendChild(newRow);
-
-            totalCals += calories;
-            document.getElementById('totalCalories').textContent = totalCals;
-
-            // Save to localStorage
-            localStorage.setItem('foods', JSON.stringify(foods));
-
-            // Clear inputs
-            document.getElementById('foodName').value = '';
-            document.getElementById('calories').value = '';
         }
 
         function deleteFood(button) {
@@ -200,46 +224,63 @@
             const foodName = row.cells[0].textContent;
             const calories = parseInt(row.cells[1].textContent);
             
-            // Remove from foods array
             foods = foods.filter(food => 
                 !(food.name === foodName && food.calories === calories)
             );
             
-            // Update total calories
-            totalCals -= calories;
-            document.getElementById('totalCalories').textContent = totalCals;
-            
-            // Remove the row
             row.remove();
-
-            // Save updated foods to localStorage
-            localStorage.setItem('foods', JSON.stringify(foods));
-        }
-
-        function clearAll() {
-            if (confirm('Are you sure you want to clear all entries?')) {
-                document.getElementById('foodList').innerHTML = '';
-                foods = [];
-                totalCals = 0;
-                document.getElementById('totalCalories').textContent = '0';
-                localStorage.removeItem('foods');
-            }
+            updateTotalCalories();
+            saveToLocalStorage();
         }
 
         function editFood(button) {
             const row = button.closest('tr');
-            const foodName = row.cells[0].textContent;
-            const calories = row.cells[1].textContent;
             
-            // Populate the form with current values
-            document.getElementById('foodName').value = foodName;
-            document.getElementById('calories').value = calories;
+            // Populate form
+            document.getElementById('foodName').value = row.cells[0].textContent;
+            document.getElementById('calories').value = row.cells[1].textContent;
             
-            // Remove the old entry
             deleteFood(button);
-            
-            // Focus on the food name input
             document.getElementById('foodName').focus();
+        }
+
+        function clearAll(showConfirmation = true) {
+            if (!showConfirmation || confirm('Are you sure you want to clear all entries?')) {
+                document.getElementById('foodList').innerHTML = '';
+                foods = [];
+                updateTotalCalories();
+                localStorage.removeItem('foods');
+            }
+        }
+
+        function updateTotalCalories() {
+            totalCals = foods.reduce((sum, food) => sum + food.calories, 0);
+            document.getElementById('totalCalories').textContent = totalCals;
+        }
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('foods', JSON.stringify(foods));
+            } catch (e) {
+                console.error('Failed to save to localStorage:', e);
+                alert('Failed to save data. Local storage might be full.');
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('foodName').value = '';
+            document.getElementById('calories').value = '';
+            document.getElementById('foodName').focus();
+        }
+
+        function checkForNewDay() {
+            const lastSaved = localStorage.getItem('lastSaveDate');
+            const today = new Date().toDateString();
+            
+            if (lastSaved && lastSaved !== today) {
+                clearAll(false); // false = don't show confirmation
+            }
+            localStorage.setItem('lastSaveDate', today);
         }
     </script>
 </body>
