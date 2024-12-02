@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stupid Meme Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .drop-zone.dragover {
+            background: #e9e9e9;
+            border-color: #999;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .meme-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .meme-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: Impact, sans-serif;
+            font-size: 36px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 #000,
+                        -2px -2px 0 #000,
+                        2px -2px 0 #000,
+                        -2px 2px 0 #000;
+            text-align: center;
+            width: 90%;
+            word-wrap: break-word;
+        }
+
+        .top-text {
+            top: 20px;
+        }
+
+        .bottom-text {
+            bottom: 20px;
+        }
+
+        #memeImage {
+            max-width: 100%;
+            display: none;
+        }
+
+        .controls {
+            margin: 15px 0;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+        }
+
+        .size-label {
+            min-width: 3em;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="drop-zone" id="dropZone">
+        Drop image here or click to browse
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+    </div>
+
+    <div class="controls">
+        <div class="input-group">
+            <input type="text" id="topText" placeholder="Top text">
+            <input type="text" id="bottomText" placeholder="Bottom text">
+        </div>
+        <div class="slider-group">
+            <label for="fontSize">Text size:</label>
+            <input type="range" id="fontSize" min="20" max="100" value="36">
+            <span class="size-label" id="fontSizeLabel">36px</span>
+        </div>
+    </div>
+
+    <div class="meme-container">
+        <div class="meme-text top-text" id="topTextDisplay"></div>
+        <img id="memeImage" alt="Your meme">
+        <div class="meme-text bottom-text" id="bottomTextDisplay"></div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const memeImage = document.getElementById('memeImage');
+        const topText = document.getElementById('topText');
+        const bottomText = document.getElementById('bottomText');
+        const topTextDisplay = document.getElementById('topTextDisplay');
+        const bottomTextDisplay = document.getElementById('bottomTextDisplay');
+        const fontSize = document.getElementById('fontSize');
+        const fontSizeLabel = document.getElementById('fontSizeLabel');
+
+        // Handle drag and drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            handleFile(e.dataTransfer.files[0]);
+        });
+
+        // Handle click to upload
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        // Handle text input
+        topText.addEventListener('input', (e) => {
+            topTextDisplay.textContent = e.target.value;
+        });
+
+        bottomText.addEventListener('input', (e) => {
+            bottomTextDisplay.textContent = e.target.value;
+        });
+
+        fontSize.addEventListener('input', (e) => {
+            const size = e.target.value;
+            fontSizeLabel.textContent = size + 'px';
+            topTextDisplay.style.fontSize = size + 'px';
+            bottomTextDisplay.style.fontSize = size + 'px';
+        });
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload an image file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                memeImage.src = e.target.result;
+                memeImage.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
