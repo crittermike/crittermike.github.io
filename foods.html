@@ -63,6 +63,15 @@
         th {
             background-color: #f4f4f4;
         }
+        button.delete {
+            background-color: #dc3545;
+            padding: 6px 12px;
+            width: auto;
+            margin: 0;
+        }
+        button.delete:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +93,7 @@
             <tr>
                 <th>Food</th>
                 <th>Calories</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="foodList">
@@ -104,11 +114,13 @@
                 return;
             }
 
+            const food = { name: foodName, calories: calories };
             const foodList = document.getElementById('foodList');
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
                 <td>${foodName}</td>
                 <td>${calories}</td>
+                <td><button onclick="deleteFood(this)" class="delete">Delete</button></td>
             `;
             foodList.appendChild(newRow);
 
@@ -118,6 +130,18 @@
             // Clear inputs
             document.getElementById('foodName').value = '';
             document.getElementById('calories').value = '';
+        }
+
+        function deleteFood(button) {
+            const row = button.closest('tr');
+            const calories = parseInt(row.cells[1].textContent);
+            
+            // Update total calories
+            totalCals -= calories;
+            document.getElementById('totalCalories').textContent = totalCals;
+            
+            // Remove the row
+            row.remove();
         }
 
         function clearAll() {
