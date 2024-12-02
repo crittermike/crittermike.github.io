@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .total-calories {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button.clear {
+            background-color: #f44336;
+        }
+        button.clear:hover {
+            background-color: #da190b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="total-calories">
+        Total Calories: <span id="totalCalories">0</span>
+    </div>
+
+    <form id="foodForm" onsubmit="addFood(event)">
+        <div class="input-group">
+            <input type="text" id="foodName" placeholder="Food Name">
+            <input type="number" id="calories" placeholder="Calories">
+            <button type="submit">Add Food</button>
+            <button type="button" class="clear" onclick="clearAll()">Clear All</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Food</th>
+                <th>Calories</th>
+            </tr>
+        </thead>
+        <tbody id="foodList">
+            <!-- Food items will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        let totalCals = 0;
+
+        function addFood(event) {
+            event.preventDefault();
+            const foodName = document.getElementById('foodName').value;
+            const calories = parseInt(document.getElementById('calories').value);
+
+            if (!foodName || !calories) {
+                alert('Please fill in both fields');
+                return;
+            }
+
+            const foodList = document.getElementById('foodList');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${foodName}</td>
+                <td>${calories}</td>
+            `;
+            foodList.appendChild(newRow);
+
+            totalCals += calories;
+            document.getElementById('totalCalories').textContent = totalCals;
+
+            // Clear inputs
+            document.getElementById('foodName').value = '';
+            document.getElementById('calories').value = '';
+        }
+
+        function clearAll() {
+            document.getElementById('foodList').innerHTML = '';
+            totalCals = 0;
+            document.getElementById('totalCalories').textContent = '0';
+        }
+    </script>
+</body>
+</html>
