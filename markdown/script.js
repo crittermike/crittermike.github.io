@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const preview = document.getElementById('preview');
     const copyBtn = document.getElementById('copyMarkdown');
     const clearBtn = document.getElementById('clearText');
-    const turndownService = new TurndownService({
-        headingStyle: 'atx',
-        codeBlockStyle: 'fenced',
-        bulletListMarker: '-'
-    });
+    const turndownService = new TurndownService();
 
     function convertToMarkdown() {
         // Get the HTML content directly from the contenteditable div
         const htmlContent = input.innerHTML;
         
-        return turndownService.turndown(htmlContent)
+        let markdown = turndownService.turndown(htmlContent)
             // Clean up extra spaces around line breaks
             .replace(/\s*\n\s*/g, '\n')
+            // Ensure paragraphs are separated by two line breaks
+            .replace(/\n/g, '\n\n')
             // Remove extra line breaks
             .replace(/\n{3,}/g, '\n\n')
             .trim();
+        
+        return markdown;
     }
 
     function updatePreview() {

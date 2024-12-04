@@ -4,83 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text to Markdown Converter</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
     <style>
+        :root {
+            --bg-primary: #f8f9fa;
+            --text-primary: #24292e;
+            --accent-color: #ff6f61;
+            --gradient-bg: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Nunito', sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
             line-height: 1.6;
             padding: 2rem;
-            color: #24292e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
         }
+
+        .container {
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6f61, #ff9f43);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
         .editor-pane, .preview-pane {
-            min-height: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 1rem;
+            min-height: 500px;
+            border: none;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
         }
+
+        .editor-pane {
+            background: white;
+        }
+
         .preview-pane {
-            background: #f8f9fa;
+            background: #282c34;
         }
+
+        .editor-pane:focus-within {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
         .rich-input {
             width: 100%;
             height: 100%;
             outline: none;
             font-family: inherit;
             line-height: inherit;
+            font-size: 1.1rem;
         }
+
         .rich-input:empty:before {
             content: attr(placeholder);
-            color: #666;
+            color: #999;
             font-style: italic;
         }
-        .editor-pane, .preview-pane {
-            min-height: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-        .preview-pane {
-            background: #f8f9fa;
-        }
+
         pre {
             margin: 0;
+            height: 100%;
         }
+
+        code {
+            font-size: 1.1rem !important;
+        }
+
         .header-with-button {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+
         .header-with-button h3 {
             margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
+        .header-with-button h3::before {
+            font-size: 1.2rem;
+        }
+
+        .input-header h3::before {
+            content: "✍️";
+        }
+
+        .output-header h3::before {
+            content: "📝";
+        }
+
         .btn {
-            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: #f1f3f5;
+            color: #495057;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6f61, #ff9f43);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .row > div {
+                margin-bottom: 2rem;
+            }
+            .editor-pane, .preview-pane {
+                min-height: 300px;
+            }
+        }
+
+        /* Add a subtle animation when copying */
+        @keyframes copied {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .copy-animation {
+            animation: copied 0.3s ease;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Rendered Text to Markdown Converter</h1>
+        <h1>✨ Text to Markdown Converter</h1>
         <div class="row">
             <div class="col-md-6">
-                <div class="header-with-button">
-                    <h3>Input</h3>
+                <div class="header-with-button input-header">
+                    <h3>Rich Text Input</h3>
                     <button class="btn btn-secondary" id="clearText">Clear</button>
                 </div>
                 <div class="editor-pane">
-                    <div id="input" contenteditable="true" class="rich-input" placeholder="Paste your formatted text here..."></div>
+                    <div id="input" contenteditable="true" class="rich-input" placeholder="Paste your rich text here..."></div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="header-with-button">
+                <div class="header-with-button output-header">
                     <h3>Markdown Output</h3>
                     <button class="btn btn-primary" id="copyMarkdown">Copy Markdown</button>
                 </div>
                 <div class="preview-pane">
-                    <pre><code class="language-markdown" id="preview"></code></pre>
+                    <pre><code id="preview"></code></pre>
                 </div>
             </div>
         </div>
