@@ -3,67 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mike Crittenden</title>
+    <title>Mike's Stupid Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent: #238636;
+            --card-bg: #161b22;
+            --hover-bg: #1f2428;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
-            color: #24292e;
+            background: var(--bg-color);
+            color: var(--text-color);
         }
-        h1 { margin-bottom: 0.5rem; }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 { 
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #238636, #2ea043);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
         .subtitle { 
-            color: #586069;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
         }
+
         .tools {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f6f8fa;
-            border-radius: 6px;
+            display: grid;
+            gap: 1rem;
         }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid #30363d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            background: var(--hover-bg);
+            border-color: var(--accent);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .tool-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .tool-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #58a6ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-description {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
         a {
-            color: #0366d6;
+            color: inherit;
             text-decoration: none;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .link {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: #238636;
+            color: white;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .link:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terminal-line {
+            font-family: 'Fira Code', monospace;
+            color: #7ee787;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-line::before {
+            content: '$ ';
+            opacity: 0.7;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Mike Crittenden</h1>
-    <div class="subtitle">
-        Working at <a href="https://github.com/crittermike">GitHub</a> • 
-        Writing at <a href="http://critter.blog">critter.blog</a>
+    <div class="hero">
+        <div class="terminal-line">whoami</div>
+        <h1>Mike Crittenden</h1>
+        <div class="subtitle">
+            Building stuff at GitHub • Writing at critter.blog
+        </div>
+        <div class="links">
+            <a href="https://github.com/crittermike" class="link">GitHub</a>
+            <a href="http://critter.blog" class="link">Blog</a>
+        </div>
     </div>
 
     <div class="tools">
-        <h2>Stupid tools and what not</h2>
-        <ul>
-            <li>
-                <a href="foods/index.html">Calorie Counter</a> - 
-                A simple tool to track your daily calorie intake
-            </li>
-            <li>
-                <a href="memes/index.html">Meme Maker</a> - 
-                Create custom memes with your own text
-            </li>
-            <li>
-                <a href="markdown/index.html">Rendered Text to Markdown Converter</a> - 
-                Convert formatted text to markdown on the fly
-            </li>
-            <li>
-                <a href="slack/index.html">Slack Snippet Cleaner</a> - 
-                Clean up copy/pasted Slack conversations
-            </li>
-            <li>
-                <a href="ascii/index.html">ASCII Converter</a> - 
-                Convert ASCII-8BIT arrays to readable text
-            </li>
-        </ul>
+        <div class="tool-card">
+            <a href="foods/index.html">
+                <div class="tool-title">🥗 Calorie Counter</div>
+                <div class="tool-description">
+                    A dead-simple tool for tracking daily calories. No accounts, no BS, 
+                    just numbers that reset at midnight.
+                </div>
+            </a>
+        </div>
+
+        <div class="tool-card">
+            <a href="memes/index.html">
+                <div class="tool-title">🖼️ Meme Maker</div>
+                <div class="tool-description">
+                    Create memes instantly in your browser. No uploads, no watermarks, 
+                    just Impact font and good times.
+                </div>
+            </a>
+        </div>
+
+        <div class="tool-card">
+            <a href="markdown/index.html">
+                <div class="tool-title">📝 Markdown Converter</div>
+                <div class="tool-description">
+                    Convert rich text to markdown without the bloat. Perfect for 
+                    moving content to GitHub or your blog.
+                </div>
+            </a>
+        </div>
+
+        <div class="tool-card">
+            <a href="slack/index.html">
+                <div class="tool-title">💬 Slack Cleaner</div>
+                <div class="tool-description">
+                    Clean up those messy Slack copy/pastes. Turns chat soup into 
+                    readable conversations.
+                </div>
+            </a>
+        </div>
+
+        <div class="tool-card">
+            <a href="ascii/index.html">
+                <div class="tool-title">🔤 ASCII Converter</div>
+                <div class="tool-description">
+                    Convert ASCII-8BIT arrays to human-readable text. Because sometimes 
+                    computers need help speaking human.
+                </div>
+            </a>
+        </div>
     </div>
 </body>
 </html>
