@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // If we're switching to a new user, output the current messages
                 if (currentUser && currentUser !== newUser && currentMessages.length > 0) {
-                    if (formattedLines.length > 0) formattedLines.push('<br>');
                     formattedLines.push(`<p><b>${currentUser}:</b><br>`);
                     formattedLines.push(currentMessages.join('<br>'));
                     formattedLines.push('</p>');
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Don't forget to add the last user's messages
         if (currentUser && currentMessages.length > 0) {
-            if (formattedLines.length > 0) formattedLines.push('<br>');
             formattedLines.push(`<p><b>${currentUser}:</b><br>`);
             formattedLines.push(currentMessages.join('<br>'));
             formattedLines.push('</p>');
