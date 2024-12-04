@@ -5,19 +5,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearBtn = document.getElementById('clearText');
     const turndownService = new TurndownService();
 
+    // Special handling for list items to prevent extra spacing
+    turndownService.addRule('listItem', {
+        filter: 'li',
+        replacement: function (content, node, options) {
+            content = content
+                .replace(/^\n+/, '')     // Remove leading newlines
+                .replace(/\n+$/, '')     // Remove trailing newlines
+                .replace(/\n/gm, '\n  '); // Indent any nested content
+            
+            let prefix = options.bulletListMarker + ' ';
+            let parent = node.parentNode;
+            if (parent.nodeName === 'OL') {
+                let start = parent.getAttribute('start');
+                let index = Array.prototype.indexOf.call(parent.children, node);
+                prefix = (start ? Number(start) + index : index + 1) + '. ';
+            }
+            return prefix + content + '\n';
+        }
+    });
+
     function convertToMarkdown() {
         // Get the HTML content directly from the contenteditable div
         const htmlContent = input.innerHTML;
-        
-        let markdown = turndownService.turndown(htmlContent)
-            // Clean up extra spaces around line breaks
-            .replace(/\s*\n\s*/g, '\n')
-            // Ensure paragraphs are separated by two line breaks
-            .replace(/\n/g, '\n\n')
-            // Remove extra line breaks
-            .replace(/\n{3,}/g, '\n\n')
-            .trim();
-        
+        let markdown = turndownService.turndown(htmlContent).trim();
         return markdown;
     }
 
