@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent: #238636;
+            --card-bg: #161b22;
+            --hover-bg: #1f2428;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #238636, #2ea043);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #58a6ff;
+            font-family: 'Fira Code', monospace;
+            transition: color 0.3s ease;
+        }
+
+        .stat-value.error {
+            color: #f85149;
+        }
+
+        .stat-value.success {
+            color: #2ea043;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .char-limit {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-top: 0.25rem;
+        }
+
+        .char-limit.error {
+            color: #f85149;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(35, 134, 54, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔤 Talent Sync Char Limit Checker</h1>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="accomplishmentsCount">0</div>
+                <div class="stat-label">Top Accomplishments</div>
+                <div class="char-limit" id="accomplishmentsLimit">250 chars max</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="whyNotHigherCount">0</div>
+                <div class="stat-label">Why Not Higher</div>
+                <div class="char-limit" id="whyNotHigherLimit">250 chars max</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="whyNotLowerCount">0</div>
+                <div class="stat-label">Why Not Lower</div>
+                <div class="char-limit" id="whyNotLowerLimit">250 chars max</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="topOpportunityCount">0</div>
+                <div class="stat-label">Top Opportunity</div>
+                <div class="char-limit" id="topOpportunityLimit">250 chars max</div>
+            </div>
+        </div>
+
+        <textarea 
+            id="input" 
+            placeholder="Paste your performance review text here..."
+            spellcheck="false"
+        ></textarea>
+    </div>
+
+    <script>
+        const input = document.getElementById('input');
+        const accomplishmentsCount = document.getElementById('accomplishmentsCount');
+        const whyNotHigherCount = document.getElementById('whyNotHigherCount');
+        const whyNotLowerCount = document.getElementById('whyNotLowerCount');
+        const topOpportunityCount = document.getElementById('topOpportunityCount');
+
+        const accomplishmentsLimit = document.getElementById('accomplishmentsLimit');
+        const whyNotHigherLimit = document.getElementById('whyNotHigherLimit');
+        const whyNotLowerLimit = document.getElementById('whyNotLowerLimit');
+        const topOpportunityLimit = document.getElementById('topOpportunityLimit');
+
+        const CHAR_LIMIT = 250;
+
+        function extractSection(text, sectionName, nextSectionName) {
+            const startMarker = sectionName + ':';
+            const start = text.indexOf(startMarker);
+            if (start === -1) return '';
+            
+            let end;
+            if (nextSectionName) {
+                end = text.indexOf(nextSectionName + ':', start);
+                if (end === -1) end = text.length;
+            } else {
+                end = text.length;
+            }
+            
+            return text.substring(start + startMarker.length, end).trim();
+        }
+
+        function updateCounterStyle(counter, limit, count) {
+            if (count > CHAR_LIMIT) {
+                counter.classList.add('error');
+                counter.classList.remove('success');
+                limit.classList.add('error');
+                limit.textContent = `${count - CHAR_LIMIT} chars over limit`;
+            } else {
+                counter.classList.remove('error');
+                counter.classList.add('success');
+                limit.classList.remove('error');
+                limit.textContent = `${CHAR_LIMIT - count} chars remaining`;
+            }
+        }
+
+        function updateCounts() {
+            const text = input.value;
+            
+            // Extract sections
+            const accomplishments = extractSection(text, 'Top accomplishments', 'Why not higher');
+            const whyNotHigher = extractSection(text, 'Why not higher', 'Why not lower');
+            const whyNotLower = extractSection(text, 'Why not lower', 'Top opportunity');
+            const topOpportunity = extractSection(text, 'Top opportunity', null);
+            
+            // Update counts and styles
+            accomplishmentsCount.textContent = accomplishments.length;
+            whyNotHigherCount.textContent = whyNotHigher.length;
+            whyNotLowerCount.textContent = whyNotLower.length;
+            topOpportunityCount.textContent = topOpportunity.length;
+
+            updateCounterStyle(accomplishmentsCount, accomplishmentsLimit, accomplishments.length);
+            updateCounterStyle(whyNotHigherCount, whyNotHigherLimit, whyNotHigher.length);
+            updateCounterStyle(whyNotLowerCount, whyNotLowerLimit, whyNotLower.length);
+            updateCounterStyle(topOpportunityCount, topOpportunityLimit, topOpportunity.length);
+        }
+
+        input.addEventListener('input', updateCounts);
+    </script>
+</body>
+</html>
