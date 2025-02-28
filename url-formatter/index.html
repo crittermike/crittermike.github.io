@@ -10,6 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /**
+         * GitHub Copilot URL Formatter styles
+         * Uses GitHub Primer color variables for consistent branding
+         */
+
+        /* === Variables === */
         :root {
             /* GitHub colors from Primer - Light theme */
             --color-canvas-default: #ffffff;
@@ -27,8 +33,20 @@
             --color-attention-emphasis: #bf8700;
             --color-danger-fg: #cf222e;
             --color-danger-emphasis: #cf222e;
+            
+            /* Custom spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* Borders */
+            --border-radius: 6px;
+            --box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
         }
 
+        /* === Base Styles === */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
             background-color: var(--color-canvas-default);
@@ -38,52 +56,22 @@
             padding: 2rem 1.5rem;
         }
 
-        /* Improved Box styling */
-        .Box {
-            margin-bottom: 24px;
-            border: 1px solid var(--color-border-default);
-            border-radius: 6px;
-            box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
-        }
-        
-        .Box-header {
-            padding: 10px 16px;
-            border-bottom: 1px solid var(--color-border-muted);
-            background-color: var(--color-canvas-subtle);
-        }
-        
-        .Box-body {
-            padding: 20px;
-        }
-
+        /* === Layout Components === */
+        /* Header Section */
         header {
             text-align: center;
-            margin-bottom: 32px;
-            padding: 0 16px;
-        }
-
-        h1 {
-            font-weight: 600;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #24292f;
-        }
-
-        .lead {
-            color: var(--color-fg-muted);
-            font-size: 1.1rem;
-            margin: 0 auto 1.5rem;
-            max-width: 600px;
+            margin-bottom: var(--spacing-xl);
+            padding: 0 var(--spacing-md);
         }
 
         .github-mark {
             display: flex;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: var(--spacing-md);
         }
 
         .github-mark svg {
-            fill: #24292f;
+            fill: var(--color-fg-default);
             height: 48px;
             width: 48px;
         }
@@ -92,9 +80,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            color: #24292f;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-fg-default);
             font-weight: 500;
             font-size: 1.5rem;
         }
@@ -105,12 +93,44 @@
             width: 28px;
             vertical-align: middle;
         }
-        
-        .form-section {
-            margin-bottom: 24px;
+
+        h1 {
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-fg-default);
+        }
+
+        .lead {
+            color: var(--color-fg-muted);
+            font-size: 1.1rem;
+            margin: 0 auto 1.5rem;
+            max-width: 600px;
+        }
+
+        /* Box Components */
+        .Box {
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
         
-        /* Improved URL display field */
+        .Box-header {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-muted);
+            background-color: var(--color-canvas-subtle);
+        }
+        
+        .Box-body {
+            padding: var(--spacing-lg);
+        }
+
+        .form-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* URL Display */
         .url-display {
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
@@ -120,23 +140,22 @@
             padding: 12px 16px;
             background-color: var(--color-canvas-subtle);
             border: 1px solid var(--color-border-default);
-            border-radius: 6px;
-            margin-bottom: 16px;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
         }
 
-        /* Improved image grid spacing */
+        /* Image Options */
         .image-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
         }
 
-        /* Improved image option styling */
         .image-option {
             border: 1px solid var(--color-border-default);
-            border-radius: 6px;
-            padding: 16px;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
             cursor: pointer;
             transition: all 0.2s ease;
             background: var(--color-canvas-subtle);
@@ -161,24 +180,43 @@
             height: auto;
             border-radius: 4px;
             max-width: 100%;
-            margin: 8px 0;
+            margin: var(--spacing-sm) 0;
         }
 
         .image-label {
-            margin-top: 12px;
+            margin-top: var(--spacing-sm);
             font-size: 0.9rem;
             color: var(--color-fg-muted);
             text-align: center;
         }
 
-        /* Improved button spacing */
+        /* Buttons & Form Controls */
         .btn {
-            margin-right: 8px;
-            margin-bottom: 8px;
-            padding: 6px 16px;
-            font-size: 14px;
+            margin-right: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
         }
 
+        .octicon {
+            margin-right: var(--spacing-xs);
+            vertical-align: text-bottom;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            padding: 12px;
+            font-size: 14px;
+            border-color: var(--color-border-default);
+            background-color: var(--color-canvas-default);
+            resize: vertical;
+        }
+
+        textarea.form-control:focus {
+            border-color: var(--color-accent-fg);
+            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+            outline: none;
+        }
+
+        /* Notifications */
         .success-message {
             position: fixed;
             bottom: 20px;
@@ -186,8 +224,8 @@
             transform: translateX(-50%);
             background: var(--color-success-emphasis);
             color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
             font-weight: 500;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -202,26 +240,17 @@
             animation-delay: 1s;
         }
 
-        /* Improved text area */
-        textarea.form-control {
-            min-height: 120px;
-            padding: 12px;
-            font-size: 14px;
-            border-color: var(--color-border-default);
-            background-color: var(--color-canvas-default);
-            resize: vertical;
-        }
-
-        textarea.form-control:focus {
-            border-color: var(--color-accent-fg);
-            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
-        }
-
         @keyframes fadeOutAfterDelay {
             from { opacity: 1; }
             to { opacity: 0; }
         }
 
+        /* Footer */
+        .footer {
+            margin-top: var(--spacing-xl);
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -236,7 +265,7 @@
             }
 
             .Box-body {
-                padding: 16px;
+                padding: var(--spacing-md);
             }
         }
     </style>
@@ -260,11 +289,12 @@
             </p>
         </header>
 
+        <!-- Prompt Input Section -->
         <div class="form-section">
             <div class="Box">
                 <div class="Box-header">
                     <h2 class="Box-title">
-                        <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <svg class="octicon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <path fill-rule="evenodd" d="M6 2.75A.75.75 0 016.75 2h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 016 2.75zM2.5 7A.75.75 0 013.25 6.25h9.5a.75.75 0 010 1.5h-9.5A.75.75 0 012.5 7zm0 5a.75.75 0 01.75-.75h9.5a.75.75 0 010 1.5h-9.5a.75.75 0 01-.75-.75z"></path>
                         </svg>
                         Create Your Prompt
@@ -276,10 +306,11 @@
             </div>
         </div>
 
+        <!-- URL Output Section -->
         <div class="Box">
             <div class="Box-header">
                 <h2 class="Box-title">
-                    <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg class="octicon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
                     </svg>
                     Generated URL
@@ -288,19 +319,21 @@
             <div class="Box-body">
                 <div class="url-display mb-3" id="urlOutput">https://github.com/copilot?prompt=</div>
                 <button id="copyButton" class="btn btn-primary" type="button">
-                    <svg class="octicon mr-1" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg class="octicon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
                         <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
                     </svg>
                     Copy URL
                 </button>
+                <a href="../" class="btn">Back to Tools</a>
             </div>
         </div>
 
+        <!-- Button Selection Section -->
         <div class="Box">
             <div class="Box-header">
                 <h2 class="Box-title">
-                    <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg class="octicon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M1.75 2.5a.75.75 0 000 1.5h10.5a.75.75 0 000-1.5H1.75zm0 5a.75.75 0 000 1.5h10.5a.75.75 0 000-1.5H1.75zm0 5a.75.75 0 000 1.5h10.5a.75.75 0 000-1.5H1.75z"></path>
                     </svg>
                     Choose a Button Style
@@ -328,8 +361,8 @@
                     </div>
                 </div>
                 
-                <button id="copyImageMarkdownButton" class="btn btn-primary">
-                    <svg class="octicon mr-1" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <button id="copyImageMarkdownButton" class="btn btn-primary mt-3">
+                    <svg class="octicon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path>
                     </svg>
                     Copy Button Markdown
@@ -337,98 +370,181 @@
             </div>
         </div>
 
-        <div class="color-fg-muted text-center mt-4">
+        <!-- Footer Section -->
+        <div class="color-fg-muted text-center mt-4 footer">
             <p class="mb-1">Made with <span class="color-fg-danger">❤️</span> for GitHub Copilot</p>
         </div>
     </div>
 
+    <!-- Success Notification -->
     <div id="successMessage" class="success-message">URL copied to clipboard!</div>
 
     <script>
-        const promptInput = document.getElementById('promptInput');
-        const urlOutput = document.getElementById('urlOutput');
-        const copyButton = document.getElementById('copyButton');
-        const copyImageMarkdownButton = document.getElementById('copyImageMarkdownButton');
-        const successMessage = document.getElementById('successMessage');
-        const imageOptions = document.querySelectorAll('.image-option');
+        /**
+         * GitHub Copilot URL Formatter
+         * Handles URL generation and clipboard operations
+         */
+
+        // DOM element references
+        const elements = {
+            promptInput: document.getElementById('promptInput'),
+            urlOutput: document.getElementById('urlOutput'),
+            copyButton: document.getElementById('copyButton'),
+            copyImageMarkdownButton: document.getElementById('copyImageMarkdownButton'),
+            successMessage: document.getElementById('successMessage'),
+            imageOptions: document.querySelectorAll('.image-option')
+        };
+
+        // Constants
+        const BASE_URL = 'https://github.com/copilot?prompt=';
         
-        // Variables to track selected image
-        let selectedImage = 'dark.png';
-        let selectedSize = 'regular';
+        // State variables
+        const state = {
+            selectedImage: 'dark.png',
+            selectedSize: 'regular'
+        };
         
-        // Initialize - select first option by default
-        imageOptions[0].classList.add('selected');
-        
-        // Add click event listeners to image options
-        imageOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                // Remove selected class from all options
-                imageOptions.forEach(opt => opt.classList.remove('selected'));
-                
-                // Add selected class to clicked option
-                option.classList.add('selected');
-                
-                // Update selected image and size
-                selectedImage = option.dataset.image;
-                selectedSize = option.dataset.size;
-            });
-        });
-        
-        // Update URL in real-time as user types
-        promptInput.addEventListener('input', () => {
+        /**
+         * Initialize the application
+         */
+        function init() {
+            // Select first option by default
+            elements.imageOptions[0].classList.add('selected');
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Initialize URL
             updateURL();
-        });
-        
-        function updateURL() {
-            const baseURL = 'https://github.com/copilot?prompt=';
-            const encodedPrompt = encodeURIComponent(promptInput.value.trim());
-            urlOutput.textContent = baseURL + encodedPrompt;
         }
         
+        /**
+         * Set up all event listeners
+         */
+        function setupEventListeners() {
+            // Listen for input changes
+            elements.promptInput.addEventListener('input', updateURL);
+            
+            // Button event listeners
+            elements.copyButton.addEventListener('click', copyURLToClipboard);
+            elements.copyImageMarkdownButton.addEventListener('click', copyMarkdownToClipboard);
+            
+            // Image option event listeners
+            elements.imageOptions.forEach(option => {
+                option.addEventListener('click', () => selectImageOption(option));
+            });
+        }
+        
+        /**
+         * Update the URL when prompt changes
+         */
+        function updateURL() {
+            const encodedPrompt = encodeURIComponent(elements.promptInput.value.trim());
+            elements.urlOutput.textContent = BASE_URL + encodedPrompt;
+        }
+        
+        /**
+         * Handle image option selection
+         * @param {HTMLElement} option - The selected option element
+         */
+        function selectImageOption(option) {
+            // Remove selected class from all options
+            elements.imageOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            option.classList.add('selected');
+            
+            // Update selected image and size
+            state.selectedImage = option.dataset.image;
+            state.selectedSize = option.dataset.size;
+        }
+        
+        /**
+         * Generate markdown for the selected button
+         * @returns {string} Generated markdown
+         */
         function generateMarkdown() {
-            const url = urlOutput.textContent;
+            const url = elements.urlOutput.textContent;
             // Create a raw URL to the image file
-            const imageUrl = window.location.href.replace('index.html', '').replace(/\/$/, '') + '/' + selectedImage;
+            const imageUrl = window.location.href.replace('index.html', '').replace(/\/$/, '') + '/' + state.selectedImage;
             return `[![Open in GitHub Copilot](${imageUrl})](${url})`;
         }
         
-        // Copy URL to clipboard
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(urlOutput.textContent)
+        /**
+         * Copy URL to clipboard
+         */
+        function copyURLToClipboard() {
+            copyToClipboard(elements.urlOutput.textContent, "URL copied to clipboard!");
+        }
+        
+        /**
+         * Copy markdown to clipboard
+         */
+        function copyMarkdownToClipboard() {
+            copyToClipboard(generateMarkdown(), "Button markdown code copied!");
+        }
+        
+        /**
+         * Copy content to clipboard with error handling
+         * @param {string} content - Content to copy
+         * @param {string} successMessage - Message to show on success
+         */
+        function copyToClipboard(content, successMsg) {
+            navigator.clipboard.writeText(content)
                 .then(() => {
-                    showSuccessMessage("URL copied to clipboard!");
+                    showSuccessMessage(successMsg);
                 })
                 .catch(err => {
-                    console.error('Failed to copy: ', err);
-                    alert('Failed to copy URL. Please try again.');
+                    console.error('Clipboard API error:', err);
+                    fallbackCopyToClipboard(content, successMsg);
                 });
-        });
+        }
         
-        // Copy image markdown button code to clipboard
-        copyImageMarkdownButton.addEventListener('click', () => {
-            const markdown = generateMarkdown();
+        /**
+         * Fallback method for copying to clipboard
+         * @param {string} content - Content to copy
+         * @param {string} successMessage - Message to show on success 
+         */
+        function fallbackCopyToClipboard(content, successMsg) {
+            // Create temporary textarea
+            const textArea = document.createElement('textarea');
+            textArea.value = content;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
             
-            navigator.clipboard.writeText(markdown)
-                .then(() => {
-                    showSuccessMessage("Button markdown code copied!");
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                    alert('Failed to copy markdown. Please try again.');
-                });
-        });
+            try {
+                // Select and copy
+                textArea.select();
+                const success = document.execCommand('copy');
+                
+                if (success) {
+                    showSuccessMessage(successMsg);
+                } else {
+                    alert('Failed to copy. Please try selecting and copying manually.');
+                }
+            } catch (err) {
+                console.error('Fallback clipboard error:', err);
+                alert('Failed to copy. Please try selecting and copying manually.');
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
         
-        // Show success message
+        /**
+         * Show success message
+         * @param {string} message - Message to display
+         */
         function showSuccessMessage(message) {
-            successMessage.textContent = message;
-            successMessage.classList.add('visible');
+            elements.successMessage.textContent = message;
+            elements.successMessage.classList.add('visible');
             setTimeout(() => {
-                successMessage.classList.remove('visible');
+                elements.successMessage.classList.remove('visible');
             }, 3000);
         }
         
-        // Initialize with empty prompt
-        updateURL();
+        // Initialize the application
+        init();
     </script>
 </body>
 </html>
