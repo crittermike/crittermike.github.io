@@ -185,6 +185,109 @@
                 font-size: 2rem;
             }
         }
+
+        .image-selector {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .image-selector-header {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .image-selector-title {
+            font-size: 1.2rem;
+        }
+
+        .image-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .image-option {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #1c2128;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-option:hover {
+            background: var(--hover-bg);
+        }
+
+        .image-option.selected {
+            border-color: var(--accent);
+            background: rgba(35, 134, 54, 0.1);
+        }
+
+        .image-option img {
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .image-label {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .select-button-style {
+            margin-top: 1rem;
+            padding: 0.7rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .select-button-style:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .markdown-preview {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #1c2128;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .preview-image {
+            width: auto;
+            height: auto;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .no-display {
+            display: none;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -212,6 +315,41 @@
                     <a href="../" class="button home-link">Back to Home</a>
                 </div>
             </div>
+            
+            <div class="image-selector">
+                <div class="image-selector-header">
+                    <div class="image-selector-title">Choose a Button Style</div>
+                </div>
+                <p>Select a branded "Open in Copilot" button to use in your GitHub README:</p>
+                
+                <div class="image-grid">
+                    <div class="image-option" data-image="dark.png" data-size="regular">
+                        <img src="dark.png" alt="Dark theme button">
+                        <div class="image-label">Dark (Regular)</div>
+                    </div>
+                    <div class="image-option" data-image="dark-small.png" data-size="small">
+                        <img src="dark-small.png" alt="Dark theme small button">
+                        <div class="image-label">Dark (Small)</div>
+                    </div>
+                    <div class="image-option" data-image="light.png" data-size="regular">
+                        <img src="light.png" alt="Light theme button">
+                        <div class="image-label">Light (Regular)</div>
+                    </div>
+                    <div class="image-option" data-image="light-small.png" data-size="small">
+                        <img src="light-small.png" alt="Light theme small button">
+                        <div class="image-label">Light (Small)</div>
+                    </div>
+                </div>
+                
+                <div class="button-group" style="margin-top: 1.5rem;">
+                    <button id="copyImageMarkdownButton" class="button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path>
+                        </svg>
+                        Copy Button Markdown
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -221,10 +359,36 @@
         const promptInput = document.getElementById('promptInput');
         const urlOutput = document.getElementById('urlOutput');
         const copyButton = document.getElementById('copyButton');
+        const copyImageMarkdownButton = document.getElementById('copyImageMarkdownButton');
         const successMessage = document.getElementById('successMessage');
+        const imageOptions = document.querySelectorAll('.image-option');
+        
+        // Variables to track selected image
+        let selectedImage = 'dark.png';
+        let selectedSize = 'regular';
+        
+        // Initialize - select first option by default
+        imageOptions[0].classList.add('selected');
+        
+        // Add click event listeners to image options
+        imageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                imageOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Update selected image and size
+                selectedImage = option.dataset.image;
+                selectedSize = option.dataset.size;
+            });
+        });
         
         // Update URL in real-time as user types
-        promptInput.addEventListener('input', updateURL);
+        promptInput.addEventListener('input', () => {
+            updateURL();
+        });
         
         function updateURL() {
             const baseURL = 'https://github.com/copilot?prompt=';
@@ -232,20 +396,47 @@
             urlOutput.textContent = baseURL + encodedPrompt;
         }
         
+        function generateMarkdown() {
+            const url = urlOutput.textContent;
+            // Create a raw URL to the image file
+            const imageUrl = window.location.href.replace('index.html', '').replace(/\/$/, '') + '/' + selectedImage;
+            return `[![Open in GitHub Copilot](${imageUrl})](${url})`;
+        }
+        
         // Copy URL to clipboard
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(urlOutput.textContent)
                 .then(() => {
-                    successMessage.classList.add('visible');
-                    setTimeout(() => {
-                        successMessage.classList.remove('visible');
-                    }, 3000);
+                    showSuccessMessage("URL copied to clipboard!");
                 })
                 .catch(err => {
                     console.error('Failed to copy: ', err);
                     alert('Failed to copy URL. Please try again.');
                 });
         });
+        
+        // Copy image markdown button code to clipboard
+        copyImageMarkdownButton.addEventListener('click', () => {
+            const markdown = generateMarkdown();
+            
+            navigator.clipboard.writeText(markdown)
+                .then(() => {
+                    showSuccessMessage("Button markdown code copied!");
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy markdown. Please try again.');
+                });
+        });
+        
+        // Show success message
+        function showSuccessMessage(message) {
+            successMessage.textContent = message;
+            successMessage.classList.add('visible');
+            setTimeout(() => {
+                successMessage.classList.remove('visible');
+            }, 3000);
+        }
         
         // Initialize with empty prompt
         updateURL();
