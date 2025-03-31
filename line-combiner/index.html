@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Combiner - Mike's Stupid Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent: #238636;
+            --card-bg: #161b22;
+            --hover-bg: #1f2428;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #238636, #2ea043);
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        textarea {
+            font-family: 'Fira Code', monospace;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 200px;
+            resize: vertical;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .output-container {
+            margin-top: 2rem;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-box {
+            font-family: 'Fira Code', monospace;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 200px;
+            white-space: pre-wrap;
+            overflow: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .copy-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .success-message {
+            color: var(--accent);
+            margin-right: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Line Combiner</h1>
+        <div class="description">
+            Combine two lists of text line by line. Great for creating pull request lists, data pairs, or any line-by-line matching.
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="input-container">
+            <label for="input1">First Input:</label>
+            <textarea id="input1" placeholder="Enter your first list of items...
+For example:
+Add login page
+Fix navigation bug
+Update docs"></textarea>
+        </div>
+        <div class="input-container">
+            <label for="input2">Second Input:</label>
+            <textarea id="input2" placeholder="Enter your second list of items...
+For example:
+https://github.com/org/repo/pull/123
+https://github.com/org/repo/pull/124
+https://github.com/org/repo/pull/125"></textarea>
+        </div>
+    </div>
+
+    <div class="output-container">
+        <div class="output-header">
+            <label for="output">Combined Output:</label>
+            <div class="copy-actions">
+                <span id="success-message" class="success-message">Copied!</span>
+                <button id="copy-button" class="copy-button">
+                    Copy
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="output" class="output-box"></div>
+    </div>
+
+    <a href="../" class="home-link">← Back to all tools</a>
+
+    <script>
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const output = document.getElementById('output');
+        const copyButton = document.getElementById('copy-button');
+        const successMessage = document.getElementById('success-message');
+
+        function updateOutput() {
+            const lines1 = input1.value.split('\n');
+            const lines2 = input2.value.split('\n');
+            const maxLines = Math.max(lines1.length, lines2.length);
+            
+            let result = '';
+            for (let i = 0; i < maxLines; i++) {
+                const line1 = i < lines1.length ? lines1[i] : '';
+                const line2 = i < lines2.length ? lines2[i] : '';
+                result += `- ${line1}: ${line2}\n`;
+            }
+            
+            output.textContent = result.trim();
+        }
+
+        input1.addEventListener('input', updateOutput);
+        input2.addEventListener('input', updateOutput);
+
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(output.textContent).then(() => {
+                successMessage.classList.add('show');
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
