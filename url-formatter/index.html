@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Copilot URL Formatter</title>
     <!-- Import Primer CSS for GitHub styling -->
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@^20.2.4/dist/primer.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/css@^20.2.4/dist/primer.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
@@ -102,23 +102,6 @@
             </p>
         </header>
 
-        <!-- Prompt Input Section -->
-        <div class="mb-3">
-            <div class="Box">
-                <div class="Box-header">
-                    <h2 class="Box-title">
-                        <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path fill-rule="evenodd" d="M6 2.75A.75.75 0 016.75 2h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 016 2.75zM2.5 7A.75.75 0 013.25 6.25h9.5a.75.75 0 010 1.5h-9.5A.75.75 0 012.5 7zm0 5a.75.75 0 01.75-.75h9.5a.75.75 0 010 1.5h-9.5a.75.75 0 01-.75-.75z"></path>
-                        </svg>
-                        Create Your Prompt
-                    </h2>
-                </div>
-                <div class="Box-body">
-                    <textarea id="promptInput" class="form-control width-full" placeholder="Enter your GitHub Copilot prompt here..." rows="8"></textarea>
-                </div>
-            </div>
-        </div>
-
         <!-- Model Selection Section -->
         <div class="Box mb-3">
             <div class="Box-header">
@@ -145,6 +128,23 @@
             </div>
         </div>
 
+        <!-- Prompt Input Section -->
+        <div class="mb-3">
+            <div class="Box">
+                <div class="Box-header">
+                    <h2 class="Box-title">
+                        <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6 2.75A.75.75 0 016.75 2h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 016 2.75zM2.5 7A.75.75 0 013.25 6.25h9.5a.75.75 0 010 1.5h-9.5A.75.75 0 012.5 7zm0 5a.75.75 0 01.75-.75h9.5a.75.75 0 010 1.5h-9.5a.75.75 0 01-.75-.75z"></path>
+                        </svg>
+                        Create Your Prompt
+                    </h2>
+                </div>
+                <div class="Box-body">
+                    <textarea id="promptInput" class="form-control width-full" placeholder="Enter your GitHub Copilot prompt here..." rows="8"></textarea>
+                </div>
+            </div>
+        </div>
+
         <!-- URL Output Section -->
         <div class="Box mb-3">
             <div class="Box-header">
@@ -156,7 +156,7 @@
                 </h2>
             </div>
             <div class="Box-body">
-                <div id="urlOutput" class="font-mono p-2 mb-3 border rounded-2 bg-canvas-subtle overflow-auto">https://github.com/copilot?prompt=</div>
+                <div id="urlOutput" class="font-mono p-2 mb-3 border rounded-2 bg-canvas-subtle overflow-auto">https://github.com/copilot?model=&prompt=</div>
                 <button id="copyButton" class="btn btn-primary mr-2" type="button">
                     <svg class="octicon mr-1" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
@@ -288,7 +288,7 @@
         function updateURL() {
             const encodedPrompt = encodeURIComponent(elements.promptInput.value.trim());
             const model = elements.modelSelect.value;
-            elements.urlOutput.textContent = BASE_URL + encodedPrompt + (model ? '&model=' + model : '');
+            elements.urlOutput.textContent = `https://github.com/copilot?model=${model}&prompt=${encodedPrompt}`;
         }
         
         /**
