@@ -119,6 +119,32 @@
             </div>
         </div>
 
+        <!-- Model Selection Section -->
+        <div class="Box mb-3">
+            <div class="Box-header">
+                <h2 class="Box-title">
+                    <svg class="octicon mr-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+                    </svg>
+                    Select Model
+                </h2>
+            </div>
+            <div class="Box-body">
+                <p class="color-fg-muted mb-3">Choose which model to use for your prompt:</p>
+                <select id="modelSelect" class="form-select width-full mb-2">
+                    <option value="">None (Default)</option>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="gpt-4.5-preview">GPT-4.5</option>
+                    <option value="o1">o1</option>
+                    <option value="o3-mini">o3-mini</option>
+                    <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                    <option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option>
+                    <option value="claude-3.7-sonnet-thought">Claude 3.7 Sonnet Thinking</option>
+                    <option value="gemini-2.0-flash-001">Gemini 2.0 Flash</option>
+                </select>
+            </div>
+        </div>
+
         <!-- URL Output Section -->
         <div class="Box mb-3">
             <div class="Box-header">
@@ -208,7 +234,8 @@
             copyButton: document.getElementById('copyButton'),
             copyImageMarkdownButton: document.getElementById('copyImageMarkdownButton'),
             successMessage: document.getElementById('successMessage'),
-            imageOptions: document.querySelectorAll('.image-option')
+            imageOptions: document.querySelectorAll('.image-option'),
+            modelSelect: document.getElementById('modelSelect')
         };
 
         // Constants
@@ -217,7 +244,8 @@
         // State variables
         const state = {
             selectedImage: 'dark.png',
-            selectedSize: 'regular'
+            selectedSize: 'regular',
+            selectedModel: ''
         };
         
         /**
@@ -249,6 +277,9 @@
             elements.imageOptions.forEach(option => {
                 option.addEventListener('click', () => selectImageOption(option));
             });
+
+            // Model selection event listener
+            elements.modelSelect.addEventListener('change', updateURL);
         }
         
         /**
@@ -256,7 +287,8 @@
          */
         function updateURL() {
             const encodedPrompt = encodeURIComponent(elements.promptInput.value.trim());
-            elements.urlOutput.textContent = BASE_URL + encodedPrompt;
+            const model = elements.modelSelect.value;
+            elements.urlOutput.textContent = BASE_URL + encodedPrompt + (model ? '&model=' + model : '');
         }
         
         /**
