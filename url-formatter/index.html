@@ -276,7 +276,7 @@
         
         // State variables
         const state = {
-            selectedImage: 'dark.png',
+            selectedImage: 'dark.svg',
             selectedSize: 'regular',
             selectedModel: ''
         };
@@ -345,7 +345,7 @@
          * @returns {string} Generated markdown
          */
         function generateMarkdown() {
-            const url = elements.urlOutput.textContent;
+            const url = elements.urlOutput.value;
             // Create a raw URL to the image file
             const imageUrl = window.location.href.replace('index.html', '').replace(/\/$/, '') + '/' + state.selectedImage;
             return `[![Open in GitHub Copilot](${imageUrl})](${url})`;
