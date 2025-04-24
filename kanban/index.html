@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Anonymous Kanban | Mike's Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Anonymous Kanban</h1>
+            <div class="board-controls">
+                <div class="board-title-container">
+                    <input type="text" id="board-title" placeholder="Untitled Board" value="Untitled Board">
+                    <div class="board-id-container">
+                        <span>Board ID: </span>
+                        <code id="board-id">...</code>
+                        <button id="copy-id" class="icon-button" title="Copy Board ID">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="create-board" class="btn">New Board</button>
+                    <button id="open-board" class="btn">Open Board</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="board-container">
+            <div id="board" class="board">
+                <!-- Columns will be added here dynamically -->
+                <div class="add-column-container">
+                    <button id="add-column" class="add-column">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                        Add Column
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for opening boards -->
+    <div id="open-board-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Open Board</h2>
+            <div class="modal-body">
+                <label for="board-id-input">Enter Board ID:</label>
+                <input type="text" id="board-id-input" placeholder="board-id">
+                <button id="open-board-submit" class="btn primary-btn">Open</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Detail Modal -->
+    <div id="card-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Card Details</h2>
+            <div class="modal-body">
+                <textarea id="card-content-edit" placeholder="Card content"></textarea>
+                <div class="card-actions">
+                    <button id="save-card" class="btn primary-btn">Save</button>
+                    <button id="delete-card" class="btn danger-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-message"></span>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
