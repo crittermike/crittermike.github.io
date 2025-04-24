@@ -103,9 +103,8 @@ function loadBoard(boardId) {
     state.boardRef.child('title').on('value', snapshot => {
         const title = snapshot.val();
         if (title) {
-            // Update both the input field and the header title
+            // Update the input field and document title
             elements.boardTitle.value = title;
-            elements.headerBoardTitle.textContent = title;
             document.title = `${title} | Kanban Board`;
         }
     });
@@ -284,48 +283,27 @@ function createCardElement(cardId, cardData, columnId) {
     cardContent.textContent = cardData.content;
     card.appendChild(cardContent);
     
-    // Comments section - only create if there are comments
+    // Add comments if they exist - always show them
     if (cardData.comments && Object.keys(cardData.comments).length > 0) {
-        const commentsSection = document.createElement('div');
-        commentsSection.className = 'comments-section-inline';
-        
-        // Sort and display all comments
         const commentIds = Object.keys(cardData.comments);
-        const sortedComments = commentIds.sort((a, b) => cardData.comments[a].created - cardData.comments[b].created);
         
+        // Sort comments chronologically
+        const sortedComments = commentIds.sort((a, b) => 
+            cardData.comments[a].created - cardData.comments[b].created);
+        
+        // Add all comments (without timestamps)
         sortedComments.forEach(commentId => {
             const comment = cardData.comments[commentId];
             const commentEl = document.createElement('div');
             commentEl.className = 'inline-comment';
-            
-            const commentContent = document.createElement('div');
-            commentContent.className = 'inline-comment-content';
-            commentContent.textContent = comment.content;
-            commentEl.appendChild(commentContent);
-            
-            const timestamp = document.createElement('div');
-            timestamp.className = 'inline-comment-timestamp';
-            if (comment.created) {
-                const date = new Date(comment.created);
-                timestamp.textContent = date.toLocaleString(undefined, {
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-            commentEl.appendChild(timestamp);
-            
-            commentsSection.appendChild(commentEl);
+            commentEl.textContent = comment.content;
+            card.appendChild(commentEl);
         });
-        
-        // Always add comments section (with existing comments) to the card
-        card.appendChild(commentsSection);
     }
     
-    // Add hidden comment input form for all cards
+    // Add comment input (always visible)
     const addCommentForm = document.createElement('div');
-    addCommentForm.className = 'inline-add-comment hidden';
+    addCommentForm.className = 'inline-add-comment';
     
     const commentInput = document.createElement('input');
     commentInput.className = 'inline-comment-input';
@@ -346,15 +324,15 @@ function createCardElement(cardId, cardData, columnId) {
         }
     });
     
-    // Prevent click propagation to avoid opening card modal when clicking the input
+    // Prevent click propagation to avoid opening card modal
     commentInput.addEventListener('click', (e) => {
         e.stopPropagation();
     });
     
     addCommentForm.appendChild(commentInput);
     card.appendChild(addCommentForm);
-    
-    // Card footer with votes and timestamp
+
+    // Card footer - only keep vote buttons, no timestamps or comment buttons
     const cardFooter = document.createElement('div');
     cardFooter.className = 'card-footer';
 
@@ -400,56 +378,8 @@ function createCardElement(cardId, cardData, columnId) {
     votes.appendChild(voteCount);
     votes.appendChild(downvoteBtn);
     cardFooter.appendChild(votes);
-
-    // Timestamp and comment icon container
-    const metaContainer = document.createElement('div');
-    metaContainer.className = 'meta-container';
+    card.appendChild(cardFooter);
     
-    // Timestamp
-    const timestamp = document.createElement('span');
-    timestamp.className = 'card-timestamp';
-    
-    if (cardData.created) {
-        const date = new Date(cardData.created);
-        timestamp.textContent = date.toLocaleString(undefined, {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-    metaContainer.appendChild(timestamp);
-    
-    // Comment icon button
-    const commentBtn = document.createElement('button');
-    commentBtn.className = 'comment-button';
-    commentBtn.title = "Add a comment";
-    commentBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-        </svg>
-    `;
-    
-    // Toggle comment input visibility when clicking the comment button
-    commentBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent card from opening
-        const commentInput = card.querySelector('.inline-add-comment');
-        commentInput.classList.toggle('hidden');
-        if (!commentInput.classList.contains('hidden')) {
-            commentInput.querySelector('input').focus();
-        }
-    });
-    
-    metaContainer.appendChild(commentBtn);
-    cardFooter.appendChild(metaContainer);
-    
-    // Open card modal on click
-    card.addEventListener('click', () => {
-        openCardModal(cardId, columnId, cardData);
-    });
-
-    return card;
-
     // Open card modal on click
     card.addEventListener('click', () => {
         openCardModal(cardId, columnId, cardData);
