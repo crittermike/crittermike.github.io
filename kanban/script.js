@@ -8,9 +8,19 @@ const firebaseConfig = {
     appId: "1:338206440353:web:a6af4374836968379d29e0"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase with improved persistence options
+const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+
+// Enable offline persistence for the Realtime Database
+database.ref('.info/connected').on('value', (snapshot) => {
+    // We're connected or reconnected
+    if (snapshot.val() === true) {
+        console.log('Connected to Firebase Realtime Database');
+    } else {
+        console.log('Disconnected from Firebase Realtime Database');
+    }
+});
 
 // DOM Elements
 const elements = {
@@ -502,20 +512,47 @@ function openExistingBoard() {
 function copyBoardId() {
     if (!state.boardId) return;
     
-    navigator.clipboard.writeText(state.boardId)
-        .then(() => {
-            showNotification('Board ID copied to clipboard');
-        })
-        .catch(() => {
-            // Fallback for browsers that don't support clipboard API
-            const input = document.createElement('textarea');
-            input.value = state.boardId;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-            showNotification('Board ID copied to clipboard');
-        });
+    // Use modern clipboard API with async handling
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(state.boardId)
+            .then(() => {
+                showNotification('Board ID copied to clipboard');
+            })
+            .catch(err => {
+                console.error('Clipboard error:', err);
+                showNotification('Clipboard access denied');
+            });
+    } else {
+        // Modern fallback that avoids synchronous operations
+        try {
+            const copyText = async () => {
+                const input = document.createElement('textarea');
+                input.value = state.boardId;
+                input.style.position = 'absolute';
+                input.style.left = '-9999px';
+                document.body.appendChild(input);
+                input.focus();
+                input.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(input);
+                    if (successful) {
+                        showNotification('Board ID copied to clipboard');
+                    } else {
+                        showNotification('Failed to copy to clipboard');
+                    }
+                } catch (err) {
+                    document.body.removeChild(input);
+                    showNotification('Failed to copy to clipboard');
+                }
+            };
+            
+            copyText();
+        } catch (err) {
+            showNotification('Failed to copy to clipboard');
+        }
+    }
 }
 
 // Sort functionality
