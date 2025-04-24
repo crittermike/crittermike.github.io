@@ -16,6 +16,7 @@ const database = firebase.database();
 const elements = {
     board: document.getElementById('board'),
     boardTitle: document.getElementById('board-title'),
+    headerBoardTitle: document.getElementById('header-board-title'),
     boardId: document.getElementById('board-id'),
     addColumnBtn: document.getElementById('add-column'),
     createBoardBtn: document.getElementById('create-board'),
@@ -25,6 +26,9 @@ const elements = {
     openBoardSubmit: document.getElementById('open-board-submit'),
     cardDetailModal: document.getElementById('card-detail-modal'),
     cardContentEdit: document.getElementById('card-content-edit'),
+    commentsContainer: document.getElementById('comments-container'),
+    newComment: document.getElementById('new-comment'),
+    addCommentBtn: document.getElementById('add-comment-btn'),
     saveCardBtn: document.getElementById('save-card'),
     deleteCardBtn: document.getElementById('delete-card'),
     copyIdBtn: document.getElementById('copy-id'),
@@ -42,7 +46,8 @@ const state = {
     boardId: null,
     boardRef: null,
     activeCardId: null,
-    activeColumnId: null
+    activeColumnId: null,
+    sortByVotes: false  // Track if we're sorting by votes
 };
 
 // Functions
@@ -98,8 +103,10 @@ function loadBoard(boardId) {
     state.boardRef.child('title').on('value', snapshot => {
         const title = snapshot.val();
         if (title) {
+            // Update both the input field and the header title
             elements.boardTitle.value = title;
-            document.title = `${title} | Anonymous Kanban`;
+            elements.headerBoardTitle.textContent = title;
+            document.title = `${title} | Kanban Board`;
         }
     });
 
@@ -216,7 +223,17 @@ function createColumnElement(columnId, columnData) {
 
     // Add cards to column
     if (columnData.cards) {
-        const cardIds = Object.keys(columnData.cards);
+        let cardIds = Object.keys(columnData.cards);
+        
+        // Sort cards by votes if enabled
+        if (state.sortByVotes) {
+            cardIds.sort((a, b) => {
+                const votesA = columnData.cards[a].votes || 0;
+                const votesB = columnData.cards[b].votes || 0;
+                return votesB - votesA; // Descending order (highest votes first)
+            });
+        }
+        
         cardIds.forEach(cardId => {
             const card = columnData.cards[cardId];
             const cardElement = createCardElement(cardId, card, columnId);
@@ -266,6 +283,91 @@ function createCardElement(cardId, cardData, columnId) {
     cardContent.className = 'card-content';
     cardContent.textContent = cardData.content;
     card.appendChild(cardContent);
+    
+    // Comments section for all cards, even those without comments yet
+    const commentsSection = document.createElement('div');
+    commentsSection.className = 'comments-section-inline';
+    
+    const commentHeader = document.createElement('div');
+    commentHeader.className = 'comments-header';
+    
+    const commentCount = cardData.comments ? Object.keys(cardData.comments).length : 0;
+    commentHeader.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        </svg>
+        <span>Comments (${commentCount})</span>
+    `;
+    commentsSection.appendChild(commentHeader);
+
+    // Add all comments if they exist
+    if (cardData.comments && Object.keys(cardData.comments).length > 0) {
+        const commentIds = Object.keys(cardData.comments);
+        
+        // Sort comments chronologically
+        const sortedComments = commentIds.sort((a, b) => cardData.comments[a].created - cardData.comments[b].created);
+        
+        // Add all comments
+        sortedComments.forEach(commentId => {
+            const comment = cardData.comments[commentId];
+            const commentEl = document.createElement('div');
+            commentEl.className = 'inline-comment';
+            
+            const commentContent = document.createElement('div');
+            commentContent.className = 'inline-comment-content';
+            commentContent.textContent = comment.content;
+            commentEl.appendChild(commentContent);
+            
+            const timestamp = document.createElement('div');
+            timestamp.className = 'inline-comment-timestamp';
+            if (comment.created) {
+                const date = new Date(comment.created);
+                timestamp.textContent = date.toLocaleString(undefined, {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            commentEl.appendChild(timestamp);
+            
+            commentsSection.appendChild(commentEl);
+        });
+    }
+    
+    // Add comment input for all cards
+    const addCommentForm = document.createElement('div');
+    addCommentForm.className = 'inline-add-comment';
+    
+    const commentInput = document.createElement('input');
+    commentInput.className = 'inline-comment-input';
+    commentInput.placeholder = 'Add a comment...';
+    commentInput.dataset.columnId = columnId;
+    commentInput.dataset.cardId = cardId;
+    
+    // Handle inline comment submission
+    commentInput.addEventListener('keydown', (e) => {
+        e.stopPropagation(); // Prevent card from opening
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const content = commentInput.value.trim();
+            if (content) {
+                addInlineComment(columnId, cardId, content);
+                commentInput.value = '';
+            }
+        }
+    });
+    
+    // Prevent click propagation to avoid opening card modal when clicking the input
+    commentInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    addCommentForm.appendChild(commentInput);
+    commentsSection.appendChild(addCommentForm);
+    
+    // Add the comments section to the card
+    card.appendChild(commentsSection);
 
     // Card footer
     const cardFooter = document.createElement('div');
@@ -382,6 +484,9 @@ function openCardModal(cardId, columnId, cardData) {
     elements.cardContentEdit.value = cardData.content;
     elements.cardDetailModal.style.display = 'flex';
     elements.cardContentEdit.focus();
+
+    // Load comments for the card
+    loadComments(columnId, cardId);
 }
 
 function saveCard() {
@@ -416,6 +521,8 @@ function handleBoardTitle() {
     const title = elements.boardTitle.value.trim();
     if (title) {
         state.boardRef.child('title').set(title);
+        // Update the header title as well
+        elements.headerBoardTitle.textContent = title;
     }
 }
 
@@ -465,6 +572,129 @@ function copyBoardId() {
         });
 }
 
+// Sort functionality
+function toggleSortByVotes() {
+    state.sortByVotes = !state.sortByVotes;
+    const sortButton = document.getElementById('sort-by-votes');
+    
+    if (state.sortByVotes) {
+        sortButton.classList.add('active');
+        sortButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+            </svg>
+            Sort by Votes
+        `;
+    } else {
+        sortButton.classList.remove('active');
+        sortButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            Sort by Votes
+        `;
+    }
+    
+    // Re-fetch the columns to trigger a re-render with the new sort
+    if (state.boardRef) {
+        state.boardRef.child('columns').once('value', snapshot => {
+            const columns = snapshot.val() || {};
+            updateColumns(columns);
+        });
+    }
+}
+
+// Comments functionality
+function addComment() {
+    if (!state.activeCardId || !state.activeColumnId || !state.boardRef) return;
+    
+    const commentContent = elements.newComment.value.trim();
+    if (!commentContent) return;
+    
+    const commentId = generateId();
+    const commentData = {
+        content: commentContent,
+        created: firebase.database.ServerValue.TIMESTAMP
+    };
+    
+    state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}/comments/${commentId}`).set(commentData)
+        .then(() => {
+            elements.newComment.value = '';
+            showNotification('Comment added');
+        });
+}
+
+function loadComments(columnId, cardId) {
+    if (!state.boardRef) return;
+    
+    elements.commentsContainer.innerHTML = ''; // Clear existing comments
+    
+    state.boardRef.child(`columns/${columnId}/cards/${cardId}/comments`).once('value', snapshot => {
+        const comments = snapshot.val();
+        
+        if (!comments) {
+            const noComments = document.createElement('div');
+            noComments.className = 'no-comments';
+            noComments.textContent = 'No comments yet';
+            elements.commentsContainer.appendChild(noComments);
+            return;
+        }
+        
+        // Sort comments by timestamp (oldest first) - chronological order
+        const sortedCommentIds = Object.keys(comments).sort((a, b) => {
+            return comments[a].created - comments[b].created;
+        });
+        
+        sortedCommentIds.forEach(commentId => {
+            const comment = comments[commentId];
+            const commentElement = createCommentElement(comment);
+            elements.commentsContainer.appendChild(commentElement);
+        });
+    });
+}
+
+function createCommentElement(comment) {
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment';
+    
+    const commentContent = document.createElement('div');
+    commentContent.className = 'comment-content';
+    commentContent.textContent = comment.content;
+    commentElement.appendChild(commentContent);
+    
+    const commentTimestamp = document.createElement('div');
+    commentTimestamp.className = 'comment-timestamp';
+    
+    if (comment.created) {
+        const date = new Date(comment.created);
+        commentTimestamp.textContent = date.toLocaleString(undefined, {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    commentElement.appendChild(commentTimestamp);
+    return commentElement;
+}
+
+// Add a comment directly from the card (without opening modal)
+function addInlineComment(columnId, cardId, content) {
+    if (!state.boardRef) return;
+    
+    const commentId = generateId();
+    const commentData = {
+        content: content,
+        created: firebase.database.ServerValue.TIMESTAMP
+    };
+    
+    state.boardRef.child(`columns/${columnId}/cards/${cardId}/comments/${commentId}`).set(commentData)
+        .then(() => {
+            showNotification('Comment added');
+        });
+}
+
 // Event Listeners
 elements.addColumnBtn.addEventListener('click', addNewColumn);
 elements.createBoardBtn.addEventListener('click', createNewBoard);
@@ -474,6 +704,11 @@ elements.boardTitle.addEventListener('change', handleBoardTitle);
 elements.saveCardBtn.addEventListener('click', saveCard);
 elements.deleteCardBtn.addEventListener('click', deleteCard);
 elements.copyIdBtn.addEventListener('click', copyBoardId);
+elements.addCommentBtn.addEventListener('click', addComment);
+
+// Sort by votes button
+document.getElementById('sort-by-votes').addEventListener('click', toggleSortByVotes);
+elements.addCommentBtn.addEventListener('click', addComment);
 
 // Close modals when clicking outside
 window.addEventListener('click', function(event) {
