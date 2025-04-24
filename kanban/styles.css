@@ -317,6 +317,37 @@ main {
     font-size: 0.85rem;
 }
 
+.meta-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b949e;
+    cursor: pointer;
+    padding: 0;
+}
+
+.comment-button:hover {
+    color: var(--text-color);
+}
+
+.inline-add-comment {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.inline-add-comment.hidden {
+    display: none;
+}
+
 .comments-header {
     display: flex;
     align-items: center;

@@ -284,30 +284,15 @@ function createCardElement(cardId, cardData, columnId) {
     cardContent.textContent = cardData.content;
     card.appendChild(cardContent);
     
-    // Comments section for all cards, even those without comments yet
-    const commentsSection = document.createElement('div');
-    commentsSection.className = 'comments-section-inline';
-    
-    const commentHeader = document.createElement('div');
-    commentHeader.className = 'comments-header';
-    
-    const commentCount = cardData.comments ? Object.keys(cardData.comments).length : 0;
-    commentHeader.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-        </svg>
-        <span>Comments (${commentCount})</span>
-    `;
-    commentsSection.appendChild(commentHeader);
-
-    // Add all comments if they exist
+    // Comments section - only create if there are comments
     if (cardData.comments && Object.keys(cardData.comments).length > 0) {
-        const commentIds = Object.keys(cardData.comments);
+        const commentsSection = document.createElement('div');
+        commentsSection.className = 'comments-section-inline';
         
-        // Sort comments chronologically
+        // Sort and display all comments
+        const commentIds = Object.keys(cardData.comments);
         const sortedComments = commentIds.sort((a, b) => cardData.comments[a].created - cardData.comments[b].created);
         
-        // Add all comments
         sortedComments.forEach(commentId => {
             const comment = cardData.comments[commentId];
             const commentEl = document.createElement('div');
@@ -333,11 +318,14 @@ function createCardElement(cardId, cardData, columnId) {
             
             commentsSection.appendChild(commentEl);
         });
+        
+        // Always add comments section (with existing comments) to the card
+        card.appendChild(commentsSection);
     }
     
-    // Add comment input for all cards
+    // Add hidden comment input form for all cards
     const addCommentForm = document.createElement('div');
-    addCommentForm.className = 'inline-add-comment';
+    addCommentForm.className = 'inline-add-comment hidden';
     
     const commentInput = document.createElement('input');
     commentInput.className = 'inline-comment-input';
@@ -364,12 +352,9 @@ function createCardElement(cardId, cardData, columnId) {
     });
     
     addCommentForm.appendChild(commentInput);
-    commentsSection.appendChild(addCommentForm);
+    card.appendChild(addCommentForm);
     
-    // Add the comments section to the card
-    card.appendChild(commentsSection);
-
-    // Card footer
+    // Card footer with votes and timestamp
     const cardFooter = document.createElement('div');
     cardFooter.className = 'card-footer';
 
@@ -416,11 +401,14 @@ function createCardElement(cardId, cardData, columnId) {
     votes.appendChild(downvoteBtn);
     cardFooter.appendChild(votes);
 
+    // Timestamp and comment icon container
+    const metaContainer = document.createElement('div');
+    metaContainer.className = 'meta-container';
+    
     // Timestamp
-    const timestamp = document.createElement('div');
+    const timestamp = document.createElement('span');
     timestamp.className = 'card-timestamp';
     
-    // Format the timestamp
     if (cardData.created) {
         const date = new Date(cardData.created);
         timestamp.textContent = date.toLocaleString(undefined, {
@@ -430,9 +418,37 @@ function createCardElement(cardId, cardData, columnId) {
             minute: '2-digit'
         });
     }
+    metaContainer.appendChild(timestamp);
     
-    cardFooter.appendChild(timestamp);
-    card.appendChild(cardFooter);
+    // Comment icon button
+    const commentBtn = document.createElement('button');
+    commentBtn.className = 'comment-button';
+    commentBtn.title = "Add a comment";
+    commentBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        </svg>
+    `;
+    
+    // Toggle comment input visibility when clicking the comment button
+    commentBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card from opening
+        const commentInput = card.querySelector('.inline-add-comment');
+        commentInput.classList.toggle('hidden');
+        if (!commentInput.classList.contains('hidden')) {
+            commentInput.querySelector('input').focus();
+        }
+    });
+    
+    metaContainer.appendChild(commentBtn);
+    cardFooter.appendChild(metaContainer);
+    
+    // Open card modal on click
+    card.addEventListener('click', () => {
+        openCardModal(cardId, columnId, cardData);
+    });
+
+    return card;
 
     // Open card modal on click
     card.addEventListener('click', () => {
