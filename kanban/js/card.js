@@ -181,13 +181,12 @@ export function addNewCard(columnId) {
     const cardData = {
         content: '',
         votes: 0,
-        created: firebase.database.ServerValue.TIMESTAMP
+        created: firebase.database.ServerValue.TIMESTAMP,
+        isNew: true // Flag to indicate this is a new card that hasn't been saved yet
     };
     
-    state.boardRef.child(`columns/${columnId}/cards/${cardId}`).set(cardData)
-        .then(() => {
-            openCardModal(cardId, columnId, cardData);
-        });
+    // Open the modal without creating the card in the database yet
+    openCardModal(cardId, columnId, cardData);
 }
 
 /**
@@ -221,13 +220,38 @@ export function saveCard() {
     const content = cardContentEdit.value.trim();
     
     if (content) {
-        state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}/content`).set(content)
-            .then(() => {
-                closeAllModals();
-                showNotification('Card updated');
-            });
+        // Check if this is a new card or an existing one
+        const isNewCard = state.isNewCard || false;
+        
+        if (isNewCard) {
+            // For a new card, save the entire card data
+            const cardData = {
+                content: content,
+                votes: 0,
+                created: firebase.database.ServerValue.TIMESTAMP
+            };
+            
+            state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}`).set(cardData)
+                .then(() => {
+                    closeAllModals();
+                    showNotification('Card created');
+                });
+        } else {
+            // For existing cards, just update the content
+            state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}/content`).set(content)
+                .then(() => {
+                    closeAllModals();
+                    showNotification('Card updated');
+                });
+        }
     } else {
-        deleteCard();
+        // If content is empty, just close the modal for new cards without saving
+        // For existing cards, offer to delete them
+        if (state.isNewCard) {
+            closeAllModals();
+        } else {
+            deleteCard();
+        }
     }
 }
 
