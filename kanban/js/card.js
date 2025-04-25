@@ -5,6 +5,34 @@ import { state } from './state.js';
 import { generateId, showNotification, closeAllModals } from './utils.js';
 import { database } from './firebase.js';
 
+// Grouped emoji set for reactions
+const COMMON_EMOJIS = [
+  // Faces & expressions
+  '😄', '😍', '🤩', '😎', '🤔', '😂', '😭', '😅', '😬', '😲', '😱', '💀', 
+
+  // Hands & gestures
+  '👍', '👎', '👏', '🙌', '💪', '🤝', '🙏', '🫡',
+
+  // Hearts
+  '❤️', '💔', '💯',
+
+  // Symbols & icons
+  '✅', '❗', '⚠️', '❓', '✨', '⭐', '🏆', '💡', '⚡',
+
+  // Eyes / observation
+  '👀',
+
+  // Brainy / thoughtful
+  '🧠',
+
+  // Fun / celebration
+  '🎉', '🚀', '🌈', '🐳',
+
+  // Food & drink
+  '🍺', '🍔'
+];
+
+
 /**
  * Creates a card element
  * @param {string} cardId The ID of the card
@@ -105,7 +133,46 @@ export function createCardElement(cardId, cardData, columnId) {
         }
     });
     
-    cardHeader.appendChild(commentsBtn);
+    // Add emoji reactions section
+    const reactionsContainer = document.createElement('div');
+    reactionsContainer.className = 'emoji-reactions';
+    
+    // Create left side for emoji reactions
+    const reactionsLeft = document.createElement('div');
+    reactionsLeft.className = 'reactions-left';
+    
+    // Display existing reactions if any
+    if (cardData.reactions) {
+        Object.entries(cardData.reactions).forEach(([emoji, users]) => {
+            const count = Object.keys(users).length;
+            if (count > 0) {
+                const reactionBtn = createReactionButton(emoji, count, columnId, cardId);
+                reactionsLeft.appendChild(reactionBtn);
+            }
+        });
+    }
+    
+    // Add reaction button
+    const addReactionBtn = document.createElement('button');
+    addReactionBtn.className = 'add-reaction-button';
+    addReactionBtn.innerHTML = '+';
+    addReactionBtn.title = 'Add reaction';
+    addReactionBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showEmojiPicker(e.target, columnId, cardId);
+    });
+    
+    reactionsLeft.appendChild(addReactionBtn);
+    
+    // Create right side for comment button
+    const reactionsRight = document.createElement('div');
+    reactionsRight.className = 'reactions-right';
+    reactionsRight.appendChild(commentsBtn);
+    
+    // Add both sides to the reactions container
+    reactionsContainer.appendChild(reactionsLeft);
+    reactionsContainer.appendChild(reactionsRight);
+    card.appendChild(reactionsContainer);
     
     // Comments section (initially hidden if there are no comments)
     const commentsSection = document.createElement('div');
@@ -295,6 +362,112 @@ export function addInlineComment(columnId, cardId, content) {
 /**
  * Adds a comment to the current card (from modal)
  */
+/**
+ * Creates an emoji reaction button
+ * @param {string} emoji The emoji to display
+ * @param {number} count The count of reactions
+ * @param {string} columnId The column ID
+ * @param {string} cardId The card ID
+ * @returns {HTMLElement} The reaction button element
+ */
+function createReactionButton(emoji, count, columnId, cardId) {
+    const reactionBtn = document.createElement('div');
+    reactionBtn.className = 'emoji-reaction';
+    reactionBtn.dataset.emoji = emoji;
+    
+    const emojiSpan = document.createElement('span');
+    emojiSpan.className = 'emoji';
+    emojiSpan.textContent = emoji;
+    
+    const countSpan = document.createElement('span');
+    countSpan.className = 'count';
+    countSpan.textContent = count;
+    
+    reactionBtn.appendChild(emojiSpan);
+    reactionBtn.appendChild(countSpan);
+    
+    reactionBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleReaction(emoji, columnId, cardId);
+    });
+    
+    return reactionBtn;
+}
+
+/**
+ * Shows the emoji picker
+ * @param {HTMLElement} target The element that triggered the picker
+ * @param {string} columnId The column ID
+ * @param {string} cardId The card ID
+ */
+function showEmojiPicker(target, columnId, cardId) {
+    // Remove any existing picker
+    const existingPicker = document.querySelector('.emoji-picker');
+    if (existingPicker) {
+        existingPicker.remove();
+    }
+    
+    // Create picker element
+    const picker = document.createElement('div');
+    picker.className = 'emoji-picker';
+    
+    // Position the picker near the button
+    const rect = target.getBoundingClientRect();
+    picker.style.left = `${rect.left}px`;
+    picker.style.top = `${rect.bottom + 5}px`;
+    
+    // Add emoji buttons
+    COMMON_EMOJIS.forEach(emoji => {
+        const button = document.createElement('button');
+        button.textContent = emoji;
+        button.addEventListener('click', () => {
+            toggleReaction(emoji, columnId, cardId);
+            picker.remove();
+        });
+        picker.appendChild(button);
+    });
+    
+    // Close picker when clicking outside
+    document.addEventListener('click', function closeEmojiPicker(e) {
+        if (!picker.contains(e.target) && e.target !== target) {
+            picker.remove();
+            document.removeEventListener('click', closeEmojiPicker);
+        }
+    });
+    
+    document.body.appendChild(picker);
+}
+
+/**
+ * Toggles an emoji reaction on a card
+ * @param {string} emoji The emoji to toggle
+ * @param {string} columnId The column ID
+ * @param {string} cardId The card ID
+ */
+function toggleReaction(emoji, columnId, cardId) {
+    if (!state.boardRef) return;
+    
+    // Generate a unique ID for this user's session if not already created
+    if (!state.sessionId) {
+        state.sessionId = generateId();
+    }
+    
+    // Path to this reaction
+    const reactionPath = `columns/${columnId}/cards/${cardId}/reactions/${emoji}/${state.sessionId}`;
+    
+    // Check if this user already reacted with this emoji
+    state.boardRef.child(reactionPath).once('value')
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                // User already reacted, remove the reaction
+                state.boardRef.child(reactionPath).remove();
+            } else {
+                // User hasn't reacted yet, add the reaction
+                state.boardRef.child(reactionPath).set(true);
+            }
+        });
+}
+
 export function addComment() {
     if (!state.activeCardId || !state.activeColumnId || !state.boardRef) return;
     
