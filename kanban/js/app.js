@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyIdBtn = document.getElementById('copy-id');
     const addCommentBtn = document.getElementById('add-comment-btn');
     const sortByVotesBtn = document.getElementById('sort-by-votes');
+    const cardContentEdit = document.getElementById('card-content-edit');
+    const newComment = document.getElementById('new-comment');
 
     // Button click handlers
     addColumnBtn.addEventListener('click', addNewColumn);
@@ -45,6 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
     copyIdBtn.addEventListener('click', copyBoardId);
     addCommentBtn.addEventListener('click', addComment);
     sortByVotesBtn.addEventListener('click', toggleSortByVotes);
+
+    // Handle Enter key in card textarea - submit on Enter, new line on Shift+Enter
+    cardContentEdit.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            saveCard();
+        }
+    });
+
+    // Handle Enter key in comment textarea - submit on Enter, new line on Shift+Enter
+    newComment.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            addComment();
+        }
+    });
 
     // Modal close events - Close when clicking outside
     const openBoardModal = document.getElementById('open-board-modal');
