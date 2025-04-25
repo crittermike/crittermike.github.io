@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-time Anonymous Kanban | Mike's Tools</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
@@ -61,8 +60,10 @@
             <span class="close-modal">&times;</span>
             <h2>Open Board</h2>
             <div class="modal-body">
-                <label for="board-id-input">Enter Board ID:</label>
-                <input type="text" id="board-id-input" placeholder="board-id">
+                <div class="form-group">
+                    <label for="board-id-input">Enter Board ID:</label>
+                    <input type="text" id="board-id-input" placeholder="Enter the board ID here" autocomplete="off">
+                </div>
                 <button id="open-board-submit" class="btn primary-btn">Open</button>
             </div>
         </div>
@@ -75,6 +76,10 @@
             <h2>Card Details</h2>
             <div class="modal-body">
                 <textarea id="card-content-edit" placeholder="Card content"></textarea>
+                <div class="card-actions">
+                    <button id="save-card" class="btn primary-btn">Save</button>
+                    <button id="delete-card" class="btn danger-btn">Delete</button>
+                </div>
                 
                 <div class="comments-section">
                     <h3>Comments</h3>
@@ -85,11 +90,6 @@
                         <textarea id="new-comment" placeholder="Add a comment..."></textarea>
                         <button id="add-comment-btn" class="btn primary-btn">Add Comment</button>
                     </div>
-                </div>
-                
-                <div class="card-actions">
-                    <button id="save-card" class="btn primary-btn">Save</button>
-                    <button id="delete-card" class="btn danger-btn">Delete</button>
                 </div>
             </div>
         </div>
