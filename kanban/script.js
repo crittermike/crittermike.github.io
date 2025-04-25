@@ -287,64 +287,9 @@ function createCardElement(cardId, cardData, columnId) {
         card.classList.remove('dragging');
     });
 
-    // Card content
-    const cardContent = document.createElement('div');
-    cardContent.className = 'card-content';
-    cardContent.textContent = cardData.content;
-    card.appendChild(cardContent);
-    
-    // Add comments if they exist - always show them
-    if (cardData.comments && Object.keys(cardData.comments).length > 0) {
-        const commentIds = Object.keys(cardData.comments);
-        
-        // Sort comments chronologically
-        const sortedComments = commentIds.sort((a, b) => 
-            cardData.comments[a].created - cardData.comments[b].created);
-        
-        // Add all comments (without timestamps)
-        sortedComments.forEach(commentId => {
-            const comment = cardData.comments[commentId];
-            const commentEl = document.createElement('div');
-            commentEl.className = 'inline-comment';
-            commentEl.textContent = comment.content;
-            card.appendChild(commentEl);
-        });
-    }
-    
-    // Add comment input (always visible)
-    const addCommentForm = document.createElement('div');
-    addCommentForm.className = 'inline-add-comment';
-    
-    const commentInput = document.createElement('input');
-    commentInput.className = 'inline-comment-input';
-    commentInput.placeholder = 'Add a comment...';
-    commentInput.dataset.columnId = columnId;
-    commentInput.dataset.cardId = cardId;
-    
-    // Handle inline comment submission
-    commentInput.addEventListener('keydown', (e) => {
-        e.stopPropagation(); // Prevent card from opening
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            const content = commentInput.value.trim();
-            if (content) {
-                addInlineComment(columnId, cardId, content);
-                commentInput.value = '';
-            }
-        }
-    });
-    
-    // Prevent click propagation to avoid opening card modal
-    commentInput.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-    
-    addCommentForm.appendChild(commentInput);
-    card.appendChild(addCommentForm);
-
-    // Card footer - only keep vote buttons, no timestamps or comment buttons
-    const cardFooter = document.createElement('div');
-    cardFooter.className = 'card-footer';
+    // Create card header with content and votes side-by-side
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'card-header';
 
     // Voting system
     const votes = document.createElement('div');
@@ -387,8 +332,98 @@ function createCardElement(cardId, cardData, columnId) {
     votes.appendChild(upvoteBtn);
     votes.appendChild(voteCount);
     votes.appendChild(downvoteBtn);
-    cardFooter.appendChild(votes);
+    
+    // Card content
+    const cardContent = document.createElement('div');
+    cardContent.className = 'card-content';
+    cardContent.textContent = cardData.content;
+    
+    cardHeader.appendChild(votes);
+    cardHeader.appendChild(cardContent);
+    card.appendChild(cardHeader);
+    
+    // Card footer with comment toggle
+    const cardFooter = document.createElement('div');
+    cardFooter.className = 'card-footer';
+    
+    // Comment toggle button
+    const hasComments = cardData.comments && Object.keys(cardData.comments).length > 0;
+    const commentCount = hasComments ? Object.keys(cardData.comments).length : 0;
+    
+    const commentsBtn = document.createElement('button');
+    commentsBtn.className = 'comments-btn';
+    commentsBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        </svg>
+        <span>${commentCount}</span>
+    `;
+    commentsBtn.title = "Toggle Comments";
+    commentsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const comments = card.querySelector('.comments-section');
+        if (comments) {
+            comments.classList.toggle('hidden');
+        }
+    });
+    
+    cardFooter.appendChild(commentsBtn);
     card.appendChild(cardFooter);
+    
+    // Comments section (initially hidden if there are no comments)
+    const commentsSection = document.createElement('div');
+    commentsSection.className = 'comments-section';
+    if (!hasComments) {
+        commentsSection.classList.add('hidden');
+    }
+    
+    // Add comments if they exist
+    if (hasComments) {
+        const commentIds = Object.keys(cardData.comments);
+        
+        // Sort comments chronologically
+        const sortedComments = commentIds.sort((a, b) => 
+            cardData.comments[a].created - cardData.comments[b].created);
+        
+        // Add all comments
+        sortedComments.forEach(commentId => {
+            const comment = cardData.comments[commentId];
+            const commentEl = document.createElement('div');
+            commentEl.className = 'comment';
+            commentEl.textContent = comment.content;
+            commentsSection.appendChild(commentEl);
+        });
+    }
+    
+    // Add comment input
+    const commentForm = document.createElement('div');
+    commentForm.className = 'comment-form';
+    
+    const commentInput = document.createElement('input');
+    commentInput.type = 'text';
+    commentInput.className = 'comment-input';
+    commentInput.placeholder = 'Add a comment...';
+    
+    // Handle comment submission
+    commentInput.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const content = commentInput.value.trim();
+            if (content) {
+                addInlineComment(columnId, cardId, content);
+                commentInput.value = '';
+            }
+        }
+    });
+    
+    commentInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    commentForm.appendChild(commentInput);
+    commentsSection.appendChild(commentForm);
+    card.appendChild(commentsSection);
     
     // Open card modal on click
     card.addEventListener('click', () => {
