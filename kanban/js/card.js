@@ -237,11 +237,14 @@ export function saveCard() {
 export function deleteCard() {
     if (!state.activeCardId || !state.activeColumnId || !state.boardRef) return;
     
-    state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}`).remove()
-        .then(() => {
-            closeAllModals();
-            showNotification('Card deleted');
-        });
+    // Add confirmation dialog
+    if (confirm('Are you sure you want to delete this card?')) {
+        state.boardRef.child(`columns/${state.activeColumnId}/cards/${state.activeCardId}`).remove()
+            .then(() => {
+                closeAllModals();
+                showNotification('Card deleted');
+            });
+    }
 }
 
 /**
