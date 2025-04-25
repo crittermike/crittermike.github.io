@@ -274,6 +274,35 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    min-height: 100px; /* Minimum height for the content area */
+}
+
+.column-content:empty {
+    position: relative;
+}
+
+.column-content:empty::before {
+    content: "Add a card to get started";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #8b949e;
+    font-style: italic;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 .column-content.drag-over {
@@ -454,6 +483,7 @@ main {
     margin-bottom: 0.5rem;
     border-left: 2px solid var(--accent);
     font-size: 0.9rem;
+    color: #999;
 }
 
 .comment-content {
