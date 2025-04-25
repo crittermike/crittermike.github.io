@@ -45,7 +45,6 @@ header {
 }
 
 .header-content {
-    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -98,7 +97,6 @@ h1 {
     color: var(--text-color);
     border: 1px solid transparent;
     border-radius: 4px;
-    padding: 0.25rem 0.5rem;
     width: 100%;
 }
 
