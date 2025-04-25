@@ -11,6 +11,7 @@ export const state = {
     activeCardId: null,
     activeColumnId: null,
     sortByVotes: false,
+    user: null,
     
     // Setter for boardId that automatically updates URL hash
     setBoardId(value) {
@@ -25,5 +26,10 @@ export const state = {
         } else {
             this.boardRef = null;
         }
+    },
+
+    // Set the authenticated user
+    setUser(user) {
+        this.user = user;
     }
 };

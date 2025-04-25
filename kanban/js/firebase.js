@@ -15,6 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase with improved persistence options
 export const app = firebase.initializeApp(firebaseConfig);
 export const database = firebase.database();
+export const auth = firebase.auth();
 
 // Enable offline persistence for the Realtime Database
 database.ref('.info/connected').on('value', (snapshot) => {

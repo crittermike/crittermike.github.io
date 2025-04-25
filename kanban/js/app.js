@@ -2,7 +2,7 @@
  * Main application entry point for the Kanban application
  * This file initializes the app and sets up event listeners
  */
-import { closeAllModals } from './utils.js';
+import { closeAllModals, showNotification } from './utils.js';
 import { addNewColumn } from './column.js';
 import { saveCard, deleteCard, addComment } from './card.js';
 import { 
@@ -14,9 +14,43 @@ import {
     toggleSortByVotes,
     initializeBoard
 } from './board.js';
+import { auth } from './firebase.js';
+import { state } from './state.js';
+
+let appInitialized = false;
 
 // Initialize elements when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Listen for authentication state changes
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            // User is signed in
+            console.log('User authenticated:', user.uid);
+            state.setUser(user);
+            showNotification('Connected anonymously');
+            
+            // Initialize the app if not already done
+            if (!appInitialized) {
+                initApp();
+                appInitialized = true;
+            }
+        } else {
+            // User is signed out, let's sign in anonymously
+            console.log('User not authenticated, signing in anonymously...');
+            auth.signInAnonymously().catch(error => {
+                console.error('Authentication failed:', error);
+                // Still initialize the app even if auth fails
+                if (!appInitialized) {
+                    initApp();
+                    appInitialized = true;
+                }
+            });
+        }
+    });
+});
+
+// Initialize application after authentication
+function initApp() {
     // Setup close button event handlers for modals
     document.querySelectorAll('.close-modal').forEach(button => {
         button.addEventListener('click', closeAllModals);
@@ -85,4 +119,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the board (either load from URL or create a new one)
     initializeBoard();
-});
+}
