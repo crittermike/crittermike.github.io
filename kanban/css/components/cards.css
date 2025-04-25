@@ -121,12 +121,55 @@
     word-break: break-word;
 }
 
+/* Comment editing styles */
+.comment-edit-area {
+    width: 100%;
+    padding: var(--space-xs);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-color);
+    margin-bottom: var(--space-xs);
+    min-height: 60px;
+    resize: vertical;
+}
+
+.comment-edit-area:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.comment-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
+}
+
+.comment-edit-actions .btn {
+    padding: var(--space-xxs) var(--space-sm);
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+    white-space: nowrap;
+}
+
+.comment-edit-actions .btn:not(.primary-btn) {
+    background-color: var(--hover-bg);
+}
+
+.comment-edit-actions .btn:not(.primary-btn):hover {
+    background-color: var(--border-color);
+}
+
 .comment-timestamp {
     font-size: var(--font-size-xs);
     color: var(--text-muted);
     text-align: right;
 }
 
+/* Comment form */
 .comment-form {
     display: flex;
     margin-top: var(--space-xs);
@@ -218,32 +261,6 @@
 
 .comment-action-button:last-child:hover {
     color: var(--danger);
-}
-
-.comment-edit-area {
-    width: 100%;
-    min-height: 60px;
-    padding: var(--space-xs);
-    font-family: inherit;
-    font-size: var(--font-size-sm);
-    background: var(--hover-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: var(--text-color);
-    margin-bottom: var(--space-xs);
-    resize: vertical;
-}
-
-.comment-edit-area:focus {
-    border-color: var(--accent);
-    outline: none;
-}
-
-.comment-edit-actions {
-    display: flex;
-    gap: var(--space-xs);
-    justify-content: flex-end;
-    margin-bottom: var(--space-xs);
 }
 
 /* Dragging States */
