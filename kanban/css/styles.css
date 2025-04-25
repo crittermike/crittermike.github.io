@@ -229,8 +229,8 @@ main {
     background: var(--column-bg);
     border-radius: 6px;
     border: 1px solid var(--border-color);
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 400px;
+    max-width: 400px;
     height: fit-content;
     max-height: calc(100vh - 150px);
     display: flex;
