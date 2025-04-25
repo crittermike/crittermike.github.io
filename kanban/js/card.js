@@ -445,15 +445,13 @@ function showEmojiPicker(target, columnId, cardId) {
  * @param {string} cardId The card ID
  */
 function toggleReaction(emoji, columnId, cardId) {
-    if (!state.boardRef) return;
+    if (!state.boardRef || !state.user) return;
     
-    // Generate a unique ID for this user's session if not already created
-    if (!state.sessionId) {
-        state.sessionId = generateId();
-    }
+    // Use Firebase's user ID which persists across sessions
+    const userId = state.user.uid;
     
     // Path to this reaction
-    const reactionPath = `columns/${columnId}/cards/${cardId}/reactions/${emoji}/${state.sessionId}`;
+    const reactionPath = `columns/${columnId}/cards/${cardId}/reactions/${emoji}/${userId}`;
     
     // Check if this user already reacted with this emoji
     state.boardRef.child(reactionPath).once('value')
