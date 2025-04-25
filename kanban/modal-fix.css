@@ -1,0 +1,137 @@
+/* Modal Dialog Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.25rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8b949e;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+/* Form elements within modals */
+.modal-body input[type="text"],
+.modal-body textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-family: inherit;
+    transition: border-color 0.2s;
+    resize: vertical;
+}
+
+.modal-body textarea {
+    min-height: 100px;
+}
+
+.modal-body input[type="text"]:focus,
+.modal-body textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+/* Button styling in modals */
+.modal-body .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* Comments section in card modal */
+.modal-body .comments-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.modal-body .comments-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.modal-body .comment {
+    padding: 0.75rem;
+    background-color: var(--hover-bg);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    border-left: 2px solid var(--accent);
+}
+
+.modal-body .add-comment {
+    margin-top: 1rem;
+}
+
+.modal-body .card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.modal-body .primary-btn {
+    background-color: var(--accent);
+}
+
+.modal-body .danger-btn {
+    background-color: var(--danger);
+}
