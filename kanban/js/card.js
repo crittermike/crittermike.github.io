@@ -84,10 +84,6 @@ export function createCardElement(cardId, cardData, columnId) {
     cardHeader.appendChild(cardContent);
     card.appendChild(cardHeader);
     
-    // Card footer with comment toggle
-    const cardFooter = document.createElement('div');
-    cardFooter.className = 'card-footer';
-    
     // Comment toggle button
     const hasComments = cardData.comments && Object.keys(cardData.comments).length > 0;
     const commentCount = hasComments ? Object.keys(cardData.comments).length : 0;
@@ -109,8 +105,7 @@ export function createCardElement(cardId, cardData, columnId) {
         }
     });
     
-    cardFooter.appendChild(commentsBtn);
-    card.appendChild(cardFooter);
+    cardHeader.appendChild(commentsBtn);
     
     // Comments section (initially hidden if there are no comments)
     const commentsSection = document.createElement('div');

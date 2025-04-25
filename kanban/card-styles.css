@@ -73,7 +73,7 @@
 
 .comments-btn {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 0.25rem;
     background: transparent;
     border: none;

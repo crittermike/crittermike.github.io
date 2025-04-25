@@ -360,7 +360,6 @@ main {
 
 .card-header {
     display: flex;
-    margin-bottom: 0.5rem;
 }
 
 .card-content {
@@ -416,7 +415,7 @@ main {
 /* Card Comments */
 .comments-btn {
     display: flex;
-    align-items: center;
+    align-items: self-end;
     gap: 0.25rem;
     background: transparent;
     border: none;
