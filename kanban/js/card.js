@@ -285,6 +285,8 @@ export function addComment() {
         .then(() => {
             newComment.value = '';
             showNotification('Comment added');
+            // Reload comments to show the newly added comment
+            loadComments(state.activeColumnId, state.activeCardId);
         });
 }
 
