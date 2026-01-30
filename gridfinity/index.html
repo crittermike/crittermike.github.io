@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gridfinity Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent: #238636;
+            --card-bg: #161b22;
+            --hover-bg: #1f2428;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #238636, #2ea043);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        input[type="number"] {
+            padding: 0.75rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(35, 134, 54, 0.2);
+        }
+
+        .unit-toggle {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .unit-toggle button {
+            padding: 0.75rem 1.25rem;
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .unit-toggle button.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .unit-toggle button:hover:not(.active) {
+            background: var(--hover-bg);
+            color: var(--text-color);
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stats-panel h2 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: #58a6ff;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #8b949e;
+        }
+
+        .stat-value {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .stat-value.highlight {
+            color: #7ee787;
+        }
+
+        .visual-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .visual-section h2 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: #58a6ff;
+        }
+
+        .print-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .print-panel h2 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: #58a6ff;
+        }
+
+        .generator-link {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .generator-link a {
+            display: inline-block;
+            color: #58a6ff;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .generator-link a:hover {
+            color: #79c0ff;
+            text-decoration: underline;
+        }
+
+        .drawer-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+            padding-bottom: 30px;
+        }
+
+        .drawer-container {
+            position: relative;
+            background: #1c2128;
+            border: 2px solid #484f58;
+            border-radius: 4px;
+            display: grid;
+        }
+
+        .baseplate-cell {
+            position: relative;
+            border: 1px dashed #484f58;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .baseplate-inner {
+            background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+            border-radius: 2px;
+            display: grid;
+            gap: 1px;
+            padding: 2px;
+        }
+
+        .grid-cell {
+            background: rgba(0,0,0,0.2);
+            border-radius: 1px;
+        }
+
+        .baseplate-label {
+            position: absolute;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        .padding-area {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(88, 166, 255, 0.15) 2px,
+                rgba(88, 166, 255, 0.15) 4px
+            );
+        }
+
+        .baseplate-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .baseplate-item {
+            background: var(--hover-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .baseplate-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .baseplate-number {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            color: #7ee787;
+            font-weight: 700;
+            background: rgba(126, 231, 135, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .baseplate-size {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .baseplate-details {
+            font-size: 0.85rem;
+            color: #8b949e;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .baseplate-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .baseplate-detail strong {
+            color: var(--text-color);
+        }
+
+        .position-label {
+            color: #58a6ff;
+            font-weight: 600;
+        }
+
+        .no-fit {
+            color: #f85149;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .input-section {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .unit-toggle {
+                grid-column: span 2;
+                justify-content: center;
+            }
+
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .unit-toggle {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗄️ Gridfinity Calculator</h1>
+        <p class="subtitle">Calculate custom gridfinity baseplates for your drawer</p>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="width">Drawer Width</label>
+                <input type="number" id="width" placeholder="Width" step="0.1" min="0">
+            </div>
+            <div class="input-group">
+                <label for="depth">Drawer Depth</label>
+                <input type="number" id="depth" placeholder="Depth" step="0.1" min="0">
+            </div>
+            <div class="input-group">
+                <label for="maxPrint">Max Print Size (mm)</label>
+                <input type="number" id="maxPrint" placeholder="256" step="1" min="42" value="256">
+            </div>
+            <div class="input-group">
+                <label>Units</label>
+                <div class="unit-toggle">
+                    <button id="btn-inches" class="active">inches</button>
+                    <button id="btn-cm">cm</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="stats-panel">
+                <h2>📐 Measurements</h2>
+                <div class="stat-row">
+                    <span class="stat-label">Drawer Size</span>
+                    <span class="stat-value" id="drawer-size">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Grid Units</span>
+                    <span class="stat-value highlight" id="grid-units">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Grid Size</span>
+                    <span class="stat-value" id="grid-size">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Left/Right Padding</span>
+                    <span class="stat-value" id="h-padding">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Back Padding</span>
+                    <span class="stat-value" id="v-padding">—</span>
+                </div>
+            </div>
+
+            <div class="print-panel">
+                <h2>🖨️ Baseplates to Print</h2>
+                <div class="baseplate-list" id="baseplate-list">
+                    <span style="color: #8b949e;">Enter dimensions to see recommendations</span>
+                </div>
+                <div class="generator-link">
+                    <a href="https://gridfinity.perplexinglabs.com/pr/gridfinity-rebuilt/0/1" target="_blank" rel="noopener">
+                        🔧 Generate STL files →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="visual-section">
+            <h2>👁️ Visual Preview</h2>
+            <div class="drawer-visual" id="drawer-visual">
+                <span style="color: #8b949e;">Enter dimensions to see preview</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GRID_SIZE_MM = 42;
+        const MM_PER_INCH = 25.4;
+        const MM_PER_CM = 10;
+
+        let currentUnit = 'inches';
+
+        const widthInput = document.getElementById('width');
+        const depthInput = document.getElementById('depth');
+        const maxPrintInput = document.getElementById('maxPrint');
+        const btnInches = document.getElementById('btn-inches');
+        const btnCm = document.getElementById('btn-cm');
+
+        function toMM(value) {
+            if (currentUnit === 'inches') {
+                return value * MM_PER_INCH;
+            }
+            return value * MM_PER_CM;
+        }
+
+        function fromMM(mm) {
+            if (currentUnit === 'inches') {
+                return mm / MM_PER_INCH;
+            }
+            return mm / MM_PER_CM;
+        }
+
+        function formatMM(mm) {
+            return `${Math.round(mm)}mm`;
+        }
+
+        function formatDimension(mm) {
+            const value = fromMM(mm);
+            const unit = currentUnit === 'inches' ? '"' : 'cm';
+            return `${value.toFixed(2)}${unit}`;
+        }
+
+        // Split grid units into printable sections (as evenly as possible)
+        function splitUnits(totalUnits, maxPrintMM) {
+            const maxUnits = Math.floor(maxPrintMM / GRID_SIZE_MM);
+            
+            if (totalUnits <= maxUnits) {
+                return [totalUnits];
+            }
+            
+            // How many sections do we need?
+            const numSections = Math.ceil(totalUnits / maxUnits);
+            
+            // Split as evenly as possible, smaller sections first (back of drawer)
+            const baseSize = Math.floor(totalUnits / numSections);
+            const remainder = totalUnits % numSections;
+            
+            const sections = [];
+            for (let i = 0; i < numSections; i++) {
+                // Put larger sections at the end (front of drawer)
+                sections.push(baseSize + (i >= numSections - remainder ? 1 : 0));
+            }
+            
+            return sections;
+        }
+
+        function calculate() {
+            const width = parseFloat(widthInput.value) || 0;
+            const depth = parseFloat(depthInput.value) || 0;
+            const maxPrint = parseFloat(maxPrintInput.value) || 220;
+
+            if (width <= 0 || depth <= 0) {
+                resetDisplay();
+                return;
+            }
+
+            const widthMM = toMM(width);
+            const depthMM = toMM(depth);
+
+            const gridCountX = Math.floor(widthMM / GRID_SIZE_MM);
+            const gridCountY = Math.floor(depthMM / GRID_SIZE_MM);
+
+            if (gridCountX === 0 || gridCountY === 0) {
+                showNoFit();
+                return;
+            }
+
+            const usedWidthMM = gridCountX * GRID_SIZE_MM;
+            const usedDepthMM = gridCountY * GRID_SIZE_MM;
+
+            const hPaddingTotalMM = widthMM - usedWidthMM;
+            const vPaddingTotalMM = depthMM - usedDepthMM;
+
+            // Center horizontally, back padding only for depth
+            const hPaddingEachMM = hPaddingTotalMM / 2;
+            const backPaddingMM = vPaddingTotalMM;
+
+            // Update stats
+            document.getElementById('drawer-size').textContent = 
+                `${formatDimension(widthMM)} × ${formatDimension(depthMM)}`;
+            document.getElementById('grid-units').textContent = 
+                `${gridCountX} × ${gridCountY} (${gridCountX * gridCountY} units)`;
+            document.getElementById('grid-size').textContent = 
+                `${formatDimension(usedWidthMM)} × ${formatDimension(usedDepthMM)}`;
+            document.getElementById('h-padding').textContent = 
+                `${formatMM(hPaddingEachMM)} each side`;
+            document.getElementById('v-padding').textContent = 
+                `${formatMM(backPaddingMM)}`;
+
+            // Calculate baseplates
+            const xSections = splitUnits(gridCountX, maxPrint);
+            const ySections = splitUnits(gridCountY, maxPrint);
+
+            const baseplates = [];
+            let yPos = 0;
+            for (let row = 0; row < ySections.length; row++) {
+                let xPos = 0;
+                for (let col = 0; col < xSections.length; col++) {
+                    const plate = {
+                        width: xSections[col],
+                        depth: ySections[row],
+                        row: row,
+                        col: col,
+                        isLeft: col === 0,
+                        isRight: col === xSections.length - 1,
+                        isBack: row === ySections.length - 1,
+                        isFront: row === 0,
+                        leftPadding: col === 0 ? hPaddingEachMM : 0,
+                        rightPadding: col === xSections.length - 1 ? hPaddingEachMM : 0,
+                        backPadding: row === ySections.length - 1 ? backPaddingMM : 0,
+                        xPos: xPos,
+                        yPos: yPos
+                    };
+                    baseplates.push(plate);
+                    xPos += xSections[col];
+                }
+                yPos += ySections[row];
+            }
+
+            // Update visual
+            updateVisual(xSections, ySections, baseplates, hPaddingEachMM, backPaddingMM, widthMM, depthMM);
+
+            // Update print recommendations
+            updatePrintRecommendations(baseplates);
+        }
+
+        function updateVisual(xSections, ySections, baseplates, hPad, backPad, totalW, totalH) {
+            const container = document.getElementById('drawer-visual');
+            const maxWidth = container.clientWidth - 60;
+            const maxHeight = 450;
+
+            const aspectRatio = totalW / totalH;
+            let displayWidth, displayHeight;
+
+            if (aspectRatio > maxWidth / maxHeight) {
+                displayWidth = maxWidth;
+                displayHeight = maxWidth / aspectRatio;
+            } else {
+                displayHeight = maxHeight;
+                displayWidth = maxHeight * aspectRatio;
+            }
+
+            // Scale to fill available space
+            const scaleX = displayWidth / totalW;
+            const scaleY = displayHeight / totalH;
+            const scale = Math.min(scaleX, scaleY);
+
+            // Recalculate display dimensions with the scale
+            const actualWidth = totalW * scale;
+            const actualHeight = totalH * scale;
+
+            const hPadDisplay = hPad * scale;
+            const backPadDisplay = backPad * scale;
+
+            const totalGridX = xSections.reduce((a, b) => a + b, 0);
+            const totalGridY = ySections.reduce((a, b) => a + b, 0);
+            const gridWidthDisplay = totalGridX * GRID_SIZE_MM * scale;
+            const gridHeightDisplay = totalGridY * GRID_SIZE_MM * scale;
+
+            // Total drawer display size
+            const drawerW = actualWidth;
+            const drawerH = actualHeight;
+
+            const colors = ['#238636', '#2d9a47', '#1a7f2e', '#34a853'];
+            
+            let baseplatesHTML = '';
+            for (let row = 0; row < ySections.length; row++) {
+                for (let col = 0; col < xSections.length; col++) {
+                    const colorIndex = (row + col) % colors.length;
+                    const cellW = xSections[col] * GRID_SIZE_MM * scale;
+                    const cellH = ySections[row] * GRID_SIZE_MM * scale;
+                    
+                    // Calculate position
+                    let xOffset = hPadDisplay;
+                    for (let c = 0; c < col; c++) {
+                        xOffset += xSections[c] * GRID_SIZE_MM * scale;
+                    }
+                    
+                    let yOffset = backPadDisplay;
+                    for (let r = 0; r < row; r++) {
+                        yOffset += ySections[r] * GRID_SIZE_MM * scale;
+                    }
+                    
+                    baseplatesHTML += `
+                        <div class="baseplate-inner" style="
+                            position: absolute;
+                            left: ${xOffset}px;
+                            top: ${yOffset}px;
+                            width: ${cellW}px;
+                            height: ${cellH}px;
+                            background: ${colors[colorIndex]};
+                            grid-template-columns: repeat(${xSections[col]}, 1fr);
+                            grid-template-rows: repeat(${ySections[row]}, 1fr);
+                            border-radius: 2px;
+                            display: grid;
+                            gap: 1px;
+                            padding: 2px;
+                            box-sizing: border-box;
+                        ">
+                            ${Array(xSections[col] * ySections[row]).fill('<div class="grid-cell"></div>').join('')}
+                            <span class="baseplate-label" style="
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                font-family: 'Fira Code', monospace;
+                                font-size: 0.7rem;
+                                color: white;
+                                text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+                                pointer-events: none;
+                            ">${xSections[col]}×${ySections[row]}</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // Build padding areas HTML
+            let paddingHTML = '';
+            
+            // Left padding
+            if (hPadDisplay > 2) {
+                paddingHTML += `
+                    <div class="padding-area" style="
+                        position: absolute;
+                        left: 0;
+                        top: ${backPadDisplay}px;
+                        width: ${hPadDisplay}px;
+                        height: ${gridHeightDisplay}px;
+                        background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(88, 166, 255, 0.2) 3px, rgba(88, 166, 255, 0.2) 6px);
+                        border-right: 1px dashed rgba(88, 166, 255, 0.4);
+                    "></div>
+                `;
+            }
+            
+            // Right padding
+            if (hPadDisplay > 2) {
+                paddingHTML += `
+                    <div class="padding-area" style="
+                        position: absolute;
+                        right: 0;
+                        top: ${backPadDisplay}px;
+                        width: ${hPadDisplay}px;
+                        height: ${gridHeightDisplay}px;
+                        background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(88, 166, 255, 0.2) 3px, rgba(88, 166, 255, 0.2) 6px);
+                        border-left: 1px dashed rgba(88, 166, 255, 0.4);
+                    "></div>
+                `;
+            }
+            
+            // Back padding (top of visual)
+            if (backPadDisplay > 2) {
+                paddingHTML += `
+                    <div class="padding-area" style="
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: ${backPadDisplay}px;
+                        background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(88, 166, 255, 0.2) 3px, rgba(88, 166, 255, 0.2) 6px);
+                        border-bottom: 1px dashed rgba(88, 166, 255, 0.4);
+                    "></div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="drawer-container" style="
+                    position: relative;
+                    width: ${drawerW}px;
+                    height: ${drawerH}px;
+                    background: #1c2128;
+                    border: 2px solid #484f58;
+                    border-radius: 4px;
+                    box-sizing: content-box;
+                ">
+                    ${paddingHTML}
+                    ${baseplatesHTML}
+                    <span style="
+                        position: absolute;
+                        bottom: -22px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        font-family: 'Fira Code', monospace;
+                        font-size: 0.7rem;
+                        color: #8b949e;
+                    ">${totalGridX}×${totalGridY} grid • Front ↓</span>
+                </div>
+            `;
+        }
+
+        function updatePrintRecommendations(baseplates) {
+            const container = document.getElementById('baseplate-list');
+            
+            if (baseplates.length === 0) {
+                container.innerHTML = '<span class="no-fit">No baseplates fit in this space</span>';
+                return;
+            }
+
+            const positionNames = (plate) => {
+                const positions = [];
+                if (plate.isFront) positions.push('front');
+                if (plate.isBack) positions.push('back');
+                if (plate.isLeft) positions.push('left');
+                if (plate.isRight) positions.push('right');
+                return positions.join('-');
+            };
+
+            container.innerHTML = baseplates.map((plate, index) => {
+                const widthMM = plate.width * GRID_SIZE_MM;
+                const depthMM = plate.depth * GRID_SIZE_MM;
+                
+                const paddingParts = [];
+                if (plate.leftPadding > 0) paddingParts.push(`${formatMM(plate.leftPadding)} left`);
+                if (plate.rightPadding > 0) paddingParts.push(`${formatMM(plate.rightPadding)} right`);
+                if (plate.backPadding > 0) paddingParts.push(`${formatMM(plate.backPadding)} back`);
+                
+                const paddingText = paddingParts.length > 0 
+                    ? paddingParts.join(', ') 
+                    : 'none';
+
+                return `
+                    <div class="baseplate-item">
+                        <div class="baseplate-header">
+                            <span class="baseplate-number">#${index + 1}</span>
+                            <span class="baseplate-size">${plate.width}×${plate.depth} baseplate</span>
+                            <span class="position-label">(${positionNames(plate)})</span>
+                        </div>
+                        <div class="baseplate-details">
+                            <span class="baseplate-detail">📏 <strong>${widthMM}mm × ${depthMM}mm</strong></span>
+                            <span class="baseplate-detail">🔲 Padding: <strong>${paddingText}</strong></span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function resetDisplay() {
+            document.getElementById('drawer-size').textContent = '—';
+            document.getElementById('grid-units').textContent = '—';
+            document.getElementById('grid-size').textContent = '—';
+            document.getElementById('h-padding').textContent = '—';
+            document.getElementById('v-padding').textContent = '—';
+            document.getElementById('drawer-visual').innerHTML = 
+                '<span style="color: #8b949e;">Enter dimensions to see preview</span>';
+            document.getElementById('baseplate-list').innerHTML = 
+                '<span style="color: #8b949e;">Enter dimensions to see recommendations</span>';
+        }
+
+        function showNoFit() {
+            document.getElementById('drawer-size').textContent = 
+                `${widthInput.value}${currentUnit === 'inches' ? '"' : 'cm'} × ${depthInput.value}${currentUnit === 'inches' ? '"' : 'cm'}`;
+            document.getElementById('grid-units').textContent = '0 × 0';
+            document.getElementById('grid-size').textContent = '—';
+            document.getElementById('h-padding').textContent = '—';
+            document.getElementById('v-padding').textContent = '—';
+            document.getElementById('drawer-visual').innerHTML = 
+                '<span class="no-fit">Drawer too small for gridfinity (min 42mm / 1.65")</span>';
+            document.getElementById('baseplate-list').innerHTML = 
+                '<span class="no-fit">No baseplates fit in this space</span>';
+        }
+
+        function setUnit(unit) {
+            if (unit === currentUnit) return;
+            
+            // Convert existing values
+            const widthVal = parseFloat(widthInput.value);
+            const depthVal = parseFloat(depthInput.value);
+            
+            if (unit === 'cm' && currentUnit === 'inches') {
+                if (widthVal) widthInput.value = (widthVal * 2.54).toFixed(2);
+                if (depthVal) depthInput.value = (depthVal * 2.54).toFixed(2);
+            } else if (unit === 'inches' && currentUnit === 'cm') {
+                if (widthVal) widthInput.value = (widthVal / 2.54).toFixed(2);
+                if (depthVal) depthInput.value = (depthVal / 2.54).toFixed(2);
+            }
+            
+            currentUnit = unit;
+            btnInches.classList.toggle('active', unit === 'inches');
+            btnCm.classList.toggle('active', unit === 'cm');
+            
+            calculate();
+        }
+
+        // Event listeners
+        widthInput.addEventListener('input', calculate);
+        depthInput.addEventListener('input', calculate);
+        maxPrintInput.addEventListener('input', calculate);
+        btnInches.addEventListener('click', () => setUnit('inches'));
+        btnCm.addEventListener('click', () => setUnit('cm'));
+    </script>
+</body>
+</html>
