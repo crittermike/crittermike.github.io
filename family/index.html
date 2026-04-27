@@ -255,58 +255,202 @@
 <script>
 // __LIVE_DATA_START__
 const LIVE_DATA = {
-  meals: [
-    { day: "Mon", meal: "Mexican beef & bean burritos" },
-    { day: "Tue", meal: "Pesto chicken + noodles + Brussels sprouts" },
-    { day: "Wed", meal: "Grilled burgers & dogs + corn" },
-    { day: "Thu", meal: "Sheet pan Italian sausage with zucchini & tomatoes over rice" },
-    { day: "Fri", meal: "Slow cooker pot roast + carrots & potatoes" },
-    { day: "Sat", meal: "Chicken fajitas" },
-    { day: "Sun", meal: "Leftovers" }
+  "meals": [
+    {
+      "day": "Mon",
+      "meal": "Mexican beef & bean burritos"
+    },
+    {
+      "day": "Tue",
+      "meal": "Pesto chicken + noodles + roasted Brussels sprouts"
+    },
+    {
+      "day": "Wed",
+      "meal": "Grilled burgers & dogs + corn on the cob"
+    },
+    {
+      "day": "Thu",
+      "meal": "Sheet pan Italian sausage with roasted zucchini, onions & cherry tomatoes over rice"
+    },
+    {
+      "day": "Fri",
+      "meal": "Slow cooker pot roast + carrots & potatoes"
+    },
+    {
+      "day": "Sat",
+      "meal": "Chicken fajitas with onions, zucchini & corn"
+    },
+    {
+      "day": "Sun",
+      "meal": "Leftovers"
+    }
   ],
-  school: [
-    { kid: "Thomas", items: [
-      { text: "Teacher Appreciation Week", date: "Apr 27-30" },
-      { text: "First Communion practice Tue 6pm", date: "Apr 28" },
-      { text: "May Lunch Orders Due", date: "Apr 28" },
-      { text: "Field Day Fri 12:15p", date: "May 1" },
-      { text: "First Holy Communion Sat", date: "May 2" },
-      { text: "Spirit Night Clare's Creamery", date: "May 4" },
-      { text: "Spring Concert", date: "May 7" }
-    ]},
-    { kid: "William", items: [
-      { text: "May Lunch Orders Due", date: "Apr 28" },
-      { text: "Poem Recitation Wed", date: "Apr 29" },
-      { text: "Prayer Recitation Thu", date: "Apr 30" },
-      { text: "Field Day Fri", date: "May 1" },
-      { text: "Spring Concert", date: "May 7" }
-    ]},
-    { kid: "Henry", items: [
-      { text: "IXL 5L/3J due", date: "Apr 27" },
-      { text: "Religion Unit 2 Test Tue", date: "Apr 28" },
-      { text: "History Ch5 Test Wed", date: "Apr 29" },
-      { text: "Field Day Fri", date: "May 1" },
-      { text: "IXL 6A/7N due", date: "May 4" },
-      { text: "Spring Concert", date: "May 7" }
-    ]},
-    { kid: "Charlie", items: [
-      { text: "Academic Awards Night Tue 6pm", date: "Apr 28" }
-    ]}
+  "school": [
+    {
+      "kid": "Thomas",
+      "text": "Teacher Appreciation Week starts (27-30 April)",
+      "date": "2026-04-27 (Mon)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "First Holy Communion practice @6pm",
+      "date": "2026-04-28 (Tue)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "May Lunch Orders Due",
+      "date": "2026-04-28 (Tue)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "Field Day - 12:15p dismissal",
+      "date": "2026-05-01 (Fri)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "Field Day - 12:15p Dismissal (After Care available)",
+      "date": "2026-05-01 (Fri)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "Field Day - 12 noon dismissal",
+      "date": "2026-05-01 (Fri)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "First Holy Communion",
+      "date": "2026-05-02 (Sat)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "Spirit Night at Clare's Creamery 3:30-8:30p",
+      "date": "2026-05-04 (Mon)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "Thomas",
+      "text": "Spring Concert",
+      "date": "2026-05-07 (Thu)",
+      "color": "#E76F51"
+    },
+    {
+      "kid": "William",
+      "text": "May Lunch Orders Due",
+      "date": "2026-04-28 (Tue)",
+      "color": "#E8834A"
+    },
+    {
+      "kid": "William",
+      "text": "Poem Recitation - The Two Kinds of People by Ella Wheeler Wilcox",
+      "date": "2026-04-29 (Wed)",
+      "color": "#E8834A"
+    },
+    {
+      "kid": "William",
+      "text": "Prayer Recitation - Prayer before Communion",
+      "date": "2026-04-30 (Thu)",
+      "color": "#E8834A"
+    },
+    {
+      "kid": "William",
+      "text": "Field Day - 12:15p Dismissal (After Care available)",
+      "date": "2026-05-01 (Fri)",
+      "color": "#E8834A"
+    },
+    {
+      "kid": "William",
+      "text": "Spring Concert",
+      "date": "2026-05-07 (Thu)",
+      "color": "#E8834A"
+    },
+    {
+      "kid": "Henry",
+      "text": "IXL 5L, 3J due",
+      "date": "2026-04-27 (Mon)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "Unit 2 Test (Religion - 100 pts)",
+      "date": "2026-04-28 (Tue)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "May Lunch Orders Due",
+      "date": "2026-04-28 (Tue)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "Chapter 5 Section 2 Test (History - Absolute Monarchs/Louis XIV - 100 pts)",
+      "date": "2026-04-29 (Wed)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "Field Day - 12:15p Dismissal (After Care available)",
+      "date": "2026-05-01 (Fri)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "IXL 6A, 7N due",
+      "date": "2026-05-04 (Mon)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "Spring Concert",
+      "date": "2026-05-07 (Thu)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "IXL 4P, 5J due",
+      "date": "2026-05-11 (Mon)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Henry",
+      "text": "IXL 7K, 6N due",
+      "date": "2026-05-18 (Mon)",
+      "color": "#457B9D"
+    },
+    {
+      "kid": "Charlie",
+      "text": "Senior Yard Sign orders due 11:59pm (0)",
+      "date": "2026-04-26 (Sun)",
+      "color": "#2A9D8F"
+    },
+    {
+      "kid": "Charlie",
+      "text": "Academic Awards Night 6pm Auditorium (if invited)",
+      "date": "2026-04-28 (Tue)",
+      "color": "#2A9D8F"
+    }
   ],
-  allowance: {
-    "Charlie": -305.23,
-    "Henry": 104.09,
-    "William": 46.49,
-    "Thomas": 0.00
+  "allowance": {
+    "Charlie": "-305.23",
+    "Henry": "104.09",
+    "William": "46.49",
+    "Thomas": "0.00"
   },
-  sugar: {
-    "Charlie": 96,
-    "Henry": 176,
-    "William": 30,
-    "Thomas": 144
+  "sugar": {
+    "Charlie": "96",
+    "Henry": "176",
+    "William": "30",
+    "Thomas": "144"
   },
-  guineaPigFund: "69.73",
-  updatedAt: "2026-04-27T11:16:00Z"
+  "guineaPigFund": "69.73",
+  "updatedAt": "Apr 27, 2026 at 11:20 AM ET"
 };
 // __LIVE_DATA_END__
 
