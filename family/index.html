@@ -29,10 +29,39 @@
     line-height: 1.6;
     min-height: 100vh;
   }
+  nav {
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  nav .brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent-orange);
+    text-decoration: none;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  nav a:hover { background: var(--warm-bg); color: var(--accent-orange); }
+  nav a.active { background: var(--warm-bg); color: var(--accent-orange); }
   header {
     background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
     color: white;
-    padding: 28px 24px 24px;
+    padding: 32px 24px 28px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -47,334 +76,310 @@
   }
   header h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; position: relative; }
   header .subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 4px; font-weight: 500; position: relative; }
-  .date-bar {
-    background: white;
-    padding: 14px 24px;
-    text-align: center;
-    font-weight: 600;
-    color: var(--accent-orange);
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .updated-note {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    margin-top: 4px;
-    font-weight: 400;
-  }
   .container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 20px 16px 40px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    padding: 24px 16px;
   }
-  @media (min-width: 640px) {
-    .container {
-      grid-template-columns: 1fr 1fr;
-      padding: 24px 24px 48px;
-      gap: 24px;
-    }
-    .card.full-width { grid-column: 1 / -1; }
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
   .card {
     background: var(--card-bg);
     border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
     box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.04);
   }
-  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-  .card-header {
-    padding: 16px 20px 12px;
+  .meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .meal-item {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--warm-bg);
+    font-size: 0.9rem;
+    transition: transform 0.1s;
+  }
+  .meal-item.today {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    color: white;
+    font-weight: 600;
+    transform: scale(1.02);
+    box-shadow: 0 3px 12px rgba(232,131,74,0.3);
+  }
+  .meal-item .day { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+  .meal-item.today .day { opacity: 1; }
+  .balance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .balance-item {
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--warm-bg);
+    text-align: center;
+  }
+  .balance-item .name { font-weight: 600; font-size: 0.85rem; color: var(--text-mid); margin-bottom: 4px; }
+  .balance-item .amount { font-size: 1.4rem; font-weight: 800; }
+  .balance-item .amount.negative { color: var(--accent-rose); }
+  .balance-item .amount.positive { color: var(--accent-teal); }
+  .sugar-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-  }
-  .card-header .icon {
-    font-size: 1.4rem;
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .card-header h2 { font-size: 1rem; font-weight: 700; letter-spacing: -0.3px; }
-  .card-body { padding: 16px 20px 20px; }
-
-  /* Meals */
-  .meals .icon { background: rgba(232,131,74,0.12); }
-  .meals .card-header h2 { color: var(--accent-orange); }
-  .meal-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 9px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-  .meal-item:last-child { border-bottom: none; }
-  .meal-day {
-    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.5px; color: var(--accent-orange); min-width: 38px;
-  }
-  .meal-name { font-size: 0.9rem; color: var(--text-dark); }
-  .meal-item.today {
-    background: rgba(232,131,74,0.06);
-    margin: 0 -20px; padding: 9px 20px;
-    border-radius: 8px; border-bottom-color: transparent;
-  }
-  .meal-item.today .meal-day {
-    color: white; background: var(--accent-orange);
-    padding: 2px 6px; border-radius: 4px;
-  }
-
-  /* School */
-  .school .icon { background: rgba(69,123,157,0.12); }
-  .school .card-header h2 { color: var(--accent-blue); }
-  .reminder-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 9px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-  .reminder-item:last-child { border-bottom: none; }
-  .reminder-badge {
-    font-size: 0.72rem; font-weight: 700; color: white;
-    padding: 2px 8px; border-radius: 6px; white-space: nowrap;
-  }
-  .reminder-text { font-size: 0.9rem; color: var(--text-dark); }
-  .reminder-date { font-size: 0.78rem; color: var(--text-mid); }
-
-  /* Tracker (Allowance + Sugar) */
-  .tracker .icon { background: rgba(124,58,237,0.12); }
-  .tracker .card-header h2 { color: var(--accent-purple); }
-  .tracker-header {
-    display: grid;
-    grid-template-columns: 1fr 70px 70px;
-    gap: 8px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid rgba(0,0,0,0.08);
-    margin-bottom: 4px;
-  }
-  .tracker-header span {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-mid);
-  }
-  .tracker-header span:not(:first-child) { text-align: right; }
-  .tracker-row {
-    display: grid;
-    grid-template-columns: 1fr 70px 70px;
-    gap: 8px;
     padding: 8px 0;
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
-  .tracker-row:last-child { border-bottom: none; }
-  .tracker-name { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
-  .tracker-val {
-    font-size: 0.9rem; font-weight: 700; text-align: right;
-    color: var(--accent-teal);
+  .sugar-bar:last-child { border-bottom: none; }
+  .sugar-bar .name { font-weight: 600; font-size: 0.9rem; min-width: 70px; }
+  .sugar-bar .bar-wrap { flex: 1; height: 20px; background: #f0f0f0; border-radius: 10px; overflow: hidden; }
+  .sugar-bar .bar-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+  .sugar-bar .grams { font-weight: 700; font-size: 0.9rem; min-width: 50px; text-align: right; }
+  .school-kid { margin-bottom: 16px; }
+  .school-kid:last-child { margin-bottom: 0; }
+  .school-kid h4 { font-size: 0.95rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 6px; }
+  .school-item {
+    font-size: 0.88rem;
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-radius: 8px;
+    background: var(--warm-bg);
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .tracker-val.negative { color: var(--accent-rose); }
-  .tracker-val.sugar-val { color: var(--accent-purple); }
-  .guinea-pig {
-    grid-template-columns: 1fr 140px;
-    margin-top: 4px;
-    padding-top: 8px;
-    border-top: 1px dashed rgba(0,0,0,0.1);
-  }
-  .guinea-pig .tracker-name { font-size: 0.82rem; color: var(--text-mid); }
-
-  /* Family */
-  .family .icon { background: rgba(231,111,81,0.12); }
-  .family .card-header h2 { color: var(--accent-rose); }
-  .family-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 12px;
-  }
-  .family-member {
-    text-align: center; padding: 14px 8px;
-    border-radius: 12px; background: rgba(231,111,81,0.04);
-  }
-  .family-avatar {
-    width: 48px; height: 48px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin: 0 auto 8px;
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+  .school-item .date-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--accent-teal);
     color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
   }
-  .family-member.pet .family-avatar {
-    background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+  .school-item.today .date-badge { background: var(--accent-orange); }
+  .trips-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: linear-gradient(135deg, #e0f4fb, #f0faff);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid rgba(42,157,143,0.2);
   }
-  .family-name { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); }
-  .family-detail { font-size: 0.75rem; color: var(--text-mid); margin-top: 2px; }
-  .quick-info {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-top: 14px; padding-top: 14px;
-    border-top: 1px solid rgba(0,0,0,0.05);
+  .trips-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .trips-card .trip-emoji { font-size: 2.2rem; }
+  .trips-card .trip-info h4 { font-weight: 700; margin-bottom: 2px; }
+  .trips-card .trip-info p { font-size: 0.88rem; color: var(--text-mid); }
+  .guinea-pig-card {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 1px solid rgba(233,196,106,0.4);
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
   }
-  .info-chip {
-    font-size: 0.78rem; padding: 5px 12px;
-    border-radius: 20px; background: rgba(0,0,0,0.04);
-    color: var(--text-mid); display: flex; align-items: center; gap: 5px;
-  }
-  .empty-state {
-    text-align: center; padding: 20px; color: var(--text-light); font-size: 0.9rem;
-  }
-  footer {
-    text-align: center; padding: 16px; color: var(--text-light); font-size: 0.75rem;
+  .guinea-pig-card .emoji { font-size: 2rem; }
+  .guinea-pig-card .label { font-size: 0.85rem; color: var(--text-mid); font-weight: 600; margin-top: 4px; }
+  .guinea-pig-card .amount { font-size: 1.6rem; font-weight: 800; color: var(--accent-teal); }
+  .updated { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 16px; padding: 12px; }
+  @media (max-width: 600px) {
+    .meals-grid { grid-template-columns: 1fr 1fr; }
+    .balance-grid { grid-template-columns: 1fr 1fr; }
+    nav { gap: 12px; padding: 10px 16px; }
+    .container { padding: 16px 12px; }
   }
 </style>
 </head>
 <body>
+<nav>
+  <a href="/family/" class="brand">🏠 Crittendens</a>
+  <a href="/family/" class="active">Home</a>
+  <a href="/family/trips/">Trips</a>
+</nav>
 
 <header>
-  <h1>🏠 Crittenden Command Center</h1>
-  <div class="subtitle">Everything in one place</div>
+  <h1>Command Center</h1>
+  <div class="subtitle">The Crittenden family dashboard</div>
 </header>
 
-<div class="date-bar" id="dateBar">
-  <div id="dateText"></div>
-  <div class="updated-note">Last updated: Apr 27, 2026 at 11:13 AM ET</div>
-</div>
-
-<div class="container">
-
+<div class="container" id="app">
   <!-- Meals -->
-  <div class="card meals">
-    <div class="card-header">
-      <div class="icon">🍽️</div>
-      <h2>This Week's Dinners</h2>
-    </div>
-    <div class="card-body" id="mealsBody"></div>
+  <div class="card">
+    <div class="section-title">🍽️ This Week's Dinners</div>
+    <div class="meals-grid" id="meals-grid"></div>
   </div>
 
-  <!-- Allowance & Sugar -->
-  <div class="card tracker">
-    <div class="card-header">
-      <div class="icon">💰</div>
-      <h2>Allowance & Sugar</h2>
-    </div>
-    <div class="card-body">
-      <div class="tracker-header">
-        <span>Kid</span>
-        <span>Allowance</span>
-        <span>Sugar</span>
-      </div>
-      
-      <div class="tracker-row">
-        <span class="tracker-name">Charlie</span>
-        <span class="tracker-val negative">$-305.23</span>
-        <span class="tracker-val sugar-val">96g</span>
-      </div>
-      <div class="tracker-row">
-        <span class="tracker-name">Henry</span>
-        <span class="tracker-val ">$104.09</span>
-        <span class="tracker-val sugar-val">176g</span>
-      </div>
-      <div class="tracker-row">
-        <span class="tracker-name">William</span>
-        <span class="tracker-val ">$46.49</span>
-        <span class="tracker-val sugar-val">30g</span>
-      </div>
-      <div class="tracker-row">
-        <span class="tracker-name">Thomas</span>
-        <span class="tracker-val ">$0.00</span>
-        <span class="tracker-val sugar-val">144g</span>
-      </div>
-      
-      <div class="tracker-row guinea-pig">
-        <span class="tracker-name">🐹 William's Guinea Pig Fund</span>
-        <span class="tracker-val" style="grid-column: span 2">$69.73</span>
-      </div>
+  <!-- Allowance + Guinea Pig Fund -->
+  <div class="card">
+    <div class="section-title">💰 Allowance Balances</div>
+    <div class="balance-grid" id="allowance-grid"></div>
+    <div style="margin-top: 14px;">
+      <div class="guinea-pig-card" id="guinea-pig"></div>
     </div>
   </div>
 
-  <!-- School Reminders -->
-  <div class="card school full-width">
-    <div class="card-header">
-      <div class="icon">📚</div>
-      <h2>Upcoming School</h2>
-    </div>
-    <div class="card-body" id="schoolBody"></div>
+  <!-- Sugar -->
+  <div class="card">
+    <div class="section-title">🍬 Sugar Balances (grams)</div>
+    <div id="sugar-bars"></div>
   </div>
 
-  <!-- Family -->
-  <div class="card family full-width">
-    <div class="card-header">
-      <div class="icon">👨‍👩‍👧‍👦</div>
-      <h2>The Crittendens</h2>
-    </div>
-    <div class="card-body">
-      <div class="family-grid">
-        <div class="family-member"><div class="family-avatar">👨</div><div class="family-name">Mike</div><div class="family-detail">Dad</div></div>
-        <div class="family-member"><div class="family-avatar">👩</div><div class="family-name">Nancy</div><div class="family-detail">Mom</div></div>
-        <div class="family-member"><div class="family-avatar">🧑</div><div class="family-name">Charlie</div><div class="family-detail">15, HS</div></div>
-        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">Henry</div><div class="family-detail">12, 7th</div></div>
-        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">William</div><div class="family-detail">10, 4th</div></div>
-        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">Thomas</div><div class="family-detail">7, 2nd</div></div>
-        <div class="family-member pet"><div class="family-avatar">🐕</div><div class="family-name">Fig</div><div class="family-detail">Poochon</div></div>
-        <div class="family-member pet"><div class="family-avatar">🐕</div><div class="family-name">Poppy</div><div class="family-detail">Poochon</div></div>
-      </div>
-      <div class="quick-info">
-        <span class="info-chip">🏫 Prince of Peace Christian School</span>
-        <span class="info-chip">📍 Greenville, SC</span>
-      </div>
-    </div>
+  <!-- School -->
+  <div class="card">
+    <div class="section-title">📚 Upcoming School Items</div>
+    <div id="school-items"></div>
   </div>
 
+  <!-- Trips -->
+  <div class="card">
+    <div class="section-title">✈️ Upcoming Trips</div>
+    <div id="trips"></div>
+  </div>
+
+  <div class="updated" id="updated"></div>
 </div>
-
-<footer>Crittenden Family Command Center &bull; Auto-updated by CritterBot 🦾</footer>
 
 <script>
-const MEALS = [{"day": "Mon", "meal": "Mexican beef & bean burritos"}, {"day": "Tue", "meal": "Pesto chicken + noodles + roasted Brussels sprouts"}, {"day": "Wed", "meal": "Grilled burgers & dogs + corn on the cob"}, {"day": "Thu", "meal": "Sheet pan Italian sausage with roasted zucchini, onions & cherry tomatoes over rice"}, {"day": "Fri", "meal": "Slow cooker pot roast + carrots & potatoes"}, {"day": "Sat", "meal": "Chicken fajitas with onions, zucchini & corn"}, {"day": "Sun", "meal": "Leftovers"}];
-const SCHOOL = [{"kid": "Thomas", "text": "Teacher Appreciation Week starts (27-30 April)", "date": "2026-04-27 (Mon)", "color": "#E76F51"}, {"kid": "Thomas", "text": "First Holy Communion practice @6pm", "date": "2026-04-28 (Tue)", "color": "#E76F51"}, {"kid": "Thomas", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12:15p dismissal", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12 noon dismissal", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "First Holy Communion", "date": "2026-05-02 (Sat)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Spirit Night at Clare's Creamery 3:30-8:30p", "date": "2026-05-04 (Mon)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#E76F51"}, {"kid": "William", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#E8834A"}, {"kid": "William", "text": "Poem Recitation - The Two Kinds of People by Ella Wheeler Wilcox", "date": "2026-04-29 (Wed)", "color": "#E8834A"}, {"kid": "William", "text": "Prayer Recitation - Prayer before Communion", "date": "2026-04-30 (Thu)", "color": "#E8834A"}, {"kid": "William", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#E8834A"}, {"kid": "William", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#E8834A"}, {"kid": "Henry", "text": "IXL 5L, 3J due", "date": "2026-04-27 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "Unit 2 Test (Religion - 100 pts)", "date": "2026-04-28 (Tue)", "color": "#457B9D"}, {"kid": "Henry", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#457B9D"}, {"kid": "Henry", "text": "Chapter 5 Section 2 Test (History - Absolute Monarchs/Louis XIV - 100 pts)", "date": "2026-04-29 (Wed)", "color": "#457B9D"}, {"kid": "Henry", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 6A, 7N due", "date": "2026-05-04 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 4P, 5J due", "date": "2026-05-11 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 7K, 6N due", "date": "2026-05-18 (Mon)", "color": "#457B9D"}, {"kid": "Charlie", "text": "Senior Yard Sign orders due 11:59pm (0)", "date": "2026-04-26 (Sun)", "color": "#2A9D8F"}, {"kid": "Charlie", "text": "Academic Awards Night 6pm Auditorium (if invited)", "date": "2026-04-28 (Tue)", "color": "#2A9D8F"}];
+// __LIVE_DATA_START__
+const LIVE_DATA = {
+  meals: [
+    { day: "Mon", meal: "Mexican beef & bean burritos" },
+    { day: "Tue", meal: "Pesto chicken + noodles + Brussels sprouts" },
+    { day: "Wed", meal: "Grilled burgers & dogs + corn" },
+    { day: "Thu", meal: "Sheet pan Italian sausage with zucchini & tomatoes over rice" },
+    { day: "Fri", meal: "Slow cooker pot roast + carrots & potatoes" },
+    { day: "Sat", meal: "Chicken fajitas" },
+    { day: "Sun", meal: "Leftovers" }
+  ],
+  school: [
+    { kid: "Thomas", items: [
+      { text: "Teacher Appreciation Week", date: "Apr 27-30" },
+      { text: "First Communion practice Tue 6pm", date: "Apr 28" },
+      { text: "May Lunch Orders Due", date: "Apr 28" },
+      { text: "Field Day Fri 12:15p", date: "May 1" },
+      { text: "First Holy Communion Sat", date: "May 2" },
+      { text: "Spirit Night Clare's Creamery", date: "May 4" },
+      { text: "Spring Concert", date: "May 7" }
+    ]},
+    { kid: "William", items: [
+      { text: "May Lunch Orders Due", date: "Apr 28" },
+      { text: "Poem Recitation Wed", date: "Apr 29" },
+      { text: "Prayer Recitation Thu", date: "Apr 30" },
+      { text: "Field Day Fri", date: "May 1" },
+      { text: "Spring Concert", date: "May 7" }
+    ]},
+    { kid: "Henry", items: [
+      { text: "IXL 5L/3J due", date: "Apr 27" },
+      { text: "Religion Unit 2 Test Tue", date: "Apr 28" },
+      { text: "History Ch5 Test Wed", date: "Apr 29" },
+      { text: "Field Day Fri", date: "May 1" },
+      { text: "IXL 6A/7N due", date: "May 4" },
+      { text: "Spring Concert", date: "May 7" }
+    ]},
+    { kid: "Charlie", items: [
+      { text: "Academic Awards Night Tue 6pm", date: "Apr 28" }
+    ]}
+  ],
+  allowance: {
+    "Charlie": -305.23,
+    "Henry": 104.09,
+    "William": 46.49,
+    "Thomas": 0.00
+  },
+  sugar: {
+    "Charlie": 96,
+    "Henry": 176,
+    "William": 30,
+    "Thomas": 144
+  },
+  guineaPigFund: "69.73",
+  updatedAt: "2026-04-27T11:16:00Z"
+};
+// __LIVE_DATA_END__
 
-// Date bar
 (function() {
-  const now = new Date();
-  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/New_York' };
-  document.getElementById('dateText').textContent = now.toLocaleDateString('en-US', opts);
-})();
-
-// Meals
-(function() {
-  const el = document.getElementById('mealsBody');
   const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const now = new Date();
-  const today = dayNames[new Date(now.toLocaleString('en-US', {timeZone:'America/New_York'})).getDay()];
-  el.innerHTML = MEALS.map(m => {
-    const isToday = m.day === today;
-    return `<div class="meal-item${isToday ? ' today' : ''}">
-      <span class="meal-day">${m.day}</span>
-      <span class="meal-name">${m.meal}${isToday ? ' 👈' : ''}</span>
-    </div>`;
-  }).join('');
-})();
+  const today = new Date();
+  const todayDay = dayNames[today.getDay()];
 
-// School
-(function() {
-  const el = document.getElementById('schoolBody');
-  if (!SCHOOL.length) {
-    el.innerHTML = '<div class="empty-state">No upcoming reminders 🎉</div>';
-    return;
-  }
-  el.innerHTML = SCHOOL.map(s => `
-    <div class="reminder-item">
-      <span class="reminder-badge" style="background:${s.color}">${s.kid}</span>
-      <div>
-        <div class="reminder-text">${s.text}</div>
-        <div class="reminder-date">${s.date}</div>
-      </div>
-    </div>
-  `).join('');
+  // Meals
+  const mealsGrid = document.getElementById('meals-grid');
+  LIVE_DATA.meals.forEach(m => {
+    const isToday = m.day === todayDay;
+    const div = document.createElement('div');
+    div.className = 'meal-item' + (isToday ? ' today' : '');
+    div.innerHTML = '<div class="day">' + m.day + (isToday ? ' (today)' : '') + '</div>' + m.meal;
+    mealsGrid.appendChild(div);
+  });
+
+  // Allowance
+  const allowanceGrid = document.getElementById('allowance-grid');
+  Object.entries(LIVE_DATA.allowance).forEach(([name, amt]) => {
+    const div = document.createElement('div');
+    div.className = 'balance-item';
+    const isNeg = amt < 0;
+    div.innerHTML = '<div class="name">' + name + '</div><div class="amount ' + (isNeg ? 'negative' : 'positive') + '">$' + Math.abs(amt).toFixed(2) + (isNeg ? ' ⚠️' : '') + '</div>';
+    allowanceGrid.appendChild(div);
+  });
+
+  // Guinea Pig Fund
+  const gpDiv = document.getElementById('guinea-pig');
+  gpDiv.innerHTML = '<div class="emoji">🐹</div><div class="label">William\'s Guinea Pig Fund</div><div class="amount">$' + LIVE_DATA.guineaPigFund + '</div>';
+
+  // Sugar
+  const sugarDiv = document.getElementById('sugar-bars');
+  const maxSugar = Math.max(...Object.values(LIVE_DATA.sugar), 200);
+  const sugarColors = { Charlie: '#7C3AED', Henry: '#457B9D', William: '#2A9D8F', Thomas: '#E8834A' };
+  Object.entries(LIVE_DATA.sugar).forEach(([name, grams]) => {
+    const pct = Math.min((grams / maxSugar) * 100, 100);
+    const div = document.createElement('div');
+    div.className = 'sugar-bar';
+    div.innerHTML = '<span class="name">' + name + '</span><div class="bar-wrap"><div class="bar-fill" style="width:' + pct + '%;background:' + (sugarColors[name] || '#888') + '"></div></div><span class="grams">' + grams + 'g</span>';
+    sugarDiv.appendChild(div);
+  });
+
+  // School
+  const schoolDiv = document.getElementById('school-items');
+  const todayStr = today.toISOString().slice(5,10); // MM-DD
+  LIVE_DATA.school.forEach(kid => {
+    const section = document.createElement('div');
+    section.className = 'school-kid';
+    section.innerHTML = '<h4>' + kid.kid + '</h4>';
+    kid.items.forEach(item => {
+      const d = document.createElement('div');
+      const isItemToday = item.date.includes('Apr 27');
+      d.className = 'school-item' + (isItemToday ? ' today' : '');
+      d.innerHTML = '<span class="date-badge">' + item.date + '</span><span>' + item.text + '</span>';
+      section.appendChild(d);
+    });
+    schoolDiv.appendChild(section);
+  });
+
+  // Trips
+  const tripsDiv = document.getElementById('trips');
+  const tripLink = document.createElement('a');
+  tripLink.className = 'trips-card';
+  tripLink.href = '/family/trips/';
+  tripLink.innerHTML = '<span class="trip-emoji">🏖️</span><div class="trip-info"><h4>Lake Hartwell</h4><p>Jul 6\u201311, 2026 \u00b7 Serenity Point, Hartwell GA</p></div>';
+  tripsDiv.appendChild(tripLink);
+
+  // Updated
+  const updatedDiv = document.getElementById('updated');
+  const d = new Date(LIVE_DATA.updatedAt);
+  updatedDiv.textContent = 'Last updated: ' + d.toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' });
 })();
 </script>
 </body>
