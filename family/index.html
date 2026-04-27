@@ -494,6 +494,15 @@ const LIVE_DATA = {
   tripLink.innerHTML = '<span class="trip-emoji">🏖️</span><div class="trip-info"><h4>Lake Hartwell</h4><p>Jul 6\u201311, 2026 \u00b7 Serenity Point, Hartwell GA</p></div>';
   tripsDiv.appendChild(tripLink);
 
+  const weddingLink = document.createElement('a');
+  weddingLink.className = 'trips-card';
+  weddingLink.href = '/family/trips/san-diego.html';
+  weddingLink.style.marginTop = '10px';
+  weddingLink.style.background = 'linear-gradient(135deg, #F3EEF8, #f8f0ff)';
+  weddingLink.style.borderColor = 'rgba(107,76,138,0.2)';
+  weddingLink.innerHTML = '<span class="trip-emoji">🎊</span><div class="trip-info"><h4>Jace & Lauren\u2019s Wedding</h4><p>Jun 19\u201321, 2026 \u00b7 San Diego, CA</p></div>';
+  tripsDiv.appendChild(weddingLink);
+
   // Updated
   const updatedDiv = document.getElementById('updated');
   const d = new Date(LIVE_DATA.updatedAt);

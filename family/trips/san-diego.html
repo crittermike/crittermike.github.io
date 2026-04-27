@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Diego Wedding Trip - Crittenden Family</title>
+<style>
+  :root {
+    --warm-bg: #FFF8F0;
+    --card-bg: #FFFFFF;
+    --accent-orange: #E8834A;
+    --accent-teal: #2A9D8F;
+    --accent-gold: #E9C46A;
+    --accent-rose: #E76F51;
+    --accent-blue: #457B9D;
+    --accent-purple: #7C3AED;
+    --wedding: #6B4C8A;
+    --wedding-dark: #4A2D6B;
+    --wedding-light: #F3EEF8;
+    --wedding-blush: #F5E6F0;
+    --sunset: #f4845f;
+    --sand: #faf6f0;
+    --text-dark: #2D3436;
+    --text-mid: #636E72;
+    --text-light: #B2BEC3;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  nav {
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  nav .brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent-orange);
+    text-decoration: none;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  nav a:hover { background: var(--warm-bg); color: var(--accent-orange); }
+  nav a.active { background: var(--warm-bg); color: var(--accent-orange); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--wedding-dark) 0%, var(--wedding) 40%, #8B6BAE 70%, var(--accent-gold) 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 24px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 40px;
+    background: var(--warm-bg);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; }
+  .hero .subtitle { font-size: 1.1rem; font-weight: 500; opacity: 0.92; }
+  .hero .dates {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 40px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 14px;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  .section { margin-bottom: 36px; }
+  .section h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--wedding-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.04);
+    margin-bottom: 16px;
+  }
+  .highlight {
+    background: linear-gradient(135deg, var(--wedding-light), #f8f0ff);
+    border-left: 4px solid var(--wedding);
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 0.95rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 28px 0;
+  }
+  .stat {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 110px;
+  }
+  .stat .num { font-size: 1.6rem; font-weight: 800; color: var(--wedding); }
+  .stat .label { font-size: 0.78rem; color: var(--text-mid); font-weight: 500; margin-top: 2px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    background: var(--warm-bg);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    font-size: 0.92rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .li-icon { flex-shrink: 0; font-size: 1.1rem; }
+
+  .venue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--wedding);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-top: 14px;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .venue-link:hover { background: var(--wedding-dark); transform: scale(1.03); }
+
+  .todo-section { margin-top: 16px; }
+  .todo-item {
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 8px;
+    background: var(--warm-bg);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent-teal); }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .detail-card {
+    background: var(--warm-bg);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    transition: transform 0.15s;
+  }
+  .detail-card:hover { transform: translateY(-2px); }
+  .detail-card .icon { font-size: 2rem; margin-bottom: 6px; }
+  .detail-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--wedding-dark); }
+  .detail-card p { font-size: 0.82rem; color: var(--text-mid); }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 18px 40px; }
+    .container { padding: 20px 14px; }
+    .stats { gap: 8px; }
+    .stat { min-width: 90px; padding: 10px 12px; }
+    .stat .num { font-size: 1.3rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    nav { gap: 12px; padding: 10px 16px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/family/" class="brand">🏠 Crittendens</a>
+  <a href="/family/">Home</a>
+  <a href="/family/trips/" class="active">Trips</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="hero-emoji">💒✨🎊</span>
+  <h1>Jace &amp; Lauren's Wedding</h1>
+  <div class="subtitle">San Diego, California</div>
+  <div class="dates">📅 June 19 &ndash; 21, 2026 &middot; Mike &amp; Nancy</div>
+</div>
+
+<!-- Stats -->
+<div class="container">
+  <div class="stats">
+    <div class="stat"><div class="num">Jun 20</div><div class="label">Wedding Day</div></div>
+    <div class="stat"><div class="num">4:30</div><div class="label">Ceremony</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Travelers</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Nights</div></div>
+  </div>
+
+  <!-- Wedding Details -->
+  <div class="section">
+    <h2>💍 Wedding Details</h2>
+    <div class="card">
+      <p>We're heading to <strong>San Diego</strong> to celebrate <strong>Jace &amp; Lauren's wedding!</strong> Just Mike and Nancy for this one, a quick adults-only getaway on the West Coast.</p>
+      <div class="highlight">
+        <strong>Ceremony:</strong> Saturday, June 20, 2026 at 4:30 PM<br>
+        <strong>Venue:</strong> Junipero Serra Museum, San Diego, CA<br>
+        <strong>Reception:</strong> To follow at the venue<br>
+        <strong>Attendees:</strong> Mike &amp; Nancy (no kids)
+      </div>
+      <a class="venue-link" href="https://www.google.com/maps/place/Junipero+Serra+Museum,+2727+Presidio+Dr,+San+Diego,+CA+92103" target="_blank">📍 View Venue on Map</a>
+    </div>
+  </div>
+
+  <!-- About the Venue -->
+  <div class="section">
+    <h2>🏛️ About the Venue</h2>
+    <div class="card">
+      <p>The <strong>Junipero Serra Museum</strong> is a stunning historic landmark in <strong>Presidio Park</strong>, perched on a hilltop overlooking Mission Valley and the San Diego River. Built in 1929 in Spanish Colonial Revival style, the museum marks the site where Father Junipero Serra established the first Spanish mission in California in 1769.</p>
+      <div class="highlight">
+        <strong>🌅 Why it's special:</strong> Gorgeous panoramic views of San Diego, beautiful Spanish architecture, lush gardens, and a sense of history that makes for an unforgettable wedding backdrop. The hilltop setting means golden hour photos will be incredible.
+      </div>
+      <div class="tags">
+        <span class="tag">🏔️ Hilltop Views</span>
+        <span class="tag">🏛️ Historic Landmark</span>
+        <span class="tag">🌿 Garden Setting</span>
+        <span class="tag">📸 Photo Paradise</span>
+        <span class="tag">🌇 Golden Hour Magic</span>
+        <span class="tag">🎭 Spanish Colonial Style</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Travel -->
+  <div class="section">
+    <h2>✈️ Travel</h2>
+    <div class="card">
+      <div class="card-grid">
+        <div class="detail-card">
+          <span class="icon">✈️</span>
+          <h4>Flights</h4>
+          <p>Not booked yet. GSP or CLT → SAN. Check Southwest, Delta, American.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">🏨</span>
+          <h4>Hotel</h4>
+          <p>Not booked yet. Look near Old Town / Mission Hills for proximity to venue.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">🚗</span>
+          <h4>Transportation</h4>
+          <p>Rental car or rideshare? TBD. San Diego is spread out.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">👶</span>
+          <h4>Childcare</h4>
+          <p>Need to arrange care for 4 kids back home. Ask family?</p>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top: 18px;">
+        <strong>💡 Tip:</strong> The venue is in the Presidio Park / Old Town area. Hotels in Old Town, Mission Hills, or Hillcrest would be closest. Downtown San Diego is also just ~10 minutes away.
+      </div>
+    </div>
+  </div>
+
+  <!-- Things To Do -->
+  <div class="section">
+    <h2>🌴 While We're There</h2>
+    <div class="card">
+      <p>San Diego has tons to offer if you want to explore beyond the wedding:</p>
+      <div class="card-grid" style="margin-top: 14px;">
+        <div class="detail-card">
+          <span class="icon">🌮</span>
+          <h4>Old Town</h4>
+          <p>Historic district right by the venue. Amazing Mexican food.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">🏖️</span>
+          <h4>Beaches</h4>
+          <p>La Jolla, Coronado, Pacific Beach. All gorgeous.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">🍷</span>
+          <h4>Gaslamp Quarter</h4>
+          <p>Downtown dining, cocktails, nightlife.</p>
+        </div>
+        <div class="detail-card">
+          <span class="icon">🌊</span>
+          <h4>La Jolla Cove</h4>
+          <p>Sea lions, tide pools, stunning cliffs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO -->
+  <div class="section">
+    <h2>📋 Trip TODO</h2>
+    <div class="card">
+      <div class="todo-section">
+        <div class="todo-item"><input type="checkbox"> Book flights (GSP/CLT → SAN)</div>
+        <div class="todo-item"><input type="checkbox"> Book hotel</div>
+        <div class="todo-item"><input type="checkbox"> Arrange childcare for 4 kids</div>
+        <div class="todo-item"><input type="checkbox"> Wedding gift</div>
+        <div class="todo-item"><input type="checkbox"> Outfits (wedding attire)</div>
+        <div class="todo-item"><input type="checkbox"> Rental car or rideshare plan</div>
+        <div class="todo-item"><input type="checkbox"> Restaurant reservations</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>💒 Jace &amp; Lauren's Wedding &middot; June 20, 2026 &middot; San Diego, CA</p>
+  <p style="margin-top:4px;"><a href="/family/trips/" style="color:var(--accent-orange); text-decoration:none; font-weight:600;">← Back to Trips</a></p>
+</footer>
+</body>
+</html>
