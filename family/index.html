@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crittenden Family Command Center</title>
+<style>
+  :root {
+    --warm-bg: #FFF8F0;
+    --card-bg: #FFFFFF;
+    --accent-orange: #E8834A;
+    --accent-teal: #2A9D8F;
+    --accent-gold: #E9C46A;
+    --accent-rose: #E76F51;
+    --accent-blue: #457B9D;
+    --text-dark: #2D3436;
+    --text-mid: #636E72;
+    --text-light: #B2BEC3;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    color: white;
+    padding: 28px 24px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+
+  header .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-top: 4px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .date-bar {
+    background: white;
+    padding: 14px 24px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-orange);
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      grid-template-columns: 1fr 1fr;
+      padding: 24px 24px 48px;
+      gap: 24px;
+    }
+    .card.full-width { grid-column: 1 / -1; }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .card-header .icon {
+    font-size: 1.4rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .card-body { padding: 16px 20px 20px; }
+
+  /* Schedule Card */
+  .schedule .icon { background: rgba(42,157,143,0.12); }
+  .schedule .card-header h2 { color: var(--accent-teal); }
+
+  .schedule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .schedule-item:last-child { border-bottom: none; }
+
+  .schedule-time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-teal);
+    background: rgba(42,157,143,0.08);
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    min-width: 65px;
+    text-align: center;
+  }
+
+  .schedule-desc {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+  }
+  .schedule-desc .who {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+
+  /* Meals Card */
+  .meals .icon { background: rgba(232,131,74,0.12); }
+  .meals .card-header h2 { color: var(--accent-orange); }
+
+  .meal-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .meal-item:last-child { border-bottom: none; }
+
+  .meal-day {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-orange);
+    min-width: 38px;
+  }
+
+  .meal-name {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+  }
+
+  .meal-item.today {
+    background: rgba(232,131,74,0.06);
+    margin: 0 -20px;
+    padding: 9px 20px;
+    border-radius: 8px;
+    border-bottom-color: transparent;
+  }
+  .meal-item.today .meal-day {
+    color: white;
+    background: var(--accent-orange);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* School Card */
+  .school .icon { background: rgba(69,123,157,0.12); }
+  .school .card-header h2 { color: var(--accent-blue); }
+
+  .reminder-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .reminder-item:last-child { border-bottom: none; }
+
+  .reminder-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .reminder-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+  }
+
+  .reminder-date {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+
+  /* Chores Card */
+  .chores .icon { background: rgba(233,196,106,0.2); }
+  .chores .card-header h2 { color: #C09030; }
+
+  .chore-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .chore-item:last-child { border-bottom: none; }
+
+  .chore-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-light);
+    border-radius: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .chore-check.done {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+  }
+  .chore-check.done::after {
+    content: '✓';
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .chore-label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    flex: 1;
+  }
+  .chore-label .assignee {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+
+  .chore-item.completed .chore-label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  /* Family Card */
+  .family .icon { background: rgba(231,111,81,0.12); }
+  .family .card-header h2 { color: var(--accent-rose); }
+
+  .family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+  }
+
+  .family-member {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 12px;
+    background: rgba(231,111,81,0.04);
+    transition: background 0.2s;
+  }
+  .family-member:hover { background: rgba(231,111,81,0.08); }
+
+  .family-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin: 0 auto 8px;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    color: white;
+  }
+
+  .family-member.pet .family-avatar {
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+  }
+
+  .family-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  .family-detail {
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    margin-top: 2px;
+  }
+
+  /* Quick Info */
+  .quick-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .info-chip {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.04);
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-light);
+    font-size: 0.75rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏠 Crittenden Command Center</h1>
+  <div class="subtitle">Everything in one place</div>
+</header>
+
+<div class="date-bar" id="dateBar"></div>
+
+<div class="container">
+
+  <!-- Today's Schedule -->
+  <div class="card schedule">
+    <div class="card-header">
+      <div class="icon">📅</div>
+      <h2>Today's Schedule</h2>
+    </div>
+    <div class="card-body" id="scheduleBody"></div>
+  </div>
+
+  <!-- This Week's Meals -->
+  <div class="card meals">
+    <div class="card-header">
+      <div class="icon">🍽️</div>
+      <h2>This Week's Dinners</h2>
+    </div>
+    <div class="card-body" id="mealsBody"></div>
+  </div>
+
+  <!-- School Reminders -->
+  <div class="card school">
+    <div class="card-header">
+      <div class="icon">📚</div>
+      <h2>School Reminders</h2>
+    </div>
+    <div class="card-body" id="schoolBody"></div>
+  </div>
+
+  <!-- Chores & Tasks -->
+  <div class="card chores">
+    <div class="card-header">
+      <div class="icon">✅</div>
+      <h2>Chores & Tasks</h2>
+    </div>
+    <div class="card-body" id="choresBody"></div>
+  </div>
+
+  <!-- Family Info -->
+  <div class="card family full-width">
+    <div class="card-header">
+      <div class="icon">👨‍👩‍👧‍👦</div>
+      <h2>The Crittendens</h2>
+    </div>
+    <div class="card-body">
+      <div class="family-grid" id="familyGrid"></div>
+      <div class="quick-info" id="quickInfo"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Crittenden Family Command Center &bull; Auto-updated by CritterBot 🦾</footer>
+
+<script>
+// ============================================================
+// DATA - Edit this JSON to update the dashboard
+// ============================================================
+const DATA = {
+  schedule: [
+    { time: "7:30 AM", desc: "School drop-off", who: "All kids" },
+    { time: "8:00 AM", desc: "Work starts", who: "Mike & Nancy" },
+    { time: "3:15 PM", desc: "School pickup", who: "All kids" },
+    { time: "5:30 PM", desc: "Dinner time", who: "Family" },
+    { time: "8:00 PM", desc: "Bedtime routine", who: "Thomas & William" },
+    { time: "9:00 PM", desc: "Bedtime", who: "Henry" },
+    { time: "10:00 PM", desc: "Bedtime", who: "Charlie" }
+  ],
+
+  meals: [
+    { day: "Mon", meal: "Mexican beef & bean burritos" },
+    { day: "Tue", meal: "Pesto chicken + noodles + Brussels sprouts" },
+    { day: "Wed", meal: "Grilled burgers & dogs + corn" },
+    { day: "Thu", meal: "Sheet pan Italian sausage with zucchini & tomatoes over rice" },
+    { day: "Fri", meal: "Slow cooker pot roast + carrots & potatoes" },
+    { day: "Sat", meal: "Chicken fajitas" },
+    { day: "Sun", meal: "Leftovers" }
+  ],
+
+  school: [
+    { kid: "Thomas", text: "Ms. Krick's class, 2nd grade", date: "", color: "#E76F51" },
+    { kid: "William", text: "4th grade", date: "", color: "#E8834A" },
+    { kid: "Henry", text: "7th grade", date: "", color: "#457B9D" },
+    { kid: "Charlie", text: "High school, 15yo", date: "", color: "#2A9D8F" }
+  ],
+
+  chores: [
+    { task: "Feed Fig & Poppy", assignee: "Thomas", done: false },
+    { task: "Unload dishwasher", assignee: "William", done: false },
+    { task: "Take out trash", assignee: "Henry", done: false },
+    { task: "Clean kitchen counters", assignee: "Charlie", done: false },
+    { task: "Wipe down bathrooms", assignee: "Rotating", done: false },
+    { task: "Pick up living room", assignee: "Everyone", done: false }
+  ],
+
+  family: [
+    { name: "Mike", detail: "Dad", emoji: "👨", pet: false },
+    { name: "Nancy", detail: "Mom", emoji: "👩", pet: false },
+    { name: "Charlie", detail: "15, High School", emoji: "🧑", pet: false },
+    { name: "Henry", detail: "12, 7th Grade", emoji: "👦", pet: false },
+    { name: "William", detail: "10, 4th Grade", emoji: "👦", pet: false },
+    { name: "Thomas", detail: "7, 2nd Grade", emoji: "👦", pet: false },
+    { name: "Fig", detail: "Poochon 🐾", emoji: "🐕", pet: true },
+    { name: "Poppy", detail: "Poochon 🐾", emoji: "🐕", pet: true }
+  ],
+
+  quickInfo: [
+    { icon: "🏫", text: "Prince of Peace Christian School" },
+    { icon: "📍", text: "Greenville, SC" },
+    { icon: "🐕", text: "2 Poochons: Fig & Poppy" }
+  ]
+};
+
+// ============================================================
+// RENDER
+// ============================================================
+
+// Date bar
+function renderDateBar() {
+  const now = new Date();
+  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  // Display in Eastern time
+  const eastern = now.toLocaleDateString('en-US', { ...opts, timeZone: 'America/New_York' });
+  document.getElementById('dateBar').textContent = eastern;
+}
+
+// Schedule
+function renderSchedule() {
+  const el = document.getElementById('scheduleBody');
+  if (!DATA.schedule.length) {
+    el.innerHTML = '<div class="empty-state">No events today</div>';
+    return;
+  }
+  el.innerHTML = DATA.schedule.map(item => `
+    <div class="schedule-item">
+      <span class="schedule-time">${item.time}</span>
+      <div class="schedule-desc">
+        ${item.desc}
+        <div class="who">${item.who}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Meals
+function renderMeals() {
+  const el = document.getElementById('mealsBody');
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const now = new Date();
+  const todayName = dayNames[now.getDay()];
+
+  el.innerHTML = DATA.meals.map(item => {
+    const isToday = item.day === todayName;
+    return `
+      <div class="meal-item${isToday ? ' today' : ''}">
+        <span class="meal-day">${item.day}</span>
+        <span class="meal-name">${item.meal}${isToday ? ' 👈' : ''}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// School
+function renderSchool() {
+  const el = document.getElementById('schoolBody');
+  if (!DATA.school.length) {
+    el.innerHTML = '<div class="empty-state">No reminders right now 🎉</div>';
+    return;
+  }
+  el.innerHTML = DATA.school.map(item => `
+    <div class="reminder-item">
+      <span class="reminder-badge" style="background:${item.color}">${item.kid}</span>
+      <div>
+        <div class="reminder-text">${item.text}</div>
+        ${item.date ? `<div class="reminder-date">${item.date}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Chores
+function renderChores() {
+  const el = document.getElementById('choresBody');
+  el.innerHTML = DATA.chores.map((item, i) => `
+    <div class="chore-item${item.done ? ' completed' : ''}" data-index="${i}">
+      <div class="chore-check${item.done ? ' done' : ''}" onclick="toggleChore(${i})"></div>
+      <div class="chore-label">
+        ${item.task}
+        <div class="assignee">${item.assignee}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleChore(index) {
+  DATA.chores[index].done = !DATA.chores[index].done;
+  renderChores();
+}
+
+// Family
+function renderFamily() {
+  const grid = document.getElementById('familyGrid');
+  grid.innerHTML = DATA.family.map(m => `
+    <div class="family-member${m.pet ? ' pet' : ''}">
+      <div class="family-avatar">${m.emoji}</div>
+      <div class="family-name">${m.name}</div>
+      <div class="family-detail">${m.detail}</div>
+    </div>
+  `).join('');
+
+  const info = document.getElementById('quickInfo');
+  info.innerHTML = DATA.quickInfo.map(q => `
+    <span class="info-chip">${q.icon} ${q.text}</span>
+  `).join('');
+}
+
+// Init
+renderDateBar();
+renderSchedule();
+renderMeals();
+renderSchool();
+renderChores();
+renderFamily();
+
+// Refresh date at midnight
+setInterval(renderDateBar, 60000);
+</script>
+</body>
+</html>
