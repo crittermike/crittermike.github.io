@@ -13,6 +13,7 @@
     --accent-gold: #E9C46A;
     --accent-rose: #E76F51;
     --accent-blue: #457B9D;
+    --accent-purple: #7C3AED;
     --text-dark: #2D3436;
     --text-mid: #636E72;
     --text-light: #B2BEC3;
@@ -20,9 +21,7 @@
     --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
     --radius: 16px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     background: var(--warm-bg);
@@ -30,7 +29,6 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-
   header {
     background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
     color: white;
@@ -39,33 +37,16 @@
     position: relative;
     overflow: hidden;
   }
-
   header::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
     background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
     pointer-events: none;
   }
-
-  header h1 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    position: relative;
-  }
-
-  header .subtitle {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    margin-top: 4px;
-    font-weight: 500;
-    position: relative;
-  }
-
+  header h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; position: relative; }
+  header .subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 4px; font-weight: 500; position: relative; }
   .date-bar {
     background: white;
     padding: 14px 24px;
@@ -77,9 +58,13 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
   }
-
+  .updated-note {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 4px;
+    font-weight: 400;
+  }
   .container {
     max-width: 900px;
     margin: 0 auto;
@@ -88,7 +73,6 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
   @media (min-width: 640px) {
     .container {
       grid-template-columns: 1fr 1fr;
@@ -97,7 +81,6 @@
     }
     .card.full-width { grid-column: 1 / -1; }
   }
-
   .card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -105,12 +88,7 @@
     overflow: hidden;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-
-  .card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-  }
-
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
   .card-header {
     padding: 16px 20px 12px;
     display: flex;
@@ -118,266 +96,139 @@
     gap: 10px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
-
   .card-header .icon {
     font-size: 1.4rem;
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-
-  .card-header h2 {
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-
+  .card-header h2 { font-size: 1rem; font-weight: 700; letter-spacing: -0.3px; }
   .card-body { padding: 16px 20px 20px; }
 
-  /* Schedule Card */
-  .schedule .icon { background: rgba(42,157,143,0.12); }
-  .schedule .card-header h2 { color: var(--accent-teal); }
-
-  .schedule-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-  .schedule-item:last-child { border-bottom: none; }
-
-  .schedule-time {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--accent-teal);
-    background: rgba(42,157,143,0.08);
-    padding: 3px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-    min-width: 65px;
-    text-align: center;
-  }
-
-  .schedule-desc {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-  }
-  .schedule-desc .who {
-    font-size: 0.78rem;
-    color: var(--text-mid);
-  }
-
-  /* Meals Card */
+  /* Meals */
   .meals .icon { background: rgba(232,131,74,0.12); }
   .meals .card-header h2 { color: var(--accent-orange); }
-
   .meal-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
     padding: 9px 0;
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .meal-item:last-child { border-bottom: none; }
-
   .meal-day {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent-orange);
-    min-width: 38px;
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--accent-orange); min-width: 38px;
   }
-
-  .meal-name {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-  }
-
+  .meal-name { font-size: 0.9rem; color: var(--text-dark); }
   .meal-item.today {
     background: rgba(232,131,74,0.06);
-    margin: 0 -20px;
-    padding: 9px 20px;
-    border-radius: 8px;
-    border-bottom-color: transparent;
+    margin: 0 -20px; padding: 9px 20px;
+    border-radius: 8px; border-bottom-color: transparent;
   }
   .meal-item.today .meal-day {
-    color: white;
-    background: var(--accent-orange);
-    padding: 2px 6px;
-    border-radius: 4px;
+    color: white; background: var(--accent-orange);
+    padding: 2px 6px; border-radius: 4px;
   }
 
-  /* School Card */
+  /* School */
   .school .icon { background: rgba(69,123,157,0.12); }
   .school .card-header h2 { color: var(--accent-blue); }
-
   .reminder-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    display: flex; align-items: flex-start; gap: 10px;
     padding: 9px 0;
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .reminder-item:last-child { border-bottom: none; }
-
   .reminder-badge {
+    font-size: 0.72rem; font-weight: 700; color: white;
+    padding: 2px 8px; border-radius: 6px; white-space: nowrap;
+  }
+  .reminder-text { font-size: 0.9rem; color: var(--text-dark); }
+  .reminder-date { font-size: 0.78rem; color: var(--text-mid); }
+
+  /* Tracker (Allowance + Sugar) */
+  .tracker .icon { background: rgba(124,58,237,0.12); }
+  .tracker .card-header h2 { color: var(--accent-purple); }
+  .tracker-header {
+    display: grid;
+    grid-template-columns: 1fr 70px 70px;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+    margin-bottom: 4px;
+  }
+  .tracker-header span {
     font-size: 0.72rem;
     font-weight: 700;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
-
-  .reminder-text {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-  }
-
-  .reminder-date {
-    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: var(--text-mid);
   }
-
-  /* Chores Card */
-  .chores .icon { background: rgba(233,196,106,0.2); }
-  .chores .card-header h2 { color: #C09030; }
-
-  .chore-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .tracker-header span:not(:first-child) { text-align: right; }
+  .tracker-row {
+    display: grid;
+    grid-template-columns: 1fr 70px 70px;
+    gap: 8px;
     padding: 8px 0;
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
-  .chore-item:last-child { border-bottom: none; }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-name { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+  .tracker-val {
+    font-size: 0.9rem; font-weight: 700; text-align: right;
+    color: var(--accent-teal);
+  }
+  .tracker-val.negative { color: var(--accent-rose); }
+  .tracker-val.sugar-val { color: var(--accent-purple); }
+  .guinea-pig {
+    grid-template-columns: 1fr 140px;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+  }
+  .guinea-pig .tracker-name { font-size: 0.82rem; color: var(--text-mid); }
 
-  .chore-check {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--text-light);
-    border-radius: 6px;
-    flex-shrink: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-
-  .chore-check.done {
-    background: var(--accent-teal);
-    border-color: var(--accent-teal);
-  }
-  .chore-check.done::after {
-    content: '✓';
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .chore-label {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-    flex: 1;
-  }
-  .chore-label .assignee {
-    font-size: 0.78rem;
-    color: var(--text-mid);
-  }
-
-  .chore-item.completed .chore-label {
-    text-decoration: line-through;
-    color: var(--text-light);
-  }
-
-  /* Family Card */
+  /* Family */
   .family .icon { background: rgba(231,111,81,0.12); }
   .family .card-header h2 { color: var(--accent-rose); }
-
   .family-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 12px;
   }
-
   .family-member {
-    text-align: center;
-    padding: 14px 8px;
-    border-radius: 12px;
-    background: rgba(231,111,81,0.04);
-    transition: background 0.2s;
+    text-align: center; padding: 14px 8px;
+    border-radius: 12px; background: rgba(231,111,81,0.04);
   }
-  .family-member:hover { background: rgba(231,111,81,0.08); }
-
   .family-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    margin: 0 auto 8px;
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 8px;
     background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
     color: white;
   }
-
   .family-member.pet .family-avatar {
     background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
   }
-
-  .family-name {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text-dark);
-  }
-
-  .family-detail {
-    font-size: 0.75rem;
-    color: var(--text-mid);
-    margin-top: 2px;
-  }
-
-  /* Quick Info */
+  .family-name { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); }
+  .family-detail { font-size: 0.75rem; color: var(--text-mid); margin-top: 2px; }
   .quick-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-    padding-top: 14px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px; padding-top: 14px;
     border-top: 1px solid rgba(0,0,0,0.05);
   }
-
   .info-chip {
-    font-size: 0.78rem;
-    padding: 5px 12px;
-    border-radius: 20px;
-    background: rgba(0,0,0,0.04);
-    color: var(--text-mid);
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: 0.78rem; padding: 5px 12px;
+    border-radius: 20px; background: rgba(0,0,0,0.04);
+    color: var(--text-mid); display: flex; align-items: center; gap: 5px;
   }
-
   .empty-state {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-light);
-    font-size: 0.9rem;
+    text-align: center; padding: 20px; color: var(--text-light); font-size: 0.9rem;
   }
-
   footer {
-    text-align: center;
-    padding: 16px;
-    color: var(--text-light);
-    font-size: 0.75rem;
+    text-align: center; padding: 16px; color: var(--text-light); font-size: 0.75rem;
   }
 </style>
 </head>
@@ -388,20 +239,14 @@
   <div class="subtitle">Everything in one place</div>
 </header>
 
-<div class="date-bar" id="dateBar"></div>
+<div class="date-bar" id="dateBar">
+  <div id="dateText"></div>
+  <div class="updated-note">Last updated: Apr 27, 2026 at 11:13 AM ET</div>
+</div>
 
 <div class="container">
 
-  <!-- Today's Schedule -->
-  <div class="card schedule">
-    <div class="card-header">
-      <div class="icon">📅</div>
-      <h2>Today's Schedule</h2>
-    </div>
-    <div class="card-body" id="scheduleBody"></div>
-  </div>
-
-  <!-- This Week's Meals -->
+  <!-- Meals -->
   <div class="card meals">
     <div class="card-header">
       <div class="icon">🍽️</div>
@@ -410,33 +255,77 @@
     <div class="card-body" id="mealsBody"></div>
   </div>
 
+  <!-- Allowance & Sugar -->
+  <div class="card tracker">
+    <div class="card-header">
+      <div class="icon">💰</div>
+      <h2>Allowance & Sugar</h2>
+    </div>
+    <div class="card-body">
+      <div class="tracker-header">
+        <span>Kid</span>
+        <span>Allowance</span>
+        <span>Sugar</span>
+      </div>
+      
+      <div class="tracker-row">
+        <span class="tracker-name">Charlie</span>
+        <span class="tracker-val negative">$-305.23</span>
+        <span class="tracker-val sugar-val">96g</span>
+      </div>
+      <div class="tracker-row">
+        <span class="tracker-name">Henry</span>
+        <span class="tracker-val ">$104.09</span>
+        <span class="tracker-val sugar-val">176g</span>
+      </div>
+      <div class="tracker-row">
+        <span class="tracker-name">William</span>
+        <span class="tracker-val ">$46.49</span>
+        <span class="tracker-val sugar-val">30g</span>
+      </div>
+      <div class="tracker-row">
+        <span class="tracker-name">Thomas</span>
+        <span class="tracker-val ">$0.00</span>
+        <span class="tracker-val sugar-val">144g</span>
+      </div>
+      
+      <div class="tracker-row guinea-pig">
+        <span class="tracker-name">🐹 William's Guinea Pig Fund</span>
+        <span class="tracker-val" style="grid-column: span 2">$69.73</span>
+      </div>
+    </div>
+  </div>
+
   <!-- School Reminders -->
-  <div class="card school">
+  <div class="card school full-width">
     <div class="card-header">
       <div class="icon">📚</div>
-      <h2>School Reminders</h2>
+      <h2>Upcoming School</h2>
     </div>
     <div class="card-body" id="schoolBody"></div>
   </div>
 
-  <!-- Chores & Tasks -->
-  <div class="card chores">
-    <div class="card-header">
-      <div class="icon">✅</div>
-      <h2>Chores & Tasks</h2>
-    </div>
-    <div class="card-body" id="choresBody"></div>
-  </div>
-
-  <!-- Family Info -->
+  <!-- Family -->
   <div class="card family full-width">
     <div class="card-header">
       <div class="icon">👨‍👩‍👧‍👦</div>
       <h2>The Crittendens</h2>
     </div>
     <div class="card-body">
-      <div class="family-grid" id="familyGrid"></div>
-      <div class="quick-info" id="quickInfo"></div>
+      <div class="family-grid">
+        <div class="family-member"><div class="family-avatar">👨</div><div class="family-name">Mike</div><div class="family-detail">Dad</div></div>
+        <div class="family-member"><div class="family-avatar">👩</div><div class="family-name">Nancy</div><div class="family-detail">Mom</div></div>
+        <div class="family-member"><div class="family-avatar">🧑</div><div class="family-name">Charlie</div><div class="family-detail">15, HS</div></div>
+        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">Henry</div><div class="family-detail">12, 7th</div></div>
+        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">William</div><div class="family-detail">10, 4th</div></div>
+        <div class="family-member"><div class="family-avatar">👦</div><div class="family-name">Thomas</div><div class="family-detail">7, 2nd</div></div>
+        <div class="family-member pet"><div class="family-avatar">🐕</div><div class="family-name">Fig</div><div class="family-detail">Poochon</div></div>
+        <div class="family-member pet"><div class="family-avatar">🐕</div><div class="family-name">Poppy</div><div class="family-detail">Poochon</div></div>
+      </div>
+      <div class="quick-info">
+        <span class="info-chip">🏫 Prince of Peace Christian School</span>
+        <span class="info-chip">📍 Greenville, SC</span>
+      </div>
     </div>
   </div>
 
@@ -445,177 +334,48 @@
 <footer>Crittenden Family Command Center &bull; Auto-updated by CritterBot 🦾</footer>
 
 <script>
-// ============================================================
-// DATA - Edit this JSON to update the dashboard
-// ============================================================
-const DATA = {
-  schedule: [
-    { time: "7:30 AM", desc: "School drop-off", who: "All kids" },
-    { time: "8:00 AM", desc: "Work starts", who: "Mike & Nancy" },
-    { time: "3:15 PM", desc: "School pickup", who: "All kids" },
-    { time: "5:30 PM", desc: "Dinner time", who: "Family" },
-    { time: "8:00 PM", desc: "Bedtime routine", who: "Thomas & William" },
-    { time: "9:00 PM", desc: "Bedtime", who: "Henry" },
-    { time: "10:00 PM", desc: "Bedtime", who: "Charlie" }
-  ],
-
-  meals: [
-    { day: "Mon", meal: "Mexican beef & bean burritos" },
-    { day: "Tue", meal: "Pesto chicken + noodles + Brussels sprouts" },
-    { day: "Wed", meal: "Grilled burgers & dogs + corn" },
-    { day: "Thu", meal: "Sheet pan Italian sausage with zucchini & tomatoes over rice" },
-    { day: "Fri", meal: "Slow cooker pot roast + carrots & potatoes" },
-    { day: "Sat", meal: "Chicken fajitas" },
-    { day: "Sun", meal: "Leftovers" }
-  ],
-
-  school: [
-    { kid: "Thomas", text: "Ms. Krick's class, 2nd grade", date: "", color: "#E76F51" },
-    { kid: "William", text: "4th grade", date: "", color: "#E8834A" },
-    { kid: "Henry", text: "7th grade", date: "", color: "#457B9D" },
-    { kid: "Charlie", text: "High school, 15yo", date: "", color: "#2A9D8F" }
-  ],
-
-  chores: [
-    { task: "Feed Fig & Poppy", assignee: "Thomas", done: false },
-    { task: "Unload dishwasher", assignee: "William", done: false },
-    { task: "Take out trash", assignee: "Henry", done: false },
-    { task: "Clean kitchen counters", assignee: "Charlie", done: false },
-    { task: "Wipe down bathrooms", assignee: "Rotating", done: false },
-    { task: "Pick up living room", assignee: "Everyone", done: false }
-  ],
-
-  family: [
-    { name: "Mike", detail: "Dad", emoji: "👨", pet: false },
-    { name: "Nancy", detail: "Mom", emoji: "👩", pet: false },
-    { name: "Charlie", detail: "15, High School", emoji: "🧑", pet: false },
-    { name: "Henry", detail: "12, 7th Grade", emoji: "👦", pet: false },
-    { name: "William", detail: "10, 4th Grade", emoji: "👦", pet: false },
-    { name: "Thomas", detail: "7, 2nd Grade", emoji: "👦", pet: false },
-    { name: "Fig", detail: "Poochon 🐾", emoji: "🐕", pet: true },
-    { name: "Poppy", detail: "Poochon 🐾", emoji: "🐕", pet: true }
-  ],
-
-  quickInfo: [
-    { icon: "🏫", text: "Prince of Peace Christian School" },
-    { icon: "📍", text: "Greenville, SC" },
-    { icon: "🐕", text: "2 Poochons: Fig & Poppy" }
-  ]
-};
-
-// ============================================================
-// RENDER
-// ============================================================
+const MEALS = [{"day": "Mon", "meal": "Mexican beef & bean burritos"}, {"day": "Tue", "meal": "Pesto chicken + noodles + roasted Brussels sprouts"}, {"day": "Wed", "meal": "Grilled burgers & dogs + corn on the cob"}, {"day": "Thu", "meal": "Sheet pan Italian sausage with roasted zucchini, onions & cherry tomatoes over rice"}, {"day": "Fri", "meal": "Slow cooker pot roast + carrots & potatoes"}, {"day": "Sat", "meal": "Chicken fajitas with onions, zucchini & corn"}, {"day": "Sun", "meal": "Leftovers"}];
+const SCHOOL = [{"kid": "Thomas", "text": "Teacher Appreciation Week starts (27-30 April)", "date": "2026-04-27 (Mon)", "color": "#E76F51"}, {"kid": "Thomas", "text": "First Holy Communion practice @6pm", "date": "2026-04-28 (Tue)", "color": "#E76F51"}, {"kid": "Thomas", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12:15p dismissal", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Field Day - 12 noon dismissal", "date": "2026-05-01 (Fri)", "color": "#E76F51"}, {"kid": "Thomas", "text": "First Holy Communion", "date": "2026-05-02 (Sat)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Spirit Night at Clare's Creamery 3:30-8:30p", "date": "2026-05-04 (Mon)", "color": "#E76F51"}, {"kid": "Thomas", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#E76F51"}, {"kid": "William", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#E8834A"}, {"kid": "William", "text": "Poem Recitation - The Two Kinds of People by Ella Wheeler Wilcox", "date": "2026-04-29 (Wed)", "color": "#E8834A"}, {"kid": "William", "text": "Prayer Recitation - Prayer before Communion", "date": "2026-04-30 (Thu)", "color": "#E8834A"}, {"kid": "William", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#E8834A"}, {"kid": "William", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#E8834A"}, {"kid": "Henry", "text": "IXL 5L, 3J due", "date": "2026-04-27 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "Unit 2 Test (Religion - 100 pts)", "date": "2026-04-28 (Tue)", "color": "#457B9D"}, {"kid": "Henry", "text": "May Lunch Orders Due", "date": "2026-04-28 (Tue)", "color": "#457B9D"}, {"kid": "Henry", "text": "Chapter 5 Section 2 Test (History - Absolute Monarchs/Louis XIV - 100 pts)", "date": "2026-04-29 (Wed)", "color": "#457B9D"}, {"kid": "Henry", "text": "Field Day - 12:15p Dismissal (After Care available)", "date": "2026-05-01 (Fri)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 6A, 7N due", "date": "2026-05-04 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "Spring Concert", "date": "2026-05-07 (Thu)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 4P, 5J due", "date": "2026-05-11 (Mon)", "color": "#457B9D"}, {"kid": "Henry", "text": "IXL 7K, 6N due", "date": "2026-05-18 (Mon)", "color": "#457B9D"}, {"kid": "Charlie", "text": "Senior Yard Sign orders due 11:59pm (0)", "date": "2026-04-26 (Sun)", "color": "#2A9D8F"}, {"kid": "Charlie", "text": "Academic Awards Night 6pm Auditorium (if invited)", "date": "2026-04-28 (Tue)", "color": "#2A9D8F"}];
 
 // Date bar
-function renderDateBar() {
+(function() {
   const now = new Date();
-  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  // Display in Eastern time
-  const eastern = now.toLocaleDateString('en-US', { ...opts, timeZone: 'America/New_York' });
-  document.getElementById('dateBar').textContent = eastern;
-}
-
-// Schedule
-function renderSchedule() {
-  const el = document.getElementById('scheduleBody');
-  if (!DATA.schedule.length) {
-    el.innerHTML = '<div class="empty-state">No events today</div>';
-    return;
-  }
-  el.innerHTML = DATA.schedule.map(item => `
-    <div class="schedule-item">
-      <span class="schedule-time">${item.time}</span>
-      <div class="schedule-desc">
-        ${item.desc}
-        <div class="who">${item.who}</div>
-      </div>
-    </div>
-  `).join('');
-}
+  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/New_York' };
+  document.getElementById('dateText').textContent = now.toLocaleDateString('en-US', opts);
+})();
 
 // Meals
-function renderMeals() {
+(function() {
   const el = document.getElementById('mealsBody');
   const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const now = new Date();
-  const todayName = dayNames[now.getDay()];
-
-  el.innerHTML = DATA.meals.map(item => {
-    const isToday = item.day === todayName;
-    return `
-      <div class="meal-item${isToday ? ' today' : ''}">
-        <span class="meal-day">${item.day}</span>
-        <span class="meal-name">${item.meal}${isToday ? ' 👈' : ''}</span>
-      </div>
-    `;
+  const today = dayNames[new Date(now.toLocaleString('en-US', {timeZone:'America/New_York'})).getDay()];
+  el.innerHTML = MEALS.map(m => {
+    const isToday = m.day === today;
+    return `<div class="meal-item${isToday ? ' today' : ''}">
+      <span class="meal-day">${m.day}</span>
+      <span class="meal-name">${m.meal}${isToday ? ' 👈' : ''}</span>
+    </div>`;
   }).join('');
-}
+})();
 
 // School
-function renderSchool() {
+(function() {
   const el = document.getElementById('schoolBody');
-  if (!DATA.school.length) {
-    el.innerHTML = '<div class="empty-state">No reminders right now 🎉</div>';
+  if (!SCHOOL.length) {
+    el.innerHTML = '<div class="empty-state">No upcoming reminders 🎉</div>';
     return;
   }
-  el.innerHTML = DATA.school.map(item => `
+  el.innerHTML = SCHOOL.map(s => `
     <div class="reminder-item">
-      <span class="reminder-badge" style="background:${item.color}">${item.kid}</span>
+      <span class="reminder-badge" style="background:${s.color}">${s.kid}</span>
       <div>
-        <div class="reminder-text">${item.text}</div>
-        ${item.date ? `<div class="reminder-date">${item.date}</div>` : ''}
+        <div class="reminder-text">${s.text}</div>
+        <div class="reminder-date">${s.date}</div>
       </div>
     </div>
   `).join('');
-}
-
-// Chores
-function renderChores() {
-  const el = document.getElementById('choresBody');
-  el.innerHTML = DATA.chores.map((item, i) => `
-    <div class="chore-item${item.done ? ' completed' : ''}" data-index="${i}">
-      <div class="chore-check${item.done ? ' done' : ''}" onclick="toggleChore(${i})"></div>
-      <div class="chore-label">
-        ${item.task}
-        <div class="assignee">${item.assignee}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function toggleChore(index) {
-  DATA.chores[index].done = !DATA.chores[index].done;
-  renderChores();
-}
-
-// Family
-function renderFamily() {
-  const grid = document.getElementById('familyGrid');
-  grid.innerHTML = DATA.family.map(m => `
-    <div class="family-member${m.pet ? ' pet' : ''}">
-      <div class="family-avatar">${m.emoji}</div>
-      <div class="family-name">${m.name}</div>
-      <div class="family-detail">${m.detail}</div>
-    </div>
-  `).join('');
-
-  const info = document.getElementById('quickInfo');
-  info.innerHTML = DATA.quickInfo.map(q => `
-    <span class="info-chip">${q.icon} ${q.text}</span>
-  `).join('');
-}
-
-// Init
-renderDateBar();
-renderSchedule();
-renderMeals();
-renderSchool();
-renderChores();
-renderFamily();
-
-// Refresh date at midnight
-setInterval(renderDateBar, 60000);
+})();
 </script>
 </body>
 </html>
