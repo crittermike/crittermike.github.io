@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crittenden Finance Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d29;
+    --card-hover: #1f2335;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-dim: #71717a;
+    --text-muted: #52525b;
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.15);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.15);
+    --purple: #a855f7;
+    --amber: #f59e0b;
+    --teal: #14b8a6;
+    --rose: #f43f5e;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+    --lime: #84cc16;
+    --pink: #ec4899;
+    --indigo: #6366f1;
+    --emerald: #10b981;
+    --yellow: #eab308;
+    --fuchsia: #d946ef;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .header {
+    padding: 32px 24px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+  .grid {
+    display: grid;
+    gap: 16px;
+    padding: 0 24px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: background 0.15s;
+  }
+  .card:hover { background: var(--card-hover); }
+  .card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .card-detail {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .badge-green { background: var(--green-dim); color: var(--green); }
+  .badge-red { background: var(--red-dim); color: var(--red); }
+  .badge-blue { background: var(--blue-dim); color: var(--blue); }
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .chart-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .chart-container { position: relative; width: 100%; }
+  .chart-container.tall { height: 320px; }
+  .chart-container.short { height: 260px; }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(42,45,58,0.5);
+  }
+  tr:last-child td { border-bottom: none; }
+  .amount { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .cat-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+  }
+  .cat-bar-label {
+    width: 140px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+  .cat-bar-track {
+    flex: 1;
+    height: 24px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cat-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    transition: width 0.6s ease;
+  }
+  .cat-bar-amount {
+    width: 80px;
+    text-align: right;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+  .month-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .month-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .month-btn:hover { border-color: var(--blue); color: var(--text); }
+  .month-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 24px 24px 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--text-dim);
+  }
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+  @media (max-width: 900px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .header { padding: 24px 16px 16px; }
+    .grid { padding: 0 16px 24px; }
+    .section-title { padding: 16px 16px 8px; }
+  }
+</style>
+</head>
+<body>
+<nav style="background:#1a1a2e;padding:10px 20px;display:flex;gap:16px;align-items:center;font-family:-apple-system,system-ui,sans-serif;font-size:14px;border-bottom:1px solid #333;">
+  <a href="/family/" style="color:#E8834A;font-weight:700;text-decoration:none;">🏠 Crittendens</a>
+  <a href="/family/" style="color:#aaa;text-decoration:none;">Home</a>
+  <a href="/family/trips/" style="color:#aaa;text-decoration:none;">Trips</a>
+  <a href="/family/diet/" style="color:#aaa;text-decoration:none;">Diet</a>
+  <a href="/family/finance/" style="color:#aaa;text-decoration:none;">Finance</a>
+  <a href="/family/fitness/" style="color:#aaa;text-decoration:none;">Fitness</a>
+  <a href="/family/habits/" style="color:#aaa;text-decoration:none;">Habits</a>
+</nav>
+
+<div class="header">
+  <h1>💰 Crittenden Finance</h1>
+  <div class="subtitle">Spending trends, category breakdowns, and monthly insights from Lunch Money</div>
+</div>
+
+<!-- KPI Cards -->
+<div class="grid grid-4" id="kpi-cards"></div>
+
+<!-- Monthly Trend -->
+<div class="section-title">Monthly Spending</div>
+<div class="grid grid-2">
+  <div class="chart-card">
+    <h3>Total Spending by Month</h3>
+    <div class="chart-container tall">
+      <canvas id="monthlyChart"></canvas>
+    </div>
+  </div>
+  <div class="chart-card">
+    <h3>Top Categories by Month</h3>
+    <div class="chart-container tall">
+      <canvas id="stackedChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Category Deep Dive -->
+<div class="section-title">Category Breakdown</div>
+<div class="grid grid-2">
+  <div class="chart-card">
+    <h3>Select Month</h3>
+    <div class="month-selector" id="monthSelector"></div>
+    <div id="catBars"></div>
+  </div>
+  <div class="chart-card">
+    <h3>Category Distribution</h3>
+    <div class="chart-container short">
+      <canvas id="donutChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Big Transactions -->
+<div class="section-title">Largest Transactions</div>
+<div class="grid" style="grid-template-columns:1fr">
+  <div class="chart-card" style="overflow-x:auto">
+    <h3 id="txnTitle">April 2026</h3>
+    <table>
+      <thead><tr><th>Date</th><th>Payee</th><th>Category</th><th style="text-align:right">Amount</th></tr></thead>
+      <tbody id="txnBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  Data from Lunch Money API · Updated May 2, 2026 · Built by CritterBot 🦾
+</div>
+
+<script>
+const DATA = {
+  months: [
+    {label:"Dec 2025",total:23241.85,by_cat:{"Housing":2121.42,"Gifts and Donations":2280.9,"Uncategorized":7305.14,"Food and Dining":3026.03,"Shopping":3073.03,"Health and Medical":3068.14,"Personal Care":192,"Utilities":770.83,"Transportation":94.6,"Pets":456.55,"Fees and Interest":799.9,"Entertainment":53.31},big_txns:[{payee:"Upstate",amount:3068.14,date:"2025-12-11",category:"Health and Medical"},{payee:"Freedom Mortgage",amount:2121.42,date:"2025-12-01",category:"Housing"},{payee:"Prince Of Peace",amount:1939.9,date:"2025-12-15",category:"Gifts and Donations"},{payee:"Greenville Co SC",amount:799.9,date:"2025-12-19",category:"Fees and Interest"},{payee:"The Tech Store",amount:606.02,date:"2025-12-24",category:"Uncategorized"},{payee:"Target",amount:364.33,date:"2025-12-16",category:"Shopping"},{payee:"Nordstrom",amount:302.86,date:"2025-12-04",category:"Shopping"},{payee:"Zelle: Granger",amount:300,date:"2025-12-17",category:"Uncategorized"},{payee:"East Greenville",amount:287.27,date:"2025-12-01",category:"Uncategorized"},{payee:"Alloy PT",amount:249,date:"2025-12-01",category:"Uncategorized"}]},
+    {label:"Jan 2026",total:23404.53,by_cat:{"Uncategorized":4747.28,"Shopping":2576.52,"Food and Dining":3478.6,"Transportation":97.35,"Housing":2121.42,"Entertainment":430,"Utilities":904.62,"Gifts and Donations":2722.9,"Pets":313,"Travel":5742.93,"Subscriptions":137.14,"Personal Care":97.78,"Health and Medical":34.99},big_txns:[{payee:"Freedom Mortgage",amount:2121.42,date:"2026-01-02",category:"Housing"},{payee:"Prince Of Peace",amount:1939.9,date:"2026-01-15",category:"Gifts and Donations"},{payee:"Airbnb",amount:1741.94,date:"2026-01-30",category:"Travel"},{payee:"American Airlines",amount:1056.43,date:"2026-01-25",category:"Travel"},{payee:"American Airlines",amount:1056.43,date:"2026-01-25",category:"Travel"},{payee:"American Airlines",amount:1056.43,date:"2026-01-25",category:"Travel"},{payee:"Lowe's",amount:621,date:"2026-01-03",category:"Shopping"},{payee:"At Home",amount:515.1,date:"2026-01-19",category:"Uncategorized"},{payee:"Hertz",amount:452.68,date:"2026-01-23",category:"Travel"}]},
+    {label:"Feb 2026",total:27289.87,by_cat:{"Food and Dining":3063.99,"Uncategorized":3776.9,"Subscriptions":360.24,"Housing":2208.83,"Gifts and Donations":2505.65,"Shopping":3476.06,"Personal Care":523.26,"Travel":10112.57,"Transportation":89.42,"Kids":125.69,"Utilities":835.33,"Entertainment":176.94,"Health and Medical":34.99},big_txns:[{payee:"Airbnb",amount:3713.22,date:"2026-02-09",category:"Travel"},{payee:"Airbnb",amount:2676.91,date:"2026-02-19",category:"Travel"},{payee:"Freedom Mortgage",amount:2208.83,date:"2026-02-02",category:"Housing"},{payee:"Airbnb",amount:2147.06,date:"2026-02-11",category:"Travel"},{payee:"Prince Of Peace",amount:1939.9,date:"2026-02-17",category:"Gifts and Donations"},{payee:"Airbnb",amount:685.44,date:"2026-02-13",category:"Travel"},{payee:"Airbnb",amount:671.8,date:"2026-02-13",category:"Travel"},{payee:"P.volve",amount:562.22,date:"2026-02-01",category:"Uncategorized"},{payee:"Zelle: Burnett",amount:450,date:"2026-02-17",category:"Uncategorized"}]},
+    {label:"Mar 2026",total:23694.84,by_cat:{"Food and Dining":3656.92,"Shopping":9489.65,"Housing":2645.35,"Gifts and Donations":2445.4,"Entertainment":613.53,"Utilities":1045.26,"Kids":228.63,"Personal Care":553.19,"Fees and Interest":39.78,"Subscriptions":135.88,"Transportation":131.55,"Health and Medical":81,"Uncategorized":3.25,"Travel":2625.45},big_txns:[{payee:"Freedom Mortgage",amount:2208.83,date:"2026-03-02",category:"Housing"},{payee:"Betterment",amount:2000,date:"2026-03-17",category:"Shopping"},{payee:"Prince Of Peace",amount:1939.9,date:"2026-03-16",category:"Gifts and Donations"},{payee:"Airbnb",amount:1844.73,date:"2026-03-22",category:"Travel"},{payee:"Wholly Ticket LLC",amount:550.8,date:"2026-03-02",category:"Shopping"},{payee:"FSAGTR",amount:500,date:"2026-03-03",category:"Shopping"},{payee:"FSAGTR",amount:500,date:"2026-03-18",category:"Shopping"},{payee:"Airbnb",amount:434.44,date:"2026-03-21",category:"Travel"},{payee:"Greenville Co SC",amount:431.35,date:"2026-03-14",category:"Shopping"}]},
+    {label:"Apr 2026",total:30080.92,by_cat:{"Housing":2865.09,"Subscriptions":498.22,"Food and Dining":5004.43,"Health and Medical":271.61,"Shopping":3354.11,"Travel":2601.65,"Pets":70.05,"Transportation":159.92,"Entertainment":912.2,"Fees and Interest":6626.55,"Gifts and Donations":2152.15,"Kids":859.24,"Utilities":797.86,"Personal Care":262.54,"Insurance":3371.78,"Uncategorized":273.52},big_txns:[{payee:"IRS",amount:6409,date:"2026-04-17",category:"Fees and Interest"},{payee:"Freedom Mortgage",amount:2200.09,date:"2026-04-01",category:"Housing"},{payee:"Prince Of Peace",amount:1939.9,date:"2026-04-15",category:"Gifts and Donations"},{payee:"Allstate",amount:1755.7,date:"2026-04-24",category:"Insurance"},{payee:"Allstate",amount:1411.08,date:"2026-04-28",category:"Insurance"},{payee:"American Airlines",amount:693.81,date:"2026-04-24",category:"Travel"},{payee:"American Airlines",amount:693.81,date:"2026-04-24",category:"Travel"},{payee:"Sugar Creek HOA",amount:665,date:"2026-04-11",category:"Housing"},{payee:"Dixiegem",amount:391.94,date:"2026-04-07",category:"Shopping"},{payee:"Prince Of Peace",amount:385,date:"2026-04-24",category:"Kids"}]},
+    {label:"May 2026",total:459.18,by_cat:{"Uncategorized":459.18},big_txns:[],is_partial:true}
+  ]
+};
+
+const CAT_COLORS = {
+  "Food and Dining":"#f59e0b","Housing":"#3b82f6","Shopping":"#a855f7","Travel":"#06b6d4",
+  "Gifts and Donations":"#ec4899","Utilities":"#14b8a6","Entertainment":"#f43f5e",
+  "Fees and Interest":"#ef4444","Insurance":"#6366f1","Kids":"#84cc16",
+  "Health and Medical":"#10b981","Subscriptions":"#f97316","Personal Care":"#d946ef",
+  "Transportation":"#eab308","Pets":"#22c55e","Uncategorized":"#71717a"
+};
+
+function fmt(n){ return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+
+// KPI Cards
+const completedMonths = DATA.months.filter(m=>!m.is_partial);
+const lastFull = completedMonths[completedMonths.length-1];
+const prevFull = completedMonths[completedMonths.length-2];
+const avg6 = completedMonths.reduce((s,m)=>s+m.total,0)/completedMonths.length;
+const delta = lastFull.total - prevFull.total;
+const deltaPct = ((delta/prevFull.total)*100).toFixed(0);
+
+const recurring = (lastFull.by_cat["Housing"]||0)+(lastFull.by_cat["Utilities"]||0)+(lastFull.by_cat["Insurance"]||0)+(lastFull.by_cat["Subscriptions"]||0);
+
+document.getElementById('kpi-cards').innerHTML = `
+  <div class="card">
+    <div class="card-title">${lastFull.label} Total</div>
+    <div class="card-value">${fmt(lastFull.total)}</div>
+    <div class="card-detail">
+      <span class="badge ${delta>0?'badge-red':'badge-green'}">${delta>0?'+':''}${deltaPct}% vs ${prevFull.label}</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">6-Month Average</div>
+    <div class="card-value">${fmt(avg6)}</div>
+    <div class="card-detail">${fmt(avg6/30)}/day average</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Fixed Costs (${lastFull.label})</div>
+    <div class="card-value">${fmt(recurring)}</div>
+    <div class="card-detail">Housing + Utilities + Insurance + Subs</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Food & Dining (${lastFull.label})</div>
+    <div class="card-value">${fmt(lastFull.by_cat["Food and Dining"]||0)}</div>
+    <div class="card-detail">${fmt((lastFull.by_cat["Food and Dining"]||0)/30)}/day</div>
+  </div>
+`;
+
+// Monthly bar chart
+const labels = completedMonths.map(m=>m.label);
+const totals = completedMonths.map(m=>m.total);
+const avgLine = completedMonths.map(()=>avg6);
+
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: 'Total Spend',
+        data: totals,
+        backgroundColor: totals.map(t=>t>avg6?'rgba(239,68,68,0.7)':'rgba(59,130,246,0.7)'),
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: '6-Month Avg',
+        data: avgLine,
+        type: 'line',
+        borderColor: 'rgba(255,255,255,0.3)',
+        borderDash: [6,4],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => fmt(ctx.parsed.y) } }
+    },
+    scales: {
+      y: { ticks: { callback: v=>fmt(v), color:'#71717a' }, grid: { color:'rgba(255,255,255,0.05)' }, border:{display:false} },
+      x: { ticks: { color:'#71717a' }, grid: { display:false }, border:{display:false} }
+    }
+  }
+});
+
+// Stacked area chart - top 6 categories
+const topCats = {};
+completedMonths.forEach(m => {
+  Object.entries(m.by_cat).forEach(([c,v]) => { topCats[c] = (topCats[c]||0)+v; });
+});
+const top6 = Object.entries(topCats).sort((a,b)=>b[1]-a[1]).slice(0,6).map(e=>e[0]);
+
+new Chart(document.getElementById('stackedChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: top6.map(cat => ({
+      label: cat,
+      data: completedMonths.map(m=>m.by_cat[cat]||0),
+      backgroundColor: CAT_COLORS[cat]||'#71717a',
+      borderRadius: 2,
+      borderSkipped: false,
+    }))
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position:'bottom', labels:{ color:'#a1a1aa', boxWidth:12, padding:12, font:{size:11} } },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${fmt(ctx.parsed.y)}` } }
+    },
+    scales: {
+      y: { stacked:true, ticks:{ callback:v=>fmt(v), color:'#71717a' }, grid:{color:'rgba(255,255,255,0.05)'}, border:{display:false} },
+      x: { stacked:true, ticks:{color:'#71717a'}, grid:{display:false}, border:{display:false} }
+    }
+  }
+});
+
+// Month selector + category bars + donut
+let selectedMonth = completedMonths.length - 1;
+let donutChart = null;
+
+function renderMonth(idx) {
+  selectedMonth = idx;
+  const m = completedMonths[idx];
+  
+  // Update buttons
+  document.querySelectorAll('.month-btn').forEach((btn,i) => {
+    btn.classList.toggle('active', i===idx);
+  });
+  
+  // Category bars
+  const sorted = Object.entries(m.by_cat).sort((a,b)=>b[1]-a[1]);
+  const max = sorted[0]?sorted[0][1]:1;
+  
+  document.getElementById('catBars').innerHTML = sorted.map(([cat,amt]) => {
+    const pct = (amt/max)*100;
+    const color = CAT_COLORS[cat]||'#71717a';
+    return `<div class="cat-bar-row">
+      <div class="cat-bar-label">${cat}</div>
+      <div class="cat-bar-track">
+        <div class="cat-bar-fill" style="width:${pct}%;background:${color}">${pct>15?fmt(amt):''}</div>
+      </div>
+      <div class="cat-bar-amount">${fmt(amt)}</div>
+    </div>`;
+  }).join('');
+  
+  // Donut
+  const donutData = sorted.slice(0,8);
+  const otherTotal = sorted.slice(8).reduce((s,e)=>s+e[1],0);
+  if(otherTotal>0) donutData.push(["Other",otherTotal]);
+  
+  if(donutChart) donutChart.destroy();
+  donutChart = new Chart(document.getElementById('donutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: donutData.map(d=>d[0]),
+      datasets: [{
+        data: donutData.map(d=>d[1]),
+        backgroundColor: donutData.map(d=>CAT_COLORS[d[0]]||'#3f3f46'),
+        borderWidth: 0,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: { position:'right', labels:{ color:'#a1a1aa', boxWidth:10, padding:8, font:{size:11} } },
+        tooltip: { callbacks: { label: ctx => {
+          const total = ctx.dataset.data.reduce((s,v)=>s+v,0);
+          return `${ctx.label}: ${fmt(ctx.parsed)} (${((ctx.parsed/total)*100).toFixed(0)}%)`;
+        }}}
+      }
+    }
+  });
+  
+  // Transactions table
+  document.getElementById('txnTitle').textContent = `Top Transactions: ${m.label}`;
+  document.getElementById('txnBody').innerHTML = (m.big_txns||[]).slice(0,10).map(t => `
+    <tr>
+      <td style="color:var(--text-dim)">${t.date}</td>
+      <td>${t.payee}</td>
+      <td><span style="color:${CAT_COLORS[t.category]||'var(--text-dim)'}">${t.category}</span></td>
+      <td class="amount" style="text-align:right">${fmt(t.amount)}</td>
+    </tr>
+  `).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--text-dim)">No large transactions yet</td></tr>';
+}
+
+// Build month buttons
+const sel = document.getElementById('monthSelector');
+completedMonths.forEach((m,i) => {
+  const btn = document.createElement('button');
+  btn.className = 'month-btn' + (i===completedMonths.length-1?' active':'');
+  btn.textContent = m.label;
+  btn.onclick = () => renderMonth(i);
+  sel.appendChild(btn);
+});
+
+renderMonth(completedMonths.length - 1);
+</script>
+</body>
+</html>
