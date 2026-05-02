@@ -6,24 +6,24 @@
 <title>Trips - Crittenden Family</title>
 <style>
   :root {
-    --warm-bg: #FFF8F0;
-    --card-bg: #FFFFFF;
+    --warm-bg: #0d1117;
+    --card-bg: #161b22;
     --accent-orange: #E8834A;
-    --accent-teal: #2A9D8F;
-    --accent-gold: #E9C46A;
-    --accent-rose: #E76F51;
-    --accent-blue: #457B9D;
-    --accent-purple: #7C3AED;
-    --lake: #1a6b8a;
-    --lake-dark: #0e4d66;
-    --lake-light: #e0f4fb;
+    --accent-teal: #3fb950;
+    --accent-gold: #d29922;
+    --accent-rose: #f85149;
+    --accent-blue: #58a6ff;
+    --accent-purple: #bc8cff;
+    --lake: #58a6ff;
+    --lake-dark: #79c0ff;
+    --lake-light: #21262d;
     --sunset: #f4845f;
-    --sand: #faf6f0;
-    --text-dark: #2D3436;
-    --text-mid: #636E72;
-    --text-light: #B2BEC3;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
-    --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+    --sand: #161b22;
+    --text-dark: #e6edf3;
+    --text-mid: #8b949e;
+    --text-light: #484f58;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
     --radius: 16px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,35 +34,6 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-  nav {
-    background: white;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  nav .brand {
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--accent-orange);
-    text-decoration: none;
-  }
-  nav a {
-    text-decoration: none;
-    color: var(--text-mid);
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    border-radius: 8px;
-    transition: background 0.15s, color 0.15s;
-  }
-  nav a:hover { background: var(--warm-bg); color: var(--accent-orange); }
-  nav a.active { background: var(--warm-bg); color: var(--accent-orange); }
 
   /* Hero */
   .hero {
@@ -79,7 +50,7 @@
     bottom: -2px;
     left: 0; right: 0;
     height: 40px;
-    background: var(--warm-bg);
+    background: #0d1117;
     clip-path: ellipse(55% 100% at 50% 100%);
   }
   .hero-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
@@ -116,12 +87,12 @@
     background: var(--card-bg);
     border-radius: var(--radius);
     padding: 22px;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: none;
+    border: 1px solid #30363d;
     margin-bottom: 16px;
   }
   .highlight {
-    background: linear-gradient(135deg, var(--lake-light), #f0faff);
+    background: #21262d;
     border-left: 4px solid var(--lake);
     border-radius: 0 12px 12px 0;
     padding: 18px 22px;
@@ -136,11 +107,12 @@
     margin: 28px 0;
   }
   .stat {
-    background: white;
+    background: var(--card-bg);
+    border: 1px solid #30363d;
     border-radius: 12px;
     padding: 14px 20px;
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: none;
     flex: 1;
     min-width: 110px;
   }
@@ -149,8 +121,8 @@
 
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .tag {
-    background: var(--warm-bg);
-    border: 1px solid rgba(0,0,0,0.06);
+    background: #21262d;
+    border: 1px solid #30363d;
     border-radius: 20px;
     padding: 6px 14px;
     font-size: 0.84rem;
@@ -164,7 +136,8 @@
     gap: 14px;
   }
   .activity-card {
-    background: var(--warm-bg);
+    background: #21262d;
+    border: 1px solid #30363d;
     border-radius: 12px;
     padding: 18px;
     text-align: center;
@@ -178,7 +151,7 @@
   .checklist { list-style: none; }
   .checklist li {
     padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    border-bottom: 1px solid #30363d;
     font-size: 0.92rem;
     display: flex;
     align-items: flex-start;
@@ -194,10 +167,10 @@
     margin-top: 14px;
   }
   .pontoon-option {
-    background: var(--warm-bg);
+    background: #21262d;
     border-radius: 12px;
     padding: 16px;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid #30363d;
   }
   .pontoon-option h4 { font-size: 0.9rem; font-weight: 700; color: var(--lake-dark); margin-bottom: 6px; }
   .pontoon-option p { font-size: 0.82rem; color: var(--text-mid); }
@@ -223,13 +196,13 @@
     padding: 8px 12px;
     margin: 6px 0;
     border-radius: 8px;
-    background: var(--warm-bg);
+    background: #21262d;
     font-size: 0.88rem;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent-teal); }
+  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #3fb950; }
 
   footer {
     text-align: center;
@@ -250,22 +223,27 @@
 </style>
 </head>
 <body>
-<nav>
-  <a href="/family/" class="brand">🏠 Crittendens</a>
-  <a href="/family/">Home</a>
-  <a href="/family/trips/" class="active">Trips</a>
+<nav style="background:#161b22;padding:12px 20px;display:flex;gap:16px;align-items:center;font-family:-apple-system,system-ui,sans-serif;font-size:14px;border-bottom:1px solid #30363d;">
+  <a href="/family/" style="color:#E8834A;font-weight:700;text-decoration:none;">🏠 Crittendens</a>
+  <a href="/family/" style="color:#8b949e;text-decoration:none;">Home</a>
+  <a href="/family/trips/" style="color:#fff;text-decoration:none;font-weight:600;">Trips</a>
+  <a href="/family/diet/" style="color:#8b949e;text-decoration:none;">Diet</a>
+  <a href="/family/finance/" style="color:#8b949e;text-decoration:none;">Finance</a>
+  <a href="/family/fitness/" style="color:#8b949e;text-decoration:none;">Fitness</a>
+  <a href="/family/habits/" style="color:#8b949e;text-decoration:none;">Habits</a>
 </nav>
+
 
 <!-- Trip Navigation -->
 <div style="max-width:860px;margin:0 auto;padding:24px 20px 0;">
   <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
-    <a href="/family/trips/" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:linear-gradient(135deg,#e0f4fb,#f0faff);border-radius:12px;text-decoration:none;color:#2D3436;border:2px solid #1a6b8a;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+    <a href="/family/trips/" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:#161b22;border-radius:12px;text-decoration:none;color:#e6edf3;border:2px solid #58a6ff;">
       <span style="font-size:2rem;">🏖️</span>
-      <div><strong>Lake Hartwell</strong><br><span style="font-size:0.85rem;color:#636E72;">Jul 6–11, 2026 · Hartwell, GA</span></div>
+      <div><strong>Lake Hartwell</strong><br><span style="font-size:0.85rem;color:#8b949e;">Jul 6–11, 2026 · Hartwell, GA</span></div>
     </a>
-    <a href="/family/trips/san-diego.html" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:linear-gradient(135deg,#F3EEF8,#f8f0ff);border-radius:12px;text-decoration:none;color:#2D3436;border:1px solid rgba(107,76,138,0.2);box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:transform 0.15s;">
+    <a href="/family/trips/san-diego.html" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:#161b22;border-radius:12px;text-decoration:none;color:#e6edf3;border:1px solid #30363d;transition:transform 0.15s;">
       <span style="font-size:2rem;">🎊</span>
-      <div><strong>Jace & Lauren's Wedding</strong><br><span style="font-size:0.85rem;color:#636E72;">Jun 19–21, 2026 · San Diego, CA</span></div>
+      <div><strong>Jace & Lauren's Wedding</strong><br><span style="font-size:0.85rem;color:#8b949e;">Jun 19–21, 2026 · San Diego, CA</span></div>
     </a>
   </div>
 </div>

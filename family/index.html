@@ -6,19 +6,19 @@
 <title>Crittenden Family Command Center</title>
 <style>
   :root {
-    --warm-bg: #FFF8F0;
-    --card-bg: #FFFFFF;
+    --warm-bg: #0d1117;
+    --card-bg: #161b22;
     --accent-orange: #E8834A;
-    --accent-teal: #2A9D8F;
-    --accent-gold: #E9C46A;
-    --accent-rose: #E76F51;
-    --accent-blue: #457B9D;
-    --accent-purple: #7C3AED;
-    --text-dark: #2D3436;
-    --text-mid: #636E72;
-    --text-light: #B2BEC3;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
-    --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+    --accent-teal: #3fb950;
+    --accent-gold: #d29922;
+    --accent-rose: #f85149;
+    --accent-blue: #58a6ff;
+    --accent-purple: #bc8cff;
+    --text-dark: #e6edf3;
+    --text-mid: #8b949e;
+    --text-light: #484f58;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
     --radius: 16px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,53 +29,17 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-  nav {
-    background: white;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  nav .brand {
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--accent-orange);
-    text-decoration: none;
-  }
-  nav a {
-    text-decoration: none;
-    color: var(--text-mid);
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    border-radius: 8px;
-    transition: background 0.15s, color 0.15s;
-  }
-  nav a:hover { background: var(--warm-bg); color: var(--accent-orange); }
-  nav a.active { background: var(--warm-bg); color: var(--accent-orange); }
   header {
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
-    color: white;
+    background: var(--card-bg);
+    border-bottom: 1px solid #30363d;
+    color: var(--text-dark);
     padding: 32px 24px 28px;
     text-align: center;
     position: relative;
     overflow: hidden;
   }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
-    pointer-events: none;
-  }
   header h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; position: relative; }
-  header .subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 4px; font-weight: 500; position: relative; }
+  header .subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 4px; font-weight: 500; position: relative; color: var(--text-mid); }
   .container {
     max-width: 900px;
     margin: 0 auto;
@@ -94,8 +58,8 @@
     border-radius: var(--radius);
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: none;
+    border: 1px solid #30363d;
   }
   .meals-grid {
     display: grid;
@@ -105,12 +69,12 @@
   .meal-item {
     padding: 10px 14px;
     border-radius: 10px;
-    background: var(--warm-bg);
+    background: #21262d;
     font-size: 0.9rem;
     transition: transform 0.1s;
   }
   .meal-item.today {
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    background: linear-gradient(135deg, #E8834A, #f85149);
     color: white;
     font-weight: 600;
     transform: scale(1.02);
@@ -126,7 +90,7 @@
   .balance-item {
     padding: 14px;
     border-radius: 12px;
-    background: var(--warm-bg);
+    background: #21262d;
     text-align: center;
   }
   .balance-item .name { font-weight: 600; font-size: 0.85rem; color: var(--text-mid); margin-bottom: 4px; }
@@ -141,8 +105,9 @@
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .sugar-bar:last-child { border-bottom: none; }
+  .sugar-bar { border-bottom-color: #30363d; }
   .sugar-bar .name { font-weight: 600; font-size: 0.9rem; min-width: 70px; }
-  .sugar-bar .bar-wrap { flex: 1; height: 20px; background: #f0f0f0; border-radius: 10px; overflow: hidden; }
+  .sugar-bar .bar-wrap { flex: 1; height: 20px; background: #21262d; border-radius: 10px; overflow: hidden; }
   .sugar-bar .bar-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
   .sugar-bar .grams { font-weight: 700; font-size: 0.9rem; min-width: 50px; text-align: right; }
   .school-kid { margin-bottom: 16px; }
@@ -153,7 +118,7 @@
     padding: 6px 10px;
     margin: 4px 0;
     border-radius: 8px;
-    background: var(--warm-bg);
+    background: #21262d;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -173,20 +138,20 @@
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background: linear-gradient(135deg, #e0f4fb, #f0faff);
+    background: #21262d;
     border-radius: 12px;
     text-decoration: none;
     color: var(--text-dark);
     transition: transform 0.15s, box-shadow 0.15s;
-    border: 1px solid rgba(42,157,143,0.2);
+    border: 1px solid #30363d;
   }
   .trips-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
   .trips-card .trip-emoji { font-size: 2.2rem; }
   .trips-card .trip-info h4 { font-weight: 700; margin-bottom: 2px; }
   .trips-card .trip-info p { font-size: 0.88rem; color: var(--text-mid); }
   .guinea-pig-card {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    border: 1px solid rgba(233,196,106,0.4);
+    background: #21262d;
+    border: 1px solid #30363d;
     text-align: center;
     padding: 16px;
     border-radius: 12px;
@@ -204,15 +169,16 @@
 </style>
 </head>
 <body>
-<nav>
-  <a href="/family/" class="brand">🏠 Crittendens</a>
-  <a href="/family/" class="active">Home</a>
-  <a href="/family/trips/">Trips</a>
-  <a href="/family/diet/">Diet</a>
-  <a href="/family/finance/">Finance</a>
-  <a href="/family/fitness/">Fitness</a>
-  <a href="/family/habits/">Habits</a>
+<nav style="background:#161b22;padding:12px 20px;display:flex;gap:16px;align-items:center;font-family:-apple-system,system-ui,sans-serif;font-size:14px;border-bottom:1px solid #30363d;">
+  <a href="/family/" style="color:#E8834A;font-weight:700;text-decoration:none;">🏠 Crittendens</a>
+  <a href="/family/" style="color:#fff;text-decoration:none;font-weight:600;">Home</a>
+  <a href="/family/trips/" style="color:#8b949e;text-decoration:none;">Trips</a>
+  <a href="/family/diet/" style="color:#8b949e;text-decoration:none;">Diet</a>
+  <a href="/family/finance/" style="color:#8b949e;text-decoration:none;">Finance</a>
+  <a href="/family/fitness/" style="color:#8b949e;text-decoration:none;">Fitness</a>
+  <a href="/family/habits/" style="color:#8b949e;text-decoration:none;">Habits</a>
 </nav>
+
 
 <header>
   <h1>Command Center</h1>
@@ -662,8 +628,8 @@ const LIVE_DATA = {
   weddingLink.className = 'trips-card';
   weddingLink.href = '/family/trips/san-diego.html';
   weddingLink.style.marginTop = '10px';
-  weddingLink.style.background = 'linear-gradient(135deg, #F3EEF8, #f8f0ff)';
-  weddingLink.style.borderColor = 'rgba(107,76,138,0.2)';
+  weddingLink.style.background = '#21262d';
+  weddingLink.style.borderColor = '#30363d';
   weddingLink.innerHTML = '<span class="trip-emoji">🎊</span><div class="trip-info"><h4>Jace & Lauren\u2019s Wedding</h4><p>Jun 18\u201321, 2026 \u00b7 San Diego, CA</p></div>';
   tripsDiv.appendChild(weddingLink);
 
