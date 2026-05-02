@@ -254,15 +254,35 @@
 </style>
 </head>
 <body>
-<nav style="background:#161b22;padding:12px 20px;display:flex;gap:16px;align-items:center;font-family:-apple-system,system-ui,sans-serif;font-size:14px;border-bottom:1px solid #30363d;">
-  <a href="/family/" style="color:#E8834A;font-weight:700;text-decoration:none;">🏠 Crittendens</a>
-  <a href="/family/" style="color:#8b949e;text-decoration:none;">Home</a>
-  <a href="/family/trips/" style="color:#8b949e;text-decoration:none;">Trips</a>
-  <a href="/family/diet/" style="color:#8b949e;text-decoration:none;">Diet</a>
-  <a href="/family/finance/" style="color:#8b949e;text-decoration:none;">Finance</a>
-  <a href="/family/fitness/" style="color:#fff;text-decoration:none;font-weight:600;">Fitness</a>
-  <a href="/family/habits/" style="color:#8b949e;text-decoration:none;">Habits</a>
+<nav id="site-nav">
+  <a href="/family/" class="brand">🏠 Crittendens</a>
+  <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+  <div class="nav-links">
+    <a href="/family/" data-page="home">Home</a>
+    <a href="/family/trips/" data-page="trips">Trips</a>
+    <a href="/family/diet/" data-page="diet">Diet</a>
+    <a href="/family/finance/" data-page="finance">Finance</a>
+    <a href="/family/fitness/" data-page="fitness" class="active">Fitness</a>
+    <a href="/family/habits/" data-page="habits">Habits</a>
+  </div>
 </nav>
+<style>
+#site-nav{background:#161b22;padding:12px 20px;display:flex;align-items:center;gap:16px;font-family:-apple-system,system-ui,sans-serif;font-size:14px;border-bottom:1px solid #30363d;position:sticky;top:0;z-index:1000;flex-wrap:wrap;}
+#site-nav .brand{color:#E8834A;font-weight:700;text-decoration:none;font-size:15px;}
+#site-nav .hamburger{display:none;background:none;border:none;color:#8b949e;font-size:22px;cursor:pointer;margin-left:auto;padding:4px 8px;}
+#site-nav .nav-links{display:flex;gap:16px;}
+#site-nav .nav-links a{color:#8b949e;text-decoration:none;font-size:14px;}
+#site-nav .nav-links a.active{color:#fff;font-weight:600;}
+#site-nav .nav-links a:hover{color:#c9d1d9;}
+@media(max-width:600px){
+  #site-nav .hamburger{display:block;}
+  #site-nav .nav-links{display:none;width:100%;flex-direction:column;gap:12px;padding-top:12px;}
+  #site-nav.open .nav-links{display:flex;}
+  #site-nav .nav-links a{font-size:16px;padding:4px 0;}
+}
+</style>
+
+
 
 
 <div class="header">
