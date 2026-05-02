@@ -1,0 +1,15 @@
+{
+  "name": "crittenden-family-site",
+  "version": "1.0.0",
+  "description": "Crittenden family dashboard with 11ty",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "start": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "devDependencies": {}
+}
