@@ -1,8 +1,9 @@
 {
   "month": "May 2026",
-  "totalSpend": 2759.27,
+  "totalSpend": 2975.82,
   "byCategory": {
     "Housing": 2300.09,
+    "Uncategorized": 216.55,
     "Transportation": 142.61,
     "Shopping": 113.0,
     "Subscriptions": 106.63,
@@ -26,5 +27,5 @@
     "Personal Care": 262.54,
     "Insurance": 3371.78
   },
-  "updatedAt": "May 03, 2026 at 06:00 AM ET"
+  "updatedAt": "May 04, 2026 at 06:00 AM ET"
 }
