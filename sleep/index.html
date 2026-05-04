@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Lab — Crittenden</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0e1a;
+            --surface: #111827;
+            --card: #1a2237;
+            --card-hover: #1f2942;
+            --border: #2a3554;
+            --text: #e2e8f0;
+            --text-dim: #8892a8;
+            --text-faint: #4a5568;
+            --accent: #818cf8;
+            --accent-glow: rgba(129, 140, 248, 0.15);
+            --deep: #6366f1;
+            --deep-glow: rgba(99, 102, 241, 0.3);
+            --rem: #a78bfa;
+            --rem-glow: rgba(167, 139, 250, 0.3);
+            --core: #38bdf8;
+            --core-glow: rgba(56, 189, 248, 0.3);
+            --awake: #f59e0b;
+            --awake-glow: rgba(245, 158, 11, 0.3);
+            --danger: #f43f5e;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+        
+        /* Starfield background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(167, 139, 250, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(56, 189, 248, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #818cf8, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+        
+        .header .moon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        
+        .header .subtitle .target {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Stat cards row */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .stat-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        .stat-card .unit {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+        
+        .stat-card .note {
+            font-size: 0.72rem;
+            color: var(--text-faint);
+            margin-top: 0.3rem;
+        }
+        
+        .stat-card.bad .value { color: var(--danger); }
+        .stat-card.ok .value { color: var(--warning); }
+        .stat-card.good .value { color: var(--success); }
+        .stat-card.accent .value { color: var(--accent); }
+        
+        /* Grade badge */
+        .grade-badge {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.3rem;
+        }
+        
+        .grade-f { background: rgba(244, 63, 94, 0.15); color: var(--danger); }
+        .grade-d { background: rgba(245, 158, 11, 0.15); color: var(--awake); }
+        .grade-c { background: rgba(251, 191, 36, 0.15); color: var(--warning); }
+        .grade-b { background: rgba(129, 140, 248, 0.15); color: var(--accent); }
+        .grade-a { background: rgba(52, 211, 153, 0.15); color: var(--success); }
+        
+        /* Chart sections */
+        .chart-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-section h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chart-section h2 .icon {
+            font-size: 1.1rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+        
+        .chart-container.tall {
+            height: 320px;
+        }
+        
+        /* Two column layout for smaller charts */
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Night log table */
+        .night-log {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .night-log h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .night-log table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        
+        .night-log th {
+            color: var(--text-dim);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.7rem;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .night-log td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(42, 53, 84, 0.4);
+            color: var(--text);
+        }
+        
+        .night-log tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .night-log tr:hover td {
+            background: rgba(129, 140, 248, 0.04);
+        }
+        
+        .duration-bar {
+            display: inline-block;
+            height: 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        
+        .note-text {
+            color: var(--text-faint);
+            font-size: 0.75rem;
+            max-width: 200px;
+        }
+        
+        /* Insight cards */
+        .insights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .insights { grid-template-columns: 1fr; }
+        }
+        
+        .insight-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+        }
+        
+        .insight-card .insight-title {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .insight-card .insight-text {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        .insight-card .insight-text strong {
+            color: var(--accent);
+        }
+        
+        /* Sleep debt meter */
+        .debt-meter {
+            background: var(--surface);
+            border-radius: 8px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .debt-meter .fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: var(--text-faint);
+            font-size: 0.75rem;
+            padding: 2rem 0 1rem;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Stage legend */
+        .stage-legend {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            font-size: 0.78rem;
+        }
+        
+        .stage-legend .leg-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--text-dim);
+        }
+        
+        .stage-legend .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="moon">🌙</span>
+            <h1>Sleep Lab</h1>
+            <p class="subtitle">Target: <span class="target">7+ hours</span> per night &middot; Updated nightly</p>
+        </div>
+        
+        <div id="stats-grid" class="stats-grid"></div>
+        
+        <div class="chart-section">
+            <h2><span class="icon">📊</span> Nightly Duration</h2>
+            <div class="chart-container">
+                <canvas id="durationChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-section">
+            <h2><span class="icon">🧬</span> Sleep Stages</h2>
+            <div class="stage-legend">
+                <div class="leg-item"><div class="dot" style="background:var(--deep)"></div> Deep</div>
+                <div class="leg-item"><div class="dot" style="background:var(--rem)"></div> REM</div>
+                <div class="leg-item"><div class="dot" style="background:var(--core)"></div> Core/Light</div>
+                <div class="leg-item"><div class="dot" style="background:var(--awake)"></div> Awake</div>
+            </div>
+            <div class="chart-container tall">
+                <canvas id="stagesChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-row">
+            <div class="chart-section">
+                <h2><span class="icon">💓</span> Heart Rate Range</h2>
+                <div class="chart-container">
+                    <canvas id="hrChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-section">
+                <h2><span class="icon">🫁</span> Deep Sleep %</h2>
+                <div class="chart-container">
+                    <canvas id="deepChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div id="insights" class="insights"></div>
+        
+        <div class="night-log">
+            <h2><span class="icon">📋</span> Night Log</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Duration</th>
+                        <th>Deep</th>
+                        <th>REM</th>
+                        <th>Core</th>
+                        <th>HR</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="logBody"></tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            Built with insomnia and spite. Target 7h, currently averaging way less. Go to bed, Mike.
+        </div>
+    </div>
+    
+    <script>
+    // ========== DATA ==========
+    const nights = [
+        {
+            date: '2026-04-24', label: 'Apr 24',
+            total: 5.78, deep: null, rem: null, core: null, awake: 0.1,
+            hrLow: 55, hrHigh: 72,
+            notes: 'Score 83'
+        },
+        {
+            date: '2026-04-25', label: 'Apr 25',
+            total: 6.3, deep: 0.55, rem: 1.75, core: 4.0, awake: 0.13,
+            hrLow: 55, hrHigh: 73,
+            notes: 'Hospital day, late to bed'
+        },
+        {
+            date: '2026-04-26', label: 'Apr 26',
+            total: 6.47, deep: 0.93, rem: 1.5, core: 4.03, awake: 0.3,
+            hrLow: 59, hrHigh: 73,
+            notes: 'Resp 13-20'
+        },
+        {
+            date: '2026-04-27', label: 'Apr 27',
+            total: 6.85, deep: 0.68, rem: 1.45, core: 4.72, awake: 0.25,
+            hrLow: 54, hrHigh: 72,
+            notes: ''
+        },
+        {
+            date: '2026-04-28', label: 'Apr 28',
+            total: 6.62, deep: 0.98, rem: 1.63, core: 4.0, awake: 0.27,
+            hrLow: 58, hrHigh: 74,
+            notes: ''
+        },
+        {
+            date: '2026-04-29', label: 'Apr 29',
+            total: 5.73, deep: 0.8, rem: 1.12, core: 3.82, awake: 0.02,
+            hrLow: 58, hrHigh: 71,
+            notes: 'Fell asleep ~40min after lying down'
+        },
+        {
+            date: '2026-04-30', label: 'Apr 30',
+            total: 6.7, deep: 0.85, rem: 1.97, core: 3.88, awake: 0.18,
+            hrLow: 56, hrHigh: 72,
+            notes: ''
+        },
+        {
+            date: '2026-05-01', label: 'May 1',
+            total: 6.35, deep: 0.68, rem: 1.98, core: 3.68, awake: 0.17,
+            hrLow: 54, hrHigh: 78,
+            notes: 'Two daytime naps, HR spike to 78'
+        },
+        {
+            date: '2026-05-02', label: 'May 2',
+            total: 6.73, deep: 0.8, rem: 1.42, core: 4.5, awake: 0.22,
+            hrLow: 57, hrHigh: 71,
+            notes: '97% efficiency, SpO2 dipping 90-95%'
+        },
+        {
+            date: '2026-05-03', label: 'May 3',
+            total: 6.7, deep: 0.8, rem: 1.3, core: 4.5, awake: 0.82,
+            hrLow: 54, hrHigh: 73,
+            notes: 'Thomas woke him at 4am'
+        }
+    ];
+    
+    // ========== CALCULATIONS ==========
+    const validNights = nights.filter(n => n.total > 0);
+    const avg = validNights.reduce((s, n) => s + n.total, 0) / validNights.length;
+    const target = 7.0;
+    const best = validNights.reduce((a, b) => a.total > b.total ? a : b);
+    const worst = validNights.reduce((a, b) => a.total < b.total ? a : b);
+    const hitsTarget = validNights.filter(n => n.total >= target).length;
+    const hitPct = Math.round((hitsTarget / validNights.length) * 100);
+    
+    // Sleep debt: sum of (target - actual) for nights below target
+    const weekNights = validNights.slice(-7);
+    const weekDebt = weekNights.reduce((s, n) => s + Math.max(0, target - n.total), 0);
+    
+    // Deep sleep stats
+    const deepNights = validNights.filter(n => n.deep !== null);
+    const avgDeep = deepNights.length > 0 ? deepNights.reduce((s, n) => s + n.deep, 0) / deepNights.length : 0;
+    const avgDeepPct = deepNights.length > 0 
+        ? deepNights.reduce((s, n) => s + (n.deep / n.total) * 100, 0) / deepNights.length 
+        : 0;
+    
+    // Average HR
+    const hrNights = validNights.filter(n => n.hrLow && n.hrHigh);
+    const avgHrLow = hrNights.reduce((s, n) => s + n.hrLow, 0) / hrNights.length;
+    const avgHrHigh = hrNights.reduce((s, n) => s + n.hrHigh, 0) / hrNights.length;
+    
+    // Grade
+    function getGrade(avg) {
+        if (avg >= 7.5) return { letter: 'A', cls: 'grade-a' };
+        if (avg >= 7.0) return { letter: 'B+', cls: 'grade-b' };
+        if (avg >= 6.5) return { letter: 'C+', cls: 'grade-c' };
+        if (avg >= 6.0) return { letter: 'D', cls: 'grade-d' };
+        return { letter: 'F', cls: 'grade-f' };
+    }
+    
+    function fmtHrs(h) {
+        const hrs = Math.floor(h);
+        const mins = Math.round((h - hrs) * 60);
+        return `${hrs}h ${mins}m`;
+    }
+    
+    const grade = getGrade(avg);
+    
+    // ========== STAT CARDS ==========
+    const statsEl = document.getElementById('stats-grid');
+    const cards = [
+        {
+            label: 'Average',
+            value: fmtHrs(avg),
+            cls: avg >= 7 ? 'good' : avg >= 6.5 ? 'ok' : 'bad',
+            note: `Grade: <span class="grade-badge ${grade.cls}">${grade.letter}</span>`
+        },
+        {
+            label: '7h Target Hit',
+            value: `${hitPct}%`,
+            cls: hitPct >= 70 ? 'good' : hitPct >= 40 ? 'ok' : 'bad',
+            note: `${hitsTarget} of ${validNights.length} nights`
+        },
+        {
+            label: 'Best Night',
+            value: fmtHrs(best.total),
+            cls: 'good',
+            note: best.label
+        },
+        {
+            label: 'Worst Night',
+            value: fmtHrs(worst.total),
+            cls: 'bad',
+            note: worst.label
+        },
+        {
+            label: '7-Day Debt',
+            value: fmtHrs(weekDebt),
+            cls: weekDebt > 5 ? 'bad' : weekDebt > 3 ? 'ok' : 'good',
+            note: 'Below target total'
+        },
+        {
+            label: 'Avg Deep Sleep',
+            value: `${Math.round(avgDeepPct)}%`,
+            cls: avgDeepPct >= 15 ? 'good' : avgDeepPct >= 10 ? 'ok' : 'bad',
+            note: `${fmtHrs(avgDeep)} per night`
+        }
+    ];
+    
+    statsEl.innerHTML = cards.map(c => `
+        <div class="stat-card ${c.cls}">
+            <div class="label">${c.label}</div>
+            <div class="value">${c.value}</div>
+            <div class="note">${c.note}</div>
+        </div>
+    `).join('');
+    
+    // ========== CHART CONFIG ==========
+    Chart.defaults.color = '#8892a8';
+    Chart.defaults.borderColor = 'rgba(42, 53, 84, 0.4)';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    
+    const labels = nights.map(n => n.label);
+    
+    // Duration chart
+    new Chart(document.getElementById('durationChart'), {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                data: nights.map(n => n.total),
+                backgroundColor: nights.map(n => 
+                    n.total >= 7 ? 'rgba(52, 211, 153, 0.7)' :
+                    n.total >= 6.5 ? 'rgba(129, 140, 248, 0.7)' :
+                    'rgba(244, 63, 94, 0.6)'
+                ),
+                borderRadius: 6,
+                borderSkipped: false,
+                barPercentage: 0.65
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => fmtHrs(ctx.raw)
+                    }
+                },
+                annotation: undefined
+            },
+            scales: {
+                y: {
+                    min: 4,
+                    max: 9,
+                    grid: { color: 'rgba(42, 53, 84, 0.3)' },
+                    ticks: {
+                        callback: v => `${v}h`,
+                        stepSize: 1
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        },
+        plugins: [{
+            id: 'targetLine',
+            afterDraw(chart) {
+                const { ctx, chartArea, scales } = chart;
+                const y = scales.y.getPixelForValue(7);
+                ctx.save();
+                ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([8, 4]);
+                ctx.beginPath();
+                ctx.moveTo(chartArea.left, y);
+                ctx.lineTo(chartArea.right, y);
+                ctx.stroke();
+                
+                ctx.fillStyle = 'rgba(52, 211, 153, 0.8)';
+                ctx.font = '600 11px Inter';
+                ctx.textAlign = 'right';
+                ctx.fillText('7h target', chartArea.right - 4, y - 6);
+                ctx.restore();
+            }
+        }]
+    });
+    
+    // Stages stacked bar
+    const stagesNights = nights.filter(n => n.deep !== null);
+    new Chart(document.getElementById('stagesChart'), {
+        type: 'bar',
+        data: {
+            labels: stagesNights.map(n => n.label),
+            datasets: [
+                {
+                    label: 'Deep',
+                    data: stagesNights.map(n => n.deep),
+                    backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                    borderRadius: { bottomLeft: 6, bottomRight: 6 },
+                    borderSkipped: false
+                },
+                {
+                    label: 'REM',
+                    data: stagesNights.map(n => n.rem),
+                    backgroundColor: 'rgba(167, 139, 250, 0.7)',
+                    borderSkipped: false
+                },
+                {
+                    label: 'Core',
+                    data: stagesNights.map(n => n.core),
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderSkipped: false
+                },
+                {
+                    label: 'Awake',
+                    data: stagesNights.map(n => n.awake),
+                    backgroundColor: 'rgba(245, 158, 11, 0.6)',
+                    borderRadius: { topLeft: 6, topRight: 6 },
+                    borderSkipped: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.dataset.label}: ${fmtHrs(ctx.raw)}`
+                    }
+                }
+            },
+            scales: {
+                x: { stacked: true, grid: { display: false } },
+                y: {
+                    stacked: true,
+                    grid: { color: 'rgba(42, 53, 84, 0.3)' },
+                    ticks: {
+                        callback: v => `${v}h`,
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+    
+    // HR range chart
+    new Chart(document.getElementById('hrChart'), {
+        type: 'bar',
+        data: {
+            labels: hrNights.map(n => n.label),
+            datasets: [
+                {
+                    label: 'Low HR',
+                    data: hrNights.map(n => n.hrLow),
+                    backgroundColor: 'transparent',
+                    borderColor: 'transparent'
+                },
+                {
+                    label: 'HR Range',
+                    data: hrNights.map(n => n.hrHigh - n.hrLow),
+                    backgroundColor: 'rgba(244, 63, 94, 0.5)',
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.5
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            const i = ctx.dataIndex;
+                            return `${hrNights[i].hrLow} - ${hrNights[i].hrHigh} BPM`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: { stacked: true, grid: { display: false } },
+                y: {
+                    stacked: true,
+                    min: 45,
+                    max: 85,
+                    grid: { color: 'rgba(42, 53, 84, 0.3)' },
+                    ticks: {
+                        callback: v => `${v} BPM`
+                    }
+                }
+            }
+        }
+    });
+    
+    // Deep sleep % chart
+    new Chart(document.getElementById('deepChart'), {
+        type: 'line',
+        data: {
+            labels: deepNights.map(n => n.label),
+            datasets: [{
+                data: deepNights.map(n => Math.round((n.deep / n.total) * 100)),
+                borderColor: 'rgba(99, 102, 241, 0.9)',
+                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                fill: true,
+                tension: 0.35,
+                pointBackgroundColor: deepNights.map(n => {
+                    const pct = (n.deep / n.total) * 100;
+                    return pct >= 15 ? 'rgba(52, 211, 153, 1)' : 
+                           pct >= 10 ? 'rgba(129, 140, 248, 1)' : 
+                           'rgba(244, 63, 94, 1)';
+                }),
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.raw}% deep sleep`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 25,
+                    grid: { color: 'rgba(42, 53, 84, 0.3)' },
+                    ticks: {
+                        callback: v => `${v}%`
+                    }
+                },
+                x: { grid: { display: false } }
+            }
+        },
+        plugins: [{
+            id: 'deepTarget',
+            afterDraw(chart) {
+                const { ctx, chartArea, scales } = chart;
+                const y = scales.y.getPixelForValue(15);
+                ctx.save();
+                ctx.strokeStyle = 'rgba(52, 211, 153, 0.4)';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([6, 4]);
+                ctx.beginPath();
+                ctx.moveTo(chartArea.left, y);
+                ctx.lineTo(chartArea.right, y);
+                ctx.stroke();
+                ctx.fillStyle = 'rgba(52, 211, 153, 0.7)';
+                ctx.font = '600 10px Inter';
+                ctx.textAlign = 'right';
+                ctx.fillText('15% ideal', chartArea.right - 4, y - 5);
+                ctx.restore();
+            }
+        }]
+    });
+    
+    // ========== INSIGHTS ==========
+    const insightsEl = document.getElementById('insights');
+    
+    const insightData = [];
+    
+    // Sleep debt insight
+    if (weekDebt > 3) {
+        insightData.push({
+            title: '🚨 Sleep Debt Alert',
+            text: `You owe yourself <strong>${fmtHrs(weekDebt)}</strong> from the past 7 nights. That's like missing an entire night. Your cognitive performance is running at maybe 80%. No amount of coffee fixes this.`
+        });
+    }
+    
+    // Deep sleep insight
+    if (avgDeepPct < 15) {
+        insightData.push({
+            title: '🧠 Deep Sleep Deficit',
+            text: `Averaging <strong>${Math.round(avgDeepPct)}%</strong> deep sleep (ideal is 15-20%). Deep sleep is when your body repairs muscle, consolidates memory, and regulates hormones. Your lifting gains are literally suffering.`
+        });
+    }
+    
+    // Consistency insight
+    const stddev = Math.sqrt(validNights.reduce((s, n) => s + Math.pow(n.total - avg, 2), 0) / validNights.length);
+    if (stddev > 0.4) {
+        insightData.push({
+            title: '🎢 Inconsistent Schedule',
+            text: `Your sleep duration varies by ±${Math.round(stddev * 60)} minutes night to night. Consistent sleep/wake times improve deep sleep quality more than total duration. Pick a bedtime and stick to it.`
+        });
+    }
+    
+    // HR insight
+    const maxHr = Math.max(...hrNights.map(n => n.hrHigh));
+    if (maxHr > 75) {
+        insightData.push({
+            title: '💓 Elevated Sleep HR',
+            text: `Peak sleeping HR hit <strong>${maxHr} BPM</strong>. Late caffeine, alcohol, or daytime naps can elevate nighttime HR. Correlates with the nap nights.`
+        });
+    }
+    
+    // Positive insight if any
+    if (hitsTarget > 0) {
+        insightData.push({
+            title: '✨ Silver Lining',
+            text: `Best night was <strong>${fmtHrs(best.total)}</strong> on ${best.label}. You CAN sleep well. The question is whether you choose to. Go to bed earlier. It's not complicated, you just don't do it.`
+        });
+    }
+    
+    insightsEl.innerHTML = insightData.map(i => `
+        <div class="insight-card">
+            <div class="insight-title">${i.title}</div>
+            <div class="insight-text">${i.text}</div>
+        </div>
+    `).join('');
+    
+    // ========== NIGHT LOG TABLE ==========
+    const logBody = document.getElementById('logBody');
+    
+    function barColor(total) {
+        if (total >= 7) return 'var(--success)';
+        if (total >= 6.5) return 'var(--accent)';
+        return 'var(--danger)';
+    }
+    
+    logBody.innerHTML = [...nights].reverse().map(n => {
+        const barWidth = Math.max(20, Math.min(100, (n.total / 9) * 100));
+        return `<tr>
+            <td style="white-space:nowrap; font-weight:600">${n.label}</td>
+            <td>
+                ${fmtHrs(n.total)}
+                <span class="duration-bar" style="width:${barWidth}px; background:${barColor(n.total)}"></span>
+            </td>
+            <td>${n.deep !== null ? fmtHrs(n.deep) : '—'}</td>
+            <td>${n.rem !== null ? fmtHrs(n.rem) : '—'}</td>
+            <td>${n.core !== null ? fmtHrs(n.core) : '—'}</td>
+            <td style="white-space:nowrap">${n.hrLow ? `${n.hrLow}-${n.hrHigh}` : '—'}</td>
+            <td class="note-text">${n.notes || '—'}</td>
+        </tr>`;
+    }).join('');
+    </script>
+</body>
+</html>
