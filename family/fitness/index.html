@@ -155,6 +155,7 @@
             <a href="/family/diet/" data-page="diet" >Diet</a>
             <a href="/family/finance/" data-page="finance" >Finance</a>
             <a href="/family/fitness/" data-page="fitness" class="active">Fitness</a>
+            <a href="/family/sleep/" data-page="sleep" >Sleep</a>
             <a href="/family/habits/" data-page="habits" >Habits</a>
         </div>
     </nav>
@@ -181,9 +182,6 @@
     --purple-dim: rgba(188,140,255,0.15);
   }
   body {
-    padding: 0;
-  }
-  .page-content {
     padding: 20px;
   }
   .header {
@@ -402,7 +400,6 @@
   }
 </style>
 
-<div class="page-content">
 <div class="header">
   <h1>🏋️ Mike's Fitness Command Center</h1>
   <p class="subtitle">Real data from Strava, Hevy, and daily diet logs. Auto-updated nightly.</p>
@@ -422,348 +419,57 @@
 // ============================================================
 
 const RUNS = [
-  {
-    "date": "2026-03-10",
-    "distance": 5.01,
-    "pace": "11:00",
-    "name": "5mi Long Run"
-  },
-  {
-    "date": "2026-03-18",
-    "distance": 3.25,
-    "pace": "10:52",
-    "name": "3.25mi Easy Run"
-  },
-  {
-    "date": "2026-03-23",
-    "distance": 3.26,
-    "pace": "9:26",
-    "name": "3.25mi Easy Run"
-  },
-  {
-    "date": "2026-03-26",
-    "distance": 4.51,
-    "pace": "9:36",
-    "name": "4.5mi Progressive Long Run"
-  },
-  {
-    "date": "2026-03-27",
-    "distance": 3.4,
-    "pace": "9:12",
-    "name": "Repeating Progressive Run"
-  },
-  {
-    "date": "2026-03-31",
-    "distance": 3.01,
-    "pace": "9:02",
-    "name": "3mi Easy Run"
-  },
-  {
-    "date": "2026-04-02",
-    "distance": 5.0,
-    "pace": "10:59",
-    "name": "5mi Long Run"
-  },
-  {
-    "date": "2026-04-03",
-    "distance": 3.66,
-    "pace": "10:24",
-    "name": "400m Repeats"
-  },
-  {
-    "date": "2026-04-13",
-    "distance": 7.31,
-    "pace": "14:01",
-    "name": "6mi Long Run"
-  },
-  {
-    "date": "2026-04-15",
-    "distance": 3.01,
-    "pace": "11:41",
-    "name": "3mi Easy Run"
-  },
-  {
-    "date": "2026-04-17",
-    "distance": 3.26,
-    "pace": "10:09",
-    "name": "On Off 200s"
-  },
-  {
-    "date": "2026-04-21",
-    "distance": 3.09,
-    "pace": "9:44",
-    "name": "Steady into Tempo"
-  },
-  {
-    "date": "2026-04-23",
-    "distance": 3.76,
-    "pace": "11:43",
-    "name": "3.25mi Easy Run"
-  },
-  {
-    "date": "2026-04-24",
-    "distance": 3.75,
-    "pace": "11:37",
-    "name": "3.75mi Long Run"
-  },
-  {
-    "date": "2026-04-30",
-    "distance": 6.5,
-    "pace": "12:23",
-    "name": "6.5mi Long Run"
-  },
-  {
-    "date": "2026-05-01",
-    "distance": 3.76,
-    "pace": "10:57",
-    "name": "3.75mi Easy Run"
-  }
+  {date:"2026-04-24",distance:3.75,pace:"11:37",duration:43.6,name:"3.75mi Long Run"},
+  {date:"2026-04-23",distance:3.76,pace:"11:43",duration:44.1,name:"3.25mi Easy Run"},
+  {date:"2026-04-21",distance:3.09,pace:"9:44",duration:30.1,name:"Steady into Tempo"},
+  {date:"2026-04-17",distance:3.26,pace:"10:09",duration:33.1,name:"On Off 200s"},
+  {date:"2026-04-15",distance:3.01,pace:"11:41",duration:35.1,name:"3mi Easy Run"},
+  {date:"2026-04-13",distance:7.31,pace:"14:01",duration:102.6,name:"6mi Long Run"},
+  {date:"2026-04-03",distance:3.66,pace:"10:24",duration:38.1,name:"400m Repeats"},
+  {date:"2026-04-02",distance:5.0,pace:"10:59",duration:55.0,name:"5mi Long Run"},
+  {date:"2026-03-31",distance:3.01,pace:"9:02",duration:27.2,name:"3mi Easy Run"},
+  {date:"2026-03-27",distance:3.4,pace:"9:12",duration:31.3,name:"Repeating Progressive Run"},
+  {date:"2026-03-26",distance:4.51,pace:"9:36",duration:43.3,name:"4.5mi Progressive Long Run"},
+  {date:"2026-03-23",distance:3.26,pace:"9:26",duration:30.8,name:"3.25mi Easy Run"},
+  {date:"2026-03-18",distance:3.25,pace:"10:52",duration:35.4,name:"3.25mi Easy Run"},
+  {date:"2026-03-10",distance:5.01,pace:"11:00",duration:55.1,name:"5mi Long Run"},
+  {date:"2026-03-03",distance:3.34,pace:"9:18",duration:31.1,name:"Progression Run"},
 ];
 
 const WORKOUTS = [
-  {
-    "date": "2026-05-01",
-    "title": "[CritterBot] Friday Light Upper: Light Upper A",
-    "volume": 3572
-  },
-  {
-    "date": "2026-04-29",
-    "title": "[CritterBot] Wednesday Upper: Bench Focus",
-    "volume": 5259
-  },
-  {
-    "date": "2026-04-27",
-    "title": "[CritterBot] Monday Lower: Squat Focus",
-    "volume": 5815
-  },
-  {
-    "date": "2026-04-24",
-    "title": "Friday Light Upper (Post-Run)",
-    "volume": 4069
-  },
-  {
-    "date": "2026-04-20",
-    "title": "Mega Full Body",
-    "volume": 1429
-  },
-  {
-    "date": "2026-04-14",
-    "title": "Morning workout \u2600\ufe0f",
-    "volume": 2427
-  },
-  {
-    "date": "2026-04-10",
-    "title": "Late night workout \ud83c\udf19",
-    "volume": 3846
-  },
-  {
-    "date": "2026-03-30",
-    "title": "Full Body 3",
-    "volume": 4391
-  },
-  {
-    "date": "2026-03-24",
-    "title": "Full Body 2",
-    "volume": 3348
-  },
-  {
-    "date": "2026-03-17",
-    "title": "Full Body 1",
-    "volume": 5028
-  },
-  {
-    "date": "2026-03-13",
-    "title": "Full Body 3",
-    "volume": 4082
-  },
-  {
-    "date": "2026-03-09",
-    "title": "Morning workout \u2600\ufe0f",
-    "volume": 4028
-  },
-  {
-    "date": "2026-03-06",
-    "title": "Morning workout \u2600\ufe0f",
-    "volume": 3098
-  },
-  {
-    "date": "2026-03-02",
-    "title": "Morning workout \u2600\ufe0f",
-    "volume": 2039
-  },
-  {
-    "date": "2026-02-24",
-    "title": "Full Body 1",
-    "volume": 2776
-  },
-  {
-    "date": "2026-02-23",
-    "title": "Morning workout \u2600\ufe0f",
-    "volume": 1034
-  },
-  {
-    "date": "2026-02-20",
-    "title": "Lower 1",
-    "volume": 6232
-  },
-  {
-    "date": "2026-02-19",
-    "title": "Upper 1",
-    "volume": 2994
-  },
-  {
-    "date": "2026-02-18",
-    "title": "Lift",
-    "volume": 1447
-  },
-  {
-    "date": "2026-02-12",
-    "title": "Lift",
-    "volume": 544
-  },
-  {
-    "date": "2026-02-09",
-    "title": "Lift",
-    "volume": 2517
-  },
-  {
-    "date": "2026-02-04",
-    "title": "BP",
-    "volume": 1973
-  },
-  {
-    "date": "2026-01-30",
-    "title": "Lift",
-    "volume": 6096
-  },
-  {
-    "date": "2026-01-15",
-    "title": "Arms",
-    "volume": 2200
-  },
-  {
-    "date": "2026-01-14",
-    "title": "Lift",
-    "volume": 850
-  },
-  {
-    "date": "2026-01-13",
-    "title": "Lift",
-    "volume": 2014
-  },
-  {
-    "date": "2026-01-12",
-    "title": "Lift",
-    "volume": 3336
-  },
-  {
-    "date": "2026-01-07",
-    "title": "Lift",
-    "volume": 2263
-  },
-  {
-    "date": "2026-01-06",
-    "title": "Lift",
-    "volume": 4291
-  },
-  {
-    "date": "2026-01-05",
-    "title": "Lift",
-    "volume": 2688
-  }
+  {date:"2026-04-27",title:"Monday Lower: Squat Focus",duration:62,exercises:6,volume:5815,names:["Squat","RDL","Leg Ext","Leg Curl","Bulgarian Split Squat","Calf Raise"]},
+  {date:"2026-04-24",title:"Friday Light Upper",duration:54,exercises:5,volume:4069,names:["Incline DB Bench","DB Row","Lat Raise","Hammer Curl","Face Pull"]},
+  {date:"2026-04-20",title:"Mega Full Body",duration:22,exercises:2,volume:1429,names:["Squat","Chin Up"]},
+  {date:"2026-04-14",title:"Morning Workout",duration:16,exercises:2,volume:2427,names:["Barbell Row","DB Shoulder Press"]},
+  {date:"2026-04-10",title:"Late Night Workout",duration:45,exercises:4,volume:3846,names:["Bench Press","DB Row","Bicep Curl","Lat Raise"]},
+  {date:"2026-03-30",title:"Full Body 3",duration:46,exercises:3,volume:4391,names:["DB RDL","Incline DB Bench","Incline Row"]},
+  {date:"2026-03-24",title:"Full Body 2",duration:57,exercises:2,volume:3348,names:["Barbell Row","DB Shoulder Press"]},
+  {date:"2026-03-17",title:"Full Body 1",duration:59,exercises:3,volume:5028,names:["Squat","Bench Press","DB Row"]},
+  {date:"2026-03-13",title:"Full Body 3",duration:90,exercises:3,volume:4082,names:["DB RDL","Incline DB Bench","Incline Row"]},
+  {date:"2026-03-09",title:"Morning Workout",duration:96,exercises:2,volume:4028,names:["Barbell Row","Squat"]},
+  {date:"2026-03-06",title:"Morning Workout",duration:29,exercises:4,volume:3098,names:["Squat","RDL","Hammer Curl","Tricep Ext"]},
+  {date:"2026-03-02",title:"Morning Workout",duration:43,exercises:2,volume:2039,names:["Bench Press","Chin Up"]},
 ];
 
 const DIET = [
-  {
-    "date": "2026-03-19",
-    "calories": 70,
-    "protein": 0
-  },
-  {
-    "date": "2026-03-21",
-    "calories": 1,
-    "protein": 139
-  },
-  {
-    "date": "2026-04-12",
-    "calories": 1515,
-    "protein": 141
-  },
-  {
-    "date": "2026-04-15",
-    "calories": 1605,
-    "protein": 148
-  },
-  {
-    "date": "2026-04-17",
-    "calories": 1455,
-    "protein": 145
-  },
-  {
-    "date": "2026-04-24",
-    "calories": 1380,
-    "protein": 127
-  },
-  {
-    "date": "2026-04-25",
-    "calories": 1820,
-    "protein": 164
-  },
-  {
-    "date": "2026-04-26",
-    "calories": 1735,
-    "protein": 151
-  },
-  {
-    "date": "2026-04-27",
-    "calories": 1880,
-    "protein": 157
-  },
-  {
-    "date": "2026-04-28",
-    "calories": 1560,
-    "protein": 135
-  },
-  {
-    "date": "2026-04-29",
-    "calories": 1655,
-    "protein": 140
-  },
-  {
-    "date": "2026-04-30",
-    "calories": 1410,
-    "protein": 122
-  },
-  {
-    "date": "2026-05-01",
-    "calories": 1558,
-    "protein": 123
-  },
-  {
-    "date": "2026-05-02",
-    "calories": 1405,
-    "protein": 128
-  },
-  {
-    "date": "2026-05-03",
-    "calories": 2262,
-    "protein": 183
-  }
+  {date:"2026-03-29",cal:2245,prot:157},{date:"2026-03-30",cal:1800,prot:150},
+  {date:"2026-03-31",cal:1800,prot:150},{date:"2026-04-01",cal:1800,prot:150},
+  {date:"2026-04-02",cal:1820,prot:156},{date:"2026-04-07",cal:1800,prot:150},
+  {date:"2026-04-08",cal:1655,prot:171},{date:"2026-04-09",cal:2360,prot:156},
+  {date:"2026-04-10",cal:1800,prot:156},{date:"2026-04-11",cal:1800,prot:150},
+  {date:"2026-04-12",cal:1515,prot:141},{date:"2026-04-13",cal:1800,prot:150},
+  {date:"2026-04-14",cal:1937,prot:176},{date:"2026-04-15",cal:1605,prot:148},
+  {date:"2026-04-17",cal:1455,prot:145},{date:"2026-04-18",cal:1670,prot:149},
+  {date:"2026-04-19",cal:1800,prot:150},{date:"2026-04-20",cal:930,prot:78},
+  {date:"2026-04-21",cal:1970,prot:156},{date:"2026-04-22",cal:1800,prot:150},
+  {date:"2026-04-24",cal:1380,prot:127},{date:"2026-04-25",cal:1820,prot:164},
+  {date:"2026-04-26",cal:1735,prot:151},{date:"2026-04-27",cal:1880,prot:157},
 ];
 
 const WEIGHT = [
-  {
-    "date": "2026-03-29",
-    "weight": 166.0
-  },
-  {
-    "date": "2026-04-19",
-    "weight": 168.0
-  },
-  {
-    "date": "2026-04-26",
-    "weight": 167.1
-  }
+  {date:"2026-03-29",weight:166.0},
+  {date:"2026-04-19",weight:168.0},
+  {date:"2026-04-26",weight:167.1},
 ];
 
 const GOALS = { calories: 1800, protein: 150, runsPerWeek: 3, liftsPerWeek: 3, targetWeight: 156 };
@@ -782,7 +488,7 @@ function formatPace(secs) {
 }
 function daysAgo(dateStr) {
   const d = new Date(dateStr + 'T12:00:00');
-  const now = new Date('2026-05-04T03:00:00');
+  const now = new Date('2026-04-28T03:00:00');
   return Math.floor((now - d) / 86400000);
 }
 function weekOf(dateStr) {
@@ -1180,7 +886,6 @@ document.getElementById('update-time').textContent = new Date().toLocaleDateStri
   weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
 });
 </script>
-</div>
 
 </body>
 </html>
