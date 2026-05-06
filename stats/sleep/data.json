@@ -1,0 +1,132 @@
+{
+  "entries": [
+    {
+      "date": "2026-04-24",
+      "totalMin": 347,
+      "hrLow": 55,
+      "hrHigh": 72
+    },
+    {
+      "date": "2026-04-25",
+      "totalMin": 378,
+      "hrLow": 55,
+      "hrHigh": 73
+    },
+    {
+      "date": "2026-04-26",
+      "totalMin": 388,
+      "hrLow": 59,
+      "hrHigh": 73
+    },
+    {
+      "date": "2026-04-27",
+      "totalMin": 411,
+      "deepMin": 41,
+      "remMin": 87,
+      "coreMin": 283,
+      "awakeMin": 15,
+      "hrLow": 54,
+      "hrHigh": 72,
+      "respLow": 14.0,
+      "respHigh": 21.5
+    },
+    {
+      "date": "2026-04-28",
+      "totalMin": 397,
+      "deepMin": 59,
+      "remMin": 98,
+      "awakeMin": 16,
+      "hrLow": 58,
+      "hrHigh": 74,
+      "respLow": 13.0,
+      "respHigh": 19.5
+    },
+    {
+      "date": "2026-04-29",
+      "totalMin": 344,
+      "deepMin": 48,
+      "remMin": 67,
+      "coreMin": 229,
+      "awakeMin": 1,
+      "hrLow": 58,
+      "hrHigh": 71,
+      "respLow": 13.5,
+      "respHigh": 18.5,
+      "notes": "Mike says he laid down ~11:40pm but Apple Health shows sleep starting ~12:20am. Possible 40min of light wakefulness Apple didn't register as sleep."
+    },
+    {
+      "date": "2026-04-30",
+      "totalMin": 402,
+      "deepMin": 51,
+      "remMin": 118,
+      "coreMin": 233,
+      "awakeMin": 11,
+      "hrLow": 56,
+      "hrHigh": 72,
+      "respLow": 13.5,
+      "respHigh": 27.0
+    },
+    {
+      "date": "2026-05-01",
+      "totalMin": 381,
+      "deepMin": 41,
+      "remMin": 119,
+      "coreMin": 221,
+      "awakeMin": 10,
+      "hrLow": 54,
+      "hrHigh": 78,
+      "respLow": 13.5,
+      "respHigh": 20.5,
+      "notes": "Trouble falling asleep due to two 1-hour naps during the day. HR spiked to 78 (highest in recent nights)."
+    },
+    {
+      "date": "2026-05-02",
+      "totalMin": 404,
+      "deepMin": 48,
+      "remMin": 85,
+      "coreMin": 270,
+      "awakeMin": 13,
+      "notes": "Good efficiency, fell asleep instantly. Deep sleep still low. SpO2 dipping into 90-95% for 30% of night worth watching."
+    },
+    {
+      "date": "2026-05-03",
+      "totalMin": 402,
+      "remMin": 78,
+      "coreMin": 270,
+      "awakeMin": 49,
+      "hrLow": 54,
+      "hrHigh": 73,
+      "respLow": 13.5,
+      "respHigh": 21.5,
+      "notes": "Thomas woke him at 4am. Bedtime ~10pm, up ~7am."
+    },
+    {
+      "date": "2026-05-04",
+      "totalMin": 406,
+      "remMin": 86,
+      "coreMin": 269,
+      "awakeMin": 9,
+      "hrLow": 57,
+      "hrHigh": 77,
+      "respLow": 13.5,
+      "respHigh": 20.5,
+      "notes": "Solid efficiency (time asleep > time in bed likely rounding). Deep sleep still under 1hr. Only 9 min awake is great."
+    },
+    {
+      "date": "2026-05-05",
+      "totalMin": 449,
+      "hrLow": 57,
+      "hrHigh": 79,
+      "respLow": 13.5,
+      "respHigh": 22.0,
+      "notes": "First 7+ hour night in 11-day streak. Deep sleep reported as 30m but likely ~60m (early block not captured in stages due to Apple Health merging issue)."
+    }
+  ],
+  "avg7": 398,
+  "avg30": 392,
+  "goal": {
+    "minHours": 7,
+    "targetHours": 8
+  },
+  "updatedAt": "May 06, 2026 at 06:00 AM ET"
+}
