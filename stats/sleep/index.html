@@ -185,6 +185,7 @@
             min-height: 100vh;
             line-height: 1.5;
             padding: 0 !important;
+            overflow-x: hidden;
         }
         
         /* Starfield background */
@@ -1043,6 +1044,6 @@
     </script>
 
 </main>
-    <style>.page { padding: 24px; max-width: 1400px; margin: 0 auto; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
+    <style>html, body { overflow-x: hidden; } .page { padding: 24px; max-width: 1400px; margin: 0 auto; min-width: 0; } .page > * { max-width: 100%; min-width: 0; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
 </body>
 </html>

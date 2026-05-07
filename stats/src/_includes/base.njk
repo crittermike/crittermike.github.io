@@ -175,6 +175,6 @@
     {% endif %}
 
     <main class="page">{{ content | safe }}</main>
-    <style>.page { padding: 24px; max-width: 1400px; margin: 0 auto; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
+    <style>html, body { overflow-x: hidden; } .page { padding: 24px; max-width: 1400px; margin: 0 auto; min-width: 0; } .page > * { max-width: 100%; min-width: 0; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
 </body>
 </html>
