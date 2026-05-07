@@ -1,7 +1,4 @@
 module.exports = function(eleventyConfig) {
-  // Copy static assets
-  eleventyConfig.addPassthroughCopy("src/diet/data.json");
-  
   // Set directories
   return {
     dir: {

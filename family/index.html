@@ -152,11 +152,8 @@
         <div class="nav-links">
             <a href="/family/" data-page="home" class="active">Home</a>
             <a href="/family/trips/" data-page="trips" >Trips</a>
-            <a href="/family/diet/" data-page="diet" >Diet</a>
             <a href="/family/finance/" data-page="finance" >Finance</a>
-            <a href="/family/fitness/" data-page="fitness" >Fitness</a>
-            <a href="/family/sleep/" data-page="sleep" >Sleep</a>
-            <a href="/family/habits/" data-page="habits" >Habits</a>
+            <a href="/family/chore-wheel/" data-page="chore-wheel" >Chore Wheel</a>
         </div>
     </nav>
 
@@ -197,668 +194,68 @@
   .container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 24px 16px;
+    padding: 32px 16px;
   }
-  .section-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: none;
-    border: 1px solid #30363d;
-  }
-  .meals-grid {
+  .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
   }
-  .meal-item {
-    padding: 10px 14px;
-    border-radius: 10px;
-    background: #21262d;
-    font-size: 0.9rem;
-    transition: transform 0.1s;
-  }
-  .meal-item.today {
-    background: linear-gradient(135deg, #E8834A, #f85149);
-    color: white;
-    font-weight: 600;
-    transform: scale(1.02);
-    box-shadow: 0 3px 12px rgba(232,131,74,0.3);
-  }
-  .meal-item .day { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
-  .meal-item.today .day { opacity: 1; }
-  .balance-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 10px;
-  }
-  .balance-item {
-    padding: 14px;
-    border-radius: 12px;
-    background: #21262d;
-    text-align: center;
-  }
-  .balance-item .name { font-weight: 600; font-size: 0.85rem; color: var(--text-mid); margin-bottom: 4px; }
-  .balance-item .amount { font-size: 1.4rem; font-weight: 800; }
-  .balance-item .amount.negative { color: var(--accent-rose); }
-  .balance-item .amount.positive { color: var(--accent-teal); }
-  .sugar-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-  .sugar-bar:last-child { border-bottom: none; }
-  .sugar-bar { border-bottom-color: #30363d; }
-  .sugar-bar .name { font-weight: 600; font-size: 0.9rem; min-width: 70px; }
-  .sugar-bar .bar-wrap { flex: 1; height: 20px; background: #21262d; border-radius: 10px; overflow: hidden; }
-  .sugar-bar .bar-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
-  .sugar-bar .grams { font-weight: 700; font-size: 0.9rem; min-width: 50px; text-align: right; }
-  .school-kid { margin-bottom: 16px; }
-  .school-kid:last-child { margin-bottom: 0; }
-  .school-kid h4 { font-size: 0.95rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 6px; }
-  .school-item {
-    font-size: 0.88rem;
-    padding: 6px 10px;
-    margin: 4px 0;
-    border-radius: 8px;
-    background: #21262d;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .school-item .date-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: var(--accent-teal);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
-  .school-item.today .date-badge { background: var(--accent-orange); }
-  .trips-card {
+  .nav-card {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 16px;
-    background: #21262d;
-    border-radius: 12px;
+    padding: 24px;
+    background: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--text-dark);
-    transition: transform 0.15s, box-shadow 0.15s;
-    border: 1px solid #30363d;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
   }
-  .trips-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-  .trips-card .trip-emoji { font-size: 2.2rem; }
-  .trips-card .trip-info h4 { font-weight: 700; margin-bottom: 2px; }
-  .trips-card .trip-info p { font-size: 0.88rem; color: var(--text-mid); }
-  .guinea-pig-card {
-    background: #21262d;
-    border: 1px solid #30363d;
-    text-align: center;
-    padding: 16px;
-    border-radius: 12px;
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-orange);
   }
-  .guinea-pig-card .emoji { font-size: 2rem; }
-  .guinea-pig-card .label { font-size: 0.85rem; color: var(--text-mid); font-weight: 600; margin-top: 4px; }
-  .guinea-pig-card .amount { font-size: 1.6rem; font-weight: 800; color: var(--accent-teal); }
-  .updated { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 16px; padding: 12px; }
-  @media (max-width: 600px) {
-    .meals-grid { grid-template-columns: 1fr 1fr; }
-    .balance-grid { grid-template-columns: 1fr 1fr; }
-    .container { padding: 16px 12px; }
+  .nav-card .emoji { font-size: 2.4rem; }
+  .nav-card .info h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .nav-card .info p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    margin: 0;
   }
 </style>
 
-<div class="container" id="app">
-  <!-- Meals -->
-  <div class="card">
-    <div class="section-title">🍽️ This Week's Dinners</div>
-    <div class="meals-grid" id="meals-grid"></div>
+<div class="container">
+  <div class="cards">
+    <a class="nav-card" href="/family/trips/">
+      <span class="emoji">✈️</span>
+      <div class="info">
+        <h3>Trips</h3>
+        <p>Upcoming family travel plans</p>
+      </div>
+    </a>
+    <a class="nav-card" href="/family/finance/">
+      <span class="emoji">💰</span>
+      <div class="info">
+        <h3>Finance</h3>
+        <p>Spending trends & monthly insights</p>
+      </div>
+    </a>
+    <a class="nav-card" href="/family/chore-wheel/">
+      <span class="emoji">🎡</span>
+      <div class="info">
+        <h3>Chore Wheel</h3>
+        <p>Spin to assign weekly chores</p>
+      </div>
+    </a>
   </div>
-
-  <!-- Allowance + Guinea Pig Fund -->
-  <div class="card">
-    <div class="section-title">💰 Allowance Balances</div>
-    <div class="balance-grid" id="allowance-grid"></div>
-    <div style="margin-top: 14px;">
-      <div class="guinea-pig-card" id="guinea-pig"></div>
-    </div>
-  </div>
-
-  <!-- Sugar -->
-  <div class="card">
-    <div class="section-title">🍬 Sugar Balances (grams)</div>
-    <div id="sugar-bars"></div>
-  </div>
-
-  <!-- School -->
-  <div class="card">
-    <div class="section-title">📚 Upcoming School Items</div>
-    <div id="school-items"></div>
-  </div>
-
-  <!-- Trips -->
-  <div class="card">
-    <div class="section-title">✈️ Upcoming Trips</div>
-    <div id="trips"></div>
-  </div>
-
-  <div class="updated" id="updated"></div>
 </div>
-
-<script>
-// __LIVE_DATA_START__
-const LIVE_DATA = {
-  "meals": [
-    {
-      "day": "Mon",
-      "meal": "Chicken Casserole w/ broccoli & cheddar (Ritz topping)"
-    },
-    {
-      "day": "Tue",
-      "meal": "Crockpot Chicken and Dumplings"
-    },
-    {
-      "day": "Wed",
-      "meal": "Clam Spaghetti w/ protein noodles + garlic bread + roasted broccoli"
-    },
-    {
-      "day": "Thu",
-      "meal": "Pesto chicken + noodles + roasted Brussels sprouts"
-    },
-    {
-      "day": "Fri",
-      "meal": "Goulash + grilled kielbasa + pan-fried zucchini"
-    },
-    {
-      "day": "Sat",
-      "meal": "Meatloaf + mashed potatoes + cabbage"
-    },
-    {
-      "day": "Sun",
-      "meal": "Leftovers"
-    }
-  ],
-  "school": [
-    {
-      "kid": "Thomas",
-      "color": "#E76F51",
-      "items": [
-        {
-          "date": "2026-05-04 (Mon)",
-          "text": "Spirit Night at Clare's Creamery 3:30-8:30p"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Simple Solutions quiz"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Synonym and Antonym test"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Recite Regina Caeli (not in front of class)"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Spring Concert"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "DOL quiz"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "\ud83c\udfb5 Spring Concert at POPCS, 6pm \u2014 performing"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Recite poem: 'True Growth' by Elizabeth Jane Coatsworth"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Spelling test"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Ch. 30 reading quiz"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Recite True Growth"
-        },
-        {
-          "date": "2026-05-15 (Fri)",
-          "text": "School play 'Alice @ Wonderland' 6p Croghan Hall, $5/person"
-        },
-        {
-          "date": "2026-08-11 (Tue)",
-          "text": "Back to School Night"
-        },
-        {
-          "date": "2026-08-13 (Thu)",
-          "text": "First Day of School (12p dismissal)"
-        },
-        {
-          "date": "2026-09-24 (Thu)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-09-25 (Fri)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-11-24 (Tue)",
-          "text": "Thanksgiving Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2026-12-18 (Fri)",
-          "text": "Christmas Break Begins (12p dismissal); Q2 Ends"
-        },
-        {
-          "date": "2027-03-25 (Thu)",
-          "text": "Easter Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2027-04-19 (Mon)",
-          "text": "Teacher Appreciation Week (Apr 19-23)"
-        },
-        {
-          "date": "2027-05-07 (Fri)",
-          "text": "Field Day (12p dismissal)"
-        },
-        {
-          "date": "2027-05-13 (Thu)",
-          "text": "Spring Concert"
-        },
-        {
-          "date": "2027-05-28 (Fri)",
-          "text": "Last Day of School (12p dismissal)"
-        }
-      ]
-    },
-    {
-      "kid": "William",
-      "color": "#E8834A",
-      "items": [
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Simple Sol. Quiz #125-128"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Spring Concert at 6:00 PM"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Bible Recitation: Mt. 7:7-10"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "\ud83c\udfb5 Spring Concert at POPCS, 6pm \u2014 performing"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Spelling Test 31"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "DOL Quiz 31"
-        },
-        {
-          "date": "2026-05-12 (Tue)",
-          "text": "Math Test, Chapter 14"
-        },
-        {
-          "date": "2026-05-15 (Fri)",
-          "text": "School play 'Alice @ Wonderland' 6p Croghan Hall, $5/person"
-        },
-        {
-          "date": "2026-08-11 (Tue)",
-          "text": "Back to School Night"
-        },
-        {
-          "date": "2026-08-13 (Thu)",
-          "text": "First Day of School (12p dismissal)"
-        },
-        {
-          "date": "2026-09-24 (Thu)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-09-25 (Fri)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-11-24 (Tue)",
-          "text": "Thanksgiving Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2026-12-18 (Fri)",
-          "text": "Christmas Break Begins (12p dismissal); Q2 Ends"
-        },
-        {
-          "date": "2027-03-25 (Thu)",
-          "text": "Easter Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2027-04-19 (Mon)",
-          "text": "Teacher Appreciation Week (Apr 19-23)"
-        },
-        {
-          "date": "2027-05-07 (Fri)",
-          "text": "Field Day (12p dismissal)"
-        },
-        {
-          "date": "2027-05-13 (Thu)",
-          "text": "Spring Concert"
-        },
-        {
-          "date": "2027-05-28 (Fri)",
-          "text": "Last Day of School (12p dismissal)"
-        }
-      ]
-    },
-    {
-      "kid": "Henry",
-      "color": "#457B9D",
-      "items": [
-        {
-          "date": "2026-05-04 (Mon)",
-          "text": "IXL 6A, 7N due"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Spanish - P.132 assignment"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Spanish - P.132"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Math - Worksheet 12.1 odds Stem-and-Leaf Plots"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "History - Chapter 5 Section 2 Test (Louis XIV Absolutism)"
-        },
-        {
-          "date": "2026-05-05 (Tue)",
-          "text": "Biology - Worksheet 2 Reinforcement The Reproductive System"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Alma - Language Arts assignment (Mrs. deMarrais)"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Spanish - Graded P.131 (07-Spanish)"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Math (course III): 13.1 all"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Spanish: Graded P.131"
-        },
-        {
-          "date": "2026-05-06 (Wed)",
-          "text": "Biology worksheet p 19 (Edwards)"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Spring Concert"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Spanish: 'did you get it?' assignment"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Alma - pit slide assignment"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Spanish: 'did you get it?' assignment"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Math (course III): 13.2 all"
-        },
-        {
-          "date": "2026-05-07 (Thu)",
-          "text": "Biology - Worksheet Chapter Review (due)"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Biology: Chapter 6 Test (100 pts)"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Religion: Unit 3 Test (100 pts, Mrs. Bunecke)"
-        },
-        {
-          "date": "2026-05-08 (Fri)",
-          "text": "Play practice after school"
-        },
-        {
-          "date": "2026-05-11 (Mon)",
-          "text": "IXL 4P, 5J due"
-        },
-        {
-          "date": "2026-05-11 (Mon)",
-          "text": "Play practice after school (every day this week)"
-        },
-        {
-          "date": "2026-05-12 (Tue)",
-          "text": "Play practice after school"
-        },
-        {
-          "date": "2026-05-13 (Wed)",
-          "text": "Math: Practice Test A and Quiz on Lessons 13.4-13.5 (100 pts)"
-        },
-        {
-          "date": "2026-05-13 (Wed)",
-          "text": "Play practice after school"
-        },
-        {
-          "date": "2026-05-14 (Thu)",
-          "text": "Math: Test on Chapter 13 (100 pts)"
-        },
-        {
-          "date": "2026-05-14 (Thu)",
-          "text": "Play practice after school"
-        },
-        {
-          "date": "2026-05-15 (Fri)",
-          "text": "School play 'Alice @ Wonderland' 6p Croghan Hall, $5/person"
-        },
-        {
-          "date": "2026-05-15 (Fri)",
-          "text": "Play performance 6pm - stay after school, pizza/drinks provided"
-        },
-        {
-          "date": "2026-05-18 (Mon)",
-          "text": "IXL 7K, 6N due"
-        },
-        {
-          "date": "2026-08-11 (Tue)",
-          "text": "Back to School Night"
-        },
-        {
-          "date": "2026-08-13 (Thu)",
-          "text": "First Day of School (12p dismissal)"
-        },
-        {
-          "date": "2026-09-24 (Thu)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-09-25 (Fri)",
-          "text": "Parent/Teacher Conferences (12p dismissal)"
-        },
-        {
-          "date": "2026-11-24 (Tue)",
-          "text": "Thanksgiving Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2026-12-18 (Fri)",
-          "text": "Christmas Break Begins (12p dismissal); Q2 Ends"
-        },
-        {
-          "date": "2027-03-25 (Thu)",
-          "text": "Easter Break Begins (12p dismissal)"
-        },
-        {
-          "date": "2027-04-19 (Mon)",
-          "text": "Teacher Appreciation Week (Apr 19-23)"
-        },
-        {
-          "date": "2027-05-07 (Fri)",
-          "text": "Field Day (12p dismissal)"
-        },
-        {
-          "date": "2027-05-13 (Thu)",
-          "text": "Spring Concert"
-        },
-        {
-          "date": "2027-05-14 (Fri)",
-          "text": "8th Grade Last Classroom Day"
-        },
-        {
-          "date": "2027-05-17 (Mon)",
-          "text": "8th Grade Class Trip (May 17-21)"
-        },
-        {
-          "date": "2027-05-26 (Wed)",
-          "text": "8th Grade Graduation"
-        }
-      ]
-    },
-    {
-      "kid": "Charlie",
-      "color": "#2A9D8F",
-      "items": [
-        {
-          "date": "2026-05-12 (Tue)",
-          "text": "AP Psychology exam - Noon at aux gym, arrive by 11:45AM. Bring: charged Chromebook, College Board login, pen/pencil, student ID, snacks, layers"
-        }
-      ]
-    }
-  ],
-  "allowance": {
-    "Charlie": "-293.23",
-    "Henry": "65.13",
-    "William": "51.29",
-    "Thomas": "-4.00"
-  },
-  "sugar": {
-    "Charlie": "126",
-    "Henry": "0",
-    "William": "15",
-    "Thomas": "1"
-  },
-  "guineaPigFund": "76.93",
-  "updatedAt": "May 07, 2026 at 06:00 AM ET"
-};
-// __LIVE_DATA_END__
-
-(function() {
-  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const today = new Date();
-  const todayDay = dayNames[today.getDay()];
-
-  // Meals
-  const mealsGrid = document.getElementById('meals-grid');
-  LIVE_DATA.meals.forEach(m => {
-    const isToday = m.day === todayDay;
-    const div = document.createElement('div');
-    div.className = 'meal-item' + (isToday ? ' today' : '');
-    div.innerHTML = '<div class="day">' + m.day + (isToday ? ' (today)' : '') + '</div>' + m.meal;
-    mealsGrid.appendChild(div);
-  });
-
-  // Allowance
-  const allowanceGrid = document.getElementById('allowance-grid');
-  Object.entries(LIVE_DATA.allowance).forEach(([name, amt]) => {
-    const div = document.createElement('div');
-    div.className = 'balance-item';
-    const isNeg = amt < 0;
-    div.innerHTML = '<div class="name">' + name + '</div><div class="amount ' + (isNeg ? 'negative' : 'positive') + '">$' + Math.abs(amt).toFixed(2) + (isNeg ? ' ⚠️' : '') + '</div>';
-    allowanceGrid.appendChild(div);
-  });
-
-  // Guinea Pig Fund
-  const gpDiv = document.getElementById('guinea-pig');
-  gpDiv.innerHTML = '<div class="emoji">🐹</div><div class="label">William\'s Guinea Pig Fund</div><div class="amount">$' + LIVE_DATA.guineaPigFund + '</div>';
-
-  // Sugar
-  const sugarDiv = document.getElementById('sugar-bars');
-  const maxSugar = Math.max(...Object.values(LIVE_DATA.sugar), 200);
-  const sugarColors = { Charlie: '#7C3AED', Henry: '#457B9D', William: '#2A9D8F', Thomas: '#E8834A' };
-  Object.entries(LIVE_DATA.sugar).forEach(([name, grams]) => {
-    const pct = Math.min((grams / maxSugar) * 100, 100);
-    const div = document.createElement('div');
-    div.className = 'sugar-bar';
-    div.innerHTML = '<span class="name">' + name + '</span><div class="bar-wrap"><div class="bar-fill" style="width:' + pct + '%;background:' + (sugarColors[name] || '#888') + '"></div></div><span class="grams">' + grams + 'g</span>';
-    sugarDiv.appendChild(div);
-  });
-
-  // School
-  const schoolDiv = document.getElementById('school-items');
-  const todayStr = today.toISOString().slice(5,10); // MM-DD
-  LIVE_DATA.school.forEach(kid => {
-    const section = document.createElement('div');
-    section.className = 'school-kid';
-    section.innerHTML = '<h4>' + kid.kid + '</h4>';
-    kid.items.forEach(item => {
-      const d = document.createElement('div');
-      const isItemToday = item.date.includes('May 02');
-      d.className = 'school-item' + (isItemToday ? ' today' : '');
-      d.innerHTML = '<span class="date-badge">' + item.date + '</span><span>' + item.text + '</span>';
-      section.appendChild(d);
-    });
-    schoolDiv.appendChild(section);
-  });
-
-  // Trips
-  const tripsDiv = document.getElementById('trips');
-  const tripLink = document.createElement('a');
-  tripLink.className = 'trips-card';
-  tripLink.href = '/family/trips/';
-  tripLink.innerHTML = '<span class="trip-emoji">🏖️</span><div class="trip-info"><h4>Lake Hartwell</h4><p>Jul 6\u201311, 2026 \u00b7 Serenity Point, Hartwell GA</p></div>';
-  tripsDiv.appendChild(tripLink);
-
-  const weddingLink = document.createElement('a');
-  weddingLink.className = 'trips-card';
-  weddingLink.href = '/family/trips/san-diego.html';
-  weddingLink.style.marginTop = '10px';
-  weddingLink.style.background = '#21262d';
-  weddingLink.style.borderColor = '#30363d';
-  weddingLink.innerHTML = '<span class="trip-emoji">🎊</span><div class="trip-info"><h4>Jace & Lauren\u2019s Wedding</h4><p>Jun 18\u201321, 2026 \u00b7 San Diego, CA</p></div>';
-  tripsDiv.appendChild(weddingLink);
-
-  // Updated
-  const updatedDiv = document.getElementById('updated');
-  const d = new Date(LIVE_DATA.updatedAt);
-  updatedDiv.textContent = 'Last updated: ' + d.toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' });
-})();
-</script>
 
 </body>
 </html>
