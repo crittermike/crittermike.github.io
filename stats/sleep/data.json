@@ -120,13 +120,22 @@
       "respLow": 13.5,
       "respHigh": 22.0,
       "notes": "First 7+ hour night in 11-day streak. Deep sleep reported as 30m but likely ~60m (early block not captured in stages due to Apple Health merging issue)."
+    },
+    {
+      "date": "2026-05-06",
+      "totalMin": 430,
+      "hrLow": 59,
+      "hrHigh": 74,
+      "respLow": 13.5,
+      "respHigh": 29.0,
+      "notes": "Two 7+ hour nights in a row. Deep sleep over 1h, much better than recent norm."
     }
   ],
-  "avg7": 398,
-  "avg30": 392,
+  "avg7": 411,
+  "avg30": 395,
   "goal": {
     "minHours": 7,
     "targetHours": 8
   },
-  "updatedAt": "May 06, 2026 at 06:00 AM ET"
+  "updatedAt": "May 07, 2026 at 06:00 AM ET"
 }

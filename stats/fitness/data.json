@@ -75,6 +75,124 @@
   ],
   "workouts": [
     {
+      "date": "2026-05-06",
+      "title": "[CritterBot] Wednesday Upper: Incline Focus",
+      "exercises": [
+        {
+          "name": "Incline Bench Press (Barbell)",
+          "sets": [
+            {
+              "weight": 115,
+              "reps": 8
+            },
+            {
+              "weight": 115,
+              "reps": 6
+            },
+            {
+              "weight": 115,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Pull Up",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 6
+            },
+            {
+              "weight": 0,
+              "reps": 6
+            }
+          ]
+        },
+        {
+          "name": "Shoulder Press (Dumbbell)",
+          "sets": [
+            {
+              "weight": 70,
+              "reps": 8
+            },
+            {
+              "weight": 70,
+              "reps": 8
+            },
+            {
+              "weight": 70,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Row",
+          "sets": [
+            {
+              "weight": 110,
+              "reps": 12
+            },
+            {
+              "weight": 110,
+              "reps": 10
+            },
+            {
+              "weight": 110,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Bicep Curl (Dumbbell)",
+          "sets": [
+            {
+              "weight": 55,
+              "reps": 10
+            },
+            {
+              "weight": 55,
+              "reps": 10
+            },
+            {
+              "weight": 55,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Triceps Extension (Dumbbell)",
+          "sets": [
+            {
+              "weight": 60,
+              "reps": 10
+            },
+            {
+              "weight": 60,
+              "reps": 10
+            },
+            {
+              "weight": 60,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Face Pull",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 20
+            },
+            {
+              "weight": 0,
+              "reps": 20
+            }
+          ]
+        }
+      ],
+      "volume": 11180
+    },
+    {
       "date": "2026-05-04",
       "title": "[CritterBot] Monday Lower: Front Squat Focus",
       "exercises": [
@@ -766,5 +884,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 06, 2026 at 06:00 AM ET"
+  "updatedAt": "May 07, 2026 at 06:00 AM ET"
 }
