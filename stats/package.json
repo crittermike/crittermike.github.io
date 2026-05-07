@@ -1,0 +1,13 @@
+{
+  "name": "crittenden-stats-site",
+  "version": "1.0.0",
+  "description": "Mike's personal stats dashboard (diet/fitness/habits/sleep)",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

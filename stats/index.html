@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats - Mike Stats</title>
+    <meta name="description" content="Mike&#39;s personal data dashboards">
+
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+
+        @media (max-width: 600px) {
+            #site-nav .hamburger { display: block; }
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            #site-nav.open .nav-links { display: flex; }
+            #site-nav .nav-links a { font-size: 16px; padding: 4px 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="site-nav">
+        <a href="/stats/" class="brand">📊 Mike Stats</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/stats/" class="active">Home</a>
+            <a href="/stats/diet/" >Diet</a>
+            <a href="/stats/fitness/" >Fitness</a>
+            <a href="/stats/habits/" >Habits</a>
+            <a href="/stats/sleep/" >Sleep</a>
+        </div>
+    </nav>
+
+    
+    <header>
+        <h1>📊 Mike&#39;s Stats</h1>
+        <div class="subtitle">Diet · Fitness · Habits · Sleep</div>
+    </header>
+    <style>
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid #30363d;
+            color: var(--text-dark);
+            padding: 32px 24px 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+        header .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-top: 4px;
+            font-weight: 500;
+            position: relative;
+            color: var(--text-mid);
+        }
+    </style>
+    
+
+    
+<style>
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    box-shadow: var(--shadow);
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-orange);
+  }
+  .card .emoji {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card h2 {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+  .card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .updated {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin-top: 36px;
+  }
+</style>
+
+<div class="wrap">
+  <div class="grid">
+    <a class="card" href="/stats/diet/">
+      <span class="emoji">🥗</span>
+      <h2>Diet & Weight</h2>
+      <p>Calories, protein, weight trend. 1800 cal / 150g protein / target 156 lbs.</p>
+    </a>
+    <a class="card" href="/stats/fitness/">
+      <span class="emoji">🏃</span>
+      <h2>Fitness</h2>
+      <p>Strava runs, Hevy lifts, weekly volume, pace trends.</p>
+    </a>
+    <a class="card" href="/stats/habits/">
+      <span class="emoji">🔥</span>
+      <h2>Habits</h2>
+      <p>GitHub-style heatmap: run, lift, diet, sleep streaks.</p>
+    </a>
+    <a class="card" href="/stats/sleep/">
+      <span class="emoji">😴</span>
+      <h2>Sleep</h2>
+      <p>Apple Health sleep stages, duration, HR, debt.</p>
+    </a>
+  </div>
+  <div class="updated">Data refreshed nightly · github.com/crittermike</div>
+</div>
+
+</body>
+</html>

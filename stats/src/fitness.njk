@@ -1,0 +1,772 @@
+---
+layout: base.njk
+title: "Mike's Fitness Command Center"
+permalink: "/fitness/index.html"
+---
+
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --green: #3fb950;
+    --green-dim: rgba(63,185,80,0.15);
+    --red: #f85149;
+    --red-dim: rgba(248,81,73,0.15);
+    --blue: #58a6ff;
+    --blue-dim: rgba(88,166,255,0.15);
+    --orange: #d29922;
+    --orange-dim: rgba(210,153,34,0.15);
+    --purple: #bc8cff;
+    --purple-dim: rgba(188,140,255,0.15);
+  }
+  body {
+    padding: 20px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-wide { grid-column: span 2; }
+  @media (max-width: 720px) { .card-wide { grid-column: span 1; } }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2 .icon { font-size: 20px; }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 8px;
+  }
+  .stat .value {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat.green { background: var(--green-dim); }
+  .stat.green .value { color: var(--green); }
+  .stat.red { background: var(--red-dim); }
+  .stat.red .value { color: var(--red); }
+  .stat.blue { background: var(--blue-dim); }
+  .stat.blue .value { color: var(--blue); }
+  .stat.orange { background: var(--orange-dim); }
+  .stat.orange .value { color: var(--orange); }
+  .stat.purple { background: var(--purple-dim); }
+  .stat.purple .value { color: var(--purple); }
+
+  .chart-container {
+    width: 100%;
+    height: 180px;
+    position: relative;
+    margin-top: 12px;
+  }
+  .chart-container canvas { width: 100% !important; height: 100% !important; }
+
+  .heatmap {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    margin-top: 8px;
+  }
+  .heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    position: relative;
+    min-width: 16px;
+  }
+  .heatmap-cell.empty { background: transparent; }
+  .heatmap-cell.none { background: #21262d; }
+  .heatmap-cell.low { background: #0e4429; }
+  .heatmap-cell.med { background: #006d32; }
+  .heatmap-cell.high { background: #26a641; }
+  .heatmap-cell.max { background: #39d353; }
+  .heatmap-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 2px 0;
+  }
+
+  .workout-list { list-style: none; }
+  .workout-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .workout-list li:last-child { border-bottom: none; }
+  .workout-name { font-weight: 500; font-size: 14px; }
+  .workout-meta { color: var(--text-dim); font-size: 12px; }
+  .workout-date { color: var(--text-dim); font-size: 12px; white-space: nowrap; }
+
+  .weight-marker {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .progress-row {
+    margin-bottom: 12px;
+  }
+  .progress-row .progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: #21262d;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .streak-dots {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .streak-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .streak-dot.hit { background: var(--green-dim); color: var(--green); }
+  .streak-dot.miss { background: var(--red-dim); color: var(--red); }
+  .streak-dot.future { background: #21262d; color: var(--text-dim); }
+
+  .section-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px;
+  }
+  .tag-green { background: var(--green-dim); color: var(--green); }
+  .tag-red { background: var(--red-dim); color: var(--red); }
+  .tag-blue { background: var(--blue-dim); color: var(--blue); }
+  .tag-orange { background: var(--orange-dim); color: var(--orange); }
+
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  .tooltip {
+    position: absolute;
+    background: #1c2128;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+    display: none;
+  }
+</style>
+
+<div class="header">
+  <h1>🏋️ Mike's Fitness Command Center</h1>
+  <p class="subtitle">Real data from Strava, Hevy, and daily diet logs. Auto-updated nightly.</p>
+</div>
+
+<div class="grid" id="dashboard">
+  <!-- Cards injected by JS -->
+</div>
+
+<div class="footer">
+  Built overnight by CritterBot 🦾 &bull; Data: Strava + Hevy + Diet Logs &bull; Last updated: <span id="update-time"></span>
+</div>
+
+<script>
+// ============================================================
+// DATA (loaded from /stats/fitness/data.json + /stats/diet/data.json)
+// ============================================================
+
+let RUNS = [];
+let WORKOUTS = [];
+let DIET = [];
+let WEIGHT = [];
+const GOALS = { calories: 1800, protein: 150, runsPerWeek: 3, liftsPerWeek: 3, targetWeight: 156 };
+
+(async () => {
+const [fitnessData, dietPayload] = await Promise.all([
+  fetch('data.json').then(r => r.json()),
+  fetch('../diet/data.json').then(r => r.json()).catch(() => ({entries: []}))
+]);
+
+RUNS = (fitnessData.runs || []).map(r => ({
+  date: r.date,
+  distance: r.distance,
+  pace: r.pace,
+  duration: r.elapsedMin || r.duration || 0,
+  name: r.name
+})).sort((a, b) => b.date.localeCompare(a.date));
+
+WORKOUTS = (fitnessData.workouts || []).map(w => {
+  const exArr = Array.isArray(w.exercises) ? w.exercises : [];
+  return {
+    date: w.date,
+    title: w.title,
+    duration: w.duration || 0,
+    exercises: exArr.length || w.exercises || 0,
+    volume: w.volume || 0,
+    names: exArr.map(e => e.name)
+  };
+}).sort((a, b) => b.date.localeCompare(a.date));
+
+WEIGHT = (fitnessData.weights || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+
+DIET = (dietPayload.entries || []).filter(d => d.calories && d.protein).map(d => ({
+  date: d.date,
+  cal: d.calories,
+  prot: d.protein
+}));
+
+/* legacy hardcoded data removed below
+  {date:"2026-04-24",distance:3.75,pace:"11:37",duration:43.6,name:"3.75mi Long Run"},
+  {date:"2026-04-23",distance:3.76,pace:"11:43",duration:44.1,name:"3.25mi Easy Run"},
+  {date:"2026-04-21",distance:3.09,pace:"9:44",duration:30.1,name:"Steady into Tempo"},
+  {date:"2026-04-17",distance:3.26,pace:"10:09",duration:33.1,name:"On Off 200s"},
+  {date:"2026-04-15",distance:3.01,pace:"11:41",duration:35.1,name:"3mi Easy Run"},
+  {date:"2026-04-13",distance:7.31,pace:"14:01",duration:102.6,name:"6mi Long Run"},
+  {date:"2026-04-03",distance:3.66,pace:"10:24",duration:38.1,name:"400m Repeats"},
+  {date:"2026-04-02",distance:5.0,pace:"10:59",duration:55.0,name:"5mi Long Run"},
+  {date:"2026-03-31",distance:3.01,pace:"9:02",duration:27.2,name:"3mi Easy Run"},
+  {date:"2026-03-27",distance:3.4,pace:"9:12",duration:31.3,name:"Repeating Progressive Run"},
+  {date:"2026-03-26",distance:4.51,pace:"9:36",duration:43.3,name:"4.5mi Progressive Long Run"},
+  {date:"2026-03-23",distance:3.26,pace:"9:26",duration:30.8,name:"3.25mi Easy Run"},
+  {date:"2026-03-18",distance:3.25,pace:"10:52",duration:35.4,name:"3.25mi Easy Run"},
+  {date:"2026-03-10",distance:5.01,pace:"11:00",duration:55.1,name:"5mi Long Run"},
+  {date:"2026-03-03",distance:3.34,pace:"9:18",duration:31.1,name:"Progression Run"},
+];
+
+const WORKOUTS = [
+  {date:"2026-04-27",title:"Monday Lower: Squat Focus",duration:62,exercises:6,volume:5815,names:["Squat","RDL","Leg Ext","Leg Curl","Bulgarian Split Squat","Calf Raise"]},
+  {date:"2026-04-24",title:"Friday Light Upper",duration:54,exercises:5,volume:4069,names:["Incline DB Bench","DB Row","Lat Raise","Hammer Curl","Face Pull"]},
+  {date:"2026-04-20",title:"Mega Full Body",duration:22,exercises:2,volume:1429,names:["Squat","Chin Up"]},
+  {date:"2026-04-14",title:"Morning Workout",duration:16,exercises:2,volume:2427,names:["Barbell Row","DB Shoulder Press"]},
+  {date:"2026-04-10",title:"Late Night Workout",duration:45,exercises:4,volume:3846,names:["Bench Press","DB Row","Bicep Curl","Lat Raise"]},
+  {date:"2026-03-30",title:"Full Body 3",duration:46,exercises:3,volume:4391,names:["DB RDL","Incline DB Bench","Incline Row"]},
+  {date:"2026-03-24",title:"Full Body 2",duration:57,exercises:2,volume:3348,names:["Barbell Row","DB Shoulder Press"]},
+  {date:"2026-03-17",title:"Full Body 1",duration:59,exercises:3,volume:5028,names:["Squat","Bench Press","DB Row"]},
+  {date:"2026-03-13",title:"Full Body 3",duration:90,exercises:3,volume:4082,names:["DB RDL","Incline DB Bench","Incline Row"]},
+  {date:"2026-03-09",title:"Morning Workout",duration:96,exercises:2,volume:4028,names:["Barbell Row","Squat"]},
+  {date:"2026-03-06",title:"Morning Workout",duration:29,exercises:4,volume:3098,names:["Squat","RDL","Hammer Curl","Tricep Ext"]},
+  {date:"2026-03-02",title:"Morning Workout",duration:43,exercises:2,volume:2039,names:["Bench Press","Chin Up"]},
+];
+
+const DIET = [
+  {date:"2026-03-29",cal:2245,prot:157},{date:"2026-03-30",cal:1800,prot:150},
+  {date:"2026-03-31",cal:1800,prot:150},{date:"2026-04-01",cal:1800,prot:150},
+  {date:"2026-04-02",cal:1820,prot:156},{date:"2026-04-07",cal:1800,prot:150},
+  {date:"2026-04-08",cal:1655,prot:171},{date:"2026-04-09",cal:2360,prot:156},
+  {date:"2026-04-10",cal:1800,prot:156},{date:"2026-04-11",cal:1800,prot:150},
+  {date:"2026-04-12",cal:1515,prot:141},{date:"2026-04-13",cal:1800,prot:150},
+  {date:"2026-04-14",cal:1937,prot:176},{date:"2026-04-15",cal:1605,prot:148},
+  {date:"2026-04-17",cal:1455,prot:145},{date:"2026-04-18",cal:1670,prot:149},
+  {date:"2026-04-19",cal:1800,prot:150},{date:"2026-04-20",cal:930,prot:78},
+  {date:"2026-04-21",cal:1970,prot:156},{date:"2026-04-22",cal:1800,prot:150},
+  {date:"2026-04-24",cal:1380,prot:127},{date:"2026-04-25",cal:1820,prot:164},
+  {date:"2026-04-26",cal:1735,prot:151},{date:"2026-04-27",cal:1880,prot:157},
+];
+
+const WEIGHT = [
+  {date:"2026-03-29",weight:166.0},
+  {date:"2026-04-19",weight:168.0},
+  {date:"2026-04-26",weight:167.1},
+];
+
+*/
+const GOALS_INLINE_REPLACED = true;
+
+
+// ============================================================
+// HELPERS
+// ============================================================
+function paceToSeconds(p) {
+  const [m, s] = p.split(':').map(Number);
+  return m * 60 + s;
+}
+function formatPace(secs) {
+  const m = Math.floor(secs / 60);
+  const s = Math.round(secs % 60);
+  return `${m}:${s.toString().padStart(2,'0')}`;
+}
+function daysAgo(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const now = new Date('2026-04-28T03:00:00');
+  return Math.floor((now - d) / 86400000);
+}
+function weekOf(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(d.setDate(diff)).toISOString().slice(0,10);
+}
+function shortDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+function dayName(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short' });
+}
+
+// ============================================================
+// BUILD DASHBOARD
+// ============================================================
+const dashboard = document.getElementById('dashboard');
+
+function card(title, icon, content, wide = false) {
+  const el = document.createElement('div');
+  el.className = 'card' + (wide ? ' card-wide' : '');
+  el.innerHTML = `<h2><span class="icon">${icon}</span>${title}</h2>${content}`;
+  dashboard.appendChild(el);
+  return el;
+}
+
+// --- Weight Progress ---
+const currentWeight = WEIGHT[WEIGHT.length - 1].weight;
+const startWeight = WEIGHT[0].weight;
+const weightDelta = currentWeight - startWeight;
+const weightToGo = currentWeight - GOALS.targetWeight;
+const weightProgress = Math.max(0, Math.min(100, ((startWeight - currentWeight) / (startWeight - GOALS.targetWeight)) * 100));
+
+card('Weight Progress', '⚖️', `
+  <div class="stat-row">
+    <div class="stat ${weightDelta <= 0 ? 'green' : 'red'}">
+      <div class="value">${currentWeight}</div>
+      <div class="label">Current (lbs)</div>
+    </div>
+    <div class="stat blue">
+      <div class="value">${GOALS.targetWeight}</div>
+      <div class="label">Goal (lbs)</div>
+    </div>
+    <div class="stat ${weightDelta <= 0 ? 'green' : 'red'}">
+      <div class="value">${weightDelta > 0 ? '+' : ''}${weightDelta.toFixed(1)}</div>
+      <div class="label">Since Start</div>
+    </div>
+    <div class="stat orange">
+      <div class="value">${weightToGo.toFixed(1)}</div>
+      <div class="label">To Go</div>
+    </div>
+  </div>
+  <div class="progress-row" style="margin-top:16px">
+    <div class="progress-header">
+      <span>166 → 156 lbs</span>
+      <span>${Math.round(weightProgress)}%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:${weightProgress}%;background:${weightProgress > 0 ? 'var(--green)' : 'var(--red)'}"></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:8px">
+    ${WEIGHT.map(w => `<span class="tag ${w.weight <= startWeight ? 'tag-green' : 'tag-red'}">${shortDate(w.date)}: ${w.weight} lbs</span>`).join('')}
+  </div>
+`);
+
+// --- This Week Summary ---
+const thisWeekStart = '2026-04-21';
+const runsThisWeek = RUNS.filter(r => r.date >= thisWeekStart).length;
+const liftsThisWeek = WORKOUTS.filter(w => w.date >= thisWeekStart).length;
+const dietThisWeek = DIET.filter(d => d.date >= thisWeekStart);
+const avgCal = dietThisWeek.length ? Math.round(dietThisWeek.reduce((s,d) => s + d.cal, 0) / dietThisWeek.length) : 0;
+const avgProt = dietThisWeek.length ? Math.round(dietThisWeek.reduce((s,d) => s + d.prot, 0) / dietThisWeek.length) : 0;
+
+card('This Week (Apr 21-27)', '📊', `
+  <div class="stat-row">
+    <div class="stat ${runsThisWeek >= 3 ? 'green' : 'orange'}">
+      <div class="value">${runsThisWeek}/3</div>
+      <div class="label">Runs</div>
+    </div>
+    <div class="stat ${liftsThisWeek >= 3 ? 'green' : 'orange'}">
+      <div class="value">${liftsThisWeek}/3</div>
+      <div class="label">Lifts</div>
+    </div>
+    <div class="stat ${avgCal <= 1800 ? 'green' : 'red'}">
+      <div class="value">${avgCal}</div>
+      <div class="label">Avg Cal</div>
+    </div>
+    <div class="stat ${avgProt >= 150 ? 'green' : 'red'}">
+      <div class="value">${avgProt}g</div>
+      <div class="label">Avg Protein</div>
+    </div>
+  </div>
+`);
+
+// --- Running Stats ---
+const totalMiles = RUNS.reduce((s, r) => s + r.distance, 0);
+const avgPace = RUNS.length ? formatPace(RUNS.reduce((s, r) => s + paceToSeconds(r.pace), 0) / RUNS.length) : '--';
+const bestPace = RUNS.length ? formatPace(Math.min(...RUNS.map(r => paceToSeconds(r.pace)))) : '--';
+const longestRun = RUNS.length ? Math.max(...RUNS.map(r => r.distance)) : 0;
+
+const runWeeks = {};
+RUNS.forEach(r => {
+  const wk = weekOf(r.date);
+  runWeeks[wk] = (runWeeks[wk] || 0) + 1;
+});
+const weeksHit3 = Object.values(runWeeks).filter(c => c >= 3).length;
+
+card('Running (Strava)', '🏃', `
+  <div class="stat-row">
+    <div class="stat blue">
+      <div class="value">${totalMiles.toFixed(1)}</div>
+      <div class="label">Total Miles (8 wks)</div>
+    </div>
+    <div class="stat green">
+      <div class="value">${bestPace}</div>
+      <div class="label">Best Pace</div>
+    </div>
+    <div class="stat purple">
+      <div class="value">${avgPace}</div>
+      <div class="label">Avg Pace</div>
+    </div>
+    <div class="stat orange">
+      <div class="value">${longestRun.toFixed(1)}</div>
+      <div class="label">Longest (mi)</div>
+    </div>
+  </div>
+  <div class="section-label">Recent Runs</div>
+  <ul class="workout-list">
+    ${RUNS.slice(0, 6).map(r => `
+      <li>
+        <div>
+          <div class="workout-name">${r.name}</div>
+          <div class="workout-meta">${r.distance} mi &bull; ${r.pace}/mi &bull; ${Math.round(r.duration)} min</div>
+        </div>
+        <div class="workout-date">${dayName(r.date)} ${shortDate(r.date)}</div>
+      </li>
+    `).join('')}
+  </ul>
+  <div class="section-label">3x/Week Target</div>
+  <div style="font-size:13px;color:var(--text-dim)">
+    Hit 3 runs: <strong style="color:var(--green)">${weeksHit3}</strong> of ${Object.keys(runWeeks).length} weeks tracked
+  </div>
+`);
+
+// --- Lifting Stats ---
+const totalVolume = WORKOUTS.reduce((s, w) => s + w.volume, 0);
+const totalSessions = WORKOUTS.length;
+const avgDuration = Math.round(WORKOUTS.reduce((s, w) => s + w.duration, 0) / totalSessions);
+const recentVolumeTrend = WORKOUTS.slice(0, 4).reduce((s, w) => s + w.volume, 0) / 4;
+const olderVolumeTrend = WORKOUTS.slice(4, 8).reduce((s, w) => s + w.volume, 0) / Math.min(4, WORKOUTS.slice(4, 8).length);
+const volumeChange = ((recentVolumeTrend - olderVolumeTrend) / olderVolumeTrend * 100).toFixed(0);
+
+const exerciseFreq = {};
+WORKOUTS.forEach(w => w.names.forEach(n => { exerciseFreq[n] = (exerciseFreq[n] || 0) + 1; }));
+const topExercises = Object.entries(exerciseFreq).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+card('Lifting (Hevy)', '🏋️', `
+  <div class="stat-row">
+    <div class="stat blue">
+      <div class="value">${totalSessions}</div>
+      <div class="label">Sessions (8 wks)</div>
+    </div>
+    <div class="stat green">
+      <div class="value">${(totalVolume/1000).toFixed(0)}k</div>
+      <div class="label">Total Vol (kg)</div>
+    </div>
+    <div class="stat purple">
+      <div class="value">${avgDuration}</div>
+      <div class="label">Avg Min</div>
+    </div>
+    <div class="stat ${Number(volumeChange) >= 0 ? 'green' : 'red'}">
+      <div class="value">${volumeChange > 0 ? '+' : ''}${volumeChange}%</div>
+      <div class="label">Vol Trend</div>
+    </div>
+  </div>
+  <div class="section-label">Recent Workouts</div>
+  <ul class="workout-list">
+    ${WORKOUTS.slice(0, 5).map(w => `
+      <li>
+        <div>
+          <div class="workout-name">${w.title}</div>
+          <div class="workout-meta">${w.exercises} exercises &bull; ${w.duration} min &bull; ${(w.volume/1000).toFixed(1)}k kg volume</div>
+        </div>
+        <div class="workout-date">${dayName(w.date)} ${shortDate(w.date)}</div>
+      </li>
+    `).join('')}
+  </ul>
+  <div class="section-label">Most Frequent Exercises</div>
+  <div>${topExercises.map(([name, count]) => `<span class="tag tag-blue">${name} (${count}x)</span>`).join(' ')}</div>
+`);
+
+// --- Diet Tracker ---
+const last14Diet = DIET.slice(-14);
+const daysOnTarget = last14Diet.filter(d => d.cal <= 1800).length;
+const daysProteinHit = last14Diet.filter(d => d.prot >= 150).length;
+const overallAvgCal = Math.round(last14Diet.reduce((s,d) => s + d.cal, 0) / last14Diet.length);
+const overallAvgProt = Math.round(last14Diet.reduce((s,d) => s + d.prot, 0) / last14Diet.length);
+
+card('Diet (Last 14 Days)', '🍽️', `
+  <div class="stat-row">
+    <div class="stat ${overallAvgCal <= 1800 ? 'green' : 'red'}">
+      <div class="value">${overallAvgCal}</div>
+      <div class="label">Avg Calories</div>
+    </div>
+    <div class="stat ${overallAvgProt >= 150 ? 'green' : 'red'}">
+      <div class="value">${overallAvgProt}g</div>
+      <div class="label">Avg Protein</div>
+    </div>
+    <div class="stat ${daysOnTarget >= 10 ? 'green' : 'orange'}">
+      <div class="value">${daysOnTarget}/14</div>
+      <div class="label">Cal On Target</div>
+    </div>
+    <div class="stat ${daysProteinHit >= 10 ? 'green' : 'orange'}">
+      <div class="value">${daysProteinHit}/14</div>
+      <div class="label">Protein Hit</div>
+    </div>
+  </div>
+  <div class="section-label">Daily Breakdown</div>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    ${last14Diet.map(d => {
+      const calPct = Math.min(100, (d.cal / 2400) * 100);
+      const protPct = Math.min(100, (d.prot / 200) * 100);
+      const calColor = d.cal <= 1800 ? 'var(--green)' : 'var(--red)';
+      const protColor = d.prot >= 150 ? 'var(--blue)' : 'var(--orange)';
+      return `<div style="display:flex;align-items:center;gap:8px;font-size:12px">
+        <span style="width:50px;color:var(--text-dim)">${shortDate(d.date)}</span>
+        <div style="flex:1;display:flex;gap:4px;align-items:center">
+          <div style="flex:1;height:6px;background:#21262d;border-radius:3px;overflow:hidden">
+            <div style="width:${calPct}%;height:100%;background:${calColor};border-radius:3px"></div>
+          </div>
+          <span style="width:45px;text-align:right;color:${calColor}">${d.cal}</span>
+        </div>
+        <div style="flex:0.6;display:flex;gap:4px;align-items:center">
+          <div style="flex:1;height:6px;background:#21262d;border-radius:3px;overflow:hidden">
+            <div style="width:${protPct}%;height:100%;background:${protColor};border-radius:3px"></div>
+          </div>
+          <span style="width:35px;text-align:right;color:${protColor}">${d.prot}g</span>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--text-dim)">
+    <span>🟢 Bars = calories (target ≤1800)</span>
+    <span>🔵 Bars = protein (target ≥150g)</span>
+  </div>
+`, true);
+
+// --- Activity Heatmap ---
+const allDates = new Set();
+RUNS.forEach(r => allDates.add(r.date));
+WORKOUTS.forEach(w => allDates.add(w.date));
+
+const heatmapDays = [];
+const startDate = new Date('2026-03-02T12:00:00');
+const endDate = new Date('2026-04-27T12:00:00');
+for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+  const ds = d.toISOString().slice(0, 10);
+  const hasRun = RUNS.some(r => r.date === ds);
+  const hasLift = WORKOUTS.some(w => w.date === ds);
+  const hasDiet = DIET.some(dt => dt.date === ds);
+  let level = 0;
+  if (hasRun) level++;
+  if (hasLift) level++;
+  if (hasDiet) level++;
+  heatmapDays.push({ date: ds, level, hasRun, hasLift, hasDiet });
+}
+
+const firstDay = new Date(startDate);
+const padDays = (firstDay.getDay() + 6) % 7;
+
+const levelClass = ['none', 'low', 'med', 'high'];
+const dayLabels = ['M','T','W','T','F','S','S'];
+
+card('Activity Heatmap', '🗓️', `
+  <div style="display:flex;gap:2px;margin-bottom:4px">
+    ${dayLabels.map(d => `<div class="heatmap-label" style="flex:1">${d}</div>`).join('')}
+  </div>
+  <div class="heatmap">
+    ${Array(padDays).fill('<div class="heatmap-cell empty"></div>').join('')}
+    ${heatmapDays.map(d => {
+      const cls = levelClass[Math.min(d.level, 3)];
+      const icons = (d.hasRun ? '🏃' : '') + (d.hasLift ? '🏋️' : '') + (d.hasDiet ? '🍽️' : '');
+      return `<div class="heatmap-cell ${cls}" title="${shortDate(d.date)}: ${icons || 'Rest day'}"></div>`;
+    }).join('')}
+  </div>
+  <div style="display:flex;gap:8px;margin-top:12px;font-size:11px;color:var(--text-dim);align-items:center">
+    <span>Less</span>
+    <div class="heatmap-cell none" style="width:14px;height:14px;display:inline-block"></div>
+    <div class="heatmap-cell low" style="width:14px;height:14px;display:inline-block"></div>
+    <div class="heatmap-cell med" style="width:14px;height:14px;display:inline-block"></div>
+    <div class="heatmap-cell high" style="width:14px;height:14px;display:inline-block"></div>
+    <span>More</span>
+    <span style="margin-left:12px">🏃 Run &nbsp; 🏋️ Lift &nbsp; 🍽️ Diet logged</span>
+  </div>
+`, true);
+
+// --- Weekly Consistency ---
+function getWeekLabel(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const mon = new Date(d);
+  mon.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  return `${mon.toLocaleDateString('en-US', {month:'short',day:'numeric'})}`;
+}
+
+const weeks = {};
+const allItems = [
+  ...RUNS.map(r => ({date: r.date, type: 'run'})),
+  ...WORKOUTS.map(w => ({date: w.date, type: 'lift'})),
+];
+allItems.forEach(item => {
+  const wk = weekOf(item.date);
+  if (!weeks[wk]) weeks[wk] = {runs: 0, lifts: 0, label: getWeekLabel(item.date)};
+  if (item.type === 'run') weeks[wk].runs++;
+  else weeks[wk].lifts++;
+});
+
+const weekKeys = Object.keys(weeks).sort().slice(-8);
+
+card('Weekly Consistency', '📈', `
+  <div style="display:flex;flex-direction:column;gap:8px">
+    ${weekKeys.map(wk => {
+      const w = weeks[wk];
+      const runBar = Math.min(100, (w.runs / 3) * 100);
+      const liftBar = Math.min(100, (w.lifts / 3) * 100);
+      return `<div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px">
+          <span style="color:var(--text-dim)">${w.label}</span>
+          <span>🏃 ${w.runs}/3 &nbsp; 🏋️ ${w.lifts}/3</span>
+        </div>
+        <div style="display:flex;gap:4px">
+          <div style="flex:1;height:6px;background:#21262d;border-radius:3px;overflow:hidden">
+            <div style="width:${runBar}%;height:100%;background:${w.runs >= 3 ? 'var(--green)' : 'var(--orange)'};border-radius:3px"></div>
+          </div>
+          <div style="flex:1;height:6px;background:#21262d;border-radius:3px;overflow:hidden">
+            <div style="width:${liftBar}%;height:100%;background:${w.lifts >= 3 ? 'var(--blue)' : 'var(--purple)'};border-radius:3px"></div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--text-dim)">
+    <span>🟢/🟠 Running (target 3x)</span>
+    <span>🔵/🟣 Lifting (target 3x)</span>
+  </div>
+`);
+
+// --- Pace Trend ---
+const sortedRuns = [...RUNS].sort((a, b) => a.date.localeCompare(b.date));
+card('Pace Trend', '⏱️', `
+  <div style="display:flex;flex-direction:column;gap:6px">
+    ${sortedRuns.map(r => {
+      const paceSec = paceToSeconds(r.pace);
+      const minPace = 480; const maxPace = 900;
+      const pct = Math.max(0, Math.min(100, ((maxPace - paceSec) / (maxPace - minPace)) * 100));
+      const color = paceSec < 600 ? 'var(--green)' : paceSec < 660 ? 'var(--blue)' : 'var(--orange)';
+      return `<div style="display:flex;align-items:center;gap:8px;font-size:12px">
+        <span style="width:55px;color:var(--text-dim)">${shortDate(r.date)}</span>
+        <div style="flex:1;height:8px;background:#21262d;border-radius:4px;overflow:hidden;position:relative">
+          <div style="width:${pct}%;height:100%;background:${color};border-radius:4px"></div>
+        </div>
+        <span style="width:50px;text-align:right;color:${color};font-weight:600">${r.pace}/mi</span>
+        <span style="width:40px;text-align:right;color:var(--text-dim)">${r.distance}mi</span>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:var(--text-dim)">Longer bar = faster pace. Green &lt;10:00, Blue &lt;11:00, Orange &gt;11:00</div>
+`);
+
+// --- Volume Trend ---
+const sortedWorkouts = [...WORKOUTS].sort((a, b) => a.date.localeCompare(b.date));
+card('Volume Trend (kg)', '📊', `
+  <div style="display:flex;flex-direction:column;gap:6px">
+    ${sortedWorkouts.map(w => {
+      const maxVol = 6000;
+      const pct = Math.min(100, (w.volume / maxVol) * 100);
+      const color = w.volume > 4000 ? 'var(--green)' : w.volume > 2500 ? 'var(--blue)' : 'var(--orange)';
+      return `<div style="display:flex;align-items:center;gap:8px;font-size:12px">
+        <span style="width:55px;color:var(--text-dim)">${shortDate(w.date)}</span>
+        <div style="flex:1;height:8px;background:#21262d;border-radius:4px;overflow:hidden">
+          <div style="width:${pct}%;height:100%;background:${color};border-radius:4px"></div>
+        </div>
+        <span style="width:55px;text-align:right;color:${color};font-weight:600">${(w.volume/1000).toFixed(1)}k</span>
+      </div>`;
+    }).join('')}
+  </div>
+`);
+
+// Update time
+document.getElementById('update-time').textContent = new Date().toLocaleDateString('en-US', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+});
+})();
+</script>

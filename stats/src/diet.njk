@@ -1,0 +1,376 @@
+---
+layout: base.njk
+title: Diet & Weight Tracker
+pageDescription: Mike's cut - 166 → 156 lbs | 1800 cal / 150g protein daily
+permalink: "/diet/index.html"
+---
+
+<style>
+    :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --green: #3fb950;
+        --red: #f85149;
+        --yellow: #d29922;
+        --blue: #58a6ff;
+        --purple: #bc8cff;
+    }
+    
+    body {
+        padding: 24px;
+        min-height: 100vh;
+    }
+    
+    h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .subtitle {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 32px;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    
+    .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .stat-card .value {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+    
+    .stat-card .label {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .stat-card .delta {
+        font-size: 13px;
+        margin-top: 4px;
+    }
+    
+    .delta.good { color: var(--green); }
+    .delta.bad { color: var(--red); }
+    .delta.neutral { color: var(--yellow); }
+    
+    .chart-container {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    
+    .chart-container h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+    
+    .chart-wrap {
+        position: relative;
+        height: 250px;
+    }
+    
+    .streak-bar {
+        display: flex;
+        gap: 3px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+    
+    .streak-day {
+        width: 18px;
+        height: 18px;
+        border-radius: 3px;
+        position: relative;
+    }
+    
+    .streak-day.hit { background: var(--green); }
+    .streak-day.miss { background: var(--red); opacity: 0.7; }
+    .streak-day.partial { background: var(--yellow); }
+    .streak-day.empty { background: var(--border); }
+    
+    .streak-legend {
+        display: flex;
+        gap: 16px;
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--muted);
+    }
+    
+    .streak-legend span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .streak-legend .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        display: inline-block;
+    }
+    
+    .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    
+    @media (max-width: 768px) {
+        .two-col { grid-template-columns: 1fr; }
+        body { padding: 16px; }
+    }
+    
+    .tooltip-date {
+        font-size: 11px;
+        color: var(--muted);
+    }
+</style>
+
+<h1>🏋️ Diet & Weight Tracker</h1>
+<p class="subtitle">Mike's cut: 166 → 156 lbs | 1800 cal / 150g protein daily</p>
+
+<div class="stats-grid" id="stats"></div>
+
+<div class="chart-container">
+    <h2>⚖️ Weight Trend</h2>
+    <div class="chart-wrap"><canvas id="weightChart"></canvas></div>
+</div>
+
+<div class="two-col">
+    <div class="chart-container">
+        <h2>🔥 Daily Calories</h2>
+        <div class="chart-wrap"><canvas id="calChart"></canvas></div>
+    </div>
+    <div class="chart-container">
+        <h2>💪 Daily Protein (g)</h2>
+        <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
+    </div>
+</div>
+
+<div class="chart-container">
+    <h2>📊 Compliance Streak (last 30 days)</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Green = both targets hit | Yellow = one hit | Red = both missed | Gray = no data</p>
+    <div class="streak-bar" id="streakBar"></div>
+    <div class="streak-legend">
+        <span><span class="dot" style="background:var(--green)"></span> Both targets</span>
+        <span><span class="dot" style="background:var(--yellow)"></span> One target</span>
+        <span><span class="dot" style="background:var(--red)"></span> Both missed</span>
+        <span><span class="dot" style="background:var(--border)"></span> No data</span>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script>
+let weightData = [];
+
+fetch('data.json').then(r => r.json()).then(payload => {
+    const dietData = payload.entries || payload;
+    weightData = payload.weights || [];
+    renderStats(dietData);
+    renderWeightChart();
+    renderCalChart(dietData);
+    renderProteinChart(dietData);
+    renderStreak(dietData);
+});
+
+function renderStats(data) {
+    const recent = data.filter(d => d.calories && d.protein).slice(-7);
+    const avgCal = Math.round(recent.reduce((s, d) => s + d.calories, 0) / recent.length);
+    const avgPro = Math.round(recent.reduce((s, d) => s + d.protein, 0) / recent.length);
+    const calHits = recent.filter(d => d.calories <= 1800).length;
+    const proHits = recent.filter(d => d.protein >= 150).length;
+    const currentWeight = weightData[weightData.length - 1].weight;
+    const weightLost = (166 - currentWeight).toFixed(1);
+    const toGo = (currentWeight - 156).toFixed(1);
+
+    const daysTracked = data.filter(d => d.calories || d.protein).length;
+
+    document.getElementById('stats').innerHTML = `
+        <div class="stat-card">
+            <div class="value">${currentWeight}</div>
+            <div class="label">Current Weight (lbs)</div>
+            <div class="delta ${weightLost > 0 ? 'good' : 'bad'}">${weightLost > 0 ? '↓' : '↑'} ${Math.abs(weightLost)} from start</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${toGo}</div>
+            <div class="label">Lbs to Goal</div>
+            <div class="delta neutral">Target: 156 lbs</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${avgCal}</div>
+            <div class="label">Avg Cal (7d)</div>
+            <div class="delta ${avgCal <= 1800 ? 'good' : 'bad'}">${avgCal <= 1800 ? '✓ Under' : '✗ Over'} 1800</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${avgPro}g</div>
+            <div class="label">Avg Protein (7d)</div>
+            <div class="delta ${avgPro >= 150 ? 'good' : 'bad'}">${avgPro >= 150 ? '✓ Hit' : '✗ Under'} 150g</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${calHits}/7</div>
+            <div class="label">Cal Target (7d)</div>
+            <div class="delta ${calHits >= 5 ? 'good' : 'bad'}">${Math.round(calHits/7*100)}% compliance</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${proHits}/7</div>
+            <div class="label">Protein Target (7d)</div>
+            <div class="delta ${proHits >= 5 ? 'good' : 'bad'}">${Math.round(proHits/7*100)}% compliance</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">${daysTracked}</div>
+            <div class="label">Days Tracked</div>
+            <div class="delta neutral">Since Mar 13</div>
+        </div>
+    `;
+}
+
+function renderWeightChart() {
+    const ctx = document.getElementById('weightChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [
+                {
+                    label: 'Weight',
+                    data: weightData.map(d => ({ x: d.date, y: d.weight })),
+                    borderColor: '#58a6ff',
+                    backgroundColor: 'rgba(88,166,255,0.1)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#58a6ff',
+                    fill: true,
+                    tension: 0.3
+                },
+                {
+                    label: 'Goal',
+                    data: [
+                        { x: '2026-03-29', y: 156 },
+                        { x: '2026-06-30', y: 156 }
+                    ],
+                    borderColor: 'rgba(63,185,80,0.5)',
+                    borderDash: [5, 5],
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { type: 'time', time: { unit: 'week' }, grid: { color: '#30363d' }, ticks: { color: '#8b949e' } },
+                y: { min: 154, max: 170, grid: { color: '#30363d' }, ticks: { color: '#8b949e' } }
+            },
+            plugins: { legend: { labels: { color: '#e6edf3' } } }
+        }
+    });
+}
+
+function renderCalChart(data) {
+    const filtered = data.filter(d => d.calories);
+    const ctx = document.getElementById('calChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: filtered.map(d => d.date),
+            datasets: [{
+                label: 'Calories',
+                data: filtered.map(d => d.calories),
+                backgroundColor: filtered.map(d => d.calories <= 1800 ? 'rgba(63,185,80,0.7)' : 'rgba(248,81,73,0.7)'),
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { type: 'time', time: { unit: 'day' }, grid: { display: false }, ticks: { color: '#8b949e', maxTicksLimit: 8 } },
+                y: { grid: { color: '#30363d' }, ticks: { color: '#8b949e' } }
+            },
+            plugins: {
+                legend: { display: false },
+                annotation: { annotations: { line1: { type: 'line', yMin: 1800, yMax: 1800, borderColor: 'rgba(248,81,73,0.5)', borderDash: [5,5] } } }
+            }
+        }
+    });
+}
+
+function renderProteinChart(data) {
+    const filtered = data.filter(d => d.protein);
+    const ctx = document.getElementById('proteinChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: filtered.map(d => d.date),
+            datasets: [{
+                label: 'Protein (g)',
+                data: filtered.map(d => d.protein),
+                backgroundColor: filtered.map(d => d.protein >= 150 ? 'rgba(63,185,80,0.7)' : 'rgba(210,153,34,0.7)'),
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { type: 'time', time: { unit: 'day' }, grid: { display: false }, ticks: { color: '#8b949e', maxTicksLimit: 8 } },
+                y: { grid: { color: '#30363d' }, ticks: { color: '#8b949e' } }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+}
+
+function renderStreak(data) {
+    const bar = document.getElementById('streakBar');
+    const today = new Date('2026-05-01');
+    const dataMap = {};
+    data.forEach(d => { dataMap[d.date] = d; });
+
+    for (let i = 29; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const key = date.toISOString().split('T')[0];
+        const d = dataMap[key];
+        const el = document.createElement('div');
+        el.className = 'streak-day';
+        el.title = key;
+
+        if (!d || (!d.calories && !d.protein)) {
+            el.classList.add('empty');
+        } else {
+            const calOk = d.calories && d.calories <= 1800;
+            const proOk = d.protein && d.protein >= 150;
+            if (calOk && proOk) el.classList.add('hit');
+            else if (calOk || proOk) el.classList.add('partial');
+            else el.classList.add('miss');
+        }
+        bar.appendChild(el);
+    }
+}
+</script>

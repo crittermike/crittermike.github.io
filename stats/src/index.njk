@@ -1,0 +1,86 @@
+---
+layout: base.njk
+title: Stats
+pageDescription: Mike's personal data dashboards
+pageHeader:
+  title: 📊 Mike's Stats
+  subtitle: Diet · Fitness · Habits · Sleep
+permalink: "/index.html"
+---
+
+<style>
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    box-shadow: var(--shadow);
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-orange);
+  }
+  .card .emoji {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card h2 {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+  .card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .updated {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin-top: 36px;
+  }
+</style>
+
+<div class="wrap">
+  <div class="grid">
+    <a class="card" href="/stats/diet/">
+      <span class="emoji">🥗</span>
+      <h2>Diet & Weight</h2>
+      <p>Calories, protein, weight trend. 1800 cal / 150g protein / target 156 lbs.</p>
+    </a>
+    <a class="card" href="/stats/fitness/">
+      <span class="emoji">🏃</span>
+      <h2>Fitness</h2>
+      <p>Strava runs, Hevy lifts, weekly volume, pace trends.</p>
+    </a>
+    <a class="card" href="/stats/habits/">
+      <span class="emoji">🔥</span>
+      <h2>Habits</h2>
+      <p>GitHub-style heatmap: run, lift, diet, sleep streaks.</p>
+    </a>
+    <a class="card" href="/stats/sleep/">
+      <span class="emoji">😴</span>
+      <h2>Sleep</h2>
+      <p>Apple Health sleep stages, duration, HR, debt.</p>
+    </a>
+  </div>
+  <div class="updated">Data refreshed nightly · github.com/crittermike</div>
+</div>
