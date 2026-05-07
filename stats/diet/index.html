@@ -144,7 +144,7 @@
 
     
 
-    
+    <main class="page">
 <style>
     :root {
         --bg: #0d1117;
@@ -159,10 +159,7 @@
         --purple: #bc8cff;
     }
     
-    body {
-        padding: 24px;
-        min-height: 100vh;
-    }
+    /* page padding handled by base.njk .page wrapper */
     
     h1 {
         font-size: 28px;
@@ -280,7 +277,6 @@
     
     @media (max-width: 768px) {
         .two-col { grid-template-columns: 1fr; }
-        body { padding: 16px; }
     }
     
     .tooltip-date {
@@ -514,6 +510,7 @@ function renderStreak(data) {
     }
 }
 </script>
-
+</main>
+    <style>.page { padding: 24px; max-width: 1400px; margin: 0 auto; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
 </body>
 </html>

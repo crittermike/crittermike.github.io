@@ -144,7 +144,7 @@
 
     
 
-    
+    <main class="page">
 <style>
   :root {
     --bg: #0d1117;
@@ -163,9 +163,7 @@
     --purple: #bc8cff;
     --purple-dim: rgba(188,140,255,0.15);
   }
-  body {
-    padding: 20px;
-  }
+  /* page padding handled by base.njk .page wrapper */
   .header {
     text-align: center;
     margin-bottom: 32px;
@@ -911,6 +909,7 @@ document.getElementById('update-time').textContent = new Date().toLocaleDateStri
 });
 })();
 </script>
-
+</main>
+    <style>.page { padding: 24px; max-width: 1400px; margin: 0 auto; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
 </body>
 </html>

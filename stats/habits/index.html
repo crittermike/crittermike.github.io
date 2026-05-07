@@ -144,14 +144,10 @@
 
     
 
-    
+    <main class="page">
 <style>
   * { box-sizing: border-box; }
-  body {
-    padding: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  /* page padding handled by base.njk .page wrapper */
   h1 {
     font-size: 28px;
     font-weight: 600;
@@ -746,6 +742,7 @@ document.getElementById('sleepStreak').textContent = `Avg: ${Math.floor(avgSleep
 document.getElementById('combinedStreak').textContent = 'How many habits hit each day';
 } // end __initHeatmap
 </script>
-
+</main>
+    <style>.page { padding: 24px; max-width: 1400px; margin: 0 auto; } @media (max-width: 768px) { .page { padding: 16px; } }</style>
 </body>
 </html>
