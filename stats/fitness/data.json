@@ -71,9 +71,71 @@
       "elapsedMin": 37.8,
       "name": "3.5mi Easy Run",
       "elevGain": 95
+    },
+    {
+      "date": "2026-05-07",
+      "distance": 3.27,
+      "pace": "10:31",
+      "elapsedMin": 34.4,
+      "name": "3.25mi Easy Run",
+      "elevGain": 122
     }
   ],
   "workouts": [
+    {
+      "date": "2026-05-07",
+      "title": "[CritterBot] Thu Active Recovery (Mobility + Core)",
+      "exercises": [
+        {
+          "name": "Plank",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 0
+            },
+            {
+              "weight": 0,
+              "reps": 0
+            },
+            {
+              "weight": 0,
+              "reps": 0
+            }
+          ]
+        },
+        {
+          "name": "Glute Bridge",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 15
+            },
+            {
+              "weight": 0,
+              "reps": 15
+            },
+            {
+              "weight": 0,
+              "reps": 15
+            }
+          ]
+        },
+        {
+          "name": "Band Pullaparts",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 20
+            },
+            {
+              "weight": 0,
+              "reps": 20
+            }
+          ]
+        }
+      ],
+      "volume": 0
+    },
     {
       "date": "2026-05-06",
       "title": "[CritterBot] Wednesday Upper: Incline Focus",
@@ -884,5 +946,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 07, 2026 at 06:00 AM ET"
+  "updatedAt": "May 08, 2026 at 06:00 AM ET"
 }
