@@ -1,8 +1,15 @@
 {
   "days": [
     {
-      "date": "2026-05-09",
+      "date": "2026-05-10",
       "diet": false,
+      "run": false,
+      "lift": false,
+      "sleep": null
+    },
+    {
+      "date": "2026-05-09",
+      "diet": true,
       "run": false,
       "lift": false,
       "sleep": null
@@ -12,42 +19,42 @@
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": null
+      "sleep": 511
     },
     {
       "date": "2026-05-07",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": null
+      "sleep": 511
     },
     {
       "date": "2026-05-06",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": 430
+      "sleep": 511
     },
     {
       "date": "2026-05-05",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": 449
+      "sleep": 511
     },
     {
       "date": "2026-05-04",
       "diet": false,
       "run": false,
       "lift": false,
-      "sleep": 406
+      "sleep": 511
     },
     {
       "date": "2026-05-03",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": 402
+      "sleep": 511
     },
     {
       "date": "2026-05-02",
@@ -622,14 +629,7 @@
       "run": false,
       "lift": false,
       "sleep": null
-    },
-    {
-      "date": "2026-02-09",
-      "diet": false,
-      "run": false,
-      "lift": false,
-      "sleep": null
     }
   ],
-  "updatedAt": "May 09, 2026 at 06:00 AM ET"
+  "updatedAt": "May 10, 2026 at 06:00 AM ET"
 }

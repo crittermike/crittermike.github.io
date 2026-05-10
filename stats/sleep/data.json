@@ -129,13 +129,25 @@
       "respLow": 13.5,
       "respHigh": 29.0,
       "notes": "Two 7+ hour nights in a row. Deep sleep over 1h, much better than recent norm."
+    },
+    {
+      "date": "2026-05-08",
+      "totalMin": 511,
+      "deepMin": 35,
+      "remMin": 107,
+      "coreMin": 369,
+      "awakeMin": 36,
+      "hrLow": 57,
+      "hrHigh": 74,
+      "respLow": 13.0,
+      "respHigh": 19.5
     }
   ],
-  "avg7": 418,
-  "avg30": 395,
+  "avg7": 440,
+  "avg30": 404,
   "goal": {
     "minHours": 7,
     "targetHours": 8
   },
-  "updatedAt": "May 09, 2026 at 06:00 AM ET"
+  "updatedAt": "May 10, 2026 at 06:00 AM ET"
 }

@@ -1,17 +1,18 @@
 {
   "month": "May 2026",
-  "totalSpend": 7279.62,
+  "totalSpend": 8017.09,
   "byCategory": {
     "Housing": 2300.09,
     "Kids": 1920.0,
-    "Shopping": 936.49,
+    "Shopping": 1058.28,
     "Food and Dining": 760.96,
+    "Uncategorized": 737.47,
     "Health and Medical": 617.14,
-    "Uncategorized": 221.43,
-    "Transportation": 163.16,
+    "Transportation": 184.36,
     "Fees and Interest": 141.62,
     "Subscriptions": 116.73,
-    "Pets": 102.0
+    "Pets": 102.0,
+    "Personal Care": 78.44
   },
   "lastMonth": {
     "Housing": 2865.09,
@@ -30,5 +31,5 @@
     "Personal Care": 262.54,
     "Insurance": 3371.78
   },
-  "updatedAt": "May 09, 2026 at 06:00 AM ET"
+  "updatedAt": "May 10, 2026 at 06:00 AM ET"
 }
