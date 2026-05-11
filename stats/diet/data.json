@@ -155,6 +155,12 @@
       "calories": 1620,
       "protein": 137,
       "fruitsVeggies": null
+    },
+    {
+      "date": "2026-05-10",
+      "calories": 1750,
+      "protein": 132,
+      "fruitsVeggies": 4
     }
   ],
   "weights": [
@@ -173,6 +179,10 @@
     {
       "date": "2026-05-09",
       "weight": 168.0
+    },
+    {
+      "date": "2026-05-10",
+      "weight": 169.0
     }
   ],
   "goals": {
@@ -181,5 +191,5 @@
     "fruitsVeggies": 5,
     "targetWeight": 156
   },
-  "updatedAt": "May 10, 2026 at 06:00 AM ET"
+  "updatedAt": "May 11, 2026 at 06:00 AM ET"
 }
