@@ -91,6 +91,123 @@
   ],
   "workouts": [
     {
+      "date": "2026-05-11",
+      "title": "[CritterBot] Monday Lower: Deadlift Focus",
+      "exercises": [
+        {
+          "name": "Deadlift (Barbell)",
+          "sets": [
+            {
+              "weight": 135,
+              "reps": 5
+            },
+            {
+              "weight": 175,
+              "reps": 3
+            },
+            {
+              "weight": 225,
+              "reps": 1
+            },
+            {
+              "weight": 185,
+              "reps": 5
+            },
+            {
+              "weight": 185,
+              "reps": 5
+            }
+          ]
+        },
+        {
+          "name": "Bulgarian Split Squat",
+          "sets": [
+            {
+              "weight": 60,
+              "reps": 10
+            },
+            {
+              "weight": 60,
+              "reps": 10
+            },
+            {
+              "weight": 60,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Hip Thrust (Barbell)",
+          "sets": [
+            {
+              "weight": 135,
+              "reps": 12
+            },
+            {
+              "weight": 135,
+              "reps": 12
+            },
+            {
+              "weight": 135,
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Seated Leg Curl (Machine)",
+          "sets": [
+            {
+              "weight": 70,
+              "reps": 12
+            },
+            {
+              "weight": 70,
+              "reps": 12
+            },
+            {
+              "weight": 70,
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Single Leg Standing Calf Raise (Dumbbell)",
+          "sets": [
+            {
+              "weight": 50,
+              "reps": 12
+            },
+            {
+              "weight": 50,
+              "reps": 12
+            },
+            {
+              "weight": 50,
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Plank",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 0
+            },
+            {
+              "weight": 0,
+              "reps": 0
+            },
+            {
+              "weight": 0,
+              "reps": 0
+            }
+          ]
+        }
+      ],
+      "volume": 14255
+    },
+    {
       "date": "2026-05-07",
       "title": "[CritterBot] Thu Active Recovery (Mobility + Core)",
       "exercises": [
@@ -891,5 +1008,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 11, 2026 at 06:00 AM ET"
+  "updatedAt": "May 12, 2026 at 06:00 AM ET"
 }
