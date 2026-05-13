@@ -87,6 +87,14 @@
       "elapsedMin": 103.3,
       "name": "Friday Morning Run",
       "elevGain": 1291
+    },
+    {
+      "date": "2026-05-12",
+      "distance": 3.39,
+      "pace": "9:40",
+      "elapsedMin": 32.8,
+      "name": "Tempo 2 Miles",
+      "elevGain": 111
     }
   ],
   "workouts": [
@@ -1008,5 +1016,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 12, 2026 at 06:00 AM ET"
+  "updatedAt": "May 13, 2026 at 06:00 AM ET"
 }

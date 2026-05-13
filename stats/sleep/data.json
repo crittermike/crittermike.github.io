@@ -141,13 +141,43 @@
       "hrHigh": 74,
       "respLow": 13.0,
       "respHigh": 19.5
+    },
+    {
+      "date": "2026-05-10",
+      "totalMin": 362,
+      "deepMin": 36,
+      "coreMin": 275,
+      "awakeMin": 28,
+      "notes": "Sick (cold, sore throat). Low REM."
+    },
+    {
+      "date": "2026-05-11",
+      "totalMin": 378,
+      "deepMin": 37,
+      "remMin": 108,
+      "coreMin": 233,
+      "awakeMin": 36,
+      "notes": "Sick day (cold, sore throat). Awake time elevated."
+    },
+    {
+      "date": "2026-05-12",
+      "totalMin": 395,
+      "deepMin": 41,
+      "remMin": 133,
+      "coreMin": 221,
+      "awakeMin": 9,
+      "hrLow": 56,
+      "hrHigh": 71,
+      "respLow": 13.0,
+      "respHigh": 22.5,
+      "notes": "Strong REM. Deep still under 45m."
     }
   ],
-  "avg7": 463,
-  "avg30": 404,
+  "avg7": 415,
+  "avg30": 399,
   "goal": {
     "minHours": 7,
     "targetHours": 8
   },
-  "updatedAt": "May 12, 2026 at 06:00 AM ET"
+  "updatedAt": "May 13, 2026 at 06:00 AM ET"
 }

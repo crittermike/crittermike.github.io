@@ -1,25 +1,32 @@
 {
   "days": [
     {
-      "date": "2026-05-12",
+      "date": "2026-05-13",
       "diet": false,
       "run": false,
       "lift": false,
       "sleep": null
     },
     {
+      "date": "2026-05-12",
+      "diet": true,
+      "run": false,
+      "lift": false,
+      "sleep": 395
+    },
+    {
       "date": "2026-05-11",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": null
+      "sleep": 378
     },
     {
       "date": "2026-05-10",
       "diet": true,
       "run": false,
       "lift": false,
-      "sleep": null
+      "sleep": 362
     },
     {
       "date": "2026-05-09",
@@ -622,14 +629,7 @@
       "run": false,
       "lift": false,
       "sleep": null
-    },
-    {
-      "date": "2026-02-12",
-      "diet": false,
-      "run": false,
-      "lift": false,
-      "sleep": null
     }
   ],
-  "updatedAt": "May 12, 2026 at 06:00 AM ET"
+  "updatedAt": "May 13, 2026 at 06:00 AM ET"
 }
