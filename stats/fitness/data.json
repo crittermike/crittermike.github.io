@@ -1,14 +1,6 @@
 {
   "runs": [
     {
-      "date": "2026-04-13",
-      "distance": 7.31,
-      "pace": "14:01",
-      "elapsedMin": 102.6,
-      "name": "6mi Long Run",
-      "elevGain": 865
-    },
-    {
       "date": "2026-04-15",
       "distance": 3.01,
       "pace": "11:41",
@@ -98,6 +90,136 @@
     }
   ],
   "workouts": [
+    {
+      "date": "2026-05-13",
+      "title": "[CritterBot] Wednesday Upper: Bench + Pull",
+      "exercises": [
+        {
+          "name": "Bench Press (Barbell)",
+          "sets": [
+            {
+              "weight": 115,
+              "reps": 5
+            },
+            {
+              "weight": 145,
+              "reps": 5
+            },
+            {
+              "weight": 145,
+              "reps": 5
+            },
+            {
+              "weight": 145,
+              "reps": 5
+            },
+            {
+              "weight": 145,
+              "reps": 5
+            }
+          ]
+        },
+        {
+          "name": "Negative Pull Up",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 7
+            },
+            {
+              "weight": 0,
+              "reps": 6
+            },
+            {
+              "weight": 0,
+              "reps": 6
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Row",
+          "sets": [
+            {
+              "weight": 110,
+              "reps": 8
+            },
+            {
+              "weight": 110,
+              "reps": 8
+            },
+            {
+              "weight": 110,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Arnold Press (Dumbbell)",
+          "sets": [
+            {
+              "weight": 50,
+              "reps": 12
+            },
+            {
+              "weight": 50,
+              "reps": 12
+            },
+            {
+              "weight": 50,
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Pinwheel Curl (Dumbbell)",
+          "sets": [
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Single Arm Tricep Extension (Dumbbell)",
+          "sets": [
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Rear Delt Reverse Fly (Dumbbell)",
+          "sets": [
+            {
+              "weight": 30,
+              "reps": 20
+            },
+            {
+              "weight": 30,
+              "reps": 20
+            }
+          ]
+        }
+      ],
+      "volume": 11515
+    },
     {
       "date": "2026-05-11",
       "title": "[CritterBot] Monday Lower: Deadlift Focus",
@@ -1016,5 +1138,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 13, 2026 at 06:00 AM ET"
+  "updatedAt": "May 14, 2026 at 06:00 AM ET"
 }

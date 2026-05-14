@@ -171,13 +171,26 @@
       "respLow": 13.0,
       "respHigh": 22.5,
       "notes": "Strong REM. Deep still under 45m."
+    },
+    {
+      "date": "2026-05-13",
+      "totalMin": 383,
+      "deepMin": 45,
+      "remMin": 64,
+      "coreMin": 274,
+      "awakeMin": 7,
+      "hrLow": 58,
+      "hrHigh": 71,
+      "respLow": 12.0,
+      "respHigh": 21.0,
+      "notes": "Deep finally hit 45m. REM dropped vs last night."
     }
   ],
-  "avg7": 415,
-  "avg30": 399,
+  "avg7": 406,
+  "avg30": 398,
   "goal": {
     "minHours": 7,
     "targetHours": 8
   },
-  "updatedAt": "May 13, 2026 at 06:00 AM ET"
+  "updatedAt": "May 14, 2026 at 06:00 AM ET"
 }
