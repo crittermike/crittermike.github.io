@@ -87,6 +87,14 @@
       "elapsedMin": 32.8,
       "name": "Tempo 2 Miles",
       "elevGain": 111
+    },
+    {
+      "date": "2026-05-14",
+      "distance": 3.5,
+      "pace": "11:14",
+      "elapsedMin": 39.4,
+      "name": "3.5mi Easy Run",
+      "elevGain": 129
     }
   ],
   "workouts": [
@@ -1061,47 +1069,6 @@
         }
       ],
       "volume": 3150
-    },
-    {
-      "date": "2026-04-14",
-      "title": "Morning workout \u2600\ufe0f",
-      "exercises": [
-        {
-          "name": "Bent Over Row (Barbell)",
-          "sets": [
-            {
-              "weight": 150,
-              "reps": 8
-            },
-            {
-              "weight": 150,
-              "reps": 8
-            },
-            {
-              "weight": 150,
-              "reps": 8
-            }
-          ]
-        },
-        {
-          "name": "Shoulder Press (Dumbbell)",
-          "sets": [
-            {
-              "weight": 70,
-              "reps": 9
-            },
-            {
-              "weight": 70,
-              "reps": 8
-            },
-            {
-              "weight": 70,
-              "reps": 8
-            }
-          ]
-        }
-      ],
-      "volume": 5350
     }
   ],
   "weights": [
@@ -1138,5 +1105,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 14, 2026 at 06:00 AM ET"
+  "updatedAt": "May 15, 2026 at 06:00 AM ET"
 }

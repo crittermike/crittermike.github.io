@@ -1,8 +1,15 @@
 {
   "days": [
     {
-      "date": "2026-05-14",
+      "date": "2026-05-15",
       "diet": false,
+      "run": false,
+      "lift": false,
+      "sleep": null
+    },
+    {
+      "date": "2026-05-14",
+      "diet": true,
       "run": false,
       "lift": false,
       "sleep": null
@@ -622,14 +629,7 @@
       "run": false,
       "lift": false,
       "sleep": null
-    },
-    {
-      "date": "2026-02-14",
-      "diet": false,
-      "run": false,
-      "lift": false,
-      "sleep": null
     }
   ],
-  "updatedAt": "May 14, 2026 at 06:00 AM ET"
+  "updatedAt": "May 15, 2026 at 06:00 AM ET"
 }
