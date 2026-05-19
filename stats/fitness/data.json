@@ -91,6 +91,111 @@
   ],
   "workouts": [
     {
+      "date": "2026-05-18",
+      "title": "[CritterBot] Monday: Back Squat Focus",
+      "exercises": [
+        {
+          "name": "Squat (Barbell)",
+          "sets": [
+            {
+              "weight": 135,
+              "reps": 2
+            },
+            {
+              "weight": 145,
+              "reps": 8
+            },
+            {
+              "weight": 145,
+              "reps": 8
+            },
+            {
+              "weight": 145,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Romanian Deadlift (Barbell)",
+          "sets": [
+            {
+              "weight": 145,
+              "reps": 10
+            },
+            {
+              "weight": 145,
+              "reps": 10
+            },
+            {
+              "weight": 145,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Lunge (Dumbbell)",
+          "sets": [
+            {
+              "weight": 80,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Leg Extension (Machine)",
+          "sets": [
+            {
+              "weight": 75,
+              "reps": 12
+            },
+            {
+              "weight": 75,
+              "reps": 9
+            },
+            {
+              "weight": 75,
+              "reps": 9
+            }
+          ]
+        },
+        {
+          "name": "Seated Leg Curl (Machine)",
+          "sets": [
+            {
+              "weight": 75,
+              "reps": 12
+            },
+            {
+              "weight": 75,
+              "reps": 11
+            },
+            {
+              "weight": 75,
+              "reps": 9
+            }
+          ]
+        },
+        {
+          "name": "Standing Calf Raise (Dumbbell)",
+          "sets": [
+            {
+              "weight": 120,
+              "reps": 15
+            },
+            {
+              "weight": 120,
+              "reps": 12
+            },
+            {
+              "weight": 120,
+              "reps": 14
+            }
+          ]
+        }
+      ],
+      "volume": 18470
+    },
+    {
       "date": "2026-05-13",
       "title": "[CritterBot] Wednesday Upper: Bench + Pull",
       "exercises": [
@@ -1097,5 +1202,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 18, 2026 at 06:00 AM ET"
+  "updatedAt": "May 19, 2026 at 06:00 AM ET"
 }
