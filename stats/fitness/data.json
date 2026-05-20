@@ -87,6 +87,14 @@
       "elapsedMin": 78.5,
       "name": "7mi Block Long Run",
       "elevGain": 261
+    },
+    {
+      "date": "2026-05-19",
+      "distance": 3.59,
+      "pace": "9:43",
+      "elapsedMin": 34.9,
+      "name": "Progression Run",
+      "elevGain": 137
     }
   ],
   "workouts": [
@@ -1202,5 +1210,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 19, 2026 at 06:00 AM ET"
+  "updatedAt": "May 20, 2026 at 06:00 AM ET"
 }
