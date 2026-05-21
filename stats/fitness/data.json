@@ -99,6 +99,106 @@
   ],
   "workouts": [
     {
+      "date": "2026-05-20",
+      "title": "[CritterBot] Wednesday: OHP + Vertical Pull",
+      "exercises": [
+        {
+          "name": "Overhead Press (Barbell)",
+          "sets": [
+            {
+              "weight": 45,
+              "reps": 10
+            },
+            {
+              "weight": 65,
+              "reps": 5
+            },
+            {
+              "weight": 85,
+              "reps": 8
+            },
+            {
+              "weight": 85,
+              "reps": 8
+            },
+            {
+              "weight": 85,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Incline Bench Press (Dumbbell)",
+          "sets": [
+            {
+              "weight": 85,
+              "reps": 8
+            },
+            {
+              "weight": 85,
+              "reps": 8
+            },
+            {
+              "weight": 85,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Pull Up (Band)",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 6
+            },
+            {
+              "weight": 0,
+              "reps": 6
+            },
+            {
+              "weight": 0,
+              "reps": 6
+            }
+          ]
+        },
+        {
+          "name": "Chest Supported Incline Row (Dumbbell)",
+          "sets": [
+            {
+              "weight": 90,
+              "reps": 10
+            },
+            {
+              "weight": 90,
+              "reps": 8
+            },
+            {
+              "weight": 90,
+              "reps": 8
+            }
+          ]
+        },
+        {
+          "name": "Lateral Raise (Dumbbell)",
+          "sets": [
+            {
+              "weight": 30,
+              "reps": 15
+            },
+            {
+              "weight": 30,
+              "reps": 15
+            },
+            {
+              "weight": 30,
+              "reps": 15
+            }
+          ]
+        }
+      ],
+      "volume": 8715
+    },
+    {
       "date": "2026-05-18",
       "title": "[CritterBot] Monday: Back Squat Focus",
       "exercises": [
@@ -1141,39 +1241,6 @@
         }
       ],
       "volume": 8970
-    },
-    {
-      "date": "2026-04-20",
-      "title": "Mega Full Body",
-      "exercises": [
-        {
-          "name": "Squat (Barbell)",
-          "sets": [
-            {
-              "weight": 175,
-              "reps": 6
-            },
-            {
-              "weight": 175,
-              "reps": 6
-            },
-            {
-              "weight": 175,
-              "reps": 6
-            }
-          ]
-        },
-        {
-          "name": "Chin Up",
-          "sets": [
-            {
-              "weight": 0,
-              "reps": 8
-            }
-          ]
-        }
-      ],
-      "volume": 3150
     }
   ],
   "weights": [
@@ -1210,5 +1277,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 20, 2026 at 06:00 AM ET"
+  "updatedAt": "May 21, 2026 at 06:00 AM ET"
 }
