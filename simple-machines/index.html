@@ -354,7 +354,7 @@ const DATA = [
   { name: "Wheel and Axle", emoji: "🚪",
     def: "A wheel attached to a rod (the axle).",
     examples: "Steering wheels, doorknobs, faucet handles, screwdrivers" },
-  { name: "Pulley", emoji: "🎏",
+  { name: "Pulley", emoji: "🛗",
     def: "A wheel with a groove and a rope that fits in the groove.",
     examples: "Flagpole wheel and rope" },
   { name: "Fixed Pulley", emoji: "📌",
@@ -647,7 +647,7 @@ function buildQuiz() {
   pulleyQs.forEach(q => {
     qs.push({
       question: q.question,
-      emoji: "🎏",
+      emoji: "🛗",
       choices: ["Fixed Pulley", "Moveable Pulley", "Wedge", "Lever"].sort(() => Math.random() - 0.5),
       correct: q.correct
     });
