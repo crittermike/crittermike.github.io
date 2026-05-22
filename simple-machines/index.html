@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas: Simple Machines!</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif;
+    background: linear-gradient(135deg, #ffe5b4 0%, #b4e5ff 100%);
+    min-height: 100vh;
+    padding: 16px;
+    color: #1a1a2e;
+  }
+  h1 {
+    text-align: center;
+    font-size: clamp(28px, 6vw, 48px);
+    color: #d62828;
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #555;
+  }
+  .mode-picker {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .mode-btn {
+    font-family: inherit;
+    font-size: clamp(16px, 3vw, 22px);
+    padding: 16px 28px;
+    border: 4px solid #1a1a2e;
+    background: #fff;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #1a1a2e;
+    transition: transform 0.1s, background 0.2s;
+    font-weight: bold;
+  }
+  .mode-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1a1a2e; }
+  .mode-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .mode-btn.active { background: #ffd166; }
+  .panel {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border: 5px solid #1a1a2e;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 8px 8px 0 #1a1a2e;
+    min-height: 400px;
+  }
+  .hidden { display: none !important; }
+
+  /* FLASHCARDS */
+  .card {
+    text-align: center;
+    padding: 20px;
+  }
+  .card-emoji {
+    font-size: clamp(80px, 18vw, 140px);
+    line-height: 1;
+    margin: 10px 0 20px;
+  }
+  .card-name {
+    font-size: clamp(28px, 6vw, 44px);
+    color: #d62828;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  .card-def {
+    font-size: clamp(18px, 4vw, 24px);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    color: #1a1a2e;
+  }
+  .card-examples {
+    font-size: clamp(16px, 3.5vw, 20px);
+    background: #fff3cd;
+    border: 3px dashed #ffa500;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+  .card-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .nav-btn {
+    font-family: inherit;
+    font-size: 24px;
+    padding: 14px 24px;
+    border: 4px solid #1a1a2e;
+    background: #ffd166;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 4px 4px 0 #1a1a2e;
+  }
+  .nav-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .card-count {
+    font-size: 18px;
+    color: #555;
+  }
+
+  /* MATCH GAME */
+  .match-instructions {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .match-col h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #d62828;
+  }
+  .match-item {
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #fff3cd;
+    border: 3px solid #1a1a2e;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .match-item:hover { background: #ffe08a; }
+  .match-item.selected { background: #06d6a0; color: #fff; border-color: #06d6a0; transform: scale(1.05); }
+  .match-item.correct { background: #06d6a0; color: #fff; border-color: #06d6a0; pointer-events: none; }
+  .match-item.wrong { background: #ef476f; color: #fff; animation: shake 0.4s; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  .match-status {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  /* QUIZ */
+  .quiz-question {
+    font-size: clamp(20px, 4.5vw, 28px);
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+  .quiz-emoji {
+    text-align: center;
+    font-size: clamp(60px, 14vw, 100px);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .quiz-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .quiz-choice {
+    font-family: inherit;
+    font-size: clamp(16px, 3.5vw, 20px);
+    padding: 18px;
+    border: 4px solid #1a1a2e;
+    background: #fff;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 4px 4px 0 #1a1a2e;
+    text-align: center;
+    min-height: 60px;
+  }
+  .quiz-choice:hover { background: #ffd166; }
+  .quiz-choice.correct { background: #06d6a0; color: #fff; }
+  .quiz-choice.wrong { background: #ef476f; color: #fff; }
+  .quiz-progress {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: #555;
+  }
+  .quiz-score {
+    text-align: center;
+    font-size: clamp(24px, 5vw, 34px);
+    color: #06a86a;
+    font-weight: bold;
+    margin: 14px 0;
+  }
+  .quiz-feedback {
+    text-align: center;
+    font-size: 24px;
+    margin: 16px 0;
+    min-height: 32px;
+    font-weight: bold;
+  }
+  .quiz-final {
+    text-align: center;
+    padding: 30px 10px;
+  }
+  .quiz-final .trophy {
+    font-size: 100px;
+  }
+  .quiz-final h2 {
+    font-size: 36px;
+    color: #d62828;
+    margin: 16px 0;
+  }
+  .quiz-final p {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .confetti {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+<h1>🛠️ Simple Machines! 🔧</h1>
+<p class="subtitle">For Thomas — Science 2, Lesson 51</p>
+
+<div class="mode-picker">
+  <button class="mode-btn active" data-mode="learn">📖 Learn</button>
+  <button class="mode-btn" data-mode="match">🎯 Match Game</button>
+  <button class="mode-btn" data-mode="quiz">⭐ Quiz Me!</button>
+</div>
+
+<div class="panel" id="panel"></div>
+
+<script>
+const DATA = [
+  {
+    name: "Simple Machine",
+    emoji: "🛠️",
+    def: "The most basic machines. They help us do work.",
+    examples: "All 6 simple machines: inclined plane, wedge, screw, lever, wheel and axle, pulley.",
+    examplesArr: ["all 6 basic machines"]
+  },
+  {
+    name: "Inclined Plane",
+    emoji: "📐",
+    def: "A flat surface that is sloped (tilted).",
+    examples: "🛝 Ramp, slide, hill",
+    examplesArr: ["ramp", "slide", "hill"]
+  },
+  {
+    name: "Wedge",
+    emoji: "🪓",
+    def: "An inclined plane that MOVES. It makes it easier to split or lift things.",
+    examples: "🪓 Ax head, knife, doorstop",
+    examplesArr: ["ax head", "knife", "doorstop"]
+  },
+  {
+    name: "Screw",
+    emoji: "🔩",
+    def: "An inclined plane wrapped around a cylinder.",
+    examples: "🔩 Screw, drill bit, jar lid",
+    examplesArr: ["drill bit", "screw", "jar lid"]
+  },
+  {
+    name: "Lever",
+    emoji: "🥄",
+    def: "A simple machine that makes it easier to lift or move objects.",
+    examples: "🛒 Hand truck, seesaw, crowbar, spoon",
+    examplesArr: ["hand truck", "seesaw", "crowbar"]
+  },
+  {
+    name: "Fulcrum",
+    emoji: "📍",
+    def: "The turning point around which a lever moves.",
+    examples: "The bar in the middle of a seesaw is the fulcrum.",
+    examplesArr: ["middle of seesaw"]
+  },
+  {
+    name: "Load",
+    emoji: "📦",
+    def: "The object being lifted or moved.",
+    examples: "The kid sitting on the seesaw is the load.",
+    examplesArr: ["thing being moved"]
+  },
+  {
+    name: "Effort",
+    emoji: "💪",
+    def: "The force used to move a load.",
+    examples: "When you push down to lift the seesaw, that push is the effort.",
+    examplesArr: ["the push or pull"]
+  },
+  {
+    name: "Wheel and Axle",
+    emoji: "🚪",
+    def: "A wheel attached to a rod (the axle).",
+    examples: "🚪 Doorknob, steering wheel, faucet handle, screwdriver",
+    examplesArr: ["doorknob", "steering wheel", "faucet handle"]
+  },
+  {
+    name: "Pulley",
+    emoji: "🎏",
+    def: "A wheel with a groove around the rim and a rope that fits in the groove.",
+    examples: "🚩 Flagpole, window blinds, crane",
+    examplesArr: ["flagpole wheel and rope", "flagpole", "blinds"]
+  },
+  {
+    name: "Fixed Pulley",
+    emoji: "📌",
+    def: "A pulley that does NOT move.",
+    examples: "A flagpole pulley stays in one spot.",
+    examplesArr: ["flagpole pulley"]
+  },
+  {
+    name: "Moveable Pulley",
+    emoji: "🪝",
+    def: "A pulley that MOVES along a rope.",
+    examples: "A crane hook that moves up and down.",
+    examplesArr: ["crane hook"]
+  }
+];
+
+// Examples used for the match game and "Name the Machine" quiz
+const EXAMPLES = [
+  { example: "🛝 Ramp",            answer: "Inclined Plane" },
+  { example: "🪓 Ax head",          answer: "Wedge" },
+  { example: "🔩 Drill bit",        answer: "Screw" },
+  { example: "🛒 Hand truck",       answer: "Lever" },
+  { example: "🚪 Doorknob",         answer: "Wheel and Axle" },
+  { example: "🚩 Flagpole rope",    answer: "Pulley" },
+  { example: "🪜 Slide",            answer: "Inclined Plane" },
+  { example: "🍴 Knife",            answer: "Wedge" },
+  { example: "🪛 Screwdriver",      answer: "Wheel and Axle" },
+  { example: "⚖️ Seesaw",           answer: "Lever" }
+];
+
+const panel = document.getElementById('panel');
+const modeBtns = document.querySelectorAll('.mode-btn');
+
+modeBtns.forEach(b => b.addEventListener('click', () => {
+  modeBtns.forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  render(b.dataset.mode);
+}));
+
+function render(mode) {
+  panel.innerHTML = '';
+  if (mode === 'learn') renderLearn();
+  if (mode === 'match') renderMatch();
+  if (mode === 'quiz') renderQuiz();
+}
+
+/* ===== LEARN MODE ===== */
+let learnIdx = 0;
+function renderLearn() {
+  const item = DATA[learnIdx];
+  panel.innerHTML = `
+    <div class="card">
+      <div class="card-emoji">${item.emoji}</div>
+      <div class="card-name">${item.name}</div>
+      <div class="card-def">${item.def}</div>
+      <div class="card-examples"><strong>Examples:</strong> ${item.examples}</div>
+      <div class="card-nav">
+        <button class="nav-btn" id="prev">← Back</button>
+        <span class="card-count">${learnIdx + 1} / ${DATA.length}</span>
+        <button class="nav-btn" id="next">Next →</button>
+      </div>
+    </div>`;
+  document.getElementById('prev').onclick = () => {
+    learnIdx = (learnIdx - 1 + DATA.length) % DATA.length;
+    renderLearn();
+  };
+  document.getElementById('next').onclick = () => {
+    learnIdx = (learnIdx + 1) % DATA.length;
+    renderLearn();
+  };
+}
+
+/* ===== MATCH GAME ===== */
+let matchSelected = null;
+let matchSolved = 0;
+let matchSet = [];
+function renderMatch() {
+  matchSolved = 0;
+  matchSelected = null;
+  // pick 5 random examples
+  const shuffled = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 5);
+  matchSet = shuffled;
+  const examples = shuffled.map(x => x.example);
+  const answers = shuffled.map(x => x.answer).sort(() => Math.random() - 0.5);
+
+  panel.innerHTML = `
+    <div class="match-instructions">Tap an example, then tap the matching machine!</div>
+    <div class="match-grid">
+      <div class="match-col">
+        <h3>Example</h3>
+        ${examples.map((e, i) => `<div class="match-item" data-side="ex" data-id="${i}">${e}</div>`).join('')}
+      </div>
+      <div class="match-col">
+        <h3>Machine</h3>
+        ${answers.map((a, i) => `<div class="match-item" data-side="ans" data-name="${a}">${a}</div>`).join('')}
+      </div>
+    </div>
+    <div class="match-status" id="match-status">Solved: 0 / 5</div>
+    <div style="text-align:center; margin-top:14px;">
+      <button class="nav-btn" id="match-restart">🔄 New Round</button>
+    </div>`;
+
+  document.querySelectorAll('.match-item').forEach(el => {
+    el.addEventListener('click', () => handleMatchClick(el));
+  });
+  document.getElementById('match-restart').onclick = renderMatch;
+}
+
+function handleMatchClick(el) {
+  if (el.classList.contains('correct')) return;
+  if (!matchSelected) {
+    matchSelected = el;
+    el.classList.add('selected');
+    return;
+  }
+  if (matchSelected === el) {
+    el.classList.remove('selected');
+    matchSelected = null;
+    return;
+  }
+  // need one of each side
+  if (matchSelected.dataset.side === el.dataset.side) {
+    matchSelected.classList.remove('selected');
+    matchSelected = el;
+    el.classList.add('selected');
+    return;
+  }
+  const ex = matchSelected.dataset.side === 'ex' ? matchSelected : el;
+  const ans = matchSelected.dataset.side === 'ans' ? matchSelected : el;
+  const expected = matchSet[parseInt(ex.dataset.id)].answer;
+  if (ans.dataset.name === expected) {
+    ex.classList.remove('selected');
+    ans.classList.remove('selected');
+    ex.classList.add('correct');
+    ans.classList.add('correct');
+    matchSelected = null;
+    matchSolved++;
+    document.getElementById('match-status').textContent = `Solved: ${matchSolved} / 5`;
+    if (matchSolved === 5) {
+      celebrate();
+      document.getElementById('match-status').innerHTML = `🎉 YOU GOT THEM ALL! 🎉`;
+    }
+  } else {
+    ex.classList.remove('selected');
+    ans.classList.remove('selected');
+    ans.classList.add('wrong');
+    setTimeout(() => ans.classList.remove('wrong'), 500);
+    matchSelected = null;
+  }
+}
+
+/* ===== QUIZ ===== */
+let quizQuestions = [];
+let quizIdx = 0;
+let quizScore = 0;
+
+function buildQuiz() {
+  const qs = [];
+
+  // Type A: definition -> name (6 questions)
+  const defQs = [...DATA].sort(() => Math.random() - 0.5).slice(0, 6);
+  defQs.forEach(d => {
+    const wrong = DATA.filter(x => x.name !== d.name).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.name);
+    const choices = [d.name, ...wrong].sort(() => Math.random() - 0.5);
+    qs.push({
+      question: d.def,
+      emoji: "❓",
+      choices,
+      correct: d.name
+    });
+  });
+
+  // Type B: example -> machine (4 questions)
+  const exQs = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 4);
+  const machineTypes = ["Inclined Plane", "Wedge", "Screw", "Lever", "Wheel and Axle", "Pulley"];
+  exQs.forEach(ex => {
+    const wrong = machineTypes.filter(x => x !== ex.answer).sort(() => Math.random() - 0.5).slice(0, 3);
+    const choices = [ex.answer, ...wrong].sort(() => Math.random() - 0.5);
+    qs.push({
+      question: `What kind of simple machine is this?`,
+      emoji: ex.example.split(' ')[0],
+      choices,
+      correct: ex.answer
+    });
+  });
+
+  return qs.sort(() => Math.random() - 0.5);
+}
+
+function renderQuiz() {
+  quizQuestions = buildQuiz();
+  quizIdx = 0;
+  quizScore = 0;
+  showQuestion();
+}
+
+function showQuestion() {
+  if (quizIdx >= quizQuestions.length) return showQuizFinal();
+  const q = quizQuestions[quizIdx];
+  panel.innerHTML = `
+    <div class="quiz-progress">Question ${quizIdx + 1} of ${quizQuestions.length} • Score: ${quizScore}</div>
+    <div class="quiz-emoji">${q.emoji}</div>
+    <div class="quiz-question">${q.question}</div>
+    <div class="quiz-choices">
+      ${q.choices.map(c => `<button class="quiz-choice" data-c="${c}">${c}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qf"></div>`;
+  document.querySelectorAll('.quiz-choice').forEach(b => {
+    b.addEventListener('click', () => handleAnswer(b, q));
+  });
+}
+
+function handleAnswer(btn, q) {
+  const all = document.querySelectorAll('.quiz-choice');
+  all.forEach(b => b.disabled = true);
+  const fb = document.getElementById('qf');
+  if (btn.dataset.c === q.correct) {
+    btn.classList.add('correct');
+    quizScore++;
+    fb.textContent = "✅ YES! Great job!";
+    fb.style.color = "#06a86a";
+  } else {
+    btn.classList.add('wrong');
+    all.forEach(b => { if (b.dataset.c === q.correct) b.classList.add('correct'); });
+    fb.textContent = `❌ The answer was: ${q.correct}`;
+    fb.style.color = "#ef476f";
+  }
+  setTimeout(() => {
+    quizIdx++;
+    showQuestion();
+  }, 1800);
+}
+
+function showQuizFinal() {
+  let trophy, msg;
+  const pct = quizScore / quizQuestions.length;
+  if (pct === 1)      { trophy = "🏆"; msg = "PERFECT SCORE! You're a Simple Machines MASTER!"; }
+  else if (pct >= 0.8){ trophy = "🥇"; msg = "AMAZING! You really know this stuff!"; }
+  else if (pct >= 0.6){ trophy = "🥈"; msg = "Great job! A little more practice and you'll have it!"; }
+  else                { trophy = "💪"; msg = "Keep practicing! Try the Learn cards again!"; }
+  panel.innerHTML = `
+    <div class="quiz-final">
+      <div class="trophy">${trophy}</div>
+      <h2>You scored ${quizScore} / ${quizQuestions.length}!</h2>
+      <p>${msg}</p>
+      <button class="nav-btn" id="quiz-again">🔄 Play Again</button>
+    </div>`;
+  document.getElementById('quiz-again').onclick = renderQuiz;
+  if (pct >= 0.8) celebrate();
+}
+
+/* ===== CONFETTI ===== */
+function celebrate() {
+  const colors = ['#ff6b6b','#ffd166','#06d6a0','#118ab2','#ef476f'];
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '-20px';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(c);
+    const dur = 2000 + Math.random() * 2000;
+    c.animate([
+      { transform: c.style.transform + ' translateY(0)', opacity: 1 },
+      { transform: c.style.transform + ` translateY(${window.innerHeight + 50}px)`, opacity: 0 }
+    ], { duration: dur, easing: 'ease-out' }).onfinish = () => c.remove();
+  }
+}
+
+/* init */
+render('learn');
+</script>
+</body>
+</html>
