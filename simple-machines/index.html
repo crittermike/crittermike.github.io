@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thomas: Simple Machines!</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif;
     background: linear-gradient(135deg, #ffe5b4 0%, #b4e5ff 100%);
@@ -18,34 +18,52 @@
     font-size: clamp(28px, 6vw, 48px);
     color: #d62828;
     text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .subtitle {
     text-align: center;
     font-size: 18px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     color: #555;
   }
+  .stats-bar {
+    max-width: 800px;
+    margin: 0 auto 14px;
+    display: flex;
+    justify-content: space-around;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .stat { display: flex; align-items: center; gap: 4px; }
   .mode-picker {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
   .mode-btn {
     font-family: inherit;
-    font-size: clamp(16px, 3vw, 22px);
-    padding: 16px 28px;
+    font-size: clamp(15px, 2.8vw, 20px);
+    padding: 14px 22px;
     border: 4px solid #1a1a2e;
     background: #fff;
     border-radius: 16px;
     cursor: pointer;
     box-shadow: 4px 4px 0 #1a1a2e;
-    transition: transform 0.1s, background 0.2s;
+    transition: transform 0.1s, background 0.15s;
     font-weight: bold;
   }
-  .mode-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1a1a2e; }
+  /* Only show hover on devices that can actually hover */
+  @media (hover: hover) {
+    .mode-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1a1a2e; }
+  }
   .mode-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
   .mode-btn.active { background: #ffd166; }
   .panel {
@@ -61,10 +79,7 @@
   .hidden { display: none !important; }
 
   /* FLASHCARDS */
-  .card {
-    text-align: center;
-    padding: 20px;
-  }
+  .card { text-align: center; padding: 20px; }
   .card-emoji {
     font-size: clamp(80px, 18vw, 140px);
     line-height: 1;
@@ -80,7 +95,6 @@
     font-size: clamp(18px, 4vw, 24px);
     line-height: 1.5;
     margin-bottom: 16px;
-    color: #1a1a2e;
   }
   .card-examples {
     font-size: clamp(16px, 3.5vw, 20px);
@@ -99,8 +113,8 @@
   }
   .nav-btn {
     font-family: inherit;
-    font-size: 24px;
-    padding: 14px 24px;
+    font-size: 22px;
+    padding: 14px 22px;
     border: 4px solid #1a1a2e;
     background: #ffd166;
     border-radius: 16px;
@@ -109,10 +123,7 @@
     box-shadow: 4px 4px 0 #1a1a2e;
   }
   .nav-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
-  .card-count {
-    font-size: 18px;
-    color: #555;
-  }
+  .card-count { font-size: 18px; color: #555; }
 
   /* MATCH GAME */
   .match-instructions {
@@ -139,19 +150,26 @@
     border: 3px solid #1a1a2e;
     border-radius: 12px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 17px;
     text-align: center;
     transition: all 0.15s;
     user-select: none;
   }
-  .match-item:hover { background: #ffe08a; }
+  @media (hover: hover) {
+    .match-item:hover { background: #ffe08a; }
+  }
   .match-item.selected { background: #06d6a0; color: #fff; border-color: #06d6a0; transform: scale(1.05); }
-  .match-item.correct { background: #06d6a0; color: #fff; border-color: #06d6a0; pointer-events: none; }
+  .match-item.correct { background: #06d6a0; color: #fff; border-color: #06d6a0; pointer-events: none; animation: pop 0.4s; }
   .match-item.wrong { background: #ef476f; color: #fff; animation: shake 0.4s; }
   @keyframes shake {
     0%,100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
     75% { transform: translateX(8px); }
+  }
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
   }
   .match-status {
     text-align: center;
@@ -164,7 +182,7 @@
   .quiz-question {
     font-size: clamp(20px, 4.5vw, 28px);
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     font-weight: bold;
     line-height: 1.4;
   }
@@ -172,7 +190,7 @@
     text-align: center;
     font-size: clamp(60px, 14vw, 100px);
     line-height: 1;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .quiz-choices {
     display: grid;
@@ -181,7 +199,7 @@
   }
   .quiz-choice {
     font-family: inherit;
-    font-size: clamp(16px, 3.5vw, 20px);
+    font-size: clamp(15px, 3.2vw, 19px);
     padding: 18px;
     border: 4px solid #1a1a2e;
     background: #fff;
@@ -191,45 +209,80 @@
     box-shadow: 4px 4px 0 #1a1a2e;
     text-align: center;
     min-height: 60px;
+    transition: transform 0.08s, background 0.15s;
   }
-  .quiz-choice:hover { background: #ffd166; }
-  .quiz-choice.correct { background: #06d6a0; color: #fff; }
+  /* Removed hover on quiz choices entirely to avoid the sticky-yellow tap state */
+  .quiz-choice:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .quiz-choice.correct { background: #06d6a0; color: #fff; animation: pop 0.4s; }
   .quiz-choice.wrong { background: #ef476f; color: #fff; }
   .quiz-progress {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 14px;
+    font-size: 17px;
+    margin-bottom: 10px;
     color: #555;
   }
-  .quiz-score {
-    text-align: center;
-    font-size: clamp(24px, 5vw, 34px);
-    color: #06a86a;
-    font-weight: bold;
-    margin: 14px 0;
+  .quiz-bar {
+    height: 14px;
+    background: #eee;
+    border: 2px solid #1a1a2e;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .quiz-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #06d6a0, #118ab2);
+    transition: width 0.3s;
   }
   .quiz-feedback {
     text-align: center;
-    font-size: 24px;
-    margin: 16px 0;
-    min-height: 32px;
+    font-size: 22px;
+    margin: 14px 0;
+    min-height: 30px;
     font-weight: bold;
+  }
+  .quiz-streak {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #ff6b35;
+    font-weight: bold;
+    min-height: 24px;
+  }
+  .quiz-hearts {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
   }
   .quiz-final {
     text-align: center;
-    padding: 30px 10px;
+    padding: 20px 10px;
   }
   .quiz-final .trophy {
     font-size: 100px;
+    animation: pop 0.6s;
   }
   .quiz-final h2 {
-    font-size: 36px;
+    font-size: clamp(26px, 5vw, 36px);
     color: #d62828;
     margin: 16px 0;
   }
   .quiz-final p {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  .quiz-final .stars {
+    font-size: 50px;
+    margin: 10px 0;
+    letter-spacing: 8px;
+  }
+  .new-best {
     font-size: 22px;
-    margin-bottom: 20px;
+    color: #06a86a;
+    margin: 10px 0;
+    animation: pop 0.6s;
+    font-weight: bold;
   }
   .confetti {
     position: fixed;
@@ -238,12 +291,31 @@
     pointer-events: none;
     z-index: 9999;
   }
+  .floater {
+    position: fixed;
+    font-size: 40px;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 9998;
+    animation: floatUp 1.2s ease-out forwards;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-120px); opacity: 0; }
+  }
 </style>
 </head>
 <body>
 
 <h1>🛠️ Simple Machines! 🔧</h1>
 <p class="subtitle">For Thomas — Science 2, Lesson 51</p>
+
+<div class="stats-bar">
+  <span class="stat">⭐ <span id="stat-xp">0</span> XP</span>
+  <span class="stat">🏆 Level <span id="stat-level">1</span></span>
+  <span class="stat">🔥 <span id="stat-streak">0</span></span>
+  <span class="stat">🥇 Best: <span id="stat-best">0</span></span>
+</div>
 
 <div class="mode-picker">
   <button class="mode-btn active" data-mode="learn">📖 Learn</button>
@@ -255,93 +327,44 @@
 
 <script>
 const DATA = [
-  {
-    name: "Simple Machine",
-    emoji: "🛠️",
+  { name: "Simple Machine", emoji: "🛠️",
     def: "The most basic machines. They help us do work.",
-    examples: "All 6 simple machines: inclined plane, wedge, screw, lever, wheel and axle, pulley.",
-    examplesArr: ["all 6 basic machines"]
-  },
-  {
-    name: "Inclined Plane",
-    emoji: "📐",
+    examples: "All 6: inclined plane, wedge, screw, lever, wheel and axle, pulley." },
+  { name: "Inclined Plane", emoji: "📐",
     def: "A flat surface that is sloped (tilted).",
-    examples: "🛝 Ramp, slide, hill",
-    examplesArr: ["ramp", "slide", "hill"]
-  },
-  {
-    name: "Wedge",
-    emoji: "🪓",
-    def: "An inclined plane that MOVES. It makes it easier to split or lift things.",
-    examples: "🪓 Ax head, knife, doorstop",
-    examplesArr: ["ax head", "knife", "doorstop"]
-  },
-  {
-    name: "Screw",
-    emoji: "🔩",
+    examples: "🛝 Ramp, slide, hill, stairs" },
+  { name: "Wedge", emoji: "🪓",
+    def: "An inclined plane that MOVES. It splits or lifts things.",
+    examples: "🪓 Ax head, knife, doorstop, nail tip, teeth" },
+  { name: "Screw", emoji: "🔩",
     def: "An inclined plane wrapped around a cylinder.",
-    examples: "🔩 Screw, drill bit, jar lid",
-    examplesArr: ["drill bit", "screw", "jar lid"]
-  },
-  {
-    name: "Lever",
-    emoji: "🥄",
+    examples: "🔩 Screw, drill bit, jar lid, light bulb, bolt" },
+  { name: "Lever", emoji: "🥄",
     def: "A simple machine that makes it easier to lift or move objects.",
-    examples: "🛒 Hand truck, seesaw, crowbar, spoon",
-    examplesArr: ["hand truck", "seesaw", "crowbar"]
-  },
-  {
-    name: "Fulcrum",
-    emoji: "📍",
+    examples: "🛒 Hand truck, seesaw, crowbar, spoon, scissors" },
+  { name: "Fulcrum", emoji: "📍",
     def: "The turning point around which a lever moves.",
-    examples: "The bar in the middle of a seesaw is the fulcrum.",
-    examplesArr: ["middle of seesaw"]
-  },
-  {
-    name: "Load",
-    emoji: "📦",
+    examples: "The bar in the middle of a seesaw is the fulcrum." },
+  { name: "Load", emoji: "📦",
     def: "The object being lifted or moved.",
-    examples: "The kid sitting on the seesaw is the load.",
-    examplesArr: ["thing being moved"]
-  },
-  {
-    name: "Effort",
-    emoji: "💪",
+    examples: "The kid sitting on the seesaw is the load." },
+  { name: "Effort", emoji: "💪",
     def: "The force used to move a load.",
-    examples: "When you push down to lift the seesaw, that push is the effort.",
-    examplesArr: ["the push or pull"]
-  },
-  {
-    name: "Wheel and Axle",
-    emoji: "🚪",
+    examples: "When you push down to lift the seesaw, that push is the effort." },
+  { name: "Wheel and Axle", emoji: "🚪",
     def: "A wheel attached to a rod (the axle).",
-    examples: "🚪 Doorknob, steering wheel, faucet handle, screwdriver",
-    examplesArr: ["doorknob", "steering wheel", "faucet handle"]
-  },
-  {
-    name: "Pulley",
-    emoji: "🎏",
-    def: "A wheel with a groove around the rim and a rope that fits in the groove.",
-    examples: "🚩 Flagpole, window blinds, crane",
-    examplesArr: ["flagpole wheel and rope", "flagpole", "blinds"]
-  },
-  {
-    name: "Fixed Pulley",
-    emoji: "📌",
+    examples: "🚪 Doorknob, steering wheel, faucet handle, screwdriver, bike wheel" },
+  { name: "Pulley", emoji: "🎏",
+    def: "A wheel with a groove and a rope that fits in the groove.",
+    examples: "🚩 Flagpole, window blinds, crane, elevator" },
+  { name: "Fixed Pulley", emoji: "📌",
     def: "A pulley that does NOT move.",
-    examples: "A flagpole pulley stays in one spot.",
-    examplesArr: ["flagpole pulley"]
-  },
-  {
-    name: "Moveable Pulley",
-    emoji: "🪝",
+    examples: "A flagpole pulley stays in one spot." },
+  { name: "Moveable Pulley", emoji: "🪝",
     def: "A pulley that MOVES along a rope.",
-    examples: "A crane hook that moves up and down.",
-    examplesArr: ["crane hook"]
-  }
+    examples: "A crane hook that moves up and down." }
 ];
 
-// Examples used for the match game and "Name the Machine" quiz
 const EXAMPLES = [
   { example: "🛝 Ramp",            answer: "Inclined Plane" },
   { example: "🪓 Ax head",          answer: "Wedge" },
@@ -352,11 +375,95 @@ const EXAMPLES = [
   { example: "🪜 Slide",            answer: "Inclined Plane" },
   { example: "🍴 Knife",            answer: "Wedge" },
   { example: "🪛 Screwdriver",      answer: "Wheel and Axle" },
-  { example: "⚖️ Seesaw",           answer: "Lever" }
+  { example: "⚖️ Seesaw",           answer: "Lever" },
+  { example: "🚗 Steering wheel",   answer: "Wheel and Axle" },
+  { example: "🪜 Stairs",           answer: "Inclined Plane" },
+  { example: "💡 Light bulb base",  answer: "Screw" },
+  { example: "✂️ Scissors blade",   answer: "Wedge" },
+  { example: "🥄 Spoon",            answer: "Lever" },
+  { example: "🪟 Window blinds",    answer: "Pulley" },
+  { example: "🚲 Bike wheel",       answer: "Wheel and Axle" },
+  { example: "🦷 Front teeth",      answer: "Wedge" },
+  { example: "🏗️ Crane",            answer: "Pulley" },
+  { example: "🗻 Hill",             answer: "Inclined Plane" },
+  { example: "🔧 Bolt",             answer: "Screw" },
+  { example: "🦯 Crowbar",          answer: "Lever" }
 ];
+
+const MACHINES = ["Inclined Plane", "Wedge", "Screw", "Lever", "Wheel and Axle", "Pulley"];
 
 const panel = document.getElementById('panel');
 const modeBtns = document.querySelectorAll('.mode-btn');
+
+/* ===== PERSISTENT STATS ===== */
+const STORE_KEY = 'thomas-sm-stats';
+let stats = loadStats();
+function loadStats() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+    return { xp: s.xp || 0, best: s.best || 0, totalQuizzes: s.totalQuizzes || 0 };
+  } catch { return { xp: 0, best: 0, totalQuizzes: 0 }; }
+}
+function saveStats() { localStorage.setItem(STORE_KEY, JSON.stringify(stats)); }
+function levelFor(xp) { return Math.floor(xp / 50) + 1; }
+function addXP(n, evt) {
+  const oldLvl = levelFor(stats.xp);
+  stats.xp += n;
+  saveStats();
+  updateStatsBar();
+  if (evt) floatXP(n, evt);
+  const newLvl = levelFor(stats.xp);
+  if (newLvl > oldLvl) levelUp(newLvl);
+}
+function updateStatsBar() {
+  document.getElementById('stat-xp').textContent = stats.xp;
+  document.getElementById('stat-level').textContent = levelFor(stats.xp);
+  document.getElementById('stat-best').textContent = stats.best;
+}
+function levelUp(lvl) {
+  const f = document.createElement('div');
+  f.className = 'floater';
+  f.style.left = '50%';
+  f.style.top = '40%';
+  f.style.transform = 'translateX(-50%)';
+  f.style.color = '#ffd700';
+  f.style.fontSize = '50px';
+  f.style.textShadow = '2px 2px 0 #000';
+  f.textContent = `🎉 LEVEL ${lvl}! 🎉`;
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 1200);
+  celebrate();
+}
+function floatXP(n, evt) {
+  const f = document.createElement('div');
+  f.className = 'floater';
+  f.style.left = (evt.clientX || window.innerWidth / 2) + 'px';
+  f.style.top = (evt.clientY || window.innerHeight / 2) + 'px';
+  f.style.color = '#ffd700';
+  f.style.textShadow = '2px 2px 0 #000';
+  f.textContent = `+${n} XP`;
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 1200);
+}
+
+/* ===== SOUNDS ===== */
+let audioCtx;
+function beep(freq, duration = 0.15, type = 'sine') {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(0.2, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + duration);
+  } catch {}
+}
+function sndCorrect() { beep(660, 0.1); setTimeout(() => beep(880, 0.15), 90); }
+function sndWrong() { beep(200, 0.25, 'square'); }
+function sndWin() { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => beep(f, 0.2), i * 100)); }
 
 modeBtns.forEach(b => b.addEventListener('click', () => {
   modeBtns.forEach(x => x.classList.remove('active'));
@@ -373,8 +480,13 @@ function render(mode) {
 
 /* ===== LEARN MODE ===== */
 let learnIdx = 0;
+let learnSeen = new Set();
 function renderLearn() {
   const item = DATA[learnIdx];
+  if (!learnSeen.has(learnIdx)) {
+    learnSeen.add(learnIdx);
+    addXP(1);
+  }
   panel.innerHTML = `
     <div class="card">
       <div class="card-emoji">${item.emoji}</div>
@@ -401,11 +513,12 @@ function renderLearn() {
 let matchSelected = null;
 let matchSolved = 0;
 let matchSet = [];
+let matchMistakes = 0;
 function renderMatch() {
   matchSolved = 0;
   matchSelected = null;
-  // pick 5 random examples
-  const shuffled = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 5);
+  matchMistakes = 0;
+  const shuffled = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 6);
   matchSet = shuffled;
   const examples = shuffled.map(x => x.example);
   const answers = shuffled.map(x => x.answer).sort(() => Math.random() - 0.5);
@@ -419,21 +532,21 @@ function renderMatch() {
       </div>
       <div class="match-col">
         <h3>Machine</h3>
-        ${answers.map((a, i) => `<div class="match-item" data-side="ans" data-name="${a}">${a}</div>`).join('')}
+        ${answers.map((a) => `<div class="match-item" data-side="ans" data-name="${a}">${a}</div>`).join('')}
       </div>
     </div>
-    <div class="match-status" id="match-status">Solved: 0 / 5</div>
+    <div class="match-status" id="match-status">Solved: 0 / 6 • Mistakes: 0</div>
     <div style="text-align:center; margin-top:14px;">
       <button class="nav-btn" id="match-restart">🔄 New Round</button>
     </div>`;
 
   document.querySelectorAll('.match-item').forEach(el => {
-    el.addEventListener('click', () => handleMatchClick(el));
+    el.addEventListener('click', (e) => handleMatchClick(el, e));
   });
   document.getElementById('match-restart').onclick = renderMatch;
 }
 
-function handleMatchClick(el) {
+function handleMatchClick(el, evt) {
   if (el.classList.contains('correct')) return;
   if (!matchSelected) {
     matchSelected = el;
@@ -445,7 +558,6 @@ function handleMatchClick(el) {
     matchSelected = null;
     return;
   }
-  // need one of each side
   if (matchSelected.dataset.side === el.dataset.side) {
     matchSelected.classList.remove('selected');
     matchSelected = el;
@@ -462,17 +574,26 @@ function handleMatchClick(el) {
     ans.classList.add('correct');
     matchSelected = null;
     matchSolved++;
-    document.getElementById('match-status').textContent = `Solved: ${matchSolved} / 5`;
-    if (matchSolved === 5) {
+    sndCorrect();
+    addXP(2, evt);
+    document.getElementById('match-status').textContent = `Solved: ${matchSolved} / 6 • Mistakes: ${matchMistakes}`;
+    if (matchSolved === 6) {
       celebrate();
-      document.getElementById('match-status').innerHTML = `🎉 YOU GOT THEM ALL! 🎉`;
+      sndWin();
+      const bonus = matchMistakes === 0 ? 15 : 5;
+      addXP(bonus, evt);
+      document.getElementById('match-status').innerHTML =
+        `🎉 ALL DONE! 🎉<br>${matchMistakes === 0 ? '✨ PERFECT! +15 bonus XP! ✨' : `+${bonus} bonus XP`}`;
     }
   } else {
     ex.classList.remove('selected');
     ans.classList.remove('selected');
     ans.classList.add('wrong');
+    matchMistakes++;
+    sndWrong();
     setTimeout(() => ans.classList.remove('wrong'), 500);
     matchSelected = null;
+    document.getElementById('match-status').textContent = `Solved: ${matchSolved} / 6 • Mistakes: ${matchMistakes}`;
   }
 }
 
@@ -480,122 +601,211 @@ function handleMatchClick(el) {
 let quizQuestions = [];
 let quizIdx = 0;
 let quizScore = 0;
+let quizStreak = 0;
+let quizMaxStreak = 0;
+let quizHearts = 3;
 
 function buildQuiz() {
   const qs = [];
 
-  // Type A: definition -> name (6 questions)
+  // Type A: definition -> name
   const defQs = [...DATA].sort(() => Math.random() - 0.5).slice(0, 6);
   defQs.forEach(d => {
     const wrong = DATA.filter(x => x.name !== d.name).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.name);
-    const choices = [d.name, ...wrong].sort(() => Math.random() - 0.5);
     qs.push({
       question: d.def,
       emoji: "❓",
-      choices,
+      choices: [d.name, ...wrong].sort(() => Math.random() - 0.5),
       correct: d.name
     });
   });
 
-  // Type B: example -> machine (4 questions)
-  const exQs = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 4);
-  const machineTypes = ["Inclined Plane", "Wedge", "Screw", "Lever", "Wheel and Axle", "Pulley"];
+  // Type B: example -> machine
+  const exQs = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 6);
   exQs.forEach(ex => {
-    const wrong = machineTypes.filter(x => x !== ex.answer).sort(() => Math.random() - 0.5).slice(0, 3);
-    const choices = [ex.answer, ...wrong].sort(() => Math.random() - 0.5);
+    const wrong = MACHINES.filter(x => x !== ex.answer).sort(() => Math.random() - 0.5).slice(0, 3);
     qs.push({
       question: `What kind of simple machine is this?`,
       emoji: ex.example.split(' ')[0],
-      choices,
+      choices: [ex.answer, ...wrong].sort(() => Math.random() - 0.5),
       correct: ex.answer
     });
   });
 
-  return qs.sort(() => Math.random() - 0.5);
+  // Type C: lever parts (fulcrum, load, effort)
+  const leverQs = [
+    { question: "The turning point on a seesaw is called the...", emoji: "📍", correct: "Fulcrum" },
+    { question: "The kid sitting on the seesaw is the...", emoji: "📦", correct: "Load" },
+    { question: "Pushing down to lift the seesaw is the...", emoji: "💪", correct: "Effort" },
+    { question: "On a lever, the THING you are lifting is the...", emoji: "📦", correct: "Load" },
+    { question: "On a lever, the FORCE you use is the...", emoji: "💪", correct: "Effort" }
+  ];
+  leverQs.sort(() => Math.random() - 0.5).slice(0, 3).forEach(q => {
+    const wrong = ["Fulcrum", "Load", "Effort", "Wedge"].filter(x => x !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+    qs.push({
+      question: q.question,
+      emoji: q.emoji,
+      choices: [q.correct, ...wrong].sort(() => Math.random() - 0.5),
+      correct: q.correct
+    });
+  });
+
+  // Type D: pulley type
+  const pulleyQs = [
+    { question: "A pulley that does NOT move is called a...", correct: "Fixed Pulley" },
+    { question: "A pulley that MOVES along the rope is a...", correct: "Moveable Pulley" }
+  ];
+  pulleyQs.forEach(q => {
+    qs.push({
+      question: q.question,
+      emoji: "🎏",
+      choices: ["Fixed Pulley", "Moveable Pulley", "Wedge", "Lever"].sort(() => Math.random() - 0.5),
+      correct: q.correct
+    });
+  });
+
+  // Type E: name -> definition (true/false-style picking the right definition)
+  const nameToDef = [...DATA].sort(() => Math.random() - 0.5).slice(0, 3);
+  nameToDef.forEach(d => {
+    const wrongDefs = DATA.filter(x => x.name !== d.name).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.def);
+    qs.push({
+      question: `What does "${d.name}" mean?`,
+      emoji: d.emoji,
+      choices: [d.def, ...wrongDefs].sort(() => Math.random() - 0.5),
+      correct: d.def
+    });
+  });
+
+  return qs.sort(() => Math.random() - 0.5).slice(0, 15);
 }
 
 function renderQuiz() {
   quizQuestions = buildQuiz();
   quizIdx = 0;
   quizScore = 0;
+  quizStreak = 0;
+  quizMaxStreak = 0;
+  quizHearts = 3;
   showQuestion();
 }
 
 function showQuestion() {
-  if (quizIdx >= quizQuestions.length) return showQuizFinal();
+  if (quizIdx >= quizQuestions.length || quizHearts <= 0) return showQuizFinal();
   const q = quizQuestions[quizIdx];
+  const pct = (quizIdx / quizQuestions.length) * 100;
+  const hearts = '❤️'.repeat(quizHearts) + '🤍'.repeat(3 - quizHearts);
+  const streakText = quizStreak >= 2 ? `🔥 ${quizStreak} in a row!` : '';
   panel.innerHTML = `
     <div class="quiz-progress">Question ${quizIdx + 1} of ${quizQuestions.length} • Score: ${quizScore}</div>
+    <div class="quiz-bar"><div class="quiz-bar-fill" style="width:${pct}%"></div></div>
+    <div class="quiz-hearts">${hearts}</div>
+    <div class="quiz-streak">${streakText}</div>
     <div class="quiz-emoji">${q.emoji}</div>
     <div class="quiz-question">${q.question}</div>
     <div class="quiz-choices">
-      ${q.choices.map(c => `<button class="quiz-choice" data-c="${c}">${c}</button>`).join('')}
+      ${q.choices.map(c => `<button class="quiz-choice" data-c="${c.replace(/"/g, '&quot;')}">${c}</button>`).join('')}
     </div>
     <div class="quiz-feedback" id="qf"></div>`;
   document.querySelectorAll('.quiz-choice').forEach(b => {
-    b.addEventListener('click', () => handleAnswer(b, q));
+    b.addEventListener('click', (e) => handleAnswer(b, q, e));
   });
 }
 
-function handleAnswer(btn, q) {
+function handleAnswer(btn, q, evt) {
   const all = document.querySelectorAll('.quiz-choice');
   all.forEach(b => b.disabled = true);
   const fb = document.getElementById('qf');
   if (btn.dataset.c === q.correct) {
     btn.classList.add('correct');
     quizScore++;
-    fb.textContent = "✅ YES! Great job!";
+    quizStreak++;
+    if (quizStreak > quizMaxStreak) quizMaxStreak = quizStreak;
+    const xpEarned = 3 + Math.min(quizStreak - 1, 5); // bonus for streak, max +5
+    addXP(xpEarned, evt);
+    sndCorrect();
+    const msgs = ["✅ YES! Great job!", "🎯 Nailed it!", "🌟 You got it!", "💯 Correct!", "🚀 Awesome!"];
+    fb.textContent = msgs[Math.floor(Math.random() * msgs.length)] + ` +${xpEarned} XP`;
     fb.style.color = "#06a86a";
   } else {
     btn.classList.add('wrong');
     all.forEach(b => { if (b.dataset.c === q.correct) b.classList.add('correct'); });
-    fb.textContent = `❌ The answer was: ${q.correct}`;
+    quizStreak = 0;
+    quizHearts--;
+    sndWrong();
+    fb.textContent = `❌ Answer: ${q.correct}`;
     fb.style.color = "#ef476f";
   }
   setTimeout(() => {
     quizIdx++;
     showQuestion();
-  }, 1800);
+  }, 1700);
 }
 
 function showQuizFinal() {
-  let trophy, msg;
+  let trophy, msg, stars;
   const pct = quizScore / quizQuestions.length;
-  if (pct === 1)      { trophy = "🏆"; msg = "PERFECT SCORE! You're a Simple Machines MASTER!"; }
-  else if (pct >= 0.8){ trophy = "🥇"; msg = "AMAZING! You really know this stuff!"; }
-  else if (pct >= 0.6){ trophy = "🥈"; msg = "Great job! A little more practice and you'll have it!"; }
-  else                { trophy = "💪"; msg = "Keep practicing! Try the Learn cards again!"; }
+  if (pct === 1)        { trophy = "🏆"; msg = "PERFECT SCORE! You're a MASTER!"; stars = "⭐⭐⭐"; }
+  else if (pct >= 0.85) { trophy = "🥇"; msg = "AMAZING! You really know this!"; stars = "⭐⭐⭐"; }
+  else if (pct >= 0.7)  { trophy = "🥈"; msg = "Great job! So close to perfect!"; stars = "⭐⭐"; }
+  else if (pct >= 0.5)  { trophy = "🥉"; msg = "Nice work! Try the Learn cards and beat your score!"; stars = "⭐"; }
+  else                  { trophy = "💪"; msg = "Keep practicing! Hit Learn first, then come back!"; stars = ""; }
+
+  // bonuses
+  let bonus = 0;
+  if (pct === 1) bonus += 20;
+  if (quizMaxStreak >= 5) bonus += 10;
+  if (quizHearts === 3) bonus += 5;
+  if (bonus > 0) addXP(bonus);
+
+  stats.totalQuizzes++;
+  let newBest = false;
+  if (quizScore > stats.best) {
+    stats.best = quizScore;
+    newBest = true;
+  }
+  saveStats();
+  updateStatsBar();
+
   panel.innerHTML = `
     <div class="quiz-final">
       <div class="trophy">${trophy}</div>
+      <div class="stars">${stars}</div>
       <h2>You scored ${quizScore} / ${quizQuestions.length}!</h2>
+      ${newBest ? '<div class="new-best">🎉 NEW HIGH SCORE! 🎉</div>' : ''}
       <p>${msg}</p>
+      <p style="font-size:18px; color:#666;">
+        🔥 Best streak: ${quizMaxStreak}<br>
+        ${bonus > 0 ? `🎁 Bonus: +${bonus} XP` : ''}
+      </p>
       <button class="nav-btn" id="quiz-again">🔄 Play Again</button>
     </div>`;
   document.getElementById('quiz-again').onclick = renderQuiz;
-  if (pct >= 0.8) celebrate();
+  if (pct >= 0.7) { celebrate(); sndWin(); }
 }
 
 /* ===== CONFETTI ===== */
 function celebrate() {
-  const colors = ['#ff6b6b','#ffd166','#06d6a0','#118ab2','#ef476f'];
-  for (let i = 0; i < 60; i++) {
+  const colors = ['#ff6b6b','#ffd166','#06d6a0','#118ab2','#ef476f','#ffd700'];
+  for (let i = 0; i < 80; i++) {
     const c = document.createElement('div');
     c.className = 'confetti';
     c.style.left = Math.random() * 100 + 'vw';
     c.style.top = '-20px';
     c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    c.style.transform = `rotate(${Math.random() * 360}deg)`;
+    const rot = Math.random() * 360;
+    c.style.transform = `rotate(${rot}deg)`;
+    if (Math.random() > 0.5) c.style.borderRadius = '50%';
     document.body.appendChild(c);
-    const dur = 2000 + Math.random() * 2000;
+    const dur = 2000 + Math.random() * 2500;
     c.animate([
-      { transform: c.style.transform + ' translateY(0)', opacity: 1 },
-      { transform: c.style.transform + ` translateY(${window.innerHeight + 50}px)`, opacity: 0 }
+      { transform: `rotate(${rot}deg) translateY(0)`, opacity: 1 },
+      { transform: `rotate(${rot + 720}deg) translateY(${window.innerHeight + 50}px)`, opacity: 0 }
     ], { duration: dur, easing: 'ease-out' }).onfinish = () => c.remove();
   }
 }
 
 /* init */
+updateStatsBar();
 render('learn');
 </script>
 </body>
