@@ -1,14 +1,6 @@
 {
   "runs": [
     {
-      "date": "2026-04-21",
-      "distance": 3.09,
-      "pace": "9:44",
-      "elapsedMin": 30.1,
-      "name": "Steady into Tempo",
-      "elevGain": 106
-    },
-    {
       "date": "2026-04-23",
       "distance": 3.76,
       "pace": "11:43",
@@ -95,9 +87,54 @@
       "elapsedMin": 34.9,
       "name": "Progression Run",
       "elevGain": 137
+    },
+    {
+      "date": "2026-05-21",
+      "distance": 3.26,
+      "pace": "11:56",
+      "elapsedMin": 38.9,
+      "name": "3.25mi Easy Run",
+      "elevGain": 140
     }
   ],
   "workouts": [
+    {
+      "date": "2026-05-21",
+      "title": "[CritterBot] Friday: Light Upper B (Post-Run)",
+      "exercises": [
+        {
+          "name": "Bench Press (Dumbbell)",
+          "sets": [
+            {
+              "weight": 65,
+              "reps": 5
+            },
+            {
+              "weight": 65,
+              "reps": 4
+            }
+          ]
+        },
+        {
+          "name": "Pinwheel Curl (Dumbbell)",
+          "sets": [
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            },
+            {
+              "weight": 50,
+              "reps": 8
+            }
+          ]
+        }
+      ],
+      "volume": 1785
+    },
     {
       "date": "2026-05-20",
       "title": "[CritterBot] Wednesday: OHP + Vertical Pull",
@@ -1277,5 +1314,5 @@
       "Fri"
     ]
   },
-  "updatedAt": "May 21, 2026 at 06:00 AM ET"
+  "updatedAt": "May 22, 2026 at 06:00 AM ET"
 }
