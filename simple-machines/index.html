@@ -620,13 +620,15 @@ function buildQuiz() {
     });
   });
 
-  // Type B: example -> machine
+  // Type B: example NAME (no emoji) -> machine
   const exQs = [...EXAMPLES].sort(() => Math.random() - 0.5).slice(0, 6);
   exQs.forEach(ex => {
     const wrong = MACHINES.filter(x => x !== ex.answer).sort(() => Math.random() - 0.5).slice(0, 3);
+    // Strip the leading emoji from "🛝 Ramp" -> "Ramp"
+    const exName = ex.example.replace(/^\S+\s+/, '');
     qs.push({
-      question: `What kind of simple machine is this?`,
-      emoji: ex.example.split(' ')[0],
+      question: `${exName}: what kind of simple machine is it?`,
+      emoji: "🤔",
       choices: [ex.answer, ...wrong].sort(() => Math.random() - 0.5),
       correct: ex.answer
     });
