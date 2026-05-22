@@ -330,37 +330,37 @@ const DATA = [
   { name: "Simple Machine", emoji: "🛠️",
     def: "The most basic machines. They help us do work.",
     examples: "All 6: inclined plane, wedge, screw, lever, wheel and axle, pulley." },
-  { name: "Inclined Plane", emoji: "📐",
+  { name: "Inclined Plane", emoji: "⭐",
     def: "A flat surface that is sloped (tilted).",
     examples: "Ramp" },
-  { name: "Wedge", emoji: "🪓",
+  { name: "Wedge", emoji: "⭐",
     def: "An inclined plane that MOVES. It splits or lifts things.",
     examples: "Ax head" },
-  { name: "Screw", emoji: "🔩",
+  { name: "Screw", emoji: "⭐",
     def: "An inclined plane wrapped around a cylinder.",
     examples: "Drill bit" },
-  { name: "Lever", emoji: "🥄",
+  { name: "Lever", emoji: "⭐",
     def: "A simple machine that makes it easier to lift or move objects.",
     examples: "Hand truck" },
-  { name: "Fulcrum", emoji: "📍",
+  { name: "Fulcrum", emoji: "⭐",
     def: "The turning point around which a lever moves.",
     examples: "The middle of a seesaw is the fulcrum." },
-  { name: "Load", emoji: "📦",
+  { name: "Load", emoji: "⭐",
     def: "The object being lifted or moved.",
     examples: "On a seesaw, the kid sitting on it is the load." },
   { name: "Effort", emoji: "💪",
     def: "The force used to move a load.",
     examples: "When you push down to lift the seesaw, that push is the effort." },
-  { name: "Wheel and Axle", emoji: "🚪",
+  { name: "Wheel and Axle", emoji: "⭐",
     def: "A wheel attached to a rod (the axle).",
     examples: "Steering wheels, doorknobs, faucet handles, screwdrivers" },
-  { name: "Pulley", emoji: "🛗",
+  { name: "Pulley", emoji: "⭐",
     def: "A wheel with a groove and a rope that fits in the groove.",
     examples: "Flagpole wheel and rope" },
-  { name: "Fixed Pulley", emoji: "📌",
+  { name: "Fixed Pulley", emoji: "⭐",
     def: "A pulley that does NOT move.",
     examples: "A flagpole pulley stays in one spot." },
-  { name: "Moveable Pulley", emoji: "🪝",
+  { name: "Moveable Pulley", emoji: "⭐",
     def: "A pulley that MOVES along a rope.",
     examples: "A pulley that travels up and down a rope." }
 ];
@@ -623,11 +623,11 @@ function buildQuiz() {
 
   // Type C: lever parts (fulcrum, load, effort)
   const leverQs = [
-    { question: "The turning point on a seesaw is called the...", emoji: "📍", correct: "Fulcrum" },
-    { question: "The kid sitting on the seesaw is the...", emoji: "📦", correct: "Load" },
-    { question: "Pushing down to lift the seesaw is the...", emoji: "💪", correct: "Effort" },
-    { question: "On a lever, the THING you are lifting is the...", emoji: "📦", correct: "Load" },
-    { question: "On a lever, the FORCE you use is the...", emoji: "💪", correct: "Effort" }
+    { question: "The turning point on a seesaw is called the...", emoji: "❓", correct: "Fulcrum" },
+    { question: "The kid sitting on the seesaw is the...", emoji: "❓", correct: "Load" },
+    { question: "Pushing down to lift the seesaw is the...", emoji: "❓", correct: "Effort" },
+    { question: "On a lever, the THING you are lifting is the...", emoji: "❓", correct: "Load" },
+    { question: "On a lever, the FORCE you use is the...", emoji: "❓", correct: "Effort" }
   ];
   leverQs.sort(() => Math.random() - 0.5).slice(0, 3).forEach(q => {
     const wrong = ["Fulcrum", "Load", "Effort", "Wedge"].filter(x => x !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
@@ -647,7 +647,7 @@ function buildQuiz() {
   pulleyQs.forEach(q => {
     qs.push({
       question: q.question,
-      emoji: "🛗",
+      emoji: "❓",
       choices: ["Fixed Pulley", "Moveable Pulley", "Wedge", "Lever"].sort(() => Math.random() - 0.5),
       correct: q.correct
     });
