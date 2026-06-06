@@ -160,325 +160,434 @@
     
 <style>
   :root {
-    --wedding: #bc8cff;
-    --wedding-dark: #d2a8ff;
-    --wedding-light: #21262d;
-    --wedding-blush: #21262d;
-    --sunset: #f4845f;
-    --sand: #161b22;
+    --accent: #d97757;
+    --accent-dim: rgba(217, 119, 87, 0.12);
+    --hairline: #21262d;
   }
 
-  /* Hero */
-  .hero {
-    background: linear-gradient(135deg, var(--wedding-dark) 0%, var(--wedding) 40%, #8B6BAE 70%, var(--accent-gold) 100%);
-    color: white;
-    text-align: center;
-    padding: 60px 24px 50px;
-    position: relative;
-    overflow: hidden;
+  .sd-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-dark);
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0; right: 0;
-    height: 40px;
-    background: #0d1117;
-    clip-path: ellipse(55% 100% at 50% 100%);
+
+  /* Header */
+  .sd-header {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 40px;
   }
-  .hero-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; }
-  .hero .subtitle { font-size: 1.1rem; font-weight: 500; opacity: 0.92; }
-  .hero .dates {
+  .sd-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .sd-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+  .sd-deck {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    max-width: 580px;
+  }
+
+  /* Meta strip */
+  .sd-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 40px;
+  }
+  .sd-meta-item .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 4px;
+  }
+  .sd-meta-item .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  /* Section */
+  .sd-section {
+    margin-bottom: 48px;
+  }
+  .sd-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sd-section-head h2 {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .sd-section-head .aside {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+
+  /* Key/value list */
+  .sd-kv {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .sd-kv dt {
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+  .sd-kv dd {
+    color: var(--text-dark);
+  }
+
+  /* Prose */
+  .sd-prose p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+  }
+  .sd-prose p:last-child { margin-bottom: 0; }
+
+  /* Links */
+  .sd-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .sd-link:hover {
+    border-bottom-color: var(--accent);
+  }
+  .sd-link-muted {
+    color: var(--text-mid);
+    text-decoration: none;
+  }
+  .sd-link-muted:hover { color: var(--text-dark); }
+
+  /* Travel grid */
+  .sd-travel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+  .sd-travel-cell {
+    background: var(--warm-bg);
+    padding: 20px;
+  }
+  .sd-travel-cell .ttl {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .sd-travel-cell .body {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-dark);
+  }
+  .sd-travel-cell .body strong {
+    font-weight: 600;
+  }
+  .sd-travel-cell .body .leg {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.88rem;
+  }
+
+  .sd-status {
     display: inline-block;
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 40px;
-    padding: 8px 24px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* Hotel list */
+  .sd-hotels {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sd-hotels li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .sd-hotels li:last-child { border-bottom: none; }
+  .sd-hotels .addr {
+    color: var(--text-mid);
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+
+  /* Things to do */
+  .sd-places {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sd-places li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sd-places li:last-child { border-bottom: none; }
+  .sd-places .name {
     font-size: 1rem;
     font-weight: 600;
-    margin-top: 14px;
+    margin-bottom: 4px;
   }
-
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 20px;
-  }
-  .section { margin-bottom: 36px; }
-  .section h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--wedding-dark);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 22px;
-    box-shadow: none;
-    border: 1px solid #30363d;
-    margin-bottom: 16px;
-  }
-  .highlight {
-    background: #21262d;
-    border-left: 4px solid var(--wedding);
-    border-radius: 0 12px 12px 0;
-    padding: 18px 22px;
-    margin: 16px 0;
-    font-size: 0.95rem;
-  }
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin: 28px 0;
-  }
-  .stat {
-    background: var(--card-bg);
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 14px 20px;
-    text-align: center;
-    box-shadow: none;
-    flex: 1;
-    min-width: 110px;
-  }
-  .stat .num { font-size: 1.6rem; font-weight: 800; color: var(--wedding); }
-  .stat .label { font-size: 0.78rem; color: var(--text-mid); font-weight: 500; margin-top: 2px; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .tag {
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .checklist { list-style: none; }
-  .checklist li {
-    padding: 10px 0;
-    border-bottom: 1px solid #30363d;
-    font-size: 0.92rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .checklist li:last-child { border-bottom: none; }
-  .checklist .li-icon { flex-shrink: 0; font-size: 1.1rem; }
-
-  .venue-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--wedding);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 30px;
-    text-decoration: none;
+  .sd-places .pick {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: 8px;
     font-weight: 600;
-    font-size: 0.92rem;
-    margin-top: 14px;
-    transition: transform 0.15s, background 0.15s;
   }
-  .venue-link:hover { background: var(--wedding-dark); transform: scale(1.03); }
+  .sd-places .addr {
+    color: var(--text-mid);
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
+  .sd-places .desc {
+    color: var(--text-dark);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
 
-  .todo-section { margin-top: 16px; }
-  .todo-item {
-    padding: 8px 12px;
-    margin: 6px 0;
-    border-radius: 8px;
-    background: #21262d;
-    font-size: 0.88rem;
+  /* TODO */
+  .sd-todo {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sd-todo li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
-  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #3fb950; }
+  .sd-todo li:last-child { border-bottom: none; }
+  .sd-todo input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: default;
+  }
+  .sd-todo .done {
+    color: var(--text-mid);
+    text-decoration: line-through;
+  }
+  .sd-todo .ref {
+    color: var(--text-mid);
+    font-size: 0.8rem;
+    margin-left: auto;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+  }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px;
-  }
-  .detail-card {
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 18px;
-    text-align: center;
-    transition: transform 0.15s;
-  }
-  .detail-card:hover { transform: translateY(-2px); }
-  .detail-card .icon { font-size: 2rem; margin-bottom: 6px; }
-  .detail-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--wedding-dark); }
-  .detail-card p { font-size: 0.82rem; color: var(--text-mid); }
-
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 0.82rem;
-    color: var(--text-light);
+  /* Footer */
+  .sd-footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
   }
 
   @media (max-width: 600px) {
-    .hero { padding: 48px 18px 40px; }
-    .container { padding: 20px 14px; }
-    .stats { gap: 8px; }
-    .stat { min-width: 90px; padding: 10px 12px; }
-    .stat .num { font-size: 1.3rem; }
-    .card-grid { grid-template-columns: 1fr; }
+    .sd-meta { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .sd-kv { grid-template-columns: 100px 1fr; }
+    .sd-section-head { flex-direction: column; gap: 4px; align-items: flex-start; }
   }
 </style>
 
-<!-- Hero -->
-<div class="hero">
-  <span class="hero-emoji">💒✨🎊</span>
-  <h1>Jace &amp; Lauren's Wedding</h1>
-  <div class="subtitle">San Diego, California</div>
-  <div class="dates">📅 June 18 &ndash; 21, 2026 &middot; 3 nights &middot; Mike &amp; Nancy</div>
-</div>
+<div class="sd-wrap">
 
-<!-- Stats -->
-<div class="container">
-  <div class="stats">
-    <div class="stat"><div class="num">Jun 20</div><div class="label">Wedding Day</div></div>
-    <div class="stat"><div class="num">4:30</div><div class="label">Ceremony</div></div>
-    <div class="stat"><div class="num">2</div><div class="label">Travelers</div></div>
-    <div class="stat"><div class="num">3</div><div class="label">Nights</div></div>
+  <header class="sd-header">
+    <div class="sd-eyebrow">Trip · June 2026</div>
+    <h1 class="sd-title">Jace &amp; Lauren's Wedding</h1>
+    <p class="sd-deck">San Diego, California. Three nights with Nancy for a hilltop ceremony at the Junipero Serra Museum.</p>
+  </header>
+
+  <div class="sd-meta">
+    <div class="sd-meta-item"><div class="label">Dates</div><div class="value">Jun 18&ndash;21</div></div>
+    <div class="sd-meta-item"><div class="label">Ceremony</div><div class="value">Sat 4:30 PM</div></div>
+    <div class="sd-meta-item"><div class="label">Travelers</div><div class="value">Mike &amp; Nancy</div></div>
+    <div class="sd-meta-item"><div class="label">Nights</div><div class="value">3</div></div>
   </div>
 
-  <!-- Wedding Details -->
-  <div class="section">
-    <h2>💍 Wedding Details</h2>
-    <div class="card">
+  <!-- Wedding -->
+  <section class="sd-section">
+    <div class="sd-section-head"><h2>Wedding</h2></div>
+    <dl class="sd-kv">
+      <dt>Date</dt><dd>Saturday, June 20, 2026</dd>
+      <dt>Ceremony</dt><dd>4:30 PM, reception to follow</dd>
+      <dt>Venue</dt><dd><a class="sd-link" href="https://www.google.com/maps/place/Junipero+Serra+Museum,+2727+Presidio+Dr,+San+Diego,+CA+92103" target="_blank">Junipero Serra Museum</a>, 2727 Presidio Dr</dd>
+      <dt>Attending</dt><dd>Mike &amp; Nancy (no kids)</dd>
+    </dl>
+  </section>
 
-      <div class="highlight">
-        <strong>Ceremony:</strong> Saturday, June 20, 2026 at 4:30 PM<br>
-        <strong>Venue:</strong> Junipero Serra Museum, San Diego, CA<br>
-        <strong>Reception:</strong> To follow at the venue<br>
-        <strong>Attendees:</strong> Mike &amp; Nancy (no kids)
-      </div>
-      <a class="venue-link" href="https://www.google.com/maps/place/Junipero+Serra+Museum,+2727+Presidio+Dr,+San+Diego,+CA+92103" target="_blank">📍 View Venue on Map</a>
+  <!-- Venue -->
+  <section class="sd-section">
+    <div class="sd-section-head"><h2>About the venue</h2></div>
+    <div class="sd-prose">
+      <p>The Junipero Serra Museum sits on a hilltop in Presidio Park, overlooking Mission Valley and the San Diego River. Built in 1929 in Spanish Colonial Revival style, it marks the site where Father Junipero Serra established the first Spanish mission in California in 1769.</p>
+      <p>Panoramic views, white stucco architecture, gardens. The hilltop setting means golden-hour photos will be excellent.</p>
     </div>
-  </div>
-
-  <!-- About the Venue -->
-  <div class="section">
-    <h2>🏛️ About the Venue</h2>
-    <div class="card">
-      <p>The <strong>Junipero Serra Museum</strong> is a stunning historic landmark in <strong>Presidio Park</strong>, perched on a hilltop overlooking Mission Valley and the San Diego River. Built in 1929 in Spanish Colonial Revival style, the museum marks the site where Father Junipero Serra established the first Spanish mission in California in 1769.</p>
-      <div class="highlight">
-        <strong>🌅 Why it's special:</strong> Gorgeous panoramic views of San Diego, beautiful Spanish architecture, lush gardens, and a sense of history that makes for an unforgettable wedding backdrop. The hilltop setting means golden hour photos will be incredible.
-      </div>
-      <div class="tags">
-        <span class="tag">🏔️ Hilltop Views</span>
-        <span class="tag">🏛️ Historic Landmark</span>
-        <span class="tag">🌿 Garden Setting</span>
-        <span class="tag">📸 Photo Paradise</span>
-        <span class="tag">🌇 Golden Hour Magic</span>
-        <span class="tag">🎭 Spanish Colonial Style</span>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <!-- Travel -->
-  <div class="section">
-    <h2>✈️ Travel</h2>
-    <div class="card">
-      <div class="card-grid">
-        <div class="detail-card">
-          <span class="icon">✈️</span>
-          <h4>Flights ✅</h4>
-          <p><strong>Confirmation: SDCTDR</strong> (American Airlines)</p>
-          <p style="margin:6px 0 0">🛫 <strong>Thu Jun 18</strong> — AA 3322<br>CLT 7:50 PM → SAN 9:48 PM<br>Seats 19D & 19E, Economy</p>
-          <p style="margin:6px 0 0">🛬 <strong>Sun Jun 21</strong> — AA 2465<br>SAN 1:23 PM → CLT 9:26 PM<br>Seats 25C & 25B, Economy</p>
+  <section class="sd-section">
+    <div class="sd-section-head"><h2>Travel</h2></div>
+    <div class="sd-travel">
+
+      <div class="sd-travel-cell">
+        <div class="ttl">Flights<span class="sd-status">Booked</span></div>
+        <div class="body">
+          <strong>AA · Confirmation SDCTDR</strong>
+          <div class="leg">
+            <strong>Thu Jun 18</strong> &middot; AA 3322<br>
+            CLT 7:50 PM → SAN 9:48 PM<br>
+            Seats 19D &amp; 19E
+          </div>
+          <div class="leg">
+            <strong>Sun Jun 21</strong> &middot; AA 2465<br>
+            SAN 1:23 PM → CLT 9:26 PM<br>
+            Seats 25C &amp; 25B
+          </div>
         </div>
-        <div class="detail-card">
-          <span class="icon">🏨</span>
-          <h4>Hotel</h4>
-          <p>Not booked yet. Recommended by the couple:</p>
-          <ul style="margin:8px 0 0;padding-left:18px;font-size:0.9rem;line-height:1.8">
-            <li><strong><a href="https://www.google.com/maps/search/Best+Western+Plus+Island+Palms+Hotel+2051+Shelter+Island+Dr+San+Diego+CA" target="_blank" style="color:var(--wedding);text-decoration:none">Best Western Plus Island Palms</a></strong><br>2051 Shelter Island Dr &middot; <a href="tel:+16192220561" style="color:var(--text-light)">(619) 222-0561</a></li>
-            <li><strong><a href="https://www.google.com/maps/search/Hilton+Garden+Inn+4200+Taylor+St+San+Diego+CA" target="_blank" style="color:var(--wedding);text-decoration:none">Hilton Garden Inn Old Town/SeaWorld</a></strong><br>4200 Taylor St &middot; <a href="tel:+16192600607" style="color:var(--text-light)">(619) 260-0607</a></li>
-            <li><strong><a href="https://www.google.com/maps/search/Hyatt+Regency+Mission+Bay+1441+Quivira+Rd+San+Diego+CA" target="_blank" style="color:var(--wedding);text-decoration:none">Hyatt Regency Mission Bay</a></strong><br>1441 Quivira Rd &middot; <a href="tel:+16192241234" style="color:var(--text-light)">(619) 224-1234</a></li>
-            <li><strong><a href="https://www.google.com/maps/search/Atwood+Hotel+1201+Hotel+Cir+S+San+Diego+CA" target="_blank" style="color:var(--wedding);text-decoration:none">Atwood Hotel</a></strong><br>1201 Hotel Cir S &middot; <a href="tel:+16192551920" style="color:var(--text-light)">(619) 255-1920</a></li>
+      </div>
+
+      <div class="sd-travel-cell">
+        <div class="ttl">Hotel</div>
+        <div class="body">
+          Not booked. Recommended by the couple:
+          <ul class="sd-hotels" style="margin-top:10px;">
+            <li>
+              <a class="sd-link" href="https://www.google.com/maps/search/Best+Western+Plus+Island+Palms+Hotel+2051+Shelter+Island+Dr+San+Diego+CA" target="_blank">Best Western Plus Island Palms</a>
+              <div class="addr">2051 Shelter Island Dr &middot; <a class="sd-link-muted" href="tel:+161****0561">(619) 222-0561</a></div>
+            </li>
+            <li>
+              <a class="sd-link" href="https://www.google.com/maps/search/Hilton+Garden+Inn+4200+Taylor+St+San+Diego+CA" target="_blank">Hilton Garden Inn Old Town</a>
+              <div class="addr">4200 Taylor St &middot; <a class="sd-link-muted" href="tel:+161****0607">(619) 260-0607</a></div>
+            </li>
+            <li>
+              <a class="sd-link" href="https://www.google.com/maps/search/Hyatt+Regency+Mission+Bay+1441+Quivira+Rd+San+Diego+CA" target="_blank">Hyatt Regency Mission Bay</a>
+              <div class="addr">1441 Quivira Rd &middot; <a class="sd-link-muted" href="tel:+161****1234">(619) 224-1234</a></div>
+            </li>
+            <li>
+              <a class="sd-link" href="https://www.google.com/maps/search/Atwood+Hotel+1201+Hotel+Cir+S+San+Diego+CA" target="_blank">Atwood Hotel</a>
+              <div class="addr">1201 Hotel Cir S &middot; <a class="sd-link-muted" href="tel:+161****1920">(619) 255-1920</a></div>
+            </li>
           </ul>
         </div>
-        <div class="detail-card">
-          <span class="icon">🚗</span>
-          <h4>Transportation</h4>
-          <p>Rental car or rideshare? TBD. San Diego is spread out.</p>
-        </div>
+      </div>
 
+      <div class="sd-travel-cell">
+        <div class="ttl">Ground</div>
+        <div class="body">Rental car or rideshare? TBD. San Diego is spread out.</div>
       </div>
 
     </div>
-  </div>
+  </section>
 
-  <!-- Things To Do -->
-  <div class="section">
-    <h2>🌴 While We're There</h2>
-    <div class="card">
-      <p>San Diego has tons to offer if you want to explore beyond the wedding:</p>
-      <ul class="checklist" style="margin-top: 14px;">
-        <li>
-          <span class="li-icon">🏛️</span>
-          <div><strong><a href="https://www.google.com/maps/search/Marston+House+3525+7th+Ave+San+Diego+CA+92103" target="_blank" style="color:var(--wedding);text-decoration:none;">Marston House</a></strong><br>3525 7th Ave, San Diego, CA 92103 · <a href="tel:+16192979327" style="color:var(--text-mid);text-decoration:none;">(619) 297-9327</a><br>Historic Arts &amp; Crafts mansion from 1905.</div>
-        </li>
-        <li>
-          <span class="li-icon">⚓</span>
-          <div><strong><a href="https://www.google.com/maps/search/Embarcadero+1492+N+Harbor+Dr+San+Diego+CA+92101" target="_blank" style="color:var(--wedding);text-decoration:none;">Embarcadero</a></strong><br>1492 N Harbor Dr, San Diego, CA 92101<br>Cruise-ship hub with Seaport Village (seafood, souvenir shops), The Headquarters (chic eateries, boutiques in an old police command post), USS Midway Museum (former aircraft carrier with flight simulators and restored planes), Waterfront Park with ocean views.</div>
-        </li>
-        <li>
-          <span class="li-icon">🌿</span>
-          <div><strong><a href="https://www.google.com/maps/search/Balboa+Park+San+Diego+CA" target="_blank" style="color:var(--wedding);text-decoration:none;">Balboa Park</a></strong> <span style="color:var(--sunset);font-size:0.78rem;">★ Nancy's pick</span><br>San Diego, CA · <a href="tel:+161****0512" style="color:var(--text-mid);text-decoration:none;">(619) 239-0512</a><br>San Diego's version of Central Park, but bigger 😎. 1,200 acres, 18 museums, gardens, hiking trails, and the world-famous San Diego Zoo. Pack a lunch and sit where the planes fly ~50 ft overhead descending into Lindbergh Field. The Prado (1914/15 promenade, expanded 1934/35) has museums and Spanish Colonial architecture from the Panama-California Exposition.</div>
-        </li>
-        <li>
-          <span class="li-icon">🗼</span>
-          <div><strong><a href="https://www.google.com/maps/search/Cabrillo+National+Monument+1800+Cabrillo+Memorial+Dr+San+Diego+CA+92106" target="_blank" style="color:var(--wedding);text-decoration:none;">Cabrillo National Monument &amp; Lighthouse</a></strong> <span style="color:var(--sunset);font-size:0.78rem;">★ Nancy's pick</span><br>1800 Cabrillo Memorial Dr, San Diego, CA 92106<br>National monument on the tip of Point Loma peninsula ($15-20 entry). 270° views of downtown San Diego, Coronado Island, north beaches, and out to the Pacific. Tide pools at the base of Point Loma are open to park visitors.</div>
-        </li>
-        <li>
-          <span class="li-icon">🏘️</span>
-          <div><strong><a href="https://www.google.com/maps/search/Heritage+Park+2454+Heritage+Park+Row+San+Diego+CA+92110" target="_blank" style="color:var(--wedding);text-decoration:none;">Heritage Park</a></strong><br>2454 Heritage Park Row, San Diego, CA 92110<br>Victorian gem in Old Town, beautifully restored Victorian-era homes from the 1880s-1890s.</div>
-        </li>
-        <li>
-          <span class="li-icon">🏄</span>
-          <div><strong><a href="https://www.google.com/maps/search/Windansea+Park+6600+Neptune+Pl+La+Jolla+CA+92037" target="_blank" style="color:var(--wedding);text-decoration:none;">Windansea Beach</a></strong> <span style="color:var(--sunset);font-size:0.78rem;">★ Nancy's favorite SD beach</span><br>6600 Neptune Pl, La Jolla, CA 92037 · <a href="tel:+161****8899" style="color:var(--text-mid);text-decoration:none;">(619) 221-8899</a><br>Super blue water, yellowish-white sand, and really cool sandstone caves to explore if the tide allows. Picturesque surf spot with the historic palm-covered surf shack.</div>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <!-- Things to do -->
+  <section class="sd-section">
+    <div class="sd-section-head"><h2>While we're there</h2><div class="aside">★ = Nancy's pick</div></div>
+    <ul class="sd-places">
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Balboa+Park+San+Diego+CA" target="_blank">Balboa Park</a><span class="pick">★ Nancy</span></div>
+        <div class="addr">San Diego, CA &middot; <a class="sd-link-muted" href="tel:+161****0512">(619) 239-0512</a></div>
+        <div class="desc">San Diego's Central Park, bigger. 1,200 acres, 18 museums, gardens, hiking, the San Diego Zoo. Pack a lunch and sit where the planes fly ~50 ft overhead descending into Lindbergh Field. The Prado (1914/15, expanded 1934/35) has the Spanish Colonial architecture from the Panama-California Exposition.</div>
+      </li>
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Cabrillo+National+Monument+1800+Cabrillo+Memorial+Dr+San+Diego+CA+92106" target="_blank">Cabrillo National Monument &amp; Lighthouse</a><span class="pick">★ Nancy</span></div>
+        <div class="addr">1800 Cabrillo Memorial Dr, San Diego, CA 92106</div>
+        <div class="desc">National monument on the tip of Point Loma ($15-20 entry). 270° views of downtown, Coronado, the north beaches, and the Pacific. Tide pools at the base are open to visitors.</div>
+      </li>
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Windansea+Park+6600+Neptune+Pl+La+Jolla+CA+92037" target="_blank">Windansea Beach</a><span class="pick">★ Nancy's favorite SD beach</span></div>
+        <div class="addr">6600 Neptune Pl, La Jolla, CA 92037 &middot; <a class="sd-link-muted" href="tel:+161****8899">(619) 221-8899</a></div>
+        <div class="desc">Blue water, yellow-white sand, sandstone caves to explore if the tide allows. Picturesque surf spot with the historic palm-covered surf shack.</div>
+      </li>
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Embarcadero+1492+N+Harbor+Dr+San+Diego+CA+92101" target="_blank">Embarcadero</a></div>
+        <div class="addr">1492 N Harbor Dr, San Diego, CA 92101</div>
+        <div class="desc">Cruise hub with Seaport Village (seafood, souvenirs), The Headquarters (eateries and boutiques in an old police command post), the USS Midway Museum (aircraft carrier with flight sims and restored planes), and Waterfront Park.</div>
+      </li>
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Marston+House+3525+7th+Ave+San+Diego+CA+92103" target="_blank">Marston House</a></div>
+        <div class="addr">3525 7th Ave, San Diego, CA 92103 &middot; <a class="sd-link-muted" href="tel:+161****9327">(619) 297-9327</a></div>
+        <div class="desc">Historic Arts &amp; Crafts mansion from 1905.</div>
+      </li>
+      <li>
+        <div class="name"><a class="sd-link" href="https://www.google.com/maps/search/Heritage+Park+2454+Heritage+Park+Row+San+Diego+CA+92110" target="_blank">Heritage Park</a></div>
+        <div class="addr">2454 Heritage Park Row, San Diego, CA 92110</div>
+        <div class="desc">Restored Victorian-era homes from the 1880s-1890s, in Old Town.</div>
+      </li>
+    </ul>
+  </section>
 
   <!-- TODO -->
-  <div class="section">
-    <h2>📋 Trip TODO</h2>
-    <div class="card">
-      <div class="todo-section">
-        <div class="todo-item"><input type="checkbox" checked disabled> <s>Book flights (CLT → SAN)</s> ✅ SDCTDR</div>
-        <div class="todo-item"><input type="checkbox"> Book hotel</div>
+  <section class="sd-section">
+    <div class="sd-section-head"><h2>To do</h2></div>
+    <ul class="sd-todo">
+      <li><input type="checkbox" checked disabled><span class="done">Book flights (CLT → SAN)</span><span class="ref">SDCTDR</span></li>
+      <li><input type="checkbox" disabled><span>Book hotel</span></li>
+      <li><input type="checkbox" disabled><span>Wedding gift</span></li>
+      <li><input type="checkbox" disabled><span>Wedding attire</span></li>
+      <li><input type="checkbox" disabled><span>Rental car or rideshare plan</span></li>
+      <li><input type="checkbox" disabled><span>Restaurant reservations</span></li>
+    </ul>
+  </section>
 
-        <div class="todo-item"><input type="checkbox"> Wedding gift</div>
-        <div class="todo-item"><input type="checkbox"> Outfits (wedding attire)</div>
-        <div class="todo-item"><input type="checkbox"> Rental car or rideshare plan</div>
-        <div class="todo-item"><input type="checkbox"> Restaurant reservations</div>
-      </div>
-    </div>
-  </div>
+  <footer class="sd-footer">
+    <span>June 20, 2026 &middot; San Diego, CA</span>
+    <a class="sd-link" href="/family/trips/">← Trips</a>
+  </footer>
+
 </div>
-
-<footer>
-  <p>💒 Jace &amp; Lauren's Wedding &middot; June 20, 2026 &middot; San Diego, CA</p>
-  <p style="margin-top:4px;"><a href="/family/trips/" style="color:var(--accent-orange); text-decoration:none; font-weight:600;">← Back to Trips</a></p>
-</footer>
 
 </body>
 </html>
