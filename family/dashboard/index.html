@@ -168,7 +168,7 @@
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 64px minmax(190px, 28%) 1fr;
+    grid-template-rows: 80px minmax(190px, 28%) 1fr;
     grid-template-areas:
       "top    top    top    top"
       "today  cal    cal    cal"
@@ -189,10 +189,9 @@
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 0 26px 0 22px;
+    padding: 8px 22px;
   }
-  .forecast { padding-right: 4px; }
-  .fc-days { gap: 18px; padding-right: 6px; }
+  .fc-days { gap: 18px; }
   .clock-block {
     display: flex;
     align-items: baseline;
