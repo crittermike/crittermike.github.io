@@ -332,7 +332,7 @@
   }
   .cal-row {
     display: grid;
-    grid-template-columns: 70px 1fr auto;
+    grid-template-columns: 90px 1fr;
     gap: 12px;
     align-items: center;
     padding: 6px 10px;
@@ -388,11 +388,7 @@
     padding-bottom: 8px;
     border-bottom: 1px solid #21262d;
   }
-  .kid-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; }
-  .kid.charlie .kid-name { color: var(--accent-rose); }
-  .kid.henry   .kid-name { color: var(--accent-blue); }
-  .kid.william .kid-name { color: var(--accent-teal); }
-  .kid.thomas  .kid-name { color: var(--accent-gold); }
+  .kid-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-dark); }
   .kid-meta { font-size: 0.7rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
 
   .kid .section { display: flex; flex-direction: column; gap: 6px; }
@@ -595,11 +591,6 @@
   <div class="card today" id="dinnerCard">
     <h3 class="card-h">🍽 Dinner Tonight</h3>
     <div class="dinner-name">White Chicken Chili</div>
-    <div class="dinner-meta">
-      <div class="row"><span class="k">Cook</span><span class="v">Nancy</span></div>
-      <div class="row"><span class="k">Method</span><span class="v">Crockpot · 2p</span></div>
-      <div class="row"><span class="k">Ready</span><span class="v">6:30p</span></div>
-    </div>
     <span class="tap-hint">tap for recipe →</span>
   </div>
 
@@ -883,7 +874,6 @@
     return '<div class="cal-row' + (isToday ? ' today-row' : '') + '">' +
       '<span class="when">' + fmtWhen(ev) + '</span>' +
       '<span class="what">' + ev.what + '</span>' +
-      '<span class="who ' + ev.who + '">' + ev.who.charAt(0).toUpperCase() + ev.who.slice(1) + '</span>' +
       '</div>';
   }
 
@@ -899,7 +889,7 @@
     const f = filter.trim().toLowerCase();
     const filtered = events
       .filter(e => e.date >= todayStr)
-      .filter(e => !f || e.what.toLowerCase().includes(f) || e.who.toLowerCase().includes(f));
+      .filter(e => !f || e.what.toLowerCase().includes(f));
     if (filtered.length === 0) {
       document.getElementById('calFullList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-mid)">No matching events.</div>';
       return;
