@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copycat Honey Baked Ham - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · crockpot</div>
+    <h1 class="ed-title">Copycat Honey Baked Ham</h1>
+    
+  </header>
+
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-0-8 lb bone-in spiral sliced half ham">
+          <span class="ing-text">8 lb bone-in spiral sliced half ham</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-1-2 tbsp butter, melted">
+          <span class="ing-text">2 Tbsp butter, melted</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-2-3 tbsp honey">
+          <span class="ing-text">3 Tbsp honey</span>
+        </li>
+        
+      
+        
+        <li class="group-heading">Glaze (dry rub)</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-0-1½ cups granulated sugar">
+          <span class="ing-text">1½ cups granulated sugar</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-1-½ tsp seasoned salt">
+          <span class="ing-text">½ tsp seasoned salt</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-2-½ tsp onion powder">
+          <span class="ing-text">½ tsp onion powder</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-3-½ tsp ground cinnamon">
+          <span class="ing-text">½ tsp ground cinnamon</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-4-½ tsp ground nutmeg">
+          <span class="ing-text">½ tsp ground nutmeg</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-5-¼ tsp ground ginger">
+          <span class="ing-text">¼ tsp ground ginger</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-6-¼ tsp ground cloves">
+          <span class="ing-text">¼ tsp ground cloves</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-7-¼ tsp paprika">
+          <span class="ing-text">¼ tsp paprika</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="glaze (dry rub)-8-pinch of allspice">
+          <span class="ing-text">pinch of allspice</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Method</h2>
+    </div>
+    <ol class="rx-steps">
+      
+      <li>Trim ham to fit slow cooker if needed. Pat dry with paper towels (the bag liquid will make the butter slide right off otherwise).</li>
+      
+      <li>Combine melted butter + honey. Massage over ham, getting some between the slices.</li>
+      
+      <li>Cover and cook on **LOW for 4-5 hours**.</li>
+      
+      <li>Preheat broiler to HIGH. Line a roasting pan with heavy-duty foil.</li>
+      
+      <li>Combine sugar, seasoned salt, onion powder, cinnamon, nutmeg, ginger, cloves, paprika, allspice in a small bowl.</li>
+      
+      <li>Transfer ham to roasting pan. Pat **half** of the sugar mixture over the top.</li>
+      
+      <li>Broil a few minutes until bubbly and caramelized. Remove from oven.</li>
+      
+      <li>In a small saucepan, add the **remaining** sugar mixture + 3 Tbsp water OR ham juices from the slow cooker (bourbon swap works too). Stir, bring to a boil, boil ~1 min, remove from heat.</li>
+      
+      <li>Brush/pour glaze over the ham. Broil **1-2 more minutes** — watch it, sugar burns fast.</li>
+      
+      <li>Rest 5-10 min at room temp so the glaze hardens into the crackly crust.</li>
+      
+    </ol>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Notes &amp; pitfalls</h2>
+    </div>
+    <div class="rx-notes ed-prose">
+      <h3>Notes / pitfalls</h3>
+<ul>
+<li>DRY the ham before the butter/honey rub or it slides off.</li>
+<li>Two broil passes, not one. First pass sets the crust, second pass glazes it.</li>
+<li>Don't walk away during broiling. Carbonized sugar = sad ham.</li>
+<li>Bourbon in the saucepan instead of plain water adds depth.</li>
+</ul>
+
+    </div>
+  </section>
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>recipe-copycat-honeybaked-ham.md</code></span>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:copycat-honeybaked-ham';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
