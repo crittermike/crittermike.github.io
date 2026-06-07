@@ -219,10 +219,10 @@ permalink: "/dashboard/index.html"
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 14px 14px 16px;
+    padding: 12px 14px 14px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
     overflow: hidden;
     min-height: 0;
   }
@@ -230,13 +230,13 @@ permalink: "/dashboard/index.html"
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
     border-bottom: 1px solid #21262d;
   }
-  .kid-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-dark); }
-  .kid-meta { font-size: 0.7rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .kid-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-dark); }
+  .kid-meta { font-size: 0.68rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
 
-  .kid .section { display: flex; flex-direction: column; gap: 6px; }
+  .kid .section { display: flex; flex-direction: column; gap: 4px; }
   .kid .section .lbl {
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -505,28 +505,30 @@ permalink: "/dashboard/index.html"
     </div>
     <div></div>
     <div class="forecast">
+      {% if weather %}
       <div class="fc-now">
-        <span class="icon">☀️</span>
+        <span class="icon">{{ weather.now.icon }}</span>
         <div class="meta">
-          <span class="temp">84°</span>
-          <span class="lo-hi">L 68° · H 88°</span>
+          <span class="temp">{{ weather.now.temp }}°</span>
+          <span class="lo-hi">L {{ weather.now.lo }}° · H {{ weather.now.hi }}°</span>
         </div>
       </div>
       <div class="fc-days">
-        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">86°</span><span class="lo">70°</span></div>
-        <div class="fc-day"><span class="d">Tue</span><span class="i">🌧</span><span class="hi">79°</span><span class="lo">67°</span></div>
-        <div class="fc-day"><span class="d">Wed</span><span class="i">⛈</span><span class="hi">75°</span><span class="lo">65°</span></div>
-        <div class="fc-day"><span class="d">Thu</span><span class="i">☀️</span><span class="hi">82°</span><span class="lo">66°</span></div>
-        <div class="fc-day"><span class="d">Fri</span><span class="i">☀️</span><span class="hi">88°</span><span class="lo">71°</span></div>
+        {% for day in weather.days %}
+        <div class="fc-day"><span class="d">{{ day.d }}</span><span class="i">{{ day.icon }}</span><span class="hi">{{ day.hi }}°</span><span class="lo">{{ day.lo }}°</span></div>
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
   </div>
 
   <!-- DINNER (tap for recipe) -->
   <div class="card today" id="dinnerCard">
     <h3 class="card-h">🍽 Dinner Tonight</h3>
-    <div class="dinner-name">White Chicken Chili</div>
+    <div class="dinner-name">{{ dinner.name if dinner else 'TBD' }}</div>
+    {% if dinner and dinner.recipe %}
     <span class="tap-hint">tap for recipe →</span>
+    {% endif %}
   </div>
 
   <!-- CALENDAR -->
@@ -538,117 +540,48 @@ permalink: "/dashboard/index.html"
     <div class="cal-list" id="calPreview"></div>
   </div>
 
-  <!-- CHARLIE -->
-  <div class="kid charlie kid1">
+  {# === KID CARDS (Charlie / Henry / William / Thomas) === #}
+  {% for kid in kids %}
+  <div class="kid {{ kid.key }} kid{{ loop.index }}">
     <div class="kid-head">
-      <span class="kid-name">Charlie</span>
-      <span class="kid-meta">rising 11th</span>
+      <span class="kid-name">{{ kid.name }}</span>
+      <span class="kid-meta">{{ kid.grade }}</span>
     </div>
-    <div class="section">
-      <span class="lbl">📚 Homework</span>
-      <div class="hw-item none">summer break</div>
-    </div>
-    <div class="section">
-      <span class="lbl">🍭 Sugar today</span>
-      <div class="stat-row">
-        <span class="stat-num warn">52g</span>
-        <span class="stat-sub">/ 50g limit</span>
-      </div>
-    </div>
-    <div class="section">
-      <span class="lbl">💵 Allowance</span>
-      <div class="stat-row">
-        <span class="stat-num">$48.00</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- HENRY -->
-  <div class="kid henry kid2">
-    <div class="kid-head">
-      <span class="kid-name">Henry</span>
-      <span class="kid-meta">rising 8th</span>
-    </div>
+    {% if kid.reading %}
     <div class="section">
-      <span class="lbl">📚 Homework</span>
+      <span class="lbl">📚 Summer reading</span>
       <div class="hw-item">
-        Summer reading
-        <span class="due">67 / 500 pgs · due first day</span>
-        <div class="progress"><div class="bar" style="width: 13%"></div></div>
+        <span class="due">{{ kid.reading.pages }} / {{ kid.reading.target }} pgs</span>
+        <div class="progress"><div class="bar" style="width: {{ kid.reading.pct }}%"></div></div>
       </div>
     </div>
-    <div class="section">
-      <span class="lbl">🍭 Sugar today</span>
-      <div class="stat-row">
-        <span class="stat-num danger">78g</span>
-        <span class="stat-sub">/ 50g limit</span>
-      </div>
-    </div>
-    <div class="section">
-      <span class="lbl">💵 Allowance</span>
-      <div class="stat-row">
-        <span class="stat-num">$22.50</span>
-      </div>
-    </div>
-  </div>
+    {% endif %}
 
-  <!-- WILLIAM -->
-  <div class="kid william kid3">
-    <div class="kid-head">
-      <span class="kid-name">William</span>
-      <span class="kid-meta">rising 5th</span>
-    </div>
+    {% if kid.sugar.balance is not none %}
     <div class="section">
-      <span class="lbl">📚 Homework</span>
-      <div class="hw-item">
-        Summer reading
-        <span class="due">35 / 400 pgs · due first day</span>
-        <div class="progress"><div class="bar" style="width: 9%"></div></div>
-      </div>
-    </div>
-    <div class="section">
-      <span class="lbl">🍭 Sugar today</span>
+      <span class="lbl">🍭 Sugar checks</span>
       <div class="stat-row">
-        <span class="stat-num">31g</span>
-        <span class="stat-sub">/ 40g limit</span>
+        {# Balance = remaining grams. Negative = overspent (red). Low = warn. Healthy = green. #}
+        {% set neg = kid.sugar.balance < 0 %}
+        {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
+        <span class="stat-num{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</span>
+        <span class="stat-sub">left</span>
       </div>
     </div>
-    <div class="section">
-      <span class="lbl">💵 Allowance</span>
-      <div class="stat-row">
-        <span class="stat-num">$18.00</span>
-      </div>
-    </div>
-  </div>
+    {% endif %}
 
-  <!-- THOMAS -->
-  <div class="kid thomas kid4">
-    <div class="kid-head">
-      <span class="kid-name">Thomas</span>
-      <span class="kid-meta">rising 3rd</span>
-    </div>
-    <div class="section">
-      <span class="lbl">📚 Homework</span>
-      <div class="hw-item">
-        Summer reading
-        <span class="due">12 / 200 pgs · due first day</span>
-        <div class="progress"><div class="bar" style="width: 6%"></div></div>
-      </div>
-    </div>
-    <div class="section">
-      <span class="lbl">🍭 Sugar today</span>
-      <div class="stat-row">
-        <span class="stat-num">18g</span>
-        <span class="stat-sub">/ 35g limit</span>
-      </div>
-    </div>
+    {% if kid.allowance.balance_str %}
     <div class="section">
       <span class="lbl">💵 Allowance</span>
       <div class="stat-row">
-        <span class="stat-num">$12.50</span>
+        {% set negA = '-' in kid.allowance.balance_str %}
+        <span class="stat-num{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
       </div>
     </div>
+    {% endif %}
   </div>
+  {% endfor %}
 
   <!-- BUDGET STRIP -->
   <div class="budget" id="budgetStrip">
@@ -693,55 +626,27 @@ permalink: "/dashboard/index.html"
 </div>
 
 <!-- RECIPE MODAL -->
+{% if dinner and dinner.recipe %}
 <div class="modal-bg" id="recipeModal">
   <div class="modal">
     <div class="modal-head">
-      <h2>White Chicken Chili</h2>
+      <h2>{{ dinner.recipe.name }}</h2>
       <button class="modal-close" onclick="closeModal('recipeModal')">✕</button>
     </div>
     <div class="modal-body">
       <div class="meta">
-        <span><b>Serves:</b> 6</span>
-        <span><b>Prep:</b> 15 min</span>
-        <span><b>Cook:</b> 4 hr (crockpot, low)</span>
-        <span><b>Total:</b> 4 hr 15 min</span>
+        {% if dinner.recipe.servings %}<span><b>Serves:</b> {{ dinner.recipe.servings }}</span>{% endif %}
+        {% if dinner.recipe.prep_min %}<span><b>Prep:</b> {{ dinner.recipe.prep_min }} min</span>{% endif %}
+        {% if dinner.recipe.cook_min %}<span><b>Cook:</b> {{ dinner.recipe.cook_min }} min</span>{% endif %}
+        {% if dinner.recipe.effort %}<span><b>Effort:</b> {{ dinner.recipe.effort }}</span>{% endif %}
+        {% if dinner.recipe.protein_g %}<span><b>Protein:</b> {{ dinner.recipe.protein_g }}g</span>{% endif %}
+        {% if dinner.recipe.cal %}<span><b>Cal:</b> {{ dinner.recipe.cal }}</span>{% endif %}
       </div>
-      <h3>Ingredients</h3>
-      <ul>
-        <li>2 lbs boneless skinless chicken breasts</li>
-        <li>1 large yellow onion, diced</li>
-        <li>4 cloves garlic, minced</li>
-        <li>2 cans (15 oz) great northern beans, drained &amp; rinsed</li>
-        <li>1 can (15 oz) cannellini beans, drained &amp; rinsed</li>
-        <li>2 cans (4 oz) diced green chiles</li>
-        <li>1 can (15 oz) corn, drained</li>
-        <li>4 cups chicken broth</li>
-        <li>1 tsp ground cumin</li>
-        <li>1 tsp oregano</li>
-        <li>1/2 tsp chili powder</li>
-        <li>1/4 tsp cayenne (optional)</li>
-        <li>Salt &amp; pepper to taste</li>
-        <li>1 cup heavy cream or half &amp; half</li>
-        <li>1 cup shredded Monterey Jack</li>
-        <li>Toppings: cilantro, lime wedges, tortilla strips, sour cream, avocado</li>
-      </ul>
-      <h3>Instructions</h3>
-      <ol>
-        <li>Add chicken, onion, garlic, beans, chiles, corn, broth, and spices to the crockpot. Stir.</li>
-        <li>Cover and cook on LOW for 4 hours (or HIGH for 2 hours) until chicken is cooked through.</li>
-        <li>Remove chicken, shred with two forks, return to pot.</li>
-        <li>Stir in heavy cream and shredded cheese. Cook on LOW another 15 min until creamy.</li>
-        <li>Taste and adjust salt. Serve with toppings and cornbread on the side.</li>
-      </ol>
-      <h3>Notes</h3>
-      <ul>
-        <li>For thicker chili, mash one can of beans before adding.</li>
-        <li>Henry hates cilantro — keep it on the side.</li>
-        <li>Freezes great. Double batch and freeze half.</li>
-      </ul>
+      {{ dinner.recipe.body_html | safe }}
     </div>
   </div>
 </div>
+{% endif %}
 
 <!-- CALENDAR FULL MODAL -->
 <div class="modal-bg" id="calModal">
@@ -758,77 +663,8 @@ permalink: "/dashboard/index.html"
 </div>
 
 <script>
-  // === EVENTS DATA ===
-  const events = [
-    { date: '2026-06-07', time: '6:00p',  what: 'Family movie night: Encanto (Thomas\'s pick)', who: 'family' },
-    { date: '2026-06-08', time: '9:00a',  what: 'Nancy colonoscopy prep: clear liquids all day', who: 'nancy' },
-    { date: '2026-06-08', time: '4:00p',  what: 'Henry orthodontist: Dr. Patel', who: 'henry' },
-    { date: '2026-06-10', time: '3:00p',  what: 'Nancy colonoscopy: Greenville Endoscopy', who: 'nancy' },
-    { date: '2026-06-10', time: '6:00p',  what: 'William baseball practice: Cleveland Park', who: 'william' },
-    { date: '2026-06-12', time: '7:00p',  what: 'Date night: sitter Maddie confirmed', who: 'parents' },
-    { date: '2026-06-13', time: 'all day',what: 'Mike\'s birthday (no fuss)', who: 'mike' },
-    { date: '2026-06-15', time: '10:00a', what: 'Charlie summer job orientation', who: 'charlie' },
-    { date: '2026-06-15', time: '6:00p',  what: 'William baseball game vs Eastside', who: 'william' },
-    { date: '2026-06-17', time: '2:00p',  what: 'Thomas dentist cleaning', who: 'thomas' },
-    { date: '2026-06-18', time: '7:00p',  what: 'School board meeting (Nancy)', who: 'nancy' },
-    { date: '2026-06-20', time: 'all day',what: 'Father\'s Day', who: 'family' },
-    { date: '2026-06-22', time: '9:00a',  what: 'Henry summer camp drop-off (week 1)', who: 'henry' },
-    { date: '2026-06-24', time: '6:30p',  what: 'William baseball practice', who: 'william' },
-    { date: '2026-06-26', time: '7:00p',  what: 'Date night', who: 'parents' },
-    { date: '2026-06-27', time: '11:00a', what: 'Family pool day @ Cherrydale', who: 'family' },
-    { date: '2026-06-29', time: '9:00a',  what: 'Henry summer camp drop-off (week 2)', who: 'henry' },
-    { date: '2026-07-01', time: '3:00p',  what: 'Nancy hair appointment', who: 'nancy' },
-    { date: '2026-07-04', time: '6:00p',  what: 'Fireworks @ Falls Park', who: 'family' },
-    { date: '2026-07-06', time: '9:00a',  what: 'Charlie SAT prep class starts', who: 'charlie' },
-    { date: '2026-07-08', time: '4:00p',  what: 'William pediatrician annual', who: 'william' },
-    { date: '2026-07-10', time: '7:00p',  what: 'Date night', who: 'parents' },
-    { date: '2026-07-13', time: 'all day',what: 'Beach trip: Pawleys Island (5 nights)', who: 'family' },
-    { date: '2026-07-20', time: '10:00a', what: 'Thomas orthodontist consult', who: 'thomas' },
-    { date: '2026-07-22', time: '2:00p',  what: 'Nancy classroom prep day', who: 'nancy' },
-    { date: '2026-07-25', time: '6:00p',  what: 'Family BBQ @ Crittendens', who: 'family' },
-    { date: '2026-07-28', time: '9:00a',  what: 'Back-to-school physicals (all kids)', who: 'family' },
-    { date: '2026-08-01', time: '11:00a', what: 'School supply shopping', who: 'family' },
-    { date: '2026-08-04', time: '5:00p',  what: 'Henry orthodontist follow-up', who: 'henry' },
-    { date: '2026-08-07', time: 'all day',what: 'Anniversary', who: 'parents' },
-    { date: '2026-08-10', time: '8:00a',  what: 'Nancy teacher in-service week starts', who: 'nancy' },
-    { date: '2026-08-13', time: 'all day',what: 'First day of school', who: 'family' },
-    { date: '2026-08-15', time: '6:00p',  what: 'William baseball fall season begins', who: 'william' },
-    { date: '2026-08-20', time: '7:00p',  what: 'Back-to-school night', who: 'family' },
-    { date: '2026-08-28', time: '7:00p',  what: 'Friday football: Mauldin HS', who: 'charlie' },
-    { date: '2026-09-04', time: '7:00p',  what: 'Friday football', who: 'charlie' },
-    { date: '2026-09-07', time: 'all day',what: 'Labor Day', who: 'family' },
-    { date: '2026-09-12', time: '10:00a', what: 'William baseball game', who: 'william' },
-    { date: '2026-09-15', time: '4:00p',  what: 'Henry orthodontist adjustment', who: 'henry' },
-    { date: '2026-09-19', time: '6:00p',  what: 'Thomas birthday (turns 9)', who: 'thomas' },
-    { date: '2026-09-26', time: '11:00a', what: 'Parent-teacher conferences', who: 'family' },
-    { date: '2026-10-03', time: '6:00p',  what: 'William baseball playoffs?', who: 'william' },
-    { date: '2026-10-09', time: 'all day',what: 'Fall break starts (5 days)', who: 'family' },
-    { date: '2026-10-17', time: '7:00p',  what: 'Charlie homecoming dance', who: 'charlie' },
-    { date: '2026-10-24', time: '6:00p',  what: 'Henry cross country meet', who: 'henry' },
-    { date: '2026-10-31', time: '6:00p',  what: 'Trick or treat: Augusta Rd', who: 'family' },
-    { date: '2026-11-07', time: '10:00a', what: 'William fall baseball banquet', who: 'william' },
-    { date: '2026-11-11', time: 'all day',what: 'Veterans Day (no school)', who: 'family' },
-    { date: '2026-11-14', time: '6:00p',  what: 'Nancy book club @ our place', who: 'nancy' },
-    { date: '2026-11-22', time: 'all day',what: 'Charlie SAT test day', who: 'charlie' },
-    { date: '2026-11-25', time: 'all day',what: 'Thanksgiving break (Wed-Fri)', who: 'family' },
-    { date: '2026-11-26', time: '2:00p',  what: 'Thanksgiving dinner @ Grandma\'s', who: 'family' },
-    { date: '2026-12-04', time: '7:00p',  what: 'Thomas elementary holiday concert', who: 'thomas' },
-    { date: '2026-12-12', time: '6:00p',  what: 'Crittenden Christmas party', who: 'family' },
-    { date: '2026-12-18', time: 'all day',what: 'Last day of school', who: 'family' },
-    { date: '2026-12-25', time: 'all day',what: 'Christmas Day', who: 'family' },
-    { date: '2026-12-31', time: '9:00p',  what: 'NYE @ home', who: 'family' },
-    { date: '2027-01-04', time: 'all day',what: 'School resumes', who: 'family' },
-    { date: '2027-01-15', time: '4:00p',  what: 'Henry orthodontist', who: 'henry' },
-    { date: '2027-01-19', time: 'all day',what: 'MLK Day (no school)', who: 'family' },
-    { date: '2027-02-14', time: '7:00p',  what: 'Valentine\'s date night', who: 'parents' },
-    { date: '2027-03-02', time: '4:00p',  what: 'William spring baseball tryouts', who: 'william' },
-    { date: '2027-03-20', time: 'all day',what: 'Spring break starts', who: 'family' },
-    { date: '2027-04-04', time: 'all day',what: 'Easter', who: 'family' },
-    { date: '2027-04-18', time: '6:00p',  what: 'Charlie prom', who: 'charlie' },
-    { date: '2027-05-08', time: '11:00a', what: 'Mother\'s Day brunch', who: 'family' },
-    { date: '2027-05-25', time: 'all day',what: 'Memorial Day', who: 'family' },
-    { date: '2027-06-03', time: 'all day',what: 'Last day of school', who: 'family' },
-  ];
+  // === EVENTS DATA (built at build time from cal_today.py via _data/calendar.js) ===
+  const events = {{ calendar | dump | safe }};
 
   const today = new Date();
   const todayStr = today.toISOString().slice(0, 10);
@@ -897,7 +733,11 @@ permalink: "/dashboard/index.html"
   }
   window.closeModal = closeModal;
 
-  document.getElementById('dinnerCard').addEventListener('click', () => openModal('recipeModal'));
+  const dinnerCard = document.getElementById('dinnerCard');
+  const recipeModalEl = document.getElementById('recipeModal');
+  if (dinnerCard && recipeModalEl) {
+    dinnerCard.addEventListener('click', () => openModal('recipeModal'));
+  }
   document.getElementById('calExpand').addEventListener('click', (e) => { e.stopPropagation(); openModal('calModal'); });
   document.getElementById('calFilter').addEventListener('input', (e) => renderFullList(e.target.value));
 
