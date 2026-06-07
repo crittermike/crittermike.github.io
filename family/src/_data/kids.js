@@ -25,12 +25,12 @@ const READING = path.join(WIKI, 'summer-reading-2026.md');
 const SUGAR = path.join(WIKI, 'sugar.md');
 const ALLOWANCE = path.join(WIKI, 'allowance.md');
 
-// Display order matches the dashboard grid: Charlie, Henry, William, Thomas
+// Display order matches the dashboard grid: youngest → oldest
 const KIDS = [
-  { key: 'charlie', name: 'Charlie', grade: 'rising 11th' },
-  { key: 'henry',   name: 'Henry',   grade: 'rising 8th'  },
-  { key: 'william', name: 'William', grade: 'rising 5th'  },
   { key: 'thomas',  name: 'Thomas',  grade: 'rising 3rd'  },
+  { key: 'william', name: 'William', grade: 'rising 5th'  },
+  { key: 'henry',   name: 'Henry',   grade: 'rising 8th'  },
+  { key: 'charlie', name: 'Charlie', grade: 'rising 11th' },
 ];
 
 function readSafe(p) {
