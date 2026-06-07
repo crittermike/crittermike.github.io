@@ -1,5 +1,5 @@
 /**
- * Tonight's dinner — single source of truth: wiki/state/data/weekly-meal-plan.json
+ * Tonight's dinner — single source of truth: wiki/state/weekly-meal-plan.json
  *
  * Resolves the meal for the current weekday from the most recent weekly plan,
  * then enriches it with full recipe content from the recipes data layer
@@ -18,7 +18,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const PLAN_FILE = path.join(os.homedir(), '.hermes', 'workspace', 'wiki', 'state', 'data', 'weekly-meal-plan.json');
+const PLAN_FILE = path.join(os.homedir(), '.hermes', 'workspace', 'wiki', 'state', 'weekly-meal-plan.json');
 const recipesLoader = require('./recipes.js');
 
 const DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
