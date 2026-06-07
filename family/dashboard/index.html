@@ -167,12 +167,12 @@
 
   .dash {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 60px minmax(200px, 30%) 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 64px minmax(190px, 28%) 1fr;
     grid-template-areas:
-      "top    top    top    top    top"
-      "today  cal    cal    cal    cal"
-      "kid1   kid2   kid3   kid4   kid5";
+      "top    top    top    top"
+      "today  cal    cal    cal"
+      "kid1   kid2   kid3   kid4";
     gap: 10px;
     padding: 10px;
     height: 100vh;
@@ -183,119 +183,174 @@
   .topbar {
     grid-area: top;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto 1fr;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 12px 24px;
+    padding: 0 22px;
+  }
+  .clock-block {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
   }
   .clock {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -1.5px;
     color: var(--accent-orange);
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
-  .date-block { display: flex; flex-direction: column; line-height: 1.15; }
-  .date-block .dow { font-size: 1rem; color: var(--text-mid); font-weight: 600; }
-  .date-block .date { font-size: 1.25rem; font-weight: 700; }
-  .weather {
+  .date-inline {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+  .date-inline .dow {
+    color: var(--text-mid);
+    margin-right: 6px;
+  }
+
+  .forecast {
     display: flex;
     align-items: center;
-    gap: 14px;
-    font-size: 1.3rem;
+    gap: 18px;
+    justify-content: flex-end;
   }
-  .weather .icon { font-size: 1.8rem; }
-  .weather .temp { font-weight: 800; font-size: 1.6rem; }
-  .weather .lo-hi { color: var(--text-mid); font-size: 0.95rem; font-weight: 600; }
+  .fc-now {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 18px;
+    border-right: 1px solid #30363d;
+  }
+  .fc-now .icon { font-size: 1.7rem; }
+  .fc-now .temp { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+  .fc-now .lo-hi { font-size: 0.78rem; color: var(--text-mid); font-weight: 600; line-height: 1; margin-top: 2px; }
+  .fc-now .meta { display: flex; flex-direction: column; gap: 3px; }
+
+  .fc-days { display: flex; gap: 14px; }
+  .fc-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 44px;
+  }
+  .fc-day .d { font-size: 0.65rem; color: var(--text-mid); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+  .fc-day .i { font-size: 1.05rem; line-height: 1; margin: 1px 0; }
+  .fc-day .hi { font-size: 0.85rem; font-weight: 700; line-height: 1; }
+  .fc-day .lo { font-size: 0.7rem; color: var(--text-mid); font-weight: 500; line-height: 1; }
 
   /* === SHARED CARD === */
   .card {
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 12px 16px 14px;
+    padding: 14px 16px 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 0;
   }
   .card-h {
-    font-size: 0.68rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     color: var(--text-mid);
-    margin: 0 0 8px;
+    margin: 0 0 10px;
     font-weight: 700;
   }
+  .card-h .h-action {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-dark);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+  }
+  .card-h .h-action:hover, .card-h .h-action:active {
+    background: rgba(255,255,255,0.12);
+  }
 
-  /* === DINNER (left of middle row) === */
-  .today { grid-area: today; }
+  /* === DINNER === */
+  .today { grid-area: today; cursor: pointer; transition: background 0.15s; }
+  .today:active { background: #1a2030; }
+  .today .tap-hint {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.62rem;
+    color: var(--text-mid);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
   .dinner-name {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 800;
     line-height: 1.15;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .dinner-meta {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    font-size: 0.78rem;
-    color: var(--text-mid);
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
   }
   .dinner-meta .row { display: flex; gap: 8px; align-items: baseline; }
-  .dinner-meta .row .k { color: var(--text-light); font-weight: 600; min-width: 52px; text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.5px; }
-  .dinner-meta .row .v { color: var(--text-dark); font-weight: 600; font-size: 0.82rem; }
-  .dinner-tag {
-    margin-top: auto;
-    display: inline-block;
-    align-self: flex-start;
-    background: rgba(63,185,80,0.15);
-    color: var(--accent-teal);
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 0.68rem;
+  .dinner-meta .row .k {
+    color: var(--text-mid);
     font-weight: 700;
+    min-width: 56px;
     text-transform: uppercase;
+    font-size: 0.62rem;
     letter-spacing: 0.5px;
   }
+  .dinner-meta .row .v { font-weight: 600; }
 
-  /* === CALENDAR (right of middle row) === */
+  /* === CALENDAR === */
   .cal { grid-area: cal; }
   .cal-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
     overflow: hidden;
   }
   .cal-row {
     display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: 14px;
+    grid-template-columns: 70px 1fr auto;
+    gap: 12px;
     align-items: center;
-    padding: 7px 12px;
-    border-radius: 8px;
+    padding: 6px 10px;
+    border-radius: 7px;
     background: rgba(255,255,255,0.02);
   }
   .cal-row.today-row {
     background: rgba(232,131,74,0.12);
-    border-left: 3px solid var(--accent-orange);
-    padding-left: 9px;
   }
-  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.82rem; }
+  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.78rem; }
   .cal-row.today-row .when { color: var(--accent-orange); }
   .cal-row .what {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .cal-row .who {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     background: rgba(255,255,255,0.08);
     padding: 3px 9px;
     border-radius: 999px;
@@ -311,40 +366,37 @@
   .cal-row .who.charlie   { background: rgba(248,81,73,0.18); color: var(--accent-rose); }
   .cal-row .who.thomas    { background: rgba(210,153,34,0.2); color: var(--accent-gold); }
   .cal-row .who.parents   { background: rgba(188,140,255,0.18); color: var(--accent-purple); }
+  .cal-row .who.mike      { background: rgba(63,185,80,0.18); color: var(--accent-teal); }
 
   /* === KID COLUMNS === */
   .kid {
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 11px 12px 13px;
+    padding: 14px 14px 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
     overflow: hidden;
     min-height: 0;
-    border-top-width: 4px;
-    border-top-style: solid;
   }
-  .kid.charlie { border-top-color: var(--accent-rose); }
-  .kid.henry   { border-top-color: var(--accent-blue); }
-  .kid.william { border-top-color: var(--accent-teal); }
-  .kid.thomas  { border-top-color: var(--accent-gold); }
-  .kid.nancy   { border-top-color: var(--accent-purple); }
-
   .kid-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-bottom: 3px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #21262d;
   }
-  .kid-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
-  .kid-meta { font-size: 0.65rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .kid-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; }
+  .kid.charlie .kid-name { color: var(--accent-rose); }
+  .kid.henry   .kid-name { color: var(--accent-blue); }
+  .kid.william .kid-name { color: var(--accent-teal); }
+  .kid.thomas  .kid-name { color: var(--accent-gold); }
+  .kid-meta { font-size: 0.7rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
 
-  .kid .section { display: flex; flex-direction: column; gap: 4px; }
+  .kid .section { display: flex; flex-direction: column; gap: 6px; }
   .kid .section .lbl {
-    font-size: 0.58rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.9px;
     color: var(--text-mid);
@@ -352,31 +404,28 @@
   }
 
   .hw-item {
-    font-size: 0.8rem;
-    padding: 6px 9px;
+    font-size: 0.9rem;
+    padding: 9px 11px;
     background: rgba(255,255,255,0.03);
-    border-radius: 6px;
-    border-left: 2px solid var(--accent-orange);
+    border-radius: 7px;
     line-height: 1.3;
   }
   .hw-item.none {
     color: var(--text-mid);
-    border-left-color: #30363d;
     font-style: italic;
-    font-size: 0.75rem;
-    padding: 5px 9px;
-    background: transparent;
+    font-size: 0.82rem;
+    padding: 7px 11px;
   }
   .hw-item .due {
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-mid);
-    margin-top: 2px;
+    margin-top: 4px;
     font-style: normal;
   }
   .hw-item .progress {
-    margin-top: 5px;
-    height: 3px;
+    margin-top: 8px;
+    height: 4px;
     background: #21262d;
     border-radius: 2px;
     overflow: hidden;
@@ -387,128 +436,179 @@
     border-radius: 2px;
   }
 
-  .sugar-row {
+  .stat-row {
     display: flex;
     align-items: baseline;
-    gap: 6px;
+    gap: 8px;
   }
-  .sugar-num {
-    font-size: 1.3rem;
+  .stat-num {
+    font-size: 1.7rem;
     font-weight: 800;
     color: var(--accent-teal);
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
-  .sugar-num.warn { color: var(--accent-gold); }
-  .sugar-num.danger { color: var(--accent-rose); }
-  .sugar-total {
-    font-size: 0.78rem;
-    color: var(--text-mid);
-    font-weight: 600;
-  }
-  .sugar-label { font-size: 0.68rem; color: var(--text-mid); margin-left: auto; font-weight: 500; }
+  .stat-num.warn { color: var(--accent-gold); }
+  .stat-num.danger { color: var(--accent-rose); }
+  .stat-sub { font-size: 0.75rem; color: var(--text-mid); font-weight: 500; margin-left: auto; }
 
-  .money {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--accent-teal);
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
+  /* === MODAL === */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
   }
-
-  .activity {
-    font-size: 0.78rem;
-    padding: 5px 9px;
-    background: rgba(88,166,255,0.12);
-    border-radius: 6px;
-    color: var(--accent-blue);
-    font-weight: 600;
-    line-height: 1.3;
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
-  .activity.none {
-    background: transparent;
-    color: var(--text-light);
-    padding: 0;
-    font-style: italic;
-    font-weight: 400;
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+    border-bottom: 1px solid #21262d;
+  }
+  .modal-head h2 { font-size: 1.4rem; font-weight: 800; margin: 0; }
+  .modal-close {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: var(--text-dark);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .modal-body {
+    padding: 18px 22px 22px;
+    overflow-y: auto;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .modal-body h3 {
     font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-mid);
+    margin: 14px 0 8px;
   }
-  .activity.warn {
-    background: rgba(248,81,73,0.12);
-    color: var(--accent-rose);
+  .modal-body h3:first-child { margin-top: 0; }
+  .modal-body ul, .modal-body ol { padding-left: 22px; margin: 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #21262d;
   }
+  .modal-body .meta b { color: var(--text-dark); font-weight: 700; }
 
-  /* Kid grid assignments */
+  /* Calendar expanded modal */
+  .cal-filter {
+    width: 100%;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    color: var(--text-dark);
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+  }
+  .cal-filter:focus { outline: none; border-color: var(--accent-orange); }
+  .cal-full-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cal-full-list .cal-row { padding: 8px 12px; }
+  .cal-full-list .cal-row .what { font-size: 0.9rem; }
+  .cal-month-h {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-mid);
+    font-weight: 700;
+    margin: 14px 0 4px;
+    padding-left: 4px;
+  }
+  .cal-month-h:first-child { margin-top: 0; }
+
+  /* Grid assignments */
   .kid1 { grid-area: kid1; }
   .kid2 { grid-area: kid2; }
   .kid3 { grid-area: kid3; }
   .kid4 { grid-area: kid4; }
-  .kid5 { grid-area: kid5; }
 </style>
 
 <div class="dash">
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="clock" id="clock">--:--</div>
-    <div class="date-block">
-      <span class="dow" id="dow">Sunday</span>
-      <span class="date" id="date">June 7, 2026</span>
+    <div class="clock-block">
+      <div class="clock" id="clock">--:--</div>
+      <div class="date-inline">
+        <span class="dow" id="dow">Sunday</span>
+        <span id="date">June 7, 2026</span>
+      </div>
     </div>
-    <div class="weather">
-      <span class="icon">☀️</span>
-      <span class="temp">84°</span>
-      <span class="lo-hi">68° · 88°</span>
+    <div></div>
+    <div class="forecast">
+      <div class="fc-now">
+        <span class="icon">☀️</span>
+        <div class="meta">
+          <span class="temp">84°</span>
+          <span class="lo-hi">L 68° · H 88°</span>
+        </div>
+      </div>
+      <div class="fc-days">
+        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">86°</span><span class="lo">70°</span></div>
+        <div class="fc-day"><span class="d">Tue</span><span class="i">🌧</span><span class="hi">79°</span><span class="lo">67°</span></div>
+        <div class="fc-day"><span class="d">Wed</span><span class="i">⛈</span><span class="hi">75°</span><span class="lo">65°</span></div>
+        <div class="fc-day"><span class="d">Thu</span><span class="i">☀️</span><span class="hi">82°</span><span class="lo">66°</span></div>
+        <div class="fc-day"><span class="d">Fri</span><span class="i">☀️</span><span class="hi">88°</span><span class="lo">71°</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- DINNER -->
-  <div class="card today">
+  <!-- DINNER (tap for recipe) -->
+  <div class="card today" id="dinnerCard">
     <h3 class="card-h">🍽 Dinner Tonight</h3>
     <div class="dinner-name">White Chicken Chili</div>
     <div class="dinner-meta">
       <div class="row"><span class="k">Cook</span><span class="v">Nancy</span></div>
       <div class="row"><span class="k">Method</span><span class="v">Crockpot · 2p</span></div>
-      <div class="row"><span class="k">Sides</span><span class="v">Cornbread</span></div>
+      <div class="row"><span class="k">Ready</span><span class="v">6:30p</span></div>
     </div>
-    <span class="dinner-tag">on track · 6:30p</span>
+    <span class="tap-hint">tap for recipe →</span>
   </div>
 
   <!-- CALENDAR -->
   <div class="card cal">
-    <h3 class="card-h">📅 Upcoming</h3>
-    <div class="cal-list">
-      <div class="cal-row today-row">
-        <span class="when">Today 6p</span>
-        <span class="what">Family movie night — Encanto (Thomas's pick)</span>
-        <span class="who family">Family</span>
-      </div>
-      <div class="cal-row">
-        <span class="when">Mon 9a</span>
-        <span class="what">Nancy colonoscopy prep — clear liquids all day</span>
-        <span class="who nancy">Nancy</span>
-      </div>
-      <div class="cal-row">
-        <span class="when">Wed 2p</span>
-        <span class="what">Nancy colonoscopy @ Greenville Endoscopy</span>
-        <span class="who nancy">Nancy</span>
-      </div>
-      <div class="cal-row">
-        <span class="when">Wed 6p</span>
-        <span class="what">William baseball practice — Cleveland Park</span>
-        <span class="who william">William</span>
-      </div>
-      <div class="cal-row">
-        <span class="when">Thu 4p</span>
-        <span class="what">Henry orthodontist — Dr. Patel</span>
-        <span class="who henry">Henry</span>
-      </div>
-      <div class="cal-row">
-        <span class="when">Fri 7p</span>
-        <span class="what">Date night — sitter Maddie confirmed</span>
-        <span class="who parents">Parents</span>
-      </div>
-    </div>
+    <h3 class="card-h">
+      <span>📅 Upcoming</span>
+      <button class="h-action" id="calExpand">See all</button>
+    </h3>
+    <div class="cal-list" id="calPreview"></div>
   </div>
 
   <!-- CHARLIE -->
@@ -522,20 +622,17 @@
       <div class="hw-item none">summer break</div>
     </div>
     <div class="section">
-      <span class="lbl">🍭 Sugar this week</span>
-      <div class="sugar-row">
-        <span class="sugar-num">3</span>
-        <span class="sugar-total">/ 5 left</span>
-        <span class="sugar-label">2 used</span>
+      <span class="lbl">🍭 Sugar today</span>
+      <div class="stat-row">
+        <span class="stat-num warn">52g</span>
+        <span class="stat-sub">/ 50g limit</span>
       </div>
     </div>
     <div class="section">
       <span class="lbl">💵 Allowance</span>
-      <div class="money">$48.00</div>
-    </div>
-    <div class="section">
-      <span class="lbl">📍 Today</span>
-      <div class="activity">Work shift · 4–9p</div>
+      <div class="stat-row">
+        <span class="stat-num">$48.00</span>
+      </div>
     </div>
   </div>
 
@@ -548,26 +645,23 @@
     <div class="section">
       <span class="lbl">📚 Homework</span>
       <div class="hw-item">
-        Summer reading — 500 pgs
-        <span class="due">due first day · 67/500</span>
+        Summer reading
+        <span class="due">67 / 500 pgs · due first day</span>
         <div class="progress"><div class="bar" style="width: 13%"></div></div>
       </div>
     </div>
     <div class="section">
-      <span class="lbl">🍭 Sugar this week</span>
-      <div class="sugar-row">
-        <span class="sugar-num danger">1</span>
-        <span class="sugar-total">/ 5 left</span>
-        <span class="sugar-label">4 used</span>
+      <span class="lbl">🍭 Sugar today</span>
+      <div class="stat-row">
+        <span class="stat-num danger">78g</span>
+        <span class="stat-sub">/ 50g limit</span>
       </div>
     </div>
     <div class="section">
       <span class="lbl">💵 Allowance</span>
-      <div class="money">$22.50</div>
-    </div>
-    <div class="section">
-      <span class="lbl">📍 Today</span>
-      <div class="activity none">nothing scheduled</div>
+      <div class="stat-row">
+        <span class="stat-num">$22.50</span>
+      </div>
     </div>
   </div>
 
@@ -580,26 +674,23 @@
     <div class="section">
       <span class="lbl">📚 Homework</span>
       <div class="hw-item">
-        Summer reading — 400 pgs
-        <span class="due">due first day · 35/400</span>
+        Summer reading
+        <span class="due">35 / 400 pgs · due first day</span>
         <div class="progress"><div class="bar" style="width: 9%"></div></div>
       </div>
     </div>
     <div class="section">
-      <span class="lbl">🍭 Sugar this week</span>
-      <div class="sugar-row">
-        <span class="sugar-num">3</span>
-        <span class="sugar-total">/ 5 left</span>
-        <span class="sugar-label">2 used</span>
+      <span class="lbl">🍭 Sugar today</span>
+      <div class="stat-row">
+        <span class="stat-num">31g</span>
+        <span class="stat-sub">/ 40g limit</span>
       </div>
     </div>
     <div class="section">
       <span class="lbl">💵 Allowance</span>
-      <div class="money">$18.00</div>
-    </div>
-    <div class="section">
-      <span class="lbl">📍 Today</span>
-      <div class="activity">Baseball Wed 6p</div>
+      <div class="stat-row">
+        <span class="stat-num">$18.00</span>
+      </div>
     </div>
   </div>
 
@@ -612,55 +703,247 @@
     <div class="section">
       <span class="lbl">📚 Homework</span>
       <div class="hw-item">
-        Summer reading — 200 pgs
-        <span class="due">due first day · 12/200</span>
+        Summer reading
+        <span class="due">12 / 200 pgs · due first day</span>
         <div class="progress"><div class="bar" style="width: 6%"></div></div>
       </div>
     </div>
     <div class="section">
-      <span class="lbl">🍭 Sugar this week</span>
-      <div class="sugar-row">
-        <span class="sugar-num">4</span>
-        <span class="sugar-total">/ 5 left</span>
-        <span class="sugar-label">1 used</span>
+      <span class="lbl">🍭 Sugar today</span>
+      <div class="stat-row">
+        <span class="stat-num">18g</span>
+        <span class="stat-sub">/ 35g limit</span>
       </div>
     </div>
     <div class="section">
       <span class="lbl">💵 Allowance</span>
-      <div class="money">$12.50</div>
-    </div>
-    <div class="section">
-      <span class="lbl">📍 Today</span>
-      <div class="activity none">nothing scheduled</div>
-    </div>
-  </div>
-
-  <!-- NANCY -->
-  <div class="kid nancy kid5">
-    <div class="kid-head">
-      <span class="kid-name">Nancy</span>
-      <span class="kid-meta">Mom</span>
-    </div>
-    <div class="section">
-      <span class="lbl">💊 Meds today</span>
-      <div class="hw-item">Adderall XR ✓ · Zepbound held</div>
-    </div>
-    <div class="section">
-      <span class="lbl">🏥 Next appt</span>
-      <div class="hw-item">
-        Colonoscopy
-        <span class="due">Wed Jun 10 · 3p</span>
+      <div class="stat-row">
+        <span class="stat-num">$12.50</span>
       </div>
-    </div>
-    <div class="section">
-      <span class="lbl">⚠️ Active</span>
-      <div class="activity warn">Ear pressure — ETD watch</div>
     </div>
   </div>
 
 </div>
 
+<!-- RECIPE MODAL -->
+<div class="modal-bg" id="recipeModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>White Chicken Chili</h2>
+      <button class="modal-close" onclick="closeModal('recipeModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="meta">
+        <span><b>Serves:</b> 6</span>
+        <span><b>Prep:</b> 15 min</span>
+        <span><b>Cook:</b> 4 hr (crockpot, low)</span>
+        <span><b>Total:</b> 4 hr 15 min</span>
+      </div>
+      <h3>Ingredients</h3>
+      <ul>
+        <li>2 lbs boneless skinless chicken breasts</li>
+        <li>1 large yellow onion, diced</li>
+        <li>4 cloves garlic, minced</li>
+        <li>2 cans (15 oz) great northern beans, drained &amp; rinsed</li>
+        <li>1 can (15 oz) cannellini beans, drained &amp; rinsed</li>
+        <li>2 cans (4 oz) diced green chiles</li>
+        <li>1 can (15 oz) corn, drained</li>
+        <li>4 cups chicken broth</li>
+        <li>1 tsp ground cumin</li>
+        <li>1 tsp oregano</li>
+        <li>1/2 tsp chili powder</li>
+        <li>1/4 tsp cayenne (optional)</li>
+        <li>Salt &amp; pepper to taste</li>
+        <li>1 cup heavy cream or half &amp; half</li>
+        <li>1 cup shredded Monterey Jack</li>
+        <li>Toppings: cilantro, lime wedges, tortilla strips, sour cream, avocado</li>
+      </ul>
+      <h3>Instructions</h3>
+      <ol>
+        <li>Add chicken, onion, garlic, beans, chiles, corn, broth, and spices to the crockpot. Stir.</li>
+        <li>Cover and cook on LOW for 4 hours (or HIGH for 2 hours) until chicken is cooked through.</li>
+        <li>Remove chicken, shred with two forks, return to pot.</li>
+        <li>Stir in heavy cream and shredded cheese. Cook on LOW another 15 min until creamy.</li>
+        <li>Taste and adjust salt. Serve with toppings and cornbread on the side.</li>
+      </ol>
+      <h3>Notes</h3>
+      <ul>
+        <li>For thicker chili, mash one can of beans before adding.</li>
+        <li>Henry hates cilantro — keep it on the side.</li>
+        <li>Freezes great. Double batch and freeze half.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR FULL MODAL -->
+<div class="modal-bg" id="calModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>📅 All upcoming events</h2>
+      <button class="modal-close" onclick="closeModal('calModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="cal-filter" id="calFilter" placeholder="Filter events..." autocomplete="off" />
+      <div id="calFullList"></div>
+    </div>
+  </div>
+</div>
+
 <script>
+  // === EVENTS DATA ===
+  const events = [
+    { date: '2026-06-07', time: '6:00p',  what: 'Family movie night: Encanto (Thomas\'s pick)', who: 'family' },
+    { date: '2026-06-08', time: '9:00a',  what: 'Nancy colonoscopy prep: clear liquids all day', who: 'nancy' },
+    { date: '2026-06-08', time: '4:00p',  what: 'Henry orthodontist: Dr. Patel', who: 'henry' },
+    { date: '2026-06-10', time: '3:00p',  what: 'Nancy colonoscopy: Greenville Endoscopy', who: 'nancy' },
+    { date: '2026-06-10', time: '6:00p',  what: 'William baseball practice: Cleveland Park', who: 'william' },
+    { date: '2026-06-12', time: '7:00p',  what: 'Date night: sitter Maddie confirmed', who: 'parents' },
+    { date: '2026-06-13', time: 'all day',what: 'Mike\'s birthday (no fuss)', who: 'mike' },
+    { date: '2026-06-15', time: '10:00a', what: 'Charlie summer job orientation', who: 'charlie' },
+    { date: '2026-06-15', time: '6:00p',  what: 'William baseball game vs Eastside', who: 'william' },
+    { date: '2026-06-17', time: '2:00p',  what: 'Thomas dentist cleaning', who: 'thomas' },
+    { date: '2026-06-18', time: '7:00p',  what: 'School board meeting (Nancy)', who: 'nancy' },
+    { date: '2026-06-20', time: 'all day',what: 'Father\'s Day', who: 'family' },
+    { date: '2026-06-22', time: '9:00a',  what: 'Henry summer camp drop-off (week 1)', who: 'henry' },
+    { date: '2026-06-24', time: '6:30p',  what: 'William baseball practice', who: 'william' },
+    { date: '2026-06-26', time: '7:00p',  what: 'Date night', who: 'parents' },
+    { date: '2026-06-27', time: '11:00a', what: 'Family pool day @ Cherrydale', who: 'family' },
+    { date: '2026-06-29', time: '9:00a',  what: 'Henry summer camp drop-off (week 2)', who: 'henry' },
+    { date: '2026-07-01', time: '3:00p',  what: 'Nancy hair appointment', who: 'nancy' },
+    { date: '2026-07-04', time: '6:00p',  what: 'Fireworks @ Falls Park', who: 'family' },
+    { date: '2026-07-06', time: '9:00a',  what: 'Charlie SAT prep class starts', who: 'charlie' },
+    { date: '2026-07-08', time: '4:00p',  what: 'William pediatrician annual', who: 'william' },
+    { date: '2026-07-10', time: '7:00p',  what: 'Date night', who: 'parents' },
+    { date: '2026-07-13', time: 'all day',what: 'Beach trip: Pawleys Island (5 nights)', who: 'family' },
+    { date: '2026-07-20', time: '10:00a', what: 'Thomas orthodontist consult', who: 'thomas' },
+    { date: '2026-07-22', time: '2:00p',  what: 'Nancy classroom prep day', who: 'nancy' },
+    { date: '2026-07-25', time: '6:00p',  what: 'Family BBQ @ Crittendens', who: 'family' },
+    { date: '2026-07-28', time: '9:00a',  what: 'Back-to-school physicals (all kids)', who: 'family' },
+    { date: '2026-08-01', time: '11:00a', what: 'School supply shopping', who: 'family' },
+    { date: '2026-08-04', time: '5:00p',  what: 'Henry orthodontist follow-up', who: 'henry' },
+    { date: '2026-08-07', time: 'all day',what: 'Anniversary', who: 'parents' },
+    { date: '2026-08-10', time: '8:00a',  what: 'Nancy teacher in-service week starts', who: 'nancy' },
+    { date: '2026-08-13', time: 'all day',what: 'First day of school', who: 'family' },
+    { date: '2026-08-15', time: '6:00p',  what: 'William baseball fall season begins', who: 'william' },
+    { date: '2026-08-20', time: '7:00p',  what: 'Back-to-school night', who: 'family' },
+    { date: '2026-08-28', time: '7:00p',  what: 'Friday football: Mauldin HS', who: 'charlie' },
+    { date: '2026-09-04', time: '7:00p',  what: 'Friday football', who: 'charlie' },
+    { date: '2026-09-07', time: 'all day',what: 'Labor Day', who: 'family' },
+    { date: '2026-09-12', time: '10:00a', what: 'William baseball game', who: 'william' },
+    { date: '2026-09-15', time: '4:00p',  what: 'Henry orthodontist adjustment', who: 'henry' },
+    { date: '2026-09-19', time: '6:00p',  what: 'Thomas birthday (turns 9)', who: 'thomas' },
+    { date: '2026-09-26', time: '11:00a', what: 'Parent-teacher conferences', who: 'family' },
+    { date: '2026-10-03', time: '6:00p',  what: 'William baseball playoffs?', who: 'william' },
+    { date: '2026-10-09', time: 'all day',what: 'Fall break starts (5 days)', who: 'family' },
+    { date: '2026-10-17', time: '7:00p',  what: 'Charlie homecoming dance', who: 'charlie' },
+    { date: '2026-10-24', time: '6:00p',  what: 'Henry cross country meet', who: 'henry' },
+    { date: '2026-10-31', time: '6:00p',  what: 'Trick or treat: Augusta Rd', who: 'family' },
+    { date: '2026-11-07', time: '10:00a', what: 'William fall baseball banquet', who: 'william' },
+    { date: '2026-11-11', time: 'all day',what: 'Veterans Day (no school)', who: 'family' },
+    { date: '2026-11-14', time: '6:00p',  what: 'Nancy book club @ our place', who: 'nancy' },
+    { date: '2026-11-22', time: 'all day',what: 'Charlie SAT test day', who: 'charlie' },
+    { date: '2026-11-25', time: 'all day',what: 'Thanksgiving break (Wed-Fri)', who: 'family' },
+    { date: '2026-11-26', time: '2:00p',  what: 'Thanksgiving dinner @ Grandma\'s', who: 'family' },
+    { date: '2026-12-04', time: '7:00p',  what: 'Thomas elementary holiday concert', who: 'thomas' },
+    { date: '2026-12-12', time: '6:00p',  what: 'Crittenden Christmas party', who: 'family' },
+    { date: '2026-12-18', time: 'all day',what: 'Last day of school', who: 'family' },
+    { date: '2026-12-25', time: 'all day',what: 'Christmas Day', who: 'family' },
+    { date: '2026-12-31', time: '9:00p',  what: 'NYE @ home', who: 'family' },
+    { date: '2027-01-04', time: 'all day',what: 'School resumes', who: 'family' },
+    { date: '2027-01-15', time: '4:00p',  what: 'Henry orthodontist', who: 'henry' },
+    { date: '2027-01-19', time: 'all day',what: 'MLK Day (no school)', who: 'family' },
+    { date: '2027-02-14', time: '7:00p',  what: 'Valentine\'s date night', who: 'parents' },
+    { date: '2027-03-02', time: '4:00p',  what: 'William spring baseball tryouts', who: 'william' },
+    { date: '2027-03-20', time: 'all day',what: 'Spring break starts', who: 'family' },
+    { date: '2027-04-04', time: 'all day',what: 'Easter', who: 'family' },
+    { date: '2027-04-18', time: '6:00p',  what: 'Charlie prom', who: 'charlie' },
+    { date: '2027-05-08', time: '11:00a', what: 'Mother\'s Day brunch', who: 'family' },
+    { date: '2027-05-25', time: 'all day',what: 'Memorial Day', who: 'family' },
+    { date: '2027-06-03', time: 'all day',what: 'Last day of school', who: 'family' },
+  ];
+
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0, 10);
+
+  function fmtWhen(ev) {
+    const d = new Date(ev.date + 'T00:00:00');
+    const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
+    const diffDays = Math.round((d - new Date(todayStr + 'T00:00:00')) / 86400000);
+    if (ev.date === todayStr) return 'Today ' + ev.time;
+    if (diffDays === 1) return 'Tmrw ' + ev.time;
+    if (diffDays > 1 && diffDays < 7) return dow + ' ' + ev.time;
+    const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return mo + ' ' + d.getDate() + ' ' + ev.time;
+  }
+
+  function rowHTML(ev) {
+    const isToday = ev.date === todayStr;
+    return '<div class="cal-row' + (isToday ? ' today-row' : '') + '">' +
+      '<span class="when">' + fmtWhen(ev) + '</span>' +
+      '<span class="what">' + ev.what + '</span>' +
+      '<span class="who ' + ev.who + '">' + ev.who.charAt(0).toUpperCase() + ev.who.slice(1) + '</span>' +
+      '</div>';
+  }
+
+  // Render preview (top ~8 upcoming)
+  function renderPreview() {
+    const upcoming = events.filter(e => e.date >= todayStr).slice(0, 8);
+    document.getElementById('calPreview').innerHTML = upcoming.map(rowHTML).join('');
+  }
+  renderPreview();
+
+  // Render full modal list, grouped by month
+  function renderFullList(filter = '') {
+    const f = filter.trim().toLowerCase();
+    const filtered = events
+      .filter(e => e.date >= todayStr)
+      .filter(e => !f || e.what.toLowerCase().includes(f) || e.who.toLowerCase().includes(f));
+    if (filtered.length === 0) {
+      document.getElementById('calFullList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-mid)">No matching events.</div>';
+      return;
+    }
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    let html = '';
+    let currentMonth = '';
+    filtered.forEach(ev => {
+      const d = new Date(ev.date + 'T00:00:00');
+      const monthKey = months[d.getMonth()] + ' ' + d.getFullYear();
+      if (monthKey !== currentMonth) {
+        html += '<div class="cal-month-h">' + monthKey + '</div>';
+        currentMonth = monthKey;
+      }
+      html += rowHTML(ev);
+    });
+    document.getElementById('calFullList').innerHTML = '<div class="cal-full-list">' + html + '</div>';
+  }
+
+  // === MODAL CONTROLS ===
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    if (id === 'calModal') {
+      renderFullList();
+      setTimeout(() => document.getElementById('calFilter').focus(), 50);
+    }
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+  window.closeModal = closeModal;
+
+  document.getElementById('dinnerCard').addEventListener('click', () => openModal('recipeModal'));
+  document.getElementById('calExpand').addEventListener('click', (e) => { e.stopPropagation(); openModal('calModal'); });
+  document.getElementById('calFilter').addEventListener('input', (e) => renderFullList(e.target.value));
+
+  // Click backdrop to close
+  document.querySelectorAll('.modal-bg').forEach(bg => {
+    bg.addEventListener('click', (e) => { if (e.target === bg) bg.classList.remove('open'); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-bg.open').forEach(m => m.classList.remove('open'));
+  });
+
+  // === CLOCK ===
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
     const now = new Date();
@@ -675,7 +958,6 @@
   }
   tick();
   setInterval(tick, 1000 * 30);
-  // Periodic refresh so stale data clears
   setTimeout(() => location.reload(), 10 * 60 * 1000);
 </script>
 
