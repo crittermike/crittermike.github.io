@@ -645,6 +645,71 @@
   .kid2 { grid-area: kid2; }
   .kid3 { grid-area: kid3; }
   .kid4 { grid-area: kid4; }
+
+  /* === MOBILE (phones, sub-768px) ===
+     Tablet layout untouched. Phone: scroll, single column, stack everything.
+  */
+  @media (max-width: 767px) {
+    html, body { overflow: auto; height: auto; }
+
+    .dash {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "top"
+        "today"
+        "cal"
+        "budget"
+        "kid1"
+        "kid2"
+        "kid3"
+        "kid4";
+      height: auto;
+      min-height: 100vh;
+      gap: 8px;
+      padding: 8px;
+    }
+
+    /* Top bar: stack clock, weather, forecast vertically */
+    .topbar {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 10px 14px;
+    }
+    .clock-block { justify-content: space-between; }
+    .clock { font-size: 2rem; }
+    .forecast {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .fc-now { padding-right: 12px; }
+    .fc-days { gap: 10px; flex-wrap: wrap; }
+    .fc-day { min-width: 38px; }
+
+    /* Cards: don't cap height, let content size */
+    .card, .kid, .budget {
+      overflow: visible;
+      min-height: 0;
+    }
+
+    /* Calendar: tighten when columns shrink */
+    .cal-row { grid-template-columns: 72px 1fr; gap: 8px; }
+    .cal-row .what { white-space: normal; }
+
+    /* Kid columns: ease up on font sizes */
+    .kid-name { font-size: 1.15rem; }
+    .stat-num { font-size: 1.5rem; }
+
+    /* Dinner */
+    .dinner-name { font-size: 1.2rem; }
+
+    /* Modals: full-width on phone */
+    .modal-bg { padding: 12px; }
+    .modal { max-height: 95vh; }
+    .modal-head { padding: 12px 16px; }
+    .modal-body { padding: 14px 16px 18px; }
+  }
 </style>
 
 <div class="dash">
@@ -664,21 +729,21 @@
       <div class="fc-now">
         <span class="icon">⛅</span>
         <div class="meta">
-          <span class="temp">86°</span>
+          <span class="temp">80°</span>
           <span class="lo-hi">L 67° · H 87°</span>
         </div>
       </div>
       <div class="fc-days">
         
-        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">91°</span><span class="lo">70°</span></div>
+        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">91°</span><span class="lo">69°</span></div>
         
-        <div class="fc-day"><span class="d">Tue</span><span class="i">🌧</span><span class="hi">78°</span><span class="lo">67°</span></div>
+        <div class="fc-day"><span class="d">Tue</span><span class="i">🌧</span><span class="hi">78°</span><span class="lo">69°</span></div>
         
         <div class="fc-day"><span class="d">Wed</span><span class="i">🌦</span><span class="hi">84°</span><span class="lo">65°</span></div>
         
-        <div class="fc-day"><span class="d">Thu</span><span class="i">🌦</span><span class="hi">92°</span><span class="lo">69°</span></div>
+        <div class="fc-day"><span class="d">Thu</span><span class="i">⛅</span><span class="hi">92°</span><span class="lo">70°</span></div>
         
-        <div class="fc-day"><span class="d">Fri</span><span class="i">🌦</span><span class="hi">94°</span><span class="lo">71°</span></div>
+        <div class="fc-day"><span class="d">Fri</span><span class="i">⛅</span><span class="hi">94°</span><span class="lo">72°</span></div>
         
       </div>
       
