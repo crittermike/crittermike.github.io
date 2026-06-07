@@ -168,12 +168,11 @@
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 80px minmax(190px, 28%) 1fr 110px;
+    grid-template-rows: 80px minmax(220px, 32%) 1fr;
     grid-template-areas:
       "top    top    top    top"
-      "today  cal    cal    cal"
-      "kid1   kid2   kid3   kid4"
-      "budget budget budget budget";
+      "today  cal    cal    budget"
+      "kid1   kid2   kid3   kid4";
     gap: 10px;
     padding: 10px;
     height: 100vh;
@@ -551,22 +550,23 @@
   }
   .cal-month-h:first-child { margin-top: 0; }
 
-  /* === BUDGET STRIP === */
+  /* === BUDGET STRIP (vertical, shares row with dinner+calendar) === */
   .budget {
     grid-area: budget;
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 12px 18px 14px;
-    display: grid;
-    grid-template-columns: auto 1fr 1fr 1fr;
-    gap: 22px;
-    align-items: center;
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
   }
   .budget-head {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
+    flex-shrink: 0;
   }
   .budget-h {
     font-size: 0.7rem;
@@ -576,9 +576,16 @@
     font-weight: 700;
   }
   .budget-month {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--text-mid);
     font-weight: 600;
+  }
+  .budget-cats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    justify-content: space-around;
   }
   .budget-cat {
     display: flex;
@@ -586,17 +593,28 @@
     gap: 4px;
   }
   .budget-cat .name {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--text-dark);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
+  .budget-cat .name .budget-status {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .budget-cat .name .budget-status.over { color: var(--accent-rose); }
   .budget-bars {
     position: relative;
-    height: 22px;
+    height: 18px;
     background: rgba(255,255,255,0.04);
-    border-radius: 6px;
+    border-radius: 5px;
     overflow: visible;
   }
   .budget-bars .actual {
@@ -604,7 +622,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    border-radius: 6px;
+    border-radius: 5px;
     transition: width 0.4s;
   }
   .budget-bars .actual.ok    { background: var(--accent-teal); }
@@ -612,8 +630,8 @@
   .budget-bars .actual.over  { background: var(--accent-rose); }
   .budget-bars .pace {
     position: absolute;
-    top: -5px;
-    height: calc(100% + 10px);
+    top: -4px;
+    height: calc(100% + 8px);
     width: 3px;
     background: #ffffff;
     border-radius: 1px;
@@ -621,12 +639,6 @@
     transform: translateX(-1.5px);
   }
   .budget-bars .pace::after { display: none; }
-  .budget-status {
-    font-size: 0.7rem;
-    color: var(--text-mid);
-    font-weight: 600;
-  }
-  .budget-status.over { color: var(--accent-rose); }
 
   /* Grid assignments */
   .kid1 { grid-area: kid1; }
@@ -799,34 +811,36 @@
       <span class="budget-h">💳 Budget</span>
       <span class="budget-month" id="budgetMonth">June</span>
     </div>
-    <div class="budget-cat" data-cat="shopping" data-pct="42">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <span class="name">Shopping</span>
-        <span class="budget-status" id="status-shopping"></span>
+    <div class="budget-cats">
+      <div class="budget-cat" data-cat="shopping" data-pct="42">
+        <div class="name">
+          <span>Shopping</span>
+          <span class="budget-status" id="status-shopping"></span>
+        </div>
+        <div class="budget-bars">
+          <div class="actual" id="bar-shopping"></div>
+          <div class="pace" id="pace-shopping"></div>
+        </div>
       </div>
-      <div class="budget-bars">
-        <div class="actual" id="bar-shopping"></div>
-        <div class="pace" id="pace-shopping"></div>
+      <div class="budget-cat" data-cat="food" data-pct="68">
+        <div class="name">
+          <span>Food</span>
+          <span class="budget-status" id="status-food"></span>
+        </div>
+        <div class="budget-bars">
+          <div class="actual" id="bar-food"></div>
+          <div class="pace" id="pace-food"></div>
+        </div>
       </div>
-    </div>
-    <div class="budget-cat" data-cat="food" data-pct="68">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <span class="name">Food</span>
-        <span class="budget-status" id="status-food"></span>
-      </div>
-      <div class="budget-bars">
-        <div class="actual" id="bar-food"></div>
-        <div class="pace" id="pace-food"></div>
-      </div>
-    </div>
-    <div class="budget-cat" data-cat="ent" data-pct="89">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <span class="name">Entertainment</span>
-        <span class="budget-status" id="status-ent"></span>
-      </div>
-      <div class="budget-bars">
-        <div class="actual" id="bar-ent"></div>
-        <div class="pace" id="pace-ent"></div>
+      <div class="budget-cat" data-cat="ent" data-pct="89">
+        <div class="name">
+          <span>Entertainment</span>
+          <span class="budget-status" id="status-ent"></span>
+        </div>
+        <div class="budget-bars">
+          <div class="actual" id="bar-ent"></div>
+          <div class="pace" id="pace-ent"></div>
+        </div>
       </div>
     </div>
   </div>
