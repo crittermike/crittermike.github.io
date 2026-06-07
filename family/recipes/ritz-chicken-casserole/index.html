@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritz Chicken Casserole - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · easy</div>
+    <h1 class="ed-title">Ritz Chicken Casserole</h1>
+    
+  </header>
+
+  
+  <div class="ed-meta">
+    <div class="ed-meta-item"><div class="label">Serves</div><div class="value">6</div></div>
+    <div class="ed-meta-item"><div class="label">Prep</div><div class="value">10 min</div></div>
+    <div class="ed-meta-item"><div class="label">Cook</div><div class="value">25 min</div></div>
+    <div class="ed-meta-item"><div class="label">Protein</div><div class="value">20g</div></div>
+    <div class="ed-meta-item"><div class="label">Calories</div><div class="value">501</div></div>
+    <div class="ed-meta-item"><div class="label">Kids</div><div class="value">Yes</div></div>
+  </div>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-0-condensed cream of chicken with herbs soup">
+          <span class="ing-text">condensed cream of chicken with herbs soup</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-1-sour cream">
+          <span class="ing-text">sour cream</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-2-green onion">
+          <span class="ing-text">green onion</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-3-rotisserie chicken">
+          <span class="ing-text">rotisserie chicken</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-4-ritz crackers">
+          <span class="ing-text">Ritz crackers</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-5-salted butter">
+          <span class="ing-text">salted butter</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-6-1 cup shredded cheddar cheese (layer under ritz topping)">
+          <span class="ing-text">1 cup shredded cheddar cheese (layer under Ritz topping)</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Method</h2>
+    </div>
+    <ol class="rx-steps">
+      
+      <li>350F, 25-30 min</li>
+      
+      <li>Mix soup + sour cream, stir in chicken + broccoli, spread in 9x9</li>
+      
+      <li>Top with shredded cheddar, then crushed Ritz mixed with melted butter</li>
+      
+      <li>Bake until golden.</li>
+      
+    </ol>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Notes &amp; pitfalls</h2>
+    </div>
+    <div class="rx-notes ed-prose">
+      Family favorite. Use store-bought rotisserie chicken. Last made 11/11/22.
+    </div>
+  </section>
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>dinner-rotation.json</code></span>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:ritz-chicken-casserole';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

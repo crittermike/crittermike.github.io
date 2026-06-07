@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Command Center - Crittenden Family</title>
+    <title>Sheet-pan smoked sausage &amp;amp; baby potatoes + broccoli - Crittenden Family</title>
     
 
     <!-- Shared editorial design system (single source of truth) -->
@@ -152,95 +152,159 @@
         <div class="nav-links">
             <a href="/family/" data-page="home" >Home</a>
             <a href="/family/trips/" data-page="trips" >Trips</a>
-            <a href="/family/recipes/" data-page="recipes" >Recipes</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
         </div>
     </nav>
 
     
-    <header>
-        <h1>Command Center</h1>
-        <div class="subtitle">The Crittenden family dashboard</div>
-    </header>
-    <style>
-        header {
-            background: var(--card-bg);
-            border-bottom: 1px solid #30363d;
-            color: var(--text-dark);
-            padding: 32px 24px 28px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        header h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            position: relative;
-        }
-        header .subtitle {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-top: 4px;
-            font-weight: 500;
-            position: relative;
-            color: var(--text-mid);
-        }
-    </style>
-    
 
     
 <style>
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 32px 16px;
-  }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-  }
-  .nav-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 24px;
-    background: var(--card-bg);
-    border: 1px solid #30363d;
-    border-radius: var(--radius);
-    text-decoration: none;
-    color: var(--text-dark);
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-  }
-  .nav-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent-orange);
-  }
-  .nav-card .emoji { font-size: 2.4rem; }
-  .nav-card .info h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .nav-card .info p {
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    margin: 0;
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
   }
 </style>
 
-<div class="container">
-  <div class="cards">
-    <a class="nav-card" href="/family/trips/">
-      <span class="emoji">✈️</span>
-      <div class="info">
-        <h3>Trips</h3>
-        <p>Upcoming family travel plans</p>
-      </div>
-    </a>
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · easy</div>
+    <h1 class="ed-title">Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>
+    
+  </header>
+
+  
+  <div class="ed-meta">
+    
+    
+    
+    <div class="ed-meta-item"><div class="label">Protein</div><div class="value">35g</div></div>
+    <div class="ed-meta-item"><div class="label">Calories</div><div class="value">650</div></div>
+    <div class="ed-meta-item"><div class="label">Kids</div><div class="value">Yes</div></div>
   </div>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-0-smoked sausage (kielbasa)">
+          <span class="ing-text">smoked sausage (kielbasa)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-1-baby potatoes">
+          <span class="ing-text">baby potatoes</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-2-broccoli">
+          <span class="ing-text">broccoli</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-3-olive oil">
+          <span class="ing-text">olive oil</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-4-garlic">
+          <span class="ing-text">garlic</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-5-italian seasoning">
+          <span class="ing-text">Italian seasoning</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-6-paprika">
+          <span class="ing-text">paprika</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-7-salt">
+          <span class="ing-text">salt</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-8-pepper">
+          <span class="ing-text">pepper</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>dinner-rotation.json</code></span>
+  </footer>
+
 </div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:sheet-pan-smoked-sausage-and-baby-potatoes-broccoli';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
 
 </body>
 </html>

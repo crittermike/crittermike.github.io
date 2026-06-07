@@ -1,0 +1,139 @@
+---
+layout: base.njk
+title: "Recipes"
+permalink: "/recipes/index.html"
+---
+
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">Kitchen · {{ recipes.length }} saved</div>
+    <h1 class="ed-title">Recipes</h1>
+    <p class="ed-deck">The family rotation. Filter by effort, search by name or ingredient, click any recipe to view it with checkboxes for ingredients as you cook.</p>
+  </header>
+
+  <div class="rx-controls">
+    <input type="search" id="rx-search" class="rx-search" placeholder="Search by name or ingredient (e.g. chicken, broccoli, crockpot)…" autocomplete="off">
+    <span id="rx-count" class="rx-count">{{ recipes.length }} recipes</span>
+  </div>
+
+  <div class="rx-chips" id="rx-chips">
+    <button class="rx-chip active" data-filter="all">All</button>
+    <button class="rx-chip" data-filter="easy">Easy</button>
+    <button class="rx-chip" data-filter="easy-slow">Crockpot</button>
+    <button class="rx-chip" data-filter="medium">Medium</button>
+    <button class="rx-chip" data-filter="full">Full recipe</button>
+    <button class="rx-chip" data-filter="kid">Kid-friendly</button>
+  </div>
+
+  <ul class="rx-list" id="rx-list">
+    {% for r in recipes %}
+    <li data-name="{{ r.name | lower }}"
+        data-ing="{{ r.all_ingredients | join(' ') | lower }}"
+        data-effort="{{ r.effort or '' }}"
+        data-kid="{{ r.kid_friendly }}"
+        data-full="{{ r.hasFullRecipe }}">
+      <a href="/family/recipes/{{ r.slug }}/">
+        <div class="name">
+          {{ r.name }}{% if not r.hasFullRecipe %}<span class="stub">· stub</span>{% endif %}
+        </div>
+        <div class="tagline">
+          {%- set parts = [] -%}
+          {%- if r.effort -%}{%- set parts = (parts.push(r.effort), parts) -%}{%- endif -%}
+          {%- if r.servings -%}{%- set parts = (parts.push("serves " + r.servings), parts) -%}{%- endif -%}
+          {%- if r.protein_g -%}{%- set parts = (parts.push(r.protein_g + "g protein") , parts) -%}{%- endif -%}
+          {%- if r.cal -%}{%- set parts = (parts.push(r.cal + " cal"), parts) -%}{%- endif -%}
+          {{ parts | join(" · ") if parts.length else "&nbsp;" | safe }}
+        </div>
+        <div class="badges">
+          {% if r.effort %}<span class="badge">{{ r.effort }}</span>{% endif %}
+          {% if r.kid_friendly %}<span class="badge">kid-friendly</span>{% endif %}
+          {% for t in r.tags %}{% if t != "dinner" and t != "recipe" %}<span class="badge">{{ t }}</span>{% endif %}{% endfor %}
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="rx-empty" id="rx-empty" style="display:none;">No matches. Loosen the filters.</div>
+
+  <footer class="ed-footer">
+    <span>Source of truth: <code>~/.hermes/workspace/wiki/concepts/recipe-*.md</code></span>
+    <a class="ed-link" href="/family/">← Home</a>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const search = document.getElementById('rx-search');
+  const list = document.getElementById('rx-list');
+  const items = Array.from(list.querySelectorAll('li'));
+  const count = document.getElementById('rx-count');
+  const empty = document.getElementById('rx-empty');
+  const chips = document.querySelectorAll('#rx-chips .rx-chip');
+
+  let activeFilter = 'all';
+  let q = '';
+
+  function matches(li) {
+    // Filter chip
+    if (activeFilter === 'easy' && li.dataset.effort !== 'easy') return false;
+    if (activeFilter === 'easy-slow' && li.dataset.effort !== 'easy-slow') return false;
+    if (activeFilter === 'medium' && li.dataset.effort !== 'medium') return false;
+    if (activeFilter === 'full' && li.dataset.full !== 'true') return false;
+    if (activeFilter === 'kid' && li.dataset.kid !== 'true') return false;
+
+    // Search
+    if (q) {
+      const haystack = li.dataset.name + ' ' + li.dataset.ing;
+      const terms = q.split(/\s+/).filter(Boolean);
+      for (const t of terms) {
+        if (!haystack.includes(t)) return false;
+      }
+    }
+    return true;
+  }
+
+  function apply() {
+    let visible = 0;
+    for (const li of items) {
+      const ok = matches(li);
+      li.style.display = ok ? '' : 'none';
+      if (ok) visible++;
+    }
+    count.textContent = visible + (visible === 1 ? ' recipe' : ' recipes');
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  search.addEventListener('input', e => {
+    q = e.target.value.trim().toLowerCase();
+    apply();
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      apply();
+    });
+  });
+
+  // ESC clears search
+  search.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      search.value = '';
+      q = '';
+      apply();
+    }
+  });
+})();
+</script>

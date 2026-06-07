@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Crittenden Family</title>
-    {% if pageDescription %}<meta name="description" content="{{ pageDescription }}">{% endif %}
+    <title>Goulash + grilled kielbasa + pan-fried zucchini and squash - Crittenden Family</title>
+    
 
     <!-- Shared editorial design system (single source of truth) -->
     <link rel="stylesheet" href="/family/shared.css">
@@ -150,44 +150,151 @@
         <a href="/family/" class="brand">🏠 Crittendens</a>
         <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
         <div class="nav-links">
-            <a href="/family/" data-page="home" {% if page.url == "/family/" or page.url == "/family/index.html" %}class="active"{% endif %}>Home</a>
-            <a href="/family/trips/" data-page="trips" {% if "/trips" in page.url %}class="active"{% endif %}>Trips</a>
-            <a href="/family/recipes/" data-page="recipes" {% if "/recipes" in page.url %}class="active"{% endif %}>Recipes</a>
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
         </div>
     </nav>
 
-    {% if pageHeader %}
-    <header>
-        <h1>{{ pageHeader.title }}</h1>
-        {% if pageHeader.subtitle %}<div class="subtitle">{{ pageHeader.subtitle }}</div>{% endif %}
-    </header>
-    <style>
-        header {
-            background: var(--card-bg);
-            border-bottom: 1px solid #30363d;
-            color: var(--text-dark);
-            padding: 32px 24px 28px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        header h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            position: relative;
-        }
-        header .subtitle {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-top: 4px;
-            font-weight: 500;
-            position: relative;
-            color: var(--text-mid);
-        }
-    </style>
-    {% endif %}
+    
 
-    {{ content | safe }}
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · medium</div>
+    <h1 class="ed-title">Goulash + grilled kielbasa + pan-fried zucchini and squash</h1>
+    
+  </header>
+
+  
+  <div class="ed-meta">
+    
+    
+    
+    <div class="ed-meta-item"><div class="label">Protein</div><div class="value">45g</div></div>
+    <div class="ed-meta-item"><div class="label">Calories</div><div class="value">700</div></div>
+    <div class="ed-meta-item"><div class="label">Kids</div><div class="value">Yes</div></div>
+  </div>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-0-ground beef">
+          <span class="ing-text">ground beef</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-1-elbow macaroni">
+          <span class="ing-text">elbow macaroni</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-2-diced tomatoes">
+          <span class="ing-text">diced tomatoes</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-3-tomato sauce">
+          <span class="ing-text">tomato sauce</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-4-kielbasa">
+          <span class="ing-text">kielbasa</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-5-zucchini">
+          <span class="ing-text">zucchini</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="main-6-yellow squash">
+          <span class="ing-text">yellow squash</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>dinner-rotation.json</code></span>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:goulash-grilled-kielbasa-pan-fried-zucchini-and-squash';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

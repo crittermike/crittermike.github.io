@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Beef + Broccoli Bowls - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · easy</div>
+    <h1 class="ed-title">Korean Beef + Broccoli Bowls</h1>
+    
+  </header>
+
+  
+  <div class="ed-meta">
+    
+    
+    
+    <div class="ed-meta-item"><div class="label">Protein</div><div class="value">60g</div></div>
+    <div class="ed-meta-item"><div class="label">Calories</div><div class="value">600</div></div>
+    <div class="ed-meta-item"><div class="label">Kids</div><div class="value">Yes</div></div>
+  </div>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        <li class="group-heading">Beef</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="beef-0-2 lb ground beef (93% lean works great)">
+          <span class="ing-text">2 lb ground beef (93% lean works great)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="beef-1-1 tbsp toasted sesame oil (for cooking)">
+          <span class="ing-text">1 tbsp toasted sesame oil (for cooking)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="beef-2-6 cloves garlic, minced">
+          <span class="ing-text">6 cloves garlic, minced</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="beef-3-1 tbsp fresh ginger, grated (or 1 tsp ground)">
+          <span class="ing-text">1 tbsp fresh ginger, grated (or 1 tsp ground)</span>
+        </li>
+        
+      
+        
+        <li class="group-heading">Sauce (whisk in a jar/bowl)</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-0-1/2 cup soy sauce">
+          <span class="ing-text">1/2 cup soy sauce</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-1-1/3 cup brown sugar, packed">
+          <span class="ing-text">1/3 cup brown sugar, packed</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-2-2 tbsp rice vinegar (or apple cider in a pinch)">
+          <span class="ing-text">2 tbsp rice vinegar (or apple cider in a pinch)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-3-1 tbsp toasted sesame oil">
+          <span class="ing-text">1 tbsp toasted sesame oil</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-4-1 tsp red pepper flakes (1/2 tsp for kid-friendly)">
+          <span class="ing-text">1 tsp red pepper flakes (1/2 tsp for kid-friendly)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-5-1 tsp black pepper">
+          <span class="ing-text">1 tsp black pepper</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="sauce (whisk in a jar/bowl)-6-1 tbsp cornstarch">
+          <span class="ing-text">1 tbsp cornstarch</span>
+        </li>
+        
+      
+        
+        <li class="group-heading">Broccoli</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="broccoli-0-2 large heads broccoli, cut into bite-size florets (~6 cups)">
+          <span class="ing-text">2 large heads broccoli, cut into bite-size florets (~6 cups)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="broccoli-1-1 tbsp neutral oil (avocado or vegetable)">
+          <span class="ing-text">1 tbsp neutral oil (avocado or vegetable)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="broccoli-2-pinch of salt">
+          <span class="ing-text">Pinch of salt</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="broccoli-3-2 tbsp water">
+          <span class="ing-text">2 tbsp water</span>
+        </li>
+        
+      
+        
+        <li class="group-heading">Serve with</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="serve with-0-3 cups jasmine rice, cooked (~1.5 cups dry)">
+          <span class="ing-text">3 cups jasmine rice, cooked (~1.5 cups dry)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="serve with-1-toasted sesame seeds">
+          <span class="ing-text">Toasted sesame seeds</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="serve with-2-sriracha on the table">
+          <span class="ing-text">Sriracha on the table</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="serve with-3-optional: kimchi or quick-pickled carrots for crunch">
+          <span class="ing-text">Optional: kimchi or quick-pickled carrots for crunch</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Method</h2>
+    </div>
+    <ol class="rx-steps">
+      
+      <li>Start rice first (longest part).</li>
+      
+      <li>**Broccoli, separate pan.** Big skillet, medium-high, neutral oil hot. Broccoli in single layer, don&#39;t crowd. Sit 2 min for char. Toss, another 2 min. Splash 2 tbsp water, lid on 90 sec. Lid off, salt. Should be bright green with brown edges, still has snap. Pull off heat.</li>
+      
+      <li>**Beef, separate skillet.** Sesame oil, medium-high. Brown beef hard, break it small, 6-8 min. Drop heat to medium. Push beef aside, garlic + ginger in empty space, 30 sec until fragrant. Stir together.</li>
+      
+      <li>Pour sauce in, stir. Thickens in ~90 sec from cornstarch. If too thick, splash of water.</li>
+      
+      <li>Taste. Flat? More soy. Too salty? Pinch more brown sugar.</li>
+      
+      <li>Dump broccoli into beef pan at the end, toss 30 sec to coat in sauce.</li>
+      
+    </ol>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Notes &amp; pitfalls</h2>
+    </div>
+    <div class="rx-notes ed-prose">
+      <h3>Morning Prep (optional, saves 15 min in evening)</h3>
+<ol>
+<li>Whisk full sauce in a jar, refrigerate. Shake before using.</li>
+<li>Mince garlic + ginger together, small container, fridge.</li>
+<li>Cut broccoli into florets, gallon ziploc, fridge crisper.</li>
+<li>Measure dry rice + water into rice cooker pot, leave on counter.
+<strong>Don't pre-cook the beef or broccoli — reheating ruins both.</strong></li>
+</ol>
+<h3>Assembly</h3>
+<p>Rice in bowl. Beef + broccoli on top. Sesame seeds over the top. Sriracha for anyone over 12.</p>
+<h3>Notes</h3>
+<ul>
+<li>Two pans for broccoli + beef is non-negotiable. Cooking broccoli in beef pan = soggy gray broccoli from sauce moisture.</li>
+<li>93% lean is fine here — sauce carries the richness.</li>
+<li>Leftovers: cold beef on rice next day is unreasonably good. Or fry an egg on top.</li>
+<li>Sub English cucumber sliced for cold crunch contrast if desired.</li>
+</ul>
+<h3>Kid Reactions (expected)</h3>
+<ul>
+<li>Thomas: deconstructed, beef and rice not touching, no green stuff visible.</li>
+<li>William: will pick around broccoli; deal = 3 pieces minimum.</li>
+<li>Henry + Charlie: inhale and ask for seconds.</li>
+<li>Nancy: yes. No tzatziki.</li>
+</ul>
+
+    </div>
+  </section>
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>recipe-korean-beef-broccoli-bowls.md</code></span>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:korean-beef-broccoli-bowls';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

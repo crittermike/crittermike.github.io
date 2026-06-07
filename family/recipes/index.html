@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">Kitchen · 17 saved</div>
+    <h1 class="ed-title">Recipes</h1>
+    <p class="ed-deck">The family rotation. Filter by effort, search by name or ingredient, click any recipe to view it with checkboxes for ingredients as you cook.</p>
+  </header>
+
+  <div class="rx-controls">
+    <input type="search" id="rx-search" class="rx-search" placeholder="Search by name or ingredient (e.g. chicken, broccoli, crockpot)…" autocomplete="off">
+    <span id="rx-count" class="rx-count">17 recipes</span>
+  </div>
+
+  <div class="rx-chips" id="rx-chips">
+    <button class="rx-chip active" data-filter="all">All</button>
+    <button class="rx-chip" data-filter="easy">Easy</button>
+    <button class="rx-chip" data-filter="easy-slow">Crockpot</button>
+    <button class="rx-chip" data-filter="medium">Medium</button>
+    <button class="rx-chip" data-filter="full">Full recipe</button>
+    <button class="rx-chip" data-filter="kid">Kid-friendly</button>
+  </div>
+
+  <ul class="rx-list" id="rx-list">
+    
+    <li data-name="chicken fajitas (cast iron)"
+        data-ing="1.5–2 lb chicken breasts, sliced into 1/4&quot; strips 2 tbsp fajita seasoning (or to taste) 2 medium onions, sliced into half-moons 2 medium zucchini, halved lengthwise then sliced 1/4&quot; thick 1.5 cups corn (frozen or fresh kernels off the cob) 2 tbsp olive oil, divided 8–10 tortillas salt + pepper"
+        data-effort="easy"
+        data-kid="true"
+        data-full="true">
+      <a href="/family/recipes/chicken-fajitas/">
+        <div class="name">
+          Chicken Fajitas (Cast Iron)
+        </div>
+        <div class="tagline">easy · 48g protein · 600 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="crockpot chicken and dumplings"
+        data-ing="chicken broth chicken breast dried minced onion dried parsley cream of chicken soup (2 cans) refrigerated biscuits"
+        data-effort="easy"
+        data-kid="true"
+        data-full="true">
+      <a href="/family/recipes/crockpot-chicken-and-dumplings/">
+        <div class="name">
+          Crockpot Chicken and Dumplings
+        </div>
+        <div class="tagline">easy · 45g protein · 550 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="korean beef + broccoli bowls"
+        data-ing="2 lb ground beef (93% lean works great) 1 tbsp toasted sesame oil (for cooking) 6 cloves garlic, minced 1 tbsp fresh ginger, grated (or 1 tsp ground) 1/2 cup soy sauce 1/3 cup brown sugar, packed 2 tbsp rice vinegar (or apple cider in a pinch) 1 tbsp toasted sesame oil 1 tsp red pepper flakes (1/2 tsp for kid-friendly) 1 tsp black pepper 1 tbsp cornstarch 2 large heads broccoli, cut into bite-size florets (~6 cups) 1 tbsp neutral oil (avocado or vegetable) pinch of salt 2 tbsp water 3 cups jasmine rice, cooked (~1.5 cups dry) toasted sesame seeds sriracha on the table optional: kimchi or quick-pickled carrots for crunch"
+        data-effort="easy"
+        data-kid="true"
+        data-full="true">
+      <a href="/family/recipes/korean-beef-broccoli-bowls/">
+        <div class="name">
+          Korean Beef + Broccoli Bowls
+        </div>
+        <div class="tagline">easy · 60g protein · 600 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="ritz chicken casserole"
+        data-ing="condensed cream of chicken with herbs soup sour cream green onion rotisserie chicken ritz crackers salted butter 1 cup shredded cheddar cheese (layer under ritz topping)"
+        data-effort="easy"
+        data-kid="true"
+        data-full="true">
+      <a href="/family/recipes/ritz-chicken-casserole/">
+        <div class="name">
+          Ritz Chicken Casserole
+        </div>
+        <div class="tagline">easy · serves 6 · 20g protein · 501 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="white chicken chili"
+        data-ing="1 can black beans 1 can corn 1 can rotel 2 chicken breasts 1 pkg ranch dressing mix 1 cream cheese 1 pound mexican cheese 1 bag tortilla chips 1 pkg sour cream mexican cheese (shredded) tortilla chips sour cream"
+        data-effort="easy-slow"
+        data-kid="true"
+        data-full="true">
+      <a href="/family/recipes/white-chicken-chili/">
+        <div class="name">
+          White Chicken Chili
+        </div>
+        <div class="tagline">easy-slow · 55g protein · 550 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy-slow</span>
+          <span class="badge">kid-friendly</span>
+          <span class="badge">crockpot</span>
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="chicken thigh and veggie soup with french bread"
+        data-ing="chicken thighs carrots celery onion chicken broth french bread"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/chicken-thigh-and-veggie-soup-with-french-bread/">
+        <div class="name">
+          Chicken thigh and veggie soup with French bread<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 40g protein · 550 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="clam spaghetti (protein noodles) + garlic bread + roasted broccoli"
+        data-ing="canned clams protein noodles garlic bread broccoli olive oil garlic white wine"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli/">
+        <div class="name">
+          Clam spaghetti (protein noodles) + garlic bread + roasted broccoli<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 40g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="goulash + grilled kielbasa + pan-fried zucchini and squash"
+        data-ing="ground beef elbow macaroni diced tomatoes tomato sauce kielbasa zucchini yellow squash"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/goulash-grilled-kielbasa-pan-fried-zucchini-and-squash/">
+        <div class="name">
+          Goulash + grilled kielbasa + pan-fried zucchini and squash<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 45g protein · 700 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="grilled hamburgers &amp; hotdogs + corn"
+        data-ing="ground beef patties hotdogs buns corn on the cob cheese slices condiments"
+        data-effort="easy"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/grilled-hamburgers-and-hotdogs-corn/">
+        <div class="name">
+          Grilled hamburgers &amp; hotdogs + corn<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy · 50g protein · 800 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="marry me chicken"
+        data-ing="chicken breasts sun-dried tomatoes heavy cream parmesan garlic spinach italian seasoning"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/marry-me-chicken/">
+        <div class="name">
+          Marry Me chicken<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 50g protein · 600 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="meatloaf + mashed potatoes + cabbage"
+        data-ing="ground beef breadcrumbs eggs ketchup potatoes butter milk cabbage"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/meatloaf-mashed-potatoes-cabbage/">
+        <div class="name">
+          Meatloaf + mashed potatoes + cabbage<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 45g protein · 700 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="mexican beef &amp; refried bean burritos + onions"
+        data-ing="ground beef refried beans tortillas onions cheese sour cream taco seasoning"
+        data-effort="easy"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/mexican-beef-and-refried-bean-burritos-onions/">
+        <div class="name">
+          Mexican beef &amp; refried bean burritos + onions<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy · 50g protein · 750 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="pesto chicken + noodles + roasted brussels sprouts with balsamic glaze"
+        data-ing="chicken thighs pesto noodles brussels sprouts balsamic glaze parmesan"
+        data-effort="medium"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze/">
+        <div class="name">
+          Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">medium · 50g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">medium</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="pot roast with carrots and potatoes"
+        data-ing="chuck roast carrots potatoes onions beef broth"
+        data-effort="easy-slow"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/pot-roast-with-carrots-and-potatoes/">
+        <div class="name">
+          Pot roast with carrots and potatoes<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy-slow · 55g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy-slow</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="shake n bake chicken + mac and cheese + cabbage"
+        data-ing="chicken breast or thighs (2 lb) shake n bake (original) boxed mac and cheese (2 boxes) butter milk cabbage (1 head)"
+        data-effort="easy"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/shake-n-bake-chicken-mac-and-cheese-cabbage/">
+        <div class="name">
+          Shake n Bake chicken + mac and cheese + cabbage<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy · 50g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="sheet pan italian sausage with roasted zucchini, onions &amp; cherry tomatoes over rice"
+        data-ing="italian sausage links zucchini onions cherry tomatoes rice olive oil italian seasoning"
+        data-effort="easy"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/sheet-pan-italian-sausage-with-roasted-zucchini-onions-and-cherry-tomatoes-over-/">
+        <div class="name">
+          Sheet pan Italian sausage with roasted zucchini, onions &amp; cherry tomatoes over rice<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy · 45g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+    <li data-name="sheet-pan smoked sausage &amp; baby potatoes + broccoli"
+        data-ing="smoked sausage (kielbasa) baby potatoes broccoli olive oil garlic italian seasoning paprika salt pepper"
+        data-effort="easy"
+        data-kid="true"
+        data-full="false">
+      <a href="/family/recipes/sheet-pan-smoked-sausage-and-baby-potatoes-broccoli/">
+        <div class="name">
+          Sheet-pan smoked sausage &amp; baby potatoes + broccoli<span class="stub">· stub</span>
+        </div>
+        <div class="tagline">easy · 35g protein · 650 cal
+        </div>
+        <div class="badges">
+          <span class="badge">easy</span>
+          <span class="badge">kid-friendly</span>
+          
+        </div>
+      </a>
+    </li>
+    
+  </ul>
+
+  <div class="rx-empty" id="rx-empty" style="display:none;">No matches. Loosen the filters.</div>
+
+  <footer class="ed-footer">
+    <span>Source of truth: <code>~/.hermes/workspace/wiki/concepts/recipe-*.md</code></span>
+    <a class="ed-link" href="/family/">← Home</a>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const search = document.getElementById('rx-search');
+  const list = document.getElementById('rx-list');
+  const items = Array.from(list.querySelectorAll('li'));
+  const count = document.getElementById('rx-count');
+  const empty = document.getElementById('rx-empty');
+  const chips = document.querySelectorAll('#rx-chips .rx-chip');
+
+  let activeFilter = 'all';
+  let q = '';
+
+  function matches(li) {
+    // Filter chip
+    if (activeFilter === 'easy' && li.dataset.effort !== 'easy') return false;
+    if (activeFilter === 'easy-slow' && li.dataset.effort !== 'easy-slow') return false;
+    if (activeFilter === 'medium' && li.dataset.effort !== 'medium') return false;
+    if (activeFilter === 'full' && li.dataset.full !== 'true') return false;
+    if (activeFilter === 'kid' && li.dataset.kid !== 'true') return false;
+
+    // Search
+    if (q) {
+      const haystack = li.dataset.name + ' ' + li.dataset.ing;
+      const terms = q.split(/\s+/).filter(Boolean);
+      for (const t of terms) {
+        if (!haystack.includes(t)) return false;
+      }
+    }
+    return true;
+  }
+
+  function apply() {
+    let visible = 0;
+    for (const li of items) {
+      const ok = matches(li);
+      li.style.display = ok ? '' : 'none';
+      if (ok) visible++;
+    }
+    count.textContent = visible + (visible === 1 ? ' recipe' : ' recipes');
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  search.addEventListener('input', e => {
+    q = e.target.value.trim().toLowerCase();
+    apply();
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      apply();
+    });
+  });
+
+  // ESC clears search
+  search.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      search.value = '';
+      q = '';
+      apply();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,4 +1,8 @@
 module.exports = function(eleventyConfig) {
+  // Copy shared CSS to output so all pages can link it.
+  // Source is in _includes (gitignored from output by default), so copy explicitly.
+  eleventyConfig.addPassthroughCopy({ "src/_includes/shared.css": "shared.css" });
+
   // Set directories
   return {
     dir: {
