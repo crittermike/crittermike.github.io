@@ -168,11 +168,12 @@
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 80px minmax(190px, 28%) 1fr;
+    grid-template-rows: 80px minmax(190px, 28%) 1fr 110px;
     grid-template-areas:
       "top    top    top    top"
       "today  cal    cal    cal"
-      "kid1   kid2   kid3   kid4";
+      "kid1   kid2   kid3   kid4"
+      "budget budget budget budget";
     gap: 10px;
     padding: 10px;
     height: 100vh;
@@ -550,6 +551,83 @@
   }
   .cal-month-h:first-child { margin-top: 0; }
 
+  /* === BUDGET STRIP === */
+  .budget {
+    grid-area: budget;
+    background: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: 14px;
+    padding: 12px 18px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+  .budget-head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .budget-h {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-mid);
+    font-weight: 700;
+  }
+  .budget-month {
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .budget-cat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .budget-cat .name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .budget-bars {
+    position: relative;
+    height: 22px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    overflow: visible;
+  }
+  .budget-bars .actual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.4s;
+  }
+  .budget-bars .actual.ok    { background: var(--accent-teal); }
+  .budget-bars .actual.warn  { background: var(--accent-gold); }
+  .budget-bars .actual.over  { background: var(--accent-rose); }
+  .budget-bars .pace {
+    position: absolute;
+    top: -5px;
+    height: calc(100% + 10px);
+    width: 3px;
+    background: #ffffff;
+    border-radius: 1px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    transform: translateX(-1.5px);
+  }
+  .budget-bars .pace::after { display: none; }
+  .budget-status {
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .budget-status.over { color: var(--accent-rose); }
+
   /* Grid assignments */
   .kid1 { grid-area: kid1; }
   .kid2 { grid-area: kid2; }
@@ -711,6 +789,44 @@
       <span class="lbl">💵 Allowance</span>
       <div class="stat-row">
         <span class="stat-num">$12.50</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUDGET STRIP -->
+  <div class="budget" id="budgetStrip">
+    <div class="budget-head">
+      <span class="budget-h">💳 Budget</span>
+      <span class="budget-month" id="budgetMonth">June</span>
+    </div>
+    <div class="budget-cat" data-cat="shopping" data-pct="42">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span class="name">Shopping</span>
+        <span class="budget-status" id="status-shopping"></span>
+      </div>
+      <div class="budget-bars">
+        <div class="actual" id="bar-shopping"></div>
+        <div class="pace" id="pace-shopping"></div>
+      </div>
+    </div>
+    <div class="budget-cat" data-cat="food" data-pct="68">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span class="name">Food</span>
+        <span class="budget-status" id="status-food"></span>
+      </div>
+      <div class="budget-bars">
+        <div class="actual" id="bar-food"></div>
+        <div class="pace" id="pace-food"></div>
+      </div>
+    </div>
+    <div class="budget-cat" data-cat="ent" data-pct="89">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span class="name">Entertainment</span>
+        <span class="budget-status" id="status-ent"></span>
+      </div>
+      <div class="budget-bars">
+        <div class="actual" id="bar-ent"></div>
+        <div class="pace" id="pace-ent"></div>
       </div>
     </div>
   </div>
@@ -950,6 +1066,43 @@
   tick();
   setInterval(tick, 1000 * 30);
   setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+  // === BUDGET STRIP ===
+  function renderBudget() {
+    const now = new Date();
+    const dayOfMonth = now.getDate();
+    const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    const monthPct = Math.round((dayOfMonth / daysInMonth) * 100);
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('budgetMonth').textContent = months[now.getMonth()] + ' · day ' + dayOfMonth + '/' + daysInMonth;
+
+    document.querySelectorAll('.budget-cat').forEach(cat => {
+      const key = cat.dataset.cat;
+      const pct = parseInt(cat.dataset.pct, 10);
+      const bar = document.getElementById('bar-' + key);
+      const pace = document.getElementById('pace-' + key);
+      const status = document.getElementById('status-' + key);
+
+      bar.style.width = Math.min(pct, 100) + '%';
+      pace.style.left = Math.min(monthPct, 100) + '%';
+
+      // Color: green if ahead of pace, yellow if slightly behind, red if blown past 100
+      if (pct >= 100) {
+        bar.className = 'actual over';
+        status.textContent = 'over';
+        status.className = 'budget-status over';
+      } else if (pct > monthPct + 8) {
+        bar.className = 'actual warn';
+        status.textContent = 'pacing high';
+        status.className = 'budget-status';
+      } else {
+        bar.className = 'actual ok';
+        status.textContent = 'on pace';
+        status.className = 'budget-status';
+      }
+    });
+  }
+  renderBudget();
 </script>
 
 </body>
