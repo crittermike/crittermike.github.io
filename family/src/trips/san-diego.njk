@@ -19,9 +19,41 @@ permalink: "/trips/san-diego.html"
     color: var(--text-dark);
   }
 
+  /* Trip switcher */
+  .sd-switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    padding-top: 24px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sd-switcher a {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.82rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .sd-switcher a.active {
+    color: var(--text-dark);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+  .sd-switcher a:hover { color: var(--text-dark); }
+  .sd-switcher .when {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
   /* Header */
   .sd-header {
-    padding: 56px 0 32px;
+    padding: 48px 0 32px;
     border-bottom: 1px solid var(--hairline);
     margin-bottom: 40px;
   }
@@ -289,6 +321,18 @@ permalink: "/trips/san-diego.html"
 </style>
 
 <div class="sd-wrap">
+
+  <!-- Trip switcher -->
+  <nav class="sd-switcher">
+    <a href="/family/trips/">
+      Lake Hartwell
+      <span class="when">Jul 6–11, 2026 · Hartwell, GA</span>
+    </a>
+    <a href="/family/trips/san-diego.html" class="active">
+      Jace &amp; Lauren's Wedding
+      <span class="when">Jun 18–21, 2026 · San Diego, CA</span>
+    </a>
+  </nav>
 
   <header class="sd-header">
     <div class="sd-eyebrow">Trip · June 2026</div>

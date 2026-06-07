@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trips - Crittenden Family</title>
+    <title>Lake Hartwell 2026 - Crittenden Family</title>
     
     
     <!-- Base styles for the dark theme -->
@@ -157,383 +157,492 @@
     
 <style>
   :root {
-    --lake: #58a6ff;
-    --lake-dark: #79c0ff;
-    --lake-light: #21262d;
-    --sunset: #f4845f;
-    --sand: #161b22;
+    --accent: #4a8fa3;
+    --accent-dim: rgba(74, 143, 163, 0.14);
+    --hairline: #21262d;
   }
 
-  /* Hero */
-  .hero {
-    background: linear-gradient(135deg, var(--lake-dark) 0%, var(--lake) 40%, #2d8eb0 70%, var(--sunset) 100%);
-    color: white;
-    text-align: center;
-    padding: 60px 24px 50px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0; right: 0;
-    height: 40px;
-    background: #0d1117;
-    clip-path: ellipse(55% 100% at 50% 100%);
-  }
-  .hero-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; }
-  .hero .subtitle { font-size: 1.1rem; font-weight: 500; opacity: 0.92; }
-  .hero .dates {
-    display: inline-block;
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 40px;
-    padding: 8px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 14px;
-  }
-
-  .container {
-    max-width: 860px;
+  .lh-wrap {
+    max-width: 820px;
     margin: 0 auto;
-    padding: 32px 20px;
+    padding: 0 20px 60px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-dark);
   }
-  .section { margin-bottom: 36px; }
-  .section h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--lake-dark);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 22px;
-    box-shadow: none;
-    border: 1px solid #30363d;
-    margin-bottom: 16px;
-  }
-  .highlight {
-    background: #21262d;
-    border-left: 4px solid var(--lake);
-    border-radius: 0 12px 12px 0;
-    padding: 18px 22px;
-    margin: 16px 0;
-    font-size: 0.95rem;
-  }
-  .stats {
+
+  /* Trip switcher */
+  .lh-switcher {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin: 28px 0;
+    gap: 0;
+    padding-top: 24px;
+    border-bottom: 1px solid var(--hairline);
   }
-  .stat {
-    background: var(--card-bg);
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 14px 20px;
-    text-align: center;
-    box-shadow: none;
+  .lh-switcher a {
     flex: 1;
-    min-width: 110px;
+    min-width: 180px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.82rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
   }
-  .stat .num { font-size: 1.6rem; font-weight: 800; color: var(--lake); }
-  .stat .label { font-size: 0.78rem; color: var(--text-mid); font-weight: 500; margin-top: 2px; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .tag {
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    white-space: nowrap;
+  .lh-switcher a.active {
+    color: var(--text-dark);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+  .lh-switcher a:hover { color: var(--text-dark); }
+  .lh-switcher .when {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
   }
 
-  .card-grid {
+  /* Header */
+  .lh-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 40px;
+  }
+  .lh-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .lh-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+  .lh-deck {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    max-width: 580px;
+  }
+
+  /* Meta strip */
+  .lh-meta {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 40px;
   }
-  .activity-card {
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 18px;
-    text-align: center;
-    transition: transform 0.15s;
+  .lh-meta-item .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 4px;
   }
-  .activity-card:hover { transform: translateY(-2px); }
-  .activity-card .icon { font-size: 2rem; margin-bottom: 6px; }
-  .activity-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--lake-dark); }
-  .activity-card p { font-size: 0.82rem; color: var(--text-mid); }
+  .lh-meta-item .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
 
-  .checklist { list-style: none; }
-  .checklist li {
-    padding: 10px 0;
-    border-bottom: 1px solid #30363d;
-    font-size: 0.92rem;
+  /* Section */
+  .lh-section { margin-bottom: 48px; }
+  .lh-section-head {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hairline);
   }
-  .checklist li:last-child { border-bottom: none; }
-  .checklist .li-icon { flex-shrink: 0; font-size: 1.1rem; }
+  .lh-section-head h2 {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .lh-section-head .aside {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
 
-  .pontoon-options {
+  /* Key/value list */
+  .lh-kv {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .lh-kv dt { color: var(--text-mid); font-weight: 500; }
+  .lh-kv dd { color: var(--text-dark); }
+
+  /* Prose */
+  .lh-prose p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+  }
+  .lh-prose p:last-child { margin-bottom: 0; }
+
+  /* Links */
+  .lh-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .lh-link:hover { border-bottom-color: var(--accent); }
+  .lh-link-muted { color: var(--text-mid); text-decoration: none; }
+  .lh-link-muted:hover { color: var(--text-dark); }
+
+  /* Cell grid (for travel-style blocks) */
+  .lh-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-    margin-top: 14px;
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
   }
-  .pontoon-option {
-    background: #21262d;
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid #30363d;
+  .lh-cell {
+    background: var(--warm-bg);
+    padding: 20px;
   }
-  .pontoon-option h4 { font-size: 0.9rem; font-weight: 700; color: var(--lake-dark); margin-bottom: 6px; }
-  .pontoon-option p { font-size: 0.82rem; color: var(--text-mid); }
-
-  .listing-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--sunset);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 30px;
-    text-decoration: none;
+  .lh-cell .ttl {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 10px;
     font-weight: 600;
-    font-size: 0.92rem;
-    margin-top: 14px;
-    transition: transform 0.15s, background 0.15s;
   }
-  .listing-link:hover { background: #e8734e; transform: scale(1.03); }
-
-  .todo-section { margin-top: 16px; }
-  .todo-item {
-    padding: 8px 12px;
-    margin: 6px 0;
-    border-radius: 8px;
-    background: #21262d;
+  .lh-cell .body {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-dark);
+  }
+  .lh-cell .body strong { font-weight: 600; }
+  .lh-cell .body .leg {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hairline);
     font-size: 0.88rem;
+  }
+
+  .lh-status {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* Tag list */
+  .lh-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .lh-tag {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    background: var(--warm-bg);
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    padding: 4px 10px;
+  }
+
+  /* Activity / bring list */
+  .lh-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lh-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+  }
+  .lh-list li:last-child { border-bottom: none; }
+  .lh-list .lbl { font-weight: 600; color: var(--text-dark); }
+  .lh-list .note { color: var(--text-mid); }
+
+  /* Callout (warnings) */
+  .lh-callout {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: var(--accent-dim);
+    border-left: 2px solid var(--accent);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-dark);
+  }
+  .lh-callout strong { font-weight: 600; }
+  .lh-callout ul {
+    margin: 6px 0 0 18px;
+    padding: 0;
+  }
+  .lh-callout li { margin-bottom: 2px; }
+
+  /* TODO */
+  .lh-todo { list-style: none; padding: 0; margin: 0; }
+  .lh-todo li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
-  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #3fb950; }
+  .lh-todo li:last-child { border-bottom: none; }
+  .lh-todo input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: default;
+  }
+  .lh-todo .done {
+    color: var(--text-mid);
+    text-decoration: line-through;
+  }
+  .lh-todo .ref {
+    color: var(--text-mid);
+    font-size: 0.8rem;
+    margin-left: auto;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+  }
 
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 0.82rem;
-    color: var(--text-light);
+  /* Footer */
+  .lh-footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
   }
 
   @media (max-width: 600px) {
-    .hero { padding: 48px 18px 40px; }
-    .container { padding: 20px 14px; }
-    .stats { gap: 8px; }
-    .stat { min-width: 90px; padding: 10px 12px; }
-    .stat .num { font-size: 1.3rem; }
-    .card-grid { grid-template-columns: 1fr; }
+    .lh-meta { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .lh-kv { grid-template-columns: 100px 1fr; }
+    .lh-list li { grid-template-columns: 1fr; gap: 4px; }
+    .lh-section-head { flex-direction: column; gap: 4px; align-items: flex-start; }
   }
 </style>
 
-<!-- Trip Navigation -->
-<div style="max-width:860px;margin:0 auto;padding:24px 20px 0;">
-  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
-    <a href="/family/trips/" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:#161b22;border-radius:12px;text-decoration:none;color:#e6edf3;border:2px solid #58a6ff;">
-      <span style="font-size:2rem;">🏖️</span>
-      <div><strong>Lake Hartwell</strong><br><span style="font-size:0.85rem;color:#8b949e;">Jul 6–11, 2026 · Hartwell, GA</span></div>
-    </a>
-    <a href="/family/trips/san-diego.html" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;background:#161b22;border-radius:12px;text-decoration:none;color:#e6edf3;border:1px solid #30363d;transition:transform 0.15s;">
-      <span style="font-size:2rem;">🎊</span>
-      <div><strong>Jace & Lauren's Wedding</strong><br><span style="font-size:0.85rem;color:#8b949e;">Jun 19–21, 2026 · San Diego, CA</span></div>
-    </a>
-  </div>
-</div>
+<div class="lh-wrap">
 
-<!-- Hero -->
-<div class="hero">
-  <span class="hero-emoji">🏖️⛵🌅</span>
-  <h1>Lake Hartwell 2026</h1>
-  <div class="subtitle">Serenity Point &middot; Hartwell, Georgia</div>
-  <div class="dates">📅 July 6 &ndash; 11, 2026 &middot; 5 Nights</div>
-</div>
+  <!-- Trip switcher -->
+  <nav class="lh-switcher">
+    <a href="/family/trips/" class="active">
+      Lake Hartwell
+      <span class="when">Jul 6–11, 2026 · Hartwell, GA</span>
+    </a>
+    <a href="/family/trips/san-diego.html">
+      Jace &amp; Lauren's Wedding
+      <span class="when">Jun 18–21, 2026 · San Diego, CA</span>
+    </a>
+  </nav>
 
-<!-- Stats -->
-<div class="container">
-  <div class="stats">
-    <div class="stat"><div class="num">5</div><div class="label">Nights</div></div>
-    <div class="stat"><div class="num">7</div><div class="label">Bedrooms</div></div>
-    <div class="stat"><div class="num">5.5</div><div class="label">Bathrooms</div></div>
-    <div class="stat"><div class="num">16+</div><div class="label">Guests</div></div>
-    <div class="stat"><div class="num">4.98⭐</div><div class="label">Rating</div></div>
+  <header class="lh-header">
+    <div class="lh-eyebrow">Trip · July 2026</div>
+    <h1 class="lh-title">Lake Hartwell</h1>
+    <p class="lh-deck">Serenity Point on the Georgia/SC border. Five nights of pontoon days, dock fishing, and a house big enough to fit everyone.</p>
+  </header>
+
+  <div class="lh-meta">
+    <div class="lh-meta-item"><div class="label">Dates</div><div class="value">Jul 6–11</div></div>
+    <div class="lh-meta-item"><div class="label">Nights</div><div class="value">5</div></div>
+    <div class="lh-meta-item"><div class="label">Bedrooms</div><div class="value">7</div></div>
+    <div class="lh-meta-item"><div class="label">Guests</div><div class="value">16+</div></div>
+    <div class="lh-meta-item"><div class="label">Rating</div><div class="value">4.98 ★</div></div>
   </div>
 
   <!-- Overview -->
-  <div class="section">
-    <h2>🌊 The Trip</h2>
-    <div class="card">
-      <p>We're heading to <strong>Lake Hartwell</strong> for a week of sun, water, and quality time! The house sits right on the lake near the GA/SC border, about <strong>1.5 hours from Greenville</strong>. Think lazy pontoon days, fishing off the dock, campfire nights, and way too much food.</p>
-      <div class="highlight">
-        <strong>Check-in:</strong> Monday, July 6 at 4:00 PM<br>
-        <strong>Checkout:</strong> Saturday, July 11 at 11:00 AM<br>
-        <strong>Address:</strong> 675 Old Mill Road, Hartwell, GA 30643
-      </div>
-      <a class="listing-link" href="https://www.airbnb.com/rooms/934751170644664612" target="_blank">🏡 View on Airbnb</a>
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>The trip</h2></div>
+    <div class="lh-prose">
+      <p>Five nights on Lake Hartwell at a brand-new 5,000 sq ft lakefront house near the GA/SC border, about 1.5 hours from Greenville via I-85. Pontoon rental booked for the middle three days. Dock has deep water for swimming and fish bite right off it.</p>
     </div>
-  </div>
+    <dl class="lh-kv" style="margin-top:18px;">
+      <dt>Check-in</dt><dd>Monday, July 6 · 4:00 PM</dd>
+      <dt>Checkout</dt><dd>Saturday, July 11 · 11:00 AM</dd>
+      <dt>Address</dt><dd><a class="lh-link" href="https://www.google.com/maps/search/675+Old+Mill+Road+Hartwell+GA+30643" target="_blank">675 Old Mill Road, Hartwell, GA 30643</a></dd>
+      <dt>Listing</dt><dd><a class="lh-link" href="https://www.airbnb.com/rooms/934751170644664612" target="_blank">View on Airbnb</a></dd>
+    </dl>
+  </section>
 
-  <!-- The House -->
-  <div class="section">
-    <h2>🏡 The House</h2>
-    <div class="card">
-      <p><strong>"Serenity Point"</strong> is a brand new, 5,000 sq ft lakefront home. It's an Airbnb Guest Favorite (top 5% of homes!) with a 4.98-star rating. Reviewers rave about the space, the stocked kitchen ("every spice you could imagine"), and comfortable beds.</p>
-      <h4 style="margin-top:18px; margin-bottom:10px; color:var(--lake-dark);">🛏️ Sleeping Arrangements</h4>
-      <p><strong>6 king bedrooms</strong> (4 en suite on the main level!) plus a dedicated <strong>kids' room</strong> with 2 bunk beds and a toddler bed. 10 beds total across 7 bedrooms.</p>
-      <h4 style="margin-top:18px; margin-bottom:8px; color:var(--lake-dark);">✨ Amenities</h4>
-      <div class="tags">
-        <span class="tag">🚤 Covered Deep-Water Dock</span>
-        <span class="tag">🛥️ Private Boat Slip</span>
-        <span class="tag">🛶 Kayak</span>
-        <span class="tag">🔥 Fire Pit</span>
-        <span class="tag">🎱 Pool Table</span>
-        <span class="tag">🏓 Ping Pong</span>
-        <span class="tag">🍳 Full Kitchen</span>
-        <span class="tag">🥩 BBQ Grill</span>
-        <span class="tag">📶 WiFi</span>
-        <span class="tag">📺 TV</span>
-        <span class="tag">🎲 Board Games</span>
-        <span class="tag">📚 Books &amp; Toys</span>
-        <span class="tag">🐕 Pet Friendly</span>
-        <span class="tag">🅿️ Free Parking</span>
-        <span class="tag">🪑 Outdoor Dining</span>
-        <span class="tag">🧒 Kids' Dinnerware</span>
-      </div>
-      <div class="highlight" style="margin-top:18px;">
-        <strong>🎣 Dock Life:</strong> The covered dock is a highlight. Multiple families have caught fish right off it, and it's perfect for swimming, lounging, and tying up a pontoon boat. Paved walkway from the house makes it easy for all ages.
-      </div>
+  <!-- The house -->
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>The house</h2><div class="aside">Serenity Point</div></div>
+    <div class="lh-prose">
+      <p>5,000 sq ft, brand new. Airbnb Guest Favorite (top 5%). Reviewers call out the stocked kitchen and comfortable beds. Paved walkway from the house to the covered dock so all ages can get down easily.</p>
     </div>
-  </div>
-
-  <!-- Things To Do -->
-  <div class="section">
-    <h2>🎉 Things To Do</h2>
-    <div class="card-grid">
-      <div class="activity-card"><span class="icon">⛵</span><h4>Pontoon Boat</h4><p>Tubing, cruising, and lake exploring. Nothing beats it.</p></div>
-      <div class="activity-card"><span class="icon">🎣</span><h4>Fishing</h4><p>Cast right off the covered dock. Kids love it.</p></div>
-      <div class="activity-card"><span class="icon">🏊</span><h4>Swimming</h4><p>Deep water off the dock, jump right in.</p></div>
-      <div class="activity-card"><span class="icon">🛶</span><h4>Kayaking</h4><p>Kayak included. Explore the coves.</p></div>
-      <div class="activity-card"><span class="icon">🔥</span><h4>Campfire</h4><p>S'mores, stories, and stargazing.</p></div>
-      <div class="activity-card"><span class="icon">🎱</span><h4>Game Room</h4><p>Pool table, ping pong, board games.</p></div>
-      <div class="activity-card"><span class="icon">🦁</span><h4>Wildlife Safari</h4><p>Safari park just 5 minutes away!</p></div>
-      <div class="activity-card"><span class="icon">🍔</span><h4>Cook &amp; Grill</h4><p>Full kitchen + BBQ for big family dinners.</p></div>
+    <dl class="lh-kv" style="margin-top:18px;">
+      <dt>Sleeping</dt><dd>6 king bedrooms (4 en suite on main level) + kids' room with 2 bunk beds and a toddler bed. 10 beds across 7 bedrooms.</dd>
+      <dt>Bathrooms</dt><dd>5.5</dd>
+      <dt>Dock</dt><dd>Covered, deep-water, private boat slip. Swimmable. Fish off it.</dd>
+    </dl>
+    <div class="lh-tags" style="margin-top:18px;">
+      <span class="lh-tag">Full kitchen</span>
+      <span class="lh-tag">BBQ grill</span>
+      <span class="lh-tag">Fire pit</span>
+      <span class="lh-tag">Pool table</span>
+      <span class="lh-tag">Ping pong</span>
+      <span class="lh-tag">Kayak</span>
+      <span class="lh-tag">Board games</span>
+      <span class="lh-tag">Kids' dinnerware</span>
+      <span class="lh-tag">Outdoor dining</span>
+      <span class="lh-tag">Pet friendly</span>
+      <span class="lh-tag">WiFi</span>
+      <span class="lh-tag">TV</span>
+      <span class="lh-tag">Free parking</span>
     </div>
-  </div>
+  </section>
 
-  <!-- Pontoon Rental -->
-  <div class="section">
-    <h2>🚤 Pontoon Rental <span style="background:#1f6feb; color:white; font-size:0.7rem; padding:3px 10px; border-radius:12px; vertical-align:middle; margin-left:8px;">BOOKED ✓</span></h2>
-    <div class="card">
-      <p><strong>#1 Rented Boat - Tritoon 150hp - Lake Hartwell</strong> via Boatsetter. Owned by Greg, 5.0 stars across 146 bookings.</p>
-      <div class="highlight" style="margin-top:0;">
-        <strong>📅 Pickup:</strong> Tue, Jul 7, 2026 · 8:30 AM<br>
-        <strong>📅 Return:</strong> Thu, Jul 9, 2026 · 6:00 PM<br>
-        <strong>⏱️ Duration:</strong> 3 days · no captain (we drive)<br>
-        <strong>👥 Passengers:</strong> 10<br>
-        <strong>💰 Total:</strong> $1,798.38 <span style="color:var(--text-mid); font-size:0.85em;">(fuel not included)</span><br>
-        <strong>🆔 Booking:</strong> SMGJBNK<br>
-        <strong>📍 Pickup address:</strong> 117 Chestnut Lane, Anderson, SC 29625 (residence slip)
-      </div>
-      <div class="pontoon-options">
-        <div class="pontoon-option">
-          <h4>🛥️ The Boat</h4>
-          <p>2014 Premier Marine 220 SunSation RE Triple Tube, 22 ft, 150hp. Capacity 12. Stereo + Bluetooth, swim ladder, anchor, kids' life jackets.</p>
-        </div>
-        <div class="pontoon-option">
-          <h4>🎯 What It Can Do</h4>
-          <p>Tritoon with 150hp pulls tubes easily. Wakeboarding is doable but not ripping. Plenty of room for the whole crew + gear.</p>
-        </div>
-        <div class="pontoon-option">
-          <h4>➕ Add-Ons Available</h4>
-          <p>Tubes, wakeboards, paddleboards ($50/booking), floating mat ($75/booking), floating island ($100/hr), fishing gear ($25/passenger), cooler ($25).</p>
+  <!-- Pontoon -->
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>Pontoon rental<span class="lh-status">Booked</span></h2><div class="aside">Boatsetter · Greg (5.0 / 146)</div></div>
+    <div class="lh-grid">
+
+      <div class="lh-cell">
+        <div class="ttl">Schedule</div>
+        <div class="body">
+          <strong>Tritoon 150hp · 22 ft</strong>
+          <div class="leg">
+            <strong>Pickup</strong> · Tue Jul 7, 8:30 AM<br>
+            <strong>Return</strong> · Thu Jul 9, 6:00 PM<br>
+            3 days &middot; no captain (we drive)
+          </div>
         </div>
       </div>
-      <div class="highlight" style="margin-top:16px; border-left-color:var(--sunset);">
-        <strong>⚠️ Don't get burned:</strong>
-        <ul style="margin:8px 0 0 20px; padding:0;">
-          <li>Refuel before return or $75 service fee + fuel cost.</li>
-          <li>Late = hourly rate. 30+ min late = $100 inconvenience fee on top.</li>
-          <li>No refunds within 30 days of rental (we're past that on 6/7).</li>
-          <li>Security deposit due Jul 5.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- Getting There -->
-  <div class="section">
-    <h2>🚗 Getting There</h2>
-    <div class="card">
-      <ul class="checklist">
-        <li><span class="li-icon">📍</span><span><strong>Address:</strong> 675 Old Mill Road, Hartwell, GA 30643</span></li>
-        <li><span class="li-icon">⏱️</span><span><strong>From Greenville:</strong> ~1.5 hours via I-85</span></li>
-        <li><span class="li-icon">🛒</span><span><strong>Nearest stores:</strong> Walmart &amp; Ingles ~8 miles away</span></li>
-        <li><span class="li-icon">🅿️</span><span><strong>Parking:</strong> Plenty of free parking on the property</span></li>
+      <div class="lh-cell">
+        <div class="ttl">Boat</div>
+        <div class="body">
+          <strong>2014 Premier Marine 220 SunSation RE</strong>
+          <div class="leg">
+            Triple tube · 150hp · capacity 12<br>
+            Stereo + Bluetooth, swim ladder, anchor, kids' life jackets. Tritoon pulls tubes easy, wakeboarding is doable but not ripping.
+          </div>
+        </div>
+      </div>
+
+      <div class="lh-cell">
+        <div class="ttl">Details</div>
+        <div class="body">
+          <strong>$1,798.38</strong> <span style="color:var(--text-mid);">(fuel not included)</span>
+          <div class="leg">
+            Booking <strong>SMGJBNK</strong><br>
+            Passengers: 10<br>
+            Pickup: <a class="lh-link" href="https://www.google.com/maps/search/117+Chestnut+Lane+Anderson+SC+29625" target="_blank">117 Chestnut Lane, Anderson, SC</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lh-cell">
+        <div class="ttl">Add-ons</div>
+        <div class="body">
+          Available: paddleboards ($50), floating mat ($75), floating island ($100/hr), fishing gear ($25/passenger), cooler ($25), tubes, wakeboards.
+        </div>
+      </div>
+
+    </div>
+    <div class="lh-callout">
+      <strong>Don't get burned</strong>
+      <ul>
+        <li>Refuel before return or $75 service fee + fuel cost.</li>
+        <li>Late = hourly rate. 30+ min late = additional $100 fee.</li>
+        <li>No refunds within 30 days of rental (past that as of 6/7).</li>
+        <li>Security deposit due Jul 5.</li>
       </ul>
     </div>
-  </div>
+  </section>
 
-  <!-- What To Bring -->
-  <div class="section">
-    <h2>🎒 What To Bring</h2>
-    <div class="card">
-      <ul class="checklist">
-        <li><span class="li-icon">🩱</span><span><strong>Swimsuits &amp; beach towels</strong></span></li>
-        <li><span class="li-icon">☀️</span><span><strong>Sunscreen &amp; hats</strong> (July in Georgia = HOT)</span></li>
-        <li><span class="li-icon">🎣</span><span><strong>Fishing gear</strong> if you have it</span></li>
-        <li><span class="li-icon">🍿</span><span><strong>Snacks &amp; groceries</strong> (stock up on the way, stores 8mi away)</span></li>
-        <li><span class="li-icon">🎮</span><span><strong>Games &amp; entertainment</strong> for downtime</span></li>
-        <li><span class="li-icon">🔦</span><span><strong>Flashlights</strong> for nighttime dock walks</span></li>
-        <li><span class="li-icon">🧊</span><span><strong>Cooler</strong> for lake-side drinks</span></li>
-        <li><span class="li-icon">🦟</span><span><strong>Bug spray</strong> (lakefront in July, trust us)</span></li>
-      </ul>
-    </div>
-  </div>
+  <!-- Activities -->
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>On site</h2></div>
+    <ul class="lh-list">
+      <li><span class="lbl">Pontoon</span><span class="note">Tubing, cruising, cove-hopping. The whole crew fits.</span></li>
+      <li><span class="lbl">Fishing</span><span class="note">Right off the covered dock. Previous renters have caught.</span></li>
+      <li><span class="lbl">Swimming</span><span class="note">Deep water at the dock. Jump in.</span></li>
+      <li><span class="lbl">Kayaking</span><span class="note">Kayak included. Explore the coves.</span></li>
+      <li><span class="lbl">Campfire</span><span class="note">Fire pit on the property. S'mores, stargazing.</span></li>
+      <li><span class="lbl">Game room</span><span class="note">Pool, ping pong, board games for the inside hours.</span></li>
+      <li><span class="lbl">Safari park</span><span class="note">5 minutes away if the kids need an off-water day.</span></li>
+      <li><span class="lbl">Cookouts</span><span class="note">Full kitchen plus BBQ. Big family dinners on the deck.</span></li>
+    </ul>
+  </section>
+
+  <!-- Getting there -->
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>Getting there</h2></div>
+    <dl class="lh-kv">
+      <dt>From Greenville</dt><dd>~1.5 hours via I-85</dd>
+      <dt>Address</dt><dd>675 Old Mill Road, Hartwell, GA 30643</dd>
+      <dt>Groceries</dt><dd>Walmart and Ingles ~8 miles away. Stock up on the way in.</dd>
+      <dt>Parking</dt><dd>Plenty on property, free.</dd>
+    </dl>
+  </section>
+
+  <!-- What to bring -->
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>What to bring</h2></div>
+    <ul class="lh-list">
+      <li><span class="lbl">Swimsuits</span><span class="note">Plus beach towels. The house provides bath towels only.</span></li>
+      <li><span class="lbl">Sunscreen</span><span class="note">July in Georgia is brutal. Hats too.</span></li>
+      <li><span class="lbl">Bug spray</span><span class="note">Lakefront in July. Trust.</span></li>
+      <li><span class="lbl">Fishing gear</span><span class="note">If you have it. Otherwise rent on the boat.</span></li>
+      <li><span class="lbl">Snacks</span><span class="note">Stores are 8mi away. Stage what you can.</span></li>
+      <li><span class="lbl">Cooler</span><span class="note">For dock-side and on the pontoon.</span></li>
+      <li><span class="lbl">Flashlights</span><span class="note">For nighttime walks down to the dock.</span></li>
+      <li><span class="lbl">Games</span><span class="note">House has some, bring favorites for downtime.</span></li>
+    </ul>
+  </section>
 
   <!-- TODO -->
-  <div class="section">
-    <h2>📋 Trip TODO</h2>
-    <div class="card">
-      <div class="todo-section">
-        <div class="todo-item"><input type="checkbox" checked> Book pontoon rental</div>
-        <div class="todo-item"><input type="checkbox"> Plan meals / grocery list</div>
-        <div class="todo-item"><input type="checkbox"> Confirm headcount &amp; room assignments</div>
-        <div class="todo-item"><input type="checkbox"> Pack fishing gear</div>
-        <div class="todo-item"><input type="checkbox"> Buy sunscreen &amp; bug spray</div>
-        <div class="todo-item"><input type="checkbox"> Download offline games / movies</div>
-        <div class="todo-item"><input type="checkbox"> Check Airbnb for host updates</div>
-      </div>
-    </div>
-  </div>
-</div>
+  <section class="lh-section">
+    <div class="lh-section-head"><h2>To do</h2></div>
+    <ul class="lh-todo">
+      <li><input type="checkbox" checked disabled><span class="done">Book pontoon rental</span><span class="ref">SMGJBNK</span></li>
+      <li><input type="checkbox" disabled><span>Pay security deposit</span><span class="ref">due Jul 5</span></li>
+      <li><input type="checkbox" disabled><span>Plan meals &amp; grocery list</span></li>
+      <li><input type="checkbox" disabled><span>Confirm headcount &amp; room assignments</span></li>
+      <li><input type="checkbox" disabled><span>Pack fishing gear</span></li>
+      <li><input type="checkbox" disabled><span>Buy sunscreen &amp; bug spray</span></li>
+      <li><input type="checkbox" disabled><span>Download offline games / shows</span></li>
+      <li><input type="checkbox" disabled><span>Check Airbnb for host updates</span></li>
+    </ul>
+  </section>
 
-<footer>
-  <p>🌊 Lake Hartwell 2026 &middot; Serenity Point &middot; Hartwell, GA</p>
-  <p style="margin-top:4px;"><a href="/family/" style="color:var(--accent-orange); text-decoration:none; font-weight:600;">← Back to Command Center</a></p>
-</footer>
+  <footer class="lh-footer">
+    <span>July 6–11, 2026 &middot; Hartwell, GA</span>
+    <a class="lh-link" href="/family/">← Command Center</a>
+  </footer>
+
+</div>
 
 </body>
 </html>
