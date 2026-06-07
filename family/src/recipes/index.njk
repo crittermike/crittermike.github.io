@@ -16,7 +16,7 @@ permalink: "/recipes/index.html"
   <header class="ed-header">
     <div class="ed-eyebrow">Kitchen · {{ recipes.length }} saved</div>
     <h1 class="ed-title">Recipes</h1>
-    <p class="ed-deck">The family rotation. Filter by effort, search by name or ingredient, click any recipe to view it with checkboxes for ingredients as you cook.</p>
+    <p class="ed-deck">The family rotation. Search by name or ingredient, click any recipe to view it with checkboxes for ingredients as you cook.</p>
   </header>
 
   <div class="rx-controls">
@@ -24,22 +24,10 @@ permalink: "/recipes/index.html"
     <span id="rx-count" class="rx-count">{{ recipes.length }} recipes</span>
   </div>
 
-  <div class="rx-chips" id="rx-chips">
-    <button class="rx-chip active" data-filter="all">All</button>
-    <button class="rx-chip" data-filter="easy">Easy</button>
-    <button class="rx-chip" data-filter="easy-slow">Crockpot</button>
-    <button class="rx-chip" data-filter="medium">Medium</button>
-    <button class="rx-chip" data-filter="full">Full recipe</button>
-    <button class="rx-chip" data-filter="kid">Kid-friendly</button>
-  </div>
-
   <ul class="rx-list" id="rx-list">
     {% for r in recipes %}
     <li data-name="{{ r.name | lower }}"
-        data-ing="{{ r.all_ingredients | join(' ') | lower }}"
-        data-effort="{{ r.effort or '' }}"
-        data-kid="{{ r.kid_friendly }}"
-        data-full="{{ r.hasFullRecipe }}">
+        data-ing="{{ r.all_ingredients | join(' ') | lower }}">
       <a href="/family/recipes/{{ r.slug }}/">
         <div class="name">
           {{ r.name }}{% if not r.hasFullRecipe %}<span class="stub">· stub</span>{% endif %}
@@ -62,7 +50,7 @@ permalink: "/recipes/index.html"
     {% endfor %}
   </ul>
 
-  <div class="rx-empty" id="rx-empty" style="display:none;">No matches. Loosen the filters.</div>
+  <div class="rx-empty" id="rx-empty" style="display:none;">No matches.</div>
 
   <footer class="ed-footer">
     <span>Source of truth: <code>~/.hermes/workspace/wiki/concepts/recipe-*.md</code></span>
@@ -78,26 +66,15 @@ permalink: "/recipes/index.html"
   const items = Array.from(list.querySelectorAll('li'));
   const count = document.getElementById('rx-count');
   const empty = document.getElementById('rx-empty');
-  const chips = document.querySelectorAll('#rx-chips .rx-chip');
 
-  let activeFilter = 'all';
   let q = '';
 
   function matches(li) {
-    // Filter chip
-    if (activeFilter === 'easy' && li.dataset.effort !== 'easy') return false;
-    if (activeFilter === 'easy-slow' && li.dataset.effort !== 'easy-slow') return false;
-    if (activeFilter === 'medium' && li.dataset.effort !== 'medium') return false;
-    if (activeFilter === 'full' && li.dataset.full !== 'true') return false;
-    if (activeFilter === 'kid' && li.dataset.kid !== 'true') return false;
-
-    // Search
-    if (q) {
-      const haystack = li.dataset.name + ' ' + li.dataset.ing;
-      const terms = q.split(/\s+/).filter(Boolean);
-      for (const t of terms) {
-        if (!haystack.includes(t)) return false;
-      }
+    if (!q) return true;
+    const haystack = li.dataset.name + ' ' + li.dataset.ing;
+    const terms = q.split(/\s+/).filter(Boolean);
+    for (const t of terms) {
+      if (!haystack.includes(t)) return false;
     }
     return true;
   }
@@ -116,15 +93,6 @@ permalink: "/recipes/index.html"
   search.addEventListener('input', e => {
     q = e.target.value.trim().toLowerCase();
     apply();
-  });
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeFilter = chip.dataset.filter;
-      apply();
-    });
   });
 
   // ESC clears search
