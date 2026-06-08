@@ -732,15 +732,17 @@ permalink: "/dashboard/index.html"
   const events = {{ calendar | dump | safe }};
 
   const today = new Date();
-  const todayStr = today.toISOString().slice(0, 10);
+  // Use LOCAL date components, not toISOString() (which is UTC and rolls to "tomorrow" after ~8pm ET).
+  const todayStr = today.getFullYear() + '-' +
+    String(today.getMonth() + 1).padStart(2, '0') + '-' +
+    String(today.getDate()).padStart(2, '0');
 
   function fmtWhen(ev) {
     const d = new Date(ev.date + 'T00:00:00');
     const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
     const diffDays = Math.round((d - new Date(todayStr + 'T00:00:00')) / 86400000);
     if (ev.date === todayStr) return 'Today ' + ev.time;
-    if (diffDays === 1) return 'Tmrw ' + ev.time;
-    if (diffDays > 1 && diffDays < 7) return dow + ' ' + ev.time;
+    if (diffDays >= 1 && diffDays < 7) return dow + ' ' + ev.time;
     const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
     return mo + ' ' + d.getDate() + ' ' + ev.time;
   }
