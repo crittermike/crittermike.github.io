@@ -613,16 +613,6 @@ permalink: "/dashboard/index.html"
       <span class="kid-meta">{{ kid.grade }}</span>
     </div>
 
-    {% if kid.reading %}
-    <div class="section">
-      <span class="lbl">📚 Summer reading</span>
-      <div class="hw-item">
-        <span class="due">{{ kid.reading.pages }} / {{ kid.reading.target }} pgs</span>
-        <div class="progress"><div class="bar" style="width: {{ kid.reading.pct }}%"></div></div>
-      </div>
-    </div>
-    {% endif %}
-
     {% if kid.sugar.balance is not none %}
     <div class="section">
       <span class="lbl">🍭 Sugar checks</span>
@@ -642,6 +632,16 @@ permalink: "/dashboard/index.html"
       <div class="stat-row">
         {% set negA = '-' in kid.allowance.balance_str %}
         <span class="stat-num{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if kid.reading %}
+    <div class="section">
+      <span class="lbl">📚 Summer reading</span>
+      <div class="hw-item">
+        <span class="due">{{ kid.reading.pages }} / {{ kid.reading.target }} pgs</span>
+        <div class="progress"><div class="bar" style="width: {{ kid.reading.pct }}%"></div></div>
       </div>
     </div>
     {% endif %}
