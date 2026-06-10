@@ -365,40 +365,45 @@
   }
   .dinner-hero.no-recipe { cursor: default; }
   .dinner-hero .dinner-name {
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.2;
     color: var(--text-dark);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .dinner-hero .dinner-tap {
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: var(--text-mid);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-top: 6px;
-    opacity: 0.6;
+    display: none;
   }
   .dinner-tomorrow {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 10px;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 6px;
     cursor: pointer;
+    min-width: 0;
   }
   .dinner-tomorrow.no-recipe { cursor: default; }
   .dinner-tomorrow .t-lbl {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     font-weight: 700;
     color: var(--text-mid);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    flex-shrink: 0;
   }
   .dinner-tomorrow .t-name {
-    font-size: 1rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-dark);
     line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-width: 0;
   }
 
   /* === CALENDAR === */
@@ -878,27 +883,6 @@
     <span class="countdowns" id="countdowns"></span>
     <div></div>
     <div class="forecast">
-      
-      <div class="fc-now">
-        <span class="icon">⛅</span>
-        <div class="meta">
-          <span class="temp">72°</span>
-          <span class="lo-hi">L 70° · H 88°</span>
-        </div>
-      </div>
-      <div class="fc-days">
-        
-        <div class="fc-day"><span class="d">Thu</span><span class="i">⛅</span><span class="hi">93°</span><span class="lo">71°</span></div>
-        
-        <div class="fc-day"><span class="d">Fri</span><span class="i">🌦</span><span class="hi">98°</span><span class="lo">73°</span></div>
-        
-        <div class="fc-day"><span class="d">Sat</span><span class="i">🌦</span><span class="hi">96°</span><span class="lo">68°</span></div>
-        
-        <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">95°</span><span class="lo">68°</span></div>
-        
-        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">92°</span><span class="lo">70°</span></div>
-        
-      </div>
       
     </div>
   </div>

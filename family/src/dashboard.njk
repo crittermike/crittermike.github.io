@@ -205,40 +205,45 @@ permalink: "/dashboard/index.html"
   }
   .dinner-hero.no-recipe { cursor: default; }
   .dinner-hero .dinner-name {
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.2;
     color: var(--text-dark);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .dinner-hero .dinner-tap {
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: var(--text-mid);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-top: 6px;
-    opacity: 0.6;
+    display: none;
   }
   .dinner-tomorrow {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 10px;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 6px;
     cursor: pointer;
+    min-width: 0;
   }
   .dinner-tomorrow.no-recipe { cursor: default; }
   .dinner-tomorrow .t-lbl {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     font-weight: 700;
     color: var(--text-mid);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    flex-shrink: 0;
   }
   .dinner-tomorrow .t-name {
-    font-size: 1rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-dark);
     line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-width: 0;
   }
 
   /* === CALENDAR === */
