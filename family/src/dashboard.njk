@@ -256,7 +256,8 @@ permalink: "/dashboard/index.html"
   .kid-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-dark); }
   .kid-meta { font-size: 0.68rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
 
-  .kid .section { display: flex; flex-direction: column; gap: 4px; }
+  .kid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kid .section { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .kid .section .lbl {
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -632,31 +633,30 @@ permalink: "/dashboard/index.html"
   <div class="kid {{ kid.key }} kid{{ loop.index }}">
     <div class="kid-head">
       <span class="kid-name">{{ kid.name }}</span>
-      <span class="kid-meta">{{ kid.grade }}</span>
     </div>
 
-    {% if kid.sugar.balance is not none %}
-    <div class="section">
-      <span class="lbl">🍭 Sugar checks</span>
-      <div class="stat-row">
-        {# Balance = remaining grams. Negative = overspent (red). Low = warn. Healthy = green. #}
-        {% set neg = kid.sugar.balance < 0 %}
-        {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
-        <span class="stat-num{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</span>
-        <span class="stat-sub">left</span>
+    <div class="kid-stats">
+      {% if kid.sugar.balance is not none %}
+      <div class="section">
+        <span class="lbl">🍭 Sugar</span>
+        <div class="stat-row">
+          {% set neg = kid.sugar.balance < 0 %}
+          {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
+          <span class="stat-num{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</span>
+        </div>
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
 
-    {% if kid.allowance.balance_str %}
-    <div class="section">
-      <span class="lbl">💵 Allowance</span>
-      <div class="stat-row">
-        {% set negA = '-' in kid.allowance.balance_str %}
-        <span class="stat-num{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
+      {% if kid.allowance.balance_str %}
+      <div class="section">
+        <span class="lbl">💵 Allowance</span>
+        <div class="stat-row">
+          {% set negA = '-' in kid.allowance.balance_str %}
+          <span class="stat-num{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
+        </div>
       </div>
+      {% endif %}
     </div>
-    {% endif %}
 
     {% if kid.reading %}
     <div class="section">
