@@ -130,42 +130,49 @@ permalink: "/dashboard/index.html"
     background: rgba(255,255,255,0.12);
   }
 
-  /* === DINNER === */
-  .today { grid-area: today; cursor: pointer; transition: background 0.15s; }
-  .today:active { background: #1a2030; }
-  .today .tap-hint {
-    margin-top: auto;
-    align-self: flex-start;
-    font-size: 0.62rem;
-    color: var(--text-mid);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  .dinner-name {
-    font-size: 1.35rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .dinner-meta {
+  /* === WEEK MEAL PLAN === */
+  .today { grid-area: today; }
+  .week-list {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    font-size: 0.8rem;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    overflow: hidden;
   }
-  .dinner-meta .row { display: flex; gap: 8px; align-items: baseline; }
-  .dinner-meta .row .k {
-    color: var(--text-mid);
+  .week-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: background 0.15s;
+    min-height: 0;
+  }
+  .week-row:hover, .week-row:active { background: rgba(255,255,255,0.06); }
+  .week-row.today-row {
+    background: rgba(232,131,74,0.14);
+  }
+  .week-row .dow {
+    font-size: 0.7rem;
     font-weight: 700;
-    min-width: 56px;
+    color: var(--text-mid);
     text-transform: uppercase;
-    font-size: 0.62rem;
     letter-spacing: 0.5px;
   }
-  .dinner-meta .row .v { font-weight: 600; }
+  .week-row.today-row .dow { color: var(--accent-orange); }
+  .week-row .meal {
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-dark);
+  }
+  .week-row.no-recipe { cursor: default; }
+  .week-row.no-recipe:hover { background: rgba(255,255,255,0.02); }
+  .week-row.no-recipe.today-row:hover { background: rgba(232,131,74,0.14); }
 
   /* === CALENDAR === */
   .cal { grid-area: cal; }
@@ -187,10 +194,10 @@ permalink: "/dashboard/index.html"
   .cal-row.today-row {
     background: rgba(232,131,74,0.12);
   }
-  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.78rem; }
+  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.92rem; }
   .cal-row.today-row .when { color: var(--accent-orange); }
   .cal-row .what {
-    font-size: 0.88rem;
+    font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -284,7 +291,7 @@ permalink: "/dashboard/index.html"
     gap: 8px;
   }
   .stat-num {
-    font-size: 1.7rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--accent-teal);
     font-variant-numeric: tabular-nums;
@@ -587,13 +594,18 @@ permalink: "/dashboard/index.html"
     </div>
   </div>
 
-  <!-- DINNER (tap for recipe) -->
-  <div class="card today" id="dinnerCard">
-    <h3 class="card-h">🍽 Dinner Tonight</h3>
-    <div class="dinner-name">{{ dinner.name if dinner else 'TBD' }}</div>
-    {% if dinner and dinner.recipe %}
-    <span class="tap-hint">tap for recipe →</span>
-    {% endif %}
+  <!-- WEEK MEAL PLAN (tap a day for recipe) -->
+  <div class="card today">
+    <h3 class="card-h">🍽 This Week</h3>
+    <div class="week-list">
+      {% for m in mealweek %}
+      <div class="week-row{% if m.isToday %} today-row{% endif %}{% if not m.recipe %} no-recipe{% endif %}"
+           {% if m.recipe %}data-recipe="{{ m.recipe.slug }}"{% endif %}>
+        <span class="dow">{{ m.dow_short }}</span>
+        <span class="meal">{{ m.name }}</span>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 
   <!-- CALENDAR -->
@@ -690,27 +702,55 @@ permalink: "/dashboard/index.html"
 
 </div>
 
-<!-- RECIPE MODAL -->
-{% if dinner and dinner.recipe %}
+<!-- RECIPE MODAL (content swapped per tapped day) -->
+{% if mealweek %}
 <div class="modal-bg" id="recipeModal">
   <div class="modal">
     <div class="modal-head">
-      <h2>{{ dinner.recipe.name }}</h2>
+      <h2 id="recipeTitle">Recipe</h2>
       <button class="modal-close" onclick="closeModal('recipeModal')">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="meta">
-        {% if dinner.recipe.servings %}<span><b>Serves:</b> {{ dinner.recipe.servings }}</span>{% endif %}
-        {% if dinner.recipe.prep_min %}<span><b>Prep:</b> {{ dinner.recipe.prep_min }} min</span>{% endif %}
-        {% if dinner.recipe.cook_min %}<span><b>Cook:</b> {{ dinner.recipe.cook_min }} min</span>{% endif %}
-        {% if dinner.recipe.effort %}<span><b>Effort:</b> {{ dinner.recipe.effort }}</span>{% endif %}
-        {% if dinner.recipe.protein_g %}<span><b>Protein:</b> {{ dinner.recipe.protein_g }}g</span>{% endif %}
-        {% if dinner.recipe.cal %}<span><b>Cal:</b> {{ dinner.recipe.cal }}</span>{% endif %}
-      </div>
-      {{ dinner.recipe.body_html | safe }}
-    </div>
+    <div class="modal-body" id="recipeBody"></div>
   </div>
 </div>
+
+<script>
+  // Recipe lookup table built from mealweek
+  const RECIPES = {
+    {% for m in mealweek %}{% if m.recipe %}
+    {{ m.recipe.slug | dump | safe }}: {
+      name: {{ m.recipe.name | dump | safe }},
+      servings: {{ (m.recipe.servings or 0) | dump | safe }},
+      prep_min: {{ (m.recipe.prep_min or 0) | dump | safe }},
+      cook_min: {{ (m.recipe.cook_min or 0) | dump | safe }},
+      effort: {{ (m.recipe.effort or '') | dump | safe }},
+      protein_g: {{ (m.recipe.protein_g or 0) | dump | safe }},
+      cal: {{ (m.recipe.cal or 0) | dump | safe }},
+      body_html: {{ (m.recipe.body_html or '') | dump | safe }}
+    },
+    {% endif %}{% endfor %}
+  };
+
+  function openRecipe(slug) {
+    const r = RECIPES[slug];
+    if (!r) return;
+    document.getElementById('recipeTitle').textContent = r.name;
+    let meta = '<div class="meta">';
+    if (r.servings) meta += '<span><b>Serves:</b> ' + r.servings + '</span>';
+    if (r.prep_min) meta += '<span><b>Prep:</b> ' + r.prep_min + ' min</span>';
+    if (r.cook_min) meta += '<span><b>Cook:</b> ' + r.cook_min + ' min</span>';
+    if (r.effort) meta += '<span><b>Effort:</b> ' + r.effort + '</span>';
+    if (r.protein_g) meta += '<span><b>Protein:</b> ' + r.protein_g + 'g</span>';
+    if (r.cal) meta += '<span><b>Cal:</b> ' + r.cal + '</span>';
+    meta += '</div>';
+    document.getElementById('recipeBody').innerHTML = meta + r.body_html;
+    openModal('recipeModal');
+  }
+
+  document.querySelectorAll('.week-row[data-recipe]').forEach(row => {
+    row.addEventListener('click', () => openRecipe(row.dataset.recipe));
+  });
+</script>
 {% endif %}
 
 <!-- CALENDAR FULL MODAL -->
@@ -800,11 +840,7 @@ permalink: "/dashboard/index.html"
   }
   window.closeModal = closeModal;
 
-  const dinnerCard = document.getElementById('dinnerCard');
-  const recipeModalEl = document.getElementById('recipeModal');
-  if (dinnerCard && recipeModalEl) {
-    dinnerCard.addEventListener('click', () => openModal('recipeModal'));
-  }
+  const dinnerCard = null;
   document.getElementById('calExpand').addEventListener('click', (e) => { e.stopPropagation(); openModal('calModal'); });
   document.getElementById('calFilter').addEventListener('input', (e) => renderFullList(e.target.value));
 

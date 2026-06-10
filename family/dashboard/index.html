@@ -290,42 +290,49 @@
     background: rgba(255,255,255,0.12);
   }
 
-  /* === DINNER === */
-  .today { grid-area: today; cursor: pointer; transition: background 0.15s; }
-  .today:active { background: #1a2030; }
-  .today .tap-hint {
-    margin-top: auto;
-    align-self: flex-start;
-    font-size: 0.62rem;
-    color: var(--text-mid);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  .dinner-name {
-    font-size: 1.35rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .dinner-meta {
+  /* === WEEK MEAL PLAN === */
+  .today { grid-area: today; }
+  .week-list {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    font-size: 0.8rem;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    overflow: hidden;
   }
-  .dinner-meta .row { display: flex; gap: 8px; align-items: baseline; }
-  .dinner-meta .row .k {
-    color: var(--text-mid);
+  .week-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: background 0.15s;
+    min-height: 0;
+  }
+  .week-row:hover, .week-row:active { background: rgba(255,255,255,0.06); }
+  .week-row.today-row {
+    background: rgba(232,131,74,0.14);
+  }
+  .week-row .dow {
+    font-size: 0.7rem;
     font-weight: 700;
-    min-width: 56px;
+    color: var(--text-mid);
     text-transform: uppercase;
-    font-size: 0.62rem;
     letter-spacing: 0.5px;
   }
-  .dinner-meta .row .v { font-weight: 600; }
+  .week-row.today-row .dow { color: var(--accent-orange); }
+  .week-row .meal {
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-dark);
+  }
+  .week-row.no-recipe { cursor: default; }
+  .week-row.no-recipe:hover { background: rgba(255,255,255,0.02); }
+  .week-row.no-recipe.today-row:hover { background: rgba(232,131,74,0.14); }
 
   /* === CALENDAR === */
   .cal { grid-area: cal; }
@@ -347,10 +354,10 @@
   .cal-row.today-row {
     background: rgba(232,131,74,0.12);
   }
-  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.78rem; }
+  .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.92rem; }
   .cal-row.today-row .when { color: var(--accent-orange); }
   .cal-row .what {
-    font-size: 0.88rem;
+    font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -444,7 +451,7 @@
     gap: 8px;
   }
   .stat-num {
-    font-size: 1.7rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--accent-teal);
     font-variant-numeric: tabular-nums;
@@ -744,24 +751,65 @@
         
         <div class="fc-day"><span class="d">Thu</span><span class="i">🌦</span><span class="hi">95°</span><span class="lo">71°</span></div>
         
-        <div class="fc-day"><span class="d">Fri</span><span class="i">🌦</span><span class="hi">99°</span><span class="lo">74°</span></div>
+        <div class="fc-day"><span class="d">Fri</span><span class="i">🌦</span><span class="hi">99°</span><span class="lo">73°</span></div>
         
-        <div class="fc-day"><span class="d">Sat</span><span class="i">⛅</span><span class="hi">94°</span><span class="lo">75°</span></div>
+        <div class="fc-day"><span class="d">Sat</span><span class="i">⛅</span><span class="hi">95°</span><span class="lo">73°</span></div>
         
-        <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">95°</span><span class="lo">73°</span></div>
+        <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">96°</span><span class="lo">71°</span></div>
         
       </div>
       
     </div>
   </div>
 
-  <!-- DINNER (tap for recipe) -->
-  <div class="card today" id="dinnerCard">
-    <h3 class="card-h">🍽 Dinner Tonight</h3>
-    <div class="dinner-name">Crockpot chicken and dumplings</div>
-    
-    <span class="tap-hint">tap for recipe →</span>
-    
+  <!-- WEEK MEAL PLAN (tap a day for recipe) -->
+  <div class="card today">
+    <h3 class="card-h">🍽 This Week</h3>
+    <div class="week-list">
+      
+      <div class="week-row no-recipe"
+           >
+        <span class="dow">Sun</span>
+        <span class="meal">Leftovers</span>
+      </div>
+      
+      <div class="week-row no-recipe"
+           >
+        <span class="dow">Mon</span>
+        <span class="meal">Chicken stir fry (frozen veg + sauce)</span>
+      </div>
+      
+      <div class="week-row no-recipe"
+           >
+        <span class="dow">Tue</span>
+        <span class="meal">Leftovers</span>
+      </div>
+      
+      <div class="week-row today-row"
+           data-recipe="crockpot-chicken-and-dumplings">
+        <span class="dow">Wed</span>
+        <span class="meal">Crockpot chicken and dumplings</span>
+      </div>
+      
+      <div class="week-row"
+           data-recipe="sheet-pan-italian-sausage-with-roasted-zucchini-onions-and-cherry-tomatoes-over-">
+        <span class="dow">Thu</span>
+        <span class="meal">Sheet pan Italian sausage with roasted zucchini, onions &amp; cherry tomatoes over rice</span>
+      </div>
+      
+      <div class="week-row no-recipe"
+           >
+        <span class="dow">Fri</span>
+        <span class="meal">Takeout (family choice)</span>
+      </div>
+      
+      <div class="week-row no-recipe"
+           >
+        <span class="dow">Sat</span>
+        <span class="meal">Pizza night</span>
+      </div>
+      
+    </div>
   </div>
 
   <!-- CALENDAR -->
@@ -970,38 +1018,66 @@
 
 </div>
 
-<!-- RECIPE MODAL -->
+<!-- RECIPE MODAL (content swapped per tapped day) -->
 
 <div class="modal-bg" id="recipeModal">
   <div class="modal">
     <div class="modal-head">
-      <h2>Crockpot Chicken and Dumplings</h2>
+      <h2 id="recipeTitle">Recipe</h2>
       <button class="modal-close" onclick="closeModal('recipeModal')">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="meta">
-        
-        
-        
-        <span><b>Effort:</b> easy</span>
-        <span><b>Protein:</b> 45g</span>
-        <span><b>Cal:</b> 550</span>
-      </div>
-      <h1>Crockpot Chicken and Dumplings</h1>
-<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href="http://cookingwithkarli.com">cookingwithkarli.com</a></p>
-<h2>Ingredients</h2>
-<ul>
-<li>chicken broth</li>
-<li>chicken breast</li>
-<li>dried minced onion</li>
-<li>dried parsley</li>
-<li>cream of chicken soup (2 cans)</li>
-<li>refrigerated biscuits</li>
-</ul>
-
-    </div>
+    <div class="modal-body" id="recipeBody"></div>
   </div>
 </div>
+
+<script>
+  // Recipe lookup table built from mealweek
+  const RECIPES = {
+    
+    "crockpot-chicken-and-dumplings": {
+      name: "Crockpot Chicken and Dumplings",
+      servings: 0,
+      prep_min: 0,
+      cook_min: 0,
+      effort: "easy",
+      protein_g: 45,
+      cal: 550,
+      body_html: "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n"
+    },
+    
+    "sheet-pan-italian-sausage-with-roasted-zucchini-onions-and-cherry-tomatoes-over-": {
+      name: "Sheet pan Italian sausage with roasted zucchini, onions & cherry tomatoes over rice",
+      servings: 0,
+      prep_min: 0,
+      cook_min: 0,
+      effort: "easy",
+      protein_g: 45,
+      cal: 650,
+      body_html: "<h1>Sheet pan Italian sausage with roasted zucchini, onions &amp; cherry tomatoes over rice</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>Italian sausage links</li>\n<li>zucchini</li>\n<li>onions</li>\n<li>cherry tomatoes</li>\n<li>rice</li>\n<li>olive oil</li>\n<li>Italian seasoning</li>\n</ul>\n"
+    },
+    
+  };
+
+  function openRecipe(slug) {
+    const r = RECIPES[slug];
+    if (!r) return;
+    document.getElementById('recipeTitle').textContent = r.name;
+    let meta = '<div class="meta">';
+    if (r.servings) meta += '<span><b>Serves:</b> ' + r.servings + '</span>';
+    if (r.prep_min) meta += '<span><b>Prep:</b> ' + r.prep_min + ' min</span>';
+    if (r.cook_min) meta += '<span><b>Cook:</b> ' + r.cook_min + ' min</span>';
+    if (r.effort) meta += '<span><b>Effort:</b> ' + r.effort + '</span>';
+    if (r.protein_g) meta += '<span><b>Protein:</b> ' + r.protein_g + 'g</span>';
+    if (r.cal) meta += '<span><b>Cal:</b> ' + r.cal + '</span>';
+    meta += '</div>';
+    document.getElementById('recipeBody').innerHTML = meta + r.body_html;
+    openModal('recipeModal');
+  }
+
+  document.querySelectorAll('.week-row[data-recipe]').forEach(row => {
+    row.addEventListener('click', () => openRecipe(row.dataset.recipe));
+  });
+</script>
 
 
 <!-- CALENDAR FULL MODAL -->
@@ -1091,11 +1167,7 @@
   }
   window.closeModal = closeModal;
 
-  const dinnerCard = document.getElementById('dinnerCard');
-  const recipeModalEl = document.getElementById('recipeModal');
-  if (dinnerCard && recipeModalEl) {
-    dinnerCard.addEventListener('click', () => openModal('recipeModal'));
-  }
+  const dinnerCard = null;
   document.getElementById('calExpand').addEventListener('click', (e) => { e.stopPropagation(); openModal('calModal'); });
   document.getElementById('calFilter').addEventListener('input', (e) => renderFullList(e.target.value));
 
