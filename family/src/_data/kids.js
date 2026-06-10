@@ -33,6 +33,30 @@ const KIDS = [
   { key: 'charlie', name: 'Charlie', grade: 'rising 11th' },
 ];
 
+/**
+ * Today's recurring assignments per kid.
+ * Summer mode (Jun/Jul, Mon-Fri): non-Charlie kids get Summer Solutions + 20 min reading.
+ * Returns [{id, label}, ...] — id must be stable so localStorage checkbox state survives.
+ */
+function todaysAssignments(kidKey) {
+  // ET date components — server is UTC, so use Intl to avoid date drift.
+  const et = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short',
+  }).formatToParts(new Date()).reduce((a, p) => (a[p.type] = p.value, a), {});
+  const month = parseInt(et.month, 10);
+  const dow = et.weekday; // Mon, Tue, Wed, Thu, Fri, Sat, Sun
+  const isSummerWeekday = (month === 6 || month === 7) &&
+    ['Mon','Tue','Wed','Thu','Fri'].includes(dow);
+
+  const out = [];
+  if (isSummerWeekday && kidKey !== 'charlie') {
+    out.push({ id: 'summer-solutions', label: 'Summer Solutions' });
+    out.push({ id: 'reading-20m',      label: 'Read 20 min' });
+  }
+  return out;
+}
+
 function readSafe(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch { return ''; }
 }
@@ -143,5 +167,6 @@ module.exports = function () {
     allowance: {
       balance_str: allowance[k.key] || null,
     },
+    assignments: todaysAssignments(k.key),
   }));
 };

@@ -299,6 +299,61 @@ permalink: "/dashboard/index.html"
     border-radius: 2px;
   }
 
+  /* Today's to-do checkboxes */
+  .todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .todo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    padding: 7px 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 7px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .todo input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #3a4250;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    margin: 0;
+  }
+  .todo input[type="checkbox"]:checked {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+  }
+  .todo input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    inset: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .todo input[type="checkbox"]:checked + .todo-label {
+    text-decoration: line-through;
+    color: var(--text-mid);
+  }
+  .todo-label { flex: 1; color: var(--text-dark); }
+
   .stat-row {
     display: flex;
     align-items: baseline;
@@ -667,6 +722,22 @@ permalink: "/dashboard/index.html"
       </div>
     </div>
     {% endif %}
+
+    {% if kid.assignments and kid.assignments.length %}
+    <div class="section">
+      <span class="lbl">✏️ Today</span>
+      <ul class="todo-list" data-kid="{{ kid.key }}">
+        {% for a in kid.assignments %}
+        <li>
+          <label class="todo">
+            <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}">
+            <span class="todo-label">{{ a.label }}</span>
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
   </div>
   {% endfor %}
 
@@ -888,6 +959,40 @@ permalink: "/dashboard/index.html"
 
   // === AUTO-RELOAD (was paired with clock tick) ===
   setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+  // === KID TODO CHECKBOXES (per-day localStorage) ===
+  (function todoInit() {
+    function todayKey() {
+      // ET date string YYYY-MM-DD
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/New_York',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+      }).formatToParts(new Date());
+      const map = {};
+      parts.forEach(p => map[p.type] = p.value);
+      return map.year + '-' + map.month + '-' + map.day;
+    }
+    const date = todayKey();
+    const STORAGE_KEY = 'kid-todos';
+
+    // Load and prune stale dates
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+    if (state.date !== date) state = { date, checks: {} };
+
+    const boxes = document.querySelectorAll('.todo input[type="checkbox"]');
+    boxes.forEach(box => {
+      const key = box.dataset.kid + '|' + box.dataset.id;
+      if (state.checks[key]) box.checked = true;
+      box.addEventListener('change', () => {
+        if (box.checked) state.checks[key] = true;
+        else delete state.checks[key];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      });
+    });
+    // Persist date roll-over even before any clicks
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  })();
 
   // === BUDGET STRIP ===
   function renderBudget() {
