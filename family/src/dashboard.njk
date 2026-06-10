@@ -478,13 +478,14 @@ permalink: "/dashboard/index.html"
     background: #ffffff;
     border: 1px solid #e3e6ea;
     border-radius: 16px;
-    max-width: 800px;
+    max-width: 1100px;
     width: 100%;
-    max-height: 90vh;
+    max-height: 92vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
+  .modal.modal-recipe { max-width: 1100px; }
   .modal-head {
     display: flex;
     justify-content: space-between;
@@ -531,6 +532,53 @@ permalink: "/dashboard/index.html"
     border-bottom: 1px solid #eef0f3;
   }
   .modal-body .meta b { color: var(--text-dark); font-weight: 700; }
+
+  /* Recipe two-column layout */
+  .recipe-cols {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .recipe-col h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-mid);
+    margin: 0 0 10px;
+  }
+  .recipe-col ul, .recipe-col ol {
+    padding-left: 22px;
+    margin: 0;
+  }
+  .recipe-col li {
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+  .recipe-col .group-h {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-mid);
+    margin: 12px 0 6px;
+    font-weight: 700;
+  }
+  .recipe-col .group-h:first-child { margin-top: 0; }
+  .recipe-empty {
+    color: var(--text-mid);
+    font-style: italic;
+    font-size: 0.88rem;
+  }
+  .recipe-notes {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #eef0f3;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+  }
+  @media (max-width: 720px) {
+    .recipe-cols { grid-template-columns: 1fr; gap: 18px; }
+  }
 
   /* Calendar expanded modal */
   .cal-filter {
@@ -949,7 +997,7 @@ permalink: "/dashboard/index.html"
 <!-- RECIPE MODAL (content swapped per tapped day) -->
 {% if mealweek %}
 <div class="modal-bg" id="recipeModal">
-  <div class="modal">
+  <div class="modal modal-recipe">
     <div class="modal-head">
       <h2 id="recipeTitle">Recipe</h2>
       <button class="modal-close" onclick="closeModal('recipeModal')">✕</button>
@@ -970,24 +1018,81 @@ permalink: "/dashboard/index.html"
       effort: {{ (m.recipe.effort or '') | dump | safe }},
       protein_g: {{ (m.recipe.protein_g or 0) | dump | safe }},
       cal: {{ (m.recipe.cal or 0) | dump | safe }},
+      ingredient_groups: {{ (m.recipe.ingredient_groups or []) | dump | safe }},
+      steps: {{ (m.recipe.steps or []) | dump | safe }},
+      notes: {{ (m.recipe.notes or '') | dump | safe }},
       body_html: {{ (m.recipe.body_html or '') | dump | safe }}
     },
     {% endif %}{% endfor %}
   };
 
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  // very light markdown: **bold** and *italic* (steps frequently use these)
+  function mdInline(s) {
+    return escHtml(s)
+      .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+      .replace(/\*([^*]+)\*/g, '<i>$1</i>');
+  }
+
   function openRecipe(slug) {
     const r = RECIPES[slug];
     if (!r) return;
     document.getElementById('recipeTitle').textContent = r.name;
-    let meta = '<div class="meta">';
-    if (r.servings) meta += '<span><b>Serves:</b> ' + r.servings + '</span>';
-    if (r.prep_min) meta += '<span><b>Prep:</b> ' + r.prep_min + ' min</span>';
-    if (r.cook_min) meta += '<span><b>Cook:</b> ' + r.cook_min + ' min</span>';
-    if (r.effort) meta += '<span><b>Effort:</b> ' + r.effort + '</span>';
-    if (r.protein_g) meta += '<span><b>Protein:</b> ' + r.protein_g + 'g</span>';
-    if (r.cal) meta += '<span><b>Cal:</b> ' + r.cal + '</span>';
-    meta += '</div>';
-    document.getElementById('recipeBody').innerHTML = meta + r.body_html;
+
+    let html = '<div class="meta">';
+    if (r.servings) html += '<span><b>Serves:</b> ' + escHtml(r.servings) + '</span>';
+    if (r.prep_min) html += '<span><b>Prep:</b> ' + escHtml(r.prep_min) + ' min</span>';
+    if (r.cook_min) html += '<span><b>Cook:</b> ' + escHtml(r.cook_min) + ' min</span>';
+    if (r.effort) html += '<span><b>Effort:</b> ' + escHtml(r.effort) + '</span>';
+    if (r.protein_g) html += '<span><b>Protein:</b> ' + escHtml(r.protein_g) + 'g</span>';
+    if (r.cal) html += '<span><b>Cal:</b> ' + escHtml(r.cal) + '</span>';
+    html += '</div>';
+
+    const groups = Array.isArray(r.ingredient_groups) ? r.ingredient_groups : [];
+    const steps = Array.isArray(r.steps) ? r.steps : [];
+    const hasStructured = groups.length > 0 || steps.length > 0;
+
+    if (hasStructured) {
+      html += '<div class="recipe-cols">';
+
+      // LEFT: ingredients
+      html += '<div class="recipe-col"><h3>Ingredients</h3>';
+      if (groups.length === 0) {
+        html += '<div class="recipe-empty">No ingredients listed.</div>';
+      } else {
+        groups.forEach(g => {
+          if (g.heading) html += '<div class="group-h">' + escHtml(g.heading) + '</div>';
+          html += '<ul>';
+          (g.items || []).forEach(it => { html += '<li>' + mdInline(it) + '</li>'; });
+          html += '</ul>';
+        });
+      }
+      html += '</div>';
+
+      // RIGHT: steps
+      html += '<div class="recipe-col"><h3>Steps</h3>';
+      if (steps.length === 0) {
+        html += '<div class="recipe-empty">No steps written up yet. Wing it.</div>';
+      } else {
+        html += '<ol>';
+        steps.forEach(s => { html += '<li>' + mdInline(s) + '</li>'; });
+        html += '</ol>';
+      }
+      html += '</div>';
+
+      html += '</div>'; // /recipe-cols
+
+      if (r.notes && r.notes.trim()) {
+        html += '<div class="recipe-notes">' + mdInline(r.notes) + '</div>';
+      }
+    } else {
+      // Fallback to raw body_html if no structured data
+      html += r.body_html || '<div class="recipe-empty">No recipe details.</div>';
+    }
+
+    document.getElementById('recipeBody').innerHTML = html;
     openModal('recipeModal');
   }
 
