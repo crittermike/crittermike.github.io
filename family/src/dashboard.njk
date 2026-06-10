@@ -391,6 +391,62 @@ permalink: "/dashboard/index.html"
     border-radius: 2px;
   }
 
+  /* Tappable summer-reading row */
+  .reading-row { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .reading-row.editing { cursor: default; }
+  .reading-tap-hint {
+    font-size: 0.62rem;
+    color: var(--text-mid);
+    margin-left: 6px;
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .reading-row.editing .reading-count { display: none; }
+  .reading-editor {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 2px;
+  }
+  .reading-editor[hidden] { display: none; }
+  .reading-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 7px 9px;
+    border: 1px solid #d0d4da;
+    border-radius: 6px;
+    background: #fff;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .reading-input::-webkit-outer-spin-button,
+  .reading-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .reading-add, .reading-cancel {
+    font-size: 0.85rem;
+    padding: 7px 11px;
+    border-radius: 6px;
+    border: 1px solid #d0d4da;
+    background: #fff;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .reading-add {
+    background: var(--accent-orange);
+    color: #fff;
+    border-color: var(--accent-orange);
+    font-weight: 600;
+  }
+  .reading-pages.bumped {
+    animation: readingBump 600ms ease;
+    color: var(--accent-orange);
+  }
+  @keyframes readingBump {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+  }
+
   /* Today's to-do checkboxes */
   .todo-list {
     list-style: none;
@@ -982,9 +1038,17 @@ permalink: "/dashboard/index.html"
     {% if kid.reading %}
     <div class="section">
       <span class="lbl">📚 Summer reading</span>
-      <div class="hw-item">
-        <span class="due">{{ kid.reading.pages }} / {{ kid.reading.target }} pgs</span>
-        <div class="progress"><div class="bar" style="width: {{ kid.reading.pct }}%"></div></div>
+      <div class="hw-item reading-row" data-kid="{{ kid.key }}" data-base="{{ kid.reading.pages }}" data-target="{{ kid.reading.target }}">
+        <span class="due reading-count">
+          <span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs
+          <span class="reading-tap-hint">tap to add</span>
+        </span>
+        <div class="reading-editor" hidden>
+          <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
+          <button type="button" class="reading-add">Add</button>
+          <button type="button" class="reading-cancel">✕</button>
+        </div>
+        <div class="progress"><div class="bar reading-bar" style="width: {{ kid.reading.pct }}%"></div></div>
       </div>
     </div>
     {% endif %}
@@ -1494,6 +1558,98 @@ permalink: "/dashboard/index.html"
     });
     // Persist date roll-over even before any clicks
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  })();
+
+  // === SUMMER READING TAP-TO-ADD (persists locally; resets when server pages catch up) ===
+  (function readingInit() {
+    const STORAGE_KEY = 'reading-local-adds';
+    let store = {};
+    try { store = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+
+    function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+
+    document.querySelectorAll('.reading-row').forEach(row => {
+      const kid = row.dataset.kid;
+      const base = parseInt(row.dataset.base, 10) || 0;
+      const target = parseInt(row.dataset.target, 10) || 0;
+      const pagesEl = row.querySelector('.reading-pages');
+      const barEl = row.querySelector('.reading-bar');
+      const editor = row.querySelector('.reading-editor');
+      const input = row.querySelector('.reading-input');
+      const addBtn = row.querySelector('.reading-add');
+      const cancelBtn = row.querySelector('.reading-cancel');
+
+      // If server pages have caught up to (or past) the local add, drop the local delta.
+      const rec = store[kid];
+      if (rec && rec.serverBase != null && base >= rec.serverBase + rec.added) {
+        delete store[kid];
+        save();
+      }
+
+      function currentLocalAdd() {
+        const r = store[kid];
+        return r ? r.added : 0;
+      }
+      function render() {
+        const total = base + currentLocalAdd();
+        pagesEl.textContent = total;
+        const pct = target > 0 ? Math.min(100, Math.round((total / target) * 100)) : 0;
+        if (barEl) barEl.style.width = pct + '%';
+      }
+      function bump() {
+        pagesEl.classList.remove('bumped');
+        // restart animation
+        void pagesEl.offsetWidth;
+        pagesEl.classList.add('bumped');
+      }
+
+      render();
+
+      function openEditor(ev) {
+        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+        if (row.classList.contains('editing')) return;
+        row.classList.add('editing');
+        editor.hidden = false;
+        input.value = '';
+        // tiny delay so iOS reliably focuses + opens the number keyboard
+        setTimeout(() => { input.focus(); input.select(); }, 30);
+      }
+      function closeEditor() {
+        row.classList.remove('editing');
+        editor.hidden = true;
+        input.value = '';
+      }
+      function commit() {
+        const n = parseInt(input.value, 10);
+        if (!Number.isFinite(n) || n <= 0) { closeEditor(); return; }
+        const prev = store[kid] || { serverBase: base, added: 0 };
+        // If server base changed since last add, reset baseline
+        if (prev.serverBase !== base) { prev.serverBase = base; prev.added = 0; }
+        prev.added += n;
+        store[kid] = prev;
+        save();
+        closeEditor();
+        render();
+        bump();
+      }
+
+      // Tap the count (or anywhere on the row when not editing) to open
+      row.addEventListener('click', (e) => {
+        if (row.classList.contains('editing')) return;
+        // Ignore clicks on the editor itself if it somehow leaks through
+        if (e.target.closest('.reading-editor')) return;
+        openEditor(e);
+      });
+
+      addBtn.addEventListener('click', (e) => { e.stopPropagation(); commit(); });
+      cancelBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEditor(); });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); commit(); }
+        else if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
+      });
+      input.addEventListener('click', (e) => e.stopPropagation());
+    });
   })();
 
   // === BUDGET STRIP ===
