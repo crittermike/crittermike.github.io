@@ -59,6 +59,10 @@ function todaysAssignments(kidKey) {
     out.push({ id: 'summer-solutions', label: 'Summer Solutions' });
     out.push({ id: 'reading-20m',      label: 'Read 20 min' });
   }
+  if (isSummerWeekday && kidKey === 'charlie') {
+    out.push({ id: 'take-medicine',  label: 'Take medicine' });
+    out.push({ id: 'popcs-video',    label: 'Finish video for POPCS' });
+  }
   // Append one-off items from school-assignments.md due today or tomorrow.
   for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
     out.push(item);
