@@ -1339,6 +1339,31 @@
   // === AUTO-RELOAD (was paired with clock tick) ===
   setTimeout(() => location.reload(), 10 * 60 * 1000);
 
+  // === LOCK VIEWPORT ZOOM (iPad kiosk: no accidental pinch) ===
+  (function lockZoom() {
+    let vp = document.querySelector('meta[name="viewport"]');
+    if (!vp) {
+      vp = document.createElement('meta');
+      vp.name = 'viewport';
+      document.head.appendChild(vp);
+    }
+    vp.setAttribute(
+      'content',
+      'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+    );
+    // iOS Safari ignores user-scalable=no — block gesture events too.
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(ev =>
+      document.addEventListener(ev, e => e.preventDefault(), { passive: false })
+    );
+    // Double-tap-to-zoom: swallow it.
+    let lastTouch = 0;
+    document.addEventListener('touchend', e => {
+      const now = Date.now();
+      if (now - lastTouch <= 350) e.preventDefault();
+      lastTouch = now;
+    }, { passive: false });
+  })();
+
   // === KID TODO CHECKBOXES (per-day localStorage) ===
   (function todoInit() {
     function todayKey() {
