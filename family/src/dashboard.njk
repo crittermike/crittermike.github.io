@@ -790,13 +790,14 @@ permalink: "/dashboard/index.html"
     String(today.getDate()).padStart(2, '0');
 
   function fmtWhen(ev) {
-    const d = new Date(ev.date + 'T00:00:00');
+    const d = new Date(ev.date + 'T00:00');
     const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
-    const diffDays = Math.round((d - new Date(todayStr + 'T00:00:00')) / 86400000);
-    if (ev.date === todayStr) return 'Today ' + ev.time;
-    if (diffDays >= 1 && diffDays < 7) return dow + ' ' + ev.time;
+    const diffDays = Math.round((d - new Date(todayStr + 'T00:00')) / 86400000);
+    const time = ev.all_day ? '' : ' ' + ev.time;
+    if (ev.date === todayStr) return 'Today' + time;
+    if (diffDays >= 1 && diffDays < 7) return dow + time;
     const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
-    return mo + ' ' + d.getDate() + ' ' + ev.time;
+    return mo + ' ' + d.getDate() + time;
   }
 
   function rowHTML(ev) {
