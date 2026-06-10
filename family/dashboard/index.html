@@ -582,7 +582,7 @@
   }
   .reading-input::-webkit-outer-spin-button,
   .reading-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .reading-add, .reading-cancel {
+  .reading-add, .reading-cancel, .reading-reset {
     font-size: 0.85rem;
     padding: 7px 11px;
     border-radius: 6px;
@@ -595,6 +595,16 @@
     background: var(--accent-orange);
     color: #fff;
     border-color: var(--accent-orange);
+    font-weight: 600;
+  }
+  .reading-reset {
+    color: #b1273b;
+    border-color: #e3b6bf;
+  }
+  .reading-reset.armed {
+    background: #b1273b;
+    color: #fff;
+    border-color: #b1273b;
     font-weight: 600;
   }
   .reading-pages.bumped {
@@ -1119,7 +1129,7 @@
       <div class="fc-now">
         <span class="icon">🌤</span>
         <div class="meta">
-          <span class="temp">78°</span>
+          <span class="temp">77°</span>
           <span class="lo-hi">L 70° · H 85°</span>
         </div>
       </div>
@@ -1232,6 +1242,7 @@
         <div class="reading-editor" hidden>
           <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
           <button type="button" class="reading-add">Add</button>
+          <button type="button" class="reading-reset" title="Reset to 0">↺</button>
           <button type="button" class="reading-cancel">✕</button>
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
@@ -1302,6 +1313,7 @@
         <div class="reading-editor" hidden>
           <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
           <button type="button" class="reading-add">Add</button>
+          <button type="button" class="reading-reset" title="Reset to 0">↺</button>
           <button type="button" class="reading-cancel">✕</button>
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
@@ -1372,6 +1384,7 @@
         <div class="reading-editor" hidden>
           <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
           <button type="button" class="reading-add">Add</button>
+          <button type="button" class="reading-reset" title="Reset to 0">↺</button>
           <button type="button" class="reading-cancel">✕</button>
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
@@ -1979,6 +1992,7 @@
       const input = row.querySelector('.reading-input');
       const addBtn = row.querySelector('.reading-add');
       const cancelBtn = row.querySelector('.reading-cancel');
+      const resetBtn = row.querySelector('.reading-reset');
 
       // If server pages have caught up to (or past) the local add, drop the local delta.
       const rec = store[kid];
@@ -2019,6 +2033,10 @@
         row.classList.remove('editing');
         editor.hidden = true;
         input.value = '';
+        if (resetBtn) {
+          resetBtn.classList.remove('armed');
+          resetBtn.textContent = '↺';
+        }
       }
       function commit() {
         const n = parseInt(input.value, 10);
@@ -2044,6 +2062,22 @@
 
       addBtn.addEventListener('click', (e) => { e.stopPropagation(); commit(); });
       cancelBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEditor(); });
+      if (resetBtn) {
+        resetBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Two-tap confirm so a kid can't wipe their pages by mistake.
+          if (!resetBtn.classList.contains('armed')) {
+            resetBtn.classList.add('armed');
+            resetBtn.textContent = 'Sure?';
+            return;
+          }
+          delete store[kid];
+          save();
+          closeEditor();
+          render();
+          bump();
+        });
+      }
 
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); commit(); }
