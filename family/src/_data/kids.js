@@ -24,6 +24,7 @@ const WIKI = path.join(os.homedir(), '.hermes', 'workspace', 'wiki', 'concepts')
 const READING = path.join(WIKI, 'summer-reading-2026.md');
 const SUGAR = path.join(WIKI, 'sugar.md');
 const ALLOWANCE = path.join(WIKI, 'allowance.md');
+const SCHOOL = path.join(WIKI, 'school-assignments.md');
 
 // Display order matches the dashboard grid: youngest → oldest
 const KIDS = [
