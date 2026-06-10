@@ -173,10 +173,11 @@
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 72px 320px 1fr;
+    grid-template-rows: 72px 155px 155px 1fr;
     grid-template-areas:
       "top    top    top    top"
-      "today  cal    cal    budget"
+      "today  cal    cal    new"
+      "budget cal    cal    new"
       "kid1   kid2   kid3   kid4";
     gap: 10px;
     padding: 10px;
@@ -684,50 +685,50 @@
   }
   .cal-month-h:first-child { margin-top: 0; }
 
-  /* === BUDGET STRIP (vertical, shares row with dinner+calendar) === */
+  /* === BUDGET STRIP (compact, stacks under meal block) === */
   .budget {
     grid-area: budget;
     background: var(--card-bg);
     border: 1px solid #30363d;
     border-radius: 14px;
-    padding: 12px 14px 14px;
+    padding: 8px 12px 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
     overflow: hidden;
   }
   .budget-head {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: baseline;
+    gap: 8px;
     flex-shrink: 0;
   }
   .budget-h {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     color: var(--text-mid);
     font-weight: 700;
   }
   .budget-month {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--text-mid);
     font-weight: 600;
   }
   .budget-cats {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
     flex: 1;
     justify-content: space-around;
   }
   .budget-cat {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
   .budget-cat .name {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: var(--text-dark);
     text-transform: uppercase;
@@ -737,7 +738,7 @@
     align-items: baseline;
   }
   .budget-cat .name .budget-status {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 600;
     color: var(--text-mid);
     text-transform: none;
@@ -746,9 +747,9 @@
   .budget-cat .name .budget-status.over { color: var(--accent-rose); }
   .budget-bars {
     position: relative;
-    height: 18px;
+    height: 10px;
     background: rgba(255,255,255,0.04);
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: visible;
   }
   .budget-bars .actual {
@@ -756,7 +757,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: width 0.4s;
   }
   .budget-bars .actual.ok    { background: var(--accent-teal); }
@@ -764,15 +765,39 @@
   .budget-bars .actual.over  { background: var(--accent-rose); }
   .budget-bars .pace {
     position: absolute;
-    top: -4px;
-    height: calc(100% + 8px);
-    width: 3px;
+    top: -3px;
+    height: calc(100% + 6px);
+    width: 2px;
     background: #ffffff;
     border-radius: 1px;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
-    transform: translateX(-1.5px);
+    transform: translateX(-1px);
   }
   .budget-bars .pace::after { display: none; }
+
+  /* === NEW BLOCK PLACEHOLDER === */
+  .new-block {
+    grid-area: new;
+    background: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .new-block-h {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-mid);
+    font-weight: 700;
+  }
+  .new-block-body {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+  }
 
   /* Grid assignments */
   .kid1 { grid-area: kid1; }
@@ -1189,6 +1214,12 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- NEW BLOCK PLACEHOLDER -->
+  <div class="new-block">
+    <span class="new-block-h">New Block</span>
+    <span class="new-block-body">TBD</span>
   </div>
 
 </div>
