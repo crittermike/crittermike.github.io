@@ -353,6 +353,66 @@
   .week-row.no-recipe:hover { background: rgba(255,255,255,0.02); }
   .week-row.no-recipe.today-row:hover { background: rgba(232,131,74,0.14); }
 
+  /* Today's dinner: hero block + tomorrow chip */
+  .dinner-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 18px 14px;
+    border-radius: 10px;
+    background: rgba(232,131,74,0.14);
+    cursor: pointer;
+    transition: background 0.15s;
+    min-height: 0;
+  }
+  .dinner-hero:hover, .dinner-hero:active { background: rgba(232,131,74,0.22); }
+  .dinner-hero.no-recipe { cursor: default; }
+  .dinner-hero.no-recipe:hover { background: rgba(232,131,74,0.14); }
+  .dinner-hero .dinner-name {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-dark);
+  }
+  .dinner-hero .dinner-tap {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 8px;
+  }
+  .dinner-tomorrow {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .dinner-tomorrow:hover, .dinner-tomorrow:active { background: rgba(255,255,255,0.07); }
+  .dinner-tomorrow.no-recipe { cursor: default; }
+  .dinner-tomorrow.no-recipe:hover { background: rgba(255,255,255,0.03); }
+  .dinner-tomorrow .t-lbl {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .dinner-tomorrow .t-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* === CALENDAR === */
   .cal { grid-area: cal; }
   .cal-list {
@@ -831,54 +891,46 @@
     </div>
   </div>
 
-  <!-- WEEK MEAL PLAN (tap a day for recipe) -->
+  <!-- TODAY'S DINNER (tap for recipe) + tomorrow chip -->
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
   <div class="card today">
-    <h3 class="card-h">🍽 This Week</h3>
-    <div class="week-list">
-      
-      <div class="week-row no-recipe"
-           >
-        <span class="dow">Sun</span>
-        <span class="meal">Leftovers</span>
-      </div>
-      
-      <div class="week-row no-recipe"
-           >
-        <span class="dow">Mon</span>
-        <span class="meal">Chicken stir fry (frozen veg + sauce)</span>
-      </div>
-      
-      <div class="week-row today-row no-recipe"
-           >
-        <span class="dow">Tue</span>
-        <span class="meal">Leftovers</span>
-      </div>
-      
-      <div class="week-row"
-           data-recipe="crockpot-chicken-and-dumplings">
-        <span class="dow">Wed</span>
-        <span class="meal">Crockpot chicken and dumplings</span>
-      </div>
-      
-      <div class="week-row"
-           data-recipe="sheet-pan-italian-sausage-with-roasted-zucchini-onions-and-cherry-tomatoes-over-">
-        <span class="dow">Thu</span>
-        <span class="meal">Sheet pan Italian sausage with roasted zucchini, onions &amp; cherry tomatoes over rice</span>
-      </div>
-      
-      <div class="week-row no-recipe"
-           >
-        <span class="dow">Fri</span>
-        <span class="meal">Takeout (family choice)</span>
-      </div>
-      
-      <div class="week-row no-recipe"
-           >
-        <span class="dow">Sat</span>
-        <span class="meal">Pizza night</span>
-      </div>
+    <h3 class="card-h">🍽 Tonight</h3>
+    
+    <div class="dinner-hero no-recipe"
+         >
+      <div class="dinner-name">Leftovers</div>
       
     </div>
+    
+    
+    <div class="dinner-tomorrow"
+         data-recipe="crockpot-chicken-and-dumplings">
+      <span class="t-lbl">Tomorrow</span>
+      <span class="t-name">Crockpot chicken and dumplings</span>
+    </div>
+    
   </div>
 
   <!-- CALENDAR -->
@@ -1210,7 +1262,7 @@
     openModal('recipeModal');
   }
 
-  document.querySelectorAll('.week-row[data-recipe]').forEach(row => {
+  document.querySelectorAll('[data-recipe]').forEach(row => {
     row.addEventListener('click', () => openRecipe(row.dataset.recipe));
   });
 </script>
@@ -1232,7 +1284,7 @@
 
 <script>
   // === EVENTS DATA (built at build time from cal_today.py via _data/calendar.js) ===
-  const events = [{"date":"2026-06-09","time":"all day","what":"Nancy: CLEAR LIQUIDS ALL DAY + Golytely prep 5pm","who":"nancy","calendar":"home","all_day":true},{"date":"2026-06-09","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-10","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-10","time":"2p","what":"Nancy colonoscopy (arrive 2pm, procedure 3pm)","who":"nancy","calendar":"home","all_day":false},{"date":"2026-06-11","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-12","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-12","time":"8p","what":"Norah all-star tournament game","who":"family","calendar":"home","all_day":false},{"date":"2026-06-13","time":"11a","what":"Summer Choral Theatre Performance (Esther)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-13","time":"2p","what":"Lion Witch Wardrobe play (Jessica + William)","who":"william","calendar":"home","all_day":false},{"date":"2026-06-13","time":"8p","what":"The Notebook musical (Nancy + Karen)","who":"nancy","calendar":"home","all_day":false},{"date":"2026-06-14","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-06-14","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-06-15","time":"all day","what":"Intern Cohort B Starts - Abdulkhaliq & Rohan","who":"family","calendar":"home","all_day":true},{"date":"2026-06-15","time":"10a","what":"Mom: Dr Smith (psychiatrist) appointment","who":"family","calendar":"home","all_day":false},{"date":"2026-06-15","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-15","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-15","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false},{"date":"2026-06-16","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-16","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-16","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false},{"date":"2026-06-17","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-17","time":"10:15a","what":"Drive Mom to pain clinic (Spartanburg Regional)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-17","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-17","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false},{"date":"2026-06-18","time":"12a","what":"San Diego Mission Bay Resort - Trip","who":"family","calendar":"home","all_day":false},{"date":"2026-06-18","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-18","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-18","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false},{"date":"2026-06-18","time":"4:30p","what":"🚗 Drive to CLT Airport (SD trip)","who":"family","calendar":"home","all_day":false},{"date":"2026-06-18","time":"7:50p","what":"✈️ CLT → SAN (AA 3322) - Wedding Trip","who":"family","calendar":"home","all_day":false},{"date":"2026-06-19","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-19","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false},{"date":"2026-06-19","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false},{"date":"2026-06-20","time":"4:30p","what":"Jace & Lauren Wedding","who":"family","calendar":"home","all_day":false},{"date":"2026-06-21","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-06-21","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-06-21","time":"4:23p","what":"✈️ SAN → CLT (AA 2465) - Return","who":"family","calendar":"home","all_day":false},{"date":"2026-06-21","time":"9:30p","what":"🚗 Drive home from CLT Airport","who":"family","calendar":"home","all_day":false},{"date":"2026-06-23","time":"all day","what":"Matt's birthday 🎂","who":"family","calendar":"home","all_day":true},{"date":"2026-06-26","time":"7p","what":"Dude Perfect - Squad Games Tour","who":"family","calendar":"home","all_day":false},{"date":"2026-06-28","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-06-28","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-06-30","time":"9:30a","what":"Mom: Dr. Michael Wine","who":"family","calendar":"home","all_day":false},{"date":"2026-07-05","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-07-05","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-07-12","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-07-12","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-07-13","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false},{"date":"2026-07-13","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false},{"date":"2026-07-14","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false},{"date":"2026-07-14","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false},{"date":"2026-07-15","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false},{"date":"2026-07-15","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false},{"date":"2026-07-16","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false},{"date":"2026-07-16","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false},{"date":"2026-07-17","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false},{"date":"2026-07-17","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false},{"date":"2026-07-19","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-07-19","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-07-26","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-07-26","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-08-02","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-02","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-08-09","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-09","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-08-10","time":"all day","what":"Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)","who":"henry","calendar":"home","all_day":true},{"date":"2026-08-11","time":"all day","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":true},{"date":"2026-08-11","time":"8a","what":"EHS First Day of School (Charlie)","who":"charlie","calendar":"home","all_day":false},{"date":"2026-08-11","time":"6p","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":false},{"date":"2026-08-13","time":"all day","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":true},{"date":"2026-08-13","time":"8a","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":false},{"date":"2026-08-16","time":"all day","what":"POPCS: Back to School Dinner","who":"family","calendar":"home","all_day":true},{"date":"2026-08-16","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-16","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-08-16","time":"5p","what":"POPCS: Back to School Dinner (Pasta La Vista)","who":"family","calendar":"home","all_day":false},{"date":"2026-08-18","time":"all day","what":"John's birthday 🎂","who":"family","calendar":"home","all_day":true},{"date":"2026-08-19","time":"8:30a","what":"POPCS: First School Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-23","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-23","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-08-30","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-08-30","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false},{"date":"2026-09-06","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false},{"date":"2026-09-06","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false}];
+  const events = [{"date":"2026-06-09","time":"all day","what":"Nancy: CLEAR LIQUIDS ALL DAY + Golytely prep 5pm","who":"nancy","calendar":"home","all_day":true,"end":"2026-06-10T00:00:00-04:00"},{"date":"2026-06-09","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false,"end":"2026-06-09T12:30:00-04:00"},{"date":"2026-06-10","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false,"end":"2026-06-10T12:30:00-04:00"},{"date":"2026-06-10","time":"2p","what":"Nancy colonoscopy (arrive 2pm, procedure 3pm)","who":"nancy","calendar":"home","all_day":false,"end":"2026-06-10T17:00:00-04:00"},{"date":"2026-06-11","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false,"end":"2026-06-11T12:30:00-04:00"},{"date":"2026-06-12","time":"9:30a","what":"Summer Choral Theatre (Esther)","who":"family","calendar":"home","all_day":false,"end":"2026-06-12T12:30:00-04:00"},{"date":"2026-06-12","time":"8p","what":"Norah all-star tournament game","who":"family","calendar":"home","all_day":false,"end":"2026-06-12T21:30:00-04:00"},{"date":"2026-06-13","time":"11a","what":"Summer Choral Theatre Performance (Esther)","who":"family","calendar":"home","all_day":false,"end":"2026-06-13T12:00:00-04:00"},{"date":"2026-06-13","time":"2p","what":"Lion Witch Wardrobe play (Jessica + William)","who":"william","calendar":"home","all_day":false,"end":"2026-06-13T16:30:00-04:00"},{"date":"2026-06-13","time":"8p","what":"The Notebook musical (Nancy + Karen)","who":"nancy","calendar":"home","all_day":false,"end":"2026-06-13T22:30:00-04:00"},{"date":"2026-06-14","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-14T09:00:00-04:00"},{"date":"2026-06-14","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-06-14T10:00:00-04:00"},{"date":"2026-06-15","time":"all day","what":"Intern Cohort B Starts - Abdulkhaliq & Rohan","who":"family","calendar":"home","all_day":true,"end":"2026-06-16T00:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Mom: Dr Smith (psychiatrist) appointment","who":"family","calendar":"home","all_day":false,"end":"2026-06-15T11:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T12:00:00-04:00"},{"date":"2026-06-15","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T14:00:00-04:00"},{"date":"2026-06-15","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-15T15:00:00-04:00"},{"date":"2026-06-16","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T12:00:00-04:00"},{"date":"2026-06-16","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T14:00:00-04:00"},{"date":"2026-06-16","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-16T15:00:00-04:00"},{"date":"2026-06-17","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T12:00:00-04:00"},{"date":"2026-06-17","time":"10:15a","what":"Drive Mom to pain clinic (Spartanburg Regional)","who":"family","calendar":"home","all_day":false,"end":"2026-06-17T11:45:00-04:00"},{"date":"2026-06-17","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T14:00:00-04:00"},{"date":"2026-06-17","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-17T15:00:00-04:00"},{"date":"2026-06-18","time":"12a","what":"San Diego Mission Bay Resort - Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T00:00:00-04:00"},{"date":"2026-06-18","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T12:00:00-04:00"},{"date":"2026-06-18","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T14:00:00-04:00"},{"date":"2026-06-18","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-18T15:00:00-04:00"},{"date":"2026-06-18","time":"4:30p","what":"🚗 Drive to CLT Airport (SD trip)","who":"family","calendar":"home","all_day":false,"end":"2026-06-18T18:20:00-04:00"},{"date":"2026-06-18","time":"7:50p","what":"✈️ CLT → SAN (AA 3322) - Wedding Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-19T00:48:00-04:00"},{"date":"2026-06-19","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T12:00:00-04:00"},{"date":"2026-06-19","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T14:00:00-04:00"},{"date":"2026-06-19","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-19T15:00:00-04:00"},{"date":"2026-06-20","time":"4:30p","what":"Jace & Lauren Wedding","who":"family","calendar":"home","all_day":false,"end":"2026-06-20T20:30:00-04:00"},{"date":"2026-06-21","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T09:00:00-04:00"},{"date":"2026-06-21","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T10:00:00-04:00"},{"date":"2026-06-21","time":"4:23p","what":"✈️ SAN → CLT (AA 2465) - Return","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T21:26:00-04:00"},{"date":"2026-06-21","time":"9:30p","what":"🚗 Drive home from CLT Airport","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T23:15:00-04:00"},{"date":"2026-06-23","time":"all day","what":"Matt's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-06-24T00:00:00-04:00"},{"date":"2026-06-26","time":"7p","what":"Dude Perfect - Squad Games Tour","who":"family","calendar":"home","all_day":false,"end":"2026-06-26T22:00:00-04:00"},{"date":"2026-06-28","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-28T09:00:00-04:00"},{"date":"2026-06-28","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-06-28T10:00:00-04:00"},{"date":"2026-06-30","time":"9:30a","what":"Mom: Dr. Michael Wine","who":"family","calendar":"home","all_day":false,"end":"2026-06-30T10:30:00-04:00"},{"date":"2026-07-05","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-05T09:00:00-04:00"},{"date":"2026-07-05","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-07-05T10:00:00-04:00"},{"date":"2026-07-12","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-12T09:00:00-04:00"},{"date":"2026-07-12","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-07-12T10:00:00-04:00"},{"date":"2026-07-13","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-13T11:30:00-04:00"},{"date":"2026-07-13","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false,"end":"2026-07-13T11:30:00-04:00"},{"date":"2026-07-14","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-14T11:30:00-04:00"},{"date":"2026-07-14","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false,"end":"2026-07-14T11:30:00-04:00"},{"date":"2026-07-15","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false,"end":"2026-07-15T11:30:00-04:00"},{"date":"2026-07-15","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-15T11:30:00-04:00"},{"date":"2026-07-16","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-16T11:30:00-04:00"},{"date":"2026-07-16","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false,"end":"2026-07-16T11:30:00-04:00"},{"date":"2026-07-17","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-17T11:30:00-04:00"},{"date":"2026-07-17","time":"9a","what":"Archery Camp (Henry + William)","who":"henry","calendar":"home","all_day":false,"end":"2026-07-17T11:30:00-04:00"},{"date":"2026-07-19","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-19T09:00:00-04:00"},{"date":"2026-07-19","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-07-19T10:00:00-04:00"},{"date":"2026-07-26","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-26T09:00:00-04:00"},{"date":"2026-07-26","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-07-26T10:00:00-04:00"},{"date":"2026-08-02","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-02T09:00:00-04:00"},{"date":"2026-08-02","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-08-02T10:00:00-04:00"},{"date":"2026-08-09","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-09T09:00:00-04:00"},{"date":"2026-08-09","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-08-09T10:00:00-04:00"},{"date":"2026-08-10","time":"all day","what":"Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)","who":"henry","calendar":"home","all_day":true,"end":"2026-08-11T00:00:00-04:00"},{"date":"2026-08-11","time":"all day","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":true,"end":"2026-08-12T00:00:00-04:00"},{"date":"2026-08-11","time":"8a","what":"EHS First Day of School (Charlie)","who":"charlie","calendar":"home","all_day":false,"end":"2026-08-11T15:00:00-04:00"},{"date":"2026-08-11","time":"6p","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":false,"end":"2026-08-11T19:30:00-04:00"},{"date":"2026-08-13","time":"all day","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":true,"end":"2026-08-14T00:00:00-04:00"},{"date":"2026-08-13","time":"8a","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":false,"end":"2026-08-13T12:00:00-04:00"},{"date":"2026-08-16","time":"all day","what":"POPCS: Back to School Dinner","who":"family","calendar":"home","all_day":true,"end":"2026-08-17T00:00:00-04:00"},{"date":"2026-08-16","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T09:00:00-04:00"},{"date":"2026-08-16","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T10:00:00-04:00"},{"date":"2026-08-16","time":"5p","what":"POPCS: Back to School Dinner (Pasta La Vista)","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T19:00:00-04:00"},{"date":"2026-08-18","time":"all day","what":"John's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-08-19T00:00:00-04:00"},{"date":"2026-08-19","time":"8:30a","what":"POPCS: First School Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-19T09:30:00-04:00"},{"date":"2026-08-23","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-23T09:00:00-04:00"},{"date":"2026-08-23","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-08-23T10:00:00-04:00"},{"date":"2026-08-30","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-30T09:00:00-04:00"},{"date":"2026-08-30","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-08-30T10:00:00-04:00"},{"date":"2026-09-06","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-06T09:00:00-04:00"},{"date":"2026-09-06","time":"9a","what":"Breakfast","who":"family","calendar":"home","all_day":false,"end":"2026-09-06T10:00:00-04:00"}];
 
   const today = new Date();
   // Use LOCAL date components, not toISOString() (which is UTC and rolls to "tomorrow" after ~8pm ET).
@@ -1251,6 +1303,21 @@
     return mo + ' ' + d.getDate() + time;
   }
 
+  // Hide events that already ended. Uses end time if present, else falls back
+  // to the start date (so a past day is fully filtered). All-day events stay
+  // visible through end of day.
+  function notPast(ev) {
+    if (ev.date > todayStr) return true;
+    if (ev.date < todayStr) return false;
+    // today: drop if it has an end time in the past
+    if (ev.all_day) return true;
+    if (ev.end) {
+      const endMs = Date.parse(ev.end);
+      if (!isNaN(endMs) && endMs < Date.now()) return false;
+    }
+    return true;
+  }
+
   function rowHTML(ev) {
     const isToday = ev.date === todayStr;
     return '<div class="cal-row' + (isToday ? ' today-row' : '') + '">' +
@@ -1259,9 +1326,9 @@
       '</div>';
   }
 
-  // Render preview (top ~8 upcoming)
+  // Render preview (top ~14 upcoming, past events filtered)
   function renderPreview() {
-    const upcoming = events.filter(e => e.date >= todayStr).slice(0, 14);
+    const upcoming = events.filter(notPast).slice(0, 14);
     document.getElementById('calPreview').innerHTML = upcoming.map(rowHTML).join('');
   }
   renderPreview();
@@ -1270,7 +1337,7 @@
   function renderFullList(filter = '') {
     const f = filter.trim().toLowerCase();
     const filtered = events
-      .filter(e => e.date >= todayStr)
+      .filter(notPast)
       .filter(e => !f || e.what.toLowerCase().includes(f));
     if (filtered.length === 0) {
       document.getElementById('calFullList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-mid)">No matching events.</div>';

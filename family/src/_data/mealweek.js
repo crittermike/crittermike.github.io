@@ -58,6 +58,8 @@ module.exports = function () {
     weekday: 'long',
   }).format(new Date());
   const todayDow = etDow;
+  const todayIdx = DOW.indexOf(todayDow);
+  const tomorrowDow = DOW[(todayIdx + 1) % 7];
 
   return DOW.map((dow, i) => {
     const meal = (plan.meals && plan.meals[dow]) || {};
@@ -66,6 +68,7 @@ module.exports = function () {
       dow_short: DOW_SHORT[i],
       name: meal.name || 'TBD',
       isToday: dow === todayDow,
+      isTomorrow: dow === tomorrowDow,
       recipe: findRecipe(recipes, meal.name),
     };
   });

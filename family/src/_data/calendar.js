@@ -89,6 +89,7 @@ module.exports = function () {
       who: inferWho(ev.summary, ev.calendar),
       calendar: ev.calendar || '',
       all_day: !!ev.all_day,
+      end: ev.end || '',
     });
   }
   return out;
