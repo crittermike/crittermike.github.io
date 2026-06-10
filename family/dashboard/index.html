@@ -218,6 +218,12 @@
     color: var(--text-mid);
     margin-right: 6px;
   }
+  .countdowns {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
   .countdown {
     display: inline-flex;
     align-items: center;
@@ -797,10 +803,7 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <span class="countdown" id="countdown" style="display:none">
-      <span class="n" id="countdownN">0</span>
-      <span class="lbl" id="countdownLbl">days</span>
-    </span>
+    <span class="countdowns" id="countdowns"></span>
     <div></div>
     <div class="forecast">
       
@@ -1314,26 +1317,31 @@
   });
 
   // === COUNTDOWNS ===
-  // [{ label, date: 'YYYY-MM-DD' }] first non-past one wins
+  // [{ label, date: 'YYYY-MM-DD' }] all non-past ones render
   const COUNTDOWNS = [
     { label: 'California',  date: '2026-06-18' },
     { label: 'lake trip',   date: '2026-07-06' },
   ];
   function renderCountdown() {
-    const el = document.getElementById('countdown');
+    const wrap = document.getElementById('countdowns');
     const today = new Date();
     const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const parts = [];
     for (const c of COUNTDOWNS) {
       const [y, m, d] = c.date.split('-').map(Number);
       const target = new Date(y, m - 1, d);
       const days = Math.round((target - todayMid) / 86400000);
       if (days < 0) continue;
-      document.getElementById('countdownN').textContent = days === 0 ? 'today!' : days;
-      document.getElementById('countdownLbl').textContent = days === 0 ? c.label : 'days to ' + c.label;
-      el.style.display = 'inline-flex';
-      return;
+      const nTxt = days === 0 ? 'today!' : days;
+      const lblTxt = days === 0 ? c.label : 'days to ' + c.label;
+      parts.push(
+        '<span class="countdown">' +
+          '<span class="n">' + nTxt + '</span>' +
+          '<span class="lbl">' + lblTxt + '</span>' +
+        '</span>'
+      );
     }
-    el.style.display = 'none';
+    wrap.innerHTML = parts.join('');
   }
   renderCountdown();
 
