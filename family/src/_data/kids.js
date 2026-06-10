@@ -49,11 +49,50 @@ function todaysAssignments(kidKey) {
   const dow = et.weekday; // Mon, Tue, Wed, Thu, Fri, Sat, Sun
   const isSummerWeekday = (month === 6 || month === 7) &&
     ['Mon','Tue','Wed','Thu','Fri'].includes(dow);
+  const todayISO = `${et.year}-${String(et.month).padStart(2,'0')}-${String(et.day).padStart(2,'0')}`;
+  // "Due today or tomorrow" window — gives Charlie a heads-up the night before.
+  const tomorrow = new Date(Date.UTC(parseInt(et.year,10), parseInt(et.month,10)-1, parseInt(et.day,10)+1));
+  const tomorrowISO = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,'0')}-${String(tomorrow.getUTCDate()).padStart(2,'0')}`;
 
   const out = [];
   if (isSummerWeekday && kidKey !== 'charlie') {
     out.push({ id: 'summer-solutions', label: 'Summer Solutions' });
     out.push({ id: 'reading-20m',      label: 'Read 20 min' });
+  }
+  // Append one-off items from school-assignments.md due today or tomorrow.
+  for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
+    out.push(item);
+  }
+  return out;
+}
+
+/**
+ * Parse school-assignments.md, return items for `kidKey` whose date is in `dateISOs`.
+ * File structure: "### <Kid name> (...)" sections under "## Upcoming",
+ * with rows like "- **2026-06-11 (Thu):** Finish video for POPCS".
+ * Stops at "## Completed".
+ */
+function loadSchoolToday(kidKey, dateISOs) {
+  const text = readSafe(SCHOOL);
+  if (!text) return [];
+  const upcoming = text.match(/## Upcoming([\s\S]*?)(?=^## Completed|\Z)/m);
+  const body = upcoming ? upcoming[1] : text;
+  const wanted = new Set(Array.isArray(dateISOs) ? dateISOs : [dateISOs]);
+
+  const sections = body.split(/^###\s+/m).slice(1);
+  const kidNameLower = kidKey.toLowerCase();
+  const out = [];
+  for (const sec of sections) {
+    const header = sec.split('\n', 1)[0].toLowerCase();
+    if (!header.startsWith(kidNameLower)) continue;
+    const rowRe = /^- \*\*(\d{4}-\d{2}-\d{2})[^*]*\*\*\s*(.+)$/gm;
+    let m;
+    while ((m = rowRe.exec(sec)) !== null) {
+      if (!wanted.has(m[1])) continue;
+      const desc = m[2].trim();
+      const id = `sch-${m[1]}-${desc.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)}`;
+      out.push({ id, label: desc });
+    }
   }
   return out;
 }
