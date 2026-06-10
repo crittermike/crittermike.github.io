@@ -170,6 +170,23 @@
   html, body { overflow: hidden; height: 100%; }
   body { background: var(--warm-bg); }
 
+  /* === LIGHT THEME OVERRIDE (dashboard only) === */
+  :root {
+    --warm-bg: #f5f1ea;
+    --card-bg: #ffffff;
+    --text-dark: #1f2328;
+    --text-mid: #57606a;
+    --text-light: #8b949e;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 2px 6px rgba(0,0,0,0.06), 0 8px 20px rgba(0,0,0,0.10);
+    --accent-orange: #d96a2a;
+    --accent-teal: #2da44e;
+    --accent-gold: #bf8700;
+    --accent-rose: #cf222e;
+    --accent-blue: #0969da;
+    --accent-purple: #8250df;
+  }
+
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -230,8 +247,8 @@
     align-items: center;
     gap: 6px;
     padding: 6px 14px;
-    background: rgba(63,185,80,0.16);
-    border: 1px solid rgba(63,185,80,0.35);
+    background: rgba(45,164,78,0.14);
+    border: 1px solid rgba(45,164,78,0.40);
     border-radius: 999px;
     font-size: 0.95rem;
     font-weight: 700;
@@ -252,7 +269,7 @@
     align-items: center;
     gap: 10px;
     padding-right: 18px;
-    border-right: 1px solid #30363d;
+    border-right: 1px solid #e3e6ea;
   }
   .fc-now .icon { font-size: 1.5rem; }
   .fc-now .temp { font-size: 1.4rem; font-weight: 800; line-height: 1; }
@@ -275,13 +292,14 @@
   /* === SHARED CARD === */
   .card {
     background: var(--card-bg);
-    border: 1px solid #30363d;
+    border: 1px solid #e3e6ea;
     border-radius: 14px;
     padding: 14px 16px 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 0;
+    box-shadow: var(--shadow);
   }
   .card-h {
     display: flex;
@@ -295,7 +313,7 @@
     font-weight: 700;
   }
   .card-h .h-action {
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.05);
     color: var(--text-dark);
     padding: 3px 9px;
     border-radius: 999px;
@@ -307,7 +325,7 @@
     text-transform: uppercase;
   }
   .card-h .h-action:hover, .card-h .h-action:active {
-    background: rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.09);
   }
 
   /* === WEEK MEAL PLAN === */
@@ -325,14 +343,14 @@
     align-items: center;
     padding: 6px 9px;
     border-radius: 7px;
-    background: rgba(255,255,255,0.02);
+    background: rgba(0,0,0,0.025);
     cursor: pointer;
     transition: background 0.15s;
     min-height: 0;
   }
-  .week-row:hover, .week-row:active { background: rgba(255,255,255,0.06); }
+  .week-row:hover, .week-row:active { background: rgba(0,0,0,0.05); }
   .week-row.today-row {
-    background: rgba(232,131,74,0.14);
+    background: rgba(217,106,42,0.12);
   }
   .week-row .dow {
     font-size: 0.7rem;
@@ -351,8 +369,8 @@
     color: var(--text-dark);
   }
   .week-row.no-recipe { cursor: default; }
-  .week-row.no-recipe:hover { background: rgba(255,255,255,0.02); }
-  .week-row.no-recipe.today-row:hover { background: rgba(232,131,74,0.14); }
+  .week-row.no-recipe:hover { background: rgba(0,0,0,0.025); }
+  .week-row.no-recipe.today-row:hover { background: rgba(217,106,42,0.12); }
 
   /* Today's dinner: hero block + tomorrow chip */
   .dinner-hero {
@@ -421,10 +439,10 @@
     align-items: center;
     padding: 6px 10px;
     border-radius: 7px;
-    background: rgba(255,255,255,0.02);
+    background: rgba(0,0,0,0.025);
   }
   .cal-row.today-row {
-    background: rgba(232,131,74,0.12);
+    background: rgba(217,106,42,0.10);
   }
   .cal-row .when { font-weight: 700; color: var(--text-mid); font-size: 0.92rem; }
   .cal-row.today-row .when { color: var(--accent-orange); }
@@ -436,7 +454,7 @@
   }
   .cal-row .who {
     font-size: 0.62rem;
-    background: rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.06);
     padding: 3px 9px;
     border-radius: 999px;
     color: var(--text-mid);
@@ -444,19 +462,19 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  .cal-row .who.family    { background: rgba(232,131,74,0.2); color: var(--accent-orange); }
-  .cal-row .who.nancy     { background: rgba(188,140,255,0.18); color: var(--accent-purple); }
-  .cal-row .who.william   { background: rgba(63,185,80,0.18); color: var(--accent-teal); }
-  .cal-row .who.henry     { background: rgba(88,166,255,0.18); color: var(--accent-blue); }
-  .cal-row .who.charlie   { background: rgba(248,81,73,0.18); color: var(--accent-rose); }
-  .cal-row .who.thomas    { background: rgba(210,153,34,0.2); color: var(--accent-gold); }
-  .cal-row .who.parents   { background: rgba(188,140,255,0.18); color: var(--accent-purple); }
-  .cal-row .who.mike      { background: rgba(63,185,80,0.18); color: var(--accent-teal); }
+  .cal-row .who.family    { background: rgba(217,106,42,0.16); color: var(--accent-orange); }
+  .cal-row .who.nancy     { background: rgba(130,80,223,0.14); color: var(--accent-purple); }
+  .cal-row .who.william   { background: rgba(45,164,78,0.16); color: var(--accent-teal); }
+  .cal-row .who.henry     { background: rgba(9,105,218,0.14); color: var(--accent-blue); }
+  .cal-row .who.charlie   { background: rgba(207,34,46,0.14); color: var(--accent-rose); }
+  .cal-row .who.thomas    { background: rgba(191,135,0,0.16); color: var(--accent-gold); }
+  .cal-row .who.parents   { background: rgba(130,80,223,0.14); color: var(--accent-purple); }
+  .cal-row .who.mike      { background: rgba(45,164,78,0.16); color: var(--accent-teal); }
 
   /* === KID COLUMNS === */
   .kid {
     background: var(--card-bg);
-    border: 1px solid #30363d;
+    border: 1px solid #e3e6ea;
     border-radius: 14px;
     padding: 12px 14px 14px;
     display: flex;
@@ -470,7 +488,7 @@
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 6px;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid #eef0f3;
   }
   .kid-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-dark); }
   .kid-meta { font-size: 0.68rem; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -488,7 +506,7 @@
   .hw-item {
     font-size: 0.9rem;
     padding: 9px 11px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.035);
     border-radius: 7px;
     line-height: 1.3;
   }
@@ -508,7 +526,7 @@
   .hw-item .progress {
     margin-top: 8px;
     height: 4px;
-    background: #21262d;
+    background: #eef0f3;
     border-radius: 2px;
     overflow: hidden;
   }
@@ -533,7 +551,7 @@
     gap: 10px;
     font-size: 1rem;
     padding: 7px 10px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.035);
     border-radius: 7px;
     cursor: pointer;
     user-select: none;
@@ -593,7 +611,7 @@
   .modal-bg {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(15,20,28,0.55);
     z-index: 100;
     display: none;
     align-items: center;
@@ -602,8 +620,8 @@
   }
   .modal-bg.open { display: flex; }
   .modal {
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
     border-radius: 16px;
     max-width: 800px;
     width: 100%;
@@ -617,11 +635,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px 22px;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid #eef0f3;
   }
   .modal-head h2 { font-size: 1.4rem; font-weight: 800; margin: 0; }
   .modal-close {
-    background: rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.06);
     border: none;
     color: var(--text-dark);
     width: 36px;
@@ -655,15 +673,15 @@
     color: var(--text-mid);
     margin-bottom: 14px;
     padding-bottom: 14px;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid #eef0f3;
   }
   .modal-body .meta b { color: var(--text-dark); font-weight: 700; }
 
   /* Calendar expanded modal */
   .cal-filter {
     width: 100%;
-    background: #0d1117;
-    border: 1px solid #30363d;
+    background: #f5f1ea;
+    border: 1px solid #e3e6ea;
     border-radius: 8px;
     color: var(--text-dark);
     padding: 10px 14px;
@@ -694,7 +712,7 @@
   .budget {
     grid-area: budget;
     background: var(--card-bg);
-    border: 1px solid #30363d;
+    border: 1px solid #e3e6ea;
     border-radius: 14px;
     padding: 8px 12px 10px;
     display: flex;
@@ -753,7 +771,7 @@
   .budget-bars {
     position: relative;
     height: 10px;
-    background: rgba(255,255,255,0.04);
+    background: rgba(0,0,0,0.04);
     border-radius: 4px;
     overflow: visible;
   }
@@ -775,7 +793,7 @@
     width: 2px;
     background: #ffffff;
     border-radius: 1px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
     transform: translateX(-1px);
   }
   .budget-bars .pace::after { display: none; }
@@ -784,7 +802,7 @@
   .new-block {
     grid-area: new;
     background: var(--card-bg);
-    border: 1px solid #30363d;
+    border: 1px solid #e3e6ea;
     border-radius: 14px;
     padding: 14px;
     display: flex;
@@ -887,8 +905,8 @@
       <div class="fc-now">
         <span class="icon">🌤</span>
         <div class="meta">
-          <span class="temp">75°</span>
-          <span class="lo-hi">L 70° · H 89°</span>
+          <span class="temp">74°</span>
+          <span class="lo-hi">L 70° · H 87°</span>
         </div>
       </div>
       <div class="fc-days">
