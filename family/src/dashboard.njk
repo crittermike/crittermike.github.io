@@ -446,6 +446,64 @@ permalink: "/dashboard/index.html"
   }
   .todo-label { flex: 1; color: var(--text-dark); }
 
+  /* === CHECKBOX CELEBRATION === */
+  /* Box pop + checkmark draw only fire on real user interaction (JS adds
+     .just-checked), so localStorage-restored checks don't animate on load. */
+  .todo input[type="checkbox"].just-checked {
+    animation: box-pop 0.45s cubic-bezier(.2,1.3,.4,1);
+  }
+  @keyframes box-pop {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.4); }
+    65%  { transform: scale(0.85); }
+    100% { transform: scale(1); }
+  }
+  .todo input[type="checkbox"].just-checked::after {
+    animation: check-in 0.45s cubic-bezier(.2,1.3,.4,1);
+    transform-origin: center;
+  }
+  @keyframes check-in {
+    0%   { transform: scale(0) rotate(-25deg); opacity: 0; }
+    55%  { transform: scale(1.35) rotate(10deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .todo.celebrate {
+    animation: row-celebrate 0.7s ease;
+  }
+  @keyframes row-celebrate {
+    0%   { background: rgba(0,0,0,0.035); }
+    25%  { background: rgba(45,164,78,0.30); box-shadow: 0 0 0 2px rgba(45,164,78,0.45); }
+    100% { background: rgba(0,0,0,0.035); box-shadow: none; }
+  }
+
+  /* All of a kid's tasks done → pulse the whole card */
+  .kid.all-done {
+    animation: kid-all-done 0.8s ease;
+  }
+  @keyframes kid-all-done {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.025); box-shadow: 0 0 0 3px rgba(45,164,78,0.55), var(--shadow); }
+    100% { transform: scale(1); box-shadow: var(--shadow); }
+  }
+
+  /* Confetti particles (spawned + removed by JS, fixed-position) */
+  .confetti-piece {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    z-index: 9999;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translate(-50%, -50%);
+    animation: confetti-fly 0.85s cubic-bezier(.15,.6,.4,1) forwards;
+  }
+  @keyframes confetti-fly {
+    0%   { opacity: 1; transform: translate(-50%, -50%) translate(0, 0) rotate(0); }
+    100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+  }
+
   .stat-row {
     display: flex;
     align-items: baseline;
@@ -1305,13 +1363,132 @@ permalink: "/dashboard/index.html"
     try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
     if (state.date !== date) state = { date, checks: {} };
 
+    // --- Celebration helpers ---
+    const ACCENTS = ['#d96a2a', '#2da44e', '#bf8700', '#cf222e', '#0969da', '#8250df'];
+
+    function burstConfetti(cx, cy, count, power) {
+      count = count || 16;
+      power = power || 1;
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
+        const dist = (38 + Math.random() * 46) * power;
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist + (28 + Math.random() * 40) * power; // gravity bias
+        piece.style.left = cx + 'px';
+        piece.style.top = cy + 'px';
+        piece.style.background = ACCENTS[i % ACCENTS.length];
+        piece.style.setProperty('--dx', dx.toFixed(1) + 'px');
+        piece.style.setProperty('--dy', dy.toFixed(1) + 'px');
+        piece.style.setProperty('--rot', Math.round(Math.random() * 720 - 360) + 'deg');
+        if (Math.random() > 0.5) piece.style.borderRadius = '50%';
+        const sz = (6 + Math.random() * 6).toFixed(1) + 'px';
+        piece.style.width = sz;
+        piece.style.height = sz;
+        document.body.appendChild(piece);
+        piece.addEventListener('animationend', () => piece.remove(), { once: true });
+      }
+    }
+
+    function centerOf(el) {
+      const r = el.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    }
+
+    // --- Sound (Web Audio, synthesized so there's no asset to host) ---
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        audioCtx = new AC();
+      }
+      // iOS starts the context suspended; the tap that called us unlocks it.
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+    function tone(freq, startOffset, dur, peak, type, partialGain) {
+      const ctx = audioCtx;
+      const t0 = ctx.currentTime + startOffset;
+      const env = ctx.createGain();
+      env.gain.setValueAtTime(0.0001, t0);
+      env.gain.exponentialRampToValueAtTime(peak, t0 + 0.008);
+      env.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      env.connect(ctx.destination);
+      const o1 = ctx.createOscillator();
+      o1.type = type || 'sine';
+      o1.frequency.value = freq;
+      o1.connect(env);
+      o1.start(t0);
+      o1.stop(t0 + dur);
+      // optional softer octave partial for extra shimmer
+      const pg = partialGain == null ? 0.3 : partialGain;
+      if (pg > 0) {
+        const o2 = ctx.createOscillator();
+        o2.type = type || 'sine';
+        o2.frequency.value = freq * 2.0;
+        const o2g = ctx.createGain();
+        o2g.gain.value = pg;
+        o2.connect(o2g).connect(env);
+        o2.start(t0);
+        o2.stop(t0 + dur);
+      }
+    }
+    function playDing() {
+      if (!ensureAudio()) return;
+      // Same voice as the final note of the all-done fanfare (C6)
+      try { tone(1046.50, 0, 0.60, 0.40); } catch (e) {}
+    }
+    function playFanfare() {
+      if (!ensureAudio()) return;
+      try {                                              // C-E-G-C major arpeggio
+        tone(523.25, 0.00, 0.45, 0.34);
+        tone(659.25, 0.10, 0.45, 0.34);
+        tone(783.99, 0.20, 0.50, 0.34);
+        tone(1046.50, 0.30, 0.60, 0.40);
+      } catch (e) {}
+    }
+
+    function celebrate(box) {
+      box.classList.add('just-checked');
+      box.addEventListener('animationend', () => box.classList.remove('just-checked'), { once: true });
+
+      const row = box.closest('.todo');
+      if (row) {
+        row.classList.add('celebrate');
+        setTimeout(() => row.classList.remove('celebrate'), 700);
+      }
+
+      const c = centerOf(box);
+      burstConfetti(c.x, c.y, 16, 1);
+
+      // All of this kid's tasks done? Bigger party.
+      const card = box.closest('.kid');
+      const kidBoxes = card ? card.querySelectorAll('.todo input[type="checkbox"]') : [];
+      const allDone = kidBoxes.length && [...kidBoxes].every(b => b.checked);
+      if (allDone) {
+        card.classList.add('all-done');
+        setTimeout(() => card.classList.remove('all-done'), 800);
+        const cc = centerOf(card);
+        setTimeout(() => burstConfetti(cc.x, cc.y, 36, 1.6), 120);
+        playFanfare();
+      } else {
+        playDing();
+      }
+    }
+
     const boxes = document.querySelectorAll('.todo input[type="checkbox"]');
     boxes.forEach(box => {
       const key = box.dataset.kid + '|' + box.dataset.id;
       if (state.checks[key]) box.checked = true;
       box.addEventListener('change', () => {
-        if (box.checked) state.checks[key] = true;
-        else delete state.checks[key];
+        if (box.checked) {
+          state.checks[key] = true;
+          celebrate(box);
+        } else {
+          delete state.checks[key];
+        }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       });
     });
