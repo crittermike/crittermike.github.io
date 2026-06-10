@@ -165,6 +165,7 @@
 
     
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
   /* Wall-mounted Kindle Fire 10": no nav, no scroll */
   #site-nav { display: none !important; }
   html, body { overflow: hidden; height: 100%; }
@@ -236,6 +237,22 @@
     color: var(--text-mid);
     margin-right: 6px;
   }
+  .wordmark {
+    font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 2.1rem;
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    line-height: 1;
+    font-feature-settings: 'ss01' on, 'ss02' on;
+    white-space: nowrap;
+  }
+  .wordmark .crew {
+    color: var(--accent-orange);
+    font-style: italic;
+    font-weight: 500;
+  }
+
   .countdowns {
     display: inline-flex;
     align-items: center;
@@ -798,29 +815,67 @@
   }
   .budget-bars .pace::after { display: none; }
 
-  /* === NEW BLOCK PLACEHOLDER === */
-  .new-block {
+  /* === COUNTDOWNS CARD === */
+  .cd-card {
     grid-area: new;
     background: var(--card-bg);
     border: 1px solid #e3e6ea;
     border-radius: 14px;
-    padding: 14px;
+    padding: 14px 16px 14px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .cd-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
     overflow: hidden;
   }
-  .new-block-h {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--text-mid);
+  .cd-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.025);
+    border-radius: 10px;
+  }
+  .cd-item .n {
+    font-family: 'Fraunces', Georgia, serif;
     font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--accent-orange);
+    font-variant-numeric: tabular-nums;
+    min-width: 1.8em;
+    text-align: right;
   }
-  .new-block-body {
-    font-size: 0.85rem;
+  .cd-item .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+  }
+  .cd-item .lbl {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cd-item .sub {
+    font-size: 0.62rem;
     color: var(--text-mid);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
   }
+  .cd-item.is-today .n { color: var(--accent-teal); font-size: 1.1rem; }
 
   /* Grid assignments */
   .kid1 { grid-area: kid1; }
@@ -898,7 +953,7 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <span class="countdowns" id="countdowns"></span>
+    <div class="wordmark">Critter <span class="crew">Crew</span></div>
     <div></div>
     <div class="forecast">
       
@@ -1239,10 +1294,10 @@
     </div>
   </div>
 
-  <!-- NEW BLOCK PLACEHOLDER -->
-  <div class="new-block">
-    <span class="new-block-h">New Block</span>
-    <span class="new-block-body">TBD</span>
+  <!-- COUNTDOWNS CARD -->
+  <div class="cd-card">
+    <div class="card-h"><span>Countdowns</span></div>
+    <div class="cd-list" id="countdowns"></div>
   </div>
 
 </div>
@@ -1425,30 +1480,40 @@
   });
 
   // === COUNTDOWNS ===
-  // [{ label, date: 'YYYY-MM-DD' }] all non-past ones render
+  // [{ label, date: 'YYYY-MM-DD' }] all non-past, sorted soonest-first
   const COUNTDOWNS = [
-    { label: 'California',  date: '2026-06-18' },
-    { label: 'lake trip',   date: '2026-07-06' },
+    { label: "Mike's birthday", date: '2026-06-13' },
+    { label: 'California',      date: '2026-06-18' },
+    { label: 'lake trip',       date: '2026-07-06' },
+    { label: 'first day of school', date: '2026-08-13' },
   ];
   function renderCountdown() {
     const wrap = document.getElementById('countdowns');
     const today = new Date();
     const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const parts = [];
-    for (const c of COUNTDOWNS) {
-      const [y, m, d] = c.date.split('-').map(Number);
-      const target = new Date(y, m - 1, d);
-      const days = Math.round((target - todayMid) / 86400000);
-      if (days < 0) continue;
-      const nTxt = days === 0 ? 'today!' : days;
-      const lblTxt = days === 0 ? c.label : 'days to ' + c.label;
-      parts.push(
-        '<span class="countdown">' +
+    const items = COUNTDOWNS
+      .map(c => {
+        const [y, m, d] = c.date.split('-').map(Number);
+        const target = new Date(y, m - 1, d);
+        const days = Math.round((target - todayMid) / 86400000);
+        return { ...c, days };
+      })
+      .filter(c => c.days >= 0)
+      .sort((a, b) => a.days - b.days);
+    const parts = items.map(c => {
+      const isToday = c.days === 0;
+      const nTxt = isToday ? '🎉' : c.days;
+      const subTxt = isToday ? 'today!' : (c.days === 1 ? 'day' : 'days');
+      return (
+        '<div class="cd-item' + (isToday ? ' is-today' : '') + '">' +
           '<span class="n">' + nTxt + '</span>' +
-          '<span class="lbl">' + lblTxt + '</span>' +
-        '</span>'
+          '<div class="meta">' +
+            '<span class="lbl">' + c.label + '</span>' +
+            '<span class="sub">' + subTxt + '</span>' +
+          '</div>' +
+        '</div>'
       );
-    }
+    });
     wrap.innerHTML = parts.join('');
   }
   renderCountdown();
