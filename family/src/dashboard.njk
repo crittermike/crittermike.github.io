@@ -13,7 +13,7 @@ permalink: "/dashboard/index.html"
   .dash {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 56px 320px 1fr;
+    grid-template-rows: 72px 320px 1fr;
     grid-template-areas:
       "top    top    top    top"
       "today  cal    cal    budget"
@@ -28,13 +28,11 @@ permalink: "/dashboard/index.html"
   .topbar {
     grid-area: top;
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 24px;
-    background: var(--card-bg);
-    border: 1px solid #30363d;
-    border-radius: 14px;
-    padding: 8px 22px;
+    gap: 18px;
+    padding: 0 4px;
+    overflow: hidden;
   }
   .fc-days { gap: 18px; }
   .clock-block {
@@ -89,9 +87,9 @@ permalink: "/dashboard/index.html"
     padding-right: 18px;
     border-right: 1px solid #30363d;
   }
-  .fc-now .icon { font-size: 1.7rem; }
-  .fc-now .temp { font-size: 1.6rem; font-weight: 800; line-height: 1; }
-  .fc-now .lo-hi { font-size: 0.78rem; color: var(--text-mid); font-weight: 600; line-height: 1; margin-top: 2px; }
+  .fc-now .icon { font-size: 1.5rem; }
+  .fc-now .temp { font-size: 1.4rem; font-weight: 800; line-height: 1; }
+  .fc-now .lo-hi { font-size: 0.72rem; color: var(--text-mid); font-weight: 600; line-height: 1; margin-top: 2px; }
   .fc-now .meta { display: flex; flex-direction: column; gap: 3px; }
 
   .fc-days { display: flex; gap: 14px; }
@@ -102,10 +100,10 @@ permalink: "/dashboard/index.html"
     gap: 2px;
     min-width: 44px;
   }
-  .fc-day .d { font-size: 0.65rem; color: var(--text-mid); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
-  .fc-day .i { font-size: 1.05rem; line-height: 1; margin: 1px 0; }
-  .fc-day .hi { font-size: 0.85rem; font-weight: 700; line-height: 1; }
-  .fc-day .lo { font-size: 0.7rem; color: var(--text-mid); font-weight: 500; line-height: 1; }
+  .fc-day .d { font-size: 0.6rem; color: var(--text-mid); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+  .fc-day .i { font-size: 0.95rem; line-height: 1; margin: 1px 0; }
+  .fc-day .hi { font-size: 0.78rem; font-weight: 700; line-height: 1; }
+  .fc-day .lo { font-size: 0.65rem; color: var(--text-mid); font-weight: 500; line-height: 1; }
 
   /* === SHARED CARD === */
   .card {
