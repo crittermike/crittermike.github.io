@@ -21,10 +21,18 @@ const path = require('path');
 const os = require('os');
 
 const WIKI = path.join(os.homedir(), '.hermes', 'workspace', 'wiki', 'concepts');
-const READING = path.join(WIKI, 'summer-reading-2026.md');
 const SUGAR = path.join(WIKI, 'sugar.md');
 const ALLOWANCE = path.join(WIKI, 'allowance.md');
 const SCHOOL = path.join(WIKI, 'school-assignments.md');
+
+// Summer reading 2026 — targets hardcoded; running totals live entirely in the
+// dashboard's localStorage (`reading-local-adds`). No wiki source. Mike will
+// tell us to remove this block at end of summer.
+const READING_TARGETS = {
+  thomas:  200,
+  william: 400,
+  henry:   500,
+};
 
 // Display order matches the dashboard grid: youngest → oldest
 const KIDS = [
@@ -106,45 +114,15 @@ function readSafe(p) {
 }
 
 /**
- * Parse the summer reading file. Returns per-kid {pages, target}.
- * Targets come from the "Targets" table. Latest progress line wins.
- *   - YYYY-MM-DD: Thomas N, William N, Henry N (notes)
+ * Summer reading: server-side base is always 0. The dashboard's tap-to-add
+ * widget keeps the running total in localStorage (`reading-local-adds`) and
+ * reconciles client-side. We only emit the hardcoded targets here; pages=0 at
+ * build time and the client adds its delta on render.
  */
 function loadReading() {
-  const text = readSafe(READING);
-  if (!text) return {};
-
-  // Targets table
-  const targets = {};
-  const targetRe = /\|\s*(Thomas|William|Henry|Charlie)\s*\|.*?\|\s*(\d+)\s*\|/gi;
-  let m;
-  while ((m = targetRe.exec(text)) !== null) {
-    targets[m[1].toLowerCase()] = parseInt(m[2], 10);
-  }
-
-  // Latest progress log line — scan in order, last match wins
-  const progress = {};
-  const lineRe = /^- (\d{4}-\d{2}-\d{2}):\s*(.+)$/gm;
-  let lastLine = null;
-  while ((m = lineRe.exec(text)) !== null) lastLine = m[2];
-  if (lastLine) {
-    // "Thomas 0, William 0, Henry 0 (challenge announced)"
-    const partRe = /(Thomas|William|Henry|Charlie)\s+(\d+)/gi;
-    let p;
-    while ((p = partRe.exec(lastLine)) !== null) {
-      progress[p[1].toLowerCase()] = parseInt(p[2], 10);
-    }
-  }
-
   const out = {};
-  for (const kid of ['thomas','william','henry','charlie']) {
-    if (targets[kid] != null) {
-      out[kid] = {
-        pages: progress[kid] || 0,
-        target: targets[kid],
-        pct: Math.min(100, Math.round((progress[kid] || 0) / targets[kid] * 100)),
-      };
-    }
+  for (const [kid, target] of Object.entries(READING_TARGETS)) {
+    out[kid] = { pages: 0, target, pct: 0 };
   }
   return out;
 }
