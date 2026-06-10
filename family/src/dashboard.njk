@@ -815,7 +815,7 @@ permalink: "/dashboard/index.html"
 
   // Render preview (top ~8 upcoming)
   function renderPreview() {
-    const upcoming = events.filter(e => e.date >= todayStr).slice(0, 8);
+    const upcoming = events.filter(e => e.date >= todayStr).slice(0, 14);
     document.getElementById('calPreview').innerHTML = upcoming.map(rowHTML).join('');
   }
   renderPreview();

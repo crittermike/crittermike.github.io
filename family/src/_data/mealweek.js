@@ -51,7 +51,13 @@ module.exports = function () {
   }
 
   const recipes = recipesLoader();
-  const todayDow = DOW[new Date().getDay()];
+  // Server is UTC. We need ET day-of-week (Mike's local time), so format
+  // through Intl with America/New_York. Otherwise at 8pm+ ET we'd see tomorrow.
+  const etDow = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'long',
+  }).format(new Date());
+  const todayDow = etDow;
 
   return DOW.map((dow, i) => {
     const meal = (plan.meals && plan.meals[dow]) || {};
