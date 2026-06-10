@@ -474,6 +474,9 @@ permalink: "/dashboard/index.html"
     padding: 24px;
   }
   .modal-bg.open { display: flex; }
+  /* Anchor specific modals to the top so on-screen keyboard doesn't cover them
+     when filtering shrinks the content. */
+  #calModal.modal-bg { align-items: flex-start; padding-top: 24px; }
   .modal {
     background: #ffffff;
     border: 1px solid #e3e6ea;
