@@ -249,8 +249,6 @@
   }
   .wordmark .crew {
     color: var(--accent-orange);
-    font-style: italic;
-    font-weight: 500;
   }
 
   .countdowns {
@@ -836,46 +834,40 @@
   }
   .cd-item {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 10px;
-    padding: 6px 10px;
+    padding: 8px 12px;
     background: rgba(0,0,0,0.025);
     border-radius: 10px;
+    min-height: 0;
   }
   .cd-item .n {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     line-height: 1;
     color: var(--accent-orange);
     font-variant-numeric: tabular-nums;
-    min-width: 1.8em;
+    min-width: 1.6em;
     text-align: right;
-  }
-  .cd-item .meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    overflow: hidden;
+    flex-shrink: 0;
   }
   .cd-item .lbl {
-    font-size: 0.82rem;
-    font-weight: 700;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--text-dark);
-    line-height: 1.1;
-    white-space: nowrap;
+    line-height: 1.15;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .cd-item .sub {
-    font-size: 0.62rem;
+  .cd-item .lbl .unit {
     color: var(--text-mid);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    line-height: 1;
+    font-weight: 500;
+    font-size: 0.78rem;
+    margin-right: 4px;
   }
-  .cd-item.is-today .n { color: var(--accent-teal); font-size: 1.1rem; }
+  .cd-item.is-today .n { color: var(--accent-teal); font-size: 1.2rem; }
 
   /* Grid assignments */
   .kid1 { grid-area: kid1; }
@@ -1503,14 +1495,12 @@
     const parts = items.map(c => {
       const isToday = c.days === 0;
       const nTxt = isToday ? '🎉' : c.days;
-      const subTxt = isToday ? 'today!' : (c.days === 1 ? 'day' : 'days');
+      const unit = isToday ? '' : '<span class="unit">' + (c.days === 1 ? 'day to' : 'days to') + '</span>';
+      const lblTxt = isToday ? c.label + ' is today!' : unit + c.label;
       return (
         '<div class="cd-item' + (isToday ? ' is-today' : '') + '">' +
           '<span class="n">' + nTxt + '</span>' +
-          '<div class="meta">' +
-            '<span class="lbl">' + c.label + '</span>' +
-            '<span class="sub">' + subTxt + '</span>' +
-          '</div>' +
+          '<span class="lbl">' + lblTxt + '</span>' +
         '</div>'
       );
     });
