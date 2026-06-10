@@ -1149,4 +1149,13 @@ permalink: "/dashboard/index.html"
     });
   }
   renderBudget();
+
+  // Invisible refresh tap target in bottom-right corner (for standalone PWA mode
+  // where there's no pull-to-refresh or reload button)
+  (function addRefreshTap() {
+    const tap = document.createElement('div');
+    tap.style.cssText = 'position:fixed;right:0;bottom:0;width:80px;height:80px;z-index:9999;cursor:pointer;';
+    tap.addEventListener('click', () => location.reload());
+    document.body.appendChild(tap);
+  })();
 </script>
