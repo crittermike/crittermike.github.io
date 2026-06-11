@@ -1192,7 +1192,7 @@
       <div class="fc-now">
         <span class="icon">☀️</span>
         <div class="meta">
-          <span class="temp">80°</span>
+          <span class="temp">81°</span>
           <span class="lo-hi">L 70° · H 92°</span>
         </div>
       </div>
@@ -1241,16 +1241,16 @@
     <h3 class="card-h">🍽 Tonight</h3>
     
     <div class="dinner-hero"
-         data-recipe="italian-sausage-onion-zucchini">
-      <div class="dinner-name">Italian sausage + onion + zucchini</div>
+         data-recipe="homemade-hamburger-helper">
+      <div class="dinner-name">Homemade Hamburger Helper</div>
       <div class="dinner-tap">tap for recipe</div>
     </div>
     
     
-    <div class="dinner-tomorrow no-recipe"
-         >
+    <div class="dinner-tomorrow"
+         data-recipe="italian-sausage-onion-zucchini">
       <span class="t-lbl">Tomorrow</span>
-      <span class="t-name">Takeout (family choice)</span>
+      <span class="t-name">Italian sausage + onion + zucchini</span>
     </div>
     
   </div>
@@ -1612,6 +1612,20 @@
       body_html: "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n"
     },
     
+    "homemade-hamburger-helper": {
+      name: "Homemade Hamburger Helper",
+      servings: 0,
+      prep_min: 0,
+      cook_min: 0,
+      effort: "",
+      protein_g: 0,
+      cal: 0,
+      ingredient_groups: [{"heading":null,"items":["2 lb ground beef","1 large yellow onion, diced","3 cloves garlic, minced (optional but obvious)","2 tbsp tomato paste","4 cups beef broth","1 cup heavy cream (or whole milk in a pinch)","1 lb large elbow macaroni (the chunky kind)","2 cups shredded cheddar","1 tbsp paprika","1 tsp garlic powder","1 tsp onion powder","1/2 tsp black pepper","Salt to taste"]}],
+      steps: ["Brown beef + onion in a large deep skillet or Dutch oven over medium-high. Drain fat if it's swimming.","Stir in garlic, tomato paste, paprika, garlic powder, onion powder, pepper. Cook 1 min until tomato paste darkens.","Pour in beef broth + cream. Scrape the bottom. Bring to a boil.","Add elbows. Stir. Cover, reduce to medium-low, simmer 10-12 min until pasta is tender and sauce thickens. Stir a couple times so the bottom doesn't catch.","Kill the heat. Stir in shredded cheddar until melted and glossy.","Salt to taste. Rest 2-3 min so it sets up."],
+      notes: "<h3>Notes</h3>\n<ul>\n<li>Want it sharper? Use sharp cheddar or half cheddar / half Monterey jack.</li>\n<li>Thinning out? Splash more broth or milk.</li>\n<li>Too thin? Uncover the last few minutes.</li>\n<li>Mike protein target: skip a half-portion of pasta, add a side of cottage cheese or boiled eggs to hit ~62g.</li>\n</ul>\n",
+      body_html: "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's request. One-pot stovetop, beef + cheesy noodle situation. Family of 6.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb ground beef</li>\n<li>1 large yellow onion, diced</li>\n<li>3 cloves garlic, minced (optional but obvious)</li>\n<li>2 tbsp tomato paste</li>\n<li>4 cups beef broth</li>\n<li>1 cup heavy cream (or whole milk in a pinch)</li>\n<li>1 lb large elbow macaroni (the chunky kind)</li>\n<li>2 cups shredded cheddar</li>\n<li>1 tbsp paprika</li>\n<li>1 tsp garlic powder</li>\n<li>1 tsp onion powder</li>\n<li>1/2 tsp black pepper</li>\n<li>Salt to taste</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Brown beef + onion in a large deep skillet or Dutch oven over medium-high. Drain fat if it's swimming.</li>\n<li>Stir in garlic, tomato paste, paprika, garlic powder, onion powder, pepper. Cook 1 min until tomato paste darkens.</li>\n<li>Pour in beef broth + cream. Scrape the bottom. Bring to a boil.</li>\n<li>Add elbows. Stir. Cover, reduce to medium-low, simmer 10-12 min until pasta is tender and sauce thickens. Stir a couple times so the bottom doesn't catch.</li>\n<li>Kill the heat. Stir in shredded cheddar until melted and glossy.</li>\n<li>Salt to taste. Rest 2-3 min so it sets up.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>Want it sharper? Use sharp cheddar or half cheddar / half Monterey jack.</li>\n<li>Thinning out? Splash more broth or milk.</li>\n<li>Too thin? Uncover the last few minutes.</li>\n<li>Mike protein target: skip a half-portion of pasta, add a side of cottage cheese or boiled eggs to hit ~62g.</li>\n</ul>\n<h2>Shopping list (what Nancy texted)</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Beef broth</li>\n<li>Cream</li>\n<li>Large elbow noodles</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n</ul>\n"
+    },
+    
     "italian-sausage-onion-zucchini": {
       name: "Italian sausage + onion + zucchini",
       servings: 0,
@@ -1824,6 +1838,7 @@
   const COUNTDOWNS = [
     { label: "Mike's birthday", date: '2026-06-13' },
     { label: 'California',      date: '2026-06-18' },
+    { label: 'Dude Perfect',    date: '2026-06-26' },
     { label: 'lake trip',       date: '2026-07-06' },
     { label: 'first day of school', date: '2026-08-13' },
   ];
