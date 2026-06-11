@@ -18,7 +18,7 @@ const LAT = 34.8526;
 const LON = -82.394;
 const URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
   `&current=temperature_2m,weather_code` +
-  `&daily=temperature_2m_max,temperature_2m_min,weather_code` +
+  `&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset` +
   `&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=6`;
 
 // WMO weather code → emoji.
@@ -66,6 +66,8 @@ module.exports = async function () {
     const hi = daily.temperature_2m_max || [];
     const lo = daily.temperature_2m_min || [];
     const codes = daily.weather_code || [];
+    const sunrises = daily.sunrise || [];
+    const sunsets = daily.sunset || [];
 
     if (!times.length) return null;
 
@@ -93,6 +95,13 @@ module.exports = async function () {
         code: now.weather_code,
       },
       days,
+      // Local-naive ISO strings ("YYYY-MM-DDTHH:mm") in America/New_York.
+      // 7-day window (today + next 5-6) so the client can pick the right day.
+      sun: {
+        sunrises: sunrises.slice(0, 7),
+        sunsets: sunsets.slice(0, 7),
+        timezone: 'America/New_York',
+      },
     };
   } catch (e) {
     console.warn(`[weather] fetch failed: ${e.message} — widget will be hidden`);
