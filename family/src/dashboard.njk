@@ -800,6 +800,27 @@ permalink: "/dashboard/index.html"
     padding-left: 4px;
   }
   .cal-month-h:first-child { margin-top: 0; }
+  .cal-bucket-h {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dark);
+    font-weight: 700;
+    margin: 12px 0 4px;
+    padding: 6px 4px 2px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .cal-bucket-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .cal-bucket-h .cal-bucket-count {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
+  .cal-bucket-h.today { color: var(--accent-orange); }
 
   /* === BUDGET STRIP (compact, stacks under meal block) === */
   .budget {
@@ -1329,12 +1350,33 @@ permalink: "/dashboard/index.html"
     const d = new Date(ev.date + 'T00:00');
     const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
     const diffDays = Math.round((d - new Date(todayStr + 'T00:00')) / 86400000);
-    const time = ev.all_day ? '' : ' ' + ev.time;
-    if (ev.date === todayStr) return 'Today' + time;
-    if (diffDays >= 1 && diffDays < 7) return dow + time;
+    const time = ev.all_day ? 'all day' : ev.time;
+    // For Today/Tomorrow buckets the header carries the day, so just show time.
+    if (diffDays === 0) return time;
+    if (diffDays === 1) return time;
+    if (diffDays >= 2 && diffDays < 14) return dow + (ev.all_day ? '' : ' ' + ev.time);
     const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
-    return mo + ' ' + d.getDate() + time;
+    return mo + ' ' + d.getDate() + (ev.all_day ? '' : ' ' + ev.time);
   }
+
+  // Bucket an event by its distance from today.
+  function bucketFor(ev) {
+    const d = new Date(ev.date + 'T00:00:00');
+    const diffDays = Math.round((d - new Date(todayStr + 'T00:00')) / 86400000);
+    if (diffDays <= 0) return 'today';
+    if (diffDays === 1) return 'tomorrow';
+    if (diffDays < 7) return 'thisweek';
+    if (diffDays < 14) return 'nextweek';
+    return 'later';
+  }
+  const BUCKET_LABELS = {
+    today: 'Today',
+    tomorrow: 'Tomorrow',
+    thisweek: 'This week',
+    nextweek: 'Next week',
+    later: 'Later'
+  };
+  const BUCKET_ORDER = ['today', 'tomorrow', 'thisweek', 'nextweek', 'later'];
 
   // Hide events that already ended. Uses end time if present, else falls back
   // to the start date (so a past day is fully filtered). All-day events stay
@@ -1359,14 +1401,36 @@ permalink: "/dashboard/index.html"
       '</div>';
   }
 
-  // Render preview (top ~14 upcoming, past events filtered)
+  // Group a flat list of events by bucket key. Returns array of {key, label, items}.
+  function groupByBucket(list) {
+    const groups = {};
+    list.forEach(ev => {
+      const k = bucketFor(ev);
+      (groups[k] = groups[k] || []).push(ev);
+    });
+    return BUCKET_ORDER
+      .filter(k => groups[k] && groups[k].length)
+      .map(k => ({ key: k, label: BUCKET_LABELS[k], items: groups[k] }));
+  }
+
+  function bucketHTML(group) {
+    const isToday = group.key === 'today';
+    return '<div class="cal-bucket-h' + (isToday ? ' today' : '') + '">' +
+      '<span>' + group.label + '</span>' +
+      '<span class="cal-bucket-count">' + group.items.length + '</span>' +
+      '</div>' +
+      group.items.map(rowHTML).join('');
+  }
+
+  // Render preview (top ~14 upcoming, past events filtered, grouped by bucket)
   function renderPreview() {
     const upcoming = events.filter(notPast).slice(0, 14);
-    document.getElementById('calPreview').innerHTML = upcoming.map(rowHTML).join('');
+    const grouped = groupByBucket(upcoming);
+    document.getElementById('calPreview').innerHTML = grouped.map(bucketHTML).join('');
   }
   renderPreview();
 
-  // Render full modal list, grouped by month
+  // Render full modal list. Bucketed at the top (Today/Tomorrow/This week/Next week), then by month for the rest.
   function renderFullList(filter = '') {
     const f = filter.trim().toLowerCase();
     const filtered = events
@@ -1376,18 +1440,26 @@ permalink: "/dashboard/index.html"
       document.getElementById('calFullList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-mid)">No matching events.</div>';
       return;
     }
-    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    // Split: events in this-or-next-week buckets get top treatment; "later" falls through to month grouping.
+    const nearTerm = filtered.filter(ev => bucketFor(ev) !== 'later');
+    const later = filtered.filter(ev => bucketFor(ev) === 'later');
     let html = '';
-    let currentMonth = '';
-    filtered.forEach(ev => {
-      const d = new Date(ev.date + 'T00:00:00');
-      const monthKey = months[d.getMonth()] + ' ' + d.getFullYear();
-      if (monthKey !== currentMonth) {
-        html += '<div class="cal-month-h">' + monthKey + '</div>';
-        currentMonth = monthKey;
-      }
-      html += rowHTML(ev);
-    });
+    if (nearTerm.length) {
+      html += groupByBucket(nearTerm).map(bucketHTML).join('');
+    }
+    if (later.length) {
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      let currentMonth = '';
+      later.forEach(ev => {
+        const d = new Date(ev.date + 'T00:00:00');
+        const monthKey = months[d.getMonth()] + ' ' + d.getFullYear();
+        if (monthKey !== currentMonth) {
+          html += '<div class="cal-month-h">' + monthKey + '</div>';
+          currentMonth = monthKey;
+        }
+        html += rowHTML(ev);
+      });
+    }
     document.getElementById('calFullList').innerHTML = '<div class="cal-full-list">' + html + '</div>';
   }
 
