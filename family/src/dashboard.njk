@@ -1067,7 +1067,7 @@ permalink: "/dashboard/index.html"
   body[data-weekend="1"] .budget    { grid-area: budget; }
   body[data-weekend="1"] .cd-card   { grid-area: cdown; }
   body[data-weekend="1"] .cal       { grid-area: cal; }
-  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; }
+  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; align-self: start; max-height: 100%; }
 
   /* === KIDS-MINI combined tile === */
   .kids-mini {
@@ -1124,27 +1124,29 @@ permalink: "/dashboard/index.html"
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 14px 16px 14px;
+    padding: 14px 18px 16px;
     box-shadow: var(--shadow);
     flex-direction: column;
     min-height: 0;
+    height: 100%;
     overflow: hidden;
   }
   .chores .card-h {
-    margin: 0 0 8px;
-    font-size: 0.95rem;
+    margin: 0 0 10px;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-mid);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-shrink: 0;
   }
   .chores .card-h .wk-pill {
     background: var(--surface-mute-3);
     color: var(--text-dark);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1152,49 +1154,72 @@ permalink: "/dashboard/index.html"
   .chores-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 14px;
+    column-gap: 22px;
     row-gap: 4px;
     overflow: hidden;
     min-height: 0;
+    flex: 1;
+    align-content: start;
   }
-  .chores-col { display: flex; flex-direction: column; min-width: 0; }
+  .chores-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
   .chores-col-h {
     font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.1rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: var(--accent-orange);
     line-height: 1;
-    margin: 6px 0 6px;
+    margin: 2px 0 10px;
     letter-spacing: -0.5px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    flex-shrink: 0;
   }
-  .chores-group { margin: 4px 0 8px; }
+  .chores-groups {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 24px;
+  }
+  .chores-group {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    min-height: 0;
+  }
   .chores-group-h {
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
+    letter-spacing: 1px;
     color: var(--text-light);
     font-weight: 800;
-    margin: 0 0 4px;
+    margin: 0 0 10px;
   }
-  .chores-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
-  .chore-item { display: flex; align-items: center; gap: 8px; line-height: 1.15; }
+  .chores-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .chore-item { display: flex; align-items: center; gap: 12px; line-height: 1.25; }
   .chore-checks {
     display: inline-flex;
     gap: 3px;
     flex-shrink: 0;
   }
   .chore-checks input[type="checkbox"] {
-    width: 14px; height: 14px;
+    width: 22px; height: 22px;
     margin: 0; padding: 0;
     accent-color: var(--accent-teal);
     cursor: pointer;
   }
   .chore-label {
     flex: 1;
-    font-size: 0.78rem;
+    font-size: 1.08rem;
     color: var(--text-dark);
     font-weight: 500;
     min-width: 0;
+    line-height: 1.3;
   }
   /* Strike when ALL boxes for that row are checked */
   .chore-item.all-done .chore-label {
@@ -1208,7 +1233,7 @@ permalink: "/dashboard/index.html"
   body[data-w-of-m="2"] .chores-monthly[data-n="2"],
   body[data-w-of-m="3"] .chores-monthly[data-n="3"],
   body[data-w-of-m="4"] .chores-monthly[data-n="4"],
-  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: block; }
+  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: flex; }
 
   /* === Weekend phone fallback === */
   @media (max-width: 767px) {
@@ -1288,6 +1313,7 @@ permalink: "/dashboard/index.html"
     <div class="chores-body">
       <div class="chores-col">
         <div class="chores-col-h">Saturday</div>
+        <div class="chores-groups">
         <div class="chores-group">
           <div class="chores-group-h">{{ chores.quick.title }}</div>
           <ul class="chores-list">
@@ -1316,9 +1342,11 @@ permalink: "/dashboard/index.html"
           </ul>
         </div>
         {% endfor %}
+        </div>
       </div>
       <div class="chores-col">
         <div class="chores-col-h">Sunday</div>
+        <div class="chores-groups">
         <div class="chores-group">
           <div class="chores-group-h">{{ chores.laundry.title }}</div>
           <ul class="chores-list">
@@ -1347,6 +1375,7 @@ permalink: "/dashboard/index.html"
           </ul>
         </div>
         {% endfor %}
+        </div>
       </div>
     </div>
   </div>
