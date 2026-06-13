@@ -1211,27 +1211,6 @@
     <div></div>
     <div class="forecast">
       
-      <div class="fc-now">
-        <span class="icon">☀️</span>
-        <div class="meta">
-          <span class="temp">91°</span>
-          <span class="lo-hi">L 72° · H 95°</span>
-        </div>
-      </div>
-      <div class="fc-days">
-        
-        <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">92°</span><span class="lo">72°</span></div>
-        
-        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">88°</span><span class="lo">70°</span></div>
-        
-        <div class="fc-day"><span class="d">Tue</span><span class="i">⛅</span><span class="hi">81°</span><span class="lo">69°</span></div>
-        
-        <div class="fc-day"><span class="d">Wed</span><span class="i">⛅</span><span class="hi">88°</span><span class="lo">62°</span></div>
-        
-        <div class="fc-day"><span class="d">Thu</span><span class="i">⛅</span><span class="hi">94°</span><span class="lo">71°</span></div>
-        
-      </div>
-      
     </div>
   </div>
 
@@ -1870,7 +1849,7 @@
   // when it's due. Reschedules on visibilitychange so a Kindle/iPad waking
   // up after sleep snaps to the right theme right away.
   (function themeInit() {
-    const SUN = {"sunrises":["2026-06-13T06:15","2026-06-14T06:15","2026-06-15T06:15","2026-06-16T06:15","2026-06-17T06:15","2026-06-18T06:15"],"sunsets":["2026-06-13T20:43","2026-06-14T20:44","2026-06-15T20:44","2026-06-16T20:44","2026-06-17T20:45","2026-06-18T20:45"],"timezone":"America/New_York"};
+    const SUN = {"sunrises":[],"sunsets":[]};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
