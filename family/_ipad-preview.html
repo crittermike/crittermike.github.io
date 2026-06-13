@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>iPad 7 preview</title>
+<style>
+  html,body{margin:0;padding:0;background:#222;color:#888;font-family:system-ui;height:100%;overflow:hidden;}
+  .label{position:fixed;top:4px;left:8px;font-size:11px;z-index:10;}
+  .stage{position:absolute;inset:24px 0 0;display:flex;align-items:flex-start;justify-content:center;}
+  .frame{width:1080px;height:810px;background:#fff;border:2px solid #444;box-shadow:0 0 20px rgba(0,0,0,.5);flex-shrink:0;transform-origin:top center;}
+  iframe{width:1080px;height:810px;border:0;display:block;}
+</style></head>
+<body>
+<div class="label" id="lbl">iPad 7th gen viewport (1080 × 810) — landscape</div>
+<div class="stage">
+  <div class="frame" id="frame"><iframe src="/dashboard/" id="dash"></iframe></div>
+</div>
+<script>
+(function fit(){
+  function go(){
+    var stage=document.querySelector('.stage');
+    var sw=stage.clientWidth, sh=stage.clientHeight;
+    var scale=Math.min(sw/1080, sh/810, 1);
+    document.getElementById('frame').style.transform='scale('+scale.toFixed(4)+')';
+    document.getElementById('lbl').textContent='iPad 7 landscape 1080×810 (scaled to '+(scale*100).toFixed(0)+'% to fit)';
+  }
+  go();
+  window.addEventListener('resize',go);
+})();
+</script>
+</body></html>

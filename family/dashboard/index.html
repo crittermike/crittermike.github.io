@@ -1201,6 +1201,189 @@
     .modal-head { padding: 12px 16px; }
     .modal-body { padding: 14px 16px 18px; }
   }
+
+  /* ============================================================
+     WEEKEND MODE (Sat/Sun) — toggled by JS via body[data-weekend="1"]
+     ============================================================ */
+
+  /* Default: weekend-only blocks hidden */
+  .kids-mini, .chores { display: none; }
+
+  body[data-weekend="1"] .dash {
+    grid-template-columns: 1.05fr 1.5fr 1.55fr;
+    grid-template-rows: 72px auto auto 1fr;
+    grid-template-areas:
+      "top    top   top"
+      "kmini  cal   chores"
+      "budget cal   chores"
+      "cdown  cal   chores";
+  }
+
+  /* Hide weekday-only blocks */
+  body[data-weekend="1"] .today,
+  body[data-weekend="1"] .kid { display: none; }
+
+  body[data-weekend="1"] .kids-mini { grid-area: kmini;  display: flex; }
+  body[data-weekend="1"] .budget    { grid-area: budget; }
+  body[data-weekend="1"] .cd-card   { grid-area: cdown; }
+  body[data-weekend="1"] .cal       { grid-area: cal; }
+  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; }
+
+  /* === KIDS-MINI combined tile === */
+  .kids-mini {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px 14px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .kids-mini .card-h {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .kids-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 16px;
+    row-gap: 8px;
+    align-items: baseline;
+  }
+  .kids-mini-grid .km-head {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  .kids-mini-grid .km-head.right { text-align: right; }
+  .kids-mini-grid .km-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .kids-mini-grid .km-val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text-dark);
+  }
+  .kids-mini-grid .km-val.danger { color: var(--accent-rose); }
+  .kids-mini-grid .km-val.warn   { color: var(--accent-gold); }
+
+  /* === CHORES card === */
+  .chores {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px 14px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .chores .card-h {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .chores .card-h .wk-pill {
+    background: var(--surface-mute-3);
+    color: var(--text-dark);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chores-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    row-gap: 4px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .chores-col { display: flex; flex-direction: column; min-width: 0; }
+  .chores-col-h {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    line-height: 1;
+    margin: 6px 0 6px;
+    letter-spacing: -0.5px;
+  }
+  .chores-group { margin: 4px 0 8px; }
+  .chores-group-h {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--text-light);
+    font-weight: 800;
+    margin: 0 0 4px;
+  }
+  .chores-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  .chore-item { display: flex; align-items: center; gap: 8px; line-height: 1.15; }
+  .chore-checks {
+    display: inline-flex;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .chore-checks input[type="checkbox"] {
+    width: 14px; height: 14px;
+    margin: 0; padding: 0;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
+  }
+  .chore-label {
+    flex: 1;
+    font-size: 0.78rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    min-width: 0;
+  }
+  /* Strike when ALL boxes for that row are checked */
+  .chore-item.all-done .chore-label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  /* === Weekend monthly section visibility === */
+  .chores-monthly { display: none; }
+  body[data-w-of-m="1"] .chores-monthly[data-n="1"],
+  body[data-w-of-m="2"] .chores-monthly[data-n="2"],
+  body[data-w-of-m="3"] .chores-monthly[data-n="3"],
+  body[data-w-of-m="4"] .chores-monthly[data-n="4"],
+  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: block; }
+
+  /* === Weekend phone fallback === */
+  @media (max-width: 767px) {
+    body[data-weekend="1"] .dash {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "top"
+        "kmini"
+        "cal"
+        "chores"
+        "budget"
+        "cdown";
+    }
+    body[data-weekend="1"] .chores-body { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="dash">
@@ -1214,7 +1397,7 @@
       <div class="fc-now">
         <span class="icon">☀️</span>
         <div class="meta">
-          <span class="temp">91°</span>
+          <span class="temp">92°</span>
           <span class="lo-hi">L 72° · H 94°</span>
         </div>
       </div>
@@ -1222,16 +1405,391 @@
         
         <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">92°</span><span class="lo">72°</span></div>
         
-        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">88°</span><span class="lo">70°</span></div>
+        <div class="fc-day"><span class="d">Mon</span><span class="i">⛅</span><span class="hi">87°</span><span class="lo">69°</span></div>
         
-        <div class="fc-day"><span class="d">Tue</span><span class="i">🌦</span><span class="hi">81°</span><span class="lo">69°</span></div>
+        <div class="fc-day"><span class="d">Tue</span><span class="i">🌦</span><span class="hi">79°</span><span class="lo">68°</span></div>
         
-        <div class="fc-day"><span class="d">Wed</span><span class="i">🌦</span><span class="hi">88°</span><span class="lo">62°</span></div>
+        <div class="fc-day"><span class="d">Wed</span><span class="i">🌦</span><span class="hi">92°</span><span class="lo">67°</span></div>
         
-        <div class="fc-day"><span class="d">Thu</span><span class="i">⛅</span><span class="hi">94°</span><span class="lo">71°</span></div>
+        <div class="fc-day"><span class="d">Thu</span><span class="i">⛅</span><span class="hi">95°</span><span class="lo">71°</span></div>
         
       </div>
       
+    </div>
+  </div>
+
+  <!-- KIDS MINI (weekend only): combined sugar + allowance tile -->
+  <div class="kids-mini">
+    <div class="card-h">
+      <span>👨‍👩‍👦‍👦 Kids</span>
+      <span style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light);">Sugar · Allowance</span>
+    </div>
+    <div class="kids-mini-grid">
+      <div class="km-head">Name</div>
+      <div class="km-head right">🍭</div>
+      <div class="km-head right">💵</div>
+      
+        <div class="km-name">Thomas</div>
+        
+          
+          
+          <div class="km-val">260g</div>
+        
+        
+          
+          <div class="km-val">$100.00</div>
+        
+      
+        <div class="km-name">William</div>
+        
+          
+          
+          <div class="km-val">156g</div>
+        
+        
+          
+          <div class="km-val">$21.31</div>
+        
+      
+        <div class="km-name">Henry</div>
+        
+          
+          
+          <div class="km-val">98g</div>
+        
+        
+          
+          <div class="km-val">$72.13</div>
+        
+      
+        <div class="km-name">Charlie</div>
+        
+          
+          
+          <div class="km-val">83g</div>
+        
+        
+          
+          <div class="km-val danger">$-273.23</div>
+        
+      
+    </div>
+  </div>
+
+  <!-- CHORES (weekend only): always-on quick clean / laundry + monthly rotation -->
+  <div class="chores">
+    <div class="card-h">
+      <span>🧹 Weekend chores</span>
+      <span class="wk-pill" id="choresWkPill">Wk —</span>
+    </div>
+    <div class="chores-body">
+      <div class="chores-col">
+        <div class="chores-col-h">Saturday</div>
+        <div class="chores-group">
+          <div class="chores-group-h">Quick clean</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="qc-pick-up-entire-house">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="qc-pick-up-entire-house" data-slot="0">
+              </span>
+              <span class="chore-label">Pick up entire house</span>
+            </li>
+            
+            <li class="chore-item" data-id="qc-wipe-kitchen-counter-stovetop">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="qc-wipe-kitchen-counter-stovetop" data-slot="0">
+              </span>
+              <span class="chore-label">Wipe kitchen counter/stovetop</span>
+            </li>
+            
+            <li class="chore-item" data-id="qc-vacuum-all-carpet">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="qc-vacuum-all-carpet" data-slot="0">
+              </span>
+              <span class="chore-label">Vacuum all carpet</span>
+            </li>
+            
+            <li class="chore-item" data-id="qc-sweep-all-hard-floors">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="qc-sweep-all-hard-floors" data-slot="0">
+              </span>
+              <span class="chore-label">Sweep all hard floors</span>
+            </li>
+            
+            <li class="chore-item" data-id="qc-bathroom-mirrors-counters">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="qc-bathroom-mirrors-counters" data-slot="0">
+              </span>
+              <span class="chore-label">Bathroom mirrors/counters</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="1">
+          <div class="chores-group-h">Kitchen</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w1-sat-clean-microwave-and-cabinets">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sat-clean-microwave-and-cabinets" data-slot="0">
+              </span>
+              <span class="chore-label">Clean microwave and cabinets</span>
+            </li>
+            
+            <li class="chore-item" data-id="w1-sat-organize-the-pantry">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sat-organize-the-pantry" data-slot="0">
+              </span>
+              <span class="chore-label">Organize the pantry</span>
+            </li>
+            
+            <li class="chore-item" data-id="w1-sat-clean-out-the-fridge">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sat-clean-out-the-fridge" data-slot="0">
+              </span>
+              <span class="chore-label">Clean out the fridge</span>
+            </li>
+            
+            <li class="chore-item" data-id="w1-sat-mop-kitchen-floor">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sat-mop-kitchen-floor" data-slot="0">
+              </span>
+              <span class="chore-label">Mop kitchen floor</span>
+            </li>
+            
+            <li class="chore-item" data-id="w1-sat-clean-the-oven">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sat-clean-the-oven" data-slot="0">
+              </span>
+              <span class="chore-label">Clean the oven</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="2">
+          <div class="chores-group-h">Bathroom</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w2-sat-clean-toilets-tubs-showers">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sat-clean-toilets-tubs-showers" data-slot="0">
+              </span>
+              <span class="chore-label">Clean toilets, tubs, showers</span>
+            </li>
+            
+            <li class="chore-item" data-id="w2-sat-wash-bathmats">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sat-wash-bathmats" data-slot="0">
+              </span>
+              <span class="chore-label">Wash bathmats</span>
+            </li>
+            
+            <li class="chore-item" data-id="w2-sat-restock-toiletries">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sat-restock-toiletries" data-slot="0">
+              </span>
+              <span class="chore-label">Restock toiletries</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="3">
+          <div class="chores-group-h">Living areas</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w3-sat-wash-cushion-covers">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sat-wash-cushion-covers" data-slot="0">
+              </span>
+              <span class="chore-label">Wash cushion covers</span>
+            </li>
+            
+            <li class="chore-item" data-id="w3-sat-clean-windows-and-glass-doors">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sat-clean-windows-and-glass-doors" data-slot="0">
+              </span>
+              <span class="chore-label">Clean windows and glass doors</span>
+            </li>
+            
+            <li class="chore-item" data-id="w3-sat-mop-hard-floors">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sat-mop-hard-floors" data-slot="0">
+              </span>
+              <span class="chore-label">Mop hard floors</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="4">
+          <div class="chores-group-h">Maintenance</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w4-sat-check-hvac-filters">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w4-sat-check-hvac-filters" data-slot="0">
+              </span>
+              <span class="chore-label">Check HVAC filters</span>
+            </li>
+            
+            <li class="chore-item" data-id="w4-sat-clean-cycle-on-washer">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w4-sat-clean-cycle-on-washer" data-slot="0">
+              </span>
+              <span class="chore-label">Clean cycle on washer</span>
+            </li>
+            
+            <li class="chore-item" data-id="w4-sat-clean-cycle-on-oven">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w4-sat-clean-cycle-on-oven" data-slot="0">
+              </span>
+              <span class="chore-label">Clean cycle on oven</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </div>
+      <div class="chores-col">
+        <div class="chores-col-h">Sunday</div>
+        <div class="chores-group">
+          <div class="chores-group-h">Laundry / Trash</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="lt-empty-all-trash-cans">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="lt-empty-all-trash-cans" data-slot="0">
+              </span>
+              <span class="chore-label">Empty all trash cans</span>
+            </li>
+            
+            <li class="chore-item" data-id="lt-take-out-trash-and-recycling">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="lt-take-out-trash-and-recycling" data-slot="0">
+              </span>
+              <span class="chore-label">Take out trash and recycling</span>
+            </li>
+            
+            <li class="chore-item" data-id="lt-laundry-wash-put-away">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="lt-laundry-wash-put-away" data-slot="0">
+              </span>
+              <span class="chore-label">Laundry (wash, put away)</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="1">
+          <div class="chores-group-h">Cars</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w1-sun-wash">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sun-wash" data-slot="0">
+              </span>
+              <span class="chore-label">Wash</span>
+            </li>
+            
+            <li class="chore-item" data-id="w1-sun-vacuum">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w1-sun-vacuum" data-slot="0">
+              </span>
+              <span class="chore-label">Vacuum</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="2">
+          <div class="chores-group-h">Bedrooms</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w2-sun-change-linens">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sun-change-linens" data-slot="0">
+              </span>
+              <span class="chore-label">Change linens</span>
+            </li>
+            
+            <li class="chore-item" data-id="w2-sun-rotate-mattresses-every-3rd-mo">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sun-rotate-mattresses-every-3rd-mo" data-slot="0">
+              </span>
+              <span class="chore-label">Rotate mattresses (every 3rd mo)</span>
+            </li>
+            
+            <li class="chore-item" data-id="w2-sun-clean-vacuum-under-beds">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w2-sun-clean-vacuum-under-beds" data-slot="0">
+              </span>
+              <span class="chore-label">Clean/vacuum under beds</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="3">
+          <div class="chores-group-h">Outdoor/Garage</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w3-sun-clean-up-backyard-patio">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sun-clean-up-backyard-patio" data-slot="0">
+              </span>
+              <span class="chore-label">Clean up backyard/patio</span>
+            </li>
+            
+            <li class="chore-item" data-id="w3-sun-blow-leaves-on-front-porch">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sun-blow-leaves-on-front-porch" data-slot="0">
+              </span>
+              <span class="chore-label">Blow leaves on front porch</span>
+            </li>
+            
+            <li class="chore-item" data-id="w3-sun-tidy-and-sweep-garage">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sun-tidy-and-sweep-garage" data-slot="0">
+              </span>
+              <span class="chore-label">Tidy and sweep garage</span>
+            </li>
+            
+            <li class="chore-item" data-id="w3-sun-seasonal-plant-care-weeds">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w3-sun-seasonal-plant-care-weeds" data-slot="0">
+              </span>
+              <span class="chore-label">Seasonal plant care/weeds</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <div class="chores-monthly chores-group" data-n="4">
+          <div class="chores-group-h">Catch up</div>
+          <ul class="chores-list">
+            
+            <li class="chore-item" data-id="w4-sun-catch-up-on-deferred-tasks">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w4-sun-catch-up-on-deferred-tasks" data-slot="0">
+              </span>
+              <span class="chore-label">Catch up on deferred tasks</span>
+            </li>
+            
+            <li class="chore-item" data-id="w4-sun-organize-something-closet-bookshelf-etc">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="w4-sun-organize-something-closet-bookshelf-etc" data-slot="0">
+              </span>
+              <span class="chore-label">Organize something (closet, bookshelf, etc.)</span>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </div>
     </div>
   </div>
 
@@ -2261,6 +2819,66 @@
     });
   }
   renderBudget();
+
+  // === WEEKEND MODE + CHORES CHECKLIST ===
+  (function weekendMode() {
+    const now = new Date();
+    const dow = now.getDay(); // 0=Sun, 6=Sat
+    const isWeekend = (dow === 0 || dow === 6);
+    if (!isWeekend) return;
+
+    // Compute weekend-of-month, anchored on Saturday.
+    const satDate = new Date(now);
+    if (dow === 0) satDate.setDate(now.getDate() - 1); // Sun → its Saturday
+    const w = Math.min(4, Math.ceil(satDate.getDate() / 7));
+
+    document.body.dataset.weekend = '1';
+    document.body.dataset.wOfM = String(w);
+
+    const pill = document.getElementById('choresWkPill');
+    if (pill) {
+      const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
+      pill.textContent = labels[w] || ('Wk ' + w);
+    }
+
+    // Persist chore checks per weekend (Sat date as the key).
+    const yyyy = satDate.getFullYear();
+    const mm = String(satDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(satDate.getDate()).padStart(2, '0');
+    const STORAGE_KEY = 'chores-' + yyyy + '-' + mm + '-' + dd;
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+
+    // Garbage-collect old chore-* keys (keep only current weekend).
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('chores-') && k !== STORAGE_KEY) localStorage.removeItem(k);
+      }
+    } catch {}
+
+    function rowKey(id, slot) { return id + ':' + slot; }
+    function updateRowStrike(item) {
+      const boxes = item.querySelectorAll('input[type="checkbox"]');
+      const allDone = Array.from(boxes).every(b => b.checked);
+      item.classList.toggle('all-done', allDone);
+    }
+
+    document.querySelectorAll('.chore-item').forEach(item => {
+      const id = item.dataset.id;
+      item.querySelectorAll('input[type="checkbox"]').forEach(box => {
+        const slot = box.dataset.slot;
+        if (state[rowKey(id, slot)]) box.checked = true;
+        box.addEventListener('change', () => {
+          state[rowKey(id, slot)] = box.checked;
+          if (!box.checked) delete state[rowKey(id, slot)];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          updateRowStrike(item);
+        });
+      });
+      updateRowStrike(item);
+    });
+  })();
 
   // Invisible refresh tap target in bottom-right corner (for standalone PWA mode
   // where there's no pull-to-refresh or reload button)

@@ -1041,6 +1041,189 @@ permalink: "/dashboard/index.html"
     .modal-head { padding: 12px 16px; }
     .modal-body { padding: 14px 16px 18px; }
   }
+
+  /* ============================================================
+     WEEKEND MODE (Sat/Sun) — toggled by JS via body[data-weekend="1"]
+     ============================================================ */
+
+  /* Default: weekend-only blocks hidden */
+  .kids-mini, .chores { display: none; }
+
+  body[data-weekend="1"] .dash {
+    grid-template-columns: 1.05fr 1.5fr 1.55fr;
+    grid-template-rows: 72px auto auto 1fr;
+    grid-template-areas:
+      "top    top   top"
+      "kmini  cal   chores"
+      "budget cal   chores"
+      "cdown  cal   chores";
+  }
+
+  /* Hide weekday-only blocks */
+  body[data-weekend="1"] .today,
+  body[data-weekend="1"] .kid { display: none; }
+
+  body[data-weekend="1"] .kids-mini { grid-area: kmini;  display: flex; }
+  body[data-weekend="1"] .budget    { grid-area: budget; }
+  body[data-weekend="1"] .cd-card   { grid-area: cdown; }
+  body[data-weekend="1"] .cal       { grid-area: cal; }
+  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; }
+
+  /* === KIDS-MINI combined tile === */
+  .kids-mini {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px 14px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .kids-mini .card-h {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .kids-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 16px;
+    row-gap: 8px;
+    align-items: baseline;
+  }
+  .kids-mini-grid .km-head {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  .kids-mini-grid .km-head.right { text-align: right; }
+  .kids-mini-grid .km-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .kids-mini-grid .km-val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text-dark);
+  }
+  .kids-mini-grid .km-val.danger { color: var(--accent-rose); }
+  .kids-mini-grid .km-val.warn   { color: var(--accent-gold); }
+
+  /* === CHORES card === */
+  .chores {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px 14px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .chores .card-h {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .chores .card-h .wk-pill {
+    background: var(--surface-mute-3);
+    color: var(--text-dark);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chores-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    row-gap: 4px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .chores-col { display: flex; flex-direction: column; min-width: 0; }
+  .chores-col-h {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    line-height: 1;
+    margin: 6px 0 6px;
+    letter-spacing: -0.5px;
+  }
+  .chores-group { margin: 4px 0 8px; }
+  .chores-group-h {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--text-light);
+    font-weight: 800;
+    margin: 0 0 4px;
+  }
+  .chores-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  .chore-item { display: flex; align-items: center; gap: 8px; line-height: 1.15; }
+  .chore-checks {
+    display: inline-flex;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .chore-checks input[type="checkbox"] {
+    width: 14px; height: 14px;
+    margin: 0; padding: 0;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
+  }
+  .chore-label {
+    flex: 1;
+    font-size: 0.78rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    min-width: 0;
+  }
+  /* Strike when ALL boxes for that row are checked */
+  .chore-item.all-done .chore-label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  /* === Weekend monthly section visibility === */
+  .chores-monthly { display: none; }
+  body[data-w-of-m="1"] .chores-monthly[data-n="1"],
+  body[data-w-of-m="2"] .chores-monthly[data-n="2"],
+  body[data-w-of-m="3"] .chores-monthly[data-n="3"],
+  body[data-w-of-m="4"] .chores-monthly[data-n="4"],
+  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: block; }
+
+  /* === Weekend phone fallback === */
+  @media (max-width: 767px) {
+    body[data-weekend="1"] .dash {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "top"
+        "kmini"
+        "cal"
+        "chores"
+        "budget"
+        "cdown";
+    }
+    body[data-weekend="1"] .chores-body { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="dash">
@@ -1064,6 +1247,107 @@ permalink: "/dashboard/index.html"
         {% endfor %}
       </div>
       {% endif %}
+    </div>
+  </div>
+
+  <!-- KIDS MINI (weekend only): combined sugar + allowance tile -->
+  <div class="kids-mini">
+    <div class="card-h">
+      <span>👨‍👩‍👦‍👦 Kids</span>
+      <span style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light);">Sugar · Allowance</span>
+    </div>
+    <div class="kids-mini-grid">
+      <div class="km-head">Name</div>
+      <div class="km-head right">🍭</div>
+      <div class="km-head right">💵</div>
+      {% for kid in kids %}
+        <div class="km-name">{{ kid.name }}</div>
+        {% if kid.sugar.balance is not none %}
+          {% set neg = kid.sugar.balance < 0 %}
+          {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
+          <div class="km-val{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</div>
+        {% else %}
+          <div class="km-val" style="color: var(--text-light);">—</div>
+        {% endif %}
+        {% if kid.allowance.balance_str %}
+          {% set negA = '-' in kid.allowance.balance_str %}
+          <div class="km-val{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</div>
+        {% else %}
+          <div class="km-val" style="color: var(--text-light);">—</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- CHORES (weekend only): always-on quick clean / laundry + monthly rotation -->
+  <div class="chores">
+    <div class="card-h">
+      <span>🧹 Weekend chores</span>
+      <span class="wk-pill" id="choresWkPill">Wk —</span>
+    </div>
+    <div class="chores-body">
+      <div class="chores-col">
+        <div class="chores-col-h">Saturday</div>
+        <div class="chores-group">
+          <div class="chores-group-h">{{ chores.quick.title }}</div>
+          <ul class="chores-list">
+            {% for item in chores.quick.items %}
+            <li class="chore-item" data-id="{{ item.id }}">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="{{ item.id }}" data-slot="0">
+              </span>
+              <span class="chore-label">{{ item.label }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% for m in chores.monthly %}
+        <div class="chores-monthly chores-group" data-n="{{ m.n }}">
+          <div class="chores-group-h">{{ m.sat.title }}</div>
+          <ul class="chores-list">
+            {% for item in m.sat.items %}
+            <li class="chore-item" data-id="{{ item.id }}">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="{{ item.id }}" data-slot="0">
+              </span>
+              <span class="chore-label">{{ item.label }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="chores-col">
+        <div class="chores-col-h">Sunday</div>
+        <div class="chores-group">
+          <div class="chores-group-h">{{ chores.laundry.title }}</div>
+          <ul class="chores-list">
+            {% for item in chores.laundry.items %}
+            <li class="chore-item" data-id="{{ item.id }}">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="{{ item.id }}" data-slot="0">
+              </span>
+              <span class="chore-label">{{ item.label }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% for m in chores.monthly %}
+        <div class="chores-monthly chores-group" data-n="{{ m.n }}">
+          <div class="chores-group-h">{{ m.sun.title }}</div>
+          <ul class="chores-list">
+            {% for item in m.sun.items %}
+            <li class="chore-item" data-id="{{ item.id }}">
+              <span class="chore-checks">
+                <input type="checkbox" data-chore="{{ item.id }}" data-slot="0">
+              </span>
+              <span class="chore-label">{{ item.label }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -1928,6 +2212,66 @@ permalink: "/dashboard/index.html"
     });
   }
   renderBudget();
+
+  // === WEEKEND MODE + CHORES CHECKLIST ===
+  (function weekendMode() {
+    const now = new Date();
+    const dow = now.getDay(); // 0=Sun, 6=Sat
+    const isWeekend = (dow === 0 || dow === 6);
+    if (!isWeekend) return;
+
+    // Compute weekend-of-month, anchored on Saturday.
+    const satDate = new Date(now);
+    if (dow === 0) satDate.setDate(now.getDate() - 1); // Sun → its Saturday
+    const w = Math.min(4, Math.ceil(satDate.getDate() / 7));
+
+    document.body.dataset.weekend = '1';
+    document.body.dataset.wOfM = String(w);
+
+    const pill = document.getElementById('choresWkPill');
+    if (pill) {
+      const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
+      pill.textContent = labels[w] || ('Wk ' + w);
+    }
+
+    // Persist chore checks per weekend (Sat date as the key).
+    const yyyy = satDate.getFullYear();
+    const mm = String(satDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(satDate.getDate()).padStart(2, '0');
+    const STORAGE_KEY = 'chores-' + yyyy + '-' + mm + '-' + dd;
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+
+    // Garbage-collect old chore-* keys (keep only current weekend).
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('chores-') && k !== STORAGE_KEY) localStorage.removeItem(k);
+      }
+    } catch {}
+
+    function rowKey(id, slot) { return id + ':' + slot; }
+    function updateRowStrike(item) {
+      const boxes = item.querySelectorAll('input[type="checkbox"]');
+      const allDone = Array.from(boxes).every(b => b.checked);
+      item.classList.toggle('all-done', allDone);
+    }
+
+    document.querySelectorAll('.chore-item').forEach(item => {
+      const id = item.dataset.id;
+      item.querySelectorAll('input[type="checkbox"]').forEach(box => {
+        const slot = box.dataset.slot;
+        if (state[rowKey(id, slot)]) box.checked = true;
+        box.addEventListener('change', () => {
+          state[rowKey(id, slot)] = box.checked;
+          if (!box.checked) delete state[rowKey(id, slot)];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          updateRowStrike(item);
+        });
+      });
+      updateRowStrike(item);
+    });
+  })();
 
   // Invisible refresh tap target in bottom-right corner (for standalone PWA mode
   // where there's no pull-to-refresh or reload button)
