@@ -293,6 +293,29 @@ eleventyExcludeFromCollections: true
     line-height: 1.25;
   }
   .cal-row:last-child { border-bottom: none; }
+  .cal-row.today-row { background: rgba(217,106,42,0.10); border-radius: 6px; padding-left: 6px; padding-right: 6px; }
+  .cal-row.today-row .t { color: var(--accent-orange); }
+  .cal-bucket-h {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dark);
+    font-weight: 700;
+    margin: 10px 0 2px;
+    padding: 5px 4px 2px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .cal-bucket-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .cal-bucket-h.today { color: var(--accent-orange); }
+  .cal-bucket-h .cal-bucket-count {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
   .cal-row .t {
     color: var(--text-light);
     font-size: 0.7rem;
@@ -331,7 +354,14 @@ eleventyExcludeFromCollections: true
     padding-bottom: 8px;
     flex-shrink: 0;
   }
-  .chores-group { margin: 0 0 12px; }
+  .chores-groups {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 16px;
+  }
+  .chores-group { margin: 0; display: flex; flex-direction: column; flex: 0 0 auto; min-height: 0; }
   .chores-group-h {
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -356,12 +386,26 @@ eleventyExcludeFromCollections: true
     font-size: 0.78rem;
     color: var(--text-dark);
   }
-  .chore-item .box {
-    width: 14px; height: 14px;
-    border: 1.5px solid var(--text-light);
-    border-radius: 3px;
+  .chore-item input[type="checkbox"] {
+    width: 16px; height: 16px;
+    margin: 0; padding: 0;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
     flex-shrink: 0;
   }
+  .chore-label { flex: 1; min-width: 0; }
+  .chore-item.all-done .chore-label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  /* Monthly section visibility — driven by body[data-w-of-m] set in renderChoresPill() */
+  .chores-monthly { display: none; }
+  body[data-w-of-m="1"] .chores-monthly[data-n="1"],
+  body[data-w-of-m="2"] .chores-monthly[data-n="2"],
+  body[data-w-of-m="3"] .chores-monthly[data-n="3"],
+  body[data-w-of-m="4"] .chores-monthly[data-n="4"],
+  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: flex; }
 
   /* === BUDGET (matches /dashboard/ .budget) === */
   .budget-cats {
@@ -708,20 +752,40 @@ eleventyExcludeFromCollections: true
       <div class="chores-body">
         <div class="chores-col">
           <div class="chores-col-h">Saturday</div>
-          <div class="chores-group">
-            <div class="chores-group-h">{{ chores.quick.title }}</div>
-            <ul class="chores-list">
-              {% for item in chores.quick.items %}<li class="chore-item"><span class="box"></span><span>{{ item.label }}</span></li>{% endfor %}
-            </ul>
+          <div class="chores-groups">
+            <div class="chores-group">
+              <div class="chores-group-h">{{ chores.quick.title }}</div>
+              <ul class="chores-list">
+                {% for item in chores.quick.items %}<li class="chore-item" data-id="{{ item.id }}"><input type="checkbox" data-chore="{{ item.id }}" data-slot="0"><span class="chore-label">{{ item.label }}</span></li>{% endfor %}
+              </ul>
+            </div>
+            {% for m in chores.monthly %}
+            <div class="chores-monthly chores-group" data-n="{{ m.n }}">
+              <div class="chores-group-h">{{ m.sat.title }}</div>
+              <ul class="chores-list">
+                {% for item in m.sat.items %}<li class="chore-item" data-id="{{ item.id }}"><input type="checkbox" data-chore="{{ item.id }}" data-slot="0"><span class="chore-label">{{ item.label }}</span></li>{% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
           </div>
         </div>
         <div class="chores-col">
           <div class="chores-col-h">Sunday</div>
-          <div class="chores-group">
-            <div class="chores-group-h">{{ chores.laundry.title }}</div>
-            <ul class="chores-list">
-              {% for item in chores.laundry.items %}<li class="chore-item"><span class="box"></span><span>{{ item.label }}</span></li>{% endfor %}
-            </ul>
+          <div class="chores-groups">
+            <div class="chores-group">
+              <div class="chores-group-h">{{ chores.laundry.title }}</div>
+              <ul class="chores-list">
+                {% for item in chores.laundry.items %}<li class="chore-item" data-id="{{ item.id }}"><input type="checkbox" data-chore="{{ item.id }}" data-slot="0"><span class="chore-label">{{ item.label }}</span></li>{% endfor %}
+              </ul>
+            </div>
+            {% for m in chores.monthly %}
+            <div class="chores-monthly chores-group" data-n="{{ m.n }}">
+              <div class="chores-group-h">{{ m.sun.title }}</div>
+              <ul class="chores-list">
+                {% for item in m.sun.items %}<li class="chore-item" data-id="{{ item.id }}"><input type="checkbox" data-chore="{{ item.id }}" data-slot="0"><span class="chore-label">{{ item.label }}</span></li>{% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -845,6 +909,63 @@ eleventyExcludeFromCollections: true
     if (id === 'countdowns') renderCountdowns();
     if (id === 'budget')     renderBudget();
     if (id === 'chores')     renderChoresPill();
+    if (id === 'calendar')   renderCalendar();
+  }
+
+  // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
+  const EVENTS = {{ calendar | dump | safe }};
+  const _td = new Date();
+  const _todayStr = _td.getFullYear() + '-' + String(_td.getMonth()+1).padStart(2,'0') + '-' + String(_td.getDate()).padStart(2,'0');
+  const _DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const _BUCKET_LABELS = { today:'Today', tomorrow:'Tomorrow', thisweek:'This week', nextweek:'Next week', later:'Later' };
+  const _BUCKET_ORDER = ['today','tomorrow','thisweek','nextweek','later'];
+  function _bucketFor(ev) {
+    const d = new Date(ev.date + 'T00:00:00');
+    const diff = Math.round((d - new Date(_todayStr + 'T00:00')) / 86400000);
+    if (diff <= 0) return 'today';
+    if (diff === 1) return 'tomorrow';
+    if (diff < 7) return 'thisweek';
+    if (diff < 14) return 'nextweek';
+    return 'later';
+  }
+  function _notPast(ev) {
+    if (ev.date > _todayStr) return true;
+    if (ev.date < _todayStr) return false;
+    if (ev.all_day) return true;
+    if (ev.end) { const e = Date.parse(ev.end); if (!isNaN(e) && e < Date.now()) return false; }
+    return true;
+  }
+  function _fmtWhen(ev) {
+    const d = new Date(ev.date + 'T00:00');
+    const diff = Math.round((d - new Date(_todayStr + 'T00:00')) / 86400000);
+    const time = ev.all_day ? 'all day' : (ev.time || '');
+    if (diff === 0 || diff === 1) return time;
+    if (diff >= 2 && diff < 14) return _DOW[d.getDay()] + (ev.all_day ? '' : ' ' + ev.time);
+    const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return mo + ' ' + d.getDate() + (ev.all_day ? '' : ' ' + ev.time);
+  }
+  function renderCalendar() {
+    const wrap = document.getElementById('calList');
+    if (!wrap) return;
+    const upcoming = EVENTS.filter(_notPast).slice(0, 14);
+    const groups = {};
+    upcoming.forEach(ev => { const k = _bucketFor(ev); (groups[k] = groups[k] || []).push(ev); });
+    const html = _BUCKET_ORDER.filter(k => groups[k] && groups[k].length).map(k => {
+      const isToday = k === 'today';
+      const head = '<div class="cal-bucket-h' + (isToday ? ' today' : '') + '">' +
+        '<span>' + _BUCKET_LABELS[k] + '</span>' +
+        '<span class="cal-bucket-count">' + groups[k].length + '</span>' +
+        '</div>';
+      const rows = groups[k].map(ev => {
+        const isT = ev.date === _todayStr;
+        return '<div class="cal-row' + (isT ? ' today-row' : '') + '">' +
+          '<span class="t">' + _fmtWhen(ev) + '</span>' +
+          '<span class="w">' + ev.what + '</span>' +
+          '</div>';
+      }).join('');
+      return head + rows;
+    }).join('');
+    wrap.innerHTML = html || '<div class="empty">No upcoming events.</div>';
   }
 
   // Countdowns: same source-of-truth as /dashboard/, computed live
@@ -920,15 +1041,54 @@ eleventyExcludeFromCollections: true
 
   function renderChoresPill() {
     const pill = document.getElementById('choresWkPill');
-    if (!pill) return;
     const now = new Date();
     const dow = now.getDay();
     const sat = new Date(now);
     if (dow === 0) sat.setDate(now.getDate() - 1);
     else if (dow !== 6) sat.setDate(now.getDate() + (6 - dow));
     const w = Math.min(4, Math.ceil(sat.getDate() / 7));
-    const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
-    pill.textContent = labels[w] || ('Wk ' + w);
+    document.body.dataset.wOfM = String(w);
+    if (pill) {
+      const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
+      pill.textContent = labels[w] || ('Wk ' + w);
+    }
+    // Persist chore checks per weekend (Sat date as key)
+    const yyyy = sat.getFullYear();
+    const mm = String(sat.getMonth() + 1).padStart(2, '0');
+    const dd = String(sat.getDate()).padStart(2, '0');
+    const CHORE_KEY = 'chores-' + yyyy + '-' + mm + '-' + dd;
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(CHORE_KEY) || '{}'); } catch {}
+    // GC old chore-* keys (keep only current weekend)
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('chores-') && k !== CHORE_KEY) localStorage.removeItem(k);
+      }
+    } catch {}
+    function updateRowStrike(item) {
+      const boxes = item.querySelectorAll('input[type="checkbox"]');
+      const allDone = Array.from(boxes).every(b => b.checked);
+      item.classList.toggle('all-done', allDone);
+    }
+    document.querySelectorAll('.chore-item').forEach(item => {
+      const id = item.dataset.id;
+      if (!id) return;
+      item.querySelectorAll('input[type="checkbox"]').forEach(box => {
+        const slot = box.dataset.slot || '0';
+        const key = id + ':' + slot;
+        if (state[key]) box.checked = true;
+        if (box.dataset._wired) return;
+        box.dataset._wired = '1';
+        box.addEventListener('change', () => {
+          if (box.checked) state[key] = true;
+          else delete state[key];
+          localStorage.setItem(CHORE_KEY, JSON.stringify(state));
+          updateRowStrike(item);
+        });
+      });
+      updateRowStrike(item);
+    });
   }
 
   // Initial load: saved state if any, else defaults

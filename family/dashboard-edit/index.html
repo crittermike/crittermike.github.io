@@ -452,6 +452,29 @@
     line-height: 1.25;
   }
   .cal-row:last-child { border-bottom: none; }
+  .cal-row.today-row { background: rgba(217,106,42,0.10); border-radius: 6px; padding-left: 6px; padding-right: 6px; }
+  .cal-row.today-row .t { color: var(--accent-orange); }
+  .cal-bucket-h {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dark);
+    font-weight: 700;
+    margin: 10px 0 2px;
+    padding: 5px 4px 2px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .cal-bucket-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .cal-bucket-h.today { color: var(--accent-orange); }
+  .cal-bucket-h .cal-bucket-count {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
   .cal-row .t {
     color: var(--text-light);
     font-size: 0.7rem;
@@ -490,7 +513,14 @@
     padding-bottom: 8px;
     flex-shrink: 0;
   }
-  .chores-group { margin: 0 0 12px; }
+  .chores-groups {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 16px;
+  }
+  .chores-group { margin: 0; display: flex; flex-direction: column; flex: 0 0 auto; min-height: 0; }
   .chores-group-h {
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -515,12 +545,26 @@
     font-size: 0.78rem;
     color: var(--text-dark);
   }
-  .chore-item .box {
-    width: 14px; height: 14px;
-    border: 1.5px solid var(--text-light);
-    border-radius: 3px;
+  .chore-item input[type="checkbox"] {
+    width: 16px; height: 16px;
+    margin: 0; padding: 0;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
     flex-shrink: 0;
   }
+  .chore-label { flex: 1; min-width: 0; }
+  .chore-item.all-done .chore-label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  /* Monthly section visibility — driven by body[data-w-of-m] set in renderChoresPill() */
+  .chores-monthly { display: none; }
+  body[data-w-of-m="1"] .chores-monthly[data-n="1"],
+  body[data-w-of-m="2"] .chores-monthly[data-n="2"],
+  body[data-w-of-m="3"] .chores-monthly[data-n="3"],
+  body[data-w-of-m="4"] .chores-monthly[data-n="4"],
+  body[data-w-of-m="5"] .chores-monthly[data-n="4"] { display: flex; }
 
   /* === BUDGET (matches /dashboard/ .budget) === */
   .budget-cats {
@@ -896,20 +940,82 @@
       <div class="chores-body">
         <div class="chores-col">
           <div class="chores-col-h">Saturday</div>
-          <div class="chores-group">
-            <div class="chores-group-h">Quick clean</div>
-            <ul class="chores-list">
-              <li class="chore-item"><span class="box"></span><span>Pick up entire house</span></li><li class="chore-item"><span class="box"></span><span>Wipe kitchen counter/stovetop</span></li><li class="chore-item"><span class="box"></span><span>Vacuum all carpet</span></li><li class="chore-item"><span class="box"></span><span>Sweep all hard floors</span></li><li class="chore-item"><span class="box"></span><span>Bathroom mirrors/counters</span></li>
-            </ul>
+          <div class="chores-groups">
+            <div class="chores-group">
+              <div class="chores-group-h">Quick clean</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="qc-pick-up-entire-house"><input type="checkbox" data-chore="qc-pick-up-entire-house" data-slot="0"><span class="chore-label">Pick up entire house</span></li><li class="chore-item" data-id="qc-wipe-kitchen-counter-stovetop"><input type="checkbox" data-chore="qc-wipe-kitchen-counter-stovetop" data-slot="0"><span class="chore-label">Wipe kitchen counter/stovetop</span></li><li class="chore-item" data-id="qc-vacuum-all-carpet"><input type="checkbox" data-chore="qc-vacuum-all-carpet" data-slot="0"><span class="chore-label">Vacuum all carpet</span></li><li class="chore-item" data-id="qc-sweep-all-hard-floors"><input type="checkbox" data-chore="qc-sweep-all-hard-floors" data-slot="0"><span class="chore-label">Sweep all hard floors</span></li><li class="chore-item" data-id="qc-bathroom-mirrors-counters"><input type="checkbox" data-chore="qc-bathroom-mirrors-counters" data-slot="0"><span class="chore-label">Bathroom mirrors/counters</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="1">
+              <div class="chores-group-h">Kitchen</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w1-sat-clean-microwave-and-cabinets"><input type="checkbox" data-chore="w1-sat-clean-microwave-and-cabinets" data-slot="0"><span class="chore-label">Clean microwave and cabinets</span></li><li class="chore-item" data-id="w1-sat-organize-the-pantry"><input type="checkbox" data-chore="w1-sat-organize-the-pantry" data-slot="0"><span class="chore-label">Organize the pantry</span></li><li class="chore-item" data-id="w1-sat-clean-out-the-fridge"><input type="checkbox" data-chore="w1-sat-clean-out-the-fridge" data-slot="0"><span class="chore-label">Clean out the fridge</span></li><li class="chore-item" data-id="w1-sat-mop-kitchen-floor"><input type="checkbox" data-chore="w1-sat-mop-kitchen-floor" data-slot="0"><span class="chore-label">Mop kitchen floor</span></li><li class="chore-item" data-id="w1-sat-clean-the-oven"><input type="checkbox" data-chore="w1-sat-clean-the-oven" data-slot="0"><span class="chore-label">Clean the oven</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="2">
+              <div class="chores-group-h">Bathroom</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w2-sat-clean-toilets-tubs-showers"><input type="checkbox" data-chore="w2-sat-clean-toilets-tubs-showers" data-slot="0"><span class="chore-label">Clean toilets, tubs, showers</span></li><li class="chore-item" data-id="w2-sat-wash-bathmats"><input type="checkbox" data-chore="w2-sat-wash-bathmats" data-slot="0"><span class="chore-label">Wash bathmats</span></li><li class="chore-item" data-id="w2-sat-restock-toiletries"><input type="checkbox" data-chore="w2-sat-restock-toiletries" data-slot="0"><span class="chore-label">Restock toiletries</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="3">
+              <div class="chores-group-h">Living areas</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w3-sat-wash-cushion-covers"><input type="checkbox" data-chore="w3-sat-wash-cushion-covers" data-slot="0"><span class="chore-label">Wash cushion covers</span></li><li class="chore-item" data-id="w3-sat-clean-windows-and-glass-doors"><input type="checkbox" data-chore="w3-sat-clean-windows-and-glass-doors" data-slot="0"><span class="chore-label">Clean windows and glass doors</span></li><li class="chore-item" data-id="w3-sat-mop-hard-floors"><input type="checkbox" data-chore="w3-sat-mop-hard-floors" data-slot="0"><span class="chore-label">Mop hard floors</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="4">
+              <div class="chores-group-h">Maintenance</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w4-sat-check-hvac-filters"><input type="checkbox" data-chore="w4-sat-check-hvac-filters" data-slot="0"><span class="chore-label">Check HVAC filters</span></li><li class="chore-item" data-id="w4-sat-clean-cycle-on-washer"><input type="checkbox" data-chore="w4-sat-clean-cycle-on-washer" data-slot="0"><span class="chore-label">Clean cycle on washer</span></li><li class="chore-item" data-id="w4-sat-clean-cycle-on-oven"><input type="checkbox" data-chore="w4-sat-clean-cycle-on-oven" data-slot="0"><span class="chore-label">Clean cycle on oven</span></li>
+              </ul>
+            </div>
+            
           </div>
         </div>
         <div class="chores-col">
           <div class="chores-col-h">Sunday</div>
-          <div class="chores-group">
-            <div class="chores-group-h">Laundry / Trash</div>
-            <ul class="chores-list">
-              <li class="chore-item"><span class="box"></span><span>Empty all trash cans</span></li><li class="chore-item"><span class="box"></span><span>Take out trash and recycling</span></li><li class="chore-item"><span class="box"></span><span>Laundry (wash, put away)</span></li>
-            </ul>
+          <div class="chores-groups">
+            <div class="chores-group">
+              <div class="chores-group-h">Laundry / Trash</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="lt-empty-all-trash-cans"><input type="checkbox" data-chore="lt-empty-all-trash-cans" data-slot="0"><span class="chore-label">Empty all trash cans</span></li><li class="chore-item" data-id="lt-take-out-trash-and-recycling"><input type="checkbox" data-chore="lt-take-out-trash-and-recycling" data-slot="0"><span class="chore-label">Take out trash and recycling</span></li><li class="chore-item" data-id="lt-laundry-wash-put-away"><input type="checkbox" data-chore="lt-laundry-wash-put-away" data-slot="0"><span class="chore-label">Laundry (wash, put away)</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="1">
+              <div class="chores-group-h">Cars</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w1-sun-wash"><input type="checkbox" data-chore="w1-sun-wash" data-slot="0"><span class="chore-label">Wash</span></li><li class="chore-item" data-id="w1-sun-vacuum"><input type="checkbox" data-chore="w1-sun-vacuum" data-slot="0"><span class="chore-label">Vacuum</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="2">
+              <div class="chores-group-h">Bedrooms</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w2-sun-change-linens"><input type="checkbox" data-chore="w2-sun-change-linens" data-slot="0"><span class="chore-label">Change linens</span></li><li class="chore-item" data-id="w2-sun-rotate-mattresses-every-3rd-mo"><input type="checkbox" data-chore="w2-sun-rotate-mattresses-every-3rd-mo" data-slot="0"><span class="chore-label">Rotate mattresses (every 3rd mo)</span></li><li class="chore-item" data-id="w2-sun-clean-vacuum-under-beds"><input type="checkbox" data-chore="w2-sun-clean-vacuum-under-beds" data-slot="0"><span class="chore-label">Clean/vacuum under beds</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="3">
+              <div class="chores-group-h">Outdoor/Garage</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w3-sun-clean-up-backyard-patio"><input type="checkbox" data-chore="w3-sun-clean-up-backyard-patio" data-slot="0"><span class="chore-label">Clean up backyard/patio</span></li><li class="chore-item" data-id="w3-sun-blow-leaves-on-front-porch"><input type="checkbox" data-chore="w3-sun-blow-leaves-on-front-porch" data-slot="0"><span class="chore-label">Blow leaves on front porch</span></li><li class="chore-item" data-id="w3-sun-tidy-and-sweep-garage"><input type="checkbox" data-chore="w3-sun-tidy-and-sweep-garage" data-slot="0"><span class="chore-label">Tidy and sweep garage</span></li><li class="chore-item" data-id="w3-sun-seasonal-plant-care-weeds"><input type="checkbox" data-chore="w3-sun-seasonal-plant-care-weeds" data-slot="0"><span class="chore-label">Seasonal plant care/weeds</span></li>
+              </ul>
+            </div>
+            
+            <div class="chores-monthly chores-group" data-n="4">
+              <div class="chores-group-h">Catch up</div>
+              <ul class="chores-list">
+                <li class="chore-item" data-id="w4-sun-catch-up-on-deferred-tasks"><input type="checkbox" data-chore="w4-sun-catch-up-on-deferred-tasks" data-slot="0"><span class="chore-label">Catch up on deferred tasks</span></li><li class="chore-item" data-id="w4-sun-organize-something-closet-bookshelf-etc"><input type="checkbox" data-chore="w4-sun-organize-something-closet-bookshelf-etc" data-slot="0"><span class="chore-label">Organize something (closet, bookshelf, etc.)</span></li>
+              </ul>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -922,7 +1028,7 @@
       
       <div class="weather-row">
         <span class="icon">☀️</span>
-        <span class="temp">77°</span>
+        <span class="temp">78°</span>
         <span class="hilo">H 89 / L 72</span>
       </div>
       <div class="weather-days">
@@ -1085,6 +1191,63 @@
     if (id === 'countdowns') renderCountdowns();
     if (id === 'budget')     renderBudget();
     if (id === 'chores')     renderChoresPill();
+    if (id === 'calendar')   renderCalendar();
+  }
+
+  // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
+  const EVENTS = [{"date":"2026-06-14","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-14T09:00:00-04:00"},{"date":"2026-06-15","time":"all day","what":"Intern Cohort B Starts - Abdulkhaliq & Rohan","who":"family","calendar":"home","all_day":true,"end":"2026-06-16T00:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Mom: Dr Smith (psychiatrist) appointment","who":"family","calendar":"home","all_day":false,"end":"2026-06-15T11:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T12:00:00-04:00"},{"date":"2026-06-15","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T14:00:00-04:00"},{"date":"2026-06-15","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-15T15:00:00-04:00"},{"date":"2026-06-16","time":"9a","what":"Nancy brain MRI 🧠","who":"nancy","calendar":"home","all_day":false,"end":"2026-06-16T10:00:00-04:00"},{"date":"2026-06-16","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T12:00:00-04:00"},{"date":"2026-06-16","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T14:00:00-04:00"},{"date":"2026-06-16","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-16T15:00:00-04:00"},{"date":"2026-06-17","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T12:00:00-04:00"},{"date":"2026-06-17","time":"10:15a","what":"Drive Mom to pain clinic (Spartanburg Regional)","who":"family","calendar":"home","all_day":false,"end":"2026-06-17T11:45:00-04:00"},{"date":"2026-06-17","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T14:00:00-04:00"},{"date":"2026-06-17","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-17T15:00:00-04:00"},{"date":"2026-06-18","time":"12a","what":"San Diego Mission Bay Resort - Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T00:00:00-04:00"},{"date":"2026-06-18","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T12:00:00-04:00"},{"date":"2026-06-18","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T14:00:00-04:00"},{"date":"2026-06-18","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-18T15:00:00-04:00"},{"date":"2026-06-18","time":"4:30p","what":"🚗 Drive to CLT Airport (SD trip)","who":"family","calendar":"home","all_day":false,"end":"2026-06-18T18:20:00-04:00"},{"date":"2026-06-18","time":"7:50p","what":"✈️ CLT → SAN (AA 3322) - Wedding Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-19T00:48:00-04:00"},{"date":"2026-06-19","time":"9a","what":"RSVP for George's birthday (text 478-390-7521)","who":"family","calendar":"home","all_day":false,"end":"2026-06-19T09:15:00-04:00"},{"date":"2026-06-19","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T12:00:00-04:00"},{"date":"2026-06-19","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T14:00:00-04:00"},{"date":"2026-06-19","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-19T15:00:00-04:00"},{"date":"2026-06-20","time":"4:30p","what":"Jace & Lauren Wedding","who":"family","calendar":"home","all_day":false,"end":"2026-06-20T20:30:00-04:00"},{"date":"2026-06-21","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T09:00:00-04:00"},{"date":"2026-06-21","time":"4:23p","what":"✈️ SAN → CLT (AA 2465) - Return","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T21:26:00-04:00"},{"date":"2026-06-21","time":"9:30p","what":"🚗 Drive home from CLT Airport","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T23:15:00-04:00"},{"date":"2026-06-23","time":"all day","what":"Matt's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-06-24T00:00:00-04:00"},{"date":"2026-06-26","time":"7p","what":"Dude Perfect - Squad Games Tour","who":"family","calendar":"home","all_day":false,"end":"2026-06-26T22:00:00-04:00"},{"date":"2026-06-27","time":"4:30p","what":"George's 10th birthday party 🎂 (RSVP 6/20 to 478-390-7521)","who":"family","calendar":"home","all_day":false,"end":"2026-06-27T18:30:00-04:00"},{"date":"2026-06-28","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-28T09:00:00-04:00"},{"date":"2026-06-30","time":"9:30a","what":"Mom: Dr. Michael Wine","who":"family","calendar":"home","all_day":false,"end":"2026-06-30T10:30:00-04:00"},{"date":"2026-07-01","time":"all day","what":"📚 Library books due (Pelham Road)","who":"family","calendar":"home","all_day":true,"end":"2026-07-02T00:00:00-04:00"},{"date":"2026-07-05","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-05T09:00:00-04:00"},{"date":"2026-07-12","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-12T09:00:00-04:00"},{"date":"2026-07-13","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-13T11:30:00-04:00"},{"date":"2026-07-14","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-14T11:30:00-04:00"},{"date":"2026-07-15","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-15T11:30:00-04:00"},{"date":"2026-07-16","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-16T11:30:00-04:00"},{"date":"2026-07-17","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-17T11:30:00-04:00"},{"date":"2026-07-17","time":"11:10a","what":"Dentist appointment","who":"family","calendar":"home","all_day":false,"end":"2026-07-17T12:10:00-04:00"},{"date":"2026-07-19","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-19T09:00:00-04:00"},{"date":"2026-07-25","time":"3:50p","what":"Hadestown (movie, 3 tickets)","who":"family","calendar":"home","all_day":false,"end":"2026-07-25T18:30:00-04:00"},{"date":"2026-07-26","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-26T09:00:00-04:00"},{"date":"2026-08-02","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-02T09:00:00-04:00"},{"date":"2026-08-09","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-09T09:00:00-04:00"},{"date":"2026-08-10","time":"all day","what":"Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)","who":"henry","calendar":"home","all_day":true,"end":"2026-08-11T00:00:00-04:00"},{"date":"2026-08-11","time":"all day","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":true,"end":"2026-08-12T00:00:00-04:00"},{"date":"2026-08-11","time":"8a","what":"EHS First Day of School (Charlie)","who":"charlie","calendar":"home","all_day":false,"end":"2026-08-11T15:00:00-04:00"},{"date":"2026-08-11","time":"6p","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":false,"end":"2026-08-11T19:30:00-04:00"},{"date":"2026-08-13","time":"all day","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":true,"end":"2026-08-14T00:00:00-04:00"},{"date":"2026-08-13","time":"8a","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":false,"end":"2026-08-13T12:00:00-04:00"},{"date":"2026-08-16","time":"all day","what":"POPCS: Back to School Dinner","who":"family","calendar":"home","all_day":true,"end":"2026-08-17T00:00:00-04:00"},{"date":"2026-08-16","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T09:00:00-04:00"},{"date":"2026-08-16","time":"5p","what":"POPCS: Back to School Dinner (Pasta La Vista)","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T19:00:00-04:00"},{"date":"2026-08-18","time":"all day","what":"John's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-08-19T00:00:00-04:00"},{"date":"2026-08-19","time":"8:30a","what":"POPCS: First School Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-19T09:30:00-04:00"},{"date":"2026-08-23","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-23T09:00:00-04:00"},{"date":"2026-08-30","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-30T09:00:00-04:00"},{"date":"2026-09-06","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-06T09:00:00-04:00"},{"date":"2026-09-07","time":"all day","what":"POPCS: Labor Day - No School","who":"family","calendar":"home","all_day":true,"end":"2026-09-08T00:00:00-04:00"},{"date":"2026-09-10","time":"9:15a","what":"Henry med check - Parkside Pediatrics","who":"henry","calendar":"home","all_day":false,"end":"2026-09-10T10:00:00-04:00"}];
+  const _td = new Date();
+  const _todayStr = _td.getFullYear() + '-' + String(_td.getMonth()+1).padStart(2,'0') + '-' + String(_td.getDate()).padStart(2,'0');
+  const _DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const _BUCKET_LABELS = { today:'Today', tomorrow:'Tomorrow', thisweek:'This week', nextweek:'Next week', later:'Later' };
+  const _BUCKET_ORDER = ['today','tomorrow','thisweek','nextweek','later'];
+  function _bucketFor(ev) {
+    const d = new Date(ev.date + 'T00:00:00');
+    const diff = Math.round((d - new Date(_todayStr + 'T00:00')) / 86400000);
+    if (diff <= 0) return 'today';
+    if (diff === 1) return 'tomorrow';
+    if (diff < 7) return 'thisweek';
+    if (diff < 14) return 'nextweek';
+    return 'later';
+  }
+  function _notPast(ev) {
+    if (ev.date > _todayStr) return true;
+    if (ev.date < _todayStr) return false;
+    if (ev.all_day) return true;
+    if (ev.end) { const e = Date.parse(ev.end); if (!isNaN(e) && e < Date.now()) return false; }
+    return true;
+  }
+  function _fmtWhen(ev) {
+    const d = new Date(ev.date + 'T00:00');
+    const diff = Math.round((d - new Date(_todayStr + 'T00:00')) / 86400000);
+    const time = ev.all_day ? 'all day' : (ev.time || '');
+    if (diff === 0 || diff === 1) return time;
+    if (diff >= 2 && diff < 14) return _DOW[d.getDay()] + (ev.all_day ? '' : ' ' + ev.time);
+    const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return mo + ' ' + d.getDate() + (ev.all_day ? '' : ' ' + ev.time);
+  }
+  function renderCalendar() {
+    const wrap = document.getElementById('calList');
+    if (!wrap) return;
+    const upcoming = EVENTS.filter(_notPast).slice(0, 14);
+    const groups = {};
+    upcoming.forEach(ev => { const k = _bucketFor(ev); (groups[k] = groups[k] || []).push(ev); });
+    const html = _BUCKET_ORDER.filter(k => groups[k] && groups[k].length).map(k => {
+      const isToday = k === 'today';
+      const head = '<div class="cal-bucket-h' + (isToday ? ' today' : '') + '">' +
+        '<span>' + _BUCKET_LABELS[k] + '</span>' +
+        '<span class="cal-bucket-count">' + groups[k].length + '</span>' +
+        '</div>';
+      const rows = groups[k].map(ev => {
+        const isT = ev.date === _todayStr;
+        return '<div class="cal-row' + (isT ? ' today-row' : '') + '">' +
+          '<span class="t">' + _fmtWhen(ev) + '</span>' +
+          '<span class="w">' + ev.what + '</span>' +
+          '</div>';
+      }).join('');
+      return head + rows;
+    }).join('');
+    wrap.innerHTML = html || '<div class="empty">No upcoming events.</div>';
   }
 
   // Countdowns: same source-of-truth as /dashboard/, computed live
@@ -1160,15 +1323,54 @@
 
   function renderChoresPill() {
     const pill = document.getElementById('choresWkPill');
-    if (!pill) return;
     const now = new Date();
     const dow = now.getDay();
     const sat = new Date(now);
     if (dow === 0) sat.setDate(now.getDate() - 1);
     else if (dow !== 6) sat.setDate(now.getDate() + (6 - dow));
     const w = Math.min(4, Math.ceil(sat.getDate() / 7));
-    const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
-    pill.textContent = labels[w] || ('Wk ' + w);
+    document.body.dataset.wOfM = String(w);
+    if (pill) {
+      const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
+      pill.textContent = labels[w] || ('Wk ' + w);
+    }
+    // Persist chore checks per weekend (Sat date as key)
+    const yyyy = sat.getFullYear();
+    const mm = String(sat.getMonth() + 1).padStart(2, '0');
+    const dd = String(sat.getDate()).padStart(2, '0');
+    const CHORE_KEY = 'chores-' + yyyy + '-' + mm + '-' + dd;
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(CHORE_KEY) || '{}'); } catch {}
+    // GC old chore-* keys (keep only current weekend)
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('chores-') && k !== CHORE_KEY) localStorage.removeItem(k);
+      }
+    } catch {}
+    function updateRowStrike(item) {
+      const boxes = item.querySelectorAll('input[type="checkbox"]');
+      const allDone = Array.from(boxes).every(b => b.checked);
+      item.classList.toggle('all-done', allDone);
+    }
+    document.querySelectorAll('.chore-item').forEach(item => {
+      const id = item.dataset.id;
+      if (!id) return;
+      item.querySelectorAll('input[type="checkbox"]').forEach(box => {
+        const slot = box.dataset.slot || '0';
+        const key = id + ':' + slot;
+        if (state[key]) box.checked = true;
+        if (box.dataset._wired) return;
+        box.dataset._wired = '1';
+        box.addEventListener('change', () => {
+          if (box.checked) state[key] = true;
+          else delete state[key];
+          localStorage.setItem(CHORE_KEY, JSON.stringify(state));
+          updateRowStrike(item);
+        });
+      });
+      updateRowStrike(item);
+    });
   }
 
   // Initial load: saved state if any, else defaults
