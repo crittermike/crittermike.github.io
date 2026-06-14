@@ -198,6 +198,78 @@ eleventyExcludeFromCollections: true
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
+  .tile-h .h-action {
+    background: var(--surface-mute-3);
+    color: var(--text-dark);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+  }
+  .tile-h .h-action:hover, .tile-h .h-action:active { background: rgba(0,0,0,0.08); }
+
+  /* === MODAL (See all events) === */
+  .modal-bg {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15, 20, 28, 0.55);
+    z-index: 350;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 24px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal-bg .modal {
+    background: var(--card-bg);
+    border-radius: 14px;
+    width: min(560px, 92vw);
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  }
+  .modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .modal-head h2 { margin: 0; font-size: 1rem; color: var(--text-dark); }
+  .modal-close {
+    background: none; border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--text-mid);
+    padding: 4px 8px;
+  }
+  .modal-body { padding: 14px 18px; overflow: auto; }
+  .cal-filter {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+  }
+  .cal-month-h {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin: 14px 0 4px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-soft);
+  }
   .tile-body {
     flex: 1;
     min-height: 0;
@@ -315,7 +387,7 @@ eleventyExcludeFromCollections: true
     color: var(--text-dark);
     font-weight: 700;
     margin: 10px 0 2px;
-    padding: 5px 4px 2px;
+    padding: 5px 0 2px;
     border-top: 1px solid var(--border-soft);
   }
   .cal-bucket-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
@@ -386,13 +458,13 @@ eleventyExcludeFromCollections: true
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
   .chore-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    line-height: 1.25;
+    line-height: 1.4;
     font-size: 0.78rem;
     color: var(--text-dark);
   }
@@ -848,7 +920,6 @@ eleventyExcludeFromCollections: true
     <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
     <div class="tile-body">
       <div class="kids-grid">
-        <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
         {% for kid in kids %}
           <div class="nm">{{ kid.name }}</div>
           {% if kid.sugar.balance is not none %}
@@ -906,7 +977,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="calendar">
-    <div class="tile-h"><span>📅 Upcoming</span></div>
+    <div class="tile-h"><span>📅 Upcoming</span><button class="h-action" id="calExpand">See all</button></div>
     <div class="tile-body">
       <div class="cal-list" id="calList"></div>
     </div>
@@ -1005,7 +1076,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="reading">
-    <div class="tile-h"><span>📚 Summer reading</span><span class="sub">Tap to add pages</span></div>
+    <div class="tile-h"><span>📚 Summer reading</span></div>
     <div class="tile-body">
       <div class="reading-list">
         {% for kid in kids %}
@@ -1075,6 +1146,20 @@ eleventyExcludeFromCollections: true
     <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
   </div>
 
+</div>
+
+<!-- Cal "see all" modal -->
+<div class="modal-bg" id="calModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>📅 All upcoming events</h2>
+      <button class="modal-close" id="calModalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="cal-filter" id="calFilter" placeholder="Filter events..." autocomplete="off" />
+      <div id="calFullList"></div>
+    </div>
+  </div>
 </div>
 
 <!-- Add-tile picker modal -->

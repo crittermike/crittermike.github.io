@@ -357,6 +357,78 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
+  .tile-h .h-action {
+    background: var(--surface-mute-3);
+    color: var(--text-dark);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+  }
+  .tile-h .h-action:hover, .tile-h .h-action:active { background: rgba(0,0,0,0.08); }
+
+  /* === MODAL (See all events) === */
+  .modal-bg {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15, 20, 28, 0.55);
+    z-index: 350;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 24px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal-bg .modal {
+    background: var(--card-bg);
+    border-radius: 14px;
+    width: min(560px, 92vw);
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  }
+  .modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .modal-head h2 { margin: 0; font-size: 1rem; color: var(--text-dark); }
+  .modal-close {
+    background: none; border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--text-mid);
+    padding: 4px 8px;
+  }
+  .modal-body { padding: 14px 18px; overflow: auto; }
+  .cal-filter {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+  }
+  .cal-month-h {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin: 14px 0 4px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-soft);
+  }
   .tile-body {
     flex: 1;
     min-height: 0;
@@ -474,7 +546,7 @@
     color: var(--text-dark);
     font-weight: 700;
     margin: 10px 0 2px;
-    padding: 5px 4px 2px;
+    padding: 5px 0 2px;
     border-top: 1px solid var(--border-soft);
   }
   .cal-bucket-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
@@ -545,13 +617,13 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
   .chore-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    line-height: 1.25;
+    line-height: 1.4;
     font-size: 0.78rem;
     color: var(--text-dark);
   }
@@ -1007,7 +1079,6 @@
     <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
     <div class="tile-body">
       <div class="kids-grid">
-        <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
         
           <div class="nm">Thomas</div>
           
@@ -1094,7 +1165,7 @@
   </div>
 
   <div data-tpl="calendar">
-    <div class="tile-h"><span>📅 Upcoming</span></div>
+    <div class="tile-h"><span>📅 Upcoming</span><button class="h-action" id="calExpand">See all</button></div>
     <div class="tile-body">
       <div class="cal-list" id="calList"></div>
     </div>
@@ -1194,7 +1265,7 @@
       
       <div class="weather-row">
         <span class="icon">☀️</span>
-        <span class="temp">86°</span>
+        <span class="temp">87°</span>
         <span class="hilo">H 90 / L 72</span>
       </div>
       <div class="weather-days">
@@ -1287,7 +1358,7 @@
   </div>
 
   <div data-tpl="reading">
-    <div class="tile-h"><span>📚 Summer reading</span><span class="sub">Tap to add pages</span></div>
+    <div class="tile-h"><span>📚 Summer reading</span></div>
     <div class="tile-body">
       <div class="reading-list">
         
@@ -1384,6 +1455,20 @@
 
 </div>
 
+<!-- Cal "see all" modal -->
+<div class="modal-bg" id="calModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>📅 All upcoming events</h2>
+      <button class="modal-close" id="calModalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="cal-filter" id="calFilter" placeholder="Filter events..." autocomplete="off" />
+      <div id="calFullList"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Add-tile picker modal -->
 <div class="picker-backdrop" id="picker">
   <div class="picker">
@@ -1455,7 +1540,7 @@
   }
 
   // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
-  const EVENTS = [{"date":"2026-06-14","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-14T09:00:00-04:00"},{"date":"2026-06-15","time":"all day","what":"Intern Cohort B Starts - Abdulkhaliq & Rohan","who":"family","calendar":"home","all_day":true,"end":"2026-06-16T00:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Mom: Dr Smith (psychiatrist) appointment","who":"family","calendar":"home","all_day":false,"end":"2026-06-15T11:00:00-04:00"},{"date":"2026-06-15","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T12:00:00-04:00"},{"date":"2026-06-15","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-15T14:00:00-04:00"},{"date":"2026-06-15","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-15T15:00:00-04:00"},{"date":"2026-06-16","time":"9a","what":"Nancy brain MRI 🧠","who":"nancy","calendar":"home","all_day":false,"end":"2026-06-16T10:00:00-04:00"},{"date":"2026-06-16","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T12:00:00-04:00"},{"date":"2026-06-16","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-16T14:00:00-04:00"},{"date":"2026-06-16","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-16T15:00:00-04:00"},{"date":"2026-06-17","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T12:00:00-04:00"},{"date":"2026-06-17","time":"10:15a","what":"Drive Mom to pain clinic (Spartanburg Regional)","who":"family","calendar":"home","all_day":false,"end":"2026-06-17T11:45:00-04:00"},{"date":"2026-06-17","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-17T14:00:00-04:00"},{"date":"2026-06-17","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-17T15:00:00-04:00"},{"date":"2026-06-18","time":"12a","what":"San Diego Mission Bay Resort - Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T00:00:00-04:00"},{"date":"2026-06-18","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T12:00:00-04:00"},{"date":"2026-06-18","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-18T14:00:00-04:00"},{"date":"2026-06-18","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-18T15:00:00-04:00"},{"date":"2026-06-18","time":"4:30p","what":"🚗 Drive to CLT Airport (SD trip)","who":"family","calendar":"home","all_day":false,"end":"2026-06-18T18:20:00-04:00"},{"date":"2026-06-18","time":"7:50p","what":"✈️ CLT → SAN (AA 3322) - Wedding Trip","who":"family","calendar":"home","all_day":false,"end":"2026-06-19T00:48:00-04:00"},{"date":"2026-06-19","time":"9a","what":"RSVP for George's birthday (text 478-390-7521)","who":"family","calendar":"home","all_day":false,"end":"2026-06-19T09:15:00-04:00"},{"date":"2026-06-19","time":"10a","what":"Thomas art camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T12:00:00-04:00"},{"date":"2026-06-19","time":"12:30p","what":"Thomas handwriting camp","who":"thomas","calendar":"home","all_day":false,"end":"2026-06-19T14:00:00-04:00"},{"date":"2026-06-19","time":"1p","what":"William art camp","who":"william","calendar":"home","all_day":false,"end":"2026-06-19T15:00:00-04:00"},{"date":"2026-06-20","time":"4:30p","what":"Jace & Lauren Wedding","who":"family","calendar":"home","all_day":false,"end":"2026-06-20T20:30:00-04:00"},{"date":"2026-06-21","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T09:00:00-04:00"},{"date":"2026-06-21","time":"4:23p","what":"✈️ SAN → CLT (AA 2465) - Return","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T21:26:00-04:00"},{"date":"2026-06-21","time":"9:30p","what":"🚗 Drive home from CLT Airport","who":"family","calendar":"home","all_day":false,"end":"2026-06-21T23:15:00-04:00"},{"date":"2026-06-23","time":"all day","what":"Matt's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-06-24T00:00:00-04:00"},{"date":"2026-06-26","time":"7p","what":"Dude Perfect - Squad Games Tour","who":"family","calendar":"home","all_day":false,"end":"2026-06-26T22:00:00-04:00"},{"date":"2026-06-27","time":"4:30p","what":"George's 10th birthday party 🎂 (RSVP 6/20 to 478-390-7521)","who":"family","calendar":"home","all_day":false,"end":"2026-06-27T18:30:00-04:00"},{"date":"2026-06-28","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-28T09:00:00-04:00"},{"date":"2026-06-30","time":"9:30a","what":"Mom: Dr. Michael Wine","who":"family","calendar":"home","all_day":false,"end":"2026-06-30T10:30:00-04:00"},{"date":"2026-07-01","time":"all day","what":"📚 Library books due (Pelham Road)","who":"family","calendar":"home","all_day":true,"end":"2026-07-02T00:00:00-04:00"},{"date":"2026-07-05","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-05T09:00:00-04:00"},{"date":"2026-07-12","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-12T09:00:00-04:00"},{"date":"2026-07-13","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-13T11:30:00-04:00"},{"date":"2026-07-14","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-14T11:30:00-04:00"},{"date":"2026-07-15","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-15T11:30:00-04:00"},{"date":"2026-07-16","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-16T11:30:00-04:00"},{"date":"2026-07-17","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-17T11:30:00-04:00"},{"date":"2026-07-17","time":"11:10a","what":"Dentist appointment","who":"family","calendar":"home","all_day":false,"end":"2026-07-17T12:10:00-04:00"},{"date":"2026-07-19","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-19T09:00:00-04:00"},{"date":"2026-07-25","time":"3:50p","what":"Hadestown (movie, 3 tickets)","who":"family","calendar":"home","all_day":false,"end":"2026-07-25T18:30:00-04:00"},{"date":"2026-07-26","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-26T09:00:00-04:00"},{"date":"2026-08-02","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-02T09:00:00-04:00"},{"date":"2026-08-09","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-09T09:00:00-04:00"},{"date":"2026-08-10","time":"all day","what":"Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)","who":"henry","calendar":"home","all_day":true,"end":"2026-08-11T00:00:00-04:00"},{"date":"2026-08-11","time":"all day","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":true,"end":"2026-08-12T00:00:00-04:00"},{"date":"2026-08-11","time":"8a","what":"EHS First Day of School (Charlie)","who":"charlie","calendar":"home","all_day":false,"end":"2026-08-11T15:00:00-04:00"},{"date":"2026-08-11","time":"6p","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":false,"end":"2026-08-11T19:30:00-04:00"},{"date":"2026-08-13","time":"all day","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":true,"end":"2026-08-14T00:00:00-04:00"},{"date":"2026-08-13","time":"8a","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":false,"end":"2026-08-13T12:00:00-04:00"},{"date":"2026-08-16","time":"all day","what":"POPCS: Back to School Dinner","who":"family","calendar":"home","all_day":true,"end":"2026-08-17T00:00:00-04:00"},{"date":"2026-08-16","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T09:00:00-04:00"},{"date":"2026-08-16","time":"5p","what":"POPCS: Back to School Dinner (Pasta La Vista)","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T19:00:00-04:00"},{"date":"2026-08-18","time":"all day","what":"John's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-08-19T00:00:00-04:00"},{"date":"2026-08-19","time":"8:30a","what":"POPCS: First School Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-19T09:30:00-04:00"},{"date":"2026-08-23","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-23T09:00:00-04:00"},{"date":"2026-08-30","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-30T09:00:00-04:00"},{"date":"2026-09-06","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-06T09:00:00-04:00"},{"date":"2026-09-07","time":"all day","what":"POPCS: Labor Day - No School","who":"family","calendar":"home","all_day":true,"end":"2026-09-08T00:00:00-04:00"},{"date":"2026-09-10","time":"9:15a","what":"Henry med check - Parkside Pediatrics","who":"henry","calendar":"home","all_day":false,"end":"2026-09-10T10:00:00-04:00"}];
+  const EVENTS = [];
   const _td = new Date();
   const _todayStr = _td.getFullYear() + '-' + String(_td.getMonth()+1).padStart(2,'0') + '-' + String(_td.getDate()).padStart(2,'0');
   const _DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
