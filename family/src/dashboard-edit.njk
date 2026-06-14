@@ -1286,6 +1286,75 @@ eleventyExcludeFromCollections: true
       return head + rows;
     }).join('');
     wrap.innerHTML = html || '<div class="empty">No upcoming events.</div>';
+    _wireCalExpand();
+  }
+
+  // Full "See all" modal with text filter
+  function _renderCalFull(filter) {
+    const f = (filter || '').trim().toLowerCase();
+    const list = EVENTS.filter(_notPast).filter(e => !f || (e.what || '').toLowerCase().includes(f));
+    const wrap = document.getElementById('calFullList');
+    if (!wrap) return;
+    if (!list.length) {
+      wrap.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-mid)">No matching events.</div>';
+      return;
+    }
+    const near = list.filter(ev => _bucketFor(ev) !== 'later');
+    const later = list.filter(ev => _bucketFor(ev) === 'later');
+    function _rowHTML(ev) {
+      const isT = ev.date === _todayStr;
+      return '<div class="cal-row' + (isT ? ' today-row' : '') + '">' +
+        '<span class="t">' + _fmtWhen(ev) + '</span>' +
+        '<span class="w">' + ev.what + '</span>' +
+        '</div>';
+    }
+    let html = '';
+    if (near.length) {
+      const groups = {};
+      near.forEach(ev => { const k = _bucketFor(ev); (groups[k] = groups[k] || []).push(ev); });
+      _BUCKET_ORDER.filter(k => groups[k] && groups[k].length).forEach(k => {
+        const isToday = k === 'today';
+        html += '<div class="cal-bucket-h' + (isToday ? ' today' : '') + '">' +
+          '<span>' + _BUCKET_LABELS[k] + '</span>' +
+          '<span class="cal-bucket-count">' + groups[k].length + '</span>' +
+          '</div>';
+        html += groups[k].map(_rowHTML).join('');
+      });
+    }
+    if (later.length) {
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      let cur = '';
+      later.forEach(ev => {
+        const d = new Date(ev.date + 'T00:00:00');
+        const mk = months[d.getMonth()] + ' ' + d.getFullYear();
+        if (mk !== cur) { html += '<div class="cal-month-h">' + mk + '</div>'; cur = mk; }
+        html += _rowHTML(ev);
+      });
+    }
+    wrap.innerHTML = html;
+  }
+  let _calBound = false;
+  function _wireCalExpand() {
+    if (_calBound) return;
+    const btn = document.getElementById('calExpand');
+    const modal = document.getElementById('calModal');
+    const closeBtn = document.getElementById('calModalClose');
+    const filter = document.getElementById('calFilter');
+    if (!btn || !modal) return;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.classList.add('open');
+      filter.value = '';
+      _renderCalFull('');
+      setTimeout(() => filter.focus(), 50);
+    });
+    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+    filter.addEventListener('input', (e) => _renderCalFull(e.target.value));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') modal.classList.remove('open');
+    });
+    _calBound = true;
   }
 
   // Countdowns: same source-of-truth as /dashboard/, computed live
