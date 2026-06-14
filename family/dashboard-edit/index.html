@@ -886,69 +886,7 @@
   <div data-tpl="calendar">
     <div class="tile-h"><span>📅 Upcoming</span></div>
     <div class="tile-body">
-      <div class="cal-list">
-        
-        <div class="cal-row">
-          <span class="t">8a</span>
-          <span class="w">Mass</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">all day</span>
-          <span class="w">Intern Cohort B Starts - Abdulkhaliq &amp; Rohan</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">10a</span>
-          <span class="w">Mom: Dr Smith (psychiatrist) appointment</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">10a</span>
-          <span class="w">Thomas art camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">12:30p</span>
-          <span class="w">Thomas handwriting camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">1p</span>
-          <span class="w">William art camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">9a</span>
-          <span class="w">Nancy brain MRI 🧠</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">10a</span>
-          <span class="w">Thomas art camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">12:30p</span>
-          <span class="w">Thomas handwriting camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">1p</span>
-          <span class="w">William art camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">10a</span>
-          <span class="w">Thomas art camp</span>
-        </div>
-        
-        <div class="cal-row">
-          <span class="t">10:15a</span>
-          <span class="w">Drive Mom to pain clinic (Spartanburg Regional)</span>
-        </div>
-        
-      </div>
+      <div class="cal-list" id="calList"></div>
     </div>
   </div>
 
@@ -1125,10 +1063,8 @@
 
   function tileHTML(id) {
     const body = TEMPLATES[id] || '<div class="placeholder">Missing template: ' + id + '</div>';
-    return '<div class="grid-stack-item-content">' +
-             '<button class="tile-rm" data-rm="' + id + '" title="Remove">✕</button>' +
-             body +
-           '</div>';
+    // GridStack wraps `content` in its own .grid-stack-item-content — do NOT add another, or you get a double border.
+    return '<button class="tile-rm" data-rm="' + id + '" title="Remove">✕</button>' + body;
   }
 
   function addTile(spec) {

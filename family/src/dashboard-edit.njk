@@ -698,14 +698,7 @@ eleventyExcludeFromCollections: true
   <div data-tpl="calendar">
     <div class="tile-h"><span>📅 Upcoming</span></div>
     <div class="tile-body">
-      <div class="cal-list">
-        {% for ev in calendar %}{% if loop.index <= 12 %}
-        <div class="cal-row">
-          <span class="t">{{ ev.time or 'all day' }}</span>
-          <span class="w">{{ ev.what }}</span>
-        </div>
-        {% endif %}{% endfor %}
-      </div>
+      <div class="cal-list" id="calList"></div>
     </div>
   </div>
 
@@ -830,10 +823,8 @@ eleventyExcludeFromCollections: true
 
   function tileHTML(id) {
     const body = TEMPLATES[id] || '<div class="placeholder">Missing template: ' + id + '</div>';
-    return '<div class="grid-stack-item-content">' +
-             '<button class="tile-rm" data-rm="' + id + '" title="Remove">✕</button>' +
-             body +
-           '</div>';
+    // GridStack wraps `content` in its own .grid-stack-item-content — do NOT add another, or you get a double border.
+    return '<button class="tile-rm" data-rm="' + id + '" title="Remove">✕</button>' + body;
   }
 
   function addTile(spec) {
