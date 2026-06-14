@@ -19,15 +19,41 @@ eleventyExcludeFromCollections: true
 <script src="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack-all.js"></script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
+
   #site-nav { display: none !important; }
   html, body { overflow: hidden; height: 100%; margin: 0; }
-  body {
-    background: #f5f1ea;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-    color: #2d2a26;
+
+  /* === DESIGN TOKENS (match /dashboard/) === */
+  :root {
+    --warm-bg: #f5f1ea;
+    --card-bg: #ffffff;
+    --text-dark: #1f2328;
+    --text-mid: #57606a;
+    --text-light: #8b949e;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    --accent-orange: #d96a2a;
+    --accent-teal: #2da44e;
+    --accent-gold: #bf8700;
+    --accent-rose: #cf222e;
+    --accent-blue: #0969da;
+    --border: #e3e6ea;
+    --border-soft: #eef0f3;
+    --surface: #ffffff;
+    --surface-mute: rgba(0,0,0,0.025);
+    --surface-mute-2: rgba(0,0,0,0.035);
+    --surface-mute-3: rgba(0,0,0,0.05);
+    --surface-mute-track: rgba(0,0,0,0.04);
+    --on-accent: #ffffff;
   }
 
-  /* Top toolbar */
+  body {
+    background: var(--warm-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    color: var(--text-dark);
+  }
+
+  /* === TOP TOOLBAR === */
   .ed-bar {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -36,14 +62,14 @@ eleventyExcludeFromCollections: true
     align-items: center;
     justify-content: space-between;
     padding: 0 14px;
-    background: #fff;
-    border-bottom: 1px solid #e8e2d6;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
     z-index: 100;
     font-size: 13px;
   }
   .ed-bar .ed-title {
     font-weight: 700;
-    color: #2d2a26;
+    color: var(--text-dark);
     font-size: 14px;
   }
   .ed-bar .ed-title .pill {
@@ -60,49 +86,49 @@ eleventyExcludeFromCollections: true
   }
   .ed-bar .ed-actions { display: flex; gap: 8px; align-items: center; }
   .ed-bar button {
-    border: 1px solid #d6d0c2;
-    background: #fff;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
     border-radius: 8px;
     padding: 6px 12px;
     font-size: 13px;
     font-weight: 600;
-    color: #2d2a26;
+    color: var(--text-dark);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
   .ed-bar button.primary {
-    background: #2d2a26;
-    color: #fff;
-    border-color: #2d2a26;
+    background: var(--text-dark);
+    color: var(--on-accent);
+    border-color: var(--text-dark);
   }
   .ed-bar button.danger {
-    background: #fff;
-    color: #b91c1c;
-    border-color: #fecaca;
+    background: var(--card-bg);
+    color: var(--accent-rose);
+    border-color: #f4c0c8;
   }
   .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
   body[data-edit="1"] .ed-bar { background: #fef3c7; border-bottom-color: #fbbf24; }
 
-  /* Stage */
+  /* === STAGE === */
   .stage {
     position: fixed;
     top: 44px; left: 0; right: 0; bottom: 0;
-    padding: 8px;
+    padding: 6px;
     overflow: hidden;
   }
 
-  /* GridStack appearance */
+  /* === GRIDSTACK SHELL === */
   .grid-stack {
     background: transparent;
     height: 100% !important;
   }
   .grid-stack-item-content {
-    background: #fff;
-    border: 1px solid #e8e2d6;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    padding: 12px 14px;
-    overflow: auto;
+    box-shadow: var(--shadow);
+    padding: 12px 14px 14px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     inset: 4px !important;
@@ -112,19 +138,17 @@ eleventyExcludeFromCollections: true
     border-style: dashed;
     cursor: move;
   }
-  /* Hide content interactivity in edit mode so taps go to drag */
   body[data-edit="1"] .grid-stack-item-content > .tile-h,
   body[data-edit="1"] .grid-stack-item-content > .tile-body { pointer-events: none; }
 
-  /* Remove (✕) button on each tile in edit mode */
   .tile-rm {
     display: none;
     position: absolute;
     top: 6px; right: 6px;
     width: 26px; height: 26px;
     border-radius: 999px;
-    background: #b91c1c;
-    color: #fff;
+    background: var(--accent-rose);
+    color: var(--on-accent);
     border: none;
     font-size: 14px;
     font-weight: 700;
@@ -136,120 +160,372 @@ eleventyExcludeFromCollections: true
   }
   body[data-edit="1"] .tile-rm { display: block; }
 
-  /* Tile header */
+  /* === SHARED TILE TYPOGRAPHY (matches /dashboard/ card-h) === */
   .tile-h {
-    margin: 0 0 8px;
-    font-size: 0.92rem;
+    margin: 0 0 10px;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #6b6357;
+    color: var(--text-mid);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     flex-shrink: 0;
   }
   .tile-h .sub {
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #a39988;
+    color: var(--text-light);
     font-weight: 600;
   }
-  .tile-body { flex: 1; min-height: 0; overflow: auto; font-size: 0.85rem; color: #2d2a26; }
+  .tile-h .pill {
+    background: var(--surface-mute-3);
+    color: var(--text-dark);
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tile-body {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+  }
 
-  /* Specific tile content */
+  /* === KIDS TILE === */
   .kids-grid {
     display: grid;
     grid-template-columns: 1fr auto auto;
-    column-gap: 14px;
-    row-gap: 7px;
+    column-gap: 18px;
+    row-gap: 9px;
     align-items: baseline;
   }
   .kids-grid .h {
     font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #a39988;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
     font-weight: 700;
   }
   .kids-grid .h.r { text-align: right; }
-  .kids-grid .nm { font-weight: 700; }
-  .kids-grid .v { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
-  .kids-grid .v.danger { color: #b91c1c; }
-  .kids-grid .v.warn { color: #b45309; }
-
-  .cd-list { display: flex; flex-direction: column; gap: 6px; }
-  .cd-row { display: flex; align-items: baseline; gap: 8px; }
-  .cd-row .n { font-size: 1.15rem; font-weight: 700; min-width: 36px; }
-  .cd-row .l { font-size: 0.85rem; color: #6b6357; }
-
-  .cal-list { display: flex; flex-direction: column; gap: 4px; }
-  .cal-row { display: flex; gap: 8px; font-size: 0.82rem; line-height: 1.3; }
-  .cal-row .t { color: #a39988; min-width: 56px; font-variant-numeric: tabular-nums; }
-  .cal-row .w { color: #2d2a26; flex: 1; }
-
-  .chores-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .chores-col h4 {
-    margin: 0 0 6px;
-    font-family: Georgia, serif;
+  .kids-grid .nm {
     font-size: 1.05rem;
-    color: #b91c1c;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--text-dark);
   }
-  .chores-group { margin-bottom: 10px; }
-  .chores-group .gh {
+  .kids-grid .v {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dark);
+  }
+  .kids-grid .v.danger { color: var(--accent-rose); }
+  .kids-grid .v.warn   { color: var(--accent-gold); }
+
+  /* === COUNTDOWNS (matches /dashboard/ .cd-item) === */
+  .cd-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .cd-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--surface-mute);
+    border-radius: 10px;
+    min-height: 0;
+  }
+  .cd-item .n {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--accent-orange);
+    font-variant-numeric: tabular-nums;
+    min-width: 1.6em;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .cd-item .lbl {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+  }
+  .cd-item .lbl .unit {
+    color: var(--text-mid);
+    font-weight: 500;
+    font-size: 0.72rem;
+    margin-right: 4px;
+  }
+  .cd-item.is-today .n { color: var(--accent-teal); font-size: 1.2rem; }
+
+  /* === CALENDAR (matches /dashboard/ cal-row) === */
+  .cal-list {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .cal-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 8px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.85rem;
+    line-height: 1.25;
+  }
+  .cal-row:last-child { border-bottom: none; }
+  .cal-row .t {
+    color: var(--text-light);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .cal-row .w { color: var(--text-dark); }
+
+  /* === CHORES (matches /dashboard/ .chores) === */
+  .chores-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 4px;
+    overflow: hidden;
+    min-height: 0;
+    flex: 1;
+    align-content: start;
+  }
+  .chores-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .chores-col-h {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    line-height: 1;
+    margin: 2px 0 10px;
+    letter-spacing: -0.5px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .chores-group { margin: 0 0 12px; }
+  .chores-group-h {
     font-size: 0.62rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #a39988;
-    font-weight: 700;
-    margin-bottom: 4px;
+    letter-spacing: 0.8px;
+    color: var(--text-light);
+    font-weight: 800;
+    margin: 0 0 6px;
   }
-  .chores-group ul { list-style: none; padding: 0; margin: 0; }
-  .chores-group li { font-size: 0.78rem; padding: 2px 0; color: #2d2a26; }
+  .chores-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .chore-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.25;
+    font-size: 0.78rem;
+    color: var(--text-dark);
+  }
+  .chore-item .box {
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--text-light);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
 
-  .budget-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
-  .budget-row .lab { font-size: 0.78rem; width: 80px; }
-  .budget-row .bar { flex: 1; height: 8px; background: #f0ebe0; border-radius: 999px; overflow: hidden; }
-  .budget-row .bar > div { height: 100%; border-radius: 999px; }
-  .budget-row .pace { font-size: 0.7rem; color: #a39988; min-width: 70px; text-align: right; }
+  /* === BUDGET (matches /dashboard/ .budget) === */
+  .budget-cats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    justify-content: space-around;
+  }
+  .budget-cat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .budget-cat .name {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .budget-cat .name .status {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .budget-cat .name .status.over { color: var(--accent-rose); }
+  .budget-bars {
+    position: relative;
+    height: 8px;
+    background: var(--surface-mute-track);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .budget-bars .actual {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+  .budget-bars .actual.ok   { background: var(--accent-teal); }
+  .budget-bars .actual.warn { background: var(--accent-gold); }
+  .budget-bars .actual.over { background: var(--accent-rose); }
+  .budget-bars .pace {
+    position: absolute;
+    top: -2px;
+    width: 2px;
+    height: 12px;
+    background: var(--text-mid);
+    border-radius: 1px;
+    transform: translateX(-1px);
+  }
 
+  /* === WEATHER === */
+  .weather-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .weather-row .icon { font-size: 1.8rem; line-height: 1; }
+  .weather-row .temp {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .weather-row .hilo {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .weather-days {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    text-align: center;
+  }
+  .weather-days .d {
+    color: var(--text-light);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .weather-days .ic { font-size: 1.15rem; line-height: 1.3; }
+  .weather-days .hl {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+    color: var(--text-dark);
+  }
+
+  /* === MEAL PLAN === */
+  .meal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.82rem;
+    overflow: hidden;
+  }
+  .meal-list .row {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 8px;
+    align-items: baseline;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .meal-list .row:last-child { border-bottom: none; }
+  .meal-list .row.today .nm { color: var(--accent-orange); font-weight: 700; }
+  .meal-list .dow {
+    color: var(--text-light);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .meal-list .nm { color: var(--text-dark); }
+
+  /* === DINNER === */
+  .dinner-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .dinner-note {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+
+  /* === PLACEHOLDER === */
   .placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #a39988;
+    color: var(--text-light);
     font-style: italic;
     font-size: 0.85rem;
     flex: 1;
   }
 
-  .weather-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-  .weather-row .icon { font-size: 1.6rem; }
-  .weather-row .temp { font-size: 1.6rem; font-weight: 700; }
-  .weather-row .hilo { color: #a39988; font-size: 0.78rem; }
-  .weather-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; font-size: 0.72rem; text-align: center; }
-  .weather-days .d { color: #a39988; }
-  .weather-days .ic { font-size: 1.1rem; line-height: 1.2; }
-  .weather-days .hl { font-weight: 700; font-variant-numeric: tabular-nums; }
-
-  .meal-list { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; }
-  .meal-list .row { display: flex; gap: 8px; }
-  .meal-list .row.today { color: #b91c1c; font-weight: 700; }
-  .meal-list .dow { min-width: 38px; color: #a39988; }
-
-  /* Add-tile picker modal */
+  /* === ADD-TILE PICKER === */
   .picker-backdrop {
     display: none;
     position: fixed; inset: 0;
-    background: rgba(45, 42, 38, 0.5);
+    background: rgba(15, 20, 28, 0.55);
     z-index: 300;
     align-items: center;
     justify-content: center;
   }
   .picker-backdrop.show { display: flex; }
   .picker {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 14px;
     width: min(420px, 92vw);
     max-height: 80vh;
@@ -257,29 +533,48 @@ eleventyExcludeFromCollections: true
     padding: 18px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.25);
   }
-  .picker h3 { margin: 0 0 14px; font-size: 1rem; color: #2d2a26; }
+  .picker h3 { margin: 0 0 14px; font-size: 1rem; color: var(--text-dark); }
   .picker .pick-list { display: flex; flex-direction: column; gap: 8px; }
   .picker .pick-item {
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 14px;
-    background: #f5f1ea;
+    background: var(--warm-bg);
     border-radius: 10px;
     cursor: pointer;
     font-size: 0.92rem;
+    color: var(--text-dark);
   }
   .picker .pick-item:hover { background: #ebe5d6; }
-  .picker .pick-item .add { color: #2d2a26; font-weight: 700; font-size: 0.78rem; }
-  .picker .empty { color: #a39988; font-style: italic; font-size: 0.85rem; text-align: center; padding: 20px 0; }
-  .picker .close { float: right; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6b6357; }
+  .picker .pick-item .add {
+    color: var(--text-mid);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+  }
+  .picker .empty {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .picker .close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-mid);
+  }
 
-  /* Toast */
+  /* === TOAST === */
   .ed-toast {
     position: fixed;
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
-    background: #2d2a26;
-    color: #fff;
+    background: var(--text-dark);
+    color: var(--on-accent);
     padding: 8px 14px;
     border-radius: 999px;
     font-size: 12px;
@@ -365,23 +660,38 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="budget">
-    <div class="tile-h"><span>💳 Budget</span><span class="sub">June · day 14/30</span></div>
+    <div class="tile-h"><span>💳 Budget</span><span class="sub" id="budgetMonth">—</span></div>
     <div class="tile-body">
-      <div class="budget-row"><span class="lab">Shopping</span><span class="bar"><div style="width:45%;background:#86efac"></div></span><span class="pace">on pace</span></div>
-      <div class="budget-row"><span class="lab">Food</span><span class="bar"><div style="width:78%;background:#fb923c"></div></span><span class="pace">high</span></div>
-      <div class="budget-row"><span class="lab">Entertain</span><span class="bar"><div style="width:82%;background:#fb923c"></div></span><span class="pace">high</span></div>
+      <div class="budget-cats">
+        <div class="budget-cat" data-cat="shopping" data-pct="42">
+          <div class="name"><span>Shopping</span><span class="status" id="status-shopping"></span></div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-shopping"></div>
+            <div class="pace" id="pace-shopping"></div>
+          </div>
+        </div>
+        <div class="budget-cat" data-cat="food" data-pct="68">
+          <div class="name"><span>Food</span><span class="status" id="status-food"></span></div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-food"></div>
+            <div class="pace" id="pace-food"></div>
+          </div>
+        </div>
+        <div class="budget-cat" data-cat="ent" data-pct="89">
+          <div class="name"><span>Entertainment</span><span class="status" id="status-ent"></span></div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-ent"></div>
+            <div class="pace" id="pace-ent"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div data-tpl="countdowns">
     <div class="tile-h"><span>⏳ Countdowns</span></div>
     <div class="tile-body">
-      <div class="cd-list">
-        <div class="cd-row"><span class="n">4</span><span class="l">days to California</span></div>
-        <div class="cd-row"><span class="n">12</span><span class="l">days to Dude Perfect</span></div>
-        <div class="cd-row"><span class="n">22</span><span class="l">days to lake trip</span></div>
-        <div class="cd-row"><span class="n">60</span><span class="l">days to first day of school</span></div>
-      </div>
+      <div class="cd-list" id="cdList"></div>
     </div>
   </div>
 
@@ -400,24 +710,24 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="chores">
-    <div class="tile-h"><span>🧹 Weekend chores</span><span class="sub">2nd weekend</span></div>
+    <div class="tile-h"><span>🧹 Weekend chores</span><span class="pill" id="choresWkPill">—</span></div>
     <div class="tile-body">
-      <div class="chores-cols">
+      <div class="chores-body">
         <div class="chores-col">
-          <h4>Saturday</h4>
+          <div class="chores-col-h">Saturday</div>
           <div class="chores-group">
-            <div class="gh">{{ chores.quick.title }}</div>
-            <ul>
-              {% for item in chores.quick.items %}<li>☐ {{ item.label }}</li>{% endfor %}
+            <div class="chores-group-h">{{ chores.quick.title }}</div>
+            <ul class="chores-list">
+              {% for item in chores.quick.items %}<li class="chore-item"><span class="box"></span><span>{{ item.label }}</span></li>{% endfor %}
             </ul>
           </div>
         </div>
         <div class="chores-col">
-          <h4>Sunday</h4>
+          <div class="chores-col-h">Sunday</div>
           <div class="chores-group">
-            <div class="gh">{{ chores.laundry.title }}</div>
-            <ul>
-              {% for item in chores.laundry.items %}<li>☐ {{ item.label }}</li>{% endfor %}
+            <div class="chores-group-h">{{ chores.laundry.title }}</div>
+            <ul class="chores-list">
+              {% for item in chores.laundry.items %}<li class="chore-item"><span class="box"></span><span>{{ item.label }}</span></li>{% endfor %}
             </ul>
           </div>
         </div>
@@ -428,6 +738,7 @@ eleventyExcludeFromCollections: true
   <div data-tpl="weather">
     <div class="tile-h"><span>☀️ Weather</span><span class="sub">Greenville</span></div>
     <div class="tile-body">
+      {% if weather %}
       <div class="weather-row">
         <span class="icon">{{ weather.now.icon }}</span>
         <span class="temp">{{ weather.now.temp }}°</span>
@@ -442,6 +753,9 @@ eleventyExcludeFromCollections: true
           </div>
         {% endfor %}
       </div>
+      {% else %}
+      <div class="placeholder">Weather unavailable</div>
+      {% endif %}
     </div>
   </div>
 
@@ -462,8 +776,8 @@ eleventyExcludeFromCollections: true
   <div data-tpl="dinner">
     <div class="tile-h"><span>🍳 Tonight</span></div>
     <div class="tile-body">
-      <div style="font-size:1.05rem;font-weight:700;margin-bottom:4px">{{ dinner.name or 'TBD' }}</div>
-      {% if dinner.note %}<div style="font-size:0.8rem;color:#6b6357">{{ dinner.note }}</div>{% endif %}
+      <div class="dinner-name">{{ dinner.name or 'TBD' }}</div>
+      {% if dinner.note %}<div class="dinner-note">{{ dinner.note }}</div>{% endif %}
     </div>
   </div>
 
@@ -489,12 +803,10 @@ eleventyExcludeFromCollections: true
 (function(){
   const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
 
-  // Parse catalog + default layout from inline JSON
   const CATALOG = JSON.parse(document.getElementById('tileCatalog').textContent);
   const CATALOG_BY_ID = Object.fromEntries(CATALOG.map(c => [c.id, c]));
   const DEFAULT_LAYOUT = JSON.parse(document.getElementById('defaultLayout').textContent);
 
-  // Pull each rendered tile body from the hidden template store
   const TEMPLATES = {};
   document.querySelectorAll('#tileTemplates [data-tpl]').forEach(el => {
     TEMPLATES[el.dataset.tpl] = el.innerHTML;
@@ -502,7 +814,7 @@ eleventyExcludeFromCollections: true
 
   // Compute cell height to fit viewport
   const stage = document.querySelector('.stage');
-  const stageH = stage.clientHeight - 16;
+  const stageH = stage.clientHeight - 12;
   const cellH = Math.floor(stageH / 8);
 
   const grid = GridStack.init({
@@ -534,6 +846,98 @@ eleventyExcludeFromCollections: true
       h: spec.h || catalog.h,
       content: tileHTML(spec.id),
     });
+    hydrateTile(spec.id);
+  }
+
+  // === LIVE DATA HYDRATION (runs after each tile is added) ===
+  function hydrateTile(id) {
+    if (id === 'countdowns') renderCountdowns();
+    if (id === 'budget')     renderBudget();
+    if (id === 'chores')     renderChoresPill();
+  }
+
+  // Countdowns: same source-of-truth as /dashboard/, computed live
+  const COUNTDOWNS = [
+    { label: "Mike's birthday",     date: '2026-06-13' },
+    { label: 'California',          date: '2026-06-18' },
+    { label: 'Dude Perfect',        date: '2026-06-26' },
+    { label: 'lake trip',           date: '2026-07-06' },
+    { label: 'first day of school', date: '2026-08-13' },
+  ];
+  function renderCountdowns() {
+    const wrap = document.getElementById('cdList');
+    if (!wrap) return;
+    const today = new Date();
+    const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const items = COUNTDOWNS
+      .map(c => {
+        const [y, m, d] = c.date.split('-').map(Number);
+        const target = new Date(y, m - 1, d);
+        const days = Math.round((target - todayMid) / 86400000);
+        return { ...c, days };
+      })
+      .filter(c => c.days >= 0)
+      .sort((a, b) => a.days - b.days);
+    wrap.innerHTML = items.map(c => {
+      const isToday = c.days === 0;
+      const nTxt = isToday ? '🎉' : c.days;
+      const unit = isToday ? '' : '<span class="unit">' + (c.days === 1 ? 'day to' : 'days to') + '</span>';
+      const lbl = isToday ? c.label + ' is today!' : unit + c.label;
+      return '<div class="cd-item' + (isToday ? ' is-today' : '') + '">' +
+               '<span class="n">' + nTxt + '</span>' +
+               '<span class="lbl">' + lbl + '</span>' +
+             '</div>';
+    }).join('');
+  }
+
+  // Budget: same hardcoded pcts + same pace logic as /dashboard/
+  function renderBudget() {
+    const now = new Date();
+    const dayOfMonth = now.getDate();
+    const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    const monthPct = Math.round((dayOfMonth / daysInMonth) * 100);
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const monthEl = document.getElementById('budgetMonth');
+    if (monthEl) monthEl.textContent = months[now.getMonth()] + ' · day ' + dayOfMonth + '/' + daysInMonth;
+
+    document.querySelectorAll('.budget-cat').forEach(cat => {
+      const key = cat.dataset.cat;
+      const pct = parseInt(cat.dataset.pct, 10);
+      const bar = document.getElementById('bar-' + key);
+      const pace = document.getElementById('pace-' + key);
+      const status = document.getElementById('status-' + key);
+      if (!bar || !pace || !status) return;
+
+      bar.style.width = Math.min(pct, 100) + '%';
+      pace.style.left = Math.min(monthPct, 100) + '%';
+
+      if (pct >= 100) {
+        bar.className = 'actual over';
+        status.textContent = 'over';
+        status.className = 'status over';
+      } else if (pct > monthPct + 8) {
+        bar.className = 'actual warn';
+        status.textContent = 'pacing high';
+        status.className = 'status';
+      } else {
+        bar.className = 'actual ok';
+        status.textContent = 'on pace';
+        status.className = 'status';
+      }
+    });
+  }
+
+  function renderChoresPill() {
+    const pill = document.getElementById('choresWkPill');
+    if (!pill) return;
+    const now = new Date();
+    const dow = now.getDay();
+    const sat = new Date(now);
+    if (dow === 0) sat.setDate(now.getDate() - 1);
+    else if (dow !== 6) sat.setDate(now.getDate() + (6 - dow));
+    const w = Math.min(4, Math.ceil(sat.getDate() / 7));
+    const labels = { 1: '1st weekend', 2: '2nd weekend', 3: '3rd weekend', 4: '4th weekend' };
+    pill.textContent = labels[w] || ('Wk ' + w);
   }
 
   // Initial load: saved state if any, else defaults
@@ -566,7 +970,6 @@ eleventyExcludeFromCollections: true
   }
 
   function persist() {
-    // Save just id/x/y/w/h — content is rebuilt from templates on load
     const data = grid.engine.nodes
       .sort((a, b) => (a.y - b.y) || (a.x - b.x))
       .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
@@ -577,7 +980,7 @@ eleventyExcludeFromCollections: true
 
   grid.on('change added removed', persist);
 
-  // Tile remove buttons (event-delegated)
+  // Tile remove buttons
   document.getElementById('grid').addEventListener('click', (ev) => {
     const btn = ev.target.closest('.tile-rm');
     if (!btn) return;
@@ -636,7 +1039,6 @@ eleventyExcludeFromCollections: true
         el.className = 'pick-item';
         el.innerHTML = '<span>' + c.label + '</span><span class="add">ADD</span>';
         el.addEventListener('click', () => {
-          // Add at bottom-left; GridStack will find a fit slot
           addTile({ id: c.id, x: 0, y: 9999, w: c.w, h: c.h });
           picker.classList.remove('show');
           showToast('Added: ' + c.label);
