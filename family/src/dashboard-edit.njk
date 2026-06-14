@@ -791,7 +791,6 @@ eleventyExcludeFromCollections: true
   <div class="ed-actions">
     <button id="edAdd" disabled>+ Add tile</button>
     <button id="edToggle">🔓 Unlock</button>
-    <button id="edSave" class="primary">💾 Save</button>
     <button id="edReset" class="danger">Reset</button>
   </div>
 </div>
@@ -1529,23 +1528,6 @@ eleventyExcludeFromCollections: true
     if (!confirm('Reset layout to default?')) return;
     localStorage.removeItem(STORAGE_KEY);
     location.reload();
-  });
-
-  // Save → download layout.json
-  document.getElementById('edSave').addEventListener('click', () => {
-    const data = grid.engine.nodes
-      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
-      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'dashlayout.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('Downloaded dashlayout.json');
   });
 
   // Add-tile picker
