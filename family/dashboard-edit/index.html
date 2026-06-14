@@ -911,6 +911,22 @@
     flex-direction: column;
     height: 100%;
   }
+  .recipe-day {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .recipe-day-next { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .recipe-daylbl {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
   .recipe-name {
     font-family: 'Fraunces', Georgia, serif;
     font-size: 1.25rem;
@@ -1053,7 +1069,7 @@
   { "id": "dinner",      "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
   { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
   { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
-  { "id": "recipe",      "label": "🍲 Recipe of the day",            "w": 3, "h": 3 },
+  { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 3, "h": 3 },
   { "id": "newish",      "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
 ]
 </script>
@@ -1317,7 +1333,7 @@
         
           <div class="row">
             <span class="dow">Mon</span>
-            <span class="nm">Chicken stir fry (frozen veg + sauce)</span>
+            <span class="nm">Italian sausage + onion + zucchini</span>
           </div>
         
           <div class="row">
@@ -1438,12 +1454,46 @@
   </div>
 
   <div data-tpl="recipe">
-    <div class="tile-h"><span>🍲 Recipe of the day</span><span class="sub" id="recipeDate">—</span></div>
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    <div class="tile-h"><span>🍲 What's cooking</span><span class="sub">Today &amp; tomorrow</span></div>
     <div class="tile-body">
-      <div class="recipe-box" id="recipeBox">
-        <div class="recipe-name" id="recipeName">—</div>
-        <div class="recipe-meta" id="recipeMeta"></div>
-        <a class="recipe-link" id="recipeLink" href="#" target="_blank" rel="noopener">Open recipe →</a>
+      <div class="recipe-day">
+        <div class="recipe-daylbl">Today</div>
+        <div class="recipe-name">Leftovers</div>
+        
+      </div>
+      <div class="recipe-day recipe-day-next">
+        <div class="recipe-daylbl">Tomorrow</div>
+        <div class="recipe-name">Italian sausage + onion + zucchini</div>
+        
+          <div class="recipe-meta">
+            <span class="pill">easy</span>
+            45g protein
+          </div>
+          <a class="recipe-link" href="/recipes/italian-sausage-onion-zucchini/" target="_blank" rel="noopener">Open recipe →</a>
+        
       </div>
     </div>
   </div>
