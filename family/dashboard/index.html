@@ -1898,15 +1898,15 @@
     
     <div class="dinner-hero no-recipe"
          >
-      <div class="dinner-name">Leftovers</div>
+      <div class="dinner-name">Leftovers (kids); Mike + Nancy travel day</div>
       
     </div>
     
     
-    <div class="dinner-tomorrow"
-         data-recipe="italian-sausage-onion-zucchini">
+    <div class="dinner-tomorrow no-recipe"
+         >
       <span class="t-lbl">Tomorrow</span>
-      <span class="t-name">Italian sausage + onion + zucchini</span>
+      <span class="t-name">Chicken fajitas (no peppers, extra onions + zucchini)</span>
     </div>
     
   </div>
@@ -2170,60 +2170,32 @@
   // Recipe lookup table built from mealweek
   const RECIPES = {
     
-    "italian-sausage-onion-zucchini": {
-      name: "Italian sausage + onion + zucchini",
+    "korean-beef-broccoli-bowls": {
+      name: "Korean Beef + Broccoli Bowls",
       servings: 0,
       prep_min: 0,
       cook_min: 0,
       effort: "easy",
-      protein_g: 45,
-      cal: 650,
-      ingredient_groups: [{"heading":null,"items":["Italian sausage links (~2 lb)","Zucchini (3-4 medium), cut into 1/2-inch half-moons","Yellow onions (2), cut into thick wedges","Cherry tomatoes (1 pint), whole","Rice (jasmine or long-grain), 2 cups dry","Olive oil (3-4 tbsp)","Italian seasoning (2 tsp)","Salt + pepper","Garlic powder (optional, 1 tsp)","Parmesan to finish (optional)"]}],
-      steps: ["Preheat oven to 425°F. Start rice on the stove or in a rice cooker.","On a large sheet pan, toss zucchini, onion wedges, and cherry tomatoes with olive oil, Italian seasoning, salt, pepper, and garlic powder.","Nestle whole sausage links among the veg. Don't crowd — use two pans if needed.","Roast 25-30 min, flipping sausages once at the halfway point. Sausages should be browned and internal temp 160°F. Tomatoes should be blistered.","Slice sausages on the bias. Serve over rice with pan juices spooned on top. Parm to finish if you've got it."],
-      notes: "<h3>Notes</h3>\n<ul>\n<li>If sausages are pre-cooked (smoked/kielbasa-style), drop oven time to 20 min total.</li>\n<li>Sub baby bell peppers or quartered fennel for the tomatoes if needed.</li>\n<li>Leftovers reheat well; chop everything and toss with pasta the next day.</li>\n</ul>\n",
-      body_html: "<h1>Italian sausage + onion + zucchini</h1>\n<p>Sheet pan. One pan, zero brain cells. Serves 6.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>Italian sausage links (~2 lb)</li>\n<li>Zucchini (3-4 medium), cut into 1/2-inch half-moons</li>\n<li>Yellow onions (2), cut into thick wedges</li>\n<li>Cherry tomatoes (1 pint), whole</li>\n<li>Rice (jasmine or long-grain), 2 cups dry</li>\n<li>Olive oil (3-4 tbsp)</li>\n<li>Italian seasoning (2 tsp)</li>\n<li>Salt + pepper</li>\n<li>Garlic powder (optional, 1 tsp)</li>\n<li>Parmesan to finish (optional)</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Preheat oven to 425°F. Start rice on the stove or in a rice cooker.</li>\n<li>On a large sheet pan, toss zucchini, onion wedges, and cherry tomatoes with olive oil, Italian seasoning, salt, pepper, and garlic powder.</li>\n<li>Nestle whole sausage links among the veg. Don't crowd — use two pans if needed.</li>\n<li>Roast 25-30 min, flipping sausages once at the halfway point. Sausages should be browned and internal temp 160°F. Tomatoes should be blistered.</li>\n<li>Slice sausages on the bias. Serve over rice with pan juices spooned on top. Parm to finish if you've got it.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>If sausages are pre-cooked (smoked/kielbasa-style), drop oven time to 20 min total.</li>\n<li>Sub baby bell peppers or quartered fennel for the tomatoes if needed.</li>\n<li>Leftovers reheat well; chop everything and toss with pasta the next day.</li>\n</ul>\n"
+      protein_g: 60,
+      cal: 600,
+      ingredient_groups: [{"heading":"Beef","items":["2 lb ground beef (93% lean works great)","1 tbsp toasted sesame oil (for cooking)","6 cloves garlic, minced","1 tbsp fresh ginger, grated (or 1 tsp ground)"]},{"heading":"Sauce (whisk in a jar/bowl)","items":["1/2 cup soy sauce","1/3 cup brown sugar, packed","2 tbsp rice vinegar (or apple cider in a pinch)","1 tbsp toasted sesame oil","1 tsp red pepper flakes (1/2 tsp for kid-friendly)","1 tsp black pepper","1 tbsp cornstarch"]},{"heading":"Broccoli","items":["2 large heads broccoli, cut into bite-size florets (~6 cups)","1 tbsp neutral oil (avocado or vegetable)","Pinch of salt","2 tbsp water"]},{"heading":"Serve with","items":["3 cups jasmine rice, cooked (~1.5 cups dry)","Toasted sesame seeds","Sriracha on the table","Optional: kimchi or quick-pickled carrots for crunch"]}],
+      steps: ["Start rice first (longest part).","**Broccoli, separate pan.** Big skillet, medium-high, neutral oil hot. Broccoli in single layer, don't crowd. Sit 2 min for char. Toss, another 2 min. Splash 2 tbsp water, lid on 90 sec. Lid off, salt. Should be bright green with brown edges, still has snap. Pull off heat.","**Beef, separate skillet.** Sesame oil, medium-high. Brown beef hard, break it small, 6-8 min. Drop heat to medium. Push beef aside, garlic + ginger in empty space, 30 sec until fragrant. Stir together.","Pour sauce in, stir. Thickens in ~90 sec from cornstarch. If too thick, splash of water.","Taste. Flat? More soy. Too salty? Pinch more brown sugar.","Dump broccoli into beef pan at the end, toss 30 sec to coat in sauce."],
+      notes: "<h3>Morning Prep (optional, saves 15 min in evening)</h3>\n<ol>\n<li>Whisk full sauce in a jar, refrigerate. Shake before using.</li>\n<li>Mince garlic + ginger together, small container, fridge.</li>\n<li>Cut broccoli into florets, gallon ziploc, fridge crisper.</li>\n<li>Measure dry rice + water into rice cooker pot, leave on counter.\n<strong>Don't pre-cook the beef or broccoli — reheating ruins both.</strong></li>\n</ol>\n<h3>Assembly</h3>\n<p>Rice in bowl. Beef + broccoli on top. Sesame seeds over the top. Sriracha for anyone over 12.</p>\n<h3>Notes</h3>\n<ul>\n<li>Two pans for broccoli + beef is non-negotiable. Cooking broccoli in beef pan = soggy gray broccoli from sauce moisture.</li>\n<li>93% lean is fine here — sauce carries the richness.</li>\n<li>Leftovers: cold beef on rice next day is unreasonably good. Or fry an egg on top.</li>\n<li>Sub English cucumber sliced for cold crunch contrast if desired.</li>\n</ul>\n<h3>Kid Reactions (expected)</h3>\n<ul>\n<li>Thomas: deconstructed, beef and rice not touching, no green stuff visible.</li>\n<li>William: will pick around broccoli; deal = 3 pieces minimum.</li>\n<li>Henry + Charlie: inhale and ask for seconds.</li>\n<li>Nancy: yes. No tzatziki.</li>\n</ul>\n",
+      body_html: "<h1>Korean Beef + Broccoli Bowls</h1>\n<p><strong>Serves:</strong> 6\n<strong>Active time:</strong> 25 min\n<strong>Macros (Mike's portion):</strong> ~600 cal / 60g protein (est. with 93/7 beef)</p>\n<h2>Ingredients</h2>\n<h3>Beef</h3>\n<ul>\n<li>2 lb ground beef (93% lean works great)</li>\n<li>1 tbsp toasted sesame oil (for cooking)</li>\n<li>6 cloves garlic, minced</li>\n<li>1 tbsp fresh ginger, grated (or 1 tsp ground)</li>\n</ul>\n<h3>Sauce (whisk in a jar/bowl)</h3>\n<ul>\n<li>1/2 cup soy sauce</li>\n<li>1/3 cup brown sugar, packed</li>\n<li>2 tbsp rice vinegar (or apple cider in a pinch)</li>\n<li>1 tbsp toasted sesame oil</li>\n<li>1 tsp red pepper flakes (1/2 tsp for kid-friendly)</li>\n<li>1 tsp black pepper</li>\n<li>1 tbsp cornstarch</li>\n</ul>\n<h3>Broccoli</h3>\n<ul>\n<li>2 large heads broccoli, cut into bite-size florets (~6 cups)</li>\n<li>1 tbsp neutral oil (avocado or vegetable)</li>\n<li>Pinch of salt</li>\n<li>2 tbsp water</li>\n</ul>\n<h3>Serve with</h3>\n<ul>\n<li>3 cups jasmine rice, cooked (~1.5 cups dry)</li>\n<li>Toasted sesame seeds</li>\n<li>Sriracha on the table</li>\n<li>Optional: kimchi or quick-pickled carrots for crunch</li>\n</ul>\n<h2>Morning Prep (optional, saves 15 min in evening)</h2>\n<ol>\n<li>Whisk full sauce in a jar, refrigerate. Shake before using.</li>\n<li>Mince garlic + ginger together, small container, fridge.</li>\n<li>Cut broccoli into florets, gallon ziploc, fridge crisper.</li>\n<li>Measure dry rice + water into rice cooker pot, leave on counter.</li>\n</ol>\n<p><strong>Don't pre-cook the beef or broccoli — reheating ruins both.</strong></p>\n<h2>Method</h2>\n<ol>\n<li>Start rice first (longest part).</li>\n<li><strong>Broccoli, separate pan.</strong> Big skillet, medium-high, neutral oil hot. Broccoli in single layer, don't crowd. Sit 2 min for char. Toss, another 2 min. Splash 2 tbsp water, lid on 90 sec. Lid off, salt. Should be bright green with brown edges, still has snap. Pull off heat.</li>\n<li><strong>Beef, separate skillet.</strong> Sesame oil, medium-high. Brown beef hard, break it small, 6-8 min. Drop heat to medium. Push beef aside, garlic + ginger in empty space, 30 sec until fragrant. Stir together.</li>\n<li>Pour sauce in, stir. Thickens in ~90 sec from cornstarch. If too thick, splash of water.</li>\n<li>Taste. Flat? More soy. Too salty? Pinch more brown sugar.</li>\n<li>Dump broccoli into beef pan at the end, toss 30 sec to coat in sauce.</li>\n</ol>\n<h2>Assembly</h2>\n<p>Rice in bowl. Beef + broccoli on top. Sesame seeds over the top. Sriracha for anyone over 12.</p>\n<h2>Notes</h2>\n<ul>\n<li>Two pans for broccoli + beef is non-negotiable. Cooking broccoli in beef pan = soggy gray broccoli from sauce moisture.</li>\n<li>93% lean is fine here — sauce carries the richness.</li>\n<li>Leftovers: cold beef on rice next day is unreasonably good. Or fry an egg on top.</li>\n<li>Sub English cucumber sliced for cold crunch contrast if desired.</li>\n</ul>\n<h2>Kid Reactions (expected)</h2>\n<ul>\n<li>Thomas: deconstructed, beef and rice not touching, no green stuff visible.</li>\n<li>William: will pick around broccoli; deal = 3 pieces minimum.</li>\n<li>Henry + Charlie: inhale and ask for seconds.</li>\n<li>Nancy: yes. No tzatziki.</li>\n</ul>\n"
     },
     
-    "crockpot-chicken-and-dumplings": {
-      name: "Crockpot Chicken and Dumplings",
+    "marry-me-chicken": {
+      name: "Marry Me chicken",
       servings: 0,
       prep_min: 0,
       cook_min: 0,
-      effort: "easy",
-      protein_g: 45,
-      cal: 550,
-      ingredient_groups: [{"heading":null,"items":["chicken broth","chicken breast","dried minced onion","dried parsley","cream of chicken soup (2 cans)","refrigerated biscuits"]}],
+      effort: "medium",
+      protein_g: 50,
+      cal: 600,
+      ingredient_groups: [{"heading":null,"items":["chicken breasts","sun-dried tomatoes","heavy cream","parmesan","garlic","spinach","Italian seasoning"]}],
       steps: [],
       notes: "",
-      body_html: "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n"
-    },
-    
-    "homemade-hamburger-helper": {
-      name: "Homemade Hamburger Helper",
-      servings: 0,
-      prep_min: 0,
-      cook_min: 0,
-      effort: "",
-      protein_g: 0,
-      cal: 0,
-      ingredient_groups: [{"heading":null,"items":["1 onion, diced","Olive oil","Garlic, minced","1 package ground beef","Salt, pepper, paprika, garlic powder","1 tbsp tomato paste","1 can Italian-seasoned diced tomatoes, drained","2 cups beef broth","1 cup heavy cream","2 cups uncooked noodles","Shredded cheddar"]}],
-      steps: ["Cook onion in olive oil.","Add garlic, cook a minute or so.","Add ground beef, brown.","Season with salt, pepper, paprika, garlic powder.","Stir in tomato paste + drained diced tomatoes.","Add beef broth + heavy cream.","Add uncooked noodles.","Cover, cook 15 min.","Uncover, cook 2 more min.","Off heat, top with cheddar, stir."],
-      notes: "",
-      body_html: "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n"
-    },
-    
-    "italian-sausage-onion-zucchini": {
-      name: "Italian sausage + onion + zucchini",
-      servings: 0,
-      prep_min: 0,
-      cook_min: 0,
-      effort: "easy",
-      protein_g: 45,
-      cal: 650,
-      ingredient_groups: [{"heading":null,"items":["Italian sausage links (~2 lb)","Zucchini (3-4 medium), cut into 1/2-inch half-moons","Yellow onions (2), cut into thick wedges","Cherry tomatoes (1 pint), whole","Rice (jasmine or long-grain), 2 cups dry","Olive oil (3-4 tbsp)","Italian seasoning (2 tsp)","Salt + pepper","Garlic powder (optional, 1 tsp)","Parmesan to finish (optional)"]}],
-      steps: ["Preheat oven to 425°F. Start rice on the stove or in a rice cooker.","On a large sheet pan, toss zucchini, onion wedges, and cherry tomatoes with olive oil, Italian seasoning, salt, pepper, and garlic powder.","Nestle whole sausage links among the veg. Don't crowd — use two pans if needed.","Roast 25-30 min, flipping sausages once at the halfway point. Sausages should be browned and internal temp 160°F. Tomatoes should be blistered.","Slice sausages on the bias. Serve over rice with pan juices spooned on top. Parm to finish if you've got it."],
-      notes: "<h3>Notes</h3>\n<ul>\n<li>If sausages are pre-cooked (smoked/kielbasa-style), drop oven time to 20 min total.</li>\n<li>Sub baby bell peppers or quartered fennel for the tomatoes if needed.</li>\n<li>Leftovers reheat well; chop everything and toss with pasta the next day.</li>\n</ul>\n",
-      body_html: "<h1>Italian sausage + onion + zucchini</h1>\n<p>Sheet pan. One pan, zero brain cells. Serves 6.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>Italian sausage links (~2 lb)</li>\n<li>Zucchini (3-4 medium), cut into 1/2-inch half-moons</li>\n<li>Yellow onions (2), cut into thick wedges</li>\n<li>Cherry tomatoes (1 pint), whole</li>\n<li>Rice (jasmine or long-grain), 2 cups dry</li>\n<li>Olive oil (3-4 tbsp)</li>\n<li>Italian seasoning (2 tsp)</li>\n<li>Salt + pepper</li>\n<li>Garlic powder (optional, 1 tsp)</li>\n<li>Parmesan to finish (optional)</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Preheat oven to 425°F. Start rice on the stove or in a rice cooker.</li>\n<li>On a large sheet pan, toss zucchini, onion wedges, and cherry tomatoes with olive oil, Italian seasoning, salt, pepper, and garlic powder.</li>\n<li>Nestle whole sausage links among the veg. Don't crowd — use two pans if needed.</li>\n<li>Roast 25-30 min, flipping sausages once at the halfway point. Sausages should be browned and internal temp 160°F. Tomatoes should be blistered.</li>\n<li>Slice sausages on the bias. Serve over rice with pan juices spooned on top. Parm to finish if you've got it.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>If sausages are pre-cooked (smoked/kielbasa-style), drop oven time to 20 min total.</li>\n<li>Sub baby bell peppers or quartered fennel for the tomatoes if needed.</li>\n<li>Leftovers reheat well; chop everything and toss with pasta the next day.</li>\n</ul>\n"
+      body_html: "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n"
     },
     
   };
