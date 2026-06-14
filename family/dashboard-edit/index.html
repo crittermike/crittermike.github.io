@@ -210,6 +210,11 @@
     background: var(--warm-bg);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     color: var(--text-dark);
+    padding-top: env(safe-area-inset-top, 20px);
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    box-sizing: border-box;
   }
 
   /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) === */
@@ -1987,6 +1992,8 @@
   refreshAddButton();
 
   const toast = document.getElementById('edToast');
+  // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
+  setTimeout(() => location.reload(), 10 * 60 * 1000);
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
