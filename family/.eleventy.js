@@ -13,6 +13,6 @@ module.exports = function(eleventyConfig) {
     },
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
-    templateFormats: ["html", "njk", "md"]
+    templateFormats: ["html", "njk", "md", "11ty.js"]
   };
 };

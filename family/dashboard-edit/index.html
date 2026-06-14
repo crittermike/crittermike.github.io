@@ -165,11 +165,13 @@
 
     
 <!--
-  GRIDSTACK SPIKE — drag/resize sandbox.
+  GRIDSTACK SPIKE — drag/resize/add/remove sandbox.
   Does NOT touch /dashboard/. Layout persisted to localStorage key:
-    crittercrew.dashedit.layout.v1
-  Toggle edit mode via the gear button (top right). Layout is locked by default
-  so taps on tile contents don't accidentally trigger drags.
+    crittercrew.dashedit.layout.v1   (positions + which tiles are present)
+  Toggle edit mode via Unlock. In edit mode:
+    - drag/resize any tile
+    - ✕ on each tile removes it
+    - "+ Add tile" in toolbar opens picker of removed tiles
 -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack.min.css">
@@ -237,6 +239,7 @@
     color: #b91c1c;
     border-color: #fecaca;
   }
+  .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
   body[data-edit="1"] .ed-bar { background: #fef3c7; border-bottom-color: #fbbf24; }
 
   /* Stage */
@@ -269,7 +272,28 @@
     cursor: move;
   }
   /* Hide content interactivity in edit mode so taps go to drag */
-  body[data-edit="1"] .grid-stack-item-content * { pointer-events: none; }
+  body[data-edit="1"] .grid-stack-item-content > .tile-h,
+  body[data-edit="1"] .grid-stack-item-content > .tile-body { pointer-events: none; }
+
+  /* Remove (✕) button on each tile in edit mode */
+  .tile-rm {
+    display: none;
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    background: #b91c1c;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body[data-edit="1"] .tile-rm { display: block; }
 
   /* Tile header */
   .tile-h {
@@ -359,6 +383,54 @@
     flex: 1;
   }
 
+  .weather-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .weather-row .icon { font-size: 1.6rem; }
+  .weather-row .temp { font-size: 1.6rem; font-weight: 700; }
+  .weather-row .hilo { color: #a39988; font-size: 0.78rem; }
+  .weather-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; font-size: 0.72rem; text-align: center; }
+  .weather-days .d { color: #a39988; }
+  .weather-days .ic { font-size: 1.1rem; line-height: 1.2; }
+  .weather-days .hl { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .meal-list { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; }
+  .meal-list .row { display: flex; gap: 8px; }
+  .meal-list .row.today { color: #b91c1c; font-weight: 700; }
+  .meal-list .dow { min-width: 38px; color: #a39988; }
+
+  /* Add-tile picker modal */
+  .picker-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(45, 42, 38, 0.5);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+  }
+  .picker-backdrop.show { display: flex; }
+  .picker {
+    background: #fff;
+    border-radius: 14px;
+    width: min(420px, 92vw);
+    max-height: 80vh;
+    overflow: auto;
+    padding: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  }
+  .picker h3 { margin: 0 0 14px; font-size: 1rem; color: #2d2a26; }
+  .picker .pick-list { display: flex; flex-direction: column; gap: 8px; }
+  .picker .pick-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px;
+    background: #f5f1ea;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+  .picker .pick-item:hover { background: #ebe5d6; }
+  .picker .pick-item .add { color: #2d2a26; font-weight: 700; font-size: 0.78rem; }
+  .picker .empty { color: #a39988; font-style: italic; font-size: 0.85rem; text-align: center; padding: 20px 0; }
+  .picker .close { float: right; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6b6357; }
+
   /* Toast */
   .ed-toast {
     position: fixed;
@@ -373,7 +445,7 @@
     opacity: 0;
     transition: opacity 0.25s;
     pointer-events: none;
-    z-index: 200;
+    z-index: 400;
   }
   .ed-toast.show { opacity: 1; }
 </style>
@@ -383,6 +455,7 @@
     Dashboard <span class="pill">EDIT SPIKE</span>
   </div>
   <div class="ed-actions">
+    <button id="edAdd" disabled>+ Add tile</button>
     <button id="edToggle">🔓 Unlock</button>
     <button id="edReset" class="danger">Reset</button>
     <button id="edDump">Dump JSON</button>
@@ -391,200 +464,319 @@
 
 <div class="stage">
   <div class="grid-stack" id="grid">
+    <!-- Tiles injected by JS from the catalog below -->
+  </div>
+</div>
 
-    <!-- KIDS -->
-    <div class="grid-stack-item" gs-id="kids" gs-x="0" gs-y="0" gs-w="3" gs-h="3">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
-        <div class="tile-body">
-          <div class="kids-grid">
-            <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
+<!-- TILE CATALOG: defines every available tile (id + label + default size + HTML) -->
+<script type="application/json" id="tileCatalog">
+[
+  { "id": "kids",       "label": "👨‍👩‍👦‍👦 Kids (sugar/allowance)", "w": 3, "h": 3 },
+  { "id": "budget",     "label": "💳 Budget",                       "w": 3, "h": 2 },
+  { "id": "countdowns", "label": "⏳ Countdowns",                   "w": 3, "h": 3 },
+  { "id": "calendar",   "label": "📅 Upcoming events",              "w": 5, "h": 5 },
+  { "id": "chores",     "label": "🧹 Weekend chores",               "w": 4, "h": 5 },
+  { "id": "weather",    "label": "☀️ Weather",                      "w": 3, "h": 3 },
+  { "id": "meals",      "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
+  { "id": "dinner",     "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
+  { "id": "newish",     "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
+]
+</script>
+
+<!-- Default layout if no saved state -->
+<script type="application/json" id="defaultLayout">
+[
+  { "id": "kids",       "x": 0, "y": 0, "w": 3, "h": 3 },
+  { "id": "budget",     "x": 0, "y": 3, "w": 3, "h": 2 },
+  { "id": "countdowns", "x": 0, "y": 5, "w": 3, "h": 3 },
+  { "id": "calendar",   "x": 3, "y": 0, "w": 5, "h": 5 },
+  { "id": "chores",     "x": 8, "y": 0, "w": 4, "h": 5 },
+  { "id": "newish",     "x": 3, "y": 5, "w": 9, "h": 3 }
+]
+</script>
+
+<!-- HIDDEN TILE TEMPLATES — server-rendered content cloned into the grid on demand -->
+<div id="tileTemplates" style="display:none">
+
+  <div data-tpl="kids">
+    <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
+    <div class="tile-body">
+      <div class="kids-grid">
+        <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
+        
+          <div class="nm">Thomas</div>
+          
             
-              <div class="nm">Thomas</div>
-              
-                
-                
-                <div class="v">260g</div>
-              
-              
-                
-                <div class="v">$100.00</div>
-              
             
-              <div class="nm">William</div>
-              
-                
-                
-                <div class="v">156g</div>
-              
-              
-                
-                <div class="v">$21.31</div>
-              
+            <div class="v">260g</div>
+          
+          
             
-              <div class="nm">Henry</div>
-              
-                
-                
-                <div class="v">98g</div>
-              
-              
-                
-                <div class="v">$72.13</div>
-              
+            <div class="v">$100.00</div>
+          
+        
+          <div class="nm">William</div>
+          
             
-              <div class="nm">Charlie</div>
-              
-                
-                
-                <div class="v">83g</div>
-              
-              
-                
-                <div class="v danger">$-273.23</div>
-              
             
+            <div class="v">156g</div>
+          
+          
+            
+            <div class="v">$21.31</div>
+          
+        
+          <div class="nm">Henry</div>
+          
+            
+            
+            <div class="v">98g</div>
+          
+          
+            
+            <div class="v">$72.13</div>
+          
+        
+          <div class="nm">Charlie</div>
+          
+            
+            
+            <div class="v">83g</div>
+          
+          
+            
+            <div class="v danger">$-273.23</div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="budget">
+    <div class="tile-h"><span>💳 Budget</span><span class="sub">June · day 14/30</span></div>
+    <div class="tile-body">
+      <div class="budget-row"><span class="lab">Shopping</span><span class="bar"><div style="width:45%;background:#86efac"></div></span><span class="pace">on pace</span></div>
+      <div class="budget-row"><span class="lab">Food</span><span class="bar"><div style="width:78%;background:#fb923c"></div></span><span class="pace">high</span></div>
+      <div class="budget-row"><span class="lab">Entertain</span><span class="bar"><div style="width:82%;background:#fb923c"></div></span><span class="pace">high</span></div>
+    </div>
+  </div>
+
+  <div data-tpl="countdowns">
+    <div class="tile-h"><span>⏳ Countdowns</span></div>
+    <div class="tile-body">
+      <div class="cd-list">
+        <div class="cd-row"><span class="n">4</span><span class="l">days to California</span></div>
+        <div class="cd-row"><span class="n">12</span><span class="l">days to Dude Perfect</span></div>
+        <div class="cd-row"><span class="n">22</span><span class="l">days to lake trip</span></div>
+        <div class="cd-row"><span class="n">60</span><span class="l">days to first day of school</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="calendar">
+    <div class="tile-h"><span>📅 Upcoming</span></div>
+    <div class="tile-body">
+      <div class="cal-list">
+        
+        <div class="cal-row">
+          <span class="t">8a</span>
+          <span class="w">Mass</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">all day</span>
+          <span class="w">Intern Cohort B Starts - Abdulkhaliq &amp; Rohan</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">10a</span>
+          <span class="w">Mom: Dr Smith (psychiatrist) appointment</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">10a</span>
+          <span class="w">Thomas art camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">12:30p</span>
+          <span class="w">Thomas handwriting camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">1p</span>
+          <span class="w">William art camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">9a</span>
+          <span class="w">Nancy brain MRI 🧠</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">10a</span>
+          <span class="w">Thomas art camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">12:30p</span>
+          <span class="w">Thomas handwriting camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">1p</span>
+          <span class="w">William art camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">10a</span>
+          <span class="w">Thomas art camp</span>
+        </div>
+        
+        <div class="cal-row">
+          <span class="t">10:15a</span>
+          <span class="w">Drive Mom to pain clinic (Spartanburg Regional)</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="chores">
+    <div class="tile-h"><span>🧹 Weekend chores</span><span class="sub">2nd weekend</span></div>
+    <div class="tile-body">
+      <div class="chores-cols">
+        <div class="chores-col">
+          <h4>Saturday</h4>
+          <div class="chores-group">
+            <div class="gh">Quick clean</div>
+            <ul>
+              <li>☐ Pick up entire house</li><li>☐ Wipe kitchen counter/stovetop</li><li>☐ Vacuum all carpet</li><li>☐ Sweep all hard floors</li><li>☐ Bathroom mirrors/counters</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chores-col">
+          <h4>Sunday</h4>
+          <div class="chores-group">
+            <div class="gh">Laundry / Trash</div>
+            <ul>
+              <li>☐ Empty all trash cans</li><li>☐ Take out trash and recycling</li><li>☐ Laundry (wash, put away)</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- BUDGET -->
-    <div class="grid-stack-item" gs-id="budget" gs-x="0" gs-y="3" gs-w="3" gs-h="2">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>💳 Budget</span><span class="sub">June · day 14/30</span></div>
-        <div class="tile-body">
-          <div class="budget-row"><span class="lab">Shopping</span><span class="bar"><div style="width:45%;background:#86efac"></div></span><span class="pace">on pace</span></div>
-          <div class="budget-row"><span class="lab">Food</span><span class="bar"><div style="width:78%;background:#fb923c"></div></span><span class="pace">high</span></div>
-          <div class="budget-row"><span class="lab">Entertain</span><span class="bar"><div style="width:82%;background:#fb923c"></div></span><span class="pace">high</span></div>
-        </div>
+  <div data-tpl="weather">
+    <div class="tile-h"><span>☀️ Weather</span><span class="sub">Greenville</span></div>
+    <div class="tile-body">
+      <div class="weather-row">
+        <span class="icon">☀️</span>
+        <span class="temp">75°</span>
+        <span class="hilo">H 92 / L 72</span>
       </div>
-    </div>
-
-    <!-- COUNTDOWNS -->
-    <div class="grid-stack-item" gs-id="countdowns" gs-x="0" gs-y="5" gs-w="3" gs-h="3">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>⏳ Countdowns</span></div>
-        <div class="tile-body">
-          <div class="cd-list">
-            <div class="cd-row"><span class="n">4</span><span class="l">days to California</span></div>
-            <div class="cd-row"><span class="n">12</span><span class="l">days to Dude Perfect</span></div>
-            <div class="cd-row"><span class="n">22</span><span class="l">days to lake trip</span></div>
-            <div class="cd-row"><span class="n">60</span><span class="l">days to first day of school</span></div>
+      <div class="weather-days">
+        
+          <div>
+            <div class="d">Mon</div>
+            <div class="ic">🌦</div>
+            <div class="hl">92/71</div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CALENDAR -->
-    <div class="grid-stack-item" gs-id="calendar" gs-x="3" gs-y="0" gs-w="5" gs-h="5">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>📅 Upcoming</span></div>
-        <div class="tile-body">
-          <div class="cal-list" id="edCalList">
-            
-            <div class="cal-row">
-              <span class="t">8a</span>
-              <span class="w">Mass</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">all day</span>
-              <span class="w">Intern Cohort B Starts - Abdulkhaliq &amp; Rohan</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">10a</span>
-              <span class="w">Mom: Dr Smith (psychiatrist) appointment</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">10a</span>
-              <span class="w">Thomas art camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">12:30p</span>
-              <span class="w">Thomas handwriting camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">1p</span>
-              <span class="w">William art camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">9a</span>
-              <span class="w">Nancy brain MRI 🧠</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">10a</span>
-              <span class="w">Thomas art camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">12:30p</span>
-              <span class="w">Thomas handwriting camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">1p</span>
-              <span class="w">William art camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">10a</span>
-              <span class="w">Thomas art camp</span>
-            </div>
-            
-            <div class="cal-row">
-              <span class="t">10:15a</span>
-              <span class="w">Drive Mom to pain clinic (Spartanburg Regional)</span>
-            </div>
-            
+        
+          <div>
+            <div class="d">Tue</div>
+            <div class="ic">⛅</div>
+            <div class="hl">82/69</div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHORES -->
-    <div class="grid-stack-item" gs-id="chores" gs-x="8" gs-y="0" gs-w="4" gs-h="5">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>🧹 Weekend chores</span><span class="sub">2nd weekend</span></div>
-        <div class="tile-body">
-          <div class="chores-cols">
-            <div class="chores-col">
-              <h4>Saturday</h4>
-              <div class="chores-group">
-                <div class="gh">Quick clean</div>
-                <ul>
-                  <li>☐ Pick up entire house</li><li>☐ Wipe kitchen counter/stovetop</li><li>☐ Vacuum all carpet</li><li>☐ Sweep all hard floors</li><li>☐ Bathroom mirrors/counters</li>
-                </ul>
-              </div>
-            </div>
-            <div class="chores-col">
-              <h4>Sunday</h4>
-              <div class="chores-group">
-                <div class="gh">Laundry / Trash</div>
-                <ul>
-                  <li>☐ Empty all trash cans</li><li>☐ Take out trash and recycling</li><li>☐ Laundry (wash, put away)</li>
-                </ul>
-              </div>
-            </div>
+        
+          <div>
+            <div class="d">Wed</div>
+            <div class="ic">⛅</div>
+            <div class="hl">85/65</div>
           </div>
-        </div>
+        
+          <div>
+            <div class="d">Thu</div>
+            <div class="ic">🌦</div>
+            <div class="hl">88/70</div>
+          </div>
+        
+          <div>
+            <div class="d">Fri</div>
+            <div class="ic">🌦</div>
+            <div class="hl">86/69</div>
+          </div>
+        
       </div>
     </div>
+  </div>
 
-    <!-- PLACEHOLDER -->
-    <div class="grid-stack-item" gs-id="newish" gs-x="3" gs-y="5" gs-w="9" gs-h="3">
-      <div class="grid-stack-item-content">
-        <div class="tile-h"><span>✨ New block</span></div>
-        <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
+  <div data-tpl="meals">
+    <div class="tile-h"><span>🍽️ Meal plan</span><span class="sub">This week</span></div>
+    <div class="tile-body">
+      <div class="meal-list">
+        
+          <div class="row today">
+            <span class="dow">Sun</span>
+            <span class="nm">Leftovers</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Mon</span>
+            <span class="nm">Chicken stir fry (frozen veg + sauce)</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Tue</span>
+            <span class="nm">Leftovers</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Wed</span>
+            <span class="nm">Crockpot chicken and dumplings</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Thu</span>
+            <span class="nm">Homemade Hamburger Helper</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Fri</span>
+            <span class="nm">Italian sausage + onion + zucchini</span>
+          </div>
+        
+          <div class="row">
+            <span class="dow">Sat</span>
+            <span class="nm">Pizza night</span>
+          </div>
+        
       </div>
     </div>
+  </div>
 
+  <div data-tpl="dinner">
+    <div class="tile-h"><span>🍳 Tonight</span></div>
+    <div class="tile-body">
+      <div style="font-size:1.05rem;font-weight:700;margin-bottom:4px">Leftovers</div>
+      
+    </div>
+  </div>
+
+  <div data-tpl="newish">
+    <div class="tile-h"><span>✨ New block</span></div>
+    <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
+  </div>
+
+</div>
+
+<!-- Add-tile picker modal -->
+<div class="picker-backdrop" id="picker">
+  <div class="picker">
+    <button class="close" id="pickerClose">✕</button>
+    <h3>Add a tile</h3>
+    <div class="pick-list" id="pickerList"></div>
   </div>
 </div>
 
@@ -594,30 +786,64 @@
 (function(){
   const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
 
-  // Compute cell height to fit viewport: 12 rows visible
+  // Parse catalog + default layout from inline JSON
+  const CATALOG = JSON.parse(document.getElementById('tileCatalog').textContent);
+  const CATALOG_BY_ID = Object.fromEntries(CATALOG.map(c => [c.id, c]));
+  const DEFAULT_LAYOUT = JSON.parse(document.getElementById('defaultLayout').textContent);
+
+  // Pull each rendered tile body from the hidden template store
+  const TEMPLATES = {};
+  document.querySelectorAll('#tileTemplates [data-tpl]').forEach(el => {
+    TEMPLATES[el.dataset.tpl] = el.innerHTML;
+  });
+
+  // Compute cell height to fit viewport
   const stage = document.querySelector('.stage');
-  const stageH = stage.clientHeight - 16; // padding
-  const cellH = Math.floor(stageH / 8); // ~8 rows tall = nice tiles
+  const stageH = stage.clientHeight - 16;
+  const cellH = Math.floor(stageH / 8);
 
   const grid = GridStack.init({
     column: 12,
     cellHeight: cellH,
     margin: 4,
     float: false,
-    disableDrag: true,        // locked by default
+    disableDrag: true,
     disableResize: true,
-    handle: '.grid-stack-item-content', // whole tile is drag handle in edit mode
+    handle: '.grid-stack-item-content',
     acceptWidgets: false,
   }, '#grid');
 
-  // Restore saved layout
+  function tileHTML(id) {
+    const body = TEMPLATES[id] || '<div class="placeholder">Missing template: ' + id + '</div>';
+    return '<div class="grid-stack-item-content">' +
+             '<button class="tile-rm" data-rm="' + id + '" title="Remove">✕</button>' +
+             body +
+           '</div>';
+  }
+
+  function addTile(spec) {
+    const catalog = CATALOG_BY_ID[spec.id];
+    if (!catalog) return;
+    grid.addWidget({
+      id: spec.id,
+      x: spec.x, y: spec.y,
+      w: spec.w || catalog.w,
+      h: spec.h || catalog.h,
+      content: tileHTML(spec.id),
+    });
+  }
+
+  // Initial load: saved state if any, else defaults
+  let initial = DEFAULT_LAYOUT;
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     try {
-      const layout = JSON.parse(saved);
-      grid.load(layout, false); // apply positions/sizes only, don't recreate widgets
-    } catch(e) { console.warn('Failed to restore layout', e); }
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length) initial = parsed;
+    } catch(e) { console.warn('Failed to parse saved layout, using defaults', e); }
   }
+  initial.forEach(addTile);
+  refreshAddButton();
 
   const toast = document.getElementById('edToast');
   function showToast(msg) {
@@ -627,11 +853,34 @@
     toast._t = setTimeout(() => toast.classList.remove('show'), 1200);
   }
 
-  // Persist on change
-  grid.on('change added removed', () => {
-    const data = grid.save(false); // no content, just layout
+  function currentIds() {
+    return grid.engine.nodes.map(n => n.id);
+  }
+
+  function refreshAddButton() {
+    const missing = CATALOG.filter(c => !currentIds().includes(c.id));
+    document.getElementById('edAdd').disabled = missing.length === 0;
+  }
+
+  function persist() {
+    // Save just id/x/y/w/h — content is rebuilt from templates on load
+    const data = grid.engine.nodes
+      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
+      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    refreshAddButton();
     showToast('Saved');
+  }
+
+  grid.on('change added removed', persist);
+
+  // Tile remove buttons (event-delegated)
+  document.getElementById('grid').addEventListener('click', (ev) => {
+    const btn = ev.target.closest('.tile-rm');
+    if (!btn) return;
+    const id = btn.dataset.rm;
+    const node = grid.engine.nodes.find(n => n.id === id);
+    if (node) grid.removeWidget(node.el, true);
   });
 
   // Edit mode toggle
@@ -662,10 +911,40 @@
 
   // Dump
   document.getElementById('edDump').addEventListener('click', () => {
-    const data = grid.save(false);
+    const data = grid.engine.nodes
+      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
+      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
     console.log('LAYOUT', data);
-    prompt('Layout JSON (copy):', JSON.stringify(data));
+    prompt('Layout JSON (copy):', JSON.stringify(data, null, 2));
   });
+
+  // Add-tile picker
+  const picker = document.getElementById('picker');
+  const pickerList = document.getElementById('pickerList');
+  document.getElementById('edAdd').addEventListener('click', () => {
+    const present = new Set(currentIds());
+    const missing = CATALOG.filter(c => !present.has(c.id));
+    pickerList.innerHTML = '';
+    if (missing.length === 0) {
+      pickerList.innerHTML = '<div class="empty">All tiles are already on the dashboard.</div>';
+    } else {
+      missing.forEach(c => {
+        const el = document.createElement('div');
+        el.className = 'pick-item';
+        el.innerHTML = '<span>' + c.label + '</span><span class="add">ADD</span>';
+        el.addEventListener('click', () => {
+          // Add at bottom-left; GridStack will find a fit slot
+          addTile({ id: c.id, x: 0, y: 9999, w: c.w, h: c.h });
+          picker.classList.remove('show');
+          showToast('Added: ' + c.label);
+        });
+        pickerList.appendChild(el);
+      });
+    }
+    picker.classList.add('show');
+  });
+  document.getElementById('pickerClose').addEventListener('click', () => picker.classList.remove('show'));
+  picker.addEventListener('click', (ev) => { if (ev.target === picker) picker.classList.remove('show'); });
 })();
 </script>
 
