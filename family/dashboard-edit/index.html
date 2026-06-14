@@ -212,19 +212,29 @@
     color: var(--text-dark);
   }
 
-  /* === TOP TOOLBAR === */
+  /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) === */
   .ed-bar {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 44px;
-    display: flex;
+    top: 12px; right: 12px;
+    display: none;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 14px;
+    gap: 14px;
+    padding: 10px 14px;
     background: var(--card-bg);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    z-index: 10000;
     font-size: 13px;
+  }
+  .ed-bar.open { display: flex; }
+  .ed-tap {
+    position: fixed;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    z-index: 9999;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .ed-bar .ed-title {
     font-weight: 700;
@@ -266,12 +276,12 @@
     border-color: #f4c0c8;
   }
   .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
-  body[data-edit="1"] .ed-bar { background: #fef3c7; border-bottom-color: #fbbf24; }
+  body[data-edit="1"] .ed-bar { background: #fef3c7; border-color: #fbbf24; }
 
   /* === STAGE === */
   .stage {
     position: fixed;
-    top: 44px; left: 0; right: 0; bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     padding: 6px;
     overflow: hidden;
   }
@@ -943,10 +953,8 @@
   .ed-toast.show { opacity: 1; }
 </style>
 
-<div class="ed-bar">
-  <div class="ed-title">
-    Dashboard <span class="pill">EDIT SPIKE</span>
-  </div>
+<div class="ed-tap" id="edTap" title="Edit toolbar"></div>
+<div class="ed-bar" id="edBar">
   <div class="ed-actions">
     <button id="edAdd" disabled>+ Add tile</button>
     <button id="edToggle">🔓 Unlock</button>
@@ -1836,6 +1844,22 @@
     localStorage.removeItem(STORAGE_KEY);
     location.reload();
   });
+
+  // Top-right tap target → toggle floating toolbar.
+  // Tap outside the bar closes it.
+  (function wireToolbarTap() {
+    const tap = document.getElementById('edTap');
+    const bar = document.getElementById('edBar');
+    tap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      bar.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!bar.classList.contains('open')) return;
+      if (bar.contains(e.target) || tap.contains(e.target)) return;
+      bar.classList.remove('open');
+    });
+  })();
 
   // Add-tile picker
   const picker = document.getElementById('picker');
