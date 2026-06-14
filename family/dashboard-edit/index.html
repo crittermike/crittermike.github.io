@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- iOS standalone (Add to Home Screen kiosk mode) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dashboard">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Dashboard Edit (Spike) - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" >Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<!--
+  GRIDSTACK SPIKE — drag/resize sandbox.
+  Does NOT touch /dashboard/. Layout persisted to localStorage key:
+    crittercrew.dashedit.layout.v1
+  Toggle edit mode via the gear button (top right). Layout is locked by default
+  so taps on tile contents don't accidentally trigger drags.
+-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack-all.js"></script>
+
+<style>
+  #site-nav { display: none !important; }
+  html, body { overflow: hidden; height: 100%; margin: 0; }
+  body {
+    background: #f5f1ea;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    color: #2d2a26;
+  }
+
+  /* Top toolbar */
+  .ed-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #fff;
+    border-bottom: 1px solid #e8e2d6;
+    z-index: 100;
+    font-size: 13px;
+  }
+  .ed-bar .ed-title {
+    font-weight: 700;
+    color: #2d2a26;
+    font-size: 14px;
+  }
+  .ed-bar .ed-title .pill {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ed-bar .ed-actions { display: flex; gap: 8px; align-items: center; }
+  .ed-bar button {
+    border: 1px solid #d6d0c2;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d2a26;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ed-bar button.primary {
+    background: #2d2a26;
+    color: #fff;
+    border-color: #2d2a26;
+  }
+  .ed-bar button.danger {
+    background: #fff;
+    color: #b91c1c;
+    border-color: #fecaca;
+  }
+  body[data-edit="1"] .ed-bar { background: #fef3c7; border-bottom-color: #fbbf24; }
+
+  /* Stage */
+  .stage {
+    position: fixed;
+    top: 44px; left: 0; right: 0; bottom: 0;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  /* GridStack appearance */
+  .grid-stack {
+    background: transparent;
+    height: 100% !important;
+  }
+  .grid-stack-item-content {
+    background: #fff;
+    border: 1px solid #e8e2d6;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 12px 14px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    inset: 4px !important;
+  }
+  body[data-edit="1"] .grid-stack-item-content {
+    border-color: #fbbf24;
+    border-style: dashed;
+    cursor: move;
+  }
+  /* Hide content interactivity in edit mode so taps go to drag */
+  body[data-edit="1"] .grid-stack-item-content * { pointer-events: none; }
+
+  /* Tile header */
+  .tile-h {
+    margin: 0 0 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #6b6357;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-shrink: 0;
+  }
+  .tile-h .sub {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 600;
+  }
+  .tile-body { flex: 1; min-height: 0; overflow: auto; font-size: 0.85rem; color: #2d2a26; }
+
+  /* Specific tile content */
+  .kids-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 14px;
+    row-gap: 7px;
+    align-items: baseline;
+  }
+  .kids-grid .h {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 700;
+  }
+  .kids-grid .h.r { text-align: right; }
+  .kids-grid .nm { font-weight: 700; }
+  .kids-grid .v { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .kids-grid .v.danger { color: #b91c1c; }
+  .kids-grid .v.warn { color: #b45309; }
+
+  .cd-list { display: flex; flex-direction: column; gap: 6px; }
+  .cd-row { display: flex; align-items: baseline; gap: 8px; }
+  .cd-row .n { font-size: 1.15rem; font-weight: 700; min-width: 36px; }
+  .cd-row .l { font-size: 0.85rem; color: #6b6357; }
+
+  .cal-list { display: flex; flex-direction: column; gap: 4px; }
+  .cal-row { display: flex; gap: 8px; font-size: 0.82rem; line-height: 1.3; }
+  .cal-row .t { color: #a39988; min-width: 56px; font-variant-numeric: tabular-nums; }
+  .cal-row .w { color: #2d2a26; flex: 1; }
+
+  .chores-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .chores-col h4 {
+    margin: 0 0 6px;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    color: #b91c1c;
+    font-weight: 600;
+  }
+  .chores-group { margin-bottom: 10px; }
+  .chores-group .gh {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .chores-group ul { list-style: none; padding: 0; margin: 0; }
+  .chores-group li { font-size: 0.78rem; padding: 2px 0; color: #2d2a26; }
+
+  .budget-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .budget-row .lab { font-size: 0.78rem; width: 80px; }
+  .budget-row .bar { flex: 1; height: 8px; background: #f0ebe0; border-radius: 999px; overflow: hidden; }
+  .budget-row .bar > div { height: 100%; border-radius: 999px; }
+  .budget-row .pace { font-size: 0.7rem; color: #a39988; min-width: 70px; text-align: right; }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #a39988;
+    font-style: italic;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+
+  /* Toast */
+  .ed-toast {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d2a26;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    z-index: 200;
+  }
+  .ed-toast.show { opacity: 1; }
+</style>
+
+<div class="ed-bar">
+  <div class="ed-title">
+    Dashboard <span class="pill">EDIT SPIKE</span>
+  </div>
+  <div class="ed-actions">
+    <button id="edToggle">🔓 Unlock</button>
+    <button id="edReset" class="danger">Reset</button>
+    <button id="edDump">Dump JSON</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="grid-stack" id="grid">
+
+    <!-- KIDS -->
+    <div class="grid-stack-item" gs-id="kids" gs-x="0" gs-y="0" gs-w="3" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
+        <div class="tile-body">
+          <div class="kids-grid">
+            <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
+            
+              <div class="nm">Thomas</div>
+              
+                
+                
+                <div class="v">260g</div>
+              
+              
+                
+                <div class="v">$100.00</div>
+              
+            
+              <div class="nm">William</div>
+              
+                
+                
+                <div class="v">156g</div>
+              
+              
+                
+                <div class="v">$21.31</div>
+              
+            
+              <div class="nm">Henry</div>
+              
+                
+                
+                <div class="v">98g</div>
+              
+              
+                
+                <div class="v">$72.13</div>
+              
+            
+              <div class="nm">Charlie</div>
+              
+                
+                
+                <div class="v">83g</div>
+              
+              
+                
+                <div class="v danger">$-273.23</div>
+              
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="grid-stack-item" gs-id="budget" gs-x="0" gs-y="3" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>💳 Budget</span><span class="sub">June · day 14/30</span></div>
+        <div class="tile-body">
+          <div class="budget-row"><span class="lab">Shopping</span><span class="bar"><div style="width:45%;background:#86efac"></div></span><span class="pace">on pace</span></div>
+          <div class="budget-row"><span class="lab">Food</span><span class="bar"><div style="width:78%;background:#fb923c"></div></span><span class="pace">high</span></div>
+          <div class="budget-row"><span class="lab">Entertain</span><span class="bar"><div style="width:82%;background:#fb923c"></div></span><span class="pace">high</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWNS -->
+    <div class="grid-stack-item" gs-id="countdowns" gs-x="0" gs-y="5" gs-w="3" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>⏳ Countdowns</span></div>
+        <div class="tile-body">
+          <div class="cd-list">
+            <div class="cd-row"><span class="n">4</span><span class="l">days to California</span></div>
+            <div class="cd-row"><span class="n">12</span><span class="l">days to Dude Perfect</span></div>
+            <div class="cd-row"><span class="n">22</span><span class="l">days to lake trip</span></div>
+            <div class="cd-row"><span class="n">60</span><span class="l">days to first day of school</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="grid-stack-item" gs-id="calendar" gs-x="3" gs-y="0" gs-w="5" gs-h="5">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>📅 Upcoming</span></div>
+        <div class="tile-body">
+          <div class="cal-list" id="edCalList">
+            
+            <div class="cal-row">
+              <span class="t">8a</span>
+              <span class="w">Mass</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">all day</span>
+              <span class="w">Intern Cohort B Starts - Abdulkhaliq &amp; Rohan</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">10a</span>
+              <span class="w">Mom: Dr Smith (psychiatrist) appointment</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">10a</span>
+              <span class="w">Thomas art camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">12:30p</span>
+              <span class="w">Thomas handwriting camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">1p</span>
+              <span class="w">William art camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">9a</span>
+              <span class="w">Nancy brain MRI 🧠</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">10a</span>
+              <span class="w">Thomas art camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">12:30p</span>
+              <span class="w">Thomas handwriting camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">1p</span>
+              <span class="w">William art camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">10a</span>
+              <span class="w">Thomas art camp</span>
+            </div>
+            
+            <div class="cal-row">
+              <span class="t">10:15a</span>
+              <span class="w">Drive Mom to pain clinic (Spartanburg Regional)</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHORES -->
+    <div class="grid-stack-item" gs-id="chores" gs-x="8" gs-y="0" gs-w="4" gs-h="5">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>🧹 Weekend chores</span><span class="sub">2nd weekend</span></div>
+        <div class="tile-body">
+          <div class="chores-cols">
+            <div class="chores-col">
+              <h4>Saturday</h4>
+              <div class="chores-group">
+                <div class="gh">Quick clean</div>
+                <ul>
+                  <li>☐ Pick up entire house</li><li>☐ Wipe kitchen counter/stovetop</li><li>☐ Vacuum all carpet</li><li>☐ Sweep all hard floors</li><li>☐ Bathroom mirrors/counters</li>
+                </ul>
+              </div>
+            </div>
+            <div class="chores-col">
+              <h4>Sunday</h4>
+              <div class="chores-group">
+                <div class="gh">Laundry / Trash</div>
+                <ul>
+                  <li>☐ Empty all trash cans</li><li>☐ Take out trash and recycling</li><li>☐ Laundry (wash, put away)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER -->
+    <div class="grid-stack-item" gs-id="newish" gs-x="3" gs-y="5" gs-w="9" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>✨ New block</span></div>
+        <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="ed-toast" id="edToast">Saved</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
+
+  // Compute cell height to fit viewport: 12 rows visible
+  const stage = document.querySelector('.stage');
+  const stageH = stage.clientHeight - 16; // padding
+  const cellH = Math.floor(stageH / 8); // ~8 rows tall = nice tiles
+
+  const grid = GridStack.init({
+    column: 12,
+    cellHeight: cellH,
+    margin: 4,
+    float: false,
+    disableDrag: true,        // locked by default
+    disableResize: true,
+    handle: '.grid-stack-item-content', // whole tile is drag handle in edit mode
+    acceptWidgets: false,
+  }, '#grid');
+
+  // Restore saved layout
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const layout = JSON.parse(saved);
+      grid.load(layout, false); // apply positions/sizes only, don't recreate widgets
+    } catch(e) { console.warn('Failed to restore layout', e); }
+  }
+
+  const toast = document.getElementById('edToast');
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 1200);
+  }
+
+  // Persist on change
+  grid.on('change added removed', () => {
+    const data = grid.save(false); // no content, just layout
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showToast('Saved');
+  });
+
+  // Edit mode toggle
+  const toggleBtn = document.getElementById('edToggle');
+  toggleBtn.addEventListener('click', () => {
+    const locked = document.body.dataset.edit !== '1';
+    if (locked) {
+      document.body.dataset.edit = '1';
+      grid.enableMove(true);
+      grid.enableResize(true);
+      toggleBtn.textContent = '🔒 Lock';
+      toggleBtn.classList.add('primary');
+    } else {
+      delete document.body.dataset.edit;
+      grid.enableMove(false);
+      grid.enableResize(false);
+      toggleBtn.textContent = '🔓 Unlock';
+      toggleBtn.classList.remove('primary');
+    }
+  });
+
+  // Reset
+  document.getElementById('edReset').addEventListener('click', () => {
+    if (!confirm('Reset layout to default?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  // Dump
+  document.getElementById('edDump').addEventListener('click', () => {
+    const data = grid.save(false);
+    console.log('LAYOUT', data);
+    prompt('Layout JSON (copy):', JSON.stringify(data));
+  });
+})();
+</script>
+
+</body>
+</html>

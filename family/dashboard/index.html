@@ -1207,16 +1207,16 @@
      ============================================================ */
 
   /* Default: weekend-only blocks hidden */
-  .kids-mini, .chores { display: none; }
+  .kids-mini, .chores, .newish { display: none; }
 
   body[data-weekend="1"] .dash {
     grid-template-columns: 1.05fr 1.5fr 1.55fr;
-    grid-template-rows: 72px auto auto 1fr;
+    grid-template-rows: 72px 1fr 1fr 1fr;
     grid-template-areas:
-      "top    top   top"
-      "kmini  cal   chores"
-      "budget cal   chores"
-      "cdown  cal   chores";
+      "top    top    top"
+      "kmini  cal    chores"
+      "budget cal    chores"
+      "cdown  newish newish";
   }
 
   /* Hide weekday-only blocks */
@@ -1227,7 +1227,47 @@
   body[data-weekend="1"] .budget    { grid-area: budget; }
   body[data-weekend="1"] .cd-card   { grid-area: cdown; }
   body[data-weekend="1"] .cal       { grid-area: cal; }
-  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; align-self: start; max-height: 100%; }
+  body[data-weekend="1"] .chores    { grid-area: chores; display: flex; align-self: stretch; max-height: 100%; }
+  body[data-weekend="1"] .newish    { grid-area: newish; display: flex; }
+
+  /* === NEWISH placeholder tile === */
+  .newish {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    gap: 8px;
+  }
+  .newish .card-h {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .newish .newish-sub {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+  .newish .newish-body {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+  }
 
   /* === KIDS-MINI combined tile === */
   .kids-mini {
@@ -1422,7 +1462,7 @@
       <div class="fc-now">
         <span class="icon">☀️</span>
         <div class="meta">
-          <span class="temp">74°</span>
+          <span class="temp">75°</span>
           <span class="lo-hi">L 72° · H 92°</span>
         </div>
       </div>
@@ -1432,7 +1472,7 @@
         
         <div class="fc-day"><span class="d">Tue</span><span class="i">⛅</span><span class="hi">82°</span><span class="lo">69°</span></div>
         
-        <div class="fc-day"><span class="d">Wed</span><span class="i">🌦</span><span class="hi">85°</span><span class="lo">65°</span></div>
+        <div class="fc-day"><span class="d">Wed</span><span class="i">⛅</span><span class="hi">85°</span><span class="lo">65°</span></div>
         
         <div class="fc-day"><span class="d">Thu</span><span class="i">🌦</span><span class="hi">88°</span><span class="lo">70°</span></div>
         
@@ -1445,14 +1485,10 @@
 
   <!-- KIDS MINI (weekend only): combined sugar + allowance tile -->
   <div class="kids-mini">
-    <div class="card-h">
-      <span>👨‍👩‍👦‍👦 Kids</span>
-      <span style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light);">Sugar · Allowance</span>
-    </div>
     <div class="kids-mini-grid">
       <div class="km-head">Name</div>
-      <div class="km-head right">🍭</div>
-      <div class="km-head right">💵</div>
+      <div class="km-head right">Sugar</div>
+      <div class="km-head right">Allowance</div>
       
         <div class="km-name">Thomas</div>
         
@@ -1819,6 +1855,17 @@
         
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- NEWISH (weekend only): placeholder for new bottom block -->
+  <div class="newish">
+    <div class="card-h">
+      <span>✨ New block</span>
+      <span class="newish-sub">pick one: dinner · weekend goal · sports · read-aloud</span>
+    </div>
+    <div class="newish-body">
+      Mike — pick what goes here and I'll wire it up.
     </div>
   </div>
 

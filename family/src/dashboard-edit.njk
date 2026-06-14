@@ -1,0 +1,427 @@
+---
+layout: base.njk
+title: Dashboard Edit (Spike)
+permalink: "/dashboard-edit/index.html"
+eleventyExcludeFromCollections: true
+---
+
+<!--
+  GRIDSTACK SPIKE — drag/resize sandbox.
+  Does NOT touch /dashboard/. Layout persisted to localStorage key:
+    crittercrew.dashedit.layout.v1
+  Toggle edit mode via the gear button (top right). Layout is locked by default
+  so taps on tile contents don't accidentally trigger drags.
+-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack-all.js"></script>
+
+<style>
+  #site-nav { display: none !important; }
+  html, body { overflow: hidden; height: 100%; margin: 0; }
+  body {
+    background: #f5f1ea;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    color: #2d2a26;
+  }
+
+  /* Top toolbar */
+  .ed-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #fff;
+    border-bottom: 1px solid #e8e2d6;
+    z-index: 100;
+    font-size: 13px;
+  }
+  .ed-bar .ed-title {
+    font-weight: 700;
+    color: #2d2a26;
+    font-size: 14px;
+  }
+  .ed-bar .ed-title .pill {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ed-bar .ed-actions { display: flex; gap: 8px; align-items: center; }
+  .ed-bar button {
+    border: 1px solid #d6d0c2;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d2a26;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ed-bar button.primary {
+    background: #2d2a26;
+    color: #fff;
+    border-color: #2d2a26;
+  }
+  .ed-bar button.danger {
+    background: #fff;
+    color: #b91c1c;
+    border-color: #fecaca;
+  }
+  body[data-edit="1"] .ed-bar { background: #fef3c7; border-bottom-color: #fbbf24; }
+
+  /* Stage */
+  .stage {
+    position: fixed;
+    top: 44px; left: 0; right: 0; bottom: 0;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  /* GridStack appearance */
+  .grid-stack {
+    background: transparent;
+    height: 100% !important;
+  }
+  .grid-stack-item-content {
+    background: #fff;
+    border: 1px solid #e8e2d6;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 12px 14px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    inset: 4px !important;
+  }
+  body[data-edit="1"] .grid-stack-item-content {
+    border-color: #fbbf24;
+    border-style: dashed;
+    cursor: move;
+  }
+  /* Hide content interactivity in edit mode so taps go to drag */
+  body[data-edit="1"] .grid-stack-item-content * { pointer-events: none; }
+
+  /* Tile header */
+  .tile-h {
+    margin: 0 0 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #6b6357;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-shrink: 0;
+  }
+  .tile-h .sub {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 600;
+  }
+  .tile-body { flex: 1; min-height: 0; overflow: auto; font-size: 0.85rem; color: #2d2a26; }
+
+  /* Specific tile content */
+  .kids-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 14px;
+    row-gap: 7px;
+    align-items: baseline;
+  }
+  .kids-grid .h {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 700;
+  }
+  .kids-grid .h.r { text-align: right; }
+  .kids-grid .nm { font-weight: 700; }
+  .kids-grid .v { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .kids-grid .v.danger { color: #b91c1c; }
+  .kids-grid .v.warn { color: #b45309; }
+
+  .cd-list { display: flex; flex-direction: column; gap: 6px; }
+  .cd-row { display: flex; align-items: baseline; gap: 8px; }
+  .cd-row .n { font-size: 1.15rem; font-weight: 700; min-width: 36px; }
+  .cd-row .l { font-size: 0.85rem; color: #6b6357; }
+
+  .cal-list { display: flex; flex-direction: column; gap: 4px; }
+  .cal-row { display: flex; gap: 8px; font-size: 0.82rem; line-height: 1.3; }
+  .cal-row .t { color: #a39988; min-width: 56px; font-variant-numeric: tabular-nums; }
+  .cal-row .w { color: #2d2a26; flex: 1; }
+
+  .chores-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .chores-col h4 {
+    margin: 0 0 6px;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    color: #b91c1c;
+    font-weight: 600;
+  }
+  .chores-group { margin-bottom: 10px; }
+  .chores-group .gh {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a39988;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .chores-group ul { list-style: none; padding: 0; margin: 0; }
+  .chores-group li { font-size: 0.78rem; padding: 2px 0; color: #2d2a26; }
+
+  .budget-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .budget-row .lab { font-size: 0.78rem; width: 80px; }
+  .budget-row .bar { flex: 1; height: 8px; background: #f0ebe0; border-radius: 999px; overflow: hidden; }
+  .budget-row .bar > div { height: 100%; border-radius: 999px; }
+  .budget-row .pace { font-size: 0.7rem; color: #a39988; min-width: 70px; text-align: right; }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #a39988;
+    font-style: italic;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+
+  /* Toast */
+  .ed-toast {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d2a26;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    z-index: 200;
+  }
+  .ed-toast.show { opacity: 1; }
+</style>
+
+<div class="ed-bar">
+  <div class="ed-title">
+    Dashboard <span class="pill">EDIT SPIKE</span>
+  </div>
+  <div class="ed-actions">
+    <button id="edToggle">🔓 Unlock</button>
+    <button id="edReset" class="danger">Reset</button>
+    <button id="edDump">Dump JSON</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="grid-stack" id="grid">
+
+    <!-- KIDS -->
+    <div class="grid-stack-item" gs-id="kids" gs-x="0" gs-y="0" gs-w="3" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
+        <div class="tile-body">
+          <div class="kids-grid">
+            <div class="h">Name</div><div class="h r">Sugar</div><div class="h r">Allowance</div>
+            {% for kid in kids %}
+              <div class="nm">{{ kid.name }}</div>
+              {% if kid.sugar.balance is not none %}
+                {% set neg = kid.sugar.balance < 0 %}
+                {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
+                <div class="v{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</div>
+              {% else %}
+                <div class="v">—</div>
+              {% endif %}
+              {% if kid.allowance.balance_str %}
+                {% set negA = '-' in kid.allowance.balance_str %}
+                <div class="v{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</div>
+              {% else %}
+                <div class="v">—</div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="grid-stack-item" gs-id="budget" gs-x="0" gs-y="3" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>💳 Budget</span><span class="sub">June · day 14/30</span></div>
+        <div class="tile-body">
+          <div class="budget-row"><span class="lab">Shopping</span><span class="bar"><div style="width:45%;background:#86efac"></div></span><span class="pace">on pace</span></div>
+          <div class="budget-row"><span class="lab">Food</span><span class="bar"><div style="width:78%;background:#fb923c"></div></span><span class="pace">high</span></div>
+          <div class="budget-row"><span class="lab">Entertain</span><span class="bar"><div style="width:82%;background:#fb923c"></div></span><span class="pace">high</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWNS -->
+    <div class="grid-stack-item" gs-id="countdowns" gs-x="0" gs-y="5" gs-w="3" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>⏳ Countdowns</span></div>
+        <div class="tile-body">
+          <div class="cd-list">
+            <div class="cd-row"><span class="n">4</span><span class="l">days to California</span></div>
+            <div class="cd-row"><span class="n">12</span><span class="l">days to Dude Perfect</span></div>
+            <div class="cd-row"><span class="n">22</span><span class="l">days to lake trip</span></div>
+            <div class="cd-row"><span class="n">60</span><span class="l">days to first day of school</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="grid-stack-item" gs-id="calendar" gs-x="3" gs-y="0" gs-w="5" gs-h="5">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>📅 Upcoming</span></div>
+        <div class="tile-body">
+          <div class="cal-list" id="edCalList">
+            {% for ev in calendar %}{% if loop.index <= 12 %}
+            <div class="cal-row">
+              <span class="t">{{ ev.time or 'all day' }}</span>
+              <span class="w">{{ ev.what }}</span>
+            </div>
+            {% endif %}{% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHORES -->
+    <div class="grid-stack-item" gs-id="chores" gs-x="8" gs-y="0" gs-w="4" gs-h="5">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>🧹 Weekend chores</span><span class="sub">2nd weekend</span></div>
+        <div class="tile-body">
+          <div class="chores-cols">
+            <div class="chores-col">
+              <h4>Saturday</h4>
+              <div class="chores-group">
+                <div class="gh">{{ chores.quick.title }}</div>
+                <ul>
+                  {% for item in chores.quick.items %}<li>☐ {{ item.label }}</li>{% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="chores-col">
+              <h4>Sunday</h4>
+              <div class="chores-group">
+                <div class="gh">{{ chores.laundry.title }}</div>
+                <ul>
+                  {% for item in chores.laundry.items %}<li>☐ {{ item.label }}</li>{% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER -->
+    <div class="grid-stack-item" gs-id="newish" gs-x="3" gs-y="5" gs-w="9" gs-h="3">
+      <div class="grid-stack-item-content">
+        <div class="tile-h"><span>✨ New block</span></div>
+        <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="ed-toast" id="edToast">Saved</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
+
+  // Compute cell height to fit viewport: 12 rows visible
+  const stage = document.querySelector('.stage');
+  const stageH = stage.clientHeight - 16; // padding
+  const cellH = Math.floor(stageH / 8); // ~8 rows tall = nice tiles
+
+  const grid = GridStack.init({
+    column: 12,
+    cellHeight: cellH,
+    margin: 4,
+    float: false,
+    disableDrag: true,        // locked by default
+    disableResize: true,
+    handle: '.grid-stack-item-content', // whole tile is drag handle in edit mode
+    acceptWidgets: false,
+  }, '#grid');
+
+  // Restore saved layout
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const layout = JSON.parse(saved);
+      grid.load(layout, false); // apply positions/sizes only, don't recreate widgets
+    } catch(e) { console.warn('Failed to restore layout', e); }
+  }
+
+  const toast = document.getElementById('edToast');
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 1200);
+  }
+
+  // Persist on change
+  grid.on('change added removed', () => {
+    const data = grid.save(false); // no content, just layout
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showToast('Saved');
+  });
+
+  // Edit mode toggle
+  const toggleBtn = document.getElementById('edToggle');
+  toggleBtn.addEventListener('click', () => {
+    const locked = document.body.dataset.edit !== '1';
+    if (locked) {
+      document.body.dataset.edit = '1';
+      grid.enableMove(true);
+      grid.enableResize(true);
+      toggleBtn.textContent = '🔒 Lock';
+      toggleBtn.classList.add('primary');
+    } else {
+      delete document.body.dataset.edit;
+      grid.enableMove(false);
+      grid.enableResize(false);
+      toggleBtn.textContent = '🔓 Unlock';
+      toggleBtn.classList.remove('primary');
+    }
+  });
+
+  // Reset
+  document.getElementById('edReset').addEventListener('click', () => {
+    if (!confirm('Reset layout to default?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  // Dump
+  document.getElementById('edDump').addEventListener('click', () => {
+    const data = grid.save(false);
+    console.log('LAYOUT', data);
+    prompt('Layout JSON (copy):', JSON.stringify(data));
+  });
+})();
+</script>
