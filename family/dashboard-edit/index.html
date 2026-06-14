@@ -210,7 +210,7 @@
     background: var(--warm-bg);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     color: var(--text-dark);
-    padding-top: env(safe-area-inset-top, 20px);
+    padding-top: max(env(safe-area-inset-top), 24px);
     padding-left: env(safe-area-inset-left, 0);
     padding-right: env(safe-area-inset-right, 0);
     padding-bottom: env(safe-area-inset-bottom, 0);
@@ -924,6 +924,7 @@
     border-bottom: 1px solid var(--border-soft);
   }
   .recipe-day-next { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .recipe-day-today { border-bottom: none; margin-bottom: 6px; padding-bottom: 0; flex: 1 1 auto; min-height: 0; }
   .recipe-daylbl {
     font-size: 0.6rem;
     font-weight: 700;
@@ -961,6 +962,35 @@
     font-weight: 700;
   }
   .recipe-link:hover { text-decoration: underline; }
+  .recipe-tomorrow {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+    cursor: pointer;
+    min-width: 0;
+  }
+  .recipe-tomorrow.no-recipe { cursor: default; }
+  .rt-lbl {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .rt-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-width: 0;
+  }
 
   /* === PLACEHOLDER === */
   .placeholder {
@@ -1482,17 +1512,17 @@
       
       
     
-    <div class="tile-h"><span>🍲 What's cooking</span><span class="sub">Today &amp; tomorrow</span></div>
+    <div class="tile-h"><span>🍲 What's cooking</span></div>
     <div class="tile-body">
-      <div class="recipe-day">
+      <div class="recipe-day recipe-day-today">
         <div class="recipe-daylbl">Today</div>
         <div class="recipe-name">Leftovers (kids); Mike + Nancy travel day</div>
         
       </div>
-      <div class="recipe-day recipe-day-next">
-        <div class="recipe-daylbl">Tomorrow</div>
-        <div class="recipe-name">Chicken fajitas (no peppers, extra onions + zucchini)</div>
-        
+      <div class="recipe-tomorrow no-recipe"
+           >
+        <span class="rt-lbl">Tomorrow</span>
+        <span class="rt-name">Chicken fajitas (no peppers, extra onions + zucchini)</span>
       </div>
     </div>
   </div>
@@ -2022,6 +2052,14 @@
     const id = btn.dataset.rm;
     const node = grid.engine.nodes.find(n => n.id === id);
     if (node) grid.removeWidget(node.el, true);
+  });
+
+  // Tomorrow-recipe tap → open recipe
+  document.getElementById('grid').addEventListener('click', (ev) => {
+    if (document.body.dataset.edit === '1') return;
+    const row = ev.target.closest('.recipe-tomorrow[data-recipe-href]');
+    if (!row) return;
+    window.open(row.dataset.recipeHref, '_blank', 'noopener');
   });
 
   // Edit mode toggle
