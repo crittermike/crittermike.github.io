@@ -51,11 +51,6 @@ eleventyExcludeFromCollections: true
     background: var(--warm-bg);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     color: var(--text-dark);
-    padding-top: max(env(safe-area-inset-top), 24px);
-    padding-left: env(safe-area-inset-left, 0);
-    padding-right: env(safe-area-inset-right, 0);
-    padding-bottom: env(safe-area-inset-bottom, 0);
-    box-sizing: border-box;
   }
 
   /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) === */
@@ -128,8 +123,9 @@ eleventyExcludeFromCollections: true
   .stage {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    padding: 6px;
+    padding: max(env(safe-area-inset-top), 24px) max(env(safe-area-inset-right), 6px) max(env(safe-area-inset-bottom), 6px) max(env(safe-area-inset-left), 6px);
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   /* === GRIDSTACK SHELL === */
@@ -1699,6 +1695,14 @@ eleventyExcludeFromCollections: true
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
   setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+  // === BOTTOM-RIGHT REFRESH TAP (mirrors /dashboard/) ===
+  (function addRefreshTap() {
+    const tap = document.createElement('div');
+    tap.style.cssText = 'position:fixed;right:0;bottom:0;width:80px;height:80px;z-index:9999;cursor:pointer;';
+    tap.addEventListener('click', () => location.reload());
+    document.body.appendChild(tap);
+  })();
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
