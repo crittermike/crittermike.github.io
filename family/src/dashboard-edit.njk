@@ -546,6 +546,160 @@ eleventyExcludeFromCollections: true
     color: var(--text-mid);
   }
 
+  /* === SUMMER READING === */
+  .reading-list { display: flex; flex-direction: column; gap: 10px; }
+  .reading-row { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .reading-row.editing { cursor: default; }
+  .reading-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.78rem;
+    margin-bottom: 3px;
+  }
+  .reading-name { color: var(--text-dark); font-weight: 700; }
+  .reading-count { color: var(--text-mid); font-variant-numeric: tabular-nums; }
+  .reading-row.editing .reading-count { display: none; }
+  .reading-editor {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin: 2px 0 4px;
+  }
+  .reading-editor[hidden] { display: none; }
+  .reading-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 4px 6px;
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--card-bg);
+    color: var(--text-dark);
+  }
+  .reading-input::-webkit-outer-spin-button,
+  .reading-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .reading-add, .reading-cancel, .reading-reset {
+    border: 1px solid var(--border-soft);
+    background: var(--card-bg);
+    color: var(--text-dark);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .reading-add { background: var(--accent-teal); color: white; border-color: transparent; font-weight: 700; }
+  .reading-row .progress {
+    height: 4px;
+    background: var(--border-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .reading-row .progress .bar {
+    height: 100%;
+    background: var(--accent-orange);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  /* === TODAY'S ASSIGNMENTS === */
+  .assn-list { display: flex; flex-direction: column; gap: 10px; }
+  .assn-kid-h {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-mid);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .assn-list .todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .assn-list .todo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+  }
+  .assn-list .todo input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 4px;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .assn-list .todo input[type="checkbox"]:checked {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+  }
+  .assn-list .todo input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    inset: 0;
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .assn-list .todo input[type="checkbox"]:checked + .todo-label {
+    text-decoration: line-through;
+    color: var(--text-mid);
+  }
+
+  /* === RECIPE OF THE DAY === */
+  .recipe-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .recipe-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .recipe-meta {
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+  }
+  .recipe-meta .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--border-soft);
+    margin-right: 6px;
+    font-weight: 600;
+  }
+  .recipe-link {
+    margin-top: auto;
+    font-size: 0.82rem;
+    color: var(--accent-teal);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .recipe-link:hover { text-decoration: underline; }
+
   /* === PLACEHOLDER === */
   .placeholder {
     display: flex;
@@ -657,21 +811,26 @@ eleventyExcludeFromCollections: true
   { "id": "calendar",   "label": "📅 Upcoming events",              "w": 5, "h": 5 },
   { "id": "chores",     "label": "🧹 Weekend chores",               "w": 4, "h": 5 },
   { "id": "weather",    "label": "☀️ Weather",                      "w": 3, "h": 3 },
-  { "id": "meals",      "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
-  { "id": "dinner",     "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
-  { "id": "newish",     "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
+  { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
+  { "id": "dinner",      "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
+  { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
+  { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
+  { "id": "recipe",      "label": "🍲 Recipe of the day",            "w": 3, "h": 3 },
+  { "id": "newish",      "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
 ]
 </script>
 
 <!-- Default layout if no saved state -->
 <script type="application/json" id="defaultLayout">
 [
-  { "id": "kids",       "x": 0, "y": 0, "w": 3, "h": 3 },
-  { "id": "budget",     "x": 0, "y": 3, "w": 3, "h": 2 },
-  { "id": "countdowns", "x": 0, "y": 5, "w": 3, "h": 3 },
-  { "id": "calendar",   "x": 3, "y": 0, "w": 5, "h": 5 },
-  { "id": "chores",     "x": 8, "y": 0, "w": 4, "h": 5 },
-  { "id": "newish",     "x": 3, "y": 5, "w": 9, "h": 3 }
+  { "id": "kids",        "x": 0, "y": 0, "w": 3, "h": 3 },
+  { "id": "budget",      "x": 0, "y": 3, "w": 3, "h": 2 },
+  { "id": "countdowns",  "x": 0, "y": 5, "w": 3, "h": 3 },
+  { "id": "calendar",    "x": 3, "y": 0, "w": 5, "h": 5 },
+  { "id": "chores",      "x": 8, "y": 0, "w": 4, "h": 5 },
+  { "id": "reading",     "x": 3, "y": 5, "w": 3, "h": 3 },
+  { "id": "assignments", "x": 6, "y": 5, "w": 3, "h": 3 },
+  { "id": "recipe",      "x": 9, "y": 5, "w": 3, "h": 3 }
 ]
 </script>
 
@@ -838,6 +997,72 @@ eleventyExcludeFromCollections: true
     </div>
   </div>
 
+  <div data-tpl="reading">
+    <div class="tile-h"><span>📚 Summer reading</span><span class="sub">Tap to add pages</span></div>
+    <div class="tile-body">
+      <div class="reading-list">
+        {% for kid in kids %}
+          {% if kid.reading %}
+            <div class="reading-row" data-kid="{{ kid.key }}" data-base="{{ kid.reading.pages }}" data-target="{{ kid.reading.target }}">
+              <div class="reading-head">
+                <span class="reading-name">{{ kid.name }}</span>
+                <span class="reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span>
+              </div>
+              <div class="reading-editor" hidden>
+                <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
+                <button type="button" class="reading-add">Add</button>
+                <button type="button" class="reading-reset" title="Reset to 0">↺</button>
+                <button type="button" class="reading-cancel">✕</button>
+              </div>
+              <div class="progress"><div class="bar reading-bar" style="width: {{ kid.reading.pct }}%"></div></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="assignments">
+    <div class="tile-h"><span>✏️ Today's assignments</span></div>
+    <div class="tile-body">
+      <div class="assn-list">
+        {% set anyAssn = false %}
+        {% for kid in kids %}
+          {% if kid.assignments and kid.assignments.length %}
+            {% set anyAssn = true %}
+            <div class="assn-kid">
+              <div class="assn-kid-h">{{ kid.name }}</div>
+              <ul class="todo-list" data-kid="{{ kid.key }}">
+                {% for a in kid.assignments %}
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}">
+                      <span class="todo-label">{{ a.label }}</span>
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% if not anyAssn %}
+          <div class="placeholder">Nothing assigned today. Go outside.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="recipe">
+    <div class="tile-h"><span>🍲 Recipe of the day</span><span class="sub" id="recipeDate">—</span></div>
+    <div class="tile-body">
+      <div class="recipe-box" id="recipeBox">
+        <div class="recipe-name" id="recipeName">—</div>
+        <div class="recipe-meta" id="recipeMeta"></div>
+        <a class="recipe-link" id="recipeLink" href="#" target="_blank" rel="noopener">Open recipe →</a>
+      </div>
+    </div>
+  </div>
+
   <div data-tpl="newish">
     <div class="tile-h"><span>✨ New block</span></div>
     <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
@@ -906,10 +1131,13 @@ eleventyExcludeFromCollections: true
 
   // === LIVE DATA HYDRATION (runs after each tile is added) ===
   function hydrateTile(id) {
-    if (id === 'countdowns') renderCountdowns();
-    if (id === 'budget')     renderBudget();
-    if (id === 'chores')     renderChoresPill();
-    if (id === 'calendar')   renderCalendar();
+    if (id === 'countdowns')   renderCountdowns();
+    if (id === 'budget')       renderBudget();
+    if (id === 'chores')       renderChoresPill();
+    if (id === 'calendar')     renderCalendar();
+    if (id === 'reading')      hydrateReading();
+    if (id === 'assignments')  hydrateAssignments();
+    if (id === 'recipe')       renderRecipeOfDay();
   }
 
   // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
@@ -1091,7 +1319,144 @@ eleventyExcludeFromCollections: true
     });
   }
 
-  // Initial load: saved state if any, else defaults
+  // === SUMMER READING (tap-to-add pages; persists locally) ===
+  function hydrateReading() {
+    const STORAGE_KEY = 'reading-local-adds';
+    let store = {};
+    try { store = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+    function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+
+    document.querySelectorAll('.reading-row').forEach(row => {
+      if (row.dataset._wired) return;
+      row.dataset._wired = '1';
+      const kid = row.dataset.kid;
+      const base = parseInt(row.dataset.base, 10) || 0;
+      const target = parseInt(row.dataset.target, 10) || 0;
+      const pagesEl = row.querySelector('.reading-pages');
+      const barEl = row.querySelector('.reading-bar');
+      const editor = row.querySelector('.reading-editor');
+      const input = row.querySelector('.reading-input');
+      const addBtn = row.querySelector('.reading-add');
+      const cancelBtn = row.querySelector('.reading-cancel');
+      const resetBtn = row.querySelector('.reading-reset');
+
+      // Drop stale local delta if server caught up
+      if (store[kid] != null && store[kid] <= base) { delete store[kid]; save(); }
+
+      function currentPages() { return base + (store[kid] || 0); }
+      function render() {
+        const p = currentPages();
+        pagesEl.textContent = p;
+        const pct = target > 0 ? Math.min(100, Math.round((p / target) * 100)) : 0;
+        barEl.style.width = pct + '%';
+      }
+      function openEditor() {
+        row.classList.add('editing');
+        editor.hidden = false;
+        input.value = '';
+        setTimeout(() => input.focus(), 0);
+      }
+      function closeEditor() {
+        row.classList.remove('editing');
+        editor.hidden = true;
+      }
+      row.addEventListener('click', (e) => {
+        if (row.classList.contains('editing')) return;
+        if (e.target.closest('.reading-editor')) return;
+        openEditor();
+      });
+      addBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const n = parseInt(input.value, 10);
+        if (!isNaN(n) && n > 0) {
+          store[kid] = (store[kid] || 0) + n;
+          save(); render();
+        }
+        closeEditor();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); addBtn.click(); }
+        if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
+      });
+      cancelBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEditor(); });
+      resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!confirm('Reset ' + kid + ' to ' + base + ' pgs?')) return;
+        delete store[kid]; save(); render(); closeEditor();
+      });
+      render();
+    });
+  }
+
+  // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
+  function hydrateAssignments() {
+    function todayKey() {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/New_York',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+      }).formatToParts(new Date());
+      const map = {};
+      parts.forEach(p => map[p.type] = p.value);
+      return map.year + '-' + map.month + '-' + map.day;
+    }
+    const date = todayKey();
+    const STORAGE_KEY = 'kid-todos';
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+    if (state.date !== date) state = { date, checks: {} };
+
+    document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(box => {
+      if (box.dataset._wired) return;
+      box.dataset._wired = '1';
+      const key = box.dataset.kid + '|' + box.dataset.id;
+      if (state.checks[key]) box.checked = true;
+      box.addEventListener('change', () => {
+        if (box.checked) state.checks[key] = true;
+        else delete state.checks[key];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      });
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // === RECIPE OF THE DAY (deterministic daily pick from rotation) ===
+  const RECIPES = {{ recipes | dump | safe }};
+  function renderRecipeOfDay() {
+    const nameEl = document.getElementById('recipeName');
+    const metaEl = document.getElementById('recipeMeta');
+    const dateEl = document.getElementById('recipeDate');
+    const linkEl = document.getElementById('recipeLink');
+    if (!nameEl) return;
+    const rotation = (RECIPES || []).filter(r => r.in_rotation);
+    if (!rotation.length) {
+      nameEl.textContent = 'No rotation recipes yet';
+      metaEl.textContent = '';
+      linkEl.style.display = 'none';
+      return;
+    }
+    // Deterministic pick: epoch-day index mod rotation length (so it changes daily, same all day)
+    const today = new Date();
+    const epochDay = Math.floor(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000);
+    const pick = rotation[epochDay % rotation.length];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    if (dateEl) dateEl.textContent = months[today.getMonth()] + ' ' + today.getDate();
+    nameEl.textContent = pick.name;
+    const bits = [];
+    if (pick.effort) bits.push('<span class="pill">' + pick.effort + '</span>');
+    if (pick.prep_min || pick.cook_min) {
+      const total = (pick.prep_min || 0) + (pick.cook_min || 0);
+      if (total > 0) bits.push(total + ' min');
+    }
+    if (pick.protein_g) bits.push(pick.protein_g + 'g protein');
+    metaEl.innerHTML = bits.join(' · ');
+    if (pick.hasFullRecipe) {
+      linkEl.href = '/recipes/' + pick.slug + '/';
+      linkEl.style.display = '';
+    } else {
+      linkEl.style.display = 'none';
+    }
+  }
+
   let initial = DEFAULT_LAYOUT;
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
