@@ -341,6 +341,38 @@ eleventyExcludeFromCollections: true
   .kids-grid .v.danger { color: var(--accent-rose); }
   .kids-grid .v.warn   { color: var(--accent-gold); }
 
+  /* === PER-KID TILE (one combined tile per kid: sugar/allowance/reading/today) === */
+  .kidtile-body { overflow-y: auto; gap: 12px; }
+  .kidtile-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .kidtile-stat { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .kidtile-stat .lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  .kidtile-stat .v {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dark);
+  }
+  .kidtile-stat .v.danger { color: var(--accent-rose); }
+  .kidtile-stat .v.warn   { color: var(--accent-gold); }
+  .kidtile-sec-lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
   /* === COUNTDOWNS (matches /dashboard/ .cd-item) === */
   .cd-list {
     display: flex;
@@ -391,21 +423,22 @@ eleventyExcludeFromCollections: true
   .cal-list {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     overflow: hidden;
     min-height: 0;
   }
   .cal-row {
     display: grid;
     grid-template-columns: 60px 1fr;
-    gap: 8px;
+    gap: 10px;
     align-items: baseline;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border-soft);
+    padding: 6px 10px;
+    border-radius: 7px;
+    background: var(--surface-mute);
     font-size: 0.85rem;
     line-height: 1.25;
   }
-  .cal-row:last-child { border-bottom: none; }
-  .cal-row.today-row { background: rgba(217,106,42,0.10); border-radius: 6px; padding-left: 6px; padding-right: 6px; }
+  .cal-row.today-row { background: rgba(217,106,42,0.10); }
   .cal-row.today-row .t { color: var(--accent-orange); }
   .cal-bucket-h {
     display: flex;
@@ -960,6 +993,9 @@ eleventyExcludeFromCollections: true
 <!-- TILE CATALOG: defines every available tile (id + label + default size + HTML) -->
 <script type="application/json" id="tileCatalog">
 [
+{% for kid in kids %}
+  { "id": "kid-{{ kid.key }}", "label": "🧒 {{ kid.name }}", "w": 3, "h": 4 },
+{% endfor %}
   { "id": "kids",       "label": "👨‍👩‍👦‍👦 Kids (sugar/allowance)", "w": 3, "h": 3 },
   { "id": "budget",     "label": "💳 Budget",                       "w": 3, "h": 2 },
   { "id": "countdowns", "label": "⏳ Countdowns",                   "w": 3, "h": 3 },
@@ -978,14 +1014,14 @@ eleventyExcludeFromCollections: true
 <!-- Default layout if no saved state -->
 <script type="application/json" id="defaultLayout">
 [
-  { "id": "kids",        "x": 0, "y": 0, "w": 3, "h": 3 },
-  { "id": "budget",      "x": 0, "y": 3, "w": 3, "h": 2 },
-  { "id": "countdowns",  "x": 0, "y": 5, "w": 3, "h": 3 },
   { "id": "calendar",    "x": 3, "y": 0, "w": 5, "h": 5 },
   { "id": "chores",      "x": 8, "y": 0, "w": 4, "h": 5 },
-  { "id": "reading",     "x": 3, "y": 5, "w": 3, "h": 3 },
-  { "id": "assignments", "x": 6, "y": 5, "w": 3, "h": 3 },
-  { "id": "recipe",      "x": 9, "y": 5, "w": 3, "h": 3 }
+  { "id": "budget",      "x": 0, "y": 0, "w": 3, "h": 2 },
+  { "id": "countdowns",  "x": 0, "y": 2, "w": 3, "h": 3 },
+  { "id": "recipe",      "x": 0, "y": 9, "w": 3, "h": 3 },
+{% for kid in kids %}
+  { "id": "kid-{{ kid.key }}", "x": {{ loop.index0 * 3 }}, "y": 5, "w": 3, "h": 4 }{{ "," if not loop.last }}
+{% endfor %}
 ]
 </script>
 
@@ -1015,6 +1051,73 @@ eleventyExcludeFromCollections: true
       </div>
     </div>
   </div>
+
+{% for kid in kids %}
+  <div data-tpl="kid-{{ kid.key }}">
+    <div class="tile-h"><span>{{ kid.name }}</span><span class="sub">{{ kid.grade }}</span></div>
+    <div class="tile-body kidtile-body">
+      <div class="kidtile-stats">
+        <div class="kidtile-stat">
+          <span class="lbl">🍭 Sugar</span>
+          {% if kid.sugar.balance is not none %}
+            {% set neg = kid.sugar.balance < 0 %}
+            {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
+            <span class="v{% if neg %} danger{% elif low %} warn{% endif %}">{{ kid.sugar.balance }}g</span>
+          {% else %}
+            <span class="v">—</span>
+          {% endif %}
+        </div>
+        <div class="kidtile-stat">
+          <span class="lbl">💵 Allowance</span>
+          {% if kid.allowance.balance_str %}
+            {% set negA = '-' in kid.allowance.balance_str %}
+            <span class="v{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
+          {% else %}
+            <span class="v">—</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if kid.reading %}
+      <div>
+        <div class="kidtile-sec-lbl">📚 Summer reading</div>
+        <div class="reading-row" data-kid="{{ kid.key }}" data-base="{{ kid.reading.pages }}" data-target="{{ kid.reading.target }}">
+          <div class="reading-head">
+            <span class="reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span>
+          </div>
+          <div class="reading-editor" hidden>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
+            <button type="button" class="reading-add">Add</button>
+            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
+            <button type="button" class="reading-cancel">✕</button>
+          </div>
+          <div class="progress"><div class="bar reading-bar" style="width: {{ kid.reading.pct }}%"></div></div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div>
+        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="assn-list">
+          {% if kid.assignments and kid.assignments.length %}
+            <ul class="todo-list" data-kid="{{ kid.key }}">
+              {% for a in kid.assignments %}
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}">
+                  <span class="todo-label">{{ a.label }}</span>
+                </label>
+              </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="placeholder">Nothing today 🎉</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 
   <div data-tpl="budget">
     <div class="tile-h"><span>💳 Budget</span><span class="sub" id="budgetMonth">—</span></div>
@@ -1322,6 +1425,7 @@ eleventyExcludeFromCollections: true
     if (id === 'reading')      hydrateReading();
     if (id === 'assignments')  hydrateAssignments();
     if (id === 'recipe')       renderRecipeOfDay();
+    if (id.indexOf('kid-') === 0) { hydrateReading(); hydrateAssignments(); }
   }
 
   // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
