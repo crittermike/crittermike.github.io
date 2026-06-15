@@ -148,6 +148,45 @@ eleventyExcludeFromCollections: true
   .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
   body[data-edit="1"] .ed-bar { background: #fef3c7; border-color: #fbbf24; }
 
+  /* === TEMPLATE SWITCHER (named layouts: School Day / Weekend / ...) === */
+  .ed-bar { flex-direction: column; align-items: stretch; gap: 10px; max-width: min(92vw, 560px); }
+  .tpl-row { display: flex; align-items: center; gap: 8px; }
+  .tpl-switch { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 auto; min-width: 0; }
+  .tpl-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer; white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tpl-pill .emo { font-size: 14px; line-height: 1; }
+  .tpl-pill.active {
+    background: var(--text-dark);
+    color: var(--on-accent);
+    border-color: var(--text-dark);
+  }
+  .tpl-auto {
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+    color: var(--text-mid, #6b7280);
+    cursor: pointer; white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tpl-auto::before { content: "◇ "; }
+  .tpl-auto.on { background: #2da44e; color: #fff; border-color: transparent; }
+  .tpl-auto.on::before { content: "◆ "; }
+  .ed-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 2px; }
+  .ed-edit-only { display: none !important; }
+  body[data-edit="1"] .ed-edit-only { display: inline-flex !important; }
+
   /* === STAGE === */
   .stage {
     position: fixed;
@@ -977,7 +1016,15 @@ eleventyExcludeFromCollections: true
 
 <div class="ed-tap" id="edTap" title="Edit toolbar"></div>
 <div class="ed-bar" id="edBar">
+  <div class="tpl-row">
+    <div class="tpl-switch" id="tplSwitch"></div>
+    <button id="tplAuto" class="tpl-auto" title="Auto-switch by day (weekday → School Day, weekend → Weekend)">Auto</button>
+  </div>
   <div class="ed-actions">
+    <button id="tplNew" class="ed-edit-only">+ New view</button>
+    <button id="tplRename" class="ed-edit-only">✎ Rename</button>
+    <button id="tplDelete" class="ed-edit-only danger">🗑 Delete</button>
+    <span class="ed-sep ed-edit-only"></span>
     <button id="edAdd" disabled>+ Add tile</button>
     <button id="edToggle">🔓 Unlock</button>
     <button id="edReset" class="danger">Reset</button>
@@ -1814,16 +1861,201 @@ eleventyExcludeFromCollections: true
     }
   }
 
-  let initial = DEFAULT_LAYOUT;
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length) initial = parsed;
-    } catch(e) { console.warn('Failed to parse saved layout, using defaults', e); }
+  // === DASHBOARD TEMPLATES (named layouts you can switch between) ===
+  // Each template is a full tile arrangement. The resolved-active one is
+  // rendered; edits (move/resize/add/remove) save back to it. "Auto" picks a
+  // template by the day of week so the kiosk switches hands-free.
+  const TPL_KEY = 'crittercrew.dashedit.templates.v2';
+
+  // Roster-driven kid tile ids, so per-kid tiles stay in sync with kids.js.
+  const KID_IDS = [{% for kid in kids %}'kid-{{ kid.key }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+  function kidRow(y, h) {
+    h = h || 4;
+    return KID_IDS.map((id, i) => ({ id: id, x: (i % 4) * 3, y: y + Math.floor(i / 4) * h, w: 3, h: h }));
   }
-  initial.forEach(addTile);
-  refreshAddButton();
+
+  function tplEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Seed templates. "everyday" reuses the server-rendered DEFAULT_LAYOUT; the
+  // others are hand-tuned. Every tile id here must exist in CATALOG.
+  function seedTemplates() {
+    return {
+      activeId: 'everyday',
+      auto: true,
+      order: ['school', 'weekend', 'everyday'],
+      templates: {
+        school: {
+          id: 'school', emoji: '🎒', name: 'School Day', match: 'weekday',
+          layout: [
+            { id: 'weather',    x: 0, y: 0, w: 3, h: 2 },
+            { id: 'countdowns', x: 0, y: 2, w: 3, h: 3 },
+            { id: 'calendar',   x: 3, y: 0, w: 6, h: 5 },
+            { id: 'dinner',     x: 9, y: 0, w: 3, h: 2 },
+            { id: 'recipe',     x: 9, y: 2, w: 3, h: 3 }
+          ].concat(kidRow(5, 4))
+        },
+        weekend: {
+          id: 'weekend', emoji: '🏖️', name: 'Weekend', match: 'weekend',
+          layout: [
+            { id: 'chores',   x: 0, y: 0, w: 4, h: 6 },
+            { id: 'calendar', x: 4, y: 0, w: 5, h: 6 },
+            { id: 'meals',    x: 9, y: 0, w: 3, h: 3 },
+            { id: 'recipe',   x: 9, y: 3, w: 3, h: 3 }
+          ].concat(kidRow(6, 3))
+        },
+        everyday: {
+          id: 'everyday', emoji: '📋', name: 'Everyday', match: null,
+          layout: DEFAULT_LAYOUT
+        }
+      }
+    };
+  }
+
+  function saveStore(s) { localStorage.setItem(TPL_KEY, JSON.stringify(s)); }
+
+  function loadStore() {
+    let store = null;
+    try {
+      const raw = localStorage.getItem(TPL_KEY);
+      if (raw) store = JSON.parse(raw);
+    } catch (e) { console.warn('Bad templates store, reseeding', e); }
+    if (!store || !store.templates || !Array.isArray(store.order) || !store.order.length) {
+      store = seedTemplates();
+      // Migrate a pre-existing single layout (v1) into "Everyday" so an
+      // already-customized kiosk keeps its arrangement; pin it (auto off).
+      try {
+        const old = localStorage.getItem(STORAGE_KEY);
+        if (old) {
+          const parsed = JSON.parse(old);
+          if (Array.isArray(parsed) && parsed.length) {
+            store.templates.everyday.layout = parsed;
+            store.activeId = 'everyday';
+            store.auto = false;
+          }
+        }
+      } catch (e) {}
+      saveStore(store);
+    }
+    return store;
+  }
+
+  let STORE = loadStore();
+
+  function todayMatch() {
+    const dow = new Date().getDay(); // 0 Sun .. 6 Sat
+    return (dow === 0 || dow === 6) ? 'weekend' : 'weekday';
+  }
+
+  function resolveActiveId() {
+    if (STORE.auto) {
+      const want = todayMatch();
+      const hit = STORE.order.find(id => STORE.templates[id] && STORE.templates[id].match === want);
+      if (hit) return hit;
+    }
+    if (STORE.templates[STORE.activeId]) return STORE.activeId;
+    return STORE.order[0];
+  }
+
+  let applying = false;
+  function clearGrid() {
+    grid.engine.nodes.slice().forEach(n => { if (n.el) grid.removeWidget(n.el, true); });
+  }
+  function applyTemplate(id) {
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    applying = true;
+    clearGrid();
+    (tpl.layout || []).forEach(addTile);
+    applying = false;
+    renderSwitcher();
+    refreshAddButton();
+  }
+
+  function currentLayout() {
+    return grid.engine.nodes
+      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
+      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
+  }
+
+  function renderSwitcher() {
+    const wrap = document.getElementById('tplSwitch');
+    const activeId = resolveActiveId();
+    wrap.innerHTML = '';
+    STORE.order.forEach(id => {
+      const tpl = STORE.templates[id];
+      if (!tpl) return;
+      const pill = document.createElement('button');
+      pill.className = 'tpl-pill' + (id === activeId ? ' active' : '');
+      pill.dataset.tpl = id;
+      pill.innerHTML = '<span class="emo">' + (tpl.emoji || '🗂') + '</span>' + tplEsc(tpl.name);
+      pill.addEventListener('click', () => {
+        STORE.auto = false;          // tapping a view pins it (manual override)
+        STORE.activeId = id;
+        saveStore(STORE);
+        applyTemplate(id);
+        showToast(tpl.name);
+      });
+      wrap.appendChild(pill);
+    });
+    const autoBtn = document.getElementById('tplAuto');
+    if (autoBtn) {
+      autoBtn.classList.toggle('on', !!STORE.auto);
+      autoBtn.setAttribute('aria-pressed', STORE.auto ? 'true' : 'false');
+    }
+  }
+
+  // Wire template management controls (Auto / New / Rename / Delete).
+  document.getElementById('tplAuto').addEventListener('click', () => {
+    STORE.auto = !STORE.auto;
+    if (STORE.auto) STORE.activeId = resolveActiveId();
+    saveStore(STORE);
+    applyTemplate(resolveActiveId());
+    showToast(STORE.auto ? 'Auto by day: on' : 'Auto by day: off');
+  });
+  document.getElementById('tplNew').addEventListener('click', () => {
+    const name = (prompt('Name this view (e.g. "Sick Day", "Summer")') || '').trim();
+    if (!name) return;
+    let id = 'view-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 24);
+    if (!id || id === 'view-') id = 'view';
+    let n = 2; const base = id;
+    while (STORE.templates[id]) id = base + '-' + (n++);
+    STORE.templates[id] = { id: id, emoji: '🗂', name: name, match: null, layout: currentLayout() };
+    STORE.order.push(id);
+    STORE.auto = false; STORE.activeId = id;
+    saveStore(STORE);
+    applyTemplate(id);
+    showToast('Created ' + name);
+  });
+  document.getElementById('tplRename').addEventListener('click', () => {
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    const name = (prompt('Rename view', tpl.name) || '').trim();
+    if (!name) return;
+    tpl.name = name;
+    saveStore(STORE);
+    renderSwitcher();
+    showToast('Renamed');
+  });
+  document.getElementById('tplDelete').addEventListener('click', () => {
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    if (STORE.order.length <= 1) { alert('Keep at least one view.'); return; }
+    if (!confirm('Delete the "' + tpl.name + '" view?')) return;
+    delete STORE.templates[id];
+    STORE.order = STORE.order.filter(x => x !== id);
+    STORE.auto = false;
+    STORE.activeId = STORE.order[0];
+    saveStore(STORE);
+    applyTemplate(STORE.activeId);
+    showToast('Deleted');
+  });
+
+  // Initial render of the active template.
+  applyTemplate(resolveActiveId());
 
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
@@ -1926,10 +2158,12 @@ eleventyExcludeFromCollections: true
   }
 
   function persist() {
-    const data = grid.engine.nodes
-      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
-      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    if (applying) return;
+    const id = resolveActiveId();
+    if (STORE.templates[id]) {
+      STORE.templates[id].layout = currentLayout();
+      saveStore(STORE);
+    }
     refreshAddButton();
     showToast('Saved');
   }
@@ -1972,11 +2206,17 @@ eleventyExcludeFromCollections: true
     }
   });
 
-  // Reset
+  // Reset — restore the CURRENT view to its seeded default layout.
   document.getElementById('edReset').addEventListener('click', () => {
-    if (!confirm('Reset layout to default?')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    const seed = seedTemplates();
+    const seededLayout = (seed.templates[id] && seed.templates[id].layout) || seed.templates.everyday.layout;
+    if (!confirm('Reset the "' + (tpl ? tpl.name : 'current') + '" view to its default layout?')) return;
+    STORE.templates[id].layout = seededLayout;
+    saveStore(STORE);
+    applyTemplate(id);
+    showToast('Reset ' + (tpl ? tpl.name : ''));
   });
 
   // Top-right tap target → toggle floating toolbar.
