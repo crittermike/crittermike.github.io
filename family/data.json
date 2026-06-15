@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-06-15T12:45:23.696Z",
+  "generated_at": "2026-06-15T13:00:33.072Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-15",
-      "time": "10a",
-      "what": "Mom: Dr Smith (psychiatrist) appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-15T11:00:00-04:00"
-    },
     {
       "date": "2026-06-15",
       "time": "10a",
@@ -127,6 +118,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-06-18T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "12p",
+      "what": "Mom: Dr Smith (psychiatrist) appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T13:00:00-04:00"
     },
     {
       "date": "2026-06-18",
@@ -971,7 +971,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 71,
+      "temp": 72,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
