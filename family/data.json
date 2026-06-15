@@ -1,7 +1,548 @@
 {
-  "generated_at": "2026-06-15T14:00:52.215Z",
+  "generated_at": "2026-06-15T14:15:37.485Z",
   "generated_by": "crittermike.github.io/family build",
-  "calendar": [],
+  "calendar": [
+    {
+      "date": "2026-06-15",
+      "time": "10a",
+      "what": "Thomas art camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-15T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-15",
+      "time": "12:30p",
+      "what": "Thomas handwriting camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-15T14:00:00-04:00"
+    },
+    {
+      "date": "2026-06-15",
+      "time": "1p",
+      "what": "William art camp",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-15T15:00:00-04:00"
+    },
+    {
+      "date": "2026-06-16",
+      "time": "9a",
+      "what": "Nancy brain MRI 🧠",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-16T10:00:00-04:00"
+    },
+    {
+      "date": "2026-06-16",
+      "time": "10a",
+      "what": "Thomas art camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-16T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-16",
+      "time": "12:30p",
+      "what": "Thomas handwriting camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-16T14:00:00-04:00"
+    },
+    {
+      "date": "2026-06-16",
+      "time": "1p",
+      "what": "William art camp",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-16T15:00:00-04:00"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "10a",
+      "what": "Thomas art camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-17T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "10:15a",
+      "what": "Drive Mom to pain clinic (Spartanburg Regional)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-17T11:45:00-04:00"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "12:30p",
+      "what": "Thomas handwriting camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-17T14:00:00-04:00"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "1p",
+      "what": "William art camp",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-17T15:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "10a",
+      "what": "Thomas art camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "12p",
+      "what": "Mom: Dr Smith (psychiatrist) appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T13:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "12:30p",
+      "what": "Thomas handwriting camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T14:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "1p",
+      "what": "William art camp",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T15:00:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "4p",
+      "what": "🚗 Drive to CLT Airport (SD trip)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-18T17:50:00-04:00"
+    },
+    {
+      "date": "2026-06-18",
+      "time": "7:50p",
+      "what": "✈️ CLT → SAN (AA 3322) - Wedding Trip",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-19T00:48:00-04:00"
+    },
+    {
+      "date": "2026-06-19",
+      "time": "9a",
+      "what": "RSVP for George's birthday (text 478-390-7521)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-19T09:15:00-04:00"
+    },
+    {
+      "date": "2026-06-19",
+      "time": "10a",
+      "what": "Thomas art camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-19T12:00:00-04:00"
+    },
+    {
+      "date": "2026-06-19",
+      "time": "12:30p",
+      "what": "Thomas handwriting camp",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-19T14:00:00-04:00"
+    },
+    {
+      "date": "2026-06-19",
+      "time": "1p",
+      "what": "William art camp",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-19T15:00:00-04:00"
+    },
+    {
+      "date": "2026-06-20",
+      "time": "4:30p",
+      "what": "Jace & Lauren Wedding",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-20T20:30:00-04:00"
+    },
+    {
+      "date": "2026-06-21",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-21T09:00:00-04:00"
+    },
+    {
+      "date": "2026-06-21",
+      "time": "4:23p",
+      "what": "✈️ SAN → CLT (AA 2465) - Return",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-21T21:26:00-04:00"
+    },
+    {
+      "date": "2026-06-21",
+      "time": "9:30p",
+      "what": "🚗 Drive home from CLT Airport",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-21T23:15:00-04:00"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "all day",
+      "what": "Matt's birthday 🎂",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-06-24T00:00:00-04:00"
+    },
+    {
+      "date": "2026-06-26",
+      "time": "7p",
+      "what": "Dude Perfect - Squad Games Tour",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-26T22:00:00-04:00"
+    },
+    {
+      "date": "2026-06-27",
+      "time": "4:30p",
+      "what": "George's 10th birthday party 🎂 (RSVP 6/20 to 478-390-7521)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-27T18:30:00-04:00"
+    },
+    {
+      "date": "2026-06-28",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-28T09:00:00-04:00"
+    },
+    {
+      "date": "2026-06-30",
+      "time": "9:30a",
+      "what": "Mom: Dr. Michael Wine",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-30T10:30:00-04:00"
+    },
+    {
+      "date": "2026-07-01",
+      "time": "all day",
+      "what": "📚 Library books due (Pelham Road)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-07-02T00:00:00-04:00"
+    },
+    {
+      "date": "2026-07-05",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-05T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-12",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-12T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-13",
+      "time": "9a",
+      "what": "Archery Camp (William)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-13T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-14",
+      "time": "9a",
+      "what": "Archery Camp (William)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-14T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-15",
+      "time": "9a",
+      "what": "Archery Camp (William)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-15T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-16",
+      "time": "9a",
+      "what": "Archery Camp (William)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-16T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-17",
+      "time": "9a",
+      "what": "Archery Camp (William)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-17T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-17",
+      "time": "11:10a",
+      "what": "Dentist appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-17T12:10:00-04:00"
+    },
+    {
+      "date": "2026-07-19",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-19T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-25",
+      "time": "3:50p",
+      "what": "Hadestown (movie, 3 tickets)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-25T18:30:00-04:00"
+    },
+    {
+      "date": "2026-07-26",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-26T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-02",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-02T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-09",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-09T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-10",
+      "time": "all day",
+      "what": "Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)",
+      "who": "henry",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-11T00:00:00-04:00"
+    },
+    {
+      "date": "2026-08-11",
+      "time": "all day",
+      "what": "POPCS: Back to School Night",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-12T00:00:00-04:00"
+    },
+    {
+      "date": "2026-08-11",
+      "time": "8a",
+      "what": "EHS First Day of School (Charlie)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-11T15:00:00-04:00"
+    },
+    {
+      "date": "2026-08-11",
+      "time": "6p",
+      "what": "POPCS: Back to School Night",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-11T19:30:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
+      "time": "all day",
+      "what": "POPCS: First Day of School (12p dismissal)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-14T00:00:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
+      "time": "8a",
+      "what": "POPCS: First Day of School (12p dismissal)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-13T12:00:00-04:00"
+    },
+    {
+      "date": "2026-08-16",
+      "time": "all day",
+      "what": "POPCS: Back to School Dinner",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-17T00:00:00-04:00"
+    },
+    {
+      "date": "2026-08-16",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-16T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-16",
+      "time": "5p",
+      "what": "POPCS: Back to School Dinner (Pasta La Vista)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-16T19:00:00-04:00"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "all day",
+      "what": "John's birthday 🎂",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-19T00:00:00-04:00"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "8:30a",
+      "what": "POPCS: First School Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-19T09:30:00-04:00"
+    },
+    {
+      "date": "2026-08-23",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-23T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-30T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-06T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "all day",
+      "what": "POPCS: Labor Day - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-09-08T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-10",
+      "time": "9:15a",
+      "what": "Henry med check - Parkside Pediatrics",
+      "who": "henry",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-10T10:00:00-04:00"
+    }
+  ],
   "kids": [
     {
       "key": "thomas",
