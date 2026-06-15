@@ -53,7 +53,20 @@ function inferWho(summary, calendar) {
   return 'family';
 }
 
-module.exports = function () {
+// Retry cal_today.py up to MAX_TRIES times. Treats both throws AND a successful
+// run that yields 0 events as transient CalDAV failures — the 90-day window
+// across all of Mike's calendars is never legitimately empty (outlook alone
+// produces hundreds), so [] means a connection blip we should retry through.
+const MAX_TRIES = 3;
+const RETRY_DELAY_MS = 2000;
+
+function sleepSync(ms) {
+  // Node's execFileSync is blocking already; use a tiny busy-wait via spawnSync.
+  const { spawnSync } = require('child_process');
+  spawnSync('sleep', [String(ms / 1000)]);
+}
+
+function fetchEventsOnce() {
   let raw;
   try {
     raw = execFileSync('python3', [SCRIPT, '--days', String(DAYS), '--json'], {
@@ -62,15 +75,36 @@ module.exports = function () {
       maxBuffer: 8 * 1024 * 1024,
     });
   } catch (e) {
-    console.warn(`[calendar] cal_today.py failed: ${e.message} — calendar will be empty`);
-    return [];
+    return { ok: false, reason: `script error: ${e.message}` };
   }
-
-  let events;
   try {
-    events = JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    return { ok: true, events: parsed };
   } catch (e) {
-    console.warn(`[calendar] invalid JSON from cal_today.py: ${e.message}`);
+    return { ok: false, reason: `invalid JSON: ${e.message}` };
+  }
+}
+
+module.exports = function () {
+  let events = null;
+  let lastReason = '';
+  for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+    const result = fetchEventsOnce();
+    if (result.ok && Array.isArray(result.events) && result.events.length > 0) {
+      events = result.events;
+      if (attempt > 1) {
+        console.warn(`[calendar] succeeded on attempt ${attempt} (${events.length} events)`);
+      }
+      break;
+    }
+    lastReason = result.ok
+      ? `empty result (0 events) — likely CalDAV blip`
+      : result.reason;
+    console.warn(`[calendar] attempt ${attempt}/${MAX_TRIES} failed: ${lastReason}`);
+    if (attempt < MAX_TRIES) sleepSync(RETRY_DELAY_MS);
+  }
+  if (!events) {
+    console.warn(`[calendar] all ${MAX_TRIES} attempts failed — calendar will be empty (${lastReason})`);
     return [];
   }
 
