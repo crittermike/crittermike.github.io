@@ -47,6 +47,35 @@ eleventyExcludeFromCollections: true
     --on-accent: #ffffff;
   }
 
+  /* === DARK THEME (auto-switched after sunset by JS) === */
+  :root[data-theme="dark"] {
+    --warm-bg: #0f1217;
+    --card-bg: #181c23;
+    --text-dark: #f1f4fa;
+    --text-mid: #d6dce6;
+    --text-light: #a8b1bf;
+    --shadow: 0 1px 3px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.55);
+    --accent-orange: #f08a55;
+    --accent-teal: #4ac373;
+    --accent-gold: #e0a93b;
+    --accent-rose: #f06372;
+    --accent-blue: #5aa9f5;
+    --border: #2a313c;
+    --border-soft: #232932;
+    --surface: #1f242c;
+    --surface-mute: rgba(255,255,255,0.04);
+    --surface-mute-2: rgba(255,255,255,0.06);
+    --surface-mute-3: rgba(255,255,255,0.09);
+    --surface-mute-track: rgba(255,255,255,0.16);
+    --on-accent: #0f1217;
+  }
+
+  /* Smooth the flip so it's not a jump-scare at sunset */
+  html, body, .stage, .grid-stack-item-content, .ed-bar,
+  .ed-bar button, .picker, .pick-item, .ed-toast {
+    transition: background-color 0.5s ease, color 0.4s ease, border-color 0.5s ease;
+  }
+
   body {
     background: var(--warm-bg);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
@@ -1695,6 +1724,79 @@ eleventyExcludeFromCollections: true
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
   setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+  // === LOCK VIEWPORT ZOOM (iPad kiosk: no accidental pinch) ===
+  (function lockZoom() {
+    let vp = document.querySelector('meta[name="viewport"]');
+    if (!vp) {
+      vp = document.createElement('meta');
+      vp.name = 'viewport';
+      document.head.appendChild(vp);
+    }
+    vp.setAttribute(
+      'content',
+      'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+    );
+    // iOS Safari ignores user-scalable=no — block gesture events too.
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(ev =>
+      document.addEventListener(ev, e => e.preventDefault(), { passive: false })
+    );
+    // Double-tap-to-zoom: swallow it.
+    let lastTouch = 0;
+    document.addEventListener('touchend', e => {
+      const now = Date.now();
+      if (now - lastTouch <= 350) e.preventDefault();
+      lastTouch = now;
+    }, { passive: false });
+  })();
+
+  // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
+  (function themeInit() {
+    const SUN = {{ (weather.sun if weather and weather.sun else { sunrises: [], sunsets: [] }) | dump | safe }};
+    const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
+    const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
+
+    function fallbackIsNight(now) {
+      const h = now.getHours();
+      return h >= 20 || h < 7;
+    }
+    function flatBoundaries() {
+      const arr = [];
+      sunrises.forEach(d => arr.push({ at: d, nightAfter: false }));
+      sunsets.forEach(d => arr.push({ at: d, nightAfter: true }));
+      arr.sort((a, b) => a.at - b.at);
+      return arr;
+    }
+    function decide(now) {
+      const bs = flatBoundaries();
+      if (!bs.length) return { isNight: fallbackIsNight(now), nextFlipMs: 60 * 60 * 1000 };
+      let lastPast = null, nextFuture = null;
+      for (const b of bs) {
+        if (b.at <= now) lastPast = b;
+        else { nextFuture = b; break; }
+      }
+      const isNight = lastPast ? lastPast.nightAfter : !bs[0].nightAfter;
+      const nextFlipMs = nextFuture ? (nextFuture.at - now) : null;
+      return { isNight, nextFlipMs };
+    }
+    let scheduledTimer = null;
+    function apply() {
+      const { isNight, nextFlipMs } = decide(new Date());
+      const want = isNight ? 'dark' : 'light';
+      if (document.documentElement.getAttribute('data-theme') !== want) {
+        document.documentElement.setAttribute('data-theme', want);
+      }
+      if (scheduledTimer) clearTimeout(scheduledTimer);
+      const wait = nextFlipMs == null
+        ? 6 * 60 * 60 * 1000
+        : Math.max(1000, Math.min(nextFlipMs + 500, 6 * 60 * 60 * 1000));
+      scheduledTimer = setTimeout(apply, wait);
+    }
+    apply();
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) apply();
+    });
+  })();
 
   // === BOTTOM-RIGHT REFRESH TAP (mirrors /dashboard/) ===
   (function addRefreshTap() {
