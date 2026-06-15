@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T15:45:39.426Z",
+  "generated_at": "2026-06-15T16:03:16.919Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2071,5 +2071,58 @@
       "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
       "last_reviewed": null
     }
-  ]
+  ],
+  "finance": {
+    "month": "June 2026",
+    "dayPct": 50,
+    "totalSpend": 2915.99,
+    "totalBudget": 991.65,
+    "categories": [
+      {
+        "name": "🍿 Entertainment",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 2209.25,
+        "balance": -2209.25,
+        "pct": 0
+      },
+      {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 471.66,
+        "spent": 605.93,
+        "balance": -134.27,
+        "pct": 128.5
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 500,
+        "spent": 80.82,
+        "balance": 419.18,
+        "pct": 16.2
+      },
+      {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 19.99,
+        "spent": 19.99,
+        "balance": 0,
+        "pct": 100
+      },
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": -76.3,
+        "balance": 76.3,
+        "pct": 0
+      }
+    ],
+    "liquidCash": 15710.57,
+    "creditDebt": -14944.7,
+    "netLiquid": 765.87,
+    "source": "ynab",
+    "updatedAt": "2026-06-15T16:03:15.720Z"
+  }
 }

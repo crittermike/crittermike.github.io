@@ -1531,40 +1531,35 @@ permalink: "/dashboard/index.html"
   <div class="budget" id="budgetStrip">
     <div class="budget-head">
       <span class="budget-h">💳 Budget</span>
-      <span class="budget-month" id="budgetMonth">June</span>
+      <span class="budget-month" id="budgetMonth">{% if finance %}{{ finance.month }}{% else %}—{% endif %}</span>
     </div>
-    <div class="budget-cats">
-      <div class="budget-cat" data-cat="shopping" data-pct="42">
-        <div class="name">
-          <span>Shopping</span>
-          <span class="budget-status" id="status-shopping"></span>
+    <div class="budget-cats" id="budgetCats">
+      {% if finance and finance.categories %}
+        {% for c in finance.categories %}
+        <div class="budget-cat" data-cat="cat-{{ loop.index }}"
+             data-pct="{{ c.pct }}"
+             data-budgeted="{{ c.budgeted }}"
+             data-spent="{{ c.spent }}">
+          <div class="name">
+            <span>{{ c.name }}</span>
+            <span class="budget-status" id="status-cat-{{ loop.index }}"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-{{ loop.index }}"></div>
+            <div class="pace" id="pace-cat-{{ loop.index }}"></div>
+          </div>
         </div>
-        <div class="budget-bars">
-          <div class="actual" id="bar-shopping"></div>
-          <div class="pace" id="pace-shopping"></div>
-        </div>
-      </div>
-      <div class="budget-cat" data-cat="food" data-pct="68">
-        <div class="name">
-          <span>Food</span>
-          <span class="budget-status" id="status-food"></span>
-        </div>
-        <div class="budget-bars">
-          <div class="actual" id="bar-food"></div>
-          <div class="pace" id="pace-food"></div>
-        </div>
-      </div>
-      <div class="budget-cat" data-cat="ent" data-pct="89">
-        <div class="name">
-          <span>Entertainment</span>
-          <span class="budget-status" id="status-ent"></span>
-        </div>
-        <div class="budget-bars">
-          <div class="actual" id="bar-ent"></div>
-          <div class="pace" id="pace-ent"></div>
-        </div>
-      </div>
+        {% endfor %}
+      {% else %}
+        <div class="budget-cat"><div class="name"><span style="opacity:0.6;">No YNAB data — check finance.js logs</span></div></div>
+      {% endif %}
     </div>
+    {% if finance %}
+    <div class="budget-totals" style="display:flex; justify-content:space-between; gap:12px; margin-top:10px; font-size:11px; opacity:0.75;">
+      <span>${{ (finance.totalSpend | round) | int }} / ${{ (finance.totalBudget | round) | int }}</span>
+      <span>Net liquid: ${{ (finance.netLiquid | round) | int }}</span>
+    </div>
+    {% endif %}
   </div>
 
   <!-- COUNTDOWNS CARD -->

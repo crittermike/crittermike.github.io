@@ -31,6 +31,7 @@ module.exports = class {
       mealweek:  data.mealweek  || [],
       weather:   data.weather   || null,
       recipes:   data.recipes   || [],
+      finance:   data.finance   || null,
     };
     return JSON.stringify(payload, null, 2);
   }
