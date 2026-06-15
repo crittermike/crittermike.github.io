@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T14:15:37.485Z",
+  "generated_at": "2026-06-15T14:30:46.629Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -962,7 +962,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
+      "temp": 76,
       "hi": 89,
       "lo": 68,
       "icon": "⛅",
@@ -971,17 +971,17 @@
     "days": [
       {
         "d": "Tue",
-        "icon": "⛅",
+        "icon": "🌧",
         "hi": 85,
         "lo": 65,
-        "code": 3
+        "code": 61
       },
       {
         "d": "Wed",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 90,
         "lo": 68,
-        "code": 3
+        "code": 55
       },
       {
         "d": "Thu",
