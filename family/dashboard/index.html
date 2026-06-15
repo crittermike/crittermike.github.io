@@ -1462,7 +1462,7 @@
       <div class="fc-now">
         <span class="icon">☀️</span>
         <div class="meta">
-          <span class="temp">86°</span>
+          <span class="temp">87°</span>
           <span class="lo-hi">L 68° · H 88°</span>
         </div>
       </div>
@@ -2194,12 +2194,87 @@
   <div class="budget" id="budgetStrip">
     <div class="budget-head">
       <span class="budget-h">💳 Budget</span>
-      <span class="budget-month" id="budgetMonth">—</span>
+      <span class="budget-month" id="budgetMonth">June 2026</span>
     </div>
     <div class="budget-cats" id="budgetCats">
       
-        <div class="budget-cat"><div class="name"><span style="opacity:0.6;">No YNAB data — check finance.js logs</span></div></div>
+        
+        <div class="budget-cat" data-cat="cat-1"
+             data-pct="0"
+             data-budgeted="0"
+             data-spent="2209.25">
+          <div class="name">
+            <span>🍿 Entertainment</span>
+            <span class="budget-status" id="status-cat-1"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-1"></div>
+            <div class="pace" id="pace-cat-1"></div>
+          </div>
+        </div>
+        
+        <div class="budget-cat" data-cat="cat-2"
+             data-pct="128.5"
+             data-budgeted="471.66"
+             data-spent="605.93">
+          <div class="name">
+            <span>🍽️ Dining out</span>
+            <span class="budget-status" id="status-cat-2"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-2"></div>
+            <div class="pace" id="pace-cat-2"></div>
+          </div>
+        </div>
+        
+        <div class="budget-cat" data-cat="cat-3"
+             data-pct="16.2"
+             data-budgeted="500"
+             data-spent="80.82">
+          <div class="name">
+            <span>🛒 Groceries</span>
+            <span class="budget-status" id="status-cat-3"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-3"></div>
+            <div class="pace" id="pace-cat-3"></div>
+          </div>
+        </div>
+        
+        <div class="budget-cat" data-cat="cat-4"
+             data-pct="100"
+             data-budgeted="19.99"
+             data-spent="19.99">
+          <div class="name">
+            <span>📺 Subscriptions</span>
+            <span class="budget-status" id="status-cat-4"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-4"></div>
+            <div class="pace" id="pace-cat-4"></div>
+          </div>
+        </div>
+        
+        <div class="budget-cat" data-cat="cat-5"
+             data-pct="0"
+             data-budgeted="0"
+             data-spent="-76.3">
+          <div class="name">
+            <span>🛍️ Shopping</span>
+            <span class="budget-status" id="status-cat-5"></span>
+          </div>
+          <div class="budget-bars">
+            <div class="actual" id="bar-cat-5"></div>
+            <div class="pace" id="pace-cat-5"></div>
+          </div>
+        </div>
+        
       
+    </div>
+    
+    <div class="budget-totals" style="display:flex; justify-content:space-between; gap:12px; margin-top:10px; font-size:11px; opacity:0.75;">
+      <span>$2916 / $992</span>
+      <span>Net liquid: $766</span>
     </div>
     
   </div>
