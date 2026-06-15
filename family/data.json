@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-06-15T03:45:43.590Z",
+  "generated_at": "2026-06-15T04:00:51.492Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-14",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-14T09:00:00-04:00"
-    },
     {
       "date": "2026-06-15",
       "time": "10a",
@@ -578,7 +569,16 @@
       "allowance": {
         "balance_str": "$100.00"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "william",
@@ -596,7 +596,16 @@
       "allowance": {
         "balance_str": "$21.31"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -614,7 +623,16 @@
       "allowance": {
         "balance_str": "$72.13"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -628,7 +646,16 @@
       "allowance": {
         "balance_str": "$-273.23"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "take-medicine",
+          "label": "Take medicine"
+        },
+        {
+          "id": "popcs-video",
+          "label": "Finish video for POPCS"
+        }
+      ]
     }
   ],
   "chores": {
@@ -842,7 +869,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -850,8 +877,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Italian sausage + onions + zucchini",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -859,7 +886,7 @@
       "dow_short": "Tue",
       "name": "Chicken fajitas (no peppers, extra onions + zucchini)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -944,20 +971,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
-      "hi": 89,
-      "lo": 72,
+      "temp": 73,
+      "hi": 90,
+      "lo": 69,
       "icon": "🌤",
       "code": 2
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 90,
-        "lo": 69,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -985,24 +1005,31 @@
         "hi": 89,
         "lo": 69,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 86,
+        "lo": 65,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-14T06:15",
         "2026-06-15T06:15",
         "2026-06-16T06:15",
         "2026-06-17T06:15",
         "2026-06-18T06:15",
-        "2026-06-19T06:15"
+        "2026-06-19T06:15",
+        "2026-06-20T06:16"
       ],
       "sunsets": [
-        "2026-06-14T20:44",
         "2026-06-15T20:44",
         "2026-06-16T20:44",
         "2026-06-17T20:45",
         "2026-06-18T20:45",
-        "2026-06-19T20:45"
+        "2026-06-19T20:45",
+        "2026-06-20T20:46"
       ],
       "timezone": "America/New_York"
     }
