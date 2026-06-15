@@ -15,6 +15,7 @@
  */
 
 const { execFileSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
@@ -86,6 +87,15 @@ function fetchEventsOnce() {
 }
 
 module.exports = function () {
+  // Local-dev fast path: on a machine without Mike's ~/.hermes tree the script
+  // is absent, so skip the 3×2s retry/sleep loop and return [] immediately.
+  // Keeps hot reload snappy; the widget just renders empty. On Mike's main
+  // machine the script exists and the normal CalDAV retry logic runs.
+  if (!fs.existsSync(SCRIPT)) {
+    console.warn(`[calendar] ${SCRIPT} not found — returning [] (calendar widget will be empty)`);
+    return [];
+  }
+
   let events = null;
   let lastReason = '';
   for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
