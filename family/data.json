@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T19:16:03.784Z",
+  "generated_at": "2026-06-15T19:30:29.914Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -962,7 +962,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 87,
+      "temp": 86,
       "hi": 88,
       "lo": 68,
       "icon": "☀️",
@@ -2072,57 +2072,5 @@
       "last_reviewed": null
     }
   ],
-  "finance": {
-    "month": "June 2026",
-    "dayPct": 50,
-    "totalSpend": 2915.99,
-    "totalBudget": 991.65,
-    "categories": [
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 2209.25,
-        "balance": -2209.25,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 471.66,
-        "spent": 605.93,
-        "balance": -134.27,
-        "pct": 128.5
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 500,
-        "spent": 80.82,
-        "balance": 419.18,
-        "pct": 16.2
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 19.99,
-        "spent": 19.99,
-        "balance": 0,
-        "pct": 100
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": -76.3,
-        "balance": 76.3,
-        "pct": 0
-      }
-    ],
-    "liquidCash": 15710.57,
-    "creditDebt": -14944.7,
-    "netLiquid": 765.87,
-    "source": "ynab",
-    "updatedAt": "2026-06-15T19:16:02.483Z"
-  }
+  "finance": null
 }
