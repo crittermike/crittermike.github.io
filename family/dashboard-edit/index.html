@@ -380,6 +380,9 @@
     box-sizing: border-box;
     pointer-events: none;
   }
+  /* Nudge header content down off the iPad status bar without changing the
+     header's measured height (so --header-h and the stage stay put). */
+  .dh-left, .dh-weather { transform: translateY(7px); }
   .dh-left {
     display: flex;
     flex-direction: column;
@@ -649,17 +652,6 @@
     gap: 9px;
     color: var(--text-dark);
     margin-bottom: 10px;
-  }
-  .kid-avatar {
-    width: 28px; height: 28px;
-    flex-shrink: 0;
-    border-radius: 999px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #fff;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px -2px rgba(0,0,0,0.35);
   }
   .kid-name {
     font-size: 1.08rem;
@@ -1616,7 +1608,6 @@
   <div data-tpl="kid-thomas">
     <div class="kidcard-accent" style="background: var(--accent-blue)"></div>
     <div class="tile-h kidtile-h">
-      <span class="kid-avatar" style="background: var(--accent-blue)">T</span>
       <span class="kid-name">Thomas</span>
     </div>
     <div class="tile-body kidtile-body">
@@ -1685,7 +1676,6 @@
   <div data-tpl="kid-william">
     <div class="kidcard-accent" style="background: var(--accent-teal)"></div>
     <div class="tile-h kidtile-h">
-      <span class="kid-avatar" style="background: var(--accent-teal)">W</span>
       <span class="kid-name">William</span>
     </div>
     <div class="tile-body kidtile-body">
@@ -1754,7 +1744,6 @@
   <div data-tpl="kid-henry">
     <div class="kidcard-accent" style="background: var(--accent-purple)"></div>
     <div class="tile-h kidtile-h">
-      <span class="kid-avatar" style="background: var(--accent-purple)">H</span>
       <span class="kid-name">Henry</span>
     </div>
     <div class="tile-body kidtile-body">
@@ -1823,7 +1812,6 @@
   <div data-tpl="kid-charlie">
     <div class="kidcard-accent" style="background: var(--accent-orange)"></div>
     <div class="tile-h kidtile-h">
-      <span class="kid-avatar" style="background: var(--accent-orange)">C</span>
       <span class="kid-name">Charlie</span>
     </div>
     <div class="tile-body kidtile-body">
