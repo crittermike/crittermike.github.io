@@ -43,6 +43,9 @@ eleventyExcludeFromCollections: true
     --accent-rose: #cf222e;
     --accent-blue: #0969da;
     --accent-purple: #8250df;
+    --wx-sun: #f3a52c;
+    --wx-cloud: #97a3b4;
+    --wx-rain: #5b9bd5;
     --border: #e2e7ef;
     --border-soft: #edf0f5;
     --surface: #ffffff;
@@ -72,6 +75,9 @@ eleventyExcludeFromCollections: true
     --accent-rose: #f06372;
     --accent-blue: #5aa9f5;
     --accent-purple: #a371f7;
+    --wx-sun: #ffce5a;
+    --wx-cloud: #8b96a6;
+    --wx-rain: #74ace8;
     --border: #2a313c;
     --border-soft: #232932;
     --surface: #1f242c;
@@ -269,7 +275,7 @@ eleventyExcludeFromCollections: true
     padding-right: 18px;
     border-right: 1px solid var(--border);
   }
-  .dh-now .dh-ic { font-size: 1.45rem; line-height: 1; align-self: center; }
+  .dh-now .dh-ic { display: flex; align-items: center; align-self: center; }
   .dh-now .dh-temp {
     font-family: 'Fraunces', Georgia, serif;
     font-size: 1.55rem; font-weight: 700; line-height: 1;
@@ -282,8 +288,21 @@ eleventyExcludeFromCollections: true
     line-height: 1.1;
   }
   .dh-day .d { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
-  .dh-day .i { font-size: 1.05rem; }
+  .dh-day .i { display: flex; align-items: center; justify-content: center; height: 1.5rem; }
   .dh-day .hl { font-size: 0.68rem; font-weight: 700; color: var(--text-dark); font-variant-numeric: tabular-nums; }
+
+  /* === COHESIVE WEATHER ICONS (inline SVG — one shared cloud/sun shape,
+        tight palette: amber sun/bolt, neutral cloud, cool precip) === */
+  .wx-i { display: block; overflow: visible; }
+  .dh-now .dh-ic .wx-i { width: 1.85rem; height: 1.85rem; }
+  .dh-day .i .wx-i { width: 1.45rem; height: 1.45rem; }
+  .wx-c { fill: var(--wx-cloud); }
+  .wx-s { fill: var(--wx-sun); }
+  .wx-b { fill: var(--wx-sun); }
+  .wx-n { fill: var(--wx-rain); }
+  .wx-ray { stroke: var(--wx-sun); stroke-width: 2.1; stroke-linecap: round; }
+  .wx-r { stroke: var(--wx-rain); stroke-width: 2.1; stroke-linecap: round; }
+  .wx-f { stroke: var(--wx-cloud); stroke-width: 2.1; stroke-linecap: round; }
   .dh-sun .sun-bar { margin-top: 0; height: 16px; border-radius: 8px; }
   .dh-sun .sun-meta { margin-top: 4px; }
 
@@ -1293,6 +1312,28 @@ eleventyExcludeFromCollections: true
     </div>
   </div>
 </div>
+{% macro wxicon(code) %}
+{%- set c = code -%}
+{%- if c == 0 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg>
+{%- elif c == 1 or c == 2 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg>
+{%- elif c == 3 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg>
+{%- elif c >= 45 and c <= 48 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1.2) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-f"><line x1="7.5" y1="18.6" x2="16.5" y2="18.6"/><line x1="9" y1="21.6" x2="15" y2="21.6"/></g></svg>
+{%- elif c >= 51 and c <= 57 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg>
+{%- elif (c >= 61 and c <= 67) or (c >= 80 and c <= 82) -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="8.6" y1="17.6" x2="7.6" y2="21"/><line x1="12.6" y1="17.6" x2="11.6" y2="21"/><line x1="16.6" y1="17.6" x2="15.6" y2="21"/></g></svg>
+{%- elif (c >= 71 and c <= 77) or (c >= 85 and c <= 86) -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-n"><circle cx="8.8" cy="19" r="1.15"/><circle cx="12.6" cy="19" r="1.15"/><circle cx="16.4" cy="19" r="1.15"/></g></svg>
+{%- elif c >= 95 -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg>
+{%- else -%}
+<svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg>
+{%- endif -%}
+{% endmacro %}
 
 <header class="dash-header" id="dashHeader">
   <div class="dh-left">
@@ -1303,13 +1344,13 @@ eleventyExcludeFromCollections: true
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic">{{ weather.now.icon }}</span>
+        <span class="dh-ic">{{ wxicon(weather.now.code) }}</span>
         <span class="dh-temp">{{ weather.now.temp }}°</span>
         <span class="dh-hilo">H {{ weather.now.hi }}° · L {{ weather.now.lo }}°</span>
       </div>
       <div class="dh-days">
         {% for d in weather.days %}
-          <div class="dh-day"><span class="d">{{ d.d }}</span><span class="i">{{ d.icon }}</span><span class="hl">{{ d.hi }}/{{ d.lo }}</span></div>
+          <div class="dh-day"><span class="d">{{ d.d }}</span><span class="i">{{ wxicon(d.code) }}</span><span class="hl">{{ d.hi }}/{{ d.lo }}</span></div>
         {% endfor %}
       </div>
     </div>
