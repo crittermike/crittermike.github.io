@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-06-16T03:49:22.482Z",
+  "generated_at": "2026-06-16T04:01:02.622Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-15",
-      "time": "10a",
-      "what": "Thomas art camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-15T12:00:00-04:00"
-    },
-    {
-      "date": "2026-06-15",
-      "time": "12:30p",
-      "what": "Thomas handwriting camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-15T14:00:00-04:00"
-    },
-    {
-      "date": "2026-06-15",
-      "time": "1p",
-      "what": "William art camp",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-15T15:00:00-04:00"
-    },
     {
       "date": "2026-06-16",
       "time": "9a",
@@ -541,6 +514,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-10T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-13T09:00:00-04:00"
     }
   ],
   "kids": [
@@ -868,7 +850,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Italian sausage + onions + zucchini",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -876,8 +858,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken fajitas (no peppers, extra onions + zucchini)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -885,7 +867,7 @@
       "dow_short": "Wed",
       "name": "Marry Me Chicken over pasta",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "marry-me-chicken",
         "name": "Marry Me chicken",
@@ -962,20 +944,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 70,
-      "hi": 86,
-      "lo": 68,
+      "temp": 69,
+      "hi": 84,
+      "lo": 65,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 84,
-        "lo": 65,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -1003,24 +978,31 @@
         "hi": 86,
         "lo": 68,
         "code": 51
+      },
+      {
+        "d": "Sun",
+        "icon": "⛅",
+        "hi": 88,
+        "lo": 66,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-15T06:15",
         "2026-06-16T06:15",
         "2026-06-17T06:15",
         "2026-06-18T06:15",
         "2026-06-19T06:15",
-        "2026-06-20T06:16"
+        "2026-06-20T06:16",
+        "2026-06-21T06:16"
       ],
       "sunsets": [
-        "2026-06-15T20:44",
         "2026-06-16T20:44",
         "2026-06-17T20:45",
         "2026-06-18T20:45",
         "2026-06-19T20:45",
-        "2026-06-20T20:46"
+        "2026-06-20T20:46",
+        "2026-06-21T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2123,6 +2105,6 @@
     "creditDebt": -14944.7,
     "netLiquid": 765.87,
     "source": "ynab",
-    "updatedAt": "2026-06-16T03:49:20.565Z"
+    "updatedAt": "2026-06-16T04:01:00.144Z"
   }
 }
