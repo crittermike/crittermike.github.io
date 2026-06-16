@@ -1801,8 +1801,14 @@ eleventyExcludeFromCollections: true
   function fitGrid() {
     const rows = Math.max(grid.getRow(), 1);
     const availH = gridEl.clientHeight || (stage.clientHeight - 12);
-    const ch = Math.max(8, Math.round(availH / rows));
+    // floor() guarantees rows*ch <= availH, so the bottom row can never
+    // overflow the stage and get clipped by overflow:hidden.
+    const ch = Math.max(8, Math.floor(availH / rows));
     grid.cellHeight(ch);
+    // Push the sub-row remainder up into the header gap so the bottom padding
+    // always equals the side padding instead of sitting flush or growing.
+    const leftover = Math.max(0, availH - rows * ch);
+    gridEl.style.transform = leftover > 1 ? 'translateY(' + leftover + 'px)' : '';
   }
 
   // The persistent header is fixed; measure it and expose its height so the
