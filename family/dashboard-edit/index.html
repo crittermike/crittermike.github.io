@@ -185,32 +185,38 @@
 
   /* === DESIGN TOKENS (match /dashboard/) === */
   :root {
-    --warm-bg: #f5f1ea;
+    --warm-bg: #e8ebf1;
+    --bg-grad-1: #f1f4f9;
+    --bg-grad-2: #e8ebf1;
+    --bg-grad-3: #dde2eb;
     --card-bg: #ffffff;
-    --card-bg-2: #fbfaf7;
-    --card-top-hi: rgba(255,255,255,0.85);
-    --text-dark: #1f2328;
-    --text-mid: #57606a;
-    --text-light: #8b949e;
-    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 24px -8px rgba(0,0,0,0.10), 0 2px 6px -2px rgba(0,0,0,0.05);
-    --accent-orange: #d96a2a;
+    --card-bg-2: #f6f8fc;
+    --card-top-hi: rgba(255,255,255,0.9);
+    --text-dark: #1f2530;
+    --text-mid: #5a6475;
+    --text-light: #8b93a3;
+    --shadow: 0 1px 2px rgba(28,39,64,0.04), 0 16px 34px -14px rgba(28,39,64,0.17), 0 3px 10px -4px rgba(28,39,64,0.07);
+    --accent-orange: #d2691e;
     --accent-teal: #2da44e;
     --accent-gold: #bf8700;
     --accent-rose: #cf222e;
     --accent-blue: #0969da;
-    --border: #e3e6ea;
-    --border-soft: #eef0f3;
+    --border: #e2e7ef;
+    --border-soft: #edf0f5;
     --surface: #ffffff;
-    --surface-mute: rgba(0,0,0,0.025);
-    --surface-mute-2: rgba(0,0,0,0.035);
-    --surface-mute-3: rgba(0,0,0,0.05);
-    --surface-mute-track: rgba(0,0,0,0.04);
+    --surface-mute: rgba(34,46,72,0.030);
+    --surface-mute-2: rgba(34,46,72,0.045);
+    --surface-mute-3: rgba(34,46,72,0.065);
+    --surface-mute-track: rgba(34,46,72,0.05);
     --on-accent: #ffffff;
   }
 
   /* === DARK THEME (auto-switched after sunset by JS) === */
   :root[data-theme="dark"] {
     --warm-bg: #0f1217;
+    --bg-grad-1: #161b24;
+    --bg-grad-2: #0f1217;
+    --bg-grad-3: #0a0c11;
     --card-bg: #181c23;
     --card-bg-2: #14181e;
     --card-top-hi: rgba(255,255,255,0.06);
@@ -240,7 +246,9 @@
   }
 
   body {
-    background: var(--warm-bg);
+    background-color: var(--warm-bg);
+    background-image: radial-gradient(135% 100% at 50% -25%, var(--bg-grad-1) 0%, var(--bg-grad-2) 58%, var(--bg-grad-3) 100%);
+    background-attachment: fixed;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     color: var(--text-dark);
   }
@@ -357,11 +365,73 @@
   }
   .ed-group-btns { display: flex; gap: 6px; }
 
+  /* === PERSISTENT HEADER (brand + live weather, always on top) === */
+  .dash-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: max(env(safe-area-inset-top), 16px) max(env(safe-area-inset-right), 22px) 10px max(env(safe-area-inset-left), 22px);
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+  .dh-brand {
+    font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 2.05rem;
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    line-height: 1;
+    white-space: nowrap;
+    font-feature-settings: 'ss01' on, 'ss02' on;
+  }
+  .dh-brand span { color: var(--accent-orange); }
+  .dh-weather {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+    min-width: 380px;
+  }
+  .dh-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+  .dh-now {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding-right: 18px;
+    border-right: 1px solid var(--border);
+  }
+  .dh-now .dh-ic { font-size: 1.45rem; line-height: 1; align-self: center; }
+  .dh-now .dh-temp {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.55rem; font-weight: 700; line-height: 1;
+    color: var(--text-dark); font-variant-numeric: tabular-nums;
+  }
+  .dh-now .dh-hilo { font-size: 0.72rem; font-weight: 600; color: var(--text-light); }
+  .dh-days { display: flex; gap: 16px; }
+  .dh-day {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    line-height: 1.1;
+  }
+  .dh-day .d { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+  .dh-day .i { font-size: 1.05rem; }
+  .dh-day .hl { font-size: 0.68rem; font-weight: 700; color: var(--text-dark); font-variant-numeric: tabular-nums; }
+  .dh-sun .sun-bar { margin-top: 0; height: 16px; border-radius: 8px; }
+  .dh-sun .sun-meta { margin-top: 4px; }
+
   /* === STAGE === */
   .stage {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    padding: max(env(safe-area-inset-top), 24px) max(env(safe-area-inset-right), 6px) max(env(safe-area-inset-bottom), 6px) max(env(safe-area-inset-left), 6px);
+    top: var(--header-h, 92px); left: 0; right: 0; bottom: 0;
+    padding: 4px max(env(safe-area-inset-right), 8px) max(env(safe-area-inset-bottom), 8px) max(env(safe-area-inset-left), 8px);
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -1283,6 +1353,41 @@
   </div>
 </div>
 
+<header class="dash-header" id="dashHeader">
+  <div class="dh-brand">Critter <span>Crew</span></div>
+  
+  <div class="dh-weather">
+    <div class="dh-top">
+      <div class="dh-now">
+        <span class="dh-ic">⛅</span>
+        <span class="dh-temp">66°</span>
+        <span class="dh-hilo">H 84° · L 66°</span>
+      </div>
+      <div class="dh-days">
+        
+          <div class="dh-day"><span class="d">Wed</span><span class="i">🌦</span><span class="hl">89/68</span></div>
+        
+          <div class="dh-day"><span class="d">Thu</span><span class="i">⛈</span><span class="hl">87/69</span></div>
+        
+          <div class="dh-day"><span class="d">Fri</span><span class="i">⛈</span><span class="hl">81/68</span></div>
+        
+          <div class="dh-day"><span class="d">Sat</span><span class="i">⛅</span><span class="hl">88/69</span></div>
+        
+          <div class="dh-day"><span class="d">Sun</span><span class="i">⛅</span><span class="hl">88/65</span></div>
+        
+      </div>
+    </div>
+    
+    <div class="dh-sun">
+      <div class="sun-bar" id="sunBar"
+           data-sunrise="2026-06-16T06:15"
+           data-sunset="2026-06-16T20:44"></div>
+    </div>
+    
+  </div>
+  
+</header>
+
 <div class="stage">
   <div class="grid-stack" id="grid">
     <!-- Tiles injected by JS from the catalog below -->
@@ -1293,48 +1398,47 @@
 <script type="application/json" id="tileCatalog">
 [
 
-  { "id": "kid-thomas", "label": "🧒 Thomas", "w": 3, "h": 4 },
+  { "id": "kid-thomas", "label": "🧒 Thomas", "w": 6, "h": 8 },
 
-  { "id": "kid-william", "label": "🧒 William", "w": 3, "h": 4 },
+  { "id": "kid-william", "label": "🧒 William", "w": 6, "h": 8 },
 
-  { "id": "kid-henry", "label": "🧒 Henry", "w": 3, "h": 4 },
+  { "id": "kid-henry", "label": "🧒 Henry", "w": 6, "h": 8 },
 
-  { "id": "kid-charlie", "label": "🧒 Charlie", "w": 3, "h": 4 },
+  { "id": "kid-charlie", "label": "🧒 Charlie", "w": 6, "h": 8 },
 
-  { "id": "kids",       "label": "👨‍👩‍👦‍👦 Kids (sugar/allowance)", "w": 3, "h": 3 },
-  { "id": "budget",     "label": "💳 Budget",                       "w": 3, "h": 2 },
-  { "id": "countdowns", "label": "⏳ Countdowns",                   "w": 3, "h": 3 },
-  { "id": "calendar",   "label": "📅 Upcoming events",              "w": 5, "h": 5 },
-  { "id": "chores",     "label": "🧹 Weekend chores",               "w": 4, "h": 5 },
-  { "id": "weather",    "label": "☀️ Weather",                      "w": 3, "h": 3 },
-  { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
-  { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
-  { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
-  { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 3, "h": 3 },
-  { "id": "joke",        "label": "😂 Joke of the day",              "w": 3, "h": 2 },
-  { "id": "bible",       "label": "✝️ Verse of the day",             "w": 3, "h": 2 },
-  { "id": "newish",      "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
+  { "id": "kids",       "label": "👨‍👩‍👦‍👦 Kids (sugar/allowance)", "w": 6, "h": 6 },
+  { "id": "budget",     "label": "💳 Budget",                       "w": 6, "h": 4 },
+  { "id": "countdowns", "label": "⏳ Countdowns",                   "w": 6, "h": 6 },
+  { "id": "calendar",   "label": "📅 Upcoming events",              "w": 10, "h": 10 },
+  { "id": "chores",     "label": "🧹 Weekend chores",               "w": 8, "h": 10 },
+  { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 6, "h": 6 },
+  { "id": "reading",     "label": "📚 Summer reading",               "w": 6, "h": 6 },
+  { "id": "assignments", "label": "✏️ Today's assignments",          "w": 6, "h": 6 },
+  { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 6, "h": 6 },
+  { "id": "joke",        "label": "😂 Joke of the day",              "w": 6, "h": 4 },
+  { "id": "bible",       "label": "✝️ Verse of the day",             "w": 6, "h": 4 },
+  { "id": "newish",      "label": "✨ Blank placeholder",            "w": 18, "h": 6 }
 ]
 </script>
 
 <!-- Default layout if no saved state -->
 <script type="application/json" id="defaultLayout">
 [
-  { "id": "calendar",    "x": 3, "y": 0, "w": 5, "h": 5 },
-  { "id": "chores",      "x": 8, "y": 0, "w": 4, "h": 5 },
-  { "id": "budget",      "x": 0, "y": 0, "w": 3, "h": 2 },
-  { "id": "countdowns",  "x": 0, "y": 2, "w": 3, "h": 3 },
-  { "id": "recipe",      "x": 0, "y": 9, "w": 3, "h": 3 },
-  { "id": "joke",        "x": 3, "y": 9, "w": 5, "h": 3 },
-  { "id": "bible",       "x": 8, "y": 9, "w": 4, "h": 3 },
+  { "id": "calendar",    "x": 6, "y": 0, "w": 10, "h": 10 },
+  { "id": "chores",      "x": 16, "y": 0, "w": 8, "h": 10 },
+  { "id": "budget",      "x": 0, "y": 0, "w": 6, "h": 4 },
+  { "id": "countdowns",  "x": 0, "y": 4, "w": 6, "h": 6 },
+  { "id": "recipe",      "x": 0, "y": 18, "w": 6, "h": 6 },
+  { "id": "joke",        "x": 6, "y": 18, "w": 10, "h": 6 },
+  { "id": "bible",       "x": 16, "y": 18, "w": 8, "h": 6 },
 
-  { "id": "kid-thomas", "x": 0, "y": 5, "w": 3, "h": 4 },
+  { "id": "kid-thomas", "x": 0, "y": 10, "w": 6, "h": 8 },
 
-  { "id": "kid-william", "x": 3, "y": 5, "w": 3, "h": 4 },
+  { "id": "kid-william", "x": 6, "y": 10, "w": 6, "h": 8 },
 
-  { "id": "kid-henry", "x": 6, "y": 5, "w": 3, "h": 4 },
+  { "id": "kid-henry", "x": 12, "y": 10, "w": 6, "h": 8 },
 
-  { "id": "kid-charlie", "x": 9, "y": 5, "w": 3, "h": 4 }
+  { "id": "kid-charlie", "x": 18, "y": 10, "w": 6, "h": 8 }
 
 ]
 </script>
@@ -1776,57 +1880,6 @@
     </div>
   </div>
 
-  <div data-tpl="weather">
-    <div class="tile-h"><span>☀️ Weather</span><span class="sub">Greenville</span></div>
-    <div class="tile-body">
-      
-      <div class="weather-row">
-        <span class="icon">⛅</span>
-        <span class="temp">66°</span>
-        <span class="hilo">H 84 / L 66</span>
-      </div>
-      <div class="weather-days">
-        
-          <div>
-            <div class="d">Wed</div>
-            <div class="ic">🌦</div>
-            <div class="hl">89/68</div>
-          </div>
-        
-          <div>
-            <div class="d">Thu</div>
-            <div class="ic">⛈</div>
-            <div class="hl">87/69</div>
-          </div>
-        
-          <div>
-            <div class="d">Fri</div>
-            <div class="ic">⛈</div>
-            <div class="hl">81/68</div>
-          </div>
-        
-          <div>
-            <div class="d">Sat</div>
-            <div class="ic">⛅</div>
-            <div class="hl">88/69</div>
-          </div>
-        
-          <div>
-            <div class="d">Sun</div>
-            <div class="ic">⛅</div>
-            <div class="hl">88/65</div>
-          </div>
-        
-      </div>
-      
-      <div class="sun-bar" id="sunBar"
-           data-sunrise="2026-06-16T06:15"
-           data-sunset="2026-06-16T20:44"></div>
-      
-      
-    </div>
-  </div>
-
   <div data-tpl="meals">
     <div class="tile-h"><span>🍽️ Meal plan</span><span class="sub">This week</span></div>
     <div class="tile-body">
@@ -2146,13 +2199,28 @@
     TEMPLATES[el.dataset.tpl] = el.innerHTML;
   });
 
-  // Compute cell height to fit viewport
+  // GridStack ships column CSS only for <=12 columns. We run a 24-column grid
+  // (finer resize granularity), so generate the width/left rules it needs.
+  const COLS = 24;
+  (function injectColCSS(n) {
+    if (document.getElementById('gs-cols-' + n)) return;
+    let css = '.gs-' + n + '>.grid-stack-item{width:' + (100 / n) + '%}';
+    for (let i = 1; i <= n; i++) css += '.gs-' + n + '>.grid-stack-item[gs-w="' + i + '"]{width:' + (i / n * 100) + '%}';
+    for (let i = 0; i < n; i++) css += '.gs-' + n + '>.grid-stack-item[gs-x="' + i + '"]{left:' + (i / n * 100) + '%}';
+    const s = document.createElement('style');
+    s.id = 'gs-cols-' + n;
+    s.textContent = css;
+    document.head.appendChild(s);
+  })(COLS);
+
+  // cellHeight is computed to FIT the active layout exactly inside the stage so
+  // nothing overflows/clips at the bottom (see fitGrid, called after each apply).
   const stage = document.querySelector('.stage');
-  const stageH = stage.clientHeight - 12;
-  const cellH = Math.floor(stageH / 8);
+  const gridEl = document.getElementById('grid');
+  const cellH = Math.max(8, Math.floor((gridEl.clientHeight || 600) / 16));
 
   const grid = GridStack.init({
-    column: 12,
+    column: COLS,
     cellHeight: cellH,
     margin: 4,
     float: false,
@@ -2161,6 +2229,25 @@
     handle: '.grid-stack-item-content',
     acceptWidgets: false,
   }, '#grid');
+
+  // Fit the active layout to the stage: pick a cellHeight so the tallest column
+  // of tiles fills (but never overflows) the available height. This guarantees
+  // the bottom tiles always show their full rounded corners with even padding —
+  // no clipping — regardless of how many rows a template/layout uses.
+  function fitGrid() {
+    const rows = Math.max(grid.getRow(), 1);
+    const availH = gridEl.clientHeight || (stage.clientHeight - 12);
+    const ch = Math.max(8, Math.round(availH / rows));
+    grid.cellHeight(ch);
+  }
+
+  // The persistent header is fixed; measure it and expose its height so the
+  // stage sits exactly below it (no overlap, no wasted gap) on any device.
+  function measureHeader() {
+    const h = document.getElementById('dashHeader');
+    if (!h) return;
+    document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+  }
 
   function tileHTML(id) {
     const body = TEMPLATES[id] || '<div class="placeholder">Missing template: ' + id + '</div>';
@@ -2190,7 +2277,6 @@
     if (id === 'reading')      hydrateReading();
     if (id === 'assignments')  hydrateAssignments();
     if (id === 'recipe')       renderRecipeOfDay();
-    if (id === 'weather')      renderSunBar();
     if (id.indexOf('kid-') === 0) { hydrateReading(); hydrateAssignments(); }
   }
 
@@ -2673,13 +2759,13 @@
   // Each template is a full tile arrangement. The resolved-active one is
   // rendered; edits (move/resize/add/remove) save back to it. "Auto" picks a
   // template by the day of week so the kiosk switches hands-free.
-  const TPL_KEY = 'crittercrew.dashedit.templates.v2';
+  const TPL_KEY = 'crittercrew.dashedit.templates.v4';
 
   // Roster-driven kid tile ids, so per-kid tiles stay in sync with kids.js.
   const KID_IDS = ['kid-thomas', 'kid-william', 'kid-henry', 'kid-charlie'];
   function kidRow(y, h) {
-    h = h || 4;
-    return KID_IDS.map((id, i) => ({ id: id, x: (i % 4) * 3, y: y + Math.floor(i / 4) * h, w: 3, h: h }));
+    h = h || 8;
+    return KID_IDS.map((id, i) => ({ id: id, x: (i % 4) * 6, y: y + Math.floor(i / 4) * h, w: 6, h: h }));
   }
 
   function tplEsc(s) {
@@ -2697,25 +2783,24 @@
         school: {
           id: 'school', emoji: '🎒', name: 'School Day', match: 'weekday',
           layout: [
-            { id: 'weather',    x: 0, y: 0, w: 3, h: 2 },
-            { id: 'countdowns', x: 0, y: 2, w: 3, h: 3 },
-            { id: 'calendar',   x: 3, y: 0, w: 6, h: 5 },
-            { id: 'recipe',     x: 9, y: 0, w: 3, h: 5 }
-          ].concat(kidRow(5, 4)).concat([
-            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
-            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+            { id: 'countdowns', x: 0, y: 0, w: 6, h: 10 },
+            { id: 'calendar',   x: 6, y: 0, w: 12, h: 10 },
+            { id: 'recipe',     x: 18, y: 0, w: 6, h: 10 }
+          ].concat(kidRow(10, 8)).concat([
+            { id: 'joke',  x: 0, y: 18, w: 12, h: 4 },
+            { id: 'bible', x: 12, y: 18, w: 12, h: 4 }
           ])
         },
         weekend: {
           id: 'weekend', emoji: '🏖️', name: 'Weekend', match: 'weekend',
           layout: [
-            { id: 'chores',   x: 0, y: 0, w: 4, h: 6 },
-            { id: 'calendar', x: 4, y: 0, w: 5, h: 6 },
-            { id: 'meals',    x: 9, y: 0, w: 3, h: 3 },
-            { id: 'recipe',   x: 9, y: 3, w: 3, h: 3 }
-          ].concat(kidRow(6, 3)).concat([
-            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
-            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+            { id: 'chores',   x: 0, y: 0, w: 8, h: 12 },
+            { id: 'calendar', x: 8, y: 0, w: 10, h: 12 },
+            { id: 'meals',    x: 18, y: 0, w: 6, h: 6 },
+            { id: 'recipe',   x: 18, y: 6, w: 6, h: 6 }
+          ].concat(kidRow(12, 6)).concat([
+            { id: 'joke',  x: 0, y: 18, w: 12, h: 4 },
+            { id: 'bible', x: 12, y: 18, w: 12, h: 4 }
           ])
         },
         everyday: {
@@ -2728,29 +2813,37 @@
 
   function saveStore(s) { localStorage.setItem(TPL_KEY, JSON.stringify(s)); }
 
+  // Grid granularity is 24x16. A legacy single-layout store (v1) is in 12-col
+  // coords; scale every tile's x/y/w/h by 2 when importing it into "Everyday".
+  function dblLayout(layout) {
+    return (Array.isArray(layout) ? layout : []).map(function (t) {
+      return { id: t.id, x: (t.x || 0) * 2, y: (t.y || 0) * 2, w: (t.w || 1) * 2, h: (t.h || 1) * 2 };
+    });
+  }
+
   function loadStore() {
     let store = null;
     try {
       const raw = localStorage.getItem(TPL_KEY);
       if (raw) store = JSON.parse(raw);
     } catch (e) { console.warn('Bad templates store, reseeding', e); }
-    if (!store || !store.templates || !Array.isArray(store.order) || !store.order.length) {
-      store = seedTemplates();
-      // Migrate a pre-existing single layout (v1) into "Everyday" so an
-      // already-customized kiosk keeps its arrangement; pin it (auto off).
-      try {
-        const old = localStorage.getItem(STORAGE_KEY);
-        if (old) {
-          const parsed = JSON.parse(old);
-          if (Array.isArray(parsed) && parsed.length) {
-            store.templates.everyday.layout = parsed;
-            store.activeId = 'everyday';
-            store.auto = false;
-          }
+    if (store && store.templates && Array.isArray(store.order) && store.order.length) return store;
+
+    store = seedTemplates();
+    // Migrate a pre-existing single layout (v1, 12-col) into "Everyday" so an
+    // already-customized kiosk keeps its arrangement; pin it (auto off).
+    try {
+      const old = localStorage.getItem(STORAGE_KEY);
+      if (old) {
+        const parsed = JSON.parse(old);
+        if (Array.isArray(parsed) && parsed.length) {
+          store.templates.everyday.layout = dblLayout(parsed);
+          store.activeId = 'everyday';
+          store.auto = false;
         }
-      } catch (e) {}
-      saveStore(store);
-    }
+      }
+    } catch (e) {}
+    saveStore(store);
     return store;
   }
 
@@ -2782,6 +2875,7 @@
     clearGrid();
     (tpl.layout || []).forEach(addTile);
     applying = false;
+    fitGrid();
     renderSwitcher();
     refreshAddButton();
   }
@@ -2867,8 +2961,13 @@
     showToast('Deleted');
   });
 
-  // Initial render of the active template.
+  // Initial render: measure the fixed header, paint the header sun bar (now a
+  // permanent fixture, not a tile), then lay out the active template.
+  measureHeader();
+  renderSunBar();
   applyTemplate(resolveActiveId());
+  // Header sun bar + measurement can shift once fonts/layout settle.
+  window.addEventListener('load', () => { measureHeader(); renderSunBar(); fitGrid(); });
 
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
@@ -2981,7 +3080,17 @@
     showToast('Saved');
   }
 
-  grid.on('change added removed', persist);
+  grid.on('change added removed', () => {
+    persist();
+    if (!applying) fitGrid();
+  });
+
+  // Keep the layout fitted to the screen on rotation / viewport changes.
+  let _fitT = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(_fitT);
+    _fitT = setTimeout(() => { measureHeader(); fitGrid(); }, 150);
+  });
 
   // Tile remove buttons
   document.getElementById('grid').addEventListener('click', (ev) => {
