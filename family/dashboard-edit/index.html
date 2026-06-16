@@ -202,6 +202,9 @@
     --accent-rose: #cf222e;
     --accent-blue: #0969da;
     --accent-purple: #8250df;
+    --wx-sun: #f3a52c;
+    --wx-cloud: #97a3b4;
+    --wx-rain: #5b9bd5;
     --border: #e2e7ef;
     --border-soft: #edf0f5;
     --surface: #ffffff;
@@ -231,6 +234,9 @@
     --accent-rose: #f06372;
     --accent-blue: #5aa9f5;
     --accent-purple: #a371f7;
+    --wx-sun: #ffce5a;
+    --wx-cloud: #8b96a6;
+    --wx-rain: #74ace8;
     --border: #2a313c;
     --border-soft: #232932;
     --surface: #1f242c;
@@ -428,7 +434,7 @@
     padding-right: 18px;
     border-right: 1px solid var(--border);
   }
-  .dh-now .dh-ic { font-size: 1.45rem; line-height: 1; align-self: center; }
+  .dh-now .dh-ic { display: flex; align-items: center; align-self: center; }
   .dh-now .dh-temp {
     font-family: 'Fraunces', Georgia, serif;
     font-size: 1.55rem; font-weight: 700; line-height: 1;
@@ -441,8 +447,21 @@
     line-height: 1.1;
   }
   .dh-day .d { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
-  .dh-day .i { font-size: 1.05rem; }
+  .dh-day .i { display: flex; align-items: center; justify-content: center; height: 1.5rem; }
   .dh-day .hl { font-size: 0.68rem; font-weight: 700; color: var(--text-dark); font-variant-numeric: tabular-nums; }
+
+  /* === COHESIVE WEATHER ICONS (inline SVG — one shared cloud/sun shape,
+        tight palette: amber sun/bolt, neutral cloud, cool precip) === */
+  .wx-i { display: block; overflow: visible; }
+  .dh-now .dh-ic .wx-i { width: 1.85rem; height: 1.85rem; }
+  .dh-day .i .wx-i { width: 1.45rem; height: 1.45rem; }
+  .wx-c { fill: var(--wx-cloud); }
+  .wx-s { fill: var(--wx-sun); }
+  .wx-b { fill: var(--wx-sun); }
+  .wx-n { fill: var(--wx-rain); }
+  .wx-ray { stroke: var(--wx-sun); stroke-width: 2.1; stroke-linecap: round; }
+  .wx-r { stroke: var(--wx-rain); stroke-width: 2.1; stroke-linecap: round; }
+  .wx-f { stroke: var(--wx-cloud); stroke-width: 2.1; stroke-linecap: round; }
   .dh-sun .sun-bar { margin-top: 0; height: 16px; border-radius: 8px; }
   .dh-sun .sun-meta { margin-top: 4px; }
 
@@ -1453,6 +1472,7 @@
   </div>
 </div>
 
+
 <header class="dash-header" id="dashHeader">
   <div class="dh-left">
     <div class="dh-brand">Critter <span>Crew</span></div>
@@ -1462,21 +1482,21 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic">⛅</span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
         <span class="dh-temp">76°</span>
         <span class="dh-hilo">H 82° · L 66°</span>
       </div>
       <div class="dh-days">
         
-          <div class="dh-day"><span class="d">Wed</span><span class="i">⛅</span><span class="hl">89/67</span></div>
+          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">89/67</span></div>
         
-          <div class="dh-day"><span class="d">Thu</span><span class="i">⛈</span><span class="hl">87/69</span></div>
+          <div class="dh-day"><span class="d">Thu</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">87/69</span></div>
         
-          <div class="dh-day"><span class="d">Fri</span><span class="i">⛈</span><span class="hl">81/68</span></div>
+          <div class="dh-day"><span class="d">Fri</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">81/68</span></div>
         
-          <div class="dh-day"><span class="d">Sat</span><span class="i">⛅</span><span class="hl">88/69</span></div>
+          <div class="dh-day"><span class="d">Sat</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">88/69</span></div>
         
-          <div class="dh-day"><span class="d">Sun</span><span class="i">⛅</span><span class="hl">88/65</span></div>
+          <div class="dh-day"><span class="d">Sun</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">88/65</span></div>
         
       </div>
     </div>
