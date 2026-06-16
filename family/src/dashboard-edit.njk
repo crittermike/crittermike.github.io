@@ -697,6 +697,53 @@ eleventyExcludeFromCollections: true
     color: var(--text-dark);
   }
 
+  /* === SUNRISE / SUNSET BAR === */
+  .sun-bar {
+    position: relative;
+    height: 16px;
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #16233f 0%, #21386180 50%, #16233f 100%);
+  }
+  .sun-bar .sun-day {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #f6b04e 0%, #ffe08a 50%, #f49a3c 100%);
+  }
+  .sun-bar .sun-now {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.85);
+  }
+  .sun-bar .sun-now::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.85);
+  }
+  .sun-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+
   /* === MEAL PLAN === */
   .meal-list {
     display: flex;
@@ -924,6 +971,34 @@ eleventyExcludeFromCollections: true
     min-width: 0;
   }
 
+  /* === JOKE OF THE DAY === */
+  .joke-text {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  /* === VERSE OF THE DAY === */
+  .bible-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 0.98rem;
+    line-height: 1.4;
+    color: var(--text-dark);
+  }
+  .bible-ref {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .bible-ver {
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
   /* === PLACEHOLDER === */
   .placeholder {
     display: flex;
@@ -1059,6 +1134,8 @@ eleventyExcludeFromCollections: true
   { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
   { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
   { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 3, "h": 3 },
+  { "id": "joke",        "label": "😂 Joke of the day",              "w": 3, "h": 2 },
+  { "id": "bible",       "label": "✝️ Verse of the day",             "w": 3, "h": 2 },
   { "id": "newish",      "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
 ]
 </script>
@@ -1071,6 +1148,8 @@ eleventyExcludeFromCollections: true
   { "id": "budget",      "x": 0, "y": 0, "w": 3, "h": 2 },
   { "id": "countdowns",  "x": 0, "y": 2, "w": 3, "h": 3 },
   { "id": "recipe",      "x": 0, "y": 9, "w": 3, "h": 3 },
+  { "id": "joke",        "x": 3, "y": 9, "w": 5, "h": 3 },
+  { "id": "bible",       "x": 8, "y": 9, "w": 4, "h": 3 },
 {% for kid in kids %}
   { "id": "kid-{{ kid.key }}", "x": {{ loop.index0 * 3 }}, "y": 5, "w": 3, "h": 4 }{{ "," if not loop.last }}
 {% endfor %}
@@ -1138,8 +1217,8 @@ eleventyExcludeFromCollections: true
             <span class="reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span>
           </div>
           <div class="reading-editor" hidden>
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
-            <button type="button" class="reading-add">Add</button>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+            <button type="button" class="reading-add">Save</button>
             <button type="button" class="reading-reset" title="Reset to 0">↺</button>
             <button type="button" class="reading-cancel">✕</button>
           </div>
@@ -1278,6 +1357,11 @@ eleventyExcludeFromCollections: true
           </div>
         {% endfor %}
       </div>
+      {% if weather.sun and weather.sun.sunrises and weather.sun.sunrises.length %}
+      <div class="sun-bar" id="sunBar"
+           data-sunrise="{{ weather.sun.sunrises[0] }}"
+           data-sunset="{{ weather.sun.sunsets[0] }}"></div>
+      {% endif %}
       {% else %}
       <div class="placeholder">Weather unavailable</div>
       {% endif %}
@@ -1310,8 +1394,8 @@ eleventyExcludeFromCollections: true
                 <span class="reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span>
               </div>
               <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
-                <button type="button" class="reading-add">Add</button>
+                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+                <button type="button" class="reading-add">Save</button>
                 <button type="button" class="reading-reset" title="Reset to 0">↺</button>
                 <button type="button" class="reading-cancel">✕</button>
               </div>
@@ -1377,6 +1461,29 @@ eleventyExcludeFromCollections: true
         <span class="rt-lbl">Tomorrow</span>
         <span class="rt-name">{{ rTomorrow.name or 'TBD' }}</span>
       </div>
+    </div>
+  </div>
+
+  <div data-tpl="joke">
+    <div class="tile-h"><span>😂 Joke of the day</span></div>
+    <div class="tile-body">
+      {% if joke and joke.joke %}
+        <div class="joke-text">{{ joke.joke }}</div>
+      {% else %}
+        <div class="placeholder">No joke today 🤷</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div data-tpl="bible">
+    <div class="tile-h"><span>✝️ Verse of the day</span></div>
+    <div class="tile-body">
+      {% if bible and bible.text %}
+        <div class="bible-text">“{{ bible.text }}”</div>
+        <div class="bible-ref">— {{ bible.reference }}{% if bible.version %} <span class="bible-ver">{{ bible.version }}</span>{% endif %}</div>
+      {% else %}
+        <div class="placeholder">Verse unavailable</div>
+      {% endif %}
     </div>
   </div>
 
@@ -1469,6 +1576,7 @@ eleventyExcludeFromCollections: true
     if (id === 'reading')      hydrateReading();
     if (id === 'assignments')  hydrateAssignments();
     if (id === 'recipe')       renderRecipeOfDay();
+    if (id === 'weather')      renderSunBar();
     if (id.indexOf('kid-') === 0) { hydrateReading(); hydrateAssignments(); }
   }
 
@@ -1742,10 +1850,10 @@ eleventyExcludeFromCollections: true
       const cancelBtn = row.querySelector('.reading-cancel');
       const resetBtn = row.querySelector('.reading-reset');
 
-      // Drop stale local delta if server caught up
+      // Drop stale local override once the server total catches up.
       if (store[kid] != null && store[kid] <= base) { delete store[kid]; save(); }
 
-      function currentPages() { return base + (store[kid] || 0); }
+      function currentPages() { return store[kid] != null ? store[kid] : base; }
       function render() {
         const p = currentPages();
         pagesEl.textContent = p;
@@ -1755,8 +1863,8 @@ eleventyExcludeFromCollections: true
       function openEditor() {
         row.classList.add('editing');
         editor.hidden = false;
-        input.value = '';
-        setTimeout(() => input.focus(), 0);
+        input.value = currentPages();
+        setTimeout(() => { input.focus(); input.select(); }, 0);
       }
       function closeEditor() {
         row.classList.remove('editing');
@@ -1770,8 +1878,10 @@ eleventyExcludeFromCollections: true
       addBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const n = parseInt(input.value, 10);
-        if (!isNaN(n) && n > 0) {
-          store[kid] = (store[kid] || 0) + n;
+        if (!isNaN(n) && n >= 0) {
+          // Input is the TOTAL pages read so far. Keep a local override only
+          // when it's ahead of the server; otherwise follow the server value.
+          if (n > base) store[kid] = n; else delete store[kid];
           save(); render();
         }
         closeEditor();
@@ -1859,6 +1969,60 @@ eleventyExcludeFromCollections: true
     }
   }
 
+  // === SUNRISE / SUNSET BAR (24h light/dark with a live "now" marker) ===
+  let _sunNowTimer = null;
+  function _fracFromISO(iso) {
+    // iso is local-naive ("YYYY-MM-DDTHH:mm") in America/New_York; the kiosk
+    // runs in ET so parsing as local time is correct.
+    const m = /T(\d{2}):(\d{2})/.exec(iso || '');
+    if (!m) return null;
+    return (parseInt(m[1], 10) + parseInt(m[2], 10) / 60) / 24;
+  }
+  function _fmtClock(iso) {
+    const m = /T(\d{2}):(\d{2})/.exec(iso || '');
+    if (!m) return '';
+    let h = parseInt(m[1], 10);
+    const min = m[2];
+    const ap = h >= 12 ? 'p' : 'a';
+    h = h % 12; if (h === 0) h = 12;
+    return h + ':' + min + ap;
+  }
+  function renderSunBar() {
+    const bar = document.getElementById('sunBar');
+    if (!bar) return;
+    const sr = _fracFromISO(bar.dataset.sunrise);
+    const ss = _fracFromISO(bar.dataset.sunset);
+    if (sr == null || ss == null) { bar.style.display = 'none'; return; }
+    if (!bar.dataset._built) {
+      bar.dataset._built = '1';
+      const day = document.createElement('div');
+      day.className = 'sun-day';
+      day.style.left = (sr * 100) + '%';
+      day.style.width = ((ss - sr) * 100) + '%';
+      const now = document.createElement('div');
+      now.className = 'sun-now';
+      bar.appendChild(day);
+      bar.appendChild(now);
+      const meta = document.createElement('div');
+      meta.className = 'sun-meta';
+      meta.innerHTML = '<span>↑ ' + _fmtClock(bar.dataset.sunrise) + '</span>' +
+                       '<span>↓ ' + _fmtClock(bar.dataset.sunset) + '</span>';
+      bar.insertAdjacentElement('afterend', meta);
+    }
+    function placeNow() {
+      const el = document.getElementById('sunBar');
+      if (!el) { if (_sunNowTimer) { clearInterval(_sunNowTimer); _sunNowTimer = null; } return; }
+      const nowEl = el.querySelector('.sun-now');
+      if (!nowEl) return;
+      const d = new Date();
+      const frac = (d.getHours() + d.getMinutes() / 60) / 24;
+      nowEl.style.left = (frac * 100) + '%';
+    }
+    placeNow();
+    if (_sunNowTimer) clearInterval(_sunNowTimer);
+    _sunNowTimer = setInterval(placeNow, 60000);
+  }
+
   // === DASHBOARD TEMPLATES (named layouts you can switch between) ===
   // Each template is a full tile arrangement. The resolved-active one is
   // rendered; edits (move/resize/add/remove) save back to it. "Auto" picks a
@@ -1891,7 +2055,10 @@ eleventyExcludeFromCollections: true
             { id: 'countdowns', x: 0, y: 2, w: 3, h: 3 },
             { id: 'calendar',   x: 3, y: 0, w: 6, h: 5 },
             { id: 'recipe',     x: 9, y: 0, w: 3, h: 5 }
-          ].concat(kidRow(5, 4))
+          ].concat(kidRow(5, 4)).concat([
+            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
+            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+          ])
         },
         weekend: {
           id: 'weekend', emoji: '🏖️', name: 'Weekend', match: 'weekend',
@@ -1900,7 +2067,10 @@ eleventyExcludeFromCollections: true
             { id: 'calendar', x: 4, y: 0, w: 5, h: 6 },
             { id: 'meals',    x: 9, y: 0, w: 3, h: 3 },
             { id: 'recipe',   x: 9, y: 3, w: 3, h: 3 }
-          ].concat(kidRow(6, 3))
+          ].concat(kidRow(6, 3)).concat([
+            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
+            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+          ])
         },
         everyday: {
           id: 'everyday', emoji: '📋', name: 'Everyday', match: null,
