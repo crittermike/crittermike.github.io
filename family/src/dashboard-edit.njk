@@ -82,19 +82,26 @@ eleventyExcludeFromCollections: true
     color: var(--text-dark);
   }
 
-  /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) === */
+  /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) ===
+     Self-contained light control-panel palette so it stays crisp over either
+     the day or the night dashboard theme. */
   .ed-bar {
+    --tb-bg: #ffffff; --tb-soft: #f1f5f9; --tb-line: #e2e8f0;
+    --tb-ink: #0f172a; --tb-ink-soft: #334155; --tb-mut: #64748b;
+    --tb-amber: #f59e0b; --tb-danger: #dc2626;
     position: fixed;
     top: 12px; right: 12px;
     display: none;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 14px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    width: min(94vw, 600px);
+    background: var(--tb-bg);
+    border: 1px solid var(--tb-line);
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(15,23,42,0.24);
     z-index: 10000;
+    color: var(--tb-ink);
     font-size: 13px;
   }
   .ed-bar.open { display: flex; }
@@ -106,86 +113,86 @@ eleventyExcludeFromCollections: true
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-  .ed-bar .ed-title {
-    font-weight: 700;
-    color: var(--text-dark);
-    font-size: 14px;
-  }
-  .ed-bar .ed-title .pill {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px 8px;
-    background: #fef3c7;
-    color: #92400e;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .ed-bar .ed-actions { display: flex; gap: 8px; align-items: center; }
-  .ed-bar button {
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-dark);
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .ed-bar button.primary {
-    background: var(--text-dark);
-    color: var(--on-accent);
-    border-color: var(--text-dark);
-  }
-  .ed-bar button.danger {
-    background: var(--card-bg);
-    color: var(--accent-rose);
-    border-color: #f4c0c8;
-  }
-  .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
-  body[data-edit="1"] .ed-bar { background: #fef3c7; border-color: #fbbf24; }
 
-  /* === TEMPLATE SWITCHER (named layouts: School Day / Weekend / ...) === */
-  .ed-bar { flex-direction: column; align-items: stretch; gap: 10px; max-width: min(92vw, 560px); }
-  .tpl-row { display: flex; align-items: center; gap: 8px; }
-  .tpl-switch { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 auto; min-width: 0; }
-  .tpl-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    border-radius: 999px;
-    padding: 6px 12px;
+  /* Shared button base */
+  .ed-bar button {
+    font-family: inherit;
+    border: 1px solid var(--tb-line);
+    background: var(--tb-soft);
+    border-radius: 9px;
+    padding: 7px 12px;
     font-size: 13px; font-weight: 600;
-    color: var(--text-dark);
+    color: var(--tb-ink-soft);
     cursor: pointer; white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
   }
-  .tpl-pill .emo { font-size: 14px; line-height: 1; }
-  .tpl-pill.active {
-    background: var(--text-dark);
-    color: var(--on-accent);
-    border-color: var(--text-dark);
+  .ed-bar button:hover { background: #e7edf3; color: var(--tb-ink); }
+  .ed-bar button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .ed-bar button.danger { color: var(--tb-danger); background: var(--tb-bg); border-color: #f1cccc; }
+  .ed-bar button.danger:hover { background: #fdecec; color: var(--tb-danger); }
+
+  /* Header: section caption + mode toggles (Auto / Edit) */
+  .ed-head { display: flex; align-items: center; gap: 10px; }
+  .ed-cap {
+    flex: 1 1 auto; min-width: 0;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--tb-mut);
   }
-  .tpl-auto {
-    flex: 0 0 auto;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    border-radius: 999px;
-    padding: 6px 12px;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
-    color: var(--text-mid, #6b7280);
-    cursor: pointer; white-space: nowrap;
+  .ed-head-actions { display: flex; gap: 8px; flex: 0 0 auto; }
+  .ed-auto::before { content: "◇"; margin-right: 6px; }
+  .ed-auto.on { background: #16a34a; color: #fff; border-color: transparent; }
+  .ed-auto.on:hover { background: #15803d; color: #fff; }
+  .ed-auto.on::before { content: "◆"; }
+  .ed-edit-toggle { background: var(--tb-ink); color: #fff; border-color: var(--tb-ink); }
+  .ed-edit-toggle:hover { background: #1e293b; color: #fff; }
+  body[data-edit="1"] .ed-edit-toggle { background: var(--tb-amber); color: #422006; border-color: var(--tb-amber); }
+  body[data-edit="1"] .ed-edit-toggle:hover { background: #d97706; color: #422006; }
+
+  /* Segmented view switcher — reads as one "pick one" control */
+  .ed-seg {
+    display: flex; gap: 4px;
+    background: var(--tb-soft);
+    border: 1px solid var(--tb-line);
+    border-radius: 12px;
+    padding: 4px;
+  }
+  .ed-seg .tpl-pill {
+    flex: 1 1 0; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 9px;
+    padding: 9px 10px;
+    font-size: 13.5px; font-weight: 600;
+    color: var(--tb-mut);
+    cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     -webkit-tap-highlight-color: transparent;
+    transition: background .12s ease, color .12s ease, box-shadow .12s ease;
   }
-  .tpl-auto::before { content: "◇ "; }
-  .tpl-auto.on { background: #2da44e; color: #fff; border-color: transparent; }
-  .tpl-auto.on::before { content: "◆ "; }
-  .ed-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 2px; }
-  .ed-edit-only { display: none !important; }
-  body[data-edit="1"] .ed-edit-only { display: inline-flex !important; }
+  .ed-seg .tpl-pill:hover { color: var(--tb-ink); }
+  .ed-seg .tpl-pill .emo { font-size: 15px; line-height: 1; flex: 0 0 auto; }
+  .ed-seg .tpl-pill.active {
+    background: var(--tb-bg);
+    color: var(--tb-ink);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 2px 8px rgba(15,23,42,0.08);
+  }
+
+  /* Edit-only management zone, split into labeled groups */
+  .ed-edit-zone { display: none; }
+  body[data-edit="1"] .ed-edit-zone {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 18px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--tb-line);
+  }
+  .ed-group { display: flex; flex-direction: column; gap: 7px; }
+  .ed-group--tiles { margin-left: auto; }
+  .ed-glabel {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; color: var(--tb-mut);
+  }
+  .ed-group-btns { display: flex; gap: 6px; }
 
   /* === STAGE === */
   .stage {
@@ -1016,18 +1023,30 @@ eleventyExcludeFromCollections: true
 
 <div class="ed-tap" id="edTap" title="Edit toolbar"></div>
 <div class="ed-bar" id="edBar">
-  <div class="tpl-row">
-    <div class="tpl-switch" id="tplSwitch"></div>
-    <button id="tplAuto" class="tpl-auto" title="Auto-switch by day (weekday → School Day, weekend → Weekend)">Auto</button>
+  <div class="ed-head">
+    <span class="ed-cap">Dashboard view</span>
+    <div class="ed-head-actions">
+      <button id="tplAuto" class="ed-auto" title="Auto-switch by day: weekday → School Day, weekend → Weekend">Auto</button>
+      <button id="edToggle" class="ed-edit-toggle">✏️ Edit</button>
+    </div>
   </div>
-  <div class="ed-actions">
-    <button id="tplNew" class="ed-edit-only">+ New view</button>
-    <button id="tplRename" class="ed-edit-only">✎ Rename</button>
-    <button id="tplDelete" class="ed-edit-only danger">🗑 Delete</button>
-    <span class="ed-sep ed-edit-only"></span>
-    <button id="edAdd" disabled>+ Add tile</button>
-    <button id="edToggle">🔓 Unlock</button>
-    <button id="edReset" class="danger">Reset</button>
+  <div class="ed-seg" id="tplSwitch" role="tablist"></div>
+  <div class="ed-edit-zone">
+    <div class="ed-group">
+      <span class="ed-glabel">This view</span>
+      <div class="ed-group-btns">
+        <button id="tplNew" title="Create a new view from the current layout">+ New</button>
+        <button id="tplRename">Rename</button>
+        <button id="tplDelete" class="danger">Delete</button>
+      </div>
+    </div>
+    <div class="ed-group ed-group--tiles">
+      <span class="ed-glabel">Layout</span>
+      <div class="ed-group-btns">
+        <button id="edAdd" disabled>+ Add tile</button>
+        <button id="edReset" class="danger">Reset</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2195,14 +2214,12 @@ eleventyExcludeFromCollections: true
       document.body.dataset.edit = '1';
       grid.enableMove(true);
       grid.enableResize(true);
-      toggleBtn.textContent = '🔒 Lock';
-      toggleBtn.classList.add('primary');
+      toggleBtn.textContent = '✓ Done';
     } else {
       delete document.body.dataset.edit;
       grid.enableMove(false);
       grid.enableResize(false);
-      toggleBtn.textContent = '🔓 Unlock';
-      toggleBtn.classList.remove('primary');
+      toggleBtn.textContent = '✏️ Edit';
     }
   });
 
