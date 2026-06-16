@@ -28,10 +28,12 @@ eleventyExcludeFromCollections: true
   :root {
     --warm-bg: #f5f1ea;
     --card-bg: #ffffff;
+    --card-bg-2: #fbfaf7;
+    --card-top-hi: rgba(255,255,255,0.85);
     --text-dark: #1f2328;
     --text-mid: #57606a;
     --text-light: #8b949e;
-    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 24px -8px rgba(0,0,0,0.10), 0 2px 6px -2px rgba(0,0,0,0.05);
     --accent-orange: #d96a2a;
     --accent-teal: #2da44e;
     --accent-gold: #bf8700;
@@ -51,10 +53,12 @@ eleventyExcludeFromCollections: true
   :root[data-theme="dark"] {
     --warm-bg: #0f1217;
     --card-bg: #181c23;
+    --card-bg-2: #14181e;
+    --card-top-hi: rgba(255,255,255,0.06);
     --text-dark: #f1f4fa;
     --text-mid: #d6dce6;
     --text-light: #a8b1bf;
-    --shadow: 0 1px 3px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.55);
+    --shadow: 0 1px 3px rgba(0,0,0,0.45), 0 12px 28px -10px rgba(0,0,0,0.6), 0 3px 10px -4px rgba(0,0,0,0.5);
     --accent-orange: #f08a55;
     --accent-teal: #4ac373;
     --accent-gold: #e0a93b;
@@ -209,11 +213,11 @@ eleventyExcludeFromCollections: true
     height: 100% !important;
   }
   .grid-stack-item-content {
-    background: var(--card-bg);
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-bg-2) 100%);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 12px 14px 14px;
+    border-radius: 16px;
+    box-shadow: var(--shadow), inset 0 1px 0 var(--card-top-hi);
+    padding: 13px 15px 15px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -697,51 +701,58 @@ eleventyExcludeFromCollections: true
     color: var(--text-dark);
   }
 
-  /* === SUNRISE / SUNSET BAR === */
+  /* === SUNRISE / SUNSET BAR (sky timeline) === */
   .sun-bar {
     position: relative;
-    height: 16px;
+    height: 18px;
     margin-top: 10px;
-    border-radius: 8px;
-    overflow: hidden;
-    background: linear-gradient(90deg, #16233f 0%, #21386180 50%, #16233f 100%);
+    border-radius: 9px;
+    background: #0b1733;            /* fallback; JS paints the twilight sky */
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10),
+                inset 0 1px 4px rgba(0,0,0,0.30);
   }
-  .sun-bar .sun-day {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, #f6b04e 0%, #ffe08a 50%, #f49a3c 100%);
+  :root[data-theme="dark"] .sun-bar {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.13),
+                inset 0 2px 6px rgba(0,0,0,0.55);
   }
-  .sun-bar .sun-now {
+  .sun-bar .sun-token {
     position: absolute;
-    top: -2px;
-    bottom: -2px;
-    width: 2px;
-    background: #fff;
-    box-shadow: 0 0 2px rgba(0,0,0,0.85);
-  }
-  .sun-bar .sun-now::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 7px;
-    height: 7px;
+    top: 50%;
+    width: 15px; height: 15px;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 2px rgba(0,0,0,0.85);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    transition: left 0.6s ease;
+  }
+  .sun-bar .sun-token.is-day {
+    background: radial-gradient(circle at 50% 42%, #fffdf3 0%, #ffe487 44%, #ffb53e 100%);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.90),
+                0 0 9px 2px rgba(255,196,72,0.90),
+                0 0 20px 6px rgba(255,165,40,0.50);
+  }
+  .sun-bar .sun-token.is-night {
+    background: radial-gradient(circle at 38% 38%, #ffffff 0%, #e2e9f6 52%, #b7c3da 100%);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.65),
+                0 0 8px 2px rgba(196,210,238,0.75);
   }
   .sun-meta {
     display: flex;
     justify-content: space-between;
-    margin-top: 4px;
-    font-size: 0.6rem;
+    align-items: center;
+    margin-top: 6px;
+    font-size: 0.64rem;
     font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
+    color: var(--text-mid);
+    letter-spacing: 0.2px;
     font-variant-numeric: tabular-nums;
+  }
+  .sun-meta .m-len {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
   }
 
   /* === MEAL PLAN === */
@@ -817,16 +828,17 @@ eleventyExcludeFromCollections: true
   }
   .reading-add { background: var(--accent-teal); color: white; border-color: transparent; font-weight: 700; }
   .reading-row .progress {
-    height: 4px;
-    background: var(--border-soft);
-    border-radius: 2px;
+    height: 6px;
+    background: var(--surface-mute-track);
+    border-radius: 999px;
     overflow: hidden;
+    box-shadow: inset 0 1px 1.5px rgba(0,0,0,0.10);
   }
   .reading-row .progress .bar {
     height: 100%;
-    background: var(--accent-orange);
-    border-radius: 2px;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+    border-radius: 999px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
   }
 
   /* === TODAY'S ASSIGNMENTS === */
@@ -1987,6 +1999,33 @@ eleventyExcludeFromCollections: true
     h = h % 12; if (h === 0) h = 12;
     return h + ':' + min + ap;
   }
+  function _sunGradient(sr, ss) {
+    const NIGHT = '#0a1530', INDIGO = '#363a7d', ROSE = '#aa5f8f',
+          SUNUP = '#ff9a4d', GOLD = '#ffd07a', SKY = '#cae9f7', SKYMID = '#9ad6f5';
+    const tw = 0.6 / 24, mid = (sr + ss) / 2;
+    const c = v => Math.max(0, Math.min(1, v));
+    const stops = [
+      [0, NIGHT],
+      [c(sr - 2.2 * tw), NIGHT],
+      [c(sr - 1.3 * tw), INDIGO],
+      [c(sr - 0.5 * tw), ROSE],
+      [c(sr), SUNUP],
+      [c(sr + 0.9 * tw), GOLD],
+      [c(sr + 2.3 * tw), SKY],
+      [c(mid), SKYMID],
+      [c(ss - 2.3 * tw), SKY],
+      [c(ss - 0.9 * tw), GOLD],
+      [c(ss), SUNUP],
+      [c(ss + 0.5 * tw), ROSE],
+      [c(ss + 1.3 * tw), INDIGO],
+      [c(ss + 2.2 * tw), NIGHT],
+      [1, NIGHT],
+    ];
+    for (let i = 1; i < stops.length; i++)
+      if (stops[i][0] < stops[i - 1][0]) stops[i][0] = stops[i - 1][0];
+    return 'linear-gradient(90deg,' +
+      stops.map(s => s[1] + ' ' + (s[0] * 100).toFixed(2) + '%').join(',') + ')';
+  }
   function renderSunBar() {
     const bar = document.getElementById('sunBar');
     if (!bar) return;
@@ -1995,28 +2034,33 @@ eleventyExcludeFromCollections: true
     if (sr == null || ss == null) { bar.style.display = 'none'; return; }
     if (!bar.dataset._built) {
       bar.dataset._built = '1';
-      const day = document.createElement('div');
-      day.className = 'sun-day';
-      day.style.left = (sr * 100) + '%';
-      day.style.width = ((ss - sr) * 100) + '%';
-      const now = document.createElement('div');
-      now.className = 'sun-now';
-      bar.appendChild(day);
-      bar.appendChild(now);
+      bar.style.background = _sunGradient(sr, ss);
+      const token = document.createElement('div');
+      token.className = 'sun-token is-day';
+      bar.appendChild(token);
+      const dayMin = Math.max(0, Math.round((ss - sr) * 24 * 60));
+      const dh = Math.floor(dayMin / 60), dm = dayMin % 60;
       const meta = document.createElement('div');
       meta.className = 'sun-meta';
-      meta.innerHTML = '<span>↑ ' + _fmtClock(bar.dataset.sunrise) + '</span>' +
-                       '<span>↓ ' + _fmtClock(bar.dataset.sunset) + '</span>';
+      meta.innerHTML = '<span>&#8593; ' + _fmtClock(bar.dataset.sunrise) + '</span>' +
+                       '<span class="m-len">' + dh + 'h ' + dm + 'm daylight</span>' +
+                       '<span>' + _fmtClock(bar.dataset.sunset) + ' &#8595;</span>';
       bar.insertAdjacentElement('afterend', meta);
     }
     function placeNow() {
       const el = document.getElementById('sunBar');
       if (!el) { if (_sunNowTimer) { clearInterval(_sunNowTimer); _sunNowTimer = null; } return; }
-      const nowEl = el.querySelector('.sun-now');
-      if (!nowEl) return;
+      const token = el.querySelector('.sun-token');
+      if (!token) return;
       const d = new Date();
       const frac = (d.getHours() + d.getMinutes() / 60) / 24;
-      nowEl.style.left = (frac * 100) + '%';
+      const W = el.clientWidth || 200;
+      const margin = 15;                       // keep token (+glow) fully inside the bar
+      const px = Math.max(margin, Math.min(W - margin, frac * W));
+      token.style.left = px + 'px';
+      const isDay = frac >= sr && frac <= ss;
+      token.classList.toggle('is-day', isDay);
+      token.classList.toggle('is-night', !isDay);
     }
     placeNow();
     if (_sunNowTimer) clearInterval(_sunNowTimer);
