@@ -241,19 +241,26 @@
     color: var(--text-dark);
   }
 
-  /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) === */
+  /* === FLOATING TOOLBAR (hidden by default, toggled by top-right tap) ===
+     Self-contained light control-panel palette so it stays crisp over either
+     the day or the night dashboard theme. */
   .ed-bar {
+    --tb-bg: #ffffff; --tb-soft: #f1f5f9; --tb-line: #e2e8f0;
+    --tb-ink: #0f172a; --tb-ink-soft: #334155; --tb-mut: #64748b;
+    --tb-amber: #f59e0b; --tb-danger: #dc2626;
     position: fixed;
     top: 12px; right: 12px;
     display: none;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 14px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    width: min(94vw, 600px);
+    background: var(--tb-bg);
+    border: 1px solid var(--tb-line);
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(15,23,42,0.24);
     z-index: 10000;
+    color: var(--tb-ink);
     font-size: 13px;
   }
   .ed-bar.open { display: flex; }
@@ -265,47 +272,86 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-  .ed-bar .ed-title {
-    font-weight: 700;
-    color: var(--text-dark);
-    font-size: 14px;
-  }
-  .ed-bar .ed-title .pill {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px 8px;
-    background: #fef3c7;
-    color: #92400e;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .ed-bar .ed-actions { display: flex; gap: 8px; align-items: center; }
+
+  /* Shared button base */
   .ed-bar button {
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-dark);
-    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid var(--tb-line);
+    background: var(--tb-soft);
+    border-radius: 9px;
+    padding: 7px 12px;
+    font-size: 13px; font-weight: 600;
+    color: var(--tb-ink-soft);
+    cursor: pointer; white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
   }
-  .ed-bar button.primary {
-    background: var(--text-dark);
-    color: var(--on-accent);
-    border-color: var(--text-dark);
+  .ed-bar button:hover { background: #e7edf3; color: var(--tb-ink); }
+  .ed-bar button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .ed-bar button.danger { color: var(--tb-danger); background: var(--tb-bg); border-color: #f1cccc; }
+  .ed-bar button.danger:hover { background: #fdecec; color: var(--tb-danger); }
+
+  /* Header: section caption + mode toggles (Auto / Edit) */
+  .ed-head { display: flex; align-items: center; gap: 10px; }
+  .ed-cap {
+    flex: 1 1 auto; min-width: 0;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--tb-mut);
   }
-  .ed-bar button.danger {
-    background: var(--card-bg);
-    color: var(--accent-rose);
-    border-color: #f4c0c8;
+  .ed-head-actions { display: flex; gap: 8px; flex: 0 0 auto; }
+  .ed-auto::before { content: "◇"; margin-right: 6px; }
+  .ed-auto.on { background: #16a34a; color: #fff; border-color: transparent; }
+  .ed-auto.on:hover { background: #15803d; color: #fff; }
+  .ed-auto.on::before { content: "◆"; }
+  .ed-edit-toggle { background: var(--tb-ink); color: #fff; border-color: var(--tb-ink); }
+  .ed-edit-toggle:hover { background: #1e293b; color: #fff; }
+  body[data-edit="1"] .ed-edit-toggle { background: var(--tb-amber); color: #422006; border-color: var(--tb-amber); }
+  body[data-edit="1"] .ed-edit-toggle:hover { background: #d97706; color: #422006; }
+
+  /* Segmented view switcher — reads as one "pick one" control */
+  .ed-seg {
+    display: flex; gap: 4px;
+    background: var(--tb-soft);
+    border: 1px solid var(--tb-line);
+    border-radius: 12px;
+    padding: 4px;
   }
-  .ed-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
-  body[data-edit="1"] .ed-bar { background: #fef3c7; border-color: #fbbf24; }
+  .ed-seg .tpl-pill {
+    flex: 1 1 0; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 9px;
+    padding: 9px 10px;
+    font-size: 13.5px; font-weight: 600;
+    color: var(--tb-mut);
+    cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .12s ease, color .12s ease, box-shadow .12s ease;
+  }
+  .ed-seg .tpl-pill:hover { color: var(--tb-ink); }
+  .ed-seg .tpl-pill .emo { font-size: 15px; line-height: 1; flex: 0 0 auto; }
+  .ed-seg .tpl-pill.active {
+    background: var(--tb-bg);
+    color: var(--tb-ink);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 2px 8px rgba(15,23,42,0.08);
+  }
+
+  /* Edit-only management zone, split into labeled groups */
+  .ed-edit-zone { display: none; }
+  body[data-edit="1"] .ed-edit-zone {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 18px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--tb-line);
+  }
+  .ed-group { display: flex; flex-direction: column; gap: 7px; }
+  .ed-group--tiles { margin-left: auto; }
+  .ed-glabel {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; color: var(--tb-mut);
+  }
+  .ed-group-btns { display: flex; gap: 6px; }
 
   /* === STAGE === */
   .stage {
@@ -500,6 +546,38 @@
   .kids-grid .v.danger { color: var(--accent-rose); }
   .kids-grid .v.warn   { color: var(--accent-gold); }
 
+  /* === PER-KID TILE (one combined tile per kid: sugar/allowance/reading/today) === */
+  .kidtile-body { overflow-y: auto; gap: 12px; }
+  .kidtile-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .kidtile-stat { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .kidtile-stat .lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  .kidtile-stat .v {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dark);
+  }
+  .kidtile-stat .v.danger { color: var(--accent-rose); }
+  .kidtile-stat .v.warn   { color: var(--accent-gold); }
+  .kidtile-sec-lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
   /* === COUNTDOWNS (matches /dashboard/ .cd-item) === */
   .cd-list {
     display: flex;
@@ -550,21 +628,22 @@
   .cal-list {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     overflow: hidden;
     min-height: 0;
   }
   .cal-row {
     display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 8px;
+    grid-template-columns: 88px 1fr;
+    gap: 10px;
     align-items: baseline;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border-soft);
+    padding: 6px 10px;
+    border-radius: 7px;
+    background: var(--surface-mute);
     font-size: 0.85rem;
     line-height: 1.25;
   }
-  .cal-row:last-child { border-bottom: none; }
-  .cal-row.today-row { background: rgba(217,106,42,0.10); border-radius: 6px; padding-left: 6px; padding-right: 6px; }
+  .cal-row.today-row { background: rgba(217,106,42,0.10); }
   .cal-row.today-row .t { color: var(--accent-orange); }
   .cal-bucket-h {
     display: flex;
@@ -594,6 +673,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3px;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
   .cal-row .w { color: var(--text-dark); }
 
@@ -776,6 +856,53 @@
     color: var(--text-dark);
   }
 
+  /* === SUNRISE / SUNSET BAR === */
+  .sun-bar {
+    position: relative;
+    height: 16px;
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #16233f 0%, #21386180 50%, #16233f 100%);
+  }
+  .sun-bar .sun-day {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #f6b04e 0%, #ffe08a 50%, #f49a3c 100%);
+  }
+  .sun-bar .sun-now {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.85);
+  }
+  .sun-bar .sun-now::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.85);
+  }
+  .sun-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+
   /* === MEAL PLAN === */
   .meal-list {
     display: flex;
@@ -802,20 +929,6 @@
     letter-spacing: 0.5px;
   }
   .meal-list .nm { color: var(--text-dark); }
-
-  /* === DINNER === */
-  .dinner-name {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
-  .dinner-note {
-    font-size: 0.78rem;
-    color: var(--text-mid);
-  }
 
   /* === SUMMER READING === */
   .reading-list { display: flex; flex-direction: column; gap: 10px; }
@@ -1017,6 +1130,34 @@
     min-width: 0;
   }
 
+  /* === JOKE OF THE DAY === */
+  .joke-text {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  /* === VERSE OF THE DAY === */
+  .bible-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 0.98rem;
+    line-height: 1.4;
+    color: var(--text-dark);
+  }
+  .bible-ref {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .bible-ver {
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
   /* === PLACEHOLDER === */
   .placeholder {
     display: flex;
@@ -1103,10 +1244,30 @@
 
 <div class="ed-tap" id="edTap" title="Edit toolbar"></div>
 <div class="ed-bar" id="edBar">
-  <div class="ed-actions">
-    <button id="edAdd" disabled>+ Add tile</button>
-    <button id="edToggle">🔓 Unlock</button>
-    <button id="edReset" class="danger">Reset</button>
+  <div class="ed-head">
+    <span class="ed-cap">Dashboard view</span>
+    <div class="ed-head-actions">
+      <button id="tplAuto" class="ed-auto" title="Auto-switch by day: weekday → School Day, weekend → Weekend">Auto</button>
+      <button id="edToggle" class="ed-edit-toggle">✏️ Edit</button>
+    </div>
+  </div>
+  <div class="ed-seg" id="tplSwitch" role="tablist"></div>
+  <div class="ed-edit-zone">
+    <div class="ed-group">
+      <span class="ed-glabel">This view</span>
+      <div class="ed-group-btns">
+        <button id="tplNew" title="Create a new view from the current layout">+ New</button>
+        <button id="tplRename">Rename</button>
+        <button id="tplDelete" class="danger">Delete</button>
+      </div>
+    </div>
+    <div class="ed-group ed-group--tiles">
+      <span class="ed-glabel">Layout</span>
+      <div class="ed-group-btns">
+        <button id="edAdd" disabled>+ Add tile</button>
+        <button id="edReset" class="danger">Reset</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1119,6 +1280,15 @@
 <!-- TILE CATALOG: defines every available tile (id + label + default size + HTML) -->
 <script type="application/json" id="tileCatalog">
 [
+
+  { "id": "kid-thomas", "label": "🧒 Thomas", "w": 3, "h": 4 },
+
+  { "id": "kid-william", "label": "🧒 William", "w": 3, "h": 4 },
+
+  { "id": "kid-henry", "label": "🧒 Henry", "w": 3, "h": 4 },
+
+  { "id": "kid-charlie", "label": "🧒 Charlie", "w": 3, "h": 4 },
+
   { "id": "kids",       "label": "👨‍👩‍👦‍👦 Kids (sugar/allowance)", "w": 3, "h": 3 },
   { "id": "budget",     "label": "💳 Budget",                       "w": 3, "h": 2 },
   { "id": "countdowns", "label": "⏳ Countdowns",                   "w": 3, "h": 3 },
@@ -1126,10 +1296,11 @@
   { "id": "chores",     "label": "🧹 Weekend chores",               "w": 4, "h": 5 },
   { "id": "weather",    "label": "☀️ Weather",                      "w": 3, "h": 3 },
   { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
-  { "id": "dinner",      "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
   { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
   { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
   { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 3, "h": 3 },
+  { "id": "joke",        "label": "😂 Joke of the day",              "w": 3, "h": 2 },
+  { "id": "bible",       "label": "✝️ Verse of the day",             "w": 3, "h": 2 },
   { "id": "newish",      "label": "✨ Blank placeholder",            "w": 9, "h": 3 }
 ]
 </script>
@@ -1137,14 +1308,22 @@
 <!-- Default layout if no saved state -->
 <script type="application/json" id="defaultLayout">
 [
-  { "id": "kids",        "x": 0, "y": 0, "w": 3, "h": 3 },
-  { "id": "budget",      "x": 0, "y": 3, "w": 3, "h": 2 },
-  { "id": "countdowns",  "x": 0, "y": 5, "w": 3, "h": 3 },
   { "id": "calendar",    "x": 3, "y": 0, "w": 5, "h": 5 },
   { "id": "chores",      "x": 8, "y": 0, "w": 4, "h": 5 },
-  { "id": "reading",     "x": 3, "y": 5, "w": 3, "h": 3 },
-  { "id": "assignments", "x": 6, "y": 5, "w": 3, "h": 3 },
-  { "id": "recipe",      "x": 9, "y": 5, "w": 3, "h": 3 }
+  { "id": "budget",      "x": 0, "y": 0, "w": 3, "h": 2 },
+  { "id": "countdowns",  "x": 0, "y": 2, "w": 3, "h": 3 },
+  { "id": "recipe",      "x": 0, "y": 9, "w": 3, "h": 3 },
+  { "id": "joke",        "x": 3, "y": 9, "w": 5, "h": 3 },
+  { "id": "bible",       "x": 8, "y": 9, "w": 4, "h": 3 },
+
+  { "id": "kid-thomas", "x": 0, "y": 5, "w": 3, "h": 4 },
+
+  { "id": "kid-william", "x": 3, "y": 5, "w": 3, "h": 4 },
+
+  { "id": "kid-henry", "x": 6, "y": 5, "w": 3, "h": 4 },
+
+  { "id": "kid-charlie", "x": 9, "y": 5, "w": 3, "h": 4 }
+
 ]
 </script>
 
@@ -1203,6 +1382,256 @@
       </div>
     </div>
   </div>
+
+
+  <div data-tpl="kid-thomas">
+    <div class="tile-h"><span>Thomas</span><span class="sub">rising 3rd</span></div>
+    <div class="tile-body kidtile-body">
+      <div class="kidtile-stats">
+        <div class="kidtile-stat">
+          <span class="lbl">🍭 Sugar</span>
+          
+            
+            
+            <span class="v">250g</span>
+          
+        </div>
+        <div class="kidtile-stat">
+          <span class="lbl">💵 Allowance</span>
+          
+            
+            <span class="v">$100.00</span>
+          
+        </div>
+      </div>
+
+      
+      <div>
+        <div class="kidtile-sec-lbl">📚 Summer reading</div>
+        <div class="reading-row" data-kid="thomas" data-base="0" data-target="200">
+          <div class="reading-head">
+            <span class="reading-count"><span class="reading-pages">0</span> / 200 pgs</span>
+          </div>
+          <div class="reading-editor" hidden>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+            <button type="button" class="reading-add">Save</button>
+            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
+            <button type="button" class="reading-cancel">✕</button>
+          </div>
+          <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
+        </div>
+      </div>
+      
+
+      <div>
+        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="assn-list">
+          
+            <ul class="todo-list" data-kid="thomas">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="summer-solutions">
+                  <span class="todo-label">Summer Solutions</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="reading-20m">
+                  <span class="todo-label">Read 20 min</span>
+                </label>
+              </li>
+              
+            </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="kid-william">
+    <div class="tile-h"><span>William</span><span class="sub">rising 5th</span></div>
+    <div class="tile-body kidtile-body">
+      <div class="kidtile-stats">
+        <div class="kidtile-stat">
+          <span class="lbl">🍭 Sugar</span>
+          
+            
+            
+            <span class="v">76g</span>
+          
+        </div>
+        <div class="kidtile-stat">
+          <span class="lbl">💵 Allowance</span>
+          
+            
+            <span class="v">$21.31</span>
+          
+        </div>
+      </div>
+
+      
+      <div>
+        <div class="kidtile-sec-lbl">📚 Summer reading</div>
+        <div class="reading-row" data-kid="william" data-base="0" data-target="400">
+          <div class="reading-head">
+            <span class="reading-count"><span class="reading-pages">0</span> / 400 pgs</span>
+          </div>
+          <div class="reading-editor" hidden>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+            <button type="button" class="reading-add">Save</button>
+            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
+            <button type="button" class="reading-cancel">✕</button>
+          </div>
+          <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
+        </div>
+      </div>
+      
+
+      <div>
+        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="assn-list">
+          
+            <ul class="todo-list" data-kid="william">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="william" data-id="summer-solutions">
+                  <span class="todo-label">Summer Solutions</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="william" data-id="reading-20m">
+                  <span class="todo-label">Read 20 min</span>
+                </label>
+              </li>
+              
+            </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="kid-henry">
+    <div class="tile-h"><span>Henry</span><span class="sub">rising 8th</span></div>
+    <div class="tile-body kidtile-body">
+      <div class="kidtile-stats">
+        <div class="kidtile-stat">
+          <span class="lbl">🍭 Sugar</span>
+          
+            
+            
+            <span class="v">98g</span>
+          
+        </div>
+        <div class="kidtile-stat">
+          <span class="lbl">💵 Allowance</span>
+          
+            
+            <span class="v">$72.13</span>
+          
+        </div>
+      </div>
+
+      
+      <div>
+        <div class="kidtile-sec-lbl">📚 Summer reading</div>
+        <div class="reading-row" data-kid="henry" data-base="0" data-target="500">
+          <div class="reading-head">
+            <span class="reading-count"><span class="reading-pages">0</span> / 500 pgs</span>
+          </div>
+          <div class="reading-editor" hidden>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+            <button type="button" class="reading-add">Save</button>
+            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
+            <button type="button" class="reading-cancel">✕</button>
+          </div>
+          <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
+        </div>
+      </div>
+      
+
+      <div>
+        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="assn-list">
+          
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="summer-solutions">
+                  <span class="todo-label">Summer Solutions</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="reading-20m">
+                  <span class="todo-label">Read 20 min</span>
+                </label>
+              </li>
+              
+            </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-tpl="kid-charlie">
+    <div class="tile-h"><span>Charlie</span><span class="sub">rising 11th</span></div>
+    <div class="tile-body kidtile-body">
+      <div class="kidtile-stats">
+        <div class="kidtile-stat">
+          <span class="lbl">🍭 Sugar</span>
+          
+            
+            
+            <span class="v">53g</span>
+          
+        </div>
+        <div class="kidtile-stat">
+          <span class="lbl">💵 Allowance</span>
+          
+            
+            <span class="v danger">$-273.23</span>
+          
+        </div>
+      </div>
+
+      
+
+      <div>
+        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="assn-list">
+          
+            <ul class="todo-list" data-kid="charlie">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="charlie" data-id="take-medicine">
+                  <span class="todo-label">Take medicine</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="charlie" data-id="popcs-video">
+                  <span class="todo-label">Finish video for POPCS</span>
+                </label>
+              </li>
+              
+            </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div data-tpl="budget">
     <div class="tile-h"><span>💳 Budget</span><span class="sub" id="budgetMonth">—</span></div>
@@ -1378,6 +1807,11 @@
         
       </div>
       
+      <div class="sun-bar" id="sunBar"
+           data-sunrise="2026-06-15T06:15"
+           data-sunset="2026-06-15T20:44"></div>
+      
+      
     </div>
   </div>
 
@@ -1425,14 +1859,6 @@
     </div>
   </div>
 
-  <div data-tpl="dinner">
-    <div class="tile-h"><span>🍳 Tonight</span></div>
-    <div class="tile-body">
-      <div class="dinner-name">Chicken fajitas (no peppers, extra onions + zucchini)</div>
-      <div class="dinner-note">Skip bell peppers per Nancy. Mike: add extra chicken + a sprinkle of cheese to clear 62g.</div>
-    </div>
-  </div>
-
   <div data-tpl="reading">
     <div class="tile-h"><span>📚 Summer reading</span></div>
     <div class="tile-body">
@@ -1445,8 +1871,8 @@
                 <span class="reading-count"><span class="reading-pages">0</span> / 200 pgs</span>
               </div>
               <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
-                <button type="button" class="reading-add">Add</button>
+                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+                <button type="button" class="reading-add">Save</button>
                 <button type="button" class="reading-reset" title="Reset to 0">↺</button>
                 <button type="button" class="reading-cancel">✕</button>
               </div>
@@ -1461,8 +1887,8 @@
                 <span class="reading-count"><span class="reading-pages">0</span> / 400 pgs</span>
               </div>
               <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
-                <button type="button" class="reading-add">Add</button>
+                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+                <button type="button" class="reading-add">Save</button>
                 <button type="button" class="reading-reset" title="Reset to 0">↺</button>
                 <button type="button" class="reading-cancel">✕</button>
               </div>
@@ -1477,8 +1903,8 @@
                 <span class="reading-count"><span class="reading-pages">0</span> / 500 pgs</span>
               </div>
               <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="9999" step="1" class="reading-input" placeholder="pages">
-                <button type="button" class="reading-add">Add</button>
+                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
+                <button type="button" class="reading-add">Save</button>
                 <button type="button" class="reading-reset" title="Reset to 0">↺</button>
                 <button type="button" class="reading-cancel">✕</button>
               </div>
@@ -1638,6 +2064,25 @@
     </div>
   </div>
 
+  <div data-tpl="joke">
+    <div class="tile-h"><span>😂 Joke of the day</span></div>
+    <div class="tile-body">
+      
+        <div class="joke-text">I&#39;ll tell you what often gets over looked... garden fences.</div>
+      
+    </div>
+  </div>
+
+  <div data-tpl="bible">
+    <div class="tile-h"><span>✝️ Verse of the day</span></div>
+    <div class="tile-body">
+      
+        <div class="bible-text">“I love you, Lord, my strength. The Lord is my rock, my fortress and my deliverer; my God is my rock, in whom I take refuge, my shield and the horn of my salvation, my stronghold.”</div>
+        <div class="bible-ref">— Psalm 18:1-2 <span class="bible-ver">NIV</span></div>
+      
+    </div>
+  </div>
+
   <div data-tpl="newish">
     <div class="tile-h"><span>✨ New block</span></div>
     <div class="placeholder">Drop something here — dinner, weekend goal, sports, read-aloud</div>
@@ -1727,6 +2172,8 @@
     if (id === 'reading')      hydrateReading();
     if (id === 'assignments')  hydrateAssignments();
     if (id === 'recipe')       renderRecipeOfDay();
+    if (id === 'weather')      renderSunBar();
+    if (id.indexOf('kid-') === 0) { hydrateReading(); hydrateAssignments(); }
   }
 
   // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
@@ -1859,8 +2306,9 @@
     { label: "Mike's birthday",     date: '2026-06-13' },
     { label: 'California',          date: '2026-06-18' },
     { label: 'Dude Perfect',        date: '2026-06-26' },
+    { label: '4th of July',         date: '2026-07-04' },
     { label: 'lake trip',           date: '2026-07-06' },
-    { label: 'first day of school', date: '2026-08-13' },
+    { label: 'school',              date: '2026-08-13' },
   ];
   function renderCountdowns() {
     const wrap = document.getElementById('cdList');
@@ -1998,10 +2446,10 @@
       const cancelBtn = row.querySelector('.reading-cancel');
       const resetBtn = row.querySelector('.reading-reset');
 
-      // Drop stale local delta if server caught up
+      // Drop stale local override once the server total catches up.
       if (store[kid] != null && store[kid] <= base) { delete store[kid]; save(); }
 
-      function currentPages() { return base + (store[kid] || 0); }
+      function currentPages() { return store[kid] != null ? store[kid] : base; }
       function render() {
         const p = currentPages();
         pagesEl.textContent = p;
@@ -2011,8 +2459,8 @@
       function openEditor() {
         row.classList.add('editing');
         editor.hidden = false;
-        input.value = '';
-        setTimeout(() => input.focus(), 0);
+        input.value = currentPages();
+        setTimeout(() => { input.focus(); input.select(); }, 0);
       }
       function closeEditor() {
         row.classList.remove('editing');
@@ -2026,8 +2474,10 @@
       addBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const n = parseInt(input.value, 10);
-        if (!isNaN(n) && n > 0) {
-          store[kid] = (store[kid] || 0) + n;
+        if (!isNaN(n) && n >= 0) {
+          // Input is the TOTAL pages read so far. Keep a local override only
+          // when it's ahead of the server; otherwise follow the server value.
+          if (n > base) store[kid] = n; else delete store[kid];
           save(); render();
         }
         closeEditor();
@@ -2115,16 +2565,260 @@
     }
   }
 
-  let initial = DEFAULT_LAYOUT;
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length) initial = parsed;
-    } catch(e) { console.warn('Failed to parse saved layout, using defaults', e); }
+  // === SUNRISE / SUNSET BAR (24h light/dark with a live "now" marker) ===
+  let _sunNowTimer = null;
+  function _fracFromISO(iso) {
+    // iso is local-naive ("YYYY-MM-DDTHH:mm") in America/New_York; the kiosk
+    // runs in ET so parsing as local time is correct.
+    const m = /T(\d{2}):(\d{2})/.exec(iso || '');
+    if (!m) return null;
+    return (parseInt(m[1], 10) + parseInt(m[2], 10) / 60) / 24;
   }
-  initial.forEach(addTile);
-  refreshAddButton();
+  function _fmtClock(iso) {
+    const m = /T(\d{2}):(\d{2})/.exec(iso || '');
+    if (!m) return '';
+    let h = parseInt(m[1], 10);
+    const min = m[2];
+    const ap = h >= 12 ? 'p' : 'a';
+    h = h % 12; if (h === 0) h = 12;
+    return h + ':' + min + ap;
+  }
+  function renderSunBar() {
+    const bar = document.getElementById('sunBar');
+    if (!bar) return;
+    const sr = _fracFromISO(bar.dataset.sunrise);
+    const ss = _fracFromISO(bar.dataset.sunset);
+    if (sr == null || ss == null) { bar.style.display = 'none'; return; }
+    if (!bar.dataset._built) {
+      bar.dataset._built = '1';
+      const day = document.createElement('div');
+      day.className = 'sun-day';
+      day.style.left = (sr * 100) + '%';
+      day.style.width = ((ss - sr) * 100) + '%';
+      const now = document.createElement('div');
+      now.className = 'sun-now';
+      bar.appendChild(day);
+      bar.appendChild(now);
+      const meta = document.createElement('div');
+      meta.className = 'sun-meta';
+      meta.innerHTML = '<span>↑ ' + _fmtClock(bar.dataset.sunrise) + '</span>' +
+                       '<span>↓ ' + _fmtClock(bar.dataset.sunset) + '</span>';
+      bar.insertAdjacentElement('afterend', meta);
+    }
+    function placeNow() {
+      const el = document.getElementById('sunBar');
+      if (!el) { if (_sunNowTimer) { clearInterval(_sunNowTimer); _sunNowTimer = null; } return; }
+      const nowEl = el.querySelector('.sun-now');
+      if (!nowEl) return;
+      const d = new Date();
+      const frac = (d.getHours() + d.getMinutes() / 60) / 24;
+      nowEl.style.left = (frac * 100) + '%';
+    }
+    placeNow();
+    if (_sunNowTimer) clearInterval(_sunNowTimer);
+    _sunNowTimer = setInterval(placeNow, 60000);
+  }
+
+  // === DASHBOARD TEMPLATES (named layouts you can switch between) ===
+  // Each template is a full tile arrangement. The resolved-active one is
+  // rendered; edits (move/resize/add/remove) save back to it. "Auto" picks a
+  // template by the day of week so the kiosk switches hands-free.
+  const TPL_KEY = 'crittercrew.dashedit.templates.v2';
+
+  // Roster-driven kid tile ids, so per-kid tiles stay in sync with kids.js.
+  const KID_IDS = ['kid-thomas', 'kid-william', 'kid-henry', 'kid-charlie'];
+  function kidRow(y, h) {
+    h = h || 4;
+    return KID_IDS.map((id, i) => ({ id: id, x: (i % 4) * 3, y: y + Math.floor(i / 4) * h, w: 3, h: h }));
+  }
+
+  function tplEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Seed templates. "everyday" reuses the server-rendered DEFAULT_LAYOUT; the
+  // others are hand-tuned. Every tile id here must exist in CATALOG.
+  function seedTemplates() {
+    return {
+      activeId: 'everyday',
+      auto: true,
+      order: ['school', 'weekend', 'everyday'],
+      templates: {
+        school: {
+          id: 'school', emoji: '🎒', name: 'School Day', match: 'weekday',
+          layout: [
+            { id: 'weather',    x: 0, y: 0, w: 3, h: 2 },
+            { id: 'countdowns', x: 0, y: 2, w: 3, h: 3 },
+            { id: 'calendar',   x: 3, y: 0, w: 6, h: 5 },
+            { id: 'recipe',     x: 9, y: 0, w: 3, h: 5 }
+          ].concat(kidRow(5, 4)).concat([
+            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
+            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+          ])
+        },
+        weekend: {
+          id: 'weekend', emoji: '🏖️', name: 'Weekend', match: 'weekend',
+          layout: [
+            { id: 'chores',   x: 0, y: 0, w: 4, h: 6 },
+            { id: 'calendar', x: 4, y: 0, w: 5, h: 6 },
+            { id: 'meals',    x: 9, y: 0, w: 3, h: 3 },
+            { id: 'recipe',   x: 9, y: 3, w: 3, h: 3 }
+          ].concat(kidRow(6, 3)).concat([
+            { id: 'joke',  x: 0, y: 9, w: 6, h: 2 },
+            { id: 'bible', x: 6, y: 9, w: 6, h: 2 }
+          ])
+        },
+        everyday: {
+          id: 'everyday', emoji: '📋', name: 'Everyday', match: null,
+          layout: DEFAULT_LAYOUT
+        }
+      }
+    };
+  }
+
+  function saveStore(s) { localStorage.setItem(TPL_KEY, JSON.stringify(s)); }
+
+  function loadStore() {
+    let store = null;
+    try {
+      const raw = localStorage.getItem(TPL_KEY);
+      if (raw) store = JSON.parse(raw);
+    } catch (e) { console.warn('Bad templates store, reseeding', e); }
+    if (!store || !store.templates || !Array.isArray(store.order) || !store.order.length) {
+      store = seedTemplates();
+      // Migrate a pre-existing single layout (v1) into "Everyday" so an
+      // already-customized kiosk keeps its arrangement; pin it (auto off).
+      try {
+        const old = localStorage.getItem(STORAGE_KEY);
+        if (old) {
+          const parsed = JSON.parse(old);
+          if (Array.isArray(parsed) && parsed.length) {
+            store.templates.everyday.layout = parsed;
+            store.activeId = 'everyday';
+            store.auto = false;
+          }
+        }
+      } catch (e) {}
+      saveStore(store);
+    }
+    return store;
+  }
+
+  let STORE = loadStore();
+
+  function todayMatch() {
+    const dow = new Date().getDay(); // 0 Sun .. 6 Sat
+    return (dow === 0 || dow === 6) ? 'weekend' : 'weekday';
+  }
+
+  function resolveActiveId() {
+    if (STORE.auto) {
+      const want = todayMatch();
+      const hit = STORE.order.find(id => STORE.templates[id] && STORE.templates[id].match === want);
+      if (hit) return hit;
+    }
+    if (STORE.templates[STORE.activeId]) return STORE.activeId;
+    return STORE.order[0];
+  }
+
+  let applying = false;
+  function clearGrid() {
+    grid.engine.nodes.slice().forEach(n => { if (n.el) grid.removeWidget(n.el, true); });
+  }
+  function applyTemplate(id) {
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    applying = true;
+    clearGrid();
+    (tpl.layout || []).forEach(addTile);
+    applying = false;
+    renderSwitcher();
+    refreshAddButton();
+  }
+
+  function currentLayout() {
+    return grid.engine.nodes
+      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
+      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
+  }
+
+  function renderSwitcher() {
+    const wrap = document.getElementById('tplSwitch');
+    const activeId = resolveActiveId();
+    wrap.innerHTML = '';
+    STORE.order.forEach(id => {
+      const tpl = STORE.templates[id];
+      if (!tpl) return;
+      const pill = document.createElement('button');
+      pill.className = 'tpl-pill' + (id === activeId ? ' active' : '');
+      pill.dataset.tpl = id;
+      pill.innerHTML = '<span class="emo">' + (tpl.emoji || '🗂') + '</span>' + tplEsc(tpl.name);
+      pill.addEventListener('click', () => {
+        STORE.auto = false;          // tapping a view pins it (manual override)
+        STORE.activeId = id;
+        saveStore(STORE);
+        applyTemplate(id);
+        showToast(tpl.name);
+      });
+      wrap.appendChild(pill);
+    });
+    const autoBtn = document.getElementById('tplAuto');
+    if (autoBtn) {
+      autoBtn.classList.toggle('on', !!STORE.auto);
+      autoBtn.setAttribute('aria-pressed', STORE.auto ? 'true' : 'false');
+    }
+  }
+
+  // Wire template management controls (Auto / New / Rename / Delete).
+  document.getElementById('tplAuto').addEventListener('click', () => {
+    STORE.auto = !STORE.auto;
+    if (STORE.auto) STORE.activeId = resolveActiveId();
+    saveStore(STORE);
+    applyTemplate(resolveActiveId());
+    showToast(STORE.auto ? 'Auto by day: on' : 'Auto by day: off');
+  });
+  document.getElementById('tplNew').addEventListener('click', () => {
+    const name = (prompt('Name this view (e.g. "Sick Day", "Summer")') || '').trim();
+    if (!name) return;
+    let id = 'view-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 24);
+    if (!id || id === 'view-') id = 'view';
+    let n = 2; const base = id;
+    while (STORE.templates[id]) id = base + '-' + (n++);
+    STORE.templates[id] = { id: id, emoji: '🗂', name: name, match: null, layout: currentLayout() };
+    STORE.order.push(id);
+    STORE.auto = false; STORE.activeId = id;
+    saveStore(STORE);
+    applyTemplate(id);
+    showToast('Created ' + name);
+  });
+  document.getElementById('tplRename').addEventListener('click', () => {
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    const name = (prompt('Rename view', tpl.name) || '').trim();
+    if (!name) return;
+    tpl.name = name;
+    saveStore(STORE);
+    renderSwitcher();
+    showToast('Renamed');
+  });
+  document.getElementById('tplDelete').addEventListener('click', () => {
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    if (!tpl) return;
+    if (STORE.order.length <= 1) { alert('Keep at least one view.'); return; }
+    if (!confirm('Delete the "' + tpl.name + '" view?')) return;
+    delete STORE.templates[id];
+    STORE.order = STORE.order.filter(x => x !== id);
+    STORE.auto = false;
+    STORE.activeId = STORE.order[0];
+    saveStore(STORE);
+    applyTemplate(STORE.activeId);
+    showToast('Deleted');
+  });
+
+  // Initial render of the active template.
+  applyTemplate(resolveActiveId());
 
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
@@ -2227,10 +2921,12 @@
   }
 
   function persist() {
-    const data = grid.engine.nodes
-      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
-      .map(n => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h }));
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    if (applying) return;
+    const id = resolveActiveId();
+    if (STORE.templates[id]) {
+      STORE.templates[id].layout = currentLayout();
+      saveStore(STORE);
+    }
     refreshAddButton();
     showToast('Saved');
   }
@@ -2262,22 +2958,26 @@
       document.body.dataset.edit = '1';
       grid.enableMove(true);
       grid.enableResize(true);
-      toggleBtn.textContent = '🔒 Lock';
-      toggleBtn.classList.add('primary');
+      toggleBtn.textContent = '✓ Done';
     } else {
       delete document.body.dataset.edit;
       grid.enableMove(false);
       grid.enableResize(false);
-      toggleBtn.textContent = '🔓 Unlock';
-      toggleBtn.classList.remove('primary');
+      toggleBtn.textContent = '✏️ Edit';
     }
   });
 
-  // Reset
+  // Reset — restore the CURRENT view to its seeded default layout.
   document.getElementById('edReset').addEventListener('click', () => {
-    if (!confirm('Reset layout to default?')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+    const id = resolveActiveId();
+    const tpl = STORE.templates[id];
+    const seed = seedTemplates();
+    const seededLayout = (seed.templates[id] && seed.templates[id].layout) || seed.templates.everyday.layout;
+    if (!confirm('Reset the "' + (tpl ? tpl.name : 'current') + '" view to its default layout?')) return;
+    STORE.templates[id].layout = seededLayout;
+    saveStore(STORE);
+    applyTemplate(id);
+    showToast('Reset ' + (tpl ? tpl.name : ''));
   });
 
   // Top-right tap target → toggle floating toolbar.
