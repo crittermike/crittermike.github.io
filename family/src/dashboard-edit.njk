@@ -42,6 +42,7 @@ eleventyExcludeFromCollections: true
     --accent-gold: #bf8700;
     --accent-rose: #cf222e;
     --accent-blue: #0969da;
+    --accent-purple: #8250df;
     --border: #e2e7ef;
     --border-soft: #edf0f5;
     --surface: #ffffff;
@@ -70,6 +71,7 @@ eleventyExcludeFromCollections: true
     --accent-gold: #e0a93b;
     --accent-rose: #f06372;
     --accent-blue: #5aa9f5;
+    --accent-purple: #a371f7;
     --border: #2a313c;
     --border-soft: #232932;
     --surface: #1f242c;
@@ -219,6 +221,12 @@ eleventyExcludeFromCollections: true
     box-sizing: border-box;
     pointer-events: none;
   }
+  .dh-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    pointer-events: none;
+  }
   .dh-brand {
     font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
     font-weight: 600;
@@ -229,7 +237,15 @@ eleventyExcludeFromCollections: true
     white-space: nowrap;
     font-feature-settings: 'ss01' on, 'ss02' on;
   }
-  .dh-brand span { color: var(--accent-orange); }
+  .dh-brand span { color: inherit; }
+  .dh-date {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-light);
+    padding-left: 2px;
+  }
   .dh-weather {
     display: flex;
     flex-direction: column;
@@ -461,36 +477,89 @@ eleventyExcludeFromCollections: true
   .kids-grid .v.danger { color: var(--accent-rose); }
   .kids-grid .v.warn   { color: var(--accent-gold); }
 
-  /* === PER-KID TILE (one combined tile per kid: sugar/allowance/reading/today) === */
-  .kidtile-body { overflow-y: auto; gap: 12px; }
-  .kidtile-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  /* === PER-KID TILE (avatar header, stat chips, reading, today) === */
+  .kidcard-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    z-index: 2;
   }
-  .kidtile-stat { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .kidtile-stat .lbl {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--text-light);
+  .kidtile-h {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+  .kid-avatar {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', Georgia, serif;
     font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px -2px rgba(0,0,0,0.35);
+  }
+  .kid-name {
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    letter-spacing: -0.2px;
+  }
+  .kidtile-body { overflow-y: auto; gap: 10px; }
+  .kidtile-stats {
+    display: flex;
+    gap: 8px;
+  }
+  .kidtile-stat {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 0;
+    background: var(--surface-mute);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 6px 9px;
+  }
+  .kidtile-stat .lbl {
+    font-size: 0.98rem;
+    line-height: 1;
+    flex-shrink: 0;
   }
   .kidtile-stat .v {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.02rem;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
     color: var(--text-dark);
   }
   .kidtile-stat .v.danger { color: var(--accent-rose); }
   .kidtile-stat .v.warn   { color: var(--accent-gold); }
+  .kidtile-sec {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 8px;
+  }
   .kidtile-sec-lbl {
-    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.62rem;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.7px;
     color: var(--text-light);
     font-weight: 700;
     margin-bottom: 6px;
+  }
+  .kidtile-sec-lbl .ct {
+    margin-left: auto;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.74rem;
+    color: var(--text-mid);
+    font-variant-numeric: tabular-nums;
   }
 
   /* === COUNTDOWNS (matches /dashboard/ .cd-item) === */
@@ -1053,32 +1122,71 @@ eleventyExcludeFromCollections: true
     min-width: 0;
   }
 
-  /* === JOKE OF THE DAY === */
-  .joke-text {
-    font-size: 1.05rem;
-    line-height: 1.35;
-    color: var(--text-dark);
-    font-weight: 600;
+  /* === JOKE / VERSE (editorial quote cards) === */
+  .quote-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 6px;
   }
-
-  /* === VERSE OF THE DAY === */
-  .bible-text {
+  .quote-mark {
+    position: absolute;
+    top: -10px; left: -4px;
     font-family: 'Fraunces', Georgia, serif;
-    font-size: 0.98rem;
-    line-height: 1.4;
+    font-size: 3.6rem;
+    line-height: 1;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+  .joke-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.18rem;
+    line-height: 1.34;
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+  .bible-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1.12rem;
+    line-height: 1.38;
     color: var(--text-dark);
   }
-  .bible-ref {
-    margin-top: 8px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-mid);
+  .quote-ref {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0;
+    font-size: 0.66rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
   }
+  .quote-ref::before {
+    content: "";
+    width: 18px; height: 2px;
+    background: currentColor;
+    opacity: 0.55;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .joke .quote-mark, .joke .quote-ref { color: var(--accent-gold); }
+  .bible .quote-mark, .bible .quote-ref { color: var(--accent-orange); }
   .bible-ver {
+    margin-left: auto;
     color: var(--text-light);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.5px;
   }
 
   /* === PLACEHOLDER === */
@@ -1195,7 +1303,10 @@ eleventyExcludeFromCollections: true
 </div>
 
 <header class="dash-header" id="dashHeader">
-  <div class="dh-brand">Critter <span>Crew</span></div>
+  <div class="dh-left">
+    <div class="dh-brand">Critter <span>Crew</span></div>
+    <div class="dh-date" id="dhDate"></div>
+  </div>
   {% if weather %}
   <div class="dh-weather">
     <div class="dh-top">
@@ -1255,11 +1366,11 @@ eleventyExcludeFromCollections: true
   { "id": "chores",      "x": 16, "y": 0, "w": 8, "h": 10 },
   { "id": "budget",      "x": 0, "y": 0, "w": 6, "h": 4 },
   { "id": "countdowns",  "x": 0, "y": 4, "w": 6, "h": 6 },
-  { "id": "recipe",      "x": 0, "y": 18, "w": 6, "h": 6 },
-  { "id": "joke",        "x": 6, "y": 18, "w": 10, "h": 6 },
-  { "id": "bible",       "x": 16, "y": 18, "w": 8, "h": 6 },
+  { "id": "recipe",      "x": 0, "y": 19, "w": 6, "h": 6 },
+  { "id": "joke",        "x": 6, "y": 19, "w": 10, "h": 6 },
+  { "id": "bible",       "x": 16, "y": 19, "w": 8, "h": 6 },
 {% for kid in kids %}
-  { "id": "kid-{{ kid.key }}", "x": {{ loop.index0 * 6 }}, "y": 10, "w": 6, "h": 8 }{{ "," if not loop.last }}
+  { "id": "kid-{{ kid.key }}", "x": {{ loop.index0 * 6 }}, "y": 10, "w": 6, "h": 9 }{{ "," if not loop.last }}
 {% endfor %}
 ]
 </script>
@@ -1268,7 +1379,7 @@ eleventyExcludeFromCollections: true
 <div id="tileTemplates" style="display:none">
 
   <div data-tpl="kids">
-    <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">Sugar · Allowance</span></div>
+    <div class="tile-h"><span>👨‍👩‍👦‍👦 Kids</span><span class="sub">🍭 · 💵</span></div>
     <div class="tile-body">
       <div class="kids-grid">
         {% for kid in kids %}
@@ -1292,12 +1403,18 @@ eleventyExcludeFromCollections: true
   </div>
 
 {% for kid in kids %}
+  {% set kidAccents = { 'thomas': 'var(--accent-blue)', 'william': 'var(--accent-teal)', 'henry': 'var(--accent-purple)', 'charlie': 'var(--accent-orange)' } %}
+  {% set accent = kidAccents[kid.key] or 'var(--accent-blue)' %}
   <div data-tpl="kid-{{ kid.key }}">
-    <div class="tile-h"><span>{{ kid.name }}</span><span class="sub">{{ kid.grade }}</span></div>
+    <div class="kidcard-accent" style="background: {{ accent }}"></div>
+    <div class="tile-h kidtile-h">
+      <span class="kid-avatar" style="background: {{ accent }}">{{ kid.name[0] | upper }}</span>
+      <span class="kid-name">{{ kid.name }}</span>
+    </div>
     <div class="tile-body kidtile-body">
       <div class="kidtile-stats">
         <div class="kidtile-stat">
-          <span class="lbl">🍭 Sugar</span>
+          <span class="lbl">🍭</span>
           {% if kid.sugar.balance is not none %}
             {% set neg = kid.sugar.balance < 0 %}
             {% set low = kid.sugar.balance >= 0 and kid.sugar.balance < kid.sugar.refill * 0.5 %}
@@ -1307,7 +1424,7 @@ eleventyExcludeFromCollections: true
           {% endif %}
         </div>
         <div class="kidtile-stat">
-          <span class="lbl">💵 Allowance</span>
+          <span class="lbl">💵</span>
           {% if kid.allowance.balance_str %}
             {% set negA = '-' in kid.allowance.balance_str %}
             <span class="v{% if negA %} danger{% endif %}">{{ kid.allowance.balance_str }}</span>
@@ -1318,24 +1435,21 @@ eleventyExcludeFromCollections: true
       </div>
 
       {% if kid.reading %}
-      <div>
-        <div class="kidtile-sec-lbl">📚 Summer reading</div>
+      <div class="kidtile-sec">
         <div class="reading-row" data-kid="{{ kid.key }}" data-base="{{ kid.reading.pages }}" data-target="{{ kid.reading.target }}">
-          <div class="reading-head">
-            <span class="reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span>
-          </div>
+          <div class="kidtile-sec-lbl">📚 Reading <span class="ct reading-count"><span class="reading-pages">{{ kid.reading.pages }}</span> / {{ kid.reading.target }} pgs</span></div>
           <div class="reading-editor" hidden>
             <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
             <button type="button" class="reading-add">Save</button>
             <button type="button" class="reading-reset" title="Reset to 0">↺</button>
             <button type="button" class="reading-cancel">✕</button>
           </div>
-          <div class="progress"><div class="bar reading-bar" style="width: {{ kid.reading.pct }}%"></div></div>
+          <div class="progress"><div class="bar reading-bar" style="width: {{ kid.reading.pct }}%; background: {{ accent }}"></div></div>
         </div>
       </div>
       {% endif %}
 
-      <div>
+      <div class="kidtile-sec">
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           {% if kid.assignments and kid.assignments.length %}
@@ -1448,7 +1562,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="meals">
-    <div class="tile-h"><span>🍽️ Meal plan</span><span class="sub">This week</span></div>
+    <div class="tile-h"><span>🍽️ Meal plan</span></div>
     <div class="tile-body">
       <div class="meal-list">
         {% for m in mealweek %}
@@ -1525,7 +1639,7 @@ eleventyExcludeFromCollections: true
     <div class="tile-h"><span>🍲 What's cooking</span></div>
     <div class="tile-body">
       <div class="recipe-day recipe-day-today">
-        <div class="recipe-daylbl">Today</div>
+        <div class="recipe-daylbl">Tonight</div>
         <div class="recipe-name">{{ rToday.name or 'TBD' }}</div>
         {% if rToday.recipe %}
           <div class="recipe-meta">
@@ -1547,7 +1661,11 @@ eleventyExcludeFromCollections: true
     <div class="tile-h"><span>😂 Joke of the day</span></div>
     <div class="tile-body">
       {% if joke and joke.joke %}
-        <div class="joke-text">{{ joke.joke }}</div>
+        <div class="quote-card joke">
+          <div class="quote-mark">“</div>
+          <div class="joke-text">{{ joke.joke }}</div>
+          <div class="quote-ref">Dad joke</div>
+        </div>
       {% else %}
         <div class="placeholder">No joke today 🤷</div>
       {% endif %}
@@ -1558,8 +1676,11 @@ eleventyExcludeFromCollections: true
     <div class="tile-h"><span>✝️ Verse of the day</span></div>
     <div class="tile-body">
       {% if bible and bible.text %}
-        <div class="bible-text">“{{ bible.text }}”</div>
-        <div class="bible-ref">— {{ bible.reference }}{% if bible.version %} <span class="bible-ver">{{ bible.version }}</span>{% endif %}</div>
+        <div class="quote-card bible">
+          <div class="quote-mark">“</div>
+          <div class="bible-text">{{ bible.text }}</div>
+          <div class="quote-ref">{{ bible.reference }}{% if bible.version %} <span class="bible-ver">{{ bible.version }}</span>{% endif %}</div>
+        </div>
       {% else %}
         <div class="placeholder">Verse unavailable</div>
       {% endif %}
@@ -2198,9 +2319,9 @@ eleventyExcludeFromCollections: true
             { id: 'countdowns', x: 0, y: 0, w: 6, h: 10 },
             { id: 'calendar',   x: 6, y: 0, w: 12, h: 10 },
             { id: 'recipe',     x: 18, y: 0, w: 6, h: 10 }
-          ].concat(kidRow(10, 8)).concat([
-            { id: 'joke',  x: 0, y: 18, w: 12, h: 4 },
-            { id: 'bible', x: 12, y: 18, w: 12, h: 4 }
+          ].concat(kidRow(10, 9)).concat([
+            { id: 'joke',  x: 0, y: 19, w: 12, h: 5 },
+            { id: 'bible', x: 12, y: 19, w: 12, h: 5 }
           ])
         },
         weekend: {
@@ -2210,9 +2331,9 @@ eleventyExcludeFromCollections: true
             { id: 'calendar', x: 8, y: 0, w: 10, h: 12 },
             { id: 'meals',    x: 18, y: 0, w: 6, h: 6 },
             { id: 'recipe',   x: 18, y: 6, w: 6, h: 6 }
-          ].concat(kidRow(12, 6)).concat([
-            { id: 'joke',  x: 0, y: 18, w: 12, h: 4 },
-            { id: 'bible', x: 12, y: 18, w: 12, h: 4 }
+          ].concat(kidRow(12, 8)).concat([
+            { id: 'joke',  x: 0, y: 20, w: 12, h: 5 },
+            { id: 'bible', x: 12, y: 20, w: 12, h: 5 }
           ])
         },
         everyday: {
@@ -2373,13 +2494,23 @@ eleventyExcludeFromCollections: true
     showToast('Deleted');
   });
 
+  // Header date line ("Tuesday, June 17"), refreshed on load + at midnight.
+  function paintDate() {
+    const el = document.getElementById('dhDate');
+    if (!el) return;
+    el.textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric',
+    });
+  }
+  paintDate();
+
   // Initial render: measure the fixed header, paint the header sun bar (now a
   // permanent fixture, not a tile), then lay out the active template.
   measureHeader();
   renderSunBar();
   applyTemplate(resolveActiveId());
   // Header sun bar + measurement can shift once fonts/layout settle.
-  window.addEventListener('load', () => { measureHeader(); renderSunBar(); fitGrid(); });
+  window.addEventListener('load', () => { measureHeader(); renderSunBar(); fitGrid(); paintDate(); });
 
   const toast = document.getElementById('edToast');
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
