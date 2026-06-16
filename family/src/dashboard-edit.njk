@@ -724,20 +724,6 @@ eleventyExcludeFromCollections: true
   }
   .meal-list .nm { color: var(--text-dark); }
 
-  /* === DINNER === */
-  .dinner-name {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
-  .dinner-note {
-    font-size: 0.78rem;
-    color: var(--text-mid);
-  }
-
   /* === SUMMER READING === */
   .reading-list { display: flex; flex-direction: column; gap: 10px; }
   .reading-row { cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -1070,7 +1056,6 @@ eleventyExcludeFromCollections: true
   { "id": "chores",     "label": "🧹 Weekend chores",               "w": 4, "h": 5 },
   { "id": "weather",    "label": "☀️ Weather",                      "w": 3, "h": 3 },
   { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 3, "h": 3 },
-  { "id": "dinner",      "label": "🍳 Tonight's dinner",             "w": 3, "h": 2 },
   { "id": "reading",     "label": "📚 Summer reading",               "w": 3, "h": 3 },
   { "id": "assignments", "label": "✏️ Today's assignments",          "w": 3, "h": 3 },
   { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 3, "h": 3 },
@@ -1310,14 +1295,6 @@ eleventyExcludeFromCollections: true
           </div>
         {% endfor %}
       </div>
-    </div>
-  </div>
-
-  <div data-tpl="dinner">
-    <div class="tile-h"><span>🍳 Tonight</span></div>
-    <div class="tile-body">
-      <div class="dinner-name">{{ dinner.name or 'TBD' }}</div>
-      {% if dinner.note %}<div class="dinner-note">{{ dinner.note }}</div>{% endif %}
     </div>
   </div>
 
@@ -1912,8 +1889,7 @@ eleventyExcludeFromCollections: true
             { id: 'weather',    x: 0, y: 0, w: 3, h: 2 },
             { id: 'countdowns', x: 0, y: 2, w: 3, h: 3 },
             { id: 'calendar',   x: 3, y: 0, w: 6, h: 5 },
-            { id: 'dinner',     x: 9, y: 0, w: 3, h: 2 },
-            { id: 'recipe',     x: 9, y: 2, w: 3, h: 3 }
+            { id: 'recipe',     x: 9, y: 0, w: 3, h: 5 }
           ].concat(kidRow(5, 4))
         },
         weekend: {
