@@ -221,6 +221,9 @@ eleventyExcludeFromCollections: true
     box-sizing: border-box;
     pointer-events: none;
   }
+  /* Nudge header content down off the iPad status bar without changing the
+     header's measured height (so --header-h and the stage stay put). */
+  .dh-left, .dh-weather { transform: translateY(7px); }
   .dh-left {
     display: flex;
     flex-direction: column;
@@ -490,17 +493,6 @@ eleventyExcludeFromCollections: true
     gap: 9px;
     color: var(--text-dark);
     margin-bottom: 10px;
-  }
-  .kid-avatar {
-    width: 28px; height: 28px;
-    flex-shrink: 0;
-    border-radius: 999px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #fff;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px -2px rgba(0,0,0,0.35);
   }
   .kid-name {
     font-size: 1.08rem;
@@ -1408,7 +1400,6 @@ eleventyExcludeFromCollections: true
   <div data-tpl="kid-{{ kid.key }}">
     <div class="kidcard-accent" style="background: {{ accent }}"></div>
     <div class="tile-h kidtile-h">
-      <span class="kid-avatar" style="background: {{ accent }}">{{ kid.name[0] | upper }}</span>
       <span class="kid-name">{{ kid.name }}</span>
     </div>
     <div class="tile-body kidtile-body">
