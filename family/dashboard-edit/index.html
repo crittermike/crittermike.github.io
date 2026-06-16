@@ -1339,7 +1339,44 @@
     <div class="tile-h"><span>☀️ Weather</span><span class="sub">Greenville</span></div>
     <div class="tile-body">
       
-      <div class="placeholder">Weather unavailable</div>
+      <div class="weather-row">
+        <span class="icon">⛅</span>
+        <span class="temp">74°</span>
+        <span class="hilo">H 86 / L 68</span>
+      </div>
+      <div class="weather-days">
+        
+          <div>
+            <div class="d">Tue</div>
+            <div class="ic">⛅</div>
+            <div class="hl">84/65</div>
+          </div>
+        
+          <div>
+            <div class="d">Wed</div>
+            <div class="ic">⛅</div>
+            <div class="hl">88/70</div>
+          </div>
+        
+          <div>
+            <div class="d">Thu</div>
+            <div class="ic">⛈</div>
+            <div class="hl">90/72</div>
+          </div>
+        
+          <div>
+            <div class="d">Fri</div>
+            <div class="ic">⛈</div>
+            <div class="hl">87/69</div>
+          </div>
+        
+          <div>
+            <div class="d">Sat</div>
+            <div class="ic">🌦</div>
+            <div class="hl">86/68</div>
+          </div>
+        
+      </div>
       
     </div>
   </div>
@@ -2120,7 +2157,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":[],"sunsets":[]};
+    const SUN = {"sunrises":["2026-06-15T06:15","2026-06-16T06:15","2026-06-17T06:15","2026-06-18T06:15","2026-06-19T06:15","2026-06-20T06:16"],"sunsets":["2026-06-15T20:44","2026-06-16T20:44","2026-06-17T20:45","2026-06-18T20:45","2026-06-19T20:45","2026-06-20T20:46"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
