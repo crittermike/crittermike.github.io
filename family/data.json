@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:31:03.043Z",
+  "generated_at": "2026-06-16T23:45:20.224Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -944,7 +944,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 72,
       "hi": 79,
       "lo": 66,
       "icon": "⛅",
@@ -953,10 +953,10 @@
     "days": [
       {
         "d": "Wed",
-        "icon": "⛅",
+        "icon": "🌫",
         "hi": 89,
-        "lo": 65,
-        "code": 3
+        "lo": 66,
+        "code": 45
       },
       {
         "d": "Thu",
@@ -2057,7 +2057,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 53.3,
-    "totalSpend": 2915.99,
+    "totalSpend": 3419.56,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2072,9 +2072,33 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 605.93,
-        "balance": -134.27,
-        "pct": 128.5
+        "spent": 641.19,
+        "balance": -169.53,
+        "pct": 135.9
+      },
+      {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 217.5,
+        "balance": -217.5,
+        "pct": 0
+      },
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 150.81,
+        "balance": -150.81,
+        "pct": 0
+      },
+      {
+        "name": "🎁 Charity",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 100,
+        "balance": -100,
+        "pct": 0
       },
       {
         "name": "🛒 Groceries",
@@ -2091,20 +2115,12 @@
         "spent": 19.99,
         "balance": 0,
         "pct": 100
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": -76.3,
-        "balance": 76.3,
-        "pct": 0
       }
     ],
     "liquidCash": 15382.07,
-    "creditDebt": -14979.96,
-    "netLiquid": 402.11,
+    "creditDebt": -15196.07,
+    "netLiquid": 186,
     "source": "ynab",
-    "updatedAt": "2026-06-16T23:31:00.749Z"
+    "updatedAt": "2026-06-16T23:45:18.347Z"
   }
 }
