@@ -26,10 +26,10 @@ eleventyExcludeFromCollections: true
 
   /* === DESIGN TOKENS (match /dashboard/) === */
   :root {
-    --warm-bg: #e8ebf1;
-    --bg-grad-1: #f1f4f9;
-    --bg-grad-2: #e8ebf1;
-    --bg-grad-3: #dde2eb;
+    --warm-bg: #eef1f7;
+    --bg-grad-1: #f7f9fc;
+    --bg-grad-2: #eef1f7;
+    --bg-grad-3: #e6ebf2;
     --card-bg: #ffffff;
     --card-bg-2: #f6f8fc;
     --card-top-hi: rgba(255,255,255,0.9);
@@ -322,7 +322,7 @@ eleventyExcludeFromCollections: true
   }
   .grid-stack-item-content {
     background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-bg-2) 100%);
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     border-radius: 16px;
     box-shadow: var(--shadow), inset 0 1px 0 var(--card-top-hi);
     padding: 13px 15px 15px;
@@ -1696,7 +1696,6 @@ eleventyExcludeFromCollections: true
         <div class="quote-card joke">
           <div class="quote-mark">“</div>
           <div class="joke-text">{{ joke.joke }}</div>
-          <div class="quote-ref">Dad joke</div>
         </div>
       {% else %}
         <div class="placeholder">No joke today 🤷</div>
@@ -1711,7 +1710,7 @@ eleventyExcludeFromCollections: true
         <div class="quote-card bible">
           <div class="quote-mark">“</div>
           <div class="bible-text">{{ bible.text }}</div>
-          <div class="quote-ref">{{ bible.reference }}{% if bible.version %} <span class="bible-ver">{{ bible.version }}</span>{% endif %}</div>
+          <div class="quote-ref">{{ bible.reference }}</div>
         </div>
       {% else %}
         <div class="placeholder">Verse unavailable</div>
