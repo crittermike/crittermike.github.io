@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:45:20.224Z",
+  "generated_at": "2026-06-17T00:02:49.823Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -830,12 +830,59 @@
     ]
   },
   "dinner": {
-    "name": "Italian sausage + onions + zucchini",
-    "protein_g": 45,
-    "cal": 580,
-    "effort": "easy",
-    "note": "Mike's pick. Skillet, weeknight. Moved from Mon (not cooked).",
-    "recipe": null
+    "name": "Marry Me Chicken over pasta",
+    "protein_g": 58,
+    "cal": 640,
+    "effort": "moderate",
+    "note": "Last home-cooked dinner before Mike + Nancy leave for SD. Family favorite. Mom pain clinic earlier that day but evening is clear.",
+    "recipe": {
+      "slug": "marry-me-chicken",
+      "name": "Marry Me chicken",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "marry-me-chicken"
+      ],
+      "in_rotation": true,
+      "effort": "medium",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 600,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "chicken breasts",
+            "sun-dried tomatoes",
+            "heavy cream",
+            "parmesan",
+            "garlic",
+            "spinach",
+            "Italian seasoning"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "chicken breasts",
+        "sun-dried tomatoes",
+        "heavy cream",
+        "parmesan",
+        "garlic",
+        "spinach",
+        "Italian seasoning"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -970,14 +1017,14 @@
         "icon": "⛈",
         "hi": 91,
         "lo": 67,
-        "code": 99
+        "code": 96
       },
       {
         "d": "Sat",
         "icon": "🌦",
         "hi": 89,
         "lo": 69,
-        "code": 80
+        "code": 51
       },
       {
         "d": "Sun",
@@ -2056,7 +2103,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 53.3,
+    "dayPct": 56.7,
     "totalSpend": 3419.56,
     "totalBudget": 991.65,
     "categories": [
@@ -2121,6 +2168,6 @@
     "creditDebt": -15196.07,
     "netLiquid": 186,
     "source": "ynab",
-    "updatedAt": "2026-06-16T23:45:18.347Z"
+    "updatedAt": "2026-06-17T00:02:48.169Z"
   }
 }
