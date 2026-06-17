@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Checkbox Feel Lab</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0f1217;
+    --card-bg: #181c23;
+    --card-bg-2: #14181e;
+    --border: #2a313c;
+    --border-soft: #232932;
+    --text-dark: #f1f4fa;
+    --text-mid: #d6dce6;
+    --text-light: #a8b1bf;
+    --teal: #2da44e;
+    --accent-orange: #f08a55;
+    --accent-gold: #e0a93b;
+    --accent-rose: #f06372;
+    --accent-blue: #4a9eff;
+    --accent-purple: #b07cff;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--text-dark);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+  }
+  body { padding: 18px 14px 40px; }
+  header { text-align: center; margin-bottom: 6px; }
+  h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.4px; }
+  .sub { color: var(--text-light); font-size: 0.82rem; margin-top: 4px; line-height: 1.45; }
+  .sub b { color: var(--text-mid); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 760px;
+    margin: 20px auto 0;
+  }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+  /* A faithful replica of the real kid-tile clip context:
+     overflow:hidden card + the checkbox sitting at the left padding edge
+     with the same 6px margin. So the felt result == the dashboard result. */
+  .lab-card {
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-bg-2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 12px 28px -10px rgba(0,0,0,0.6);
+    padding: 14px 15px 16px;
+    overflow: hidden;            /* mirrors .tile-body / .grid-stack-item-content */
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease;
+  }
+  .lab-card:active { border-color: #3a4250; }
+  .lab-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .lab-num {
+    font-size: 0.66rem; font-weight: 800; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--text-light);
+  }
+  .lab-name { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+  .lab-sound { font-size: 0.68rem; color: var(--text-light); margin-top: 2px; }
+
+  .todo {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.92rem; color: var(--text-dark);
+    padding: 2px 0;
+  }
+  .cbx {
+    appearance: none; -webkit-appearance: none;
+    width: 20px; height: 20px; flex-shrink: 0;
+    border: 1.5px solid var(--border-soft); border-radius: 4px;
+    margin: 0 0 0 6px;            /* the clearance margin from the real fix */
+    position: relative; cursor: pointer;
+    background: transparent;
+    transition: none;
+  }
+  .cbx:checked { background: var(--teal); border-color: var(--teal); }
+  .cbx:checked::after {
+    content: "✓"; position: absolute; inset: 0;
+    color: #fff; font-size: 13px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center; line-height: 1;
+  }
+  .cbx:checked + .todo-label { text-decoration: line-through; color: var(--text-mid); }
+  .todo-label { transition: color 0.2s; }
+  .hint { margin-top: 12px; font-size: 0.7rem; color: var(--text-light); opacity: 0.7; }
+
+  .controls { max-width: 760px; margin: 22px auto 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    background: #1f242c; color: var(--text-mid); border: 1px solid var(--border);
+    border-radius: 999px; padding: 11px 20px; font-size: 0.82rem; font-weight: 700;
+    cursor: pointer;
+  }
+  .btn:active { background: #262c35; }
+
+  /* ===== MOTION VARIANTS — each scales the checkbox, centered, within the 6px clearance ===== */
+  /* 1. Crisp Snap — fast, tight, minimal overshoot (iOS-native feel) */
+  .m-snap.go { animation: m-snap 0.26s cubic-bezier(.2,.9,.3,1); }
+  @keyframes m-snap { 0%{transform:scale(1)} 45%{transform:scale(1.26)} 100%{transform:scale(1)} }
+
+  /* 2. Springy Bounce — big overshoot + wobble settle (playful) */
+  .m-spring.go { animation: m-spring 0.6s cubic-bezier(.2,1.3,.3,1); }
+  @keyframes m-spring {
+    0%{transform:scale(1)} 30%{transform:scale(1.45)} 55%{transform:scale(0.88)}
+    75%{transform:scale(1.12)} 90%{transform:scale(0.97)} 100%{transform:scale(1)}
+  }
+
+  /* 3. Jelly Squish — anticipation squash then pop (very juicy) */
+  .m-jelly.go { animation: m-jelly 0.5s cubic-bezier(.3,1.2,.4,1); }
+  @keyframes m-jelly {
+    0%{transform:scale(1,1)} 20%{transform:scale(1.22,0.82)} 45%{transform:scale(0.85,1.2)}
+    65%{transform:scale(1.08,0.95)} 100%{transform:scale(1,1)}
+  }
+
+  /* 4. Stamp — press-in then sharp pop-out (satisfying impact) */
+  .m-stamp.go { animation: m-stamp 0.42s cubic-bezier(.25,.8,.25,1); }
+  @keyframes m-stamp {
+    0%{transform:scale(1)} 18%{transform:scale(0.78)} 50%{transform:scale(1.3)} 100%{transform:scale(1)}
+  }
+
+  /* 5. Pop + Glow — gentle pop with a teal glow bloom (smooth/elegant) */
+  .m-glow.go { animation: m-glow 0.5s ease-out; }
+  @keyframes m-glow {
+    0%{transform:scale(1); box-shadow:0 0 0 0 rgba(45,164,78,0)}
+    40%{transform:scale(1.2); box-shadow:0 0 0 5px rgba(45,164,78,0.35), 0 0 14px 3px rgba(45,164,78,0.5)}
+    100%{transform:scale(1); box-shadow:0 0 0 0 rgba(45,164,78,0)}
+  }
+
+  /* 6. Double-Tap Pop — quick two-beat bounce (energetic, "yes-yes!") */
+  .m-double.go { animation: m-double 0.55s ease-out; }
+  @keyframes m-double {
+    0%{transform:scale(1)} 18%{transform:scale(1.3)} 36%{transform:scale(0.95)}
+    54%{transform:scale(1.18)} 72%{transform:scale(0.98)} 100%{transform:scale(1)}
+  }
+
+  /* Confetti — fixed position so it escapes the clip, exactly like the dashboard */
+  .confetti-piece {
+    position: fixed; top:0; left:0; width:9px; height:9px; z-index:9999;
+    pointer-events:none; will-change:transform,opacity;
+    transform: translate(-50%,-50%);
+    animation: confetti-fly 0.85s cubic-bezier(.15,.6,.4,1) forwards;
+  }
+  @keyframes confetti-fly {
+    0%{opacity:1; transform:translate(-50%,-50%) translate(0,0) rotate(0)}
+    100%{opacity:0; transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) rotate(var(--rot))}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎉 Checkbox Feel Lab</h1>
+  <div class="sub">
+    Tap each box with your <b>actual thumb</b>. Same clip + margin as the real dashboard, so what you feel here is what you'll get.<br>
+    Confetti is constant (it already works). You're judging the <b>pop motion</b> + <b>sound</b>.<br>
+    Text me the winner: <b>"#3"</b> or mix it: <b>"motion 2, sound 5"</b>.
+  </div>
+</header>
+
+<div class="grid" id="grid">
+  <!-- cards injected by JS so motion + sound stay in sync and labels can't drift -->
+</div>
+
+<div class="controls">
+  <button class="btn" id="reset">↺ Reset all</button>
+  <button class="btn" id="replay">▶ Replay last</button>
+</div>
+
+<script>
+(function(){
+  // ---- Confetti (ported from the dashboard) ----
+  const ACCENTS = ['#d96a2a', '#2da44e', '#bf8700', '#cf222e', '#0969da', '#8250df'];
+  function burstConfetti(cx, cy, count, power) {
+    count = count||16; power = power||1;
+    for (let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className='confetti-piece';
+      const a=(Math.PI*2*i)/count+(Math.random()-0.5)*0.6;
+      const d=(38+Math.random()*46)*power;
+      const dx=Math.cos(a)*d, dy=Math.sin(a)*d+(28+Math.random()*40)*power;
+      p.style.left=cx+'px'; p.style.top=cy+'px';
+      p.style.background=ACCENTS[i%ACCENTS.length];
+      p.style.setProperty('--dx',dx.toFixed(1)+'px');
+      p.style.setProperty('--dy',dy.toFixed(1)+'px');
+      p.style.setProperty('--rot',Math.round(Math.random()*720-360)+'deg');
+      if(Math.random()>0.5) p.style.borderRadius='50%';
+      const s=(6+Math.random()*6).toFixed(1)+'px'; p.style.width=s; p.style.height=s;
+      document.body.appendChild(p);
+      p.addEventListener('animationend',()=>p.remove(),{once:true});
+    }
+  }
+  function centerOf(el){ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; }
+
+  // ---- Web Audio synth (ported + extended) ----
+  let ctx=null;
+  function ac(){ if(!ctx){const A=window.AudioContext||window.webkitAudioContext; if(!A)return null; ctx=new A();} if(ctx.state==='suspended')ctx.resume(); return ctx; }
+  function tone(freq, t, dur, peak, type, partial){
+    const c=ctx, t0=c.currentTime+t;
+    const env=c.createGain();
+    env.gain.setValueAtTime(0.0001,t0);
+    env.gain.exponentialRampToValueAtTime(peak,t0+0.008);
+    env.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    env.connect(c.destination);
+    const o=c.createOscillator(); o.type=type||'sine'; o.frequency.value=freq; o.connect(env); o.start(t0); o.stop(t0+dur);
+    const pg=partial==null?0.3:partial;
+    if(pg>0){ const o2=c.createOscillator(); o2.type=type||'sine'; o2.frequency.value=freq*2; const g2=c.createGain(); g2.gain.value=pg; o2.connect(g2).connect(env); o2.start(t0); o2.stop(t0+dur); }
+  }
+  function sweep(f0,f1,dur,peak,type){
+    const c=ctx,t0=c.currentTime;
+    const env=c.createGain(); env.gain.setValueAtTime(0.0001,t0);
+    env.gain.exponentialRampToValueAtTime(peak,t0+0.01);
+    env.gain.exponentialRampToValueAtTime(0.0001,t0+dur); env.connect(c.destination);
+    const o=c.createOscillator(); o.type=type||'sine';
+    o.frequency.setValueAtTime(f0,t0); o.frequency.exponentialRampToValueAtTime(f1,t0+dur);
+    o.connect(env); o.start(t0); o.stop(t0+dur);
+  }
+  function noiseClick(dur,peak){
+    const c=ctx,t0=c.currentTime;
+    const n=Math.floor(c.sampleRate*dur); const buf=c.createBuffer(1,n,c.sampleRate); const d=buf.getChannelData(0);
+    for(let i=0;i<n;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2); }
+    const src=c.createBufferSource(); src.buffer=buf;
+    const g=c.createGain(); g.gain.value=peak; const f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1800; f.Q.value=0.8;
+    src.connect(f).connect(g).connect(c.destination); src.start(t0);
+  }
+
+  const SOUNDS = {
+    ding:   { label:'Soft ding',     play(){ if(!ac())return; tone(1046.50,0,0.55,0.40); } },
+    marimba:{ label:'Marimba',       play(){ if(!ac())return; tone(659.25,0,0.28,0.34,'triangle',0.15); tone(987.77,0.07,0.34,0.30,'triangle',0.15); } },
+    bubble: { label:'Bubble pop',    play(){ if(!ac())return; sweep(420,1400,0.18,0.42,'sine'); } },
+    coin:   { label:'Coin',          play(){ if(!ac())return; tone(987.77,0,0.09,0.30,'square',0); tone(1318.51,0.08,0.42,0.30,'square',0); } },
+    wood:   { label:'Wood block',    play(){ if(!ac())return; noiseClick(0.05,0.5); tone(880,0,0.08,0.18,'triangle',0); } },
+    chime:  { label:'Chime shimmer', play(){ if(!ac())return; tone(523.25,0,0.5,0.26); tone(659.25,0.04,0.5,0.24); tone(783.99,0.08,0.6,0.24); } },
+  };
+
+  const VARIANTS = [
+    { motion:'m-snap',   name:'Crisp Snap',     sound:'ding',    blurb:'Fast & tight, iOS-native' },
+    { motion:'m-spring', name:'Springy Bounce', sound:'marimba', blurb:'Big overshoot, playful wobble' },
+    { motion:'m-jelly',  name:'Jelly Squish',   sound:'bubble',  blurb:'Squash-and-pop, very juicy' },
+    { motion:'m-stamp',  name:'Stamp',          sound:'wood',    blurb:'Press-in then sharp pop' },
+    { motion:'m-glow',   name:'Pop + Glow',     sound:'chime',   blurb:'Gentle pop, teal glow bloom' },
+    { motion:'m-double', name:'Double Pop',     sound:'coin',    blurb:'Two-beat bounce, energetic' },
+  ];
+
+  const grid = document.getElementById('grid');
+  let lastBox = null, lastVariant = null;
+
+  VARIANTS.forEach((v, idx) => {
+    const card = document.createElement('div');
+    card.className = 'lab-card';
+    card.innerHTML =
+      '<div class="lab-head">'+
+        '<div><div class="lab-name">'+v.name+'</div><div class="lab-sound">🔊 '+SOUNDS[v.sound].label+'</div></div>'+
+        '<div class="lab-num">#'+(idx+1)+'</div>'+
+      '</div>'+
+      '<div class="todo">'+
+        '<input type="checkbox" class="cbx '+v.motion+'" id="cb'+idx+'">'+
+        '<span class="todo-label">'+v.blurb+'</span>'+
+      '</div>'+
+      '<div class="hint">tap anywhere on this card</div>';
+    const box = card.querySelector('.cbx');
+
+    function fire() {
+      // toggle on (always celebrate the check; tapping again unchecks silently)
+      if (box.checked) { box.checked = false; return; }
+      box.checked = true;
+      // restart the motion animation
+      box.classList.remove('go'); void box.offsetWidth; box.classList.add('go');
+      box.addEventListener('animationend', () => box.classList.remove('go'), { once:true });
+      SOUNDS[v.sound].play();
+      const c = centerOf(box);
+      burstConfetti(c.x, c.y, 18, 1.1);
+      lastBox = box; lastVariant = v;
+    }
+    card.addEventListener('click', (e) => { e.preventDefault(); fire(); });
+    grid.appendChild(card);
+  });
+
+  document.getElementById('reset').addEventListener('click', () => {
+    document.querySelectorAll('.cbx').forEach(b => { b.checked = false; b.classList.remove('go'); });
+  });
+  document.getElementById('replay').addEventListener('click', () => {
+    if (!lastBox || !lastVariant) return;
+    lastBox.checked = false;
+    lastBox.classList.remove('go'); void lastBox.offsetWidth; lastBox.checked = true; lastBox.classList.add('go');
+    SOUNDS[lastVariant.sound].play();
+    const c = centerOf(lastBox); burstConfetti(c.x, c.y, 18, 1.1);
+  });
+})();
+</script>
+</body>
+</html>
