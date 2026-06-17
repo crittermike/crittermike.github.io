@@ -767,16 +767,6 @@
     100% { background: var(--surface-mute-2); box-shadow: none; }
   }
 
-  /* All of a kid's tasks done → pulse the whole card */
-  .kid.all-done {
-    animation: kid-all-done 0.8s ease;
-  }
-  @keyframes kid-all-done {
-    0%   { transform: scale(1); }
-    30%  { transform: scale(1.025); box-shadow: 0 0 0 3px rgba(45,164,78,0.55), var(--shadow); }
-    100% { transform: scale(1); box-shadow: var(--shadow); }
-  }
-
   /* Confetti particles (spawned + removed by JS, fixed-position) */
   .confetti-piece {
     position: fixed;
@@ -2853,8 +2843,8 @@
       const kidBoxes = card ? card.querySelectorAll('.todo input[type="checkbox"]') : [];
       const allDone = kidBoxes.length && [...kidBoxes].every(b => b.checked);
       if (allDone) {
-        card.classList.add('all-done');
-        setTimeout(() => card.classList.remove('all-done'), 800);
+        // Last box in a set keeps the bigger confetti + fanfare, but NOT the
+        // tile pulse/glow — Mike wants the checkbox itself to feel identical.
         const cc = centerOf(card);
         setTimeout(() => burstConfetti(cc.x, cc.y, 36, 1.6), 120);
         playFanfare();
