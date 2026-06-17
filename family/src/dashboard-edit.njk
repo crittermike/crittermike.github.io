@@ -735,7 +735,8 @@ eleventyExcludeFromCollections: true
   }
   .chore-item input[type="checkbox"] {
     width: 16px; height: 16px;
-    margin: 0; padding: 0;
+    /* margin-left clears the tile's overflow:hidden left edge (see .assn-list note) */
+    margin: 0 0 0 6px; padding: 0;
     accent-color: var(--accent-teal);
     cursor: pointer;
     flex-shrink: 0;
@@ -1026,7 +1027,10 @@ eleventyExcludeFromCollections: true
     height: 18px;
     border: 1.5px solid var(--border-soft);
     border-radius: 4px;
-    margin: 0;
+    /* margin-left clears the tile's overflow:hidden left edge so the .just-checked
+       1.4x pop + row-flash ring don't get sliced. ~6px covers 3.6px of scale
+       growth + the 2px ring. */
+    margin: 0 0 0 6px;
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
@@ -1285,12 +1289,20 @@ eleventyExcludeFromCollections: true
   .ed-toast.show { opacity: 1; }
 
   /* === CHECKBOX CELEBRATION (ported from /dashboard/) === */
-  /* NOTE: no box scale/zoom on the checkbox itself. It sits flush against the
-     tile's left clip edge, and the kid tiles have THREE nested overflow:hidden
-     ancestors (.kidtile-body[overflow-y:auto], .tile-body, .grid-stack-item-content).
-     overflow-x:visible is spec-illegal when overflow-y is auto/hidden (computes
-     back to auto), so any scale on the box clips on the left. Celebration =
-     checkmark draw-in + row flash + confetti instead. Do NOT re-add box-pop. */
+  /* The kid/chore tiles clip on overflow:hidden (.tile-body) and the checkbox
+     sits at that left edge. The input rules below give it margin-left so the
+     1.4x pop AND the row-flash ring have clearance and don't get sliced. */
+  .todo input[type="checkbox"].just-checked,
+  .chore-item input[type="checkbox"].just-checked {
+    animation: box-pop 0.45s cubic-bezier(.2,1.3,.4,1);
+    transform-origin: center;
+  }
+  @keyframes box-pop {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.4); }
+    65%  { transform: scale(0.85); }
+    100% { transform: scale(1); }
+  }
   .todo input[type="checkbox"].just-checked::after,
   .chore-item input[type="checkbox"].just-checked::after {
     animation: check-in 0.45s cubic-bezier(.2,1.3,.4,1);
@@ -1306,8 +1318,6 @@ eleventyExcludeFromCollections: true
   }
   @keyframes row-celebrate {
     0%   { background: transparent; }
-    /* inset ring (not outset) so the green halo draws inside the row instead
-       of bleeding left past the tile's overflow:hidden clip edge. */
     25%  { background: rgba(45,164,78,0.22); box-shadow: inset 0 0 0 2px rgba(45,164,78,0.45); }
     100% { background: transparent; box-shadow: none; }
   }
