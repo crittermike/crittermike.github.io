@@ -579,13 +579,15 @@ permalink: "/dashboard/index.html"
   /* Box pop + checkmark draw only fire on real user interaction (JS adds
      .just-checked), so localStorage-restored checks don't animate on load. */
   .todo input[type="checkbox"].just-checked {
-    animation: box-pop 0.45s cubic-bezier(.2,1.3,.4,1);
+    animation: box-pop 0.5s cubic-bezier(.3,1.2,.4,1);
   }
+  /* Jelly Squish — anticipation squash then pop (kid-tested winner) */
   @keyframes box-pop {
-    0%   { transform: scale(1); }
-    35%  { transform: scale(1.4); }
-    65%  { transform: scale(0.85); }
-    100% { transform: scale(1); }
+    0%   { transform: scale(1, 1); }
+    20%  { transform: scale(1.22, 0.82); }
+    45%  { transform: scale(0.85, 1.2); }
+    65%  { transform: scale(1.08, 0.95); }
+    100% { transform: scale(1, 1); }
   }
   .todo input[type="checkbox"].just-checked::after {
     animation: check-in 0.45s cubic-bezier(.2,1.3,.4,1);
