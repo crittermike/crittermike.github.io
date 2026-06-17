@@ -1633,7 +1633,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">70°</span>
+        <span class="dh-temp">71°</span>
         <span class="dh-hilo">H 79° · L 66°</span>
       </div>
       <div class="dh-days">
@@ -1761,7 +1761,7 @@
           
             
             
-            <div class="v">53g</div>
+            <div class="v">38g</div>
           
           
             
@@ -1991,7 +1991,7 @@
           
             
             
-            <span class="v">53g</span>
+            <span class="v">38g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3400,7 +3400,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":250,"refill":60},"allowance":{"balance_str":"$100.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":76,"refill":60},"allowance":{"balance_str":"$21.31"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":98,"refill":60},"allowance":{"balance_str":"$72.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":53,"refill":60},"allowance":{"balance_str":"$-273.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"},{"id":"popcs-video","label":"Finish video for POPCS"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":250,"refill":60},"allowance":{"balance_str":"$100.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":76,"refill":60},"allowance":{"balance_str":"$21.31"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":98,"refill":60},"allowance":{"balance_str":"$72.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":38,"refill":60},"allowance":{"balance_str":"$-273.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"},{"id":"popcs-video","label":"Finish video for POPCS"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
