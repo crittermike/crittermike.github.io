@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T12:15:09.255Z",
+  "generated_at": "2026-06-18T12:30:17.885Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -51,15 +51,6 @@
       "date": "2026-06-18",
       "time": "7:50p",
       "what": "✈️ CLT → SAN (AA 3322) - Wedding Trip",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T00:48:00-04:00"
-    },
-    {
-      "date": "2026-06-18",
-      "time": "7:50p",
-      "what": "Flight AA 3322 CLT→SAN (SDCTDR)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
@@ -2067,6 +2058,6 @@
     "creditDebt": -16033.72,
     "netLiquid": -2791.65,
     "source": "ynab",
-    "updatedAt": "2026-06-18T12:15:08.014Z"
+    "updatedAt": "2026-06-18T12:30:16.637Z"
   }
 }
