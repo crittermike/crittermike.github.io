@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T23:46:03.356Z",
+  "generated_at": "2026-06-18T00:00:51.525Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -803,59 +803,12 @@
     ]
   },
   "dinner": {
-    "name": "Marry Me Chicken over pasta",
-    "protein_g": 58,
-    "cal": 640,
-    "effort": "moderate",
-    "note": "Last home-cooked dinner before Mike + Nancy leave for SD. Family favorite. Mom pain clinic earlier that day but evening is clear.",
-    "recipe": {
-      "slug": "marry-me-chicken",
-      "name": "Marry Me chicken",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "marry-me-chicken"
-      ],
-      "in_rotation": true,
-      "effort": "medium",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 600,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chicken breasts",
-            "sun-dried tomatoes",
-            "heavy cream",
-            "parmesan",
-            "garlic",
-            "spinach",
-            "Italian seasoning"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chicken breasts",
-        "sun-dried tomatoes",
-        "heavy cream",
-        "parmesan",
-        "garlic",
-        "spinach",
-        "Italian seasoning"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Grilled hot dogs + corn on the cob + chips (kids + sitter)",
+    "protein_g": 20,
+    "cal": 550,
+    "effort": "easy",
+    "note": "Mike + Nancy gone by 4:30pm (drive to CLT for 7:50pm flight). Hot dogs only (skip burgers, less prep for sitter). Mike eats at airport / on plane. No protein target — he's not home.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -964,7 +917,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 87,
       "lo": 66,
       "icon": "☀️",
@@ -994,17 +947,17 @@
       },
       {
         "d": "Sun",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 93,
         "lo": 70,
-        "code": 3
+        "code": 51
       },
       {
         "d": "Mon",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 94,
         "lo": 74,
-        "code": 3
+        "code": 51
       }
     ],
     "sun": {
@@ -2076,7 +2029,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 56.7,
+    "dayPct": 60,
     "totalSpend": 3500.53,
     "totalBudget": 991.65,
     "categories": [
@@ -2141,6 +2094,6 @@
     "creditDebt": -15277.04,
     "netLiquid": 105.03,
     "source": "ynab",
-    "updatedAt": "2026-06-17T23:46:01.980Z"
+    "updatedAt": "2026-06-18T00:00:49.395Z"
   }
 }
