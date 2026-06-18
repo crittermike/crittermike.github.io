@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T11:45:51.278Z",
+  "generated_at": "2026-06-18T12:00:59.684Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -776,18 +776,18 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hot dogs + corn on the cob + chips (kids + sitter)",
-    "protein_g": 20,
-    "cal": 550,
-    "effort": "easy",
-    "note": "Mike + Nancy gone by 4:30pm (drive to CLT for 7:50pm flight). Hot dogs only (skip burgers, less prep for sitter). Mike eats at airport / on plane. No protein target — he's not home.",
+    "name": "Whatever Nana says",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Mike + Nancy leave for SD wedding. Boys with Nana — she handles dinner.",
     "recipe": null
   },
   "mealweek": [
     {
       "dow": "Sunday",
       "dow_short": "Sun",
-      "name": "Leftovers or whatever you can scrounge up",
+      "name": "Whatever Nana says",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -866,7 +866,7 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Grilled hot dogs + corn on the cob + chips (kids + sitter)",
+      "name": "Whatever Nana says",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -874,7 +874,7 @@
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Takeout — Chick-fil-A or similar (kids + sitter)",
+      "name": "Whatever Nana says",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -882,7 +882,7 @@
     {
       "dow": "Saturday",
       "dow_short": "Sat",
-      "name": "Pizza night (kids + sitter)",
+      "name": "Whatever Nana says",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -890,11 +890,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
+      "temp": 76,
       "hi": 91,
       "lo": 72,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
       {
@@ -907,29 +907,29 @@
       {
         "d": "Sat",
         "icon": "⛅",
-        "hi": 88,
-        "lo": 68,
+        "hi": 89,
+        "lo": 67,
         "code": 3
       },
       {
         "d": "Sun",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 90,
-        "lo": 68,
-        "code": 3
+        "lo": 69,
+        "code": 53
       },
       {
         "d": "Mon",
-        "icon": "🌦",
-        "hi": 87,
-        "lo": 72,
-        "code": 51
+        "icon": "⛅",
+        "hi": 84,
+        "lo": 69,
+        "code": 3
       },
       {
         "d": "Tue",
         "icon": "🌦",
-        "hi": 83,
-        "lo": 67,
+        "hi": 89,
+        "lo": 71,
         "code": 51
       }
     ],
@@ -2067,6 +2067,6 @@
     "creditDebt": -16033.72,
     "netLiquid": -2791.65,
     "source": "ynab",
-    "updatedAt": "2026-06-18T11:45:50.074Z"
+    "updatedAt": "2026-06-18T12:00:58.491Z"
   }
 }
