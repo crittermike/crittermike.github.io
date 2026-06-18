@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T21:46:21.252Z",
+  "generated_at": "2026-06-18T22:00:29.635Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1994,7 +1994,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 60,
-    "totalSpend": 3525.84,
+    "totalSpend": 3604.24,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2009,9 +2009,9 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 641.19,
-        "balance": -169.53,
-        "pct": 135.9
+        "spent": 719.59,
+        "balance": -247.93,
+        "pct": 152.6
       },
       {
         "name": "📚 School",
@@ -2058,6 +2058,6 @@
     "creditDebt": -16033.72,
     "netLiquid": -2791.65,
     "source": "ynab",
-    "updatedAt": "2026-06-18T21:46:20.158Z"
+    "updatedAt": "2026-06-18T22:00:28.428Z"
   }
 }
