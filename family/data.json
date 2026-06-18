@@ -1,43 +1,7 @@
 {
-  "generated_at": "2026-06-18T03:45:57.565Z",
+  "generated_at": "2026-06-18T04:01:06.760Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-17",
-      "time": "10a",
-      "what": "Thomas art camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-17T12:00:00-04:00"
-    },
-    {
-      "date": "2026-06-17",
-      "time": "10:15a",
-      "what": "Drive Mom to pain clinic (Spartanburg Regional)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-17T11:45:00-04:00"
-    },
-    {
-      "date": "2026-06-17",
-      "time": "12:30p",
-      "what": "Thomas handwriting camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-17T14:00:00-04:00"
-    },
-    {
-      "date": "2026-06-17",
-      "time": "1p",
-      "what": "William art camp",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-17T15:00:00-04:00"
-    },
     {
       "date": "2026-06-18",
       "time": "10a",
@@ -848,7 +812,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Marry Me Chicken over pasta",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "marry-me-chicken",
@@ -903,8 +867,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hot dogs + corn on the cob + chips (kids + sitter)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -912,7 +876,7 @@
       "dow_short": "Fri",
       "name": "Takeout — Chick-fil-A or similar (kids + sitter)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -927,19 +891,12 @@
   "weather": {
     "now": {
       "temp": 76,
-      "hi": 87,
-      "lo": 66,
+      "hi": 90,
+      "lo": 73,
       "icon": "🌤",
-      "code": 1
+      "code": 2
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛈",
-        "hi": 90,
-        "lo": 73,
-        "code": 95
-      },
       {
         "d": "Fri",
         "icon": "⛈",
@@ -967,24 +924,31 @@
         "hi": 89,
         "lo": 70,
         "code": 95
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 85,
+        "lo": 68,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-17T06:15",
         "2026-06-18T06:15",
         "2026-06-19T06:15",
         "2026-06-20T06:16",
         "2026-06-21T06:16",
-        "2026-06-22T06:16"
+        "2026-06-22T06:16",
+        "2026-06-23T06:16"
       ],
       "sunsets": [
-        "2026-06-17T20:45",
         "2026-06-18T20:45",
         "2026-06-19T20:45",
         "2026-06-20T20:46",
         "2026-06-21T20:46",
-        "2026-06-22T20:46"
+        "2026-06-22T20:46",
+        "2026-06-23T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2103,6 +2067,6 @@
     "creditDebt": -15277.04,
     "netLiquid": 105.03,
     "source": "ynab",
-    "updatedAt": "2026-06-18T03:45:56.348Z"
+    "updatedAt": "2026-06-18T04:01:05.460Z"
   }
 }
