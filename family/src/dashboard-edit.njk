@@ -1830,13 +1830,6 @@ eleventyExcludeFromCollections: true
       <div class="recipe-day recipe-day-today">
         <div class="recipe-daylbl">Tonight</div>
         <div class="recipe-name">{{ rToday.name or 'TBD' }}</div>
-        {% if rToday.recipe %}
-          <div class="recipe-meta">
-            {% if rToday.recipe.effort %}<span class="pill">{{ rToday.recipe.effort }}</span>{% endif %}
-            {% if rToday.recipe.protein_g %}{{ rToday.recipe.protein_g }}g protein{% endif %}
-          </div>
-          <a class="recipe-link" href="/recipes/{{ rToday.recipe.slug }}/" target="_blank" rel="noopener">Open recipe →</a>
-        {% endif %}
       </div>
       <div class="recipe-tomorrow{% if not rTomorrow.recipe %} no-recipe{% endif %}"
            {% if rTomorrow.recipe %}data-recipe-href="/recipes/{{ rTomorrow.recipe.slug }}/"{% endif %}>
