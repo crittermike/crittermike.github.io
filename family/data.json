@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T23:45:09.014Z",
+  "generated_at": "2026-06-19T00:00:50.284Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -771,7 +771,7 @@
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Mike + Nancy leave for SD wedding. Boys with Nana — she handles dinner.",
+    "note": "Mike + Nancy in SD. Boys with Nana — she handles dinner.",
     "recipe": null
   },
   "mealweek": [
@@ -907,7 +907,7 @@
         "icon": "🌦",
         "hi": 91,
         "lo": 67,
-        "code": 51
+        "code": 80
       },
       {
         "d": "Mon",
@@ -918,10 +918,10 @@
       },
       {
         "d": "Tue",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 92,
         "lo": 72,
-        "code": 3
+        "code": 51
       }
     ],
     "sun": {
@@ -1993,7 +1993,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 60,
+    "dayPct": 63.3,
     "totalSpend": 3604.24,
     "totalBudget": 991.65,
     "categories": [
@@ -2058,6 +2058,6 @@
     "creditDebt": -16033.72,
     "netLiquid": -2791.65,
     "source": "ynab",
-    "updatedAt": "2026-06-18T23:45:07.893Z"
+    "updatedAt": "2026-06-19T00:00:49.053Z"
   }
 }
