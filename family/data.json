@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T02:45:07.643Z",
+  "generated_at": "2026-06-19T03:00:17.706Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -531,7 +531,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$72.13"
+        "balance_str": "$62.13"
       },
       "assignments": [
         {
@@ -885,7 +885,7 @@
       "hi": 88,
       "lo": 71,
       "icon": "🌧",
-      "code": 61
+      "code": 65
     },
     "days": [
       {
@@ -2058,6 +2058,6 @@
     "creditDebt": -16033.72,
     "netLiquid": -2791.65,
     "source": "ynab",
-    "updatedAt": "2026-06-19T02:45:06.414Z"
+    "updatedAt": "2026-06-19T03:00:14.952Z"
   }
 }
