@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T23:00:36.791Z",
+  "generated_at": "2026-06-20T23:16:00.656Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-06-21T09:00:00-04:00"
+    },
+    {
+      "date": "2026-06-21",
+      "time": "4:23p",
+      "what": "Flight: San Diego (SAN) → Charlotte (CLT) — AA 2465",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-21T21:26:00-04:00"
     },
     {
       "date": "2026-06-21",
@@ -1972,6 +1981,6 @@
     "creditDebt": -16966.01,
     "netLiquid": -4223.94,
     "source": "ynab",
-    "updatedAt": "2026-06-20T23:00:35.653Z"
+    "updatedAt": "2026-06-20T23:15:59.371Z"
   }
 }
