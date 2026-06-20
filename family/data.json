@@ -1,52 +1,7 @@
 {
-  "generated_at": "2026-06-20T03:45:40.282Z",
+  "generated_at": "2026-06-20T04:00:48.619Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-18",
-      "time": "7:50p",
-      "what": "✈️ CLT → SAN (AA 3322) - Wedding Trip",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T00:48:00-04:00"
-    },
-    {
-      "date": "2026-06-19",
-      "time": "9a",
-      "what": "RSVP for George's birthday (text 478-390-7521)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T09:15:00-04:00"
-    },
-    {
-      "date": "2026-06-19",
-      "time": "10a",
-      "what": "Thomas art camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T12:00:00-04:00"
-    },
-    {
-      "date": "2026-06-19",
-      "time": "12:30p",
-      "what": "Thomas handwriting camp",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T14:00:00-04:00"
-    },
-    {
-      "date": "2026-06-19",
-      "time": "1p",
-      "what": "William art camp",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-19T15:00:00-04:00"
-    },
     {
       "date": "2026-06-20",
       "time": "4:30p",
@@ -434,16 +389,7 @@
       "allowance": {
         "balance_str": "$100.00"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -461,16 +407,7 @@
       "allowance": {
         "balance_str": "$21.31"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -488,16 +425,7 @@
       "allowance": {
         "balance_str": "$62.13"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -511,16 +439,7 @@
       "allowance": {
         "balance_str": "$-273.23"
       },
-      "assignments": [
-        {
-          "id": "take-medicine",
-          "label": "Take medicine"
-        },
-        {
-          "id": "popcs-video",
-          "label": "Finish video for POPCS"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -735,7 +654,7 @@
       "dow_short": "Sun",
       "name": "Whatever Nana says",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -821,7 +740,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Whatever Nana says",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -829,27 +748,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Whatever Nana says",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 70,
-      "hi": 86,
-      "lo": 70,
+      "hi": 85,
+      "lo": 65,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 85,
-        "lo": 65,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "⛅",
@@ -877,24 +789,31 @@
         "hi": 90,
         "lo": 68,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "⛅",
+        "hi": 90,
+        "lo": 70,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-19T06:15",
         "2026-06-20T06:16",
         "2026-06-21T06:16",
         "2026-06-22T06:16",
         "2026-06-23T06:16",
-        "2026-06-24T06:17"
+        "2026-06-24T06:17",
+        "2026-06-25T06:17"
       ],
       "sunsets": [
-        "2026-06-19T20:45",
         "2026-06-20T20:46",
         "2026-06-21T20:46",
         "2026-06-22T20:46",
         "2026-06-23T20:46",
-        "2026-06-24T20:46"
+        "2026-06-24T20:46",
+        "2026-06-25T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2013,6 +1932,6 @@
     "creditDebt": -16190.89,
     "netLiquid": -3448.82,
     "source": "ynab",
-    "updatedAt": "2026-06-20T03:45:39.078Z"
+    "updatedAt": "2026-06-20T04:00:47.365Z"
   }
 }
