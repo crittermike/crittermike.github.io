@@ -1636,6 +1636,36 @@
     <div class="dh-date" id="dhDate"></div>
   </div>
   
+  <div class="dh-weather">
+    <div class="dh-top">
+      <div class="dh-now">
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
+        <span class="dh-temp">71°</span>
+        <span class="dh-hilo">H 86° · L 70°</span>
+      </div>
+      <div class="dh-days">
+        
+          <div class="dh-day"><span class="d">Sat</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">85/65</span></div>
+        
+          <div class="dh-day"><span class="d">Sun</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">90/67</span></div>
+        
+          <div class="dh-day"><span class="d">Mon</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">85/71</span></div>
+        
+          <div class="dh-day"><span class="d">Tue</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">92/69</span></div>
+        
+          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">90/68</span></div>
+        
+      </div>
+    </div>
+    
+    <div class="dh-sun">
+      <div class="sun-bar" id="sunBar"
+           data-sunrise="2026-06-19T06:15"
+           data-sunset="2026-06-19T20:45"></div>
+    </div>
+    
+  </div>
+  
 </header>
 
 <div class="stage">
@@ -3492,7 +3522,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":[],"sunsets":[]};
+    const SUN = {"sunrises":["2026-06-19T06:15","2026-06-20T06:16","2026-06-21T06:16","2026-06-22T06:16","2026-06-23T06:16","2026-06-24T06:17"],"sunsets":["2026-06-19T20:45","2026-06-20T20:46","2026-06-21T20:46","2026-06-22T20:46","2026-06-23T20:46","2026-06-24T20:46"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
