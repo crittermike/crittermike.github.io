@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:46:08.702Z",
+  "generated_at": "2026-06-22T12:00:19.071Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -899,7 +899,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
+      "temp": 74,
       "hi": 88,
       "lo": 70,
       "icon": "☀️",
@@ -2012,7 +2012,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 73.3,
-    "totalSpend": 5402.33,
+    "totalSpend": 5645.16,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2027,16 +2027,16 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 906.67,
-        "balance": -435.01,
-        "pct": 192.2
+        "spent": 920.68,
+        "balance": -449.02,
+        "pct": 195.2
       },
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 791.03,
-        "balance": -791.03,
+        "spent": 904.71,
+        "balance": -904.71,
         "pct": 0
       },
       {
@@ -2059,9 +2059,9 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 500,
-        "spent": 187.1,
-        "balance": 312.9,
-        "pct": 37.4
+        "spent": 302.24,
+        "balance": 197.76,
+        "pct": 60.4
       },
       {
         "name": "💅 Personal Care",
@@ -2113,9 +2113,9 @@
       }
     ],
     "liquidCash": 12742.07,
-    "creditDebt": -17038.84,
-    "netLiquid": -4296.77,
+    "creditDebt": -17856.56,
+    "netLiquid": -5114.49,
     "source": "ynab",
-    "updatedAt": "2026-06-22T11:46:07.394Z"
+    "updatedAt": "2026-06-22T12:00:16.397Z"
   }
 }
