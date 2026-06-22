@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T23:46:02.384Z",
+  "generated_at": "2026-06-22T00:01:13.350Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -650,11 +650,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Chicken fajitas (cast iron, with zucchini + corn)",
+    "protein_g": 48,
+    "cal": 600,
+    "effort": "easy",
+    "note": "Carryover from last week (was bumped). NO bell peppers, skip cilantro (Nancy) - onions + zucchini + corn instead.",
     "recipe": null
   },
   "mealweek": [
@@ -899,7 +899,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 84,
       "hi": 89,
       "lo": 64,
       "icon": "☀️",
@@ -2011,7 +2011,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 70,
+    "dayPct": 73.3,
     "totalSpend": 5329.5,
     "totalBudget": 991.65,
     "categories": [
@@ -2116,6 +2116,6 @@
     "creditDebt": -16966.01,
     "netLiquid": -4223.94,
     "source": "ynab",
-    "updatedAt": "2026-06-21T23:46:01.088Z"
+    "updatedAt": "2026-06-22T00:01:12.137Z"
   }
 }
