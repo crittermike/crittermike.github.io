@@ -1,43 +1,7 @@
 {
-  "generated_at": "2026-06-22T03:45:14.679Z",
+  "generated_at": "2026-06-22T04:00:24.316Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-21",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-21T09:00:00-04:00"
-    },
-    {
-      "date": "2026-06-21",
-      "time": "4:23p",
-      "what": "Flight: San Diego (SAN) → Charlotte (CLT) — AA 2465",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-21T21:26:00-04:00"
-    },
-    {
-      "date": "2026-06-21",
-      "time": "4:23p",
-      "what": "✈️ SAN → CLT (AA 2465) - Return",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-21T21:26:00-04:00"
-    },
-    {
-      "date": "2026-06-21",
-      "time": "9:30p",
-      "what": "🚗 Drive home from CLT Airport",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-21T23:15:00-04:00"
-    },
     {
       "date": "2026-06-23",
       "time": "all day",
@@ -398,7 +362,16 @@
       "allowance": {
         "balance_str": "$100.00"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "william",
@@ -416,7 +389,16 @@
       "allowance": {
         "balance_str": "$21.31"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -434,7 +416,16 @@
       "allowance": {
         "balance_str": "$56.13"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -448,7 +439,16 @@
       "allowance": {
         "balance_str": "$-273.23"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "take-medicine",
+          "label": "Take medicine"
+        },
+        {
+          "id": "popcs-video",
+          "label": "Finish video for POPCS"
+        }
+      ]
     }
   ],
   "chores": {
@@ -662,7 +662,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -670,8 +670,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken fajitas (cast iron, with zucchini + corn)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -679,7 +679,7 @@
       "dow_short": "Tue",
       "name": "Korean beef + broccoli bowls",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "korean-beef-broccoli-bowls",
         "name": "Korean Beef + Broccoli Bowls",
@@ -900,19 +900,12 @@
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 89,
-      "lo": 64,
+      "hi": 90,
+      "lo": 70,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛈",
-        "hi": 89,
-        "lo": 70,
-        "code": 95
-      },
       {
         "d": "Tue",
         "icon": "🌦",
@@ -940,24 +933,31 @@
         "hi": 90,
         "lo": 70,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 96,
+        "lo": 73,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-21T06:16",
         "2026-06-22T06:16",
         "2026-06-23T06:16",
         "2026-06-24T06:17",
         "2026-06-25T06:17",
-        "2026-06-26T06:17"
+        "2026-06-26T06:17",
+        "2026-06-27T06:18"
       ],
       "sunsets": [
-        "2026-06-21T20:46",
         "2026-06-22T20:46",
         "2026-06-23T20:46",
         "2026-06-24T20:46",
         "2026-06-25T20:46",
-        "2026-06-26T20:47"
+        "2026-06-26T20:47",
+        "2026-06-27T20:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2116,6 +2116,6 @@
     "creditDebt": -17038.84,
     "netLiquid": -4296.77,
     "source": "ynab",
-    "updatedAt": "2026-06-22T03:45:13.365Z"
+    "updatedAt": "2026-06-22T04:00:22.662Z"
   }
 }
