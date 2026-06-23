@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T11:45:55.983Z",
+  "generated_at": "2026-06-23T12:01:04.557Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1006,7 +1006,7 @@
       "hi": 88,
       "lo": 70,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
       {
@@ -2115,7 +2115,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 76.7,
-    "totalSpend": 6220.05,
+    "totalSpend": 6358.92,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2130,24 +2130,24 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1155.65,
-        "balance": -1155.65,
+        "spent": 1211.68,
+        "balance": -1211.68,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 983.55,
-        "balance": -511.89,
-        "pct": 208.5
+        "spent": 1006.39,
+        "balance": -534.73,
+        "pct": 213.4
       },
       {
         "name": "🏝️ Vacation",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 735.23,
-        "balance": -735.23,
+        "spent": 795.23,
+        "balance": -795.23,
         "pct": 0
       },
       {
@@ -2215,10 +2215,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 12742.07,
-    "creditDebt": -17856.56,
-    "netLiquid": -5114.49,
+    "liquidCash": 12561.2,
+    "creditDebt": -20905.7,
+    "netLiquid": -8344.5,
     "source": "ynab",
-    "updatedAt": "2026-06-23T11:45:54.733Z"
+    "updatedAt": "2026-06-23T12:01:03.202Z"
   }
 }
