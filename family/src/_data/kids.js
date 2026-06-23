@@ -34,6 +34,11 @@ const READING_TARGETS = {
   henry:   500,
 };
 
+// Kids who've finished their summer reading. They drop the daily "Read 20 min"
+// dashboard checkbox (but keep Summer Solutions). Add/remove keys here as kids
+// finish. Cleared at end of summer along with the reading block.
+const READING_DONE = new Set(['thomas']);
+
 // Display order matches the dashboard grid: youngest → oldest
 const KIDS = [
   { key: 'thomas',  name: 'Thomas',  grade: 'rising 3rd'  },
@@ -65,7 +70,11 @@ function todaysAssignments(kidKey) {
   const out = [];
   if (isSummerWeekday && kidKey !== 'charlie') {
     out.push({ id: 'summer-solutions', label: 'Summer Solutions' });
-    out.push({ id: 'reading-20m',      label: 'Read 20 min' });
+    // Kids who've finished their summer reading skip the daily "Read 20 min"
+    // checkbox but keep Summer Solutions. (Thomas done 2026-06-23.)
+    if (!READING_DONE.has(kidKey)) {
+      out.push({ id: 'reading-20m', label: 'Read 20 min' });
+    }
   }
   if (isSummerWeekday && kidKey === 'charlie') {
     out.push({ id: 'take-medicine',  label: 'Take medicine' });
