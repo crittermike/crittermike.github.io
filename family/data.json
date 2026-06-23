@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T23:00:21.342Z",
+  "generated_at": "2026-06-23T23:30:16.273Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -375,10 +375,6 @@
         {
           "id": "summer-solutions",
           "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
         }
       ]
     },
@@ -1002,11 +998,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 80,
       "hi": 87,
       "lo": 71,
-      "icon": "🌤",
-      "code": 2
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
       {
@@ -2219,6 +2215,6 @@
     "creditDebt": -20905.7,
     "netLiquid": -8344.5,
     "source": "ynab",
-    "updatedAt": "2026-06-23T23:00:20.089Z"
+    "updatedAt": "2026-06-23T23:30:14.971Z"
   }
 }
