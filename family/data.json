@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T03:45:51.024Z",
+  "generated_at": "2026-06-23T04:00:59.617Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -343,6 +343,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-18T19:00:00-04:00"
+    },
+    {
+      "date": "2026-09-20",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-20T09:00:00-04:00"
     }
   ],
   "kids": [
@@ -764,7 +773,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken fajitas (cast iron, with zucchini + corn)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -772,8 +781,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Korean beef + broccoli bowls",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "korean-beef-broccoli-bowls",
         "name": "Korean Beef + Broccoli Bowls",
@@ -875,7 +884,7 @@
       "dow_short": "Wed",
       "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze",
         "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
@@ -993,20 +1002,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
-      "hi": 88,
-      "lo": 70,
+      "temp": 75,
+      "hi": 83,
+      "lo": 67,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "🌧",
-        "hi": 83,
-        "lo": 67,
-        "code": 61
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -1034,24 +1036,31 @@
         "hi": 96,
         "lo": 74,
         "code": 3
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 98,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-22T06:16",
         "2026-06-23T06:16",
         "2026-06-24T06:17",
         "2026-06-25T06:17",
         "2026-06-26T06:17",
-        "2026-06-27T06:18"
+        "2026-06-27T06:18",
+        "2026-06-28T06:18"
       ],
       "sunsets": [
-        "2026-06-22T20:46",
         "2026-06-23T20:46",
         "2026-06-24T20:46",
         "2026-06-25T20:46",
         "2026-06-26T20:47",
-        "2026-06-27T20:47"
+        "2026-06-27T20:47",
+        "2026-06-28T20:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2210,6 +2219,6 @@
     "creditDebt": -17856.56,
     "netLiquid": -5114.49,
     "source": "ynab",
-    "updatedAt": "2026-06-23T03:45:49.874Z"
+    "updatedAt": "2026-06-23T04:00:58.370Z"
   }
 }
