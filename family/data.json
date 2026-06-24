@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-06-24T03:45:31.695Z",
+  "generated_at": "2026-06-24T04:00:39.940Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-23",
-      "time": "all day",
-      "what": "Matt's birthday 🎂",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-06-24T00:00:00-04:00"
-    },
     {
       "date": "2026-06-26",
       "time": "7p",
@@ -728,7 +719,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Korean beef + broccoli bowls",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "korean-beef-broccoli-bowls",
@@ -830,8 +821,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze",
         "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
@@ -884,7 +875,7 @@
       "dow_short": "Thu",
       "name": "Pot roast with carrots and potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -949,20 +940,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 70,
-      "hi": 87,
-      "lo": 71,
+      "temp": 69,
+      "hi": 86,
+      "lo": 63,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 86,
-        "lo": 63,
-        "code": 3
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -990,24 +974,31 @@
         "hi": 94,
         "lo": 72,
         "code": 80
+      },
+      {
+        "d": "Mon",
+        "icon": "🌦",
+        "hi": 88,
+        "lo": 70,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-23T06:16",
         "2026-06-24T06:17",
         "2026-06-25T06:17",
         "2026-06-26T06:17",
         "2026-06-27T06:18",
-        "2026-06-28T06:18"
+        "2026-06-28T06:18",
+        "2026-06-29T06:18"
       ],
       "sunsets": [
-        "2026-06-23T20:46",
         "2026-06-24T20:46",
         "2026-06-25T20:46",
         "2026-06-26T20:47",
         "2026-06-27T20:47",
-        "2026-06-28T20:47"
+        "2026-06-28T20:47",
+        "2026-06-29T20:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2166,6 +2157,6 @@
     "creditDebt": -20905.7,
     "netLiquid": -8344.5,
     "source": "ynab",
-    "updatedAt": "2026-06-24T03:45:30.471Z"
+    "updatedAt": "2026-06-24T04:00:38.610Z"
   }
 }
