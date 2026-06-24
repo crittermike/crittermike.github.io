@@ -1504,7 +1504,7 @@
     100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)); }
   }
 
-  /* === 7PM UNDONE-ITEMS NAG OVERLAY === */
+  /* === 8PM UNDONE-ITEMS NAG OVERLAY === */
   #nagOverlay {
     position: fixed;
     inset: 0;
@@ -2464,7 +2464,7 @@
 
 <div id="nagOverlay" role="alertdialog" aria-live="assertive">
   <div class="nag-title" id="nagTitle">⏰ Unfinished business</div>
-  <div class="nag-sub">It's past 7 PM and these aren't done. Tap one to check it off.</div>
+  <div class="nag-sub">It's past 8 PM and these aren't done. Tap one to check it off.</div>
   <div class="nag-list" id="nagList"></div>
   <button class="nag-dismiss" id="nagDismiss">Snooze 30 min</button>
 </div>
@@ -3386,8 +3386,8 @@
   // === AUTO-RELOAD every 10 min (mirrors /dashboard/) ===
   setTimeout(() => location.reload(), 10 * 60 * 1000);
 
-  // === 7PM UNDONE-ITEMS NAG ===
-  // After 19:00 ET, if any of Today's assignments are still unchecked, throw a
+  // === 8PM UNDONE-ITEMS NAG ===
+  // After 20:00 ET, if any of Today's assignments are still unchecked, throw a
   // full-screen pulsing red overlay listing them. Tapping an item checks the
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
@@ -3397,7 +3397,7 @@
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
     const SNOOZE_KEY = 'nag-snooze-until';
-    const NAG_HOUR = 19; // 7 PM ET
+    const NAG_HOUR = 20; // 8 PM ET
 
     function etHour() {
       const h = new Intl.DateTimeFormat('en-US', {
