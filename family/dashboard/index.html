@@ -680,6 +680,53 @@
     100% { transform: scale(1); }
   }
 
+  /* Inline "finished your book?" nudge under the reading row (over-goal, not done) */
+  .book-prompt {
+    display: none;
+    margin-top: 8px;
+    width: 100%;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px dashed var(--accent-teal);
+    background: var(--surface);
+    color: var(--accent-teal);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .book-prompt.show { display: block; }
+
+  /* Book-finished dialog (reuses .modal-bg / .modal) */
+  .modal.modal-book { max-width: 460px; }
+  .book-q {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 4px;
+  }
+  .book-sub { font-size: 0.95rem; color: var(--text-mid); margin: 0 0 18px; }
+  .book-actions { display: flex; flex-direction: column; gap: 10px; }
+  .book-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background: var(--surface);
+    color: var(--text-dark);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .book-btn-yes {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+    color: #fff;
+  }
+  .book-foot { font-size: 0.8rem; color: var(--text-mid); margin: 16px 0 0; }
+
   /* Today's to-do checkboxes */
   .todo-list {
     list-style: none;
@@ -1454,7 +1501,7 @@
       <div class="fc-now">
         <span class="icon">⛅</span>
         <div class="meta">
-          <span class="temp">72°</span>
+          <span class="temp">73°</span>
           <span class="lo-hi">L 64° · H 88°</span>
         </div>
       </div>
@@ -1958,6 +2005,7 @@
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
       </div>
+      <button type="button" class="book-prompt" data-kid="thomas">📖 Hit your goal! Did you finish your book?</button>
     </div>
     
 
@@ -2022,6 +2070,7 @@
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
       </div>
+      <button type="button" class="book-prompt" data-kid="william">📖 Hit your goal! Did you finish your book?</button>
     </div>
     
 
@@ -2093,6 +2142,7 @@
         </div>
         <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
       </div>
+      <button type="button" class="book-prompt" data-kid="henry">📖 Hit your goal! Did you finish your book?</button>
     </div>
     
 
