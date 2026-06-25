@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T11:30:51.103Z",
+  "generated_at": "2026-06-25T11:46:29.229Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -938,11 +938,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 67,
       "hi": 88,
       "lo": 64,
-      "icon": "🌤",
-      "code": 2
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
       {
@@ -955,28 +955,28 @@
       {
         "d": "Sat",
         "icon": "🌦",
-        "hi": 94,
+        "hi": 95,
+        "lo": 71,
+        "code": 53
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 86,
         "lo": 73,
         "code": 51
       },
       {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 70,
-        "code": 3
-      },
-      {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 94,
-        "lo": 73,
+        "hi": 96,
+        "lo": 71,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛅",
-        "hi": 91,
+        "hi": 96,
         "lo": 72,
         "code": 3
       }
@@ -2051,7 +2051,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 83.3,
-    "totalSpend": 13482.36,
+    "totalSpend": 13639.33,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2066,8 +2066,8 @@
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2301.76,
-        "balance": -2301.76,
+        "spent": 2333.32,
+        "balance": -2333.32,
         "pct": 0
       },
       {
@@ -2082,17 +2082,17 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1400.56,
-        "balance": -1400.56,
+        "spent": 1468.37,
+        "balance": -1468.37,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 1019.79,
-        "balance": -548.13,
-        "pct": 216.2
+        "spent": 1077.39,
+        "balance": -605.73,
+        "pct": 228.4
       },
       {
         "name": "📚 School",
@@ -2167,10 +2167,10 @@
         "pct": 233
       }
     ],
-    "liquidCash": 12561.2,
-    "creditDebt": -22507.03,
-    "netLiquid": -9945.83,
+    "liquidCash": 12474.2,
+    "creditDebt": -23118.15,
+    "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T11:30:49.862Z"
+    "updatedAt": "2026-06-25T11:46:28.023Z"
   }
 }
