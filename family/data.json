@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T23:00:51.321Z",
+  "generated_at": "2026-06-25T23:15:42.175Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -289,6 +289,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-23T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "7p",
+      "what": "Fortune Feimster: Takin' Care of Biscuits Comedy Tour",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-28T21:00:00-04:00"
     },
     {
       "date": "2026-08-30",
@@ -963,8 +972,8 @@
       "temp": 82,
       "hi": 85,
       "lo": 64,
-      "icon": "🌤",
-      "code": 1
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -2193,6 +2202,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T23:00:49.669Z"
+    "updatedAt": "2026-06-25T23:15:40.980Z"
   }
 }
