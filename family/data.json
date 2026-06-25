@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T13:15:22.750Z",
+  "generated_at": "2026-06-25T13:30:31.817Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -646,14 +646,14 @@
     ]
   },
   "dinner": {
-    "name": "Marry Me chicken + pasta",
+    "name": "Mexican beef & refried bean burritos + onions",
     "protein_g": 50,
-    "cal": 600,
-    "effort": "medium",
-    "note": "Swapped in for pot roast (Mike vetoed). Stovetop, ~35 min, family favorite, hits macros.",
+    "cal": 750,
+    "effort": "easy",
+    "note": "Swapped in for pot roast (Mike vetoed pot roast + Marry Me chicken).",
     "recipe": {
-      "slug": "marry-me-chicken",
-      "name": "Marry Me chicken",
+      "slug": "mexican-beef-and-refried-bean-burritos-onions",
+      "name": "Mexican beef & refried bean burritos + onions",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -661,13 +661,13 @@
         "dinner"
       ],
       "aliases": [
-        "marry-me-chicken"
+        "mexican-beef-and-refried-bean-burritos-onions"
       ],
       "in_rotation": true,
-      "effort": "medium",
+      "effort": "easy",
       "kid_friendly": true,
       "protein_g": 50,
-      "cal": 600,
+      "cal": 750,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -675,28 +675,28 @@
         {
           "heading": null,
           "items": [
-            "chicken breasts",
-            "sun-dried tomatoes",
-            "heavy cream",
-            "parmesan",
-            "garlic",
-            "spinach",
-            "Italian seasoning"
+            "ground beef",
+            "refried beans",
+            "tortillas",
+            "onions",
+            "cheese",
+            "sour cream",
+            "taco seasoning"
           ]
         }
       ],
       "all_ingredients": [
-        "chicken breasts",
-        "sun-dried tomatoes",
-        "heavy cream",
-        "parmesan",
-        "garlic",
-        "spinach",
-        "Italian seasoning"
+        "ground beef",
+        "refried beans",
+        "tortillas",
+        "onions",
+        "cheese",
+        "sour cream",
+        "taco seasoning"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
+      "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -875,12 +875,12 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Marry Me chicken + pasta",
+      "name": "Mexican beef & refried bean burritos + onions",
       "isToday": true,
       "isTomorrow": false,
       "recipe": {
-        "slug": "marry-me-chicken",
-        "name": "Marry Me chicken",
+        "slug": "mexican-beef-and-refried-bean-burritos-onions",
+        "name": "Mexican beef & refried bean burritos + onions",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
@@ -888,13 +888,13 @@
           "dinner"
         ],
         "aliases": [
-          "marry-me-chicken"
+          "mexican-beef-and-refried-bean-burritos-onions"
         ],
         "in_rotation": true,
-        "effort": "medium",
+        "effort": "easy",
         "kid_friendly": true,
         "protein_g": 50,
-        "cal": 600,
+        "cal": 750,
         "servings": null,
         "prep_min": null,
         "cook_min": null,
@@ -902,28 +902,28 @@
           {
             "heading": null,
             "items": [
-              "chicken breasts",
-              "sun-dried tomatoes",
-              "heavy cream",
-              "parmesan",
-              "garlic",
-              "spinach",
-              "Italian seasoning"
+              "ground beef",
+              "refried beans",
+              "tortillas",
+              "onions",
+              "cheese",
+              "sour cream",
+              "taco seasoning"
             ]
           }
         ],
         "all_ingredients": [
-          "chicken breasts",
-          "sun-dried tomatoes",
-          "heavy cream",
-          "parmesan",
-          "garlic",
-          "spinach",
-          "Italian seasoning"
+          "ground beef",
+          "refried beans",
+          "tortillas",
+          "onions",
+          "cheese",
+          "sour cream",
+          "taco seasoning"
         ],
         "steps": [],
         "notes": "",
-        "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
+        "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
@@ -2179,6 +2179,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T13:15:21.492Z"
+    "updatedAt": "2026-06-25T13:30:30.434Z"
   }
 }
