@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T13:00:14.684Z",
+  "generated_at": "2026-06-25T13:15:22.750Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -646,14 +646,14 @@
     ]
   },
   "dinner": {
-    "name": "Pot roast with carrots and potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "Crockpot, set-and-forget. Start it in the morning.",
+    "name": "Marry Me chicken + pasta",
+    "protein_g": 50,
+    "cal": 600,
+    "effort": "medium",
+    "note": "Swapped in for pot roast (Mike vetoed). Stovetop, ~35 min, family favorite, hits macros.",
     "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
+      "slug": "marry-me-chicken",
+      "name": "Marry Me chicken",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -661,13 +661,13 @@
         "dinner"
       ],
       "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
+        "marry-me-chicken"
       ],
       "in_rotation": true,
-      "effort": "easy-slow",
+      "effort": "medium",
       "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
+      "protein_g": 50,
+      "cal": 600,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -675,24 +675,28 @@
         {
           "heading": null,
           "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth"
+            "chicken breasts",
+            "sun-dried tomatoes",
+            "heavy cream",
+            "parmesan",
+            "garlic",
+            "spinach",
+            "Italian seasoning"
           ]
         }
       ],
       "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth"
+        "chicken breasts",
+        "sun-dried tomatoes",
+        "heavy cream",
+        "parmesan",
+        "garlic",
+        "spinach",
+        "Italian seasoning"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -871,12 +875,12 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Pot roast with carrots and potatoes",
+      "name": "Marry Me chicken + pasta",
       "isToday": true,
       "isTomorrow": false,
       "recipe": {
-        "slug": "pot-roast-with-carrots-and-potatoes",
-        "name": "Pot roast with carrots and potatoes",
+        "slug": "marry-me-chicken",
+        "name": "Marry Me chicken",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
@@ -884,13 +888,13 @@
           "dinner"
         ],
         "aliases": [
-          "pot-roast-with-carrots-and-potatoes"
+          "marry-me-chicken"
         ],
         "in_rotation": true,
-        "effort": "easy-slow",
+        "effort": "medium",
         "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 650,
+        "protein_g": 50,
+        "cal": 600,
         "servings": null,
         "prep_min": null,
         "cook_min": null,
@@ -898,24 +902,28 @@
           {
             "heading": null,
             "items": [
-              "chuck roast",
-              "carrots",
-              "potatoes",
-              "onions",
-              "beef broth"
+              "chicken breasts",
+              "sun-dried tomatoes",
+              "heavy cream",
+              "parmesan",
+              "garlic",
+              "spinach",
+              "Italian seasoning"
             ]
           }
         ],
         "all_ingredients": [
-          "chuck roast",
-          "carrots",
-          "potatoes",
-          "onions",
-          "beef broth"
+          "chicken breasts",
+          "sun-dried tomatoes",
+          "heavy cream",
+          "parmesan",
+          "garlic",
+          "spinach",
+          "Italian seasoning"
         ],
         "steps": [],
         "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+        "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
@@ -938,7 +946,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 70,
+      "temp": 72,
       "hi": 88,
       "lo": 64,
       "icon": "⛅",
@@ -2171,6 +2179,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T13:00:11.290Z"
+    "updatedAt": "2026-06-25T13:15:21.492Z"
   }
 }
