@@ -1501,15 +1501,15 @@
       <div class="fc-now">
         <span class="icon">⛅</span>
         <div class="meta">
-          <span class="temp">73°</span>
+          <span class="temp">74°</span>
           <span class="lo-hi">L 64° · H 88°</span>
         </div>
       </div>
       <div class="fc-days">
         
-        <div class="fc-day"><span class="d">Fri</span><span class="i">⛅</span><span class="hi">86°</span><span class="lo">69°</span></div>
+        <div class="fc-day"><span class="d">Fri</span><span class="i">⛅</span><span class="hi">87°</span><span class="lo">68°</span></div>
         
-        <div class="fc-day"><span class="d">Sat</span><span class="i">🌦</span><span class="hi">95°</span><span class="lo">71°</span></div>
+        <div class="fc-day"><span class="d">Sat</span><span class="i">🌦</span><span class="hi">95°</span><span class="lo">69°</span></div>
         
         <div class="fc-day"><span class="d">Sun</span><span class="i">🌦</span><span class="hi">86°</span><span class="lo">73°</span></div>
         
@@ -1992,7 +1992,7 @@
     
     <div class="section">
       <span class="lbl">📚 Summer reading</span>
-      <div class="hw-item reading-row" data-kid="thomas" data-base="0" data-target="200">
+      <div class="hw-item reading-row" data-kid="thomas" data-name="Thomas" data-base="0" data-target="200">
         <span class="due reading-count">
           <span class="reading-pages">0</span> / 200 pgs
           <span class="reading-tap-hint">tap to add</span>
@@ -2057,7 +2057,7 @@
     
     <div class="section">
       <span class="lbl">📚 Summer reading</span>
-      <div class="hw-item reading-row" data-kid="william" data-base="0" data-target="400">
+      <div class="hw-item reading-row" data-kid="william" data-name="William" data-base="0" data-target="400">
         <span class="due reading-count">
           <span class="reading-pages">0</span> / 400 pgs
           <span class="reading-tap-hint">tap to add</span>
@@ -2129,7 +2129,7 @@
     
     <div class="section">
       <span class="lbl">📚 Summer reading</span>
-      <div class="hw-item reading-row" data-kid="henry" data-base="0" data-target="500">
+      <div class="hw-item reading-row" data-kid="henry" data-name="Henry" data-base="0" data-target="500">
         <span class="due reading-count">
           <span class="reading-pages">0</span> / 500 pgs
           <span class="reading-tap-hint">tap to add</span>
@@ -2591,6 +2591,25 @@
   </div>
 </div>
 
+<!-- BOOK-FINISHED DIALOG (over-goal nudge) -->
+<div class="modal-bg" id="bookModal">
+  <div class="modal modal-book">
+    <div class="modal-head">
+      <h2>📖 Nice reading!</h2>
+      <button class="modal-close" onclick="closeModal('bookModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="book-q" id="bookQ">You passed your reading goal!</p>
+      <p class="book-sub">Did you finish the book you were reading?</p>
+      <div class="book-actions">
+        <button type="button" class="book-btn book-btn-yes" id="bookYes">Yes, I finished it! 🎉</button>
+        <button type="button" class="book-btn" id="bookNo">Not yet, still reading</button>
+      </div>
+      <p class="book-foot">If you finished, the daily "Read 20 min" reminder goes away. If you're still reading, it sticks around until you're done.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   // === EVENTS DATA (built at build time from cal_today.py via _data/calendar.js) ===
   const events = [{"date":"2026-06-26","time":"7p","what":"Dude Perfect - Squad Games Tour","who":"family","calendar":"home","all_day":false,"end":"2026-06-26T22:00:00-04:00"},{"date":"2026-06-27","time":"4:30p","what":"George's 10th birthday party 🎂 (RSVP 6/20 to 478-390-7521)","who":"family","calendar":"home","all_day":false,"end":"2026-06-27T18:30:00-04:00"},{"date":"2026-06-28","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-06-28T09:00:00-04:00"},{"date":"2026-06-30","time":"9:30a","what":"Mom: Dr. Michael Wine","who":"family","calendar":"home","all_day":false,"end":"2026-06-30T10:30:00-04:00"},{"date":"2026-07-01","time":"all day","what":"📚 Library books due (Pelham Road)","who":"family","calendar":"home","all_day":true,"end":"2026-07-02T00:00:00-04:00"},{"date":"2026-07-05","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-05T09:00:00-04:00"},{"date":"2026-07-12","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-12T09:00:00-04:00"},{"date":"2026-07-13","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-13T11:30:00-04:00"},{"date":"2026-07-14","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-14T11:30:00-04:00"},{"date":"2026-07-15","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-15T11:30:00-04:00"},{"date":"2026-07-16","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-16T11:30:00-04:00"},{"date":"2026-07-17","time":"9a","what":"Archery Camp (William)","who":"william","calendar":"home","all_day":false,"end":"2026-07-17T11:30:00-04:00"},{"date":"2026-07-17","time":"11:10a","what":"Dentist appointment","who":"family","calendar":"home","all_day":false,"end":"2026-07-17T12:10:00-04:00"},{"date":"2026-07-19","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-19T09:00:00-04:00"},{"date":"2026-07-25","time":"3:50p","what":"Hadestown (movie, 3 tickets)","who":"family","calendar":"home","all_day":false,"end":"2026-07-25T18:30:00-04:00"},{"date":"2026-07-26","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-07-26T09:00:00-04:00"},{"date":"2026-08-02","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-02T09:00:00-04:00"},{"date":"2026-08-09","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-09T09:00:00-04:00"},{"date":"2026-08-10","time":"all day","what":"Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)","who":"henry","calendar":"home","all_day":true,"end":"2026-08-11T00:00:00-04:00"},{"date":"2026-08-11","time":"all day","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":true,"end":"2026-08-12T00:00:00-04:00"},{"date":"2026-08-11","time":"8a","what":"EHS First Day of School (Charlie)","who":"charlie","calendar":"home","all_day":false,"end":"2026-08-11T15:00:00-04:00"},{"date":"2026-08-11","time":"6p","what":"POPCS: Back to School Night","who":"family","calendar":"home","all_day":false,"end":"2026-08-11T19:30:00-04:00"},{"date":"2026-08-13","time":"all day","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":true,"end":"2026-08-14T00:00:00-04:00"},{"date":"2026-08-13","time":"8a","what":"POPCS: First Day of School (12p dismissal)","who":"family","calendar":"home","all_day":false,"end":"2026-08-13T12:00:00-04:00"},{"date":"2026-08-16","time":"all day","what":"POPCS: Back to School Dinner","who":"family","calendar":"home","all_day":true,"end":"2026-08-17T00:00:00-04:00"},{"date":"2026-08-16","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T09:00:00-04:00"},{"date":"2026-08-16","time":"5p","what":"POPCS: Back to School Dinner (Pasta La Vista)","who":"family","calendar":"home","all_day":false,"end":"2026-08-16T19:00:00-04:00"},{"date":"2026-08-18","time":"all day","what":"John's birthday 🎂","who":"family","calendar":"home","all_day":true,"end":"2026-08-19T00:00:00-04:00"},{"date":"2026-08-19","time":"8:30a","what":"POPCS: First School Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-19T09:30:00-04:00"},{"date":"2026-08-23","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-23T09:00:00-04:00"},{"date":"2026-08-30","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-08-30T09:00:00-04:00"},{"date":"2026-09-06","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-06T09:00:00-04:00"},{"date":"2026-09-07","time":"all day","what":"POPCS: Labor Day - No School","who":"family","calendar":"home","all_day":true,"end":"2026-09-08T00:00:00-04:00"},{"date":"2026-09-09","time":"10a","what":"Mom appt with Dr Leblond (pain clinic)","who":"family","calendar":"home","all_day":false,"end":"2026-09-09T11:00:00-04:00"},{"date":"2026-09-10","time":"9:15a","what":"Henry med check - Parkside Pediatrics","who":"henry","calendar":"home","all_day":false,"end":"2026-09-10T10:00:00-04:00"},{"date":"2026-09-13","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-13T09:00:00-04:00"},{"date":"2026-09-18","time":"6p","what":"POPCS: MS Information Night (Henry)","who":"henry","calendar":"home","all_day":false,"end":"2026-09-18T19:00:00-04:00"},{"date":"2026-09-20","time":"8a","what":"Mass","who":"family","calendar":"home","all_day":false,"end":"2026-09-20T09:00:00-04:00"}];
@@ -3002,8 +3021,12 @@
 
       // All of this kid's tasks done? Bigger party.
       const card = box.closest('.kid');
-      const kidBoxes = card ? card.querySelectorAll('.todo input[type="checkbox"]') : [];
-      const allDone = kidBoxes.length && [...kidBoxes].every(b => b.checked);
+      // Only count VISIBLE boxes — a hidden "Read 20 min" (book finished) must
+      // not block the all-done fanfare.
+      const kidBoxes = card
+        ? [...card.querySelectorAll('.todo input[type="checkbox"]')].filter(b => b.offsetParent !== null)
+        : [];
+      const allDone = kidBoxes.length && kidBoxes.every(b => b.checked);
       if (allDone) {
         // Last box in a set keeps the bigger confetti + fanfare, but NOT the
         // tile pulse/glow — Mike wants the checkbox itself to feel identical.
@@ -3041,6 +3064,35 @@
 
     function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
 
+    // --- Book-finished gate ---
+    // Hide a kid's daily "Read 20 min" box only when they're BOTH over their
+    // page goal AND have confirmed they finished the book. Over goal but not
+    // finished => keep nudging them to read. Keyed by kid, separate store.
+    const BOOK_DONE_KEY = 'reading-book-done';
+    let bookDone = {};
+    try { bookDone = JSON.parse(localStorage.getItem(BOOK_DONE_KEY) || '{}'); } catch {}
+    function saveBookDone() { localStorage.setItem(BOOK_DONE_KEY, JSON.stringify(bookDone)); }
+
+    // One shared "did you finish your book?" dialog, reused per kid.
+    let activeBookKid = null, activeBookApply = null;
+    const bookQ = document.getElementById('bookQ');
+    const bookYes = document.getElementById('bookYes');
+    const bookNo = document.getElementById('bookNo');
+    function openBookDialog(kid, name, applyFn) {
+      activeBookKid = kid; activeBookApply = applyFn;
+      if (bookQ) bookQ.textContent = (name || 'You') + ' passed the reading goal!';
+      openModal('bookModal');
+    }
+    if (bookYes) bookYes.addEventListener('click', () => {
+      if (activeBookKid) { bookDone[activeBookKid] = true; saveBookDone(); }
+      if (activeBookApply) activeBookApply();
+      closeModal('bookModal');
+    });
+    if (bookNo) bookNo.addEventListener('click', () => {
+      closeModal('bookModal');
+      if (activeBookApply) activeBookApply();
+    });
+
     document.querySelectorAll('.reading-row').forEach(row => {
       const kid = row.dataset.kid;
       const base = parseInt(row.dataset.base, 10) || 0;
@@ -3052,6 +3104,14 @@
       const addBtn = row.querySelector('.reading-add');
       const cancelBtn = row.querySelector('.reading-cancel');
       const resetBtn = row.querySelector('.reading-reset');
+      const name = row.dataset.name || '';
+      // The "📖 finished your book?" inline nudge sits just after the row.
+      const bookPrompt = row.parentElement.querySelector('.book-prompt');
+      // This kid's daily "Read 20 min" checkbox lives in the ✏️ Today section
+      // of the SAME kid card. Hide its whole <li> when book is confirmed done.
+      const card = row.closest('.kid');
+      const readingBox = card ? card.querySelector('.todo input[data-id="reading-20m"][data-kid="' + kid + '"]') : null;
+      const readingLi = readingBox ? readingBox.closest('li') : null;
 
       // If server pages have caught up to (or past) the local add, drop the local delta.
       const rec = store[kid];
@@ -3064,11 +3124,27 @@
         const r = store[kid];
         return r ? r.added : 0;
       }
+      function totalPages() { return base + currentLocalAdd(); }
+      function isOverGoal() { return target > 0 && totalPages() >= target; }
+      function isBookDone() { return !!bookDone[kid]; }
+
+      // Show/hide the daily "Read 20 min" box + the inline book nudge based on
+      // the two-factor rule: over goal AND finished => hide box; over goal but
+      // not finished => keep box + show nudge; under goal => box only, no nudge.
+      function applyReadingState() {
+        if (!readingLi) { if (bookPrompt) bookPrompt.classList.remove('show'); return; }
+        const over = isOverGoal();
+        const done = isBookDone();
+        readingLi.style.display = (over && done) ? 'none' : '';
+        if (bookPrompt) bookPrompt.classList.toggle('show', over && !done);
+      }
+
       function render() {
-        const total = base + currentLocalAdd();
+        const total = totalPages();
         pagesEl.textContent = total;
         const pct = target > 0 ? Math.min(100, Math.round((total / target) * 100)) : 0;
         if (barEl) barEl.style.width = pct + '%';
+        applyReadingState();
       }
       function bump() {
         pagesEl.classList.remove('bumped');
@@ -3100,6 +3176,7 @@
       function commit() {
         const n = parseInt(input.value, 10);
         if (!Number.isFinite(n) || n <= 0) { closeEditor(); return; }
+        const wasOver = isOverGoal();
         const prev = store[kid] || { serverBase: base, added: 0 };
         // If server base changed since last add, reset baseline
         if (prev.serverBase !== base) { prev.serverBase = base; prev.added = 0; }
@@ -3109,6 +3186,11 @@
         closeEditor();
         render();
         bump();
+        // Just crossed the goal (and book not already marked done)? Ask once.
+        // Only when there's actually a daily reading box to suppress.
+        if (readingLi && !wasOver && isOverGoal() && !isBookDone()) {
+          openBookDialog(kid, name, applyReadingState);
+        }
       }
 
       // Tap the count (or anywhere on the row when not editing) to open
@@ -3132,9 +3214,21 @@
           }
           delete store[kid];
           save();
+          // Pages reset => book is no longer "done" for the new run; bring the
+          // daily reading box back.
+          if (bookDone[kid]) { delete bookDone[kid]; saveBookDone(); }
           closeEditor();
           render();
           bump();
+        });
+      }
+
+      // Inline "did you finish your book?" nudge — lets them answer later if
+      // they dismissed the auto dialog, or correct a "not yet" once they're done.
+      if (bookPrompt) {
+        bookPrompt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openBookDialog(kid, name, applyReadingState);
         });
       }
 
