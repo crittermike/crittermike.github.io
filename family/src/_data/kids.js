@@ -80,6 +80,12 @@ function todaysAssignments(kidKey) {
     out.push({ id: 'take-medicine',  label: 'Take medicine' });
     // popcs-video removed 2026-06-25 — Charlie finished the POPCS video.
   }
+  // Friday laundry — every boy brings his laundry down so Mike can wash it.
+  // Year-round chore (NOT summer-gated), all 4 kids, Fridays only. Stable id so
+  // the daily kid-todos localStorage check persists through Friday and resets Sat.
+  if (dow === 'Fri') {
+    out.push({ id: 'laundry-friday', label: '🧺 Bring down laundry' });
+  }
   // Append one-off items from school-assignments.md due today or tomorrow.
   for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
     out.push(item);

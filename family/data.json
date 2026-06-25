@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T16:45:21.662Z",
+  "generated_at": "2026-06-25T16:56:07.717Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-06-27T18:30:00-04:00"
+    },
+    {
+      "date": "2026-06-27",
+      "time": "7:30p",
+      "what": "Frozen: The Live Musical (Nancy, William, Thomas)",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-06-27T21:30:00-04:00"
     },
     {
       "date": "2026-06-28",
@@ -2175,6 +2184,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T16:45:20.420Z"
+    "updatedAt": "2026-06-25T16:56:06.522Z"
   }
 }
