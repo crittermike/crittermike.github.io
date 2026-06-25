@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T23:45:52.976Z",
+  "generated_at": "2026-06-25T00:01:33.579Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -646,14 +646,14 @@
     ]
   },
   "dinner": {
-    "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
-    "protein_g": 50,
+    "name": "Pot roast with carrots and potatoes",
+    "protein_g": 55,
     "cal": 650,
-    "effort": "moderate",
-    "note": "",
+    "effort": "easy-slow",
+    "note": "Crockpot, set-and-forget. Start it in the morning.",
     "recipe": {
-      "slug": "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze",
-      "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
+      "slug": "pot-roast-with-carrots-and-potatoes",
+      "name": "Pot roast with carrots and potatoes",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -661,12 +661,12 @@
         "dinner"
       ],
       "aliases": [
-        "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze"
+        "pot-roast-with-carrots-and-potatoes"
       ],
       "in_rotation": true,
-      "effort": "medium",
+      "effort": "easy-slow",
       "kid_friendly": true,
-      "protein_g": 50,
+      "protein_g": 55,
       "cal": 650,
       "servings": null,
       "prep_min": null,
@@ -675,26 +675,24 @@
         {
           "heading": null,
           "items": [
-            "chicken thighs",
-            "pesto",
-            "noodles",
-            "Brussels sprouts",
-            "balsamic glaze",
-            "parmesan"
+            "chuck roast",
+            "carrots",
+            "potatoes",
+            "onions",
+            "beef broth"
           ]
         }
       ],
       "all_ingredients": [
-        "chicken thighs",
-        "pesto",
-        "noodles",
-        "Brussels sprouts",
-        "balsamic glaze",
-        "parmesan"
+        "chuck roast",
+        "carrots",
+        "potatoes",
+        "onions",
+        "beef broth"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>pesto</li>\n<li>noodles</li>\n<li>Brussels sprouts</li>\n<li>balsamic glaze</li>\n<li>parmesan</li>\n</ul>\n",
+      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -940,7 +938,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 79,
       "hi": 82,
       "lo": 63,
       "icon": "☀️",
@@ -957,29 +955,29 @@
       {
         "d": "Fri",
         "icon": "⛅",
-        "hi": 94,
+        "hi": 89,
         "lo": 71,
         "code": 3
       },
       {
         "d": "Sat",
         "icon": "🌧",
-        "hi": 97,
-        "lo": 72,
+        "hi": 96,
+        "lo": 70,
         "code": 61
       },
       {
         "d": "Sun",
         "icon": "🌦",
-        "hi": 81,
-        "lo": 72,
+        "hi": 92,
+        "lo": 73,
         "code": 53
       },
       {
         "d": "Mon",
         "icon": "🌦",
         "hi": 97,
-        "lo": 69,
+        "lo": 70,
         "code": 53
       }
     ],
@@ -2052,7 +2050,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 80,
+    "dayPct": 83.3,
     "totalSpend": 13482.36,
     "totalBudget": 991.65,
     "categories": [
@@ -2173,6 +2171,6 @@
     "creditDebt": -22507.03,
     "netLiquid": -9945.83,
     "source": "ynab",
-    "updatedAt": "2026-06-24T23:45:51.765Z"
+    "updatedAt": "2026-06-25T00:01:32.335Z"
   }
 }
