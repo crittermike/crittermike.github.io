@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T13:30:31.817Z",
+  "generated_at": "2026-06-25T13:45:11.213Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -439,10 +439,6 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
-        },
-        {
-          "id": "popcs-video",
-          "label": "Finish video for POPCS"
         }
       ]
     }
@@ -2179,6 +2175,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T13:30:30.434Z"
+    "updatedAt": "2026-06-25T13:45:09.959Z"
   }
 }

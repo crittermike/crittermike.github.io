@@ -78,7 +78,7 @@ function todaysAssignments(kidKey) {
   }
   if (isSummerWeekday && kidKey === 'charlie') {
     out.push({ id: 'take-medicine',  label: 'Take medicine' });
-    out.push({ id: 'popcs-video',    label: 'Finish video for POPCS' });
+    // popcs-video removed 2026-06-25 — Charlie finished the POPCS video.
   }
   // Append one-off items from school-assignments.md due today or tomorrow.
   for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
