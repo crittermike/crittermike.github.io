@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T03:46:05.542Z",
+  "generated_at": "2026-06-25T04:00:17.325Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -819,7 +819,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze",
@@ -872,8 +872,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Pot roast with carrots and potatoes",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -924,7 +924,7 @@
       "dow_short": "Fri",
       "name": "Takeout / out - Dude Perfect Squad Games Tour",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -939,19 +939,12 @@
   "weather": {
     "now": {
       "temp": 69,
-      "hi": 82,
-      "lo": 63,
+      "hi": 88,
+      "lo": 64,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 88,
-        "lo": 64,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "🌧",
@@ -979,24 +972,31 @@
         "hi": 97,
         "lo": 70,
         "code": 53
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 97,
+        "lo": 75,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-24T06:17",
         "2026-06-25T06:17",
         "2026-06-26T06:17",
         "2026-06-27T06:18",
         "2026-06-28T06:18",
-        "2026-06-29T06:18"
+        "2026-06-29T06:18",
+        "2026-06-30T06:19"
       ],
       "sunsets": [
-        "2026-06-24T20:46",
         "2026-06-25T20:46",
         "2026-06-26T20:47",
         "2026-06-27T20:47",
         "2026-06-28T20:47",
-        "2026-06-29T20:47"
+        "2026-06-29T20:47",
+        "2026-06-30T20:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2171,6 +2171,6 @@
     "creditDebt": -22507.03,
     "netLiquid": -9945.83,
     "source": "ynab",
-    "updatedAt": "2026-06-25T03:46:04.202Z"
+    "updatedAt": "2026-06-25T04:00:14.066Z"
   }
 }
