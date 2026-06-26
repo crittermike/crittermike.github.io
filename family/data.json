@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T11:31:00.831Z",
+  "generated_at": "2026-06-26T11:45:32.252Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -938,7 +938,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 70,
+      "temp": 71,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -954,31 +954,31 @@
       },
       {
         "d": "Sun",
-        "icon": "🌧",
-        "hi": 94,
-        "lo": 72,
-        "code": 63
+        "icon": "🌦",
+        "hi": 93,
+        "lo": 70,
+        "code": 51
       },
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 96,
-        "lo": 71,
+        "hi": 97,
+        "lo": 73,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛈",
-        "hi": 98,
+        "hi": 99,
         "lo": 74,
         "code": 95
       },
       {
         "d": "Wed",
         "icon": "⛈",
-        "hi": 104,
-        "lo": 70,
-        "code": 99
+        "hi": 98,
+        "lo": 74,
+        "code": 95
       }
     ],
     "sun": {
@@ -2151,7 +2151,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 86.7,
-    "totalSpend": 13639.33,
+    "totalSpend": 13719.36,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2182,17 +2182,17 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1468.37,
-        "balance": -1468.37,
+        "spent": 1489.58,
+        "balance": -1489.58,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 1077.39,
-        "balance": -605.73,
-        "pct": 228.4
+        "spent": 1136.21,
+        "balance": -664.55,
+        "pct": 240.9
       },
       {
         "name": "📚 School",
@@ -2267,10 +2267,10 @@
         "pct": 233
       }
     ],
-    "liquidCash": 12474.2,
-    "creditDebt": -23118.15,
-    "netLiquid": -10643.95,
+    "liquidCash": 12564.51,
+    "creditDebt": -23218.04,
+    "netLiquid": -10653.53,
     "source": "ynab",
-    "updatedAt": "2026-06-26T11:30:59.530Z"
+    "updatedAt": "2026-06-26T11:45:31.005Z"
   }
 }
