@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- iOS standalone (Add to Home Screen kiosk mode) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dashboard">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Tuscan Chicken Pasta - Crittenden Family</title>
+    
+
+    <!-- Shared editorial design system (single source of truth) -->
+    <link rel="stylesheet" href="/family/shared.css">
+
+    <!-- Base styles for the dark theme -->
+    <style>
+        :root {
+            --warm-bg: #0d1117;
+            --card-bg: #161b22;
+            --accent-orange: #E8834A;
+            --accent-teal: #3fb950;
+            --accent-gold: #d29922;
+            --accent-rose: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-dark: #e6edf3;
+            --text-mid: #8b949e;
+            --text-light: #484f58;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+            --radius: 16px;
+            
+            /* Additional colors for other pages */
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --green-dim: rgba(63,185,80,0.15);
+            --red: #f85149;
+            --red-dim: rgba(248,81,73,0.15);
+            --blue: #58a6ff;
+            --blue-dim: rgba(88,166,255,0.15);
+            --yellow: #d29922;
+            --orange: #d29922;
+            --orange-dim: rgba(210,153,34,0.15);
+            --purple: #bc8cff;
+            --purple-dim: rgba(188,140,255,0.15);
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --lime: #84cc16;
+            --pink: #ec4899;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --fuchsia: #d946ef;
+            --rose: #f43f5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        #site-nav {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #30363d;
+            flex-wrap: wrap;
+        }
+        
+        #site-nav .brand {
+            color: #E8834A;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        #site-nav .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 4px 8px;
+        }
+        
+        #site-nav .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        #site-nav .nav-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        #site-nav .nav-links a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        #site-nav .nav-links a:hover {
+            color: #c9d1d9;
+        }
+        
+        @media (max-width: 600px) {
+            #site-nav .hamburger {
+                display: block;
+            }
+            
+            #site-nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 12px;
+            }
+            
+            #site-nav.open .nav-links {
+                display: flex;
+            }
+            
+            #site-nav .nav-links a {
+                font-size: 16px;
+                padding: 4px 0;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <a href="/family/" class="brand">🏠 Crittendens</a>
+        <button class="hamburger" onclick="document.getElementById('site-nav').classList.toggle('open')" aria-label="Menu">☰</button>
+        <div class="nav-links">
+            <a href="/family/" data-page="home" >Home</a>
+            <a href="/family/trips/" data-page="trips" >Trips</a>
+            <a href="/family/recipes/" data-page="recipes" class="active">Recipes</a>
+        </div>
+    </nav>
+
+    
+
+    
+<style>
+  :root {
+    --accent: #d29922;
+    --accent-dim: rgba(210, 153, 34, 0.14);
+  }
+</style>
+
+<div class="ed-wrap">
+
+  <header class="ed-header">
+    <div class="ed-eyebrow">
+      Recipe · medium</div>
+    <h1 class="ed-title">Tuscan Chicken Pasta</h1>
+    
+  </header>
+
+  
+  <div class="ed-meta">
+    <div class="ed-meta-item"><div class="label">Serves</div><div class="value">6</div></div>
+    <div class="ed-meta-item"><div class="label">Prep</div><div class="value">30 min</div></div>
+    <div class="ed-meta-item"><div class="label">Cook</div><div class="value">20 min</div></div>
+    <div class="ed-meta-item"><div class="label">Protein</div><div class="value">30g</div></div>
+    <div class="ed-meta-item"><div class="label">Calories</div><div class="value">471</div></div>
+    <div class="ed-meta-item"><div class="label">Kids</div><div class="value">Yes</div></div>
+  </div>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Ingredients</h2>
+      <div class="aside">Tap to check off as you go</div>
+    </div>
+    <ul class="rx-ingredients" id="rx-ing">
+      
+        
+        <li class="group-heading">Chicken</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-0-2 boneless skinless chicken breasts (~1 lb)">
+          <span class="ing-text">2 boneless skinless chicken breasts (~1 lb)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-1-3 tbsp olive oil, divided">
+          <span class="ing-text">3 tbsp olive oil, divided</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-2-1 tsp paprika">
+          <span class="ing-text">1 tsp paprika</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-3-1 tsp garlic powder">
+          <span class="ing-text">1 tsp garlic powder</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-4-1 tsp kosher salt">
+          <span class="ing-text">1 tsp kosher salt</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="chicken-5-½ tsp black pepper">
+          <span class="ing-text">½ tsp black pepper</span>
+        </li>
+        
+      
+        
+        <li class="group-heading">Pasta + Sauce</li>
+        
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-0-8 oz rigatoni, cooked al dente">
+          <span class="ing-text">8 oz rigatoni, cooked al dente</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-1-4 tbsp (½ stick) unsalted butter">
+          <span class="ing-text">4 tbsp (½ stick) unsalted butter</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-2-¼ cup shallot, finely diced">
+          <span class="ing-text">¼ cup shallot, finely diced</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-3-¼ cup sun-dried tomatoes, softened in hot water and chopped">
+          <span class="ing-text">¼ cup sun-dried tomatoes, softened in hot water and chopped</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-4-1 tsp garlic, minced">
+          <span class="ing-text">1 tsp garlic, minced</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-5-2 tbsp tomato paste">
+          <span class="ing-text">2 tbsp tomato paste</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-6-1 tsp oregano">
+          <span class="ing-text">1 tsp oregano</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-7-1 tsp paprika">
+          <span class="ing-text">1 tsp paprika</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-8-½ tsp garlic powder">
+          <span class="ing-text">½ tsp garlic powder</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-9-½ tsp kosher salt">
+          <span class="ing-text">½ tsp kosher salt</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-10-¼ tsp black pepper">
+          <span class="ing-text">¼ tsp black pepper</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-11-1½ cups heavy cream">
+          <span class="ing-text">1½ cups heavy cream</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-12-1½ cups milk">
+          <span class="ing-text">1½ cups milk</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-13-1 cup fresh spinach">
+          <span class="ing-text">1 cup fresh spinach</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-14-1 cup parmesan cheese, grated (plus more for garnish)">
+          <span class="ing-text">1 cup parmesan cheese, grated (plus more for garnish)</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-15-1 cup cherry tomatoes, halved">
+          <span class="ing-text">1 cup cherry tomatoes, halved</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-16-fresh parsley, for garnish">
+          <span class="ing-text">Fresh parsley, for garnish</span>
+        </li>
+        
+        <li class="ing">
+          <input type="checkbox" data-ing="pasta + sauce-17-salt + pepper, to taste">
+          <span class="ing-text">Salt + pepper, to taste</span>
+        </li>
+        
+      
+    </ul>
+    <button class="rx-reset" id="rx-reset" type="button">Reset all</button>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Method</h2>
+    </div>
+    <ol class="rx-steps">
+      
+      <li>Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.</li>
+      
+      <li>Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.</li>
+      
+      <li>In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).</li>
+      
+      <li>Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm. ### Pasta + Sauce</li>
+      
+      <li>Boil rigatoni in salted water, cook al dente (~14 min). Drain.</li>
+      
+      <li>In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.</li>
+      
+      <li>Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.</li>
+      
+      <li>Add heavy cream and milk, stir to combine.</li>
+      
+      <li>Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.</li>
+      
+      <li>Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.</li>
+      
+      <li>Serve topped with extra parmesan and parsley. Salt + pepper to taste.</li>
+      
+    </ol>
+  </section>
+  
+
+  
+  <section class="ed-section">
+    <div class="ed-section-head">
+      <h2>Notes &amp; pitfalls</h2>
+    </div>
+    <div class="rx-notes ed-prose">
+      <h3>Pitfalls</h3>
+<ul>
+<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>
+<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>
+<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>
+<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>
+</ul>
+
+    </div>
+  </section>
+  
+
+  
+
+  <footer class="ed-footer">
+    <a class="ed-link" href="/family/recipes/">← All recipes</a>
+    <span class="ed-link-muted">Source: <code>recipe-tuscan-chicken-pasta.md</code></span>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const KEY = 'recipe-checked:tuscan-chicken-pasta';
+  const boxes = document.querySelectorAll('#rx-ing .ing input[type="checkbox"]');
+  const reset = document.getElementById('rx-reset');
+
+  // Restore state
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch (e) { checked = {}; }
+
+  boxes.forEach(box => {
+    if (checked[box.dataset.ing]) {
+      box.checked = true;
+      box.closest('.ing').classList.add('checked');
+    }
+    box.addEventListener('change', () => {
+      box.closest('.ing').classList.toggle('checked', box.checked);
+      checked[box.dataset.ing] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(checked));
+    });
+  });
+
+  // Click anywhere on the row toggles (except the checkbox itself, which native-handles it)
+  document.querySelectorAll('#rx-ing .ing').forEach(li => {
+    li.addEventListener('click', e => {
+      if (e.target.tagName === 'INPUT') return;
+      const box = li.querySelector('input[type="checkbox"]');
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event('change'));
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', () => {
+      boxes.forEach(box => {
+        box.checked = false;
+        box.closest('.ing').classList.remove('checked');
+      });
+      localStorage.removeItem(KEY);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
