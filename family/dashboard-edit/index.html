@@ -1757,7 +1757,7 @@
           
             
             
-            <div class="v">118g</div>
+            <div class="v">78g</div>
           
           
             
@@ -1923,7 +1923,7 @@
           
             
             
-            <span class="v">118g</span>
+            <span class="v">78g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3378,7 +3378,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":270,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":118,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":270,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":78,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
