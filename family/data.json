@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T23:45:58.209Z",
+  "generated_at": "2026-06-26T00:01:36.684Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -293,8 +293,8 @@
     {
       "date": "2026-08-28",
       "time": "7p",
-      "what": "Fortune Feimster: Takin' Care of Biscuits Comedy Tour",
-      "who": "family",
+      "what": "Fortune Feimster comedy - Nancy (not Mike)",
+      "who": "nancy",
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-28T21:00:00-04:00"
@@ -669,59 +669,12 @@
     ]
   },
   "dinner": {
-    "name": "Mexican beef & refried bean burritos + onions",
-    "protein_g": 50,
-    "cal": 750,
-    "effort": "easy",
-    "note": "Swapped in for pot roast (Mike vetoed pot roast + Marry Me chicken).",
-    "recipe": {
-      "slug": "mexican-beef-and-refried-bean-burritos-onions",
-      "name": "Mexican beef & refried bean burritos + onions",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "mexican-beef-and-refried-bean-burritos-onions"
-      ],
-      "in_rotation": true,
-      "effort": "easy",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 750,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "ground beef",
-            "refried beans",
-            "tortillas",
-            "onions",
-            "cheese",
-            "sour cream",
-            "taco seasoning"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "ground beef",
-        "refried beans",
-        "tortillas",
-        "onions",
-        "cheese",
-        "sour cream",
-        "taco seasoning"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Takeout / out - Dude Perfect Squad Games Tour",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Family at Dude Perfect 7-10pm at Bon Secours Arena. Grab-and-go or takeout, no cook.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -969,7 +922,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 80,
       "hi": 85,
       "lo": 64,
       "icon": "☀️",
@@ -2081,7 +2034,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 83.3,
+    "dayPct": 86.7,
     "totalSpend": 13639.33,
     "totalBudget": 991.65,
     "categories": [
@@ -2202,6 +2155,6 @@
     "creditDebt": -23118.15,
     "netLiquid": -10643.95,
     "source": "ynab",
-    "updatedAt": "2026-06-25T23:45:57.007Z"
+    "updatedAt": "2026-06-26T00:01:35.566Z"
   }
 }
