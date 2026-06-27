@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T23:15:32.199Z",
+  "generated_at": "2026-06-27T23:30:40.015Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -926,7 +926,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 80,
       "hi": 91,
       "lo": 73,
       "icon": "⛅",
@@ -2139,23 +2139,23 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 90,
-    "totalSpend": 13719.36,
+    "totalSpend": 14340.86,
     "totalBudget": 991.65,
     "categories": [
       {
         "name": "🏝️ Vacation",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 5197.79,
-        "balance": -5197.79,
+        "spent": 5237.23,
+        "balance": -5237.23,
         "pct": 0
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2333.32,
-        "balance": -2333.32,
+        "spent": 2767.45,
+        "balance": -2767.45,
         "pct": 0
       },
       {
@@ -2170,8 +2170,8 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1489.58,
-        "balance": -1489.58,
+        "spent": 1498.57,
+        "balance": -1498.57,
         "pct": 0
       },
       {
@@ -2183,20 +2183,20 @@
         "pct": 240.9
       },
       {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 500,
+        "spent": 481.4,
+        "balance": 18.6,
+        "pct": 96.3
+      },
+      {
         "name": "📚 School",
         "group": "Needs",
         "budgeted": 0,
         "spent": 357.5,
         "balance": -357.5,
         "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 500,
-        "spent": 342.46,
-        "balance": 157.54,
-        "pct": 68.5
       },
       {
         "name": "📱 Phone & Internet",
@@ -2256,9 +2256,9 @@
       }
     ],
     "liquidCash": 15660.7,
-    "creditDebt": -23218.04,
-    "netLiquid": -7557.34,
+    "creditDebt": -24303.57,
+    "netLiquid": -8642.87,
     "source": "ynab",
-    "updatedAt": "2026-06-27T23:15:31.156Z"
+    "updatedAt": "2026-06-27T23:30:38.888Z"
   }
 }
