@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T23:45:43.136Z",
+  "generated_at": "2026-06-27T00:01:33.628Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -685,11 +685,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout / out - Dude Perfect Squad Games Tour",
-    "protein_g": null,
-    "cal": null,
+    "name": "Pizza night",
+    "protein_g": 32,
+    "cal": 800,
     "effort": "none",
-    "note": "Family at Dude Perfect 7-10pm at Bon Secours Arena. Grab-and-go or takeout, no cook.",
+    "note": "George's 10th bday party 4:30-6:30pm at Main Event earlier. Pizza (delivery or frozen) after.",
     "recipe": null
   },
   "mealweek": [
@@ -938,7 +938,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 85,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -955,28 +955,28 @@
       {
         "d": "Sun",
         "icon": "🌦",
-        "hi": 94,
+        "hi": 97,
         "lo": 71,
         "code": 53
       },
       {
         "d": "Mon",
         "icon": "🌦",
-        "hi": 97,
-        "lo": 76,
+        "hi": 99,
+        "lo": 73,
         "code": 81
       },
       {
         "d": "Tue",
         "icon": "⛈",
-        "hi": 99,
-        "lo": 74,
+        "hi": 95,
+        "lo": 72,
         "code": 95
       },
       {
         "d": "Wed",
         "icon": "⛈",
-        "hi": 100,
+        "hi": 98,
         "lo": 73,
         "code": 95
       }
@@ -2150,7 +2150,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 86.7,
+    "dayPct": 90,
     "totalSpend": 13719.36,
     "totalBudget": 991.65,
     "categories": [
@@ -2271,6 +2271,6 @@
     "creditDebt": -23218.04,
     "netLiquid": -10653.53,
     "source": "ynab",
-    "updatedAt": "2026-06-26T23:45:42.053Z"
+    "updatedAt": "2026-06-27T00:01:32.582Z"
   }
 }
