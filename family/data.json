@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-06-27T03:45:20.871Z",
+  "generated_at": "2026-06-27T04:00:29.686Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-26",
-      "time": "7p",
-      "what": "Dude Perfect - Squad Games Tour",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-26T22:00:00-04:00"
-    },
     {
       "date": "2026-06-27",
       "time": "3:30p",
@@ -370,6 +361,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-20T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "all day",
+      "what": "POPCS: Parent/Teacher Conferences (12p dismissal)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-09-25T00:00:00-04:00"
     }
   ],
   "kids": [
@@ -389,16 +389,7 @@
       "allowance": {
         "balance_str": "$112.00"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -416,20 +407,7 @@
       "allowance": {
         "balance_str": "$34.11"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -447,20 +425,7 @@
       "allowance": {
         "balance_str": "$68.13"
       },
-      "assignments": [
-        {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -476,12 +441,16 @@
       },
       "assignments": [
         {
-          "id": "take-medicine",
-          "label": "Take medicine"
+          "id": "sch-2026-06-28-summer-pe-perry-week-4-fitness-log-log-4",
+          "label": "Summer PE (Perry): Week 4 Fitness Log — log 4x 20-min workouts + attach 1-min video clip"
         },
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "sch-2026-06-28-summer-pe-perry-nutrient-brochure",
+          "label": "Summer PE (Perry): Nutrient Brochure"
+        },
+        {
+          "id": "sch-2026-06-28-summer-pe-perry-usda-dietary-quiz",
+          "label": "Summer PE (Perry): USDA Dietary Quiz"
         }
       ]
     }
@@ -698,7 +667,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -923,7 +892,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / out - Dude Perfect Squad Games Tour",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -931,27 +900,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 77,
-      "hi": 89,
-      "lo": 68,
+      "temp": 76,
+      "hi": 92,
+      "lo": 73,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛈",
-        "hi": 92,
-        "lo": 73,
-        "code": 95
-      },
       {
         "d": "Sun",
         "icon": "🌦",
@@ -979,24 +941,31 @@
         "hi": 98,
         "lo": 73,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "🌤",
+        "hi": 100,
+        "lo": 76,
+        "code": 1
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-26T06:17",
         "2026-06-27T06:18",
         "2026-06-28T06:18",
         "2026-06-29T06:18",
         "2026-06-30T06:19",
-        "2026-07-01T06:19"
+        "2026-07-01T06:19",
+        "2026-07-02T06:20"
       ],
       "sunsets": [
-        "2026-06-26T20:47",
         "2026-06-27T20:47",
         "2026-06-28T20:47",
         "2026-06-29T20:47",
         "2026-06-30T20:47",
-        "2026-07-01T20:47"
+        "2026-07-01T20:47",
+        "2026-07-02T20:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2271,6 +2240,6 @@
     "creditDebt": -23218.04,
     "netLiquid": -10653.53,
     "source": "ynab",
-    "updatedAt": "2026-06-27T03:45:19.685Z"
+    "updatedAt": "2026-06-27T04:00:28.017Z"
   }
 }
