@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T18:30:48.489Z",
+  "generated_at": "2026-06-27T18:46:00.721Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -924,71 +924,7 @@
       "recipe": null
     }
   ],
-  "weather": {
-    "now": {
-      "temp": 92,
-      "hi": 93,
-      "lo": 73,
-      "icon": "☀️",
-      "code": 0
-    },
-    "days": [
-      {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 93,
-        "lo": 73,
-        "code": 3
-      },
-      {
-        "d": "Mon",
-        "icon": "🌦",
-        "hi": 99,
-        "lo": 75,
-        "code": 51
-      },
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 98,
-        "lo": 74,
-        "code": 3
-      },
-      {
-        "d": "Wed",
-        "icon": "⛈",
-        "hi": 97,
-        "lo": 74,
-        "code": 95
-      },
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 98,
-        "lo": 74,
-        "code": 3
-      }
-    ],
-    "sun": {
-      "sunrises": [
-        "2026-06-27T06:18",
-        "2026-06-28T06:18",
-        "2026-06-29T06:18",
-        "2026-06-30T06:19",
-        "2026-07-01T06:19",
-        "2026-07-02T06:20"
-      ],
-      "sunsets": [
-        "2026-06-27T20:47",
-        "2026-06-28T20:47",
-        "2026-06-29T20:47",
-        "2026-06-30T20:47",
-        "2026-07-01T20:47",
-        "2026-07-02T20:47"
-      ],
-      "timezone": "America/New_York"
-    }
-  },
+  "weather": null,
   "recipes": [
     {
       "slug": "chicken-fajitas",
@@ -2259,6 +2195,6 @@
     "creditDebt": -23218.04,
     "netLiquid": -7557.34,
     "source": "ynab",
-    "updatedAt": "2026-06-27T18:30:47.467Z"
+    "updatedAt": "2026-06-27T18:45:54.848Z"
   }
 }
