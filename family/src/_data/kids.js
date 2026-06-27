@@ -86,6 +86,12 @@ function todaysAssignments(kidKey) {
   if (dow === 'Fri') {
     out.push({ id: 'laundry-friday', label: '🧺 Bring down laundry' });
   }
+  // Saturday laundry — every boy puts his (now-washed) laundry away. Mirror of
+  // the Friday bring-down chore: year-round, all 4 kids, Saturdays only. Stable
+  // id so the kid-todos localStorage check persists through Sat and resets Sun.
+  if (dow === 'Sat') {
+    out.push({ id: 'laundry-saturday', label: '🧺 Put laundry away' });
+  }
   // Append one-off items from school-assignments.md due today or tomorrow.
   for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
     out.push(item);

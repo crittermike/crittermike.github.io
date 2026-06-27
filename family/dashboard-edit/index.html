@@ -1825,7 +1825,16 @@
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           
-            <div class="placeholder">Nothing today 🎉</div>
+            <ul class="todo-list" data-kid="thomas">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="laundry-saturday">
+                  <span class="todo-label">🧺 Put laundry away</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -1877,7 +1886,16 @@
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           
-            <div class="placeholder">Nothing today 🎉</div>
+            <ul class="todo-list" data-kid="william">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="william" data-id="laundry-saturday">
+                  <span class="todo-label">🧺 Put laundry away</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -1929,7 +1947,16 @@
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           
-            <div class="placeholder">Nothing today 🎉</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="laundry-saturday">
+                  <span class="todo-label">🧺 Put laundry away</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -1969,6 +1996,13 @@
         <div class="assn-list">
           
             <ul class="todo-list" data-kid="charlie">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="charlie" data-id="laundry-saturday">
+                  <span class="todo-label">🧺 Put laundry away</span>
+                </label>
+              </li>
               
               <li>
                 <label class="todo">
@@ -2240,9 +2274,54 @@
         
         
           
-        
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Thomas</div>
+              <ul class="todo-list" data-kid="thomas">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="laundry-saturday">
+                      <span class="todo-label">🧺 Put laundry away</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">William</div>
+              <ul class="todo-list" data-kid="william">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="william" data-id="laundry-saturday">
+                      <span class="todo-label">🧺 Put laundry away</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
+          
+        
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="laundry-saturday">
+                      <span class="todo-label">🧺 Put laundry away</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -2250,6 +2329,13 @@
             <div class="assn-kid">
               <div class="assn-kid-h">Charlie</div>
               <ul class="todo-list" data-kid="charlie">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="charlie" data-id="laundry-saturday">
+                      <span class="todo-label">🧺 Put laundry away</span>
+                    </label>
+                  </li>
                 
                   <li>
                     <label class="todo">
@@ -3306,7 +3392,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":360,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":90,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":138,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":118,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"sch-2026-06-28-summer-pe-perry-week-4-fitness-log-log-4","label":"Summer PE (Perry): Week 4 Fitness Log — log 4x 20-min workouts + attach 1-min video clip"},{"id":"sch-2026-06-28-summer-pe-perry-nutrient-brochure","label":"Summer PE (Perry): Nutrient Brochure"},{"id":"sch-2026-06-28-summer-pe-perry-usda-dietary-quiz","label":"Summer PE (Perry): USDA Dietary Quiz"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":360,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":90,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":138,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":118,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-06-28-summer-pe-perry-week-4-fitness-log-log-4","label":"Summer PE (Perry): Week 4 Fitness Log — log 4x 20-min workouts + attach 1-min video clip"},{"id":"sch-2026-06-28-summer-pe-perry-nutrient-brochure","label":"Summer PE (Perry): Nutrient Brochure"},{"id":"sch-2026-06-28-summer-pe-perry-usda-dietary-quiz","label":"Summer PE (Perry): USDA Dietary Quiz"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');

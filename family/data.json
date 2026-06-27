@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T14:15:58.714Z",
+  "generated_at": "2026-06-27T14:18:42.900Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -389,7 +389,12 @@
       "allowance": {
         "balance_str": "$112.00"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
+        }
+      ]
     },
     {
       "key": "william",
@@ -407,7 +412,12 @@
       "allowance": {
         "balance_str": "$34.11"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -425,7 +435,12 @@
       "allowance": {
         "balance_str": "$68.13"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -440,6 +455,10 @@
         "balance_str": "$-261.23"
       },
       "assignments": [
+        {
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
+        },
         {
           "id": "sch-2026-06-28-summer-pe-perry-week-4-fitness-log-log-4",
           "label": "Summer PE (Perry): Week 4 Fitness Log — log 4x 20-min workouts + attach 1-min video clip"
@@ -2240,6 +2259,6 @@
     "creditDebt": -23218.04,
     "netLiquid": -7557.34,
     "source": "ynab",
-    "updatedAt": "2026-06-27T14:15:57.586Z"
+    "updatedAt": "2026-06-27T14:18:41.795Z"
   }
 }
