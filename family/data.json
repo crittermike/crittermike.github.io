@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T11:30:52.678Z",
+  "generated_at": "2026-06-28T11:46:00.863Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -30,6 +30,24 @@
       "end": "2026-07-02T00:00:00-04:00"
     },
     {
+      "date": "2026-07-03",
+      "time": "all day",
+      "what": "Dad off work",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-07-04T00:00:00-04:00"
+    },
+    {
+      "date": "2026-07-04",
+      "time": "all day",
+      "what": "🇺🇸 4th of July",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-07-05T00:00:00-04:00"
+    },
+    {
       "date": "2026-07-05",
       "time": "8a",
       "what": "Mass",
@@ -37,6 +55,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-05T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-06",
+      "time": "1p",
+      "what": "🐟 Go to the lake",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-06T15:00:00-04:00"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "10a",
+      "what": "Come home from the lake",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-11T12:00:00-04:00"
     },
     {
       "date": "2026-07-12",
@@ -892,8 +928,8 @@
       "temp": 75,
       "hi": 93,
       "lo": 73,
-      "icon": "🌤",
-      "code": 1
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -906,30 +942,30 @@
       {
         "d": "Tue",
         "icon": "⛈",
-        "hi": 100,
-        "lo": 73,
+        "hi": 98,
+        "lo": 71,
         "code": 95
       },
       {
         "d": "Wed",
         "icon": "🌦",
-        "hi": 97,
-        "lo": 71,
-        "code": 81
+        "hi": 98,
+        "lo": 74,
+        "code": 53
       },
       {
         "d": "Thu",
         "icon": "⛈",
-        "hi": 99,
-        "lo": 76,
+        "hi": 97,
+        "lo": 71,
         "code": 95
       },
       {
         "d": "Fri",
-        "icon": "🌤",
-        "hi": 102,
+        "icon": "⛅",
+        "hi": 99,
         "lo": 76,
-        "code": 1
+        "code": 3
       }
     ],
     "sun": {
@@ -2222,6 +2258,6 @@
     "creditDebt": -24303.57,
     "netLiquid": -8642.87,
     "source": "ynab",
-    "updatedAt": "2026-06-28T11:30:51.555Z"
+    "updatedAt": "2026-06-28T11:45:59.573Z"
   }
 }
