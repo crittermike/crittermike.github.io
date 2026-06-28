@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T23:45:46.967Z",
+  "generated_at": "2026-06-28T00:01:30.888Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -673,11 +673,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza night",
-    "protein_g": 32,
-    "cal": 800,
+    "name": "Leftovers or whatever you can scrounge up",
+    "protein_g": null,
+    "cal": null,
     "effort": "none",
-    "note": "George's 10th bday party 4:30-6:30pm at Main Event earlier. Pizza (delivery or frozen) after.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -926,7 +926,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 79,
       "hi": 91,
       "lo": 73,
       "icon": "⛅",
@@ -2138,7 +2138,7 @@
   ],
   "finance": {
     "month": "June 2026",
-    "dayPct": 90,
+    "dayPct": 93.3,
     "totalSpend": 14340.86,
     "totalBudget": 991.65,
     "categories": [
@@ -2259,6 +2259,6 @@
     "creditDebt": -24303.57,
     "netLiquid": -8642.87,
     "source": "ynab",
-    "updatedAt": "2026-06-27T23:45:45.938Z"
+    "updatedAt": "2026-06-28T00:01:29.762Z"
   }
 }
