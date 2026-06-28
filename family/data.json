@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T17:01:01.786Z",
+  "generated_at": "2026-06-28T17:15:54.862Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -691,122 +691,159 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken fajitas (cast iron, with zucchini + corn)",
+      "name": "Homemade Hamburger Helper (one-pot beef + cheesy noodles)",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": null
-    },
-    {
-      "dow": "Tuesday",
-      "dow_short": "Tue",
-      "name": "Korean beef + broccoli bowls",
-      "isToday": false,
-      "isTomorrow": false,
       "recipe": {
-        "slug": "korean-beef-broccoli-bowls",
-        "name": "Korean Beef + Broccoli Bowls",
+        "slug": "homemade-hamburger-helper",
+        "name": "Homemade Hamburger Helper",
         "source": "markdown",
         "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "korean-beef-bowls",
-          "korean-beef-broccoli"
-        ],
-        "in_rotation": true,
-        "effort": "easy",
+        "tags": [],
+        "aliases": [],
+        "in_rotation": false,
+        "effort": null,
         "kid_friendly": true,
-        "protein_g": 60,
-        "cal": 600,
+        "protein_g": null,
+        "cal": null,
         "servings": null,
         "prep_min": null,
         "cook_min": null,
         "ingredient_groups": [
           {
-            "heading": "Beef",
+            "heading": null,
             "items": [
-              "2 lb ground beef (93% lean works great)",
-              "1 tbsp toasted sesame oil (for cooking)",
-              "6 cloves garlic, minced",
-              "1 tbsp fresh ginger, grated (or 1 tsp ground)"
-            ]
-          },
-          {
-            "heading": "Sauce (whisk in a jar/bowl)",
-            "items": [
-              "1/2 cup soy sauce",
-              "1/3 cup brown sugar, packed",
-              "2 tbsp rice vinegar (or apple cider in a pinch)",
-              "1 tbsp toasted sesame oil",
-              "1 tsp red pepper flakes (1/2 tsp for kid-friendly)",
-              "1 tsp black pepper",
-              "1 tbsp cornstarch"
-            ]
-          },
-          {
-            "heading": "Broccoli",
-            "items": [
-              "2 large heads broccoli, cut into bite-size florets (~6 cups)",
-              "1 tbsp neutral oil (avocado or vegetable)",
-              "Pinch of salt",
-              "2 tbsp water"
-            ]
-          },
-          {
-            "heading": "Serve with",
-            "items": [
-              "3 cups jasmine rice, cooked (~1.5 cups dry)",
-              "Toasted sesame seeds",
-              "Sriracha on the table",
-              "Optional: kimchi or quick-pickled carrots for crunch"
+              "1 onion, diced",
+              "Olive oil",
+              "Garlic, minced",
+              "1 package ground beef",
+              "Salt, pepper, paprika, garlic powder",
+              "1 tbsp tomato paste",
+              "1 can Italian-seasoned diced tomatoes, drained",
+              "2 cups beef broth",
+              "1 cup heavy cream",
+              "2 cups uncooked noodles",
+              "Shredded cheddar"
             ]
           }
         ],
         "all_ingredients": [
-          "2 lb ground beef (93% lean works great)",
-          "1 tbsp toasted sesame oil (for cooking)",
-          "6 cloves garlic, minced",
-          "1 tbsp fresh ginger, grated (or 1 tsp ground)",
-          "1/2 cup soy sauce",
-          "1/3 cup brown sugar, packed",
-          "2 tbsp rice vinegar (or apple cider in a pinch)",
-          "1 tbsp toasted sesame oil",
-          "1 tsp red pepper flakes (1/2 tsp for kid-friendly)",
-          "1 tsp black pepper",
-          "1 tbsp cornstarch",
-          "2 large heads broccoli, cut into bite-size florets (~6 cups)",
-          "1 tbsp neutral oil (avocado or vegetable)",
-          "Pinch of salt",
-          "2 tbsp water",
-          "3 cups jasmine rice, cooked (~1.5 cups dry)",
-          "Toasted sesame seeds",
-          "Sriracha on the table",
-          "Optional: kimchi or quick-pickled carrots for crunch"
+          "1 onion, diced",
+          "Olive oil",
+          "Garlic, minced",
+          "1 package ground beef",
+          "Salt, pepper, paprika, garlic powder",
+          "1 tbsp tomato paste",
+          "1 can Italian-seasoned diced tomatoes, drained",
+          "2 cups beef broth",
+          "1 cup heavy cream",
+          "2 cups uncooked noodles",
+          "Shredded cheddar"
         ],
         "steps": [
-          "Start rice first (longest part).",
-          "**Broccoli, separate pan.** Big skillet, medium-high, neutral oil hot. Broccoli in single layer, don't crowd. Sit 2 min for char. Toss, another 2 min. Splash 2 tbsp water, lid on 90 sec. Lid off, salt. Should be bright green with brown edges, still has snap. Pull off heat.",
-          "**Beef, separate skillet.** Sesame oil, medium-high. Brown beef hard, break it small, 6-8 min. Drop heat to medium. Push beef aside, garlic + ginger in empty space, 30 sec until fragrant. Stir together.",
-          "Pour sauce in, stir. Thickens in ~90 sec from cornstarch. If too thick, splash of water.",
-          "Taste. Flat? More soy. Too salty? Pinch more brown sugar.",
-          "Dump broccoli into beef pan at the end, toss 30 sec to coat in sauce."
+          "Cook onion in olive oil.",
+          "Add garlic, cook a minute or so.",
+          "Add ground beef, brown.",
+          "Season with salt, pepper, paprika, garlic powder.",
+          "Stir in tomato paste + drained diced tomatoes.",
+          "Add beef broth + heavy cream.",
+          "Add uncooked noodles.",
+          "Cover, cook 15 min.",
+          "Uncover, cook 2 more min.",
+          "Off heat, top with cheddar, stir."
         ],
-        "notes": "<h3>Morning Prep (optional, saves 15 min in evening)</h3>\n<ol>\n<li>Whisk full sauce in a jar, refrigerate. Shake before using.</li>\n<li>Mince garlic + ginger together, small container, fridge.</li>\n<li>Cut broccoli into florets, gallon ziploc, fridge crisper.</li>\n<li>Measure dry rice + water into rice cooker pot, leave on counter.\n<strong>Don't pre-cook the beef or broccoli — reheating ruins both.</strong></li>\n</ol>\n<h3>Assembly</h3>\n<p>Rice in bowl. Beef + broccoli on top. Sesame seeds over the top. Sriracha for anyone over 12.</p>\n<h3>Notes</h3>\n<ul>\n<li>Two pans for broccoli + beef is non-negotiable. Cooking broccoli in beef pan = soggy gray broccoli from sauce moisture.</li>\n<li>93% lean is fine here — sauce carries the richness.</li>\n<li>Leftovers: cold beef on rice next day is unreasonably good. Or fry an egg on top.</li>\n<li>Sub English cucumber sliced for cold crunch contrast if desired.</li>\n</ul>\n<h3>Kid Reactions (expected)</h3>\n<ul>\n<li>Thomas: deconstructed, beef and rice not touching, no green stuff visible.</li>\n<li>William: will pick around broccoli; deal = 3 pieces minimum.</li>\n<li>Henry + Charlie: inhale and ask for seconds.</li>\n<li>Nancy: yes. No tzatziki.</li>\n</ul>\n",
-        "body_html": "<h1>Korean Beef + Broccoli Bowls</h1>\n<p><strong>Serves:</strong> 6\n<strong>Active time:</strong> 25 min\n<strong>Macros (Mike's portion):</strong> ~600 cal / 60g protein (est. with 93/7 beef)</p>\n<h2>Ingredients</h2>\n<h3>Beef</h3>\n<ul>\n<li>2 lb ground beef (93% lean works great)</li>\n<li>1 tbsp toasted sesame oil (for cooking)</li>\n<li>6 cloves garlic, minced</li>\n<li>1 tbsp fresh ginger, grated (or 1 tsp ground)</li>\n</ul>\n<h3>Sauce (whisk in a jar/bowl)</h3>\n<ul>\n<li>1/2 cup soy sauce</li>\n<li>1/3 cup brown sugar, packed</li>\n<li>2 tbsp rice vinegar (or apple cider in a pinch)</li>\n<li>1 tbsp toasted sesame oil</li>\n<li>1 tsp red pepper flakes (1/2 tsp for kid-friendly)</li>\n<li>1 tsp black pepper</li>\n<li>1 tbsp cornstarch</li>\n</ul>\n<h3>Broccoli</h3>\n<ul>\n<li>2 large heads broccoli, cut into bite-size florets (~6 cups)</li>\n<li>1 tbsp neutral oil (avocado or vegetable)</li>\n<li>Pinch of salt</li>\n<li>2 tbsp water</li>\n</ul>\n<h3>Serve with</h3>\n<ul>\n<li>3 cups jasmine rice, cooked (~1.5 cups dry)</li>\n<li>Toasted sesame seeds</li>\n<li>Sriracha on the table</li>\n<li>Optional: kimchi or quick-pickled carrots for crunch</li>\n</ul>\n<h2>Morning Prep (optional, saves 15 min in evening)</h2>\n<ol>\n<li>Whisk full sauce in a jar, refrigerate. Shake before using.</li>\n<li>Mince garlic + ginger together, small container, fridge.</li>\n<li>Cut broccoli into florets, gallon ziploc, fridge crisper.</li>\n<li>Measure dry rice + water into rice cooker pot, leave on counter.</li>\n</ol>\n<p><strong>Don't pre-cook the beef or broccoli — reheating ruins both.</strong></p>\n<h2>Method</h2>\n<ol>\n<li>Start rice first (longest part).</li>\n<li><strong>Broccoli, separate pan.</strong> Big skillet, medium-high, neutral oil hot. Broccoli in single layer, don't crowd. Sit 2 min for char. Toss, another 2 min. Splash 2 tbsp water, lid on 90 sec. Lid off, salt. Should be bright green with brown edges, still has snap. Pull off heat.</li>\n<li><strong>Beef, separate skillet.</strong> Sesame oil, medium-high. Brown beef hard, break it small, 6-8 min. Drop heat to medium. Push beef aside, garlic + ginger in empty space, 30 sec until fragrant. Stir together.</li>\n<li>Pour sauce in, stir. Thickens in ~90 sec from cornstarch. If too thick, splash of water.</li>\n<li>Taste. Flat? More soy. Too salty? Pinch more brown sugar.</li>\n<li>Dump broccoli into beef pan at the end, toss 30 sec to coat in sauce.</li>\n</ol>\n<h2>Assembly</h2>\n<p>Rice in bowl. Beef + broccoli on top. Sesame seeds over the top. Sriracha for anyone over 12.</p>\n<h2>Notes</h2>\n<ul>\n<li>Two pans for broccoli + beef is non-negotiable. Cooking broccoli in beef pan = soggy gray broccoli from sauce moisture.</li>\n<li>93% lean is fine here — sauce carries the richness.</li>\n<li>Leftovers: cold beef on rice next day is unreasonably good. Or fry an egg on top.</li>\n<li>Sub English cucumber sliced for cold crunch contrast if desired.</li>\n</ul>\n<h2>Kid Reactions (expected)</h2>\n<ul>\n<li>Thomas: deconstructed, beef and rice not touching, no green stuff visible.</li>\n<li>William: will pick around broccoli; deal = 3 pieces minimum.</li>\n<li>Henry + Charlie: inhale and ask for seconds.</li>\n<li>Nancy: yes. No tzatziki.</li>\n</ul>\n",
+        "notes": "",
+        "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
+        "last_reviewed": null
+      }
+    },
+    {
+      "dow": "Tuesday",
+      "dow_short": "Tue",
+      "name": "White Chicken Chili (crockpot)",
+      "isToday": false,
+      "isTomorrow": false,
+      "recipe": {
+        "slug": "white-chicken-chili",
+        "name": "White Chicken Chili",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner",
+          "crockpot"
+        ],
+        "aliases": [
+          "white-chicken-chili"
+        ],
+        "in_rotation": true,
+        "effort": "easy-slow",
+        "kid_friendly": true,
+        "protein_g": 55,
+        "cal": 550,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "1 can black beans",
+              "1 can corn",
+              "1 can rotel",
+              "2 chicken breasts",
+              "1 pkg ranch dressing mix",
+              "1 cream cheese",
+              "1 pound mexican cheese",
+              "1 bag tortilla chips",
+              "1 pkg sour cream"
+            ]
+          },
+          {
+            "heading": "Toppings",
+            "items": [
+              "Mexican cheese (shredded)",
+              "Tortilla chips",
+              "Sour cream"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "1 can black beans",
+          "1 can corn",
+          "1 can rotel",
+          "2 chicken breasts",
+          "1 pkg ranch dressing mix",
+          "1 cream cheese",
+          "1 pound mexican cheese",
+          "1 bag tortilla chips",
+          "1 pkg sour cream",
+          "Mexican cheese (shredded)",
+          "Tortilla chips",
+          "Sour cream"
+        ],
+        "steps": [
+          "Drain and rinse black beans.",
+          "Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.",
+          "Top with seasonings and ranch mix. Stir together.",
+          "Place cream cheese on top.",
+          "Cover with lid and cook on low for 6-8 hours.",
+          "Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve."
+        ],
+        "notes": "",
+        "body_html": "<h1>White Chicken Chili</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>1 can black beans</li>\n<li>1 can corn</li>\n<li>1 can rotel</li>\n<li>2 chicken breasts</li>\n<li>1 pkg ranch dressing mix</li>\n<li>1 cream cheese</li>\n<li>1 pound mexican cheese</li>\n<li>1 bag tortilla chips</li>\n<li>1 pkg sour cream</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Drain and rinse black beans.</li>\n<li>Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.</li>\n<li>Top with seasonings and ranch mix. Stir together.</li>\n<li>Place cream cheese on top.</li>\n<li>Cover with lid and cook on low for 6-8 hours.</li>\n<li>Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve.</li>\n</ol>\n<h2>Toppings</h2>\n<ul>\n<li>Mexican cheese (shredded)</li>\n<li>Tortilla chips</li>\n<li>Sour cream</li>\n</ul>\n",
         "last_reviewed": "2026-05-29T00:00:00.000Z"
       }
     },
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
+      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
       "isToday": false,
       "isTomorrow": false,
       "recipe": {
-        "slug": "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze",
-        "name": "Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze",
+        "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
+        "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
@@ -814,12 +851,12 @@
           "dinner"
         ],
         "aliases": [
-          "pesto-chicken-noodles-roasted-brussels-sprouts-with-balsamic-glaze"
+          "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
         ],
         "in_rotation": true,
-        "effort": "medium",
+        "effort": "easy",
         "kid_friendly": true,
-        "protein_g": 50,
+        "protein_g": 35,
         "cal": 650,
         "servings": null,
         "prep_min": null,
@@ -828,88 +865,146 @@
           {
             "heading": null,
             "items": [
-              "chicken thighs",
-              "pesto",
-              "noodles",
-              "Brussels sprouts",
-              "balsamic glaze",
-              "parmesan"
+              "smoked sausage (kielbasa)",
+              "baby potatoes",
+              "broccoli",
+              "olive oil",
+              "garlic",
+              "Italian seasoning",
+              "paprika",
+              "salt",
+              "pepper"
             ]
           }
         ],
         "all_ingredients": [
-          "chicken thighs",
-          "pesto",
-          "noodles",
-          "Brussels sprouts",
-          "balsamic glaze",
-          "parmesan"
+          "smoked sausage (kielbasa)",
+          "baby potatoes",
+          "broccoli",
+          "olive oil",
+          "garlic",
+          "Italian seasoning",
+          "paprika",
+          "salt",
+          "pepper"
         ],
         "steps": [],
         "notes": "",
-        "body_html": "<h1>Pesto chicken + noodles + roasted Brussels sprouts with balsamic glaze</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>pesto</li>\n<li>noodles</li>\n<li>Brussels sprouts</li>\n<li>balsamic glaze</li>\n<li>parmesan</li>\n</ul>\n",
+        "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Mexican beef & refried bean burritos + onions",
+      "name": "Tuscan Chicken Pasta (rigatoni, creamy parm-tomato sauce)",
       "isToday": false,
       "isTomorrow": false,
       "recipe": {
-        "slug": "mexican-beef-and-refried-bean-burritos-onions",
-        "name": "Mexican beef & refried bean burritos + onions",
-        "source": "markdown",
+        "slug": "tuscan-chicken-pasta",
+        "name": "Tuscan Chicken Pasta",
+        "source": "https://iamhomesteader.com/wprm_print/tuscan-chicken-pasta",
         "hasFullRecipe": true,
         "tags": [
           "recipe",
           "dinner"
         ],
         "aliases": [
-          "mexican-beef-and-refried-bean-burritos-onions"
+          "tuscan-chicken-pasta",
+          "tuscan-chicken"
         ],
         "in_rotation": true,
-        "effort": "easy",
+        "effort": "medium",
         "kid_friendly": true,
-        "protein_g": 50,
-        "cal": 750,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
+        "protein_g": 30,
+        "cal": 471,
+        "servings": 6,
+        "prep_min": 30,
+        "cook_min": 20,
         "ingredient_groups": [
           {
-            "heading": null,
+            "heading": "Chicken",
             "items": [
-              "ground beef",
-              "refried beans",
-              "tortillas",
-              "onions",
-              "cheese",
-              "sour cream",
-              "taco seasoning"
+              "2 boneless skinless chicken breasts (~1 lb)",
+              "3 tbsp olive oil, divided",
+              "1 tsp paprika",
+              "1 tsp garlic powder",
+              "1 tsp kosher salt",
+              "½ tsp black pepper"
+            ]
+          },
+          {
+            "heading": "Pasta + Sauce",
+            "items": [
+              "8 oz rigatoni, cooked al dente",
+              "4 tbsp (½ stick) unsalted butter",
+              "¼ cup shallot, finely diced",
+              "¼ cup sun-dried tomatoes, softened in hot water and chopped",
+              "1 tsp garlic, minced",
+              "2 tbsp tomato paste",
+              "1 tsp oregano",
+              "1 tsp paprika",
+              "½ tsp garlic powder",
+              "½ tsp kosher salt",
+              "¼ tsp black pepper",
+              "1½ cups heavy cream",
+              "1½ cups milk",
+              "1 cup fresh spinach",
+              "1 cup parmesan cheese, grated (plus more for garnish)",
+              "1 cup cherry tomatoes, halved",
+              "Fresh parsley, for garnish",
+              "Salt + pepper, to taste"
             ]
           }
         ],
         "all_ingredients": [
-          "ground beef",
-          "refried beans",
-          "tortillas",
-          "onions",
-          "cheese",
-          "sour cream",
-          "taco seasoning"
+          "2 boneless skinless chicken breasts (~1 lb)",
+          "3 tbsp olive oil, divided",
+          "1 tsp paprika",
+          "1 tsp garlic powder",
+          "1 tsp kosher salt",
+          "½ tsp black pepper",
+          "8 oz rigatoni, cooked al dente",
+          "4 tbsp (½ stick) unsalted butter",
+          "¼ cup shallot, finely diced",
+          "¼ cup sun-dried tomatoes, softened in hot water and chopped",
+          "1 tsp garlic, minced",
+          "2 tbsp tomato paste",
+          "1 tsp oregano",
+          "1 tsp paprika",
+          "½ tsp garlic powder",
+          "½ tsp kosher salt",
+          "¼ tsp black pepper",
+          "1½ cups heavy cream",
+          "1½ cups milk",
+          "1 cup fresh spinach",
+          "1 cup parmesan cheese, grated (plus more for garnish)",
+          "1 cup cherry tomatoes, halved",
+          "Fresh parsley, for garnish",
+          "Salt + pepper, to taste"
         ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
-        "last_reviewed": null
+        "steps": [
+          "Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.",
+          "Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.",
+          "In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).",
+          "Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm. ### Pasta + Sauce",
+          "Boil rigatoni in salted water, cook al dente (~14 min). Drain.",
+          "In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.",
+          "Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.",
+          "Add heavy cream and milk, stir to combine.",
+          "Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.",
+          "Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.",
+          "Serve topped with extra parmesan and parsley. Salt + pepper to taste."
+        ],
+        "notes": "<h3>Pitfalls</h3>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
+        "body_html": "<h1>Tuscan Chicken Pasta</h1>\n<p>Rigatoni in a creamy parmesan-tomato sauce with spinach and sun-dried tomatoes, topped with baked seasoned chicken. Serves 6. ~471 cal / ~30g protein per serving. Weigh your portion and load extra chicken + parmesan to hit your macro target.</p>\n<h2>Ingredients</h2>\n<h3>Chicken</h3>\n<ul>\n<li>2 boneless skinless chicken breasts (~1 lb)</li>\n<li>3 tbsp olive oil, divided</li>\n<li>1 tsp paprika</li>\n<li>1 tsp garlic powder</li>\n<li>1 tsp kosher salt</li>\n<li>½ tsp black pepper</li>\n</ul>\n<h3>Pasta + Sauce</h3>\n<ul>\n<li>8 oz rigatoni, cooked al dente</li>\n<li>4 tbsp (½ stick) unsalted butter</li>\n<li>¼ cup shallot, finely diced</li>\n<li>¼ cup sun-dried tomatoes, softened in hot water and chopped</li>\n<li>1 tsp garlic, minced</li>\n<li>2 tbsp tomato paste</li>\n<li>1 tsp oregano</li>\n<li>1 tsp paprika</li>\n<li>½ tsp garlic powder</li>\n<li>½ tsp kosher salt</li>\n<li>¼ tsp black pepper</li>\n<li>1½ cups heavy cream</li>\n<li>1½ cups milk</li>\n<li>1 cup fresh spinach</li>\n<li>1 cup parmesan cheese, grated (plus more for garnish)</li>\n<li>1 cup cherry tomatoes, halved</li>\n<li>Fresh parsley, for garnish</li>\n<li>Salt + pepper, to taste</li>\n</ul>\n<h2>Steps</h2>\n<h3>Chicken</h3>\n<ol>\n<li>Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.</li>\n<li>Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.</li>\n<li>In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).</li>\n<li>Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm.</li>\n</ol>\n<h3>Pasta + Sauce</h3>\n<ol start=\"5\">\n<li>Boil rigatoni in salted water, cook al dente (~14 min). Drain.</li>\n<li>In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.</li>\n<li>Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.</li>\n<li>Add heavy cream and milk, stir to combine.</li>\n<li>Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.</li>\n<li>Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.</li>\n<li>Serve topped with extra parmesan and parsley. Salt + pepper to taste.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
+        "last_reviewed": "2026-06-25T00:00:00.000Z"
       }
     },
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Takeout / out - Dude Perfect Squad Games Tour",
+      "name": "Pizza night (delivery or frozen)",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -917,15 +1012,60 @@
     {
       "dow": "Saturday",
       "dow_short": "Sat",
-      "name": "Pizza night",
+      "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "grilled-hamburgers-and-hotdogs-corn",
+        "name": "Grilled hamburgers & hotdogs + corn",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "grilled-hamburgers-and-hotdogs-corn"
+        ],
+        "in_rotation": true,
+        "effort": "easy",
+        "kid_friendly": true,
+        "protein_g": 50,
+        "cal": 800,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "ground beef patties",
+              "hotdogs",
+              "buns",
+              "corn on the cob",
+              "cheese slices",
+              "condiments"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "ground beef patties",
+          "hotdogs",
+          "buns",
+          "corn on the cob",
+          "cheese slices",
+          "condiments"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     }
   ],
   "weather": {
     "now": {
-      "temp": 89,
+      "temp": 90,
       "hi": 92,
       "lo": 73,
       "icon": "☀️",
@@ -2274,6 +2414,6 @@
     "creditDebt": -24588.72,
     "netLiquid": -8928.02,
     "source": "ynab",
-    "updatedAt": "2026-06-28T17:01:00.543Z"
+    "updatedAt": "2026-06-28T17:15:53.722Z"
   }
 }
