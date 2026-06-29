@@ -249,27 +249,6 @@ eleventyExcludeFromCollections: true
     100% { transform: scale(calc(1.7 * var(--fw-scale, 1))); opacity: 0; }
   }
 
-  /* Scrolling emoji ticker pinned to the very bottom. Translucent, taps fall
-     through (pointer-events:none), sits above tiles so it's always visible. */
-  .usa-marquee {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    height: 30px; overflow: hidden;
-    pointer-events: none; z-index: 9990;
-    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--usa-blue) 22%, transparent));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-  .usa-marquee .track {
-    display: inline-block; white-space: nowrap;
-    font-size: 19px; line-height: 30px; letter-spacing: 4px;
-    will-change: transform;
-    animation: usa-marquee-scroll 26s linear infinite;
-  }
-  @keyframes usa-marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
   /* === Waving-flag brand wordmark, flanked by screaming eagles === */
   :root[data-skin="usa"] .dh-brand {
     background-image: linear-gradient(90deg,
@@ -331,7 +310,6 @@ eleventyExcludeFromCollections: true
   /* Respect reduced-motion: keep the loud colors, kill the wiggling. */
   @media (prefers-reduced-motion: reduce) {
     :root[data-skin="usa"] .usa-fw,
-    :root[data-skin="usa"] .usa-marquee .track,
     :root[data-skin="usa"] .dh-brand,
     :root[data-skin="usa"] .dh-brand::before,
     :root[data-skin="usa"] .dh-brand::after,
@@ -3259,9 +3237,9 @@ eleventyExcludeFromCollections: true
       try { const s = localStorage.getItem(SKIN_KEY); if (s && VALID.has(s)) return s; } catch (e) {}
       return 'normal';
     }
-    // Build the loud extras (fireworks + emoji marquee) ONCE, on demand.
-    // They live in a single .usa-decor / .usa-marquee node we add/remove, so
-    // the Normal theme carries zero leftover patriotic shrapnel.
+    // Build the loud fireworks decoration ONCE, on demand. It lives in a
+    // single .usa-decor node we add/remove, so the Normal theme carries zero
+    // leftover patriotic shrapnel.
     function buildDecor() {
       if (document.querySelector('.usa-decor')) return;
       const FW = [ // [left%, topVh, delay s, scale]
@@ -3282,17 +3260,9 @@ eleventyExcludeFromCollections: true
         decor.appendChild(fw);
       });
       document.body.appendChild(decor);
-
-      const marquee = document.createElement('div');
-      marquee.className = 'usa-marquee';
-      marquee.setAttribute('aria-hidden', 'true');
-      const unit = ' 🇺🇸 🦅 🎆 ⭐ 🗽 🎇 🦅 🇺🇸 🍔 🎆 ⭐ 🎇 ';
-      // Doubled content so the -50% scroll loops seamlessly.
-      marquee.innerHTML = '<span class="track">' + unit.repeat(6) + unit.repeat(6) + '</span>';
-      document.body.appendChild(marquee);
     }
     function removeDecor() {
-      document.querySelectorAll('.usa-decor, .usa-marquee').forEach(n => n.remove());
+      document.querySelectorAll('.usa-decor').forEach(n => n.remove());
     }
     function apply(id) {
       if (id && id !== 'normal') {

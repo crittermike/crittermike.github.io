@@ -408,27 +408,6 @@
     100% { transform: scale(calc(1.7 * var(--fw-scale, 1))); opacity: 0; }
   }
 
-  /* Scrolling emoji ticker pinned to the very bottom. Translucent, taps fall
-     through (pointer-events:none), sits above tiles so it's always visible. */
-  .usa-marquee {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    height: 30px; overflow: hidden;
-    pointer-events: none; z-index: 9990;
-    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--usa-blue) 22%, transparent));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-  .usa-marquee .track {
-    display: inline-block; white-space: nowrap;
-    font-size: 19px; line-height: 30px; letter-spacing: 4px;
-    will-change: transform;
-    animation: usa-marquee-scroll 26s linear infinite;
-  }
-  @keyframes usa-marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
   /* === Waving-flag brand wordmark, flanked by screaming eagles === */
   :root[data-skin="usa"] .dh-brand {
     background-image: linear-gradient(90deg,
@@ -490,7 +469,6 @@
   /* Respect reduced-motion: keep the loud colors, kill the wiggling. */
   @media (prefers-reduced-motion: reduce) {
     :root[data-skin="usa"] .usa-fw,
-    :root[data-skin="usa"] .usa-marquee .track,
     :root[data-skin="usa"] .dh-brand,
     :root[data-skin="usa"] .dh-brand::before,
     :root[data-skin="usa"] .dh-brand::after,
@@ -1935,15 +1913,15 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg></span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
         <span class="dh-temp">84°</span>
         <span class="dh-hilo">H 96° · L 74°</span>
       </div>
       <div class="dh-days">
         
-          <div class="dh-day"><span class="d">Tue</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">97/77</span></div>
+          <div class="dh-day"><span class="d">Tue</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">96/77</span></div>
         
-          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">99/73</span></div>
+          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span><span class="hl">99/74</span></div>
         
           <div class="dh-day"><span class="d">Thu</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">99/72</span></div>
         
@@ -3807,9 +3785,9 @@
       try { const s = localStorage.getItem(SKIN_KEY); if (s && VALID.has(s)) return s; } catch (e) {}
       return 'normal';
     }
-    // Build the loud extras (fireworks + emoji marquee) ONCE, on demand.
-    // They live in a single .usa-decor / .usa-marquee node we add/remove, so
-    // the Normal theme carries zero leftover patriotic shrapnel.
+    // Build the loud fireworks decoration ONCE, on demand. It lives in a
+    // single .usa-decor node we add/remove, so the Normal theme carries zero
+    // leftover patriotic shrapnel.
     function buildDecor() {
       if (document.querySelector('.usa-decor')) return;
       const FW = [ // [left%, topVh, delay s, scale]
@@ -3830,17 +3808,9 @@
         decor.appendChild(fw);
       });
       document.body.appendChild(decor);
-
-      const marquee = document.createElement('div');
-      marquee.className = 'usa-marquee';
-      marquee.setAttribute('aria-hidden', 'true');
-      const unit = ' 🇺🇸 🦅 🎆 ⭐ 🗽 🎇 🦅 🇺🇸 🍔 🎆 ⭐ 🎇 ';
-      // Doubled content so the -50% scroll loops seamlessly.
-      marquee.innerHTML = '<span class="track">' + unit.repeat(6) + unit.repeat(6) + '</span>';
-      document.body.appendChild(marquee);
     }
     function removeDecor() {
-      document.querySelectorAll('.usa-decor, .usa-marquee').forEach(n => n.remove());
+      document.querySelectorAll('.usa-decor').forEach(n => n.remove());
     }
     function apply(id) {
       if (id && id !== 'normal') {
