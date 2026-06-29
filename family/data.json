@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-06-29T03:46:00.755Z",
+  "generated_at": "2026-06-29T04:00:13.304Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-28",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-28T09:00:00-04:00"
-    },
     {
       "date": "2026-06-30",
       "time": "9:30a",
@@ -407,7 +398,12 @@
       "allowance": {
         "balance_str": "$112.00"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        }
+      ]
     },
     {
       "key": "william",
@@ -425,7 +421,16 @@
       "allowance": {
         "balance_str": "$34.11"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -443,7 +448,16 @@
       "allowance": {
         "balance_str": "$68.13"
       },
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -459,16 +473,8 @@
       },
       "assignments": [
         {
-          "id": "sch-2026-06-28-summer-pe-perry-week-4-fitness-log-log-4",
-          "label": "Summer PE (Perry): Week 4 Fitness Log — log 4x 20-min workouts + attach 1-min video clip"
-        },
-        {
-          "id": "sch-2026-06-28-summer-pe-perry-nutrient-brochure",
-          "label": "Summer PE (Perry): Nutrient Brochure"
-        },
-        {
-          "id": "sch-2026-06-28-summer-pe-perry-usda-dietary-quiz",
-          "label": "Summer PE (Perry): USDA Dietary Quiz"
+          "id": "take-medicine",
+          "label": "Take medicine"
         }
       ]
     }
@@ -684,7 +690,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -692,8 +698,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken Fajitas (cast iron, zucchini + corn)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -701,7 +707,7 @@
       "dow_short": "Tue",
       "name": "White Chicken Chili (crockpot)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "white-chicken-chili",
         "name": "White Chicken Chili",
@@ -1005,19 +1011,12 @@
   "weather": {
     "now": {
       "temp": 77,
-      "hi": 90,
-      "lo": 73,
+      "hi": 93,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛈",
-        "hi": 93,
-        "lo": 74,
-        "code": 95
-      },
       {
         "d": "Tue",
         "icon": "⛈",
@@ -1045,24 +1044,31 @@
         "hi": 98,
         "lo": 75,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 100,
+        "lo": 77,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-28T06:18",
         "2026-06-29T06:18",
         "2026-06-30T06:19",
         "2026-07-01T06:19",
         "2026-07-02T06:20",
-        "2026-07-03T06:20"
+        "2026-07-03T06:20",
+        "2026-07-04T06:21"
       ],
       "sunsets": [
-        "2026-06-28T20:47",
         "2026-06-29T20:47",
         "2026-06-30T20:47",
         "2026-07-01T20:47",
         "2026-07-02T20:47",
-        "2026-07-03T20:46"
+        "2026-07-03T20:46",
+        "2026-07-04T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2353,6 +2359,6 @@
     "creditDebt": -24588.72,
     "netLiquid": -8928.02,
     "source": "ynab",
-    "updatedAt": "2026-06-29T03:45:59.427Z"
+    "updatedAt": "2026-06-29T04:00:10.382Z"
   }
 }
