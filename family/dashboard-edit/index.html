@@ -399,33 +399,35 @@
   /* --- Injected decoration container (added by skin JS only under USA) --- */
   .usa-decor { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
 
-  /* CSS fireworks: a tiny dot wearing a ring of red/white/blue/gold "sparks",
-     scaled + faded on a loop so it bursts over and over. The spark colors are
-     per-firework CSS vars (--fw-c1..c3) and the JS re-randomizes position +
-     palette + size on every burst, so no two bursts repeat the same spot.
-     Lives in the background (behind tiles); you see it in the header band. */
+  /* CSS fireworks: a tiny dot wearing a ring of red/white/blue/gold "sparks".
+     The animation plays ONCE per launch (no infinite loop, no mid-flight var
+     mutation — that caused Safari to jump the playhead and flash); the JS
+     re-arms each firework with a fresh position/palette after it ends, via a
+     restart of the animation. Lives in the open sky band above the tiles. */
   .usa-fw {
     position: absolute;
     width: 4px; height: 4px; border-radius: 50%;
-    background: #fff;
+    background: transparent;
     opacity: 0;
-    transform: scale(0.2);
-    animation: usa-fw-burst var(--fw-dur, 2.6s) ease-out infinite;
+    transform: scale(0.15);
     will-change: transform, opacity;
     box-shadow:
       20px 0 0 0 var(--fw-c1, #b31942),     17.3px 10px 0 0 var(--fw-c2, #fff),    10px 17.3px 0 0 var(--fw-c3, #0a3161),
       0 20px 0 0 var(--fw-c1, #b31942),     -10px 17.3px 0 0 var(--fw-c2, #fff),   -17.3px 10px 0 0 var(--fw-c3, #0a3161),
       -20px 0 0 0 var(--fw-c1, #b31942),    -17.3px -10px 0 0 var(--fw-c2, #fff),  -10px -17.3px 0 0 var(--fw-c3, #0a3161),
       0 -20px 0 0 var(--fw-c1, #b31942),    10px -17.3px 0 0 var(--fw-c2, #fff),   17.3px -10px 0 0 var(--fw-c3, #0a3161),
-      /* inner ring for a fuller burst */
       9px 0 0 0 var(--fw-c2, #fff),         0 9px 0 0 var(--fw-c3, #0a3161),
       -9px 0 0 0 var(--fw-c2, #fff),        0 -9px 0 0 var(--fw-c1, #b31942);
   }
+  /* The .bursting class is what actually plays the animation; JS toggles it. */
+  .usa-fw.bursting {
+    animation: usa-fw-burst var(--fw-dur, 2.6s) ease-out 1 forwards;
+  }
   @keyframes usa-fw-burst {
     0%   { transform: scale(0.15); opacity: 0; }
-    8%   { opacity: 1; }
-    60%  { opacity: 0.9; }
-    100% { transform: scale(calc(1.75 * var(--fw-scale, 1))); opacity: 0; }
+    9%   { opacity: 1; }
+    55%  { opacity: 0.92; }
+    100% { transform: scale(calc(1.7 * var(--fw-scale, 1))); opacity: 0; }
   }
 
   /* === Waving-flag brand wordmark, flanked by screaming eagles === */
@@ -1965,8 +1967,8 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-1) scale(0.78)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><path class="wx-b" d="M13.2 15.6 L9.2 20.8 H11.5 L10.7 23.6 L15 18.2 H12.4 Z"/></svg></span>
-        <span class="dh-temp">90°</span>
-        <span class="dh-hilo">H 93° · L 74°</span>
+        <span class="dh-temp">91°</span>
+        <span class="dh-hilo">H 94° · L 74°</span>
       </div>
       <div class="dh-days">
         
