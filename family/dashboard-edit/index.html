@@ -296,9 +296,9 @@
     --usa-star: rgba(10,49,97,0.22);
     --usa-stripe: rgba(179,25,66,0.13);
     --usa-glow: rgba(10,49,97,0.09);
-    --usa-tile: rgba(255,255,255,0.93);
-    --usa-tile-2: rgba(247,250,255,0.91);
-    --usa-tile-edge: rgba(255,255,255,0.65);
+    --usa-tile: rgba(255,255,255,0.66);
+    --usa-tile-2: rgba(247,250,255,0.60);
+    --usa-tile-edge: rgba(255,255,255,0.6);
   }
 
   /* --- 🇺🇸 FOURTH OF JULY — DARK (fireworks night sky) --- */
@@ -336,9 +336,9 @@
     --usa-star: rgba(173,196,255,0.34);
     --usa-stripe: rgba(255,93,115,0.13);
     --usa-glow: rgba(91,141,239,0.26);
-    --usa-tile: rgba(16,26,48,0.72);
-    --usa-tile-2: rgba(12,20,38,0.68);
-    --usa-tile-edge: rgba(120,160,255,0.18);
+    --usa-tile: rgba(16,26,48,0.56);
+    --usa-tile-2: rgba(12,20,38,0.50);
+    --usa-tile-edge: rgba(120,160,255,0.20);
   }
 
   /* === 🦅🎆 OVERKILL USA DECOR LAYER 🎆🦅 ===
@@ -361,8 +361,8 @@
     background-image:
       linear-gradient(180deg, rgba(20,28,52,0.14) 0%, rgba(20,28,52,0.05) 24%, rgba(20,28,52,0.03) 52%, rgba(44,14,26,0.09) 100%),
       url("/family/assets/flag.webp");
-    background-size: cover, cover;
-    background-position: center center, center 40%;
+    background-size: cover, 132% auto;
+    background-position: center center, 78% 38%;
     background-repeat: no-repeat, no-repeat;
     filter: saturate(1.42) contrast(1.07);
   }
@@ -473,8 +473,8 @@
      is what keeps it legible: the photo turns to soft color, not detail. */
   :root[data-skin="usa"] .grid-stack-item-content {
     background: linear-gradient(180deg, var(--usa-tile) 0%, var(--usa-tile-2) 100%);
-    -webkit-backdrop-filter: blur(11px) saturate(1.15);
-            backdrop-filter: blur(11px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.25);
+            backdrop-filter: blur(16px) saturate(1.25);
     border: 1px solid var(--usa-tile-edge);
   }
   /* Modal + toolbar panels also float over the flag — frost them too so they
@@ -3861,19 +3861,19 @@
       const rand = (a, b) => a + Math.random() * (b - a);
       const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
-      // Fireworks only read in the open sky band: top ~30vh, and we avoid the
-      // dead-center where the weather widget + brand sit by biasing to the
-      // sides and the gaps. Each FW relaunches itself at a new spot on each
-      // burst via the animationiteration event.
-      const COUNT = 7;
+      // Fireworks read only in the OPEN SKY BAND above the tile grid. The grid
+      // starts ~18.5vh down, so we keep bursts in the top ~15vh and the side
+      // gutters where there are no tiles. Avoid dead-center (brand + weather).
+      const COUNT = 6;
+      const timers = [];
+
       function reseed(fw) {
-        // Horizontal: spread across the full width but thin out the very center
-        // (35-62%) where the header text lives.
+        // Bias to the sides; thin out the very center where header text lives.
         let left;
-        do { left = rand(3, 97); } while (left > 36 && left < 61 && Math.random() < 0.7);
-        const top = rand(2, 26);              // vh, the open sky band
-        const scale = rand(0.55, 1.35);
-        const dur = rand(2.0, 3.4);
+        do { left = rand(2, 98); } while (left > 34 && left < 64 && Math.random() < 0.78);
+        const top = rand(1.5, 14);            // vh — strictly above the tiles
+        const scale = rand(0.6, 1.3);
+        const dur = rand(2.2, 3.2);
         const pal = pick(PALETTES);
         fw.style.left = left.toFixed(1) + '%';
         fw.style.top = top.toFixed(1) + 'vh';
@@ -3882,20 +3882,36 @@
         fw.style.setProperty('--fw-c1', pal[0]);
         fw.style.setProperty('--fw-c2', pal[1]);
         fw.style.setProperty('--fw-c3', pal[2]);
+        return dur;
       }
+
+      // One launch = reseed at a new spot, then play the burst exactly once by
+      // toggling .bursting (force reflow so the restart actually re-triggers).
+      // When it ends, schedule the next launch after a random gap. No infinite
+      // loop, no mutating duration mid-flight — that's what made them flicker.
+      function launch(fw) {
+        const dur = reseed(fw);
+        fw.classList.remove('bursting');
+        void fw.offsetWidth;                  // reflow: lets the class re-add re-fire the anim
+        fw.classList.add('bursting');
+        const gap = rand(250, 1400);          // ms of dark sky before this one relaunches
+        timers.push(setTimeout(() => launch(fw), dur * 1000 + gap));
+      }
+
       for (let i = 0; i < COUNT; i++) {
         const fw = document.createElement('div');
         fw.className = 'usa-fw';
-        reseed(fw);
-        // Stagger the start so they don't all burst in unison.
-        fw.style.animationDelay = (-rand(0, 3)).toFixed(2) + 's';
-        // On every loop, jump to a fresh position + palette.
-        fw.addEventListener('animationiteration', () => reseed(fw));
         decor.appendChild(fw);
+        // Stagger the first launch so they don't all pop at once.
+        timers.push(setTimeout(() => launch(fw), rand(0, 2600)));
       }
+      decor._timers = timers;                 // so removeDecor can clear them
     }
     function removeDecor() {
-      document.querySelectorAll('.usa-decor').forEach(n => n.remove());
+      document.querySelectorAll('.usa-decor').forEach(n => {
+        (n._timers || []).forEach(clearTimeout);
+        n.remove();
+      });
     }
     function apply(id) {
       if (id && id !== 'normal') {
