@@ -3,6 +3,9 @@ module.exports = function(eleventyConfig) {
   // Source is in _includes (gitignored from output by default), so copy explicitly.
   eleventyConfig.addPassthroughCopy({ "src/_includes/shared.css": "shared.css" });
 
+  // Copy static image assets (e.g. the 4th of July flag background) to output.
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+
   // Set directories
   return {
     dir: {

@@ -296,6 +296,9 @@
     --usa-star: rgba(10,49,97,0.22);
     --usa-stripe: rgba(179,25,66,0.13);
     --usa-glow: rgba(10,49,97,0.18);
+    --usa-tile: rgba(255,255,255,0.74);
+    --usa-tile-2: rgba(247,250,255,0.70);
+    --usa-tile-edge: rgba(255,255,255,0.65);
   }
 
   /* --- 🇺🇸 FOURTH OF JULY — DARK (fireworks night sky) --- */
@@ -333,6 +336,9 @@
     --usa-star: rgba(173,196,255,0.34);
     --usa-stripe: rgba(255,93,115,0.13);
     --usa-glow: rgba(91,141,239,0.26);
+    --usa-tile: rgba(16,26,48,0.72);
+    --usa-tile-2: rgba(12,20,38,0.68);
+    --usa-tile-edge: rgba(120,160,255,0.18);
   }
 
   /* === 🦅🎆 OVERKILL USA DECOR LAYER 🎆🦅 ===
@@ -348,17 +354,24 @@
     inset: 0;
     transition: opacity 0.5s ease;
   }
-  /* Bold full-height flag stripes across the whole field. */
+  /* Real waving-flag photo, fixed behind everything. Self-hosted (CC BY-SA
+     4.0 — see footer credit). A dark-to-clear scrim keeps the header text and
+     bright tiles legible over the busy photo. */
   :root[data-skin="usa"] body::before {
-    background-image: repeating-linear-gradient(
-      180deg,
-      var(--usa-stripe) 0px,
-      var(--usa-stripe) 44px,
-      transparent 44px,
-      transparent 88px
-    );
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 100%);
-            mask-image: linear-gradient(180deg, #000 0%, #000 100%);
+    background-image:
+      linear-gradient(180deg, rgba(12,20,40,0.30) 0%, rgba(12,20,40,0.10) 22%, rgba(12,20,40,0.05) 50%, rgba(12,20,40,0.16) 100%),
+      url("/assets/flag.webp");
+    background-size: cover, cover;
+    background-position: center center, center center;
+    background-repeat: no-repeat, no-repeat;
+  }
+  /* Night mode: drop the photo brightness so it reads as fireworks-dark, not
+     a sunny afternoon glued behind a navy dashboard. */
+  :root[data-skin="usa"][data-theme="dark"] body::before {
+    background-image:
+      linear-gradient(180deg, rgba(4,8,20,0.62) 0%, rgba(4,8,20,0.50) 50%, rgba(8,4,16,0.66) 100%),
+      url("/assets/flag.webp");
+    filter: saturate(1.05);
   }
   /* A dense field of white "stars" + a big blue canton glow up top-left. */
   :root[data-skin="usa"] body::after {
@@ -442,6 +455,35 @@
   }
   /* Date line gets its own little parade. */
   :root[data-skin="usa"] .dh-date::after { content: " 🎆 🇺🇸 🦅"; letter-spacing: 1px; }
+
+  /* === FROSTED GLASS TILES — let the flag show through ===
+     Swap the opaque card gradient for a translucent one + backdrop blur, so
+     the waving flag reads behind every tile while text stays crisp. The blur
+     is what keeps it legible: the photo turns to soft color, not detail. */
+  :root[data-skin="usa"] .grid-stack-item-content {
+    background: linear-gradient(180deg, var(--usa-tile) 0%, var(--usa-tile-2) 100%);
+    -webkit-backdrop-filter: blur(11px) saturate(1.15);
+            backdrop-filter: blur(11px) saturate(1.15);
+    border: 1px solid var(--usa-tile-edge);
+  }
+  /* Modal + toolbar panels also float over the flag — frost them too so they
+     don't look like opaque cutouts pasted on the photo. */
+  :root[data-skin="usa"] .modal-bg .modal {
+    background: linear-gradient(180deg, var(--usa-tile) 0%, var(--usa-tile-2) 100%);
+    -webkit-backdrop-filter: blur(14px) saturate(1.15);
+            backdrop-filter: blur(14px) saturate(1.15);
+  }
+  /* Graceful fallback: if the browser can't do backdrop-filter, bump the tile
+     opacity up so text never lands on a busy photo. (Modern iPad Safari does
+     support it, so this is just a seatbelt.) */
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    :root[data-skin="usa"] .grid-stack-item-content {
+      background: linear-gradient(180deg,
+        color-mix(in srgb, var(--usa-tile) 100%, #fff 14%) 0%,
+        var(--usa-tile-2) 100%);
+    }
+    :root[data-skin="usa"] .grid-stack-item-content { backdrop-filter: none; }
+  }
 
   /* === Fat shimmering red-white-blue ribbon across every tile top === */
   :root[data-skin="usa"] .grid-stack-item-content::before {
@@ -1914,7 +1956,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">84°</span>
+        <span class="dh-temp">83°</span>
         <span class="dh-hilo">H 96° · L 74°</span>
       </div>
       <div class="dh-days">
