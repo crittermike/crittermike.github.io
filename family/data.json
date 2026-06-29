@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T20:00:49.308Z",
+  "generated_at": "2026-06-29T20:15:48.266Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -28,6 +28,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-07-04T00:00:00-04:00"
+    },
+    {
+      "date": "2026-07-03",
+      "time": "3p",
+      "what": "Poppy grooming (DOG Full Groom) 🐩",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-03T16:00:00-04:00"
     },
     {
       "date": "2026-07-04",
@@ -2359,6 +2368,6 @@
     "creditDebt": -23873.65,
     "netLiquid": -8212.95,
     "source": "ynab",
-    "updatedAt": "2026-06-29T20:00:47.990Z"
+    "updatedAt": "2026-06-29T20:15:47.086Z"
   }
 }
