@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T12:30:09.957Z",
+  "generated_at": "2026-06-29T12:45:17.581Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1010,7 +1010,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 81,
       "hi": 96,
       "lo": 74,
       "icon": "☀️",
@@ -2223,7 +2223,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 96.7,
-    "totalSpend": 15197.01,
+    "totalSpend": 15691.82,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2243,6 +2243,14 @@
         "pct": 0
       },
       {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 2200.9,
+        "balance": -2200.9,
+        "pct": 0
+      },
+      {
         "name": "😌 Emergency fund",
         "group": "Needs",
         "budgeted": 0,
@@ -2251,28 +2259,20 @@
         "pct": 0
       },
       {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 1892.72,
-        "balance": -1892.72,
-        "pct": 0
-      },
-      {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 471.66,
-        "spent": 1156.07,
-        "balance": -684.41,
-        "pct": 245.1
+        "spent": 1210.73,
+        "balance": -739.07,
+        "pct": 256.7
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 500,
-        "spent": 481.4,
-        "balance": 18.6,
-        "pct": 96.3
+        "spent": 515.26,
+        "balance": -15.26,
+        "pct": 103.1
       },
       {
         "name": "📚 School",
@@ -2299,6 +2299,14 @@
         "pct": 0
       },
       {
+        "name": "⚡️ Utilities",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 214.8,
+        "balance": -214.8,
+        "pct": 0
+      },
+      {
         "name": "😷 Medical",
         "group": "Needs",
         "budgeted": 0,
@@ -2312,14 +2320,6 @@
         "budgeted": 0,
         "spent": 160,
         "balance": -160,
-        "pct": 0
-      },
-      {
-        "name": "⚡️ Utilities",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 116.69,
-        "balance": -116.69,
         "pct": 0
       },
       {
@@ -2356,9 +2356,9 @@
       }
     ],
     "liquidCash": 15660.7,
-    "creditDebt": -24599.77,
-    "netLiquid": -8939.07,
+    "creditDebt": -23873.65,
+    "netLiquid": -8212.95,
     "source": "ynab",
-    "updatedAt": "2026-06-29T12:30:08.414Z"
+    "updatedAt": "2026-06-29T12:45:16.442Z"
   }
 }
