@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:30:51.812Z",
+  "generated_at": "2026-06-29T21:45:51.884Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -687,11 +687,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken Fajitas (cast iron, zucchini + corn)",
-    "protein_g": 48,
-    "cal": 600,
-    "effort": "easy",
-    "note": "Swapped in for hamburger helper (Mike's call). Nancy-safe: onions + zucchini, NO bell peppers. Load extra chicken for Mike's macros.",
+    "name": "Leftovers / butter noodles",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Nancy out today + tomorrow. No real cook -- leftovers or butter noodles for the kids.",
     "recipe": null
   },
   "mealweek": [
@@ -706,7 +706,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken Fajitas (cast iron, zucchini + corn)",
+      "name": "Leftovers / butter noodles",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -714,139 +714,18 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "White Chicken Chili (crockpot)",
+      "name": "Leftovers / butter noodles",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": {
-        "slug": "white-chicken-chili",
-        "name": "White Chicken Chili",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner",
-          "crockpot"
-        ],
-        "aliases": [
-          "white-chicken-chili"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 550,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "1 can black beans",
-              "1 can corn",
-              "1 can rotel",
-              "2 chicken breasts",
-              "1 pkg ranch dressing mix",
-              "1 cream cheese",
-              "1 pound mexican cheese",
-              "1 bag tortilla chips",
-              "1 pkg sour cream"
-            ]
-          },
-          {
-            "heading": "Toppings",
-            "items": [
-              "Mexican cheese (shredded)",
-              "Tortilla chips",
-              "Sour cream"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "1 can black beans",
-          "1 can corn",
-          "1 can rotel",
-          "2 chicken breasts",
-          "1 pkg ranch dressing mix",
-          "1 cream cheese",
-          "1 pound mexican cheese",
-          "1 bag tortilla chips",
-          "1 pkg sour cream",
-          "Mexican cheese (shredded)",
-          "Tortilla chips",
-          "Sour cream"
-        ],
-        "steps": [
-          "Drain and rinse black beans.",
-          "Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.",
-          "Top with seasonings and ranch mix. Stir together.",
-          "Place cream cheese on top.",
-          "Cover with lid and cook on low for 6-8 hours.",
-          "Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve."
-        ],
-        "notes": "",
-        "body_html": "<h1>White Chicken Chili</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>1 can black beans</li>\n<li>1 can corn</li>\n<li>1 can rotel</li>\n<li>2 chicken breasts</li>\n<li>1 pkg ranch dressing mix</li>\n<li>1 cream cheese</li>\n<li>1 pound mexican cheese</li>\n<li>1 bag tortilla chips</li>\n<li>1 pkg sour cream</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Drain and rinse black beans.</li>\n<li>Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.</li>\n<li>Top with seasonings and ranch mix. Stir together.</li>\n<li>Place cream cheese on top.</li>\n<li>Cover with lid and cook on low for 6-8 hours.</li>\n<li>Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve.</li>\n</ol>\n<h2>Toppings</h2>\n<ul>\n<li>Mexican cheese (shredded)</li>\n<li>Tortilla chips</li>\n<li>Sour cream</li>\n</ul>\n",
-        "last_reviewed": "2026-05-29T00:00:00.000Z"
-      }
+      "recipe": null
     },
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+      "name": "Chicken Fajitas (cast iron, zucchini + corn)",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
-        "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
-        ],
-        "in_rotation": true,
-        "effort": "easy",
-        "kid_friendly": true,
-        "protein_g": 35,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "smoked sausage (kielbasa)",
-              "baby potatoes",
-              "broccoli",
-              "olive oil",
-              "garlic",
-              "Italian seasoning",
-              "paprika",
-              "salt",
-              "pepper"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "smoked sausage (kielbasa)",
-          "baby potatoes",
-          "broccoli",
-          "olive oil",
-          "garlic",
-          "Italian seasoning",
-          "paprika",
-          "salt",
-          "pepper"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Thursday",
@@ -1019,8 +898,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 94,
-      "hi": 94,
+      "temp": 91,
+      "hi": 92,
       "lo": 74,
       "icon": "⛈",
       "code": 95
@@ -1030,7 +909,7 @@
         "d": "Tue",
         "icon": "⛈",
         "hi": 96,
-        "lo": 75,
+        "lo": 76,
         "code": 95
       },
       {
@@ -2368,6 +2247,6 @@
     "creditDebt": -23873.65,
     "netLiquid": -8212.95,
     "source": "ynab",
-    "updatedAt": "2026-06-29T21:30:50.580Z"
+    "updatedAt": "2026-06-29T21:45:50.591Z"
   }
 }
