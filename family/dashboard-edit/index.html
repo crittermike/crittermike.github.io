@@ -264,9 +264,9 @@
   /* --- 🇺🇸 FOURTH OF JULY — LIGHT (sunlit parchment + flag) --- */
   :root[data-skin="usa"] {
     --warm-bg: #eef1f9;
-    --bg-grad-1: #e7eefc;   /* sky blue up top   */
+    --bg-grad-1: #dbe8ff;   /* bolder sky blue up top */
     --bg-grad-2: #f6f4ee;   /* cream in the middle */
-    --bg-grad-3: #f8ebe9;   /* faint red blush below */
+    --bg-grad-3: #ffdde0;   /* stronger red blush below */
     --card-bg: #ffffff;
     --card-bg-2: #f5f8ff;
     --card-top-hi: rgba(255,255,255,0.95);
@@ -293,9 +293,9 @@
     --on-accent: #ffffff;
     --usa-red: #b31942;
     --usa-blue: #0a3161;
-    --usa-star: rgba(10,49,97,0.16);
-    --usa-stripe: rgba(179,25,66,0.055);
-    --usa-glow: rgba(10,49,97,0.16);
+    --usa-star: rgba(10,49,97,0.22);
+    --usa-stripe: rgba(179,25,66,0.13);
+    --usa-glow: rgba(10,49,97,0.18);
   }
 
   /* --- 🇺🇸 FOURTH OF JULY — DARK (fireworks night sky) --- */
@@ -330,15 +330,15 @@
     --on-accent: #ffffff;
     --usa-red: #ff5d73;
     --usa-blue: #5b8def;
-    --usa-star: rgba(173,196,255,0.30);
-    --usa-stripe: rgba(255,93,115,0.06);
-    --usa-glow: rgba(91,141,239,0.20);
+    --usa-star: rgba(173,196,255,0.34);
+    --usa-stripe: rgba(255,93,115,0.13);
+    --usa-glow: rgba(91,141,239,0.26);
   }
 
-  /* --- USA decorative layer: flag stripes + a star canton ---
-     Two fixed, click-through layers that sit ABOVE the body
-     gradient but BEHIND every tile/header (z-index:-1), so they
-     never touch readability. Only present under the USA skin. */
+  /* === 🦅🎆 OVERKILL USA DECOR LAYER 🎆🦅 ===
+     Loud on purpose. Everything here is fixed/absolute, pointer-events:none,
+     and lives BEHIND the opaque tiles (z-index:-1) or only over empty header
+     space, so tile TEXT stays readable no matter how dumb this gets. */
   :root[data-skin="usa"] body::before,
   :root[data-skin="usa"] body::after {
     content: "";
@@ -348,54 +348,155 @@
     inset: 0;
     transition: opacity 0.5s ease;
   }
-  /* Broad, faint horizontal "stripes" wash across the lower field. */
+  /* Bold full-height flag stripes across the whole field. */
   :root[data-skin="usa"] body::before {
     background-image: repeating-linear-gradient(
       180deg,
       var(--usa-stripe) 0px,
-      var(--usa-stripe) 46px,
-      transparent 46px,
-      transparent 92px
+      var(--usa-stripe) 44px,
+      transparent 44px,
+      transparent 88px
     );
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
-            mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 100%);
   }
-  /* A soft blue glow + scattered white "stars" in the top-left canton. */
+  /* A dense field of white "stars" + a big blue canton glow up top-left. */
   :root[data-skin="usa"] body::after {
     background-image:
-      radial-gradient(circle at 7% 10%, var(--usa-star) 0 1.4px, transparent 1.8px),
-      radial-gradient(circle at 17% 8%,  var(--usa-star) 0 1.2px, transparent 1.6px),
-      radial-gradient(circle at 12% 19%, var(--usa-star) 0 1.5px, transparent 1.9px),
-      radial-gradient(circle at 24% 16%, var(--usa-star) 0 1.2px, transparent 1.6px),
-      radial-gradient(circle at 5%  26%, var(--usa-star) 0 1.3px, transparent 1.7px),
-      radial-gradient(circle at 20% 27%, var(--usa-star) 0 1.2px, transparent 1.6px),
-      radial-gradient(ellipse 60% 55% at -6% -8%, var(--usa-glow) 0%, transparent 70%);
+      radial-gradient(circle at 4% 8%,  var(--usa-star) 0 2px, transparent 2.4px),
+      radial-gradient(circle at 12% 6%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 19% 11%, var(--usa-star) 0 2px, transparent 2.4px),
+      radial-gradient(circle at 27% 7%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 34% 13%, var(--usa-star) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle at 8% 18%, var(--usa-star) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle at 16% 22%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 24% 19%, var(--usa-star) 0 2px, transparent 2.4px),
+      radial-gradient(circle at 31% 24%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 6% 30%, var(--usa-star) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle at 14% 34%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 22% 31%, var(--usa-star) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle at 88% 12%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(circle at 94% 20%, var(--usa-star) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle at 82% 24%, var(--usa-star) 0 1.6px, transparent 2px),
+      radial-gradient(ellipse 64% 60% at -8% -10%, var(--usa-glow) 0%, transparent 70%);
     background-repeat: no-repeat;
   }
 
-  /* Patriotic brand wordmark: "Critter" red, "Crew" blue. */
-  :root[data-skin="usa"] .dh-brand { color: var(--usa-red); }
-  :root[data-skin="usa"] .dh-brand span { color: var(--usa-blue); }
+  /* --- Injected decoration container (added by skin JS only under USA) --- */
+  .usa-decor { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
 
-  /* A thin red→white→blue ribbon across the top of every tile. */
+  /* CSS fireworks: a tiny dot wearing a ring of red/white/blue box-shadow
+     "sparks", scaled + faded on a loop so it bursts over and over. Lives in
+     the background (behind tiles); you see it in the header band + gaps. */
+  .usa-fw {
+    position: absolute;
+    width: 3px; height: 3px; border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transform: scale(0.2);
+    animation: usa-fw-burst 2.6s ease-out infinite;
+    box-shadow:
+      18px 0 0 0 var(--usa-red),    15.6px 9px 0 0 #fff,    9px 15.6px 0 0 var(--usa-blue),
+      0 18px 0 0 var(--usa-red),    -9px 15.6px 0 0 #fff,   -15.6px 9px 0 0 var(--usa-blue),
+      -18px 0 0 0 var(--usa-red),   -15.6px -9px 0 0 #fff,  -9px -15.6px 0 0 var(--usa-blue),
+      0 -18px 0 0 var(--usa-red),   9px -15.6px 0 0 #fff,   15.6px -9px 0 0 var(--usa-blue);
+  }
+  @keyframes usa-fw-burst {
+    0%   { transform: scale(0.2); opacity: 0; }
+    10%  { opacity: 1; }
+    65%  { opacity: 0.85; }
+    100% { transform: scale(calc(1.7 * var(--fw-scale, 1))); opacity: 0; }
+  }
+
+  /* Scrolling emoji ticker pinned to the very bottom. Translucent, taps fall
+     through (pointer-events:none), sits above tiles so it's always visible. */
+  .usa-marquee {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 30px; overflow: hidden;
+    pointer-events: none; z-index: 9990;
+    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--usa-blue) 22%, transparent));
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .usa-marquee .track {
+    display: inline-block; white-space: nowrap;
+    font-size: 19px; line-height: 30px; letter-spacing: 4px;
+    will-change: transform;
+    animation: usa-marquee-scroll 26s linear infinite;
+  }
+  @keyframes usa-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* === Waving-flag brand wordmark, flanked by screaming eagles === */
+  :root[data-skin="usa"] .dh-brand {
+    background-image: linear-gradient(90deg,
+      var(--usa-red) 0%, var(--usa-blue) 25%, var(--usa-red) 50%,
+      var(--usa-blue) 75%, var(--usa-red) 100%);
+    background-size: 260% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: usa-flag-wave 7s linear infinite;
+    text-shadow: none;
+  }
+  :root[data-skin="usa"] .dh-brand span { color: transparent; }
+  @keyframes usa-flag-wave { to { background-position: 260% 0; } }
+  /* Eagles sit OUTSIDE the clipped text (reset the fill so the emoji shows). */
+  :root[data-skin="usa"] .dh-brand::before,
+  :root[data-skin="usa"] .dh-brand::after {
+    -webkit-text-fill-color: initial; color: initial;
+    background: none;
+    display: inline-block;
+  }
+  :root[data-skin="usa"] .dh-brand::before {
+    content: "🦅"; margin-right: 8px;
+    animation: usa-eagle-bob 1.6s ease-in-out infinite;
+  }
+  :root[data-skin="usa"] .dh-brand::after {
+    content: "🎆"; margin-left: 8px;
+    animation: usa-eagle-bob 1.6s ease-in-out infinite 0.8s;
+  }
+  @keyframes usa-eagle-bob {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50%      { transform: translateY(-3px) rotate(4deg); }
+  }
+  /* Date line gets its own little parade. */
+  :root[data-skin="usa"] .dh-date::after { content: " 🎆 🇺🇸 🦅"; letter-spacing: 1px; }
+
+  /* === Fat shimmering red-white-blue ribbon across every tile top === */
   :root[data-skin="usa"] .grid-stack-item-content::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
+    height: 5px;
     border-radius: 16px 16px 0 0;
-    background: linear-gradient(90deg,
-      var(--usa-red) 0%, var(--usa-red) 33%,
-      var(--card-bg) 33%, var(--card-bg) 66%,
-      var(--usa-blue) 66%, var(--usa-blue) 100%);
-    opacity: 0.85;
+    background-image: repeating-linear-gradient(90deg,
+      var(--usa-red) 0px, var(--usa-red) 22px,
+      #ffffff 22px, #ffffff 44px,
+      var(--usa-blue) 44px, var(--usa-blue) 66px);
+    background-size: 66px 100%;
     z-index: 2;
     pointer-events: none;
+    animation: usa-ribbon-march 3.5s linear infinite;
   }
+  @keyframes usa-ribbon-march { to { background-position: 66px 0; } }
   /* Kid tiles already paint their own full-width accent bar at top:0;
      drop the ribbon there so the two don't stack/clash. */
   :root[data-skin="usa"] .grid-stack-item-content:has(> .kidcard-accent)::before {
     display: none;
+  }
+
+  /* Respect reduced-motion: keep the loud colors, kill the wiggling. */
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-skin="usa"] .usa-fw,
+    :root[data-skin="usa"] .usa-marquee .track,
+    :root[data-skin="usa"] .dh-brand,
+    :root[data-skin="usa"] .dh-brand::before,
+    :root[data-skin="usa"] .dh-brand::after,
+    :root[data-skin="usa"] .grid-stack-item-content::before {
+      animation: none;
+    }
   }
 
   /* Toolbar: tint the active view pill + brand touch patriotic. */
@@ -3706,9 +3807,49 @@
       try { const s = localStorage.getItem(SKIN_KEY); if (s && VALID.has(s)) return s; } catch (e) {}
       return 'normal';
     }
+    // Build the loud extras (fireworks + emoji marquee) ONCE, on demand.
+    // They live in a single .usa-decor / .usa-marquee node we add/remove, so
+    // the Normal theme carries zero leftover patriotic shrapnel.
+    function buildDecor() {
+      if (document.querySelector('.usa-decor')) return;
+      const FW = [ // [left%, topVh, delay s, scale]
+        [12, 16, 0.0, 1.0], [30, 9, 0.7, 0.8], [48, 19, 1.3, 1.1],
+        [66, 11, 0.4, 0.9], [83, 17, 1.0, 1.0], [92, 7, 1.7, 0.75],
+        [22, 30, 0.5, 0.85], [58, 33, 1.5, 0.95], [75, 27, 0.9, 0.8],
+      ];
+      const decor = document.createElement('div');
+      decor.className = 'usa-decor';
+      decor.setAttribute('aria-hidden', 'true');
+      FW.forEach(([l, t, d, sc]) => {
+        const fw = document.createElement('div');
+        fw.className = 'usa-fw';
+        fw.style.left = l + '%';
+        fw.style.top = t + 'vh';
+        fw.style.animationDelay = d + 's';
+        fw.style.setProperty('--fw-scale', sc);
+        decor.appendChild(fw);
+      });
+      document.body.appendChild(decor);
+
+      const marquee = document.createElement('div');
+      marquee.className = 'usa-marquee';
+      marquee.setAttribute('aria-hidden', 'true');
+      const unit = ' 🇺🇸 🦅 🎆 ⭐ 🗽 🎇 🦅 🇺🇸 🍔 🎆 ⭐ 🎇 ';
+      // Doubled content so the -50% scroll loops seamlessly.
+      marquee.innerHTML = '<span class="track">' + unit.repeat(6) + unit.repeat(6) + '</span>';
+      document.body.appendChild(marquee);
+    }
+    function removeDecor() {
+      document.querySelectorAll('.usa-decor, .usa-marquee').forEach(n => n.remove());
+    }
     function apply(id) {
-      if (id && id !== 'normal') document.documentElement.setAttribute('data-skin', id);
-      else document.documentElement.removeAttribute('data-skin');
+      if (id && id !== 'normal') {
+        document.documentElement.setAttribute('data-skin', id);
+        if (id === 'usa') buildDecor(); else removeDecor();
+      } else {
+        document.documentElement.removeAttribute('data-skin');
+        removeDecor();
+      }
     }
 
     let current = load();
