@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T06:15:13.194Z",
+  "generated_at": "2026-06-29T06:30:38.431Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1010,7 +1010,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 76,
       "hi": 96,
       "lo": 74,
       "icon": "🌤",
@@ -2223,7 +2223,7 @@
   "finance": {
     "month": "June 2026",
     "dayPct": 96.7,
-    "totalSpend": 15187.02,
+    "totalSpend": 15197.01,
     "totalBudget": 991.65,
     "categories": [
       {
@@ -2339,26 +2339,26 @@
         "pct": 0
       },
       {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 19.99,
+        "spent": 56.56,
+        "balance": -36.57,
+        "pct": 282.9
+      },
+      {
         "name": "🏠 Home",
         "group": "Needs",
         "budgeted": 0,
         "spent": 55,
         "balance": -55,
         "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 19.99,
-        "spent": 46.57,
-        "balance": -26.58,
-        "pct": 233
       }
     ],
     "liquidCash": 15660.7,
-    "creditDebt": -24588.72,
-    "netLiquid": -8928.02,
+    "creditDebt": -24599.77,
+    "netLiquid": -8939.07,
     "source": "ynab",
-    "updatedAt": "2026-06-29T06:15:11.575Z"
+    "updatedAt": "2026-06-29T06:30:37.156Z"
   }
 }
