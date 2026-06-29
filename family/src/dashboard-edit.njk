@@ -18,6 +18,9 @@ eleventyExcludeFromCollections: true
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack.min.css">
 <script src="https://cdn.jsdelivr.net/npm/gridstack@10.3.1/dist/gridstack-all.js"></script>
 
+<!-- Apply the saved visual skin (e.g. 4th of July) ASAP, before paint, to avoid a flash of the normal theme. -->
+<script>(function(){try{var s=localStorage.getItem('crittercrew.dashedit.skin.v1');if(s&&s!=='normal'){document.documentElement.setAttribute('data-skin',s);}}catch(e){}})();</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
 
@@ -86,6 +89,160 @@ eleventyExcludeFromCollections: true
     --surface-mute-3: rgba(255,255,255,0.09);
     --surface-mute-track: rgba(255,255,255,0.16);
     --on-accent: #0f1217;
+  }
+
+  /* ============================================================
+     === VISUAL SKINS (data-skin) =================================
+     A skin is a THIRD axis, orthogonal to the day/night theme.
+     Each skin ships BOTH a light palette ([data-skin="x"]) and a
+     dark palette ([data-skin="x"][data-theme="dark"]), so the
+     automatic sunrise/sunset flip keeps working under any skin.
+     The combined two-attribute selector (0,2,0) outranks the bare
+     dark block (0,1,0), so USA-at-night always wins cleanly.
+     Skin "normal" = no attribute = the default tokens above.
+     ============================================================ */
+
+  /* --- 🇺🇸 FOURTH OF JULY — LIGHT (sunlit parchment + flag) --- */
+  :root[data-skin="usa"] {
+    --warm-bg: #eef1f9;
+    --bg-grad-1: #e7eefc;   /* sky blue up top   */
+    --bg-grad-2: #f6f4ee;   /* cream in the middle */
+    --bg-grad-3: #f8ebe9;   /* faint red blush below */
+    --card-bg: #ffffff;
+    --card-bg-2: #f5f8ff;
+    --card-top-hi: rgba(255,255,255,0.95);
+    --text-dark: #14233f;   /* navy ink */
+    --text-mid: #3c4d70;
+    --text-light: #8693b0;
+    --shadow: 0 1px 2px rgba(10,49,97,0.05), 0 16px 34px -14px rgba(10,49,97,0.22), 0 3px 10px -4px rgba(10,49,97,0.10);
+    --accent-orange: #c8102e;  /* firecracker red */
+    --accent-teal: #1d4e89;    /* steel blue (kid-distinct) */
+    --accent-gold: #b8860b;
+    --accent-rose: #b31942;    /* Old Glory Red */
+    --accent-blue: #0a3161;    /* Old Glory Blue */
+    --accent-purple: #7a2150;  /* wine (kid-distinct) */
+    --wx-sun: #e8a33d;
+    --wx-cloud: #93a0bb;
+    --wx-rain: #3f74c4;
+    --border: #d8e0f0;
+    --border-soft: #e7ecf6;
+    --surface: #ffffff;
+    --surface-mute: rgba(10,49,97,0.035);
+    --surface-mute-2: rgba(10,49,97,0.055);
+    --surface-mute-3: rgba(10,49,97,0.08);
+    --surface-mute-track: rgba(10,49,97,0.07);
+    --on-accent: #ffffff;
+    --usa-red: #b31942;
+    --usa-blue: #0a3161;
+    --usa-star: rgba(10,49,97,0.16);
+    --usa-stripe: rgba(179,25,66,0.055);
+    --usa-glow: rgba(10,49,97,0.16);
+  }
+
+  /* --- 🇺🇸 FOURTH OF JULY — DARK (fireworks night sky) --- */
+  :root[data-skin="usa"][data-theme="dark"] {
+    --warm-bg: #070c18;
+    --bg-grad-1: #0d1730;   /* deep navy */
+    --bg-grad-2: #070c18;
+    --bg-grad-3: #170a14;   /* maroon-black below */
+    --card-bg: #101a30;
+    --card-bg-2: #0c1426;
+    --card-top-hi: rgba(120,160,255,0.09);
+    --text-dark: #eef3ff;
+    --text-mid: #c3cfea;
+    --text-light: #8a9abe;
+    --shadow: 0 1px 3px rgba(0,0,0,0.5), 0 12px 28px -10px rgba(0,0,0,0.65), 0 3px 10px -4px rgba(0,0,0,0.55);
+    --accent-orange: #ff6b5e;
+    --accent-teal: #5b9be8;
+    --accent-gold: #e8b948;
+    --accent-rose: #ff5d73;    /* bright flag red, readable on navy */
+    --accent-blue: #5b8def;
+    --accent-purple: #d76a9a;
+    --wx-sun: #ffce5a;
+    --wx-cloud: #8e9bb8;
+    --wx-rain: #74ace8;
+    --border: #243352;
+    --border-soft: #1c2940;
+    --surface: #15203a;
+    --surface-mute: rgba(150,180,255,0.05);
+    --surface-mute-2: rgba(150,180,255,0.08);
+    --surface-mute-3: rgba(150,180,255,0.12);
+    --surface-mute-track: rgba(150,180,255,0.18);
+    --on-accent: #ffffff;
+    --usa-red: #ff5d73;
+    --usa-blue: #5b8def;
+    --usa-star: rgba(173,196,255,0.30);
+    --usa-stripe: rgba(255,93,115,0.06);
+    --usa-glow: rgba(91,141,239,0.20);
+  }
+
+  /* --- USA decorative layer: flag stripes + a star canton ---
+     Two fixed, click-through layers that sit ABOVE the body
+     gradient but BEHIND every tile/header (z-index:-1), so they
+     never touch readability. Only present under the USA skin. */
+  :root[data-skin="usa"] body::before,
+  :root[data-skin="usa"] body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    inset: 0;
+    transition: opacity 0.5s ease;
+  }
+  /* Broad, faint horizontal "stripes" wash across the lower field. */
+  :root[data-skin="usa"] body::before {
+    background-image: repeating-linear-gradient(
+      180deg,
+      var(--usa-stripe) 0px,
+      var(--usa-stripe) 46px,
+      transparent 46px,
+      transparent 92px
+    );
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 100%);
+  }
+  /* A soft blue glow + scattered white "stars" in the top-left canton. */
+  :root[data-skin="usa"] body::after {
+    background-image:
+      radial-gradient(circle at 7% 10%, var(--usa-star) 0 1.4px, transparent 1.8px),
+      radial-gradient(circle at 17% 8%,  var(--usa-star) 0 1.2px, transparent 1.6px),
+      radial-gradient(circle at 12% 19%, var(--usa-star) 0 1.5px, transparent 1.9px),
+      radial-gradient(circle at 24% 16%, var(--usa-star) 0 1.2px, transparent 1.6px),
+      radial-gradient(circle at 5%  26%, var(--usa-star) 0 1.3px, transparent 1.7px),
+      radial-gradient(circle at 20% 27%, var(--usa-star) 0 1.2px, transparent 1.6px),
+      radial-gradient(ellipse 60% 55% at -6% -8%, var(--usa-glow) 0%, transparent 70%);
+    background-repeat: no-repeat;
+  }
+
+  /* Patriotic brand wordmark: "Critter" red, "Crew" blue. */
+  :root[data-skin="usa"] .dh-brand { color: var(--usa-red); }
+  :root[data-skin="usa"] .dh-brand span { color: var(--usa-blue); }
+
+  /* A thin red→white→blue ribbon across the top of every tile. */
+  :root[data-skin="usa"] .grid-stack-item-content::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg,
+      var(--usa-red) 0%, var(--usa-red) 33%,
+      var(--card-bg) 33%, var(--card-bg) 66%,
+      var(--usa-blue) 66%, var(--usa-blue) 100%);
+    opacity: 0.85;
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* Kid tiles already paint their own full-width accent bar at top:0;
+     drop the ribbon there so the two don't stack/clash. */
+  :root[data-skin="usa"] .grid-stack-item-content:has(> .kidcard-accent)::before {
+    display: none;
+  }
+
+  /* Toolbar: tint the active view pill + brand touch patriotic. */
+  :root[data-skin="usa"] .ed-seg .tpl-pill.active { color: var(--usa-blue); }
+  :root[data-skin="usa"] .skin-seg .skin-pill.active {
+    box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 2px 8px rgba(15,23,42,0.08), inset 0 0 0 1.5px var(--usa-red);
   }
 
   /* Smooth the flip so it's not a jump-scare at sunset */
@@ -193,6 +350,40 @@ eleventyExcludeFromCollections: true
   .ed-seg .tpl-pill:hover { color: var(--tb-ink); }
   .ed-seg .tpl-pill .emo { font-size: 15px; line-height: 1; flex: 0 0 auto; }
   .ed-seg .tpl-pill.active {
+    background: var(--tb-bg);
+    color: var(--tb-ink);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 2px 8px rgba(15,23,42,0.08);
+  }
+
+  /* Skin switcher — same visual language as the view segment, but a
+     separate control so "look" (skin) and "layout" (view) stay distinct. */
+  .ed-skin-row { display: flex; align-items: center; gap: 10px; }
+  .ed-skin-row .ed-cap { flex: 0 0 auto; }
+  .skin-seg {
+    display: flex; gap: 4px; flex: 1 1 auto;
+    background: var(--tb-soft);
+    border: 1px solid var(--tb-line);
+    border-radius: 12px;
+    padding: 4px;
+  }
+  .skin-seg .skin-pill {
+    flex: 1 1 0; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 9px;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 13px; font-weight: 600;
+    color: var(--tb-mut);
+    cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .12s ease, color .12s ease, box-shadow .12s ease;
+  }
+  .skin-seg .skin-pill:hover { color: var(--tb-ink); }
+  .skin-seg .skin-pill .emo { font-size: 15px; line-height: 1; flex: 0 0 auto; }
+  .skin-seg .skin-pill.active {
     background: var(--tb-bg);
     color: var(--tb-ink);
     font-weight: 700;
@@ -1451,6 +1642,10 @@ eleventyExcludeFromCollections: true
     </div>
   </div>
   <div class="ed-seg" id="tplSwitch" role="tablist"></div>
+  <div class="ed-skin-row">
+    <span class="ed-cap">Theme</span>
+    <div class="skin-seg" id="skinSwitch" role="tablist" title="Visual theme — switch back to Normal after the 4th"></div>
+  </div>
   <div class="ed-edit-zone">
     <div class="ed-group">
       <span class="ed-glabel">This view</span>
@@ -2942,6 +3137,58 @@ eleventyExcludeFromCollections: true
       if (now - lastTouch <= 350) e.preventDefault();
       lastTouch = now;
     }, { passive: false });
+  })();
+
+  // === VISUAL SKINS (Normal / 4th of July / ...) ===
+  // A skin is purely cosmetic: it sets data-skin on <html>, which swaps the
+  // CSS token palette. It is INDEPENDENT of the day/night engine (which owns
+  // data-theme) and of the view switcher (which owns tiles/layout). Each skin
+  // defines both a light and dark palette in CSS, so auto day/night still
+  // works under any skin. Persisted so it survives the 10-min auto-reload;
+  // Mike taps "Normal" to undo it after the 4th.
+  (function skinInit() {
+    const SKIN_KEY = 'crittercrew.dashedit.skin.v1';
+    const SKINS = [
+      { id: 'normal', emoji: '🏠', name: 'Normal' },
+      { id: 'usa',    emoji: '🇺🇸', name: '4th of July' },
+    ];
+    const VALID = new Set(SKINS.map(s => s.id));
+
+    function load() {
+      try { const s = localStorage.getItem(SKIN_KEY); if (s && VALID.has(s)) return s; } catch (e) {}
+      return 'normal';
+    }
+    function apply(id) {
+      if (id && id !== 'normal') document.documentElement.setAttribute('data-skin', id);
+      else document.documentElement.removeAttribute('data-skin');
+    }
+
+    let current = load();
+    apply(current); // reconcile with the pre-paint inline script (handles a stale/invalid value)
+
+    const wrap = document.getElementById('skinSwitch');
+    function render() {
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      SKINS.forEach(s => {
+        const pill = document.createElement('button');
+        pill.className = 'skin-pill' + (s.id === current ? ' active' : '');
+        pill.dataset.skin = s.id;
+        pill.setAttribute('role', 'tab');
+        pill.setAttribute('aria-selected', s.id === current ? 'true' : 'false');
+        pill.innerHTML = '<span class="emo">' + s.emoji + '</span>' + tplEsc(s.name);
+        pill.addEventListener('click', () => {
+          if (current === s.id) return;
+          current = s.id;
+          try { localStorage.setItem(SKIN_KEY, current); } catch (e) {}
+          apply(current);
+          render();
+          showToast(s.id === 'normal' ? 'Normal theme' : (s.emoji + ' ' + s.name));
+        });
+        wrap.appendChild(pill);
+      });
+    }
+    render();
   })();
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
