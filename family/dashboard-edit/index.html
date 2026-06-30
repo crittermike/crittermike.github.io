@@ -1966,7 +1966,7 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
         <span class="dh-temp">79°</span>
         <span class="dh-hilo">H 92° · L 74°</span>
       </div>
@@ -2073,7 +2073,7 @@
           
             
             
-            <div class="v">50g</div>
+            <div class="v warn">0g</div>
           
           
             
@@ -2182,7 +2182,7 @@
           
             
             
-            <span class="v">50g</span>
+            <span class="v warn">0g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3705,7 +3705,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":330,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":50,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":138,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":78,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":330,"refill":60},"allowance":{"balance_str":"$112.00"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$34.11"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":138,"refill":60},"allowance":{"balance_str":"$68.13"},"assignments":[{"id":"summer-solutions","label":"Summer Solutions"},{"id":"reading-20m","label":"Read 20 min"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":78,"refill":60},"allowance":{"balance_str":"$-261.23"},"assignments":[{"id":"take-medicine","label":"Take medicine"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
