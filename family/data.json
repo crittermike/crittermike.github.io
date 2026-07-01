@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T13:00:58.894Z",
+  "generated_at": "2026-07-01T13:15:59.293Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -423,7 +423,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$82.00"
+        "balance_str": "$94.00"
       },
       "assignments": [
         {
@@ -446,7 +446,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$4.11"
+        "balance_str": "$8.91"
       },
       "assignments": [
         {
@@ -473,7 +473,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$68.13"
+        "balance_str": "$80.13"
       },
       "assignments": [
         {
@@ -496,7 +496,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$-261.23"
+        "balance_str": "$-249.23"
       },
       "assignments": [
         {
@@ -919,16 +919,16 @@
       "temp": 82,
       "hi": 100,
       "lo": 78,
-      "icon": "⛈",
-      "code": 95
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
         "d": "Thu",
-        "icon": "⛈",
+        "icon": "⛅",
         "hi": 101,
         "lo": 77,
-        "code": 95
+        "code": 3
       },
       {
         "d": "Fri",
@@ -2136,6 +2136,6 @@
     "creditDebt": -25129.07,
     "netLiquid": -11155.41,
     "source": "ynab",
-    "updatedAt": "2026-07-01T13:00:57.742Z"
+    "updatedAt": "2026-07-01T13:15:58.016Z"
   }
 }
