@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-01T03:45:43.891Z",
+  "generated_at": "2026-07-01T04:00:44.825Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-06-30",
-      "time": "9:30a",
-      "what": "Mom: Dr. Michael Wine",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-06-30T10:30:00-04:00"
-    },
     {
       "date": "2026-07-01",
       "time": "all day",
@@ -406,6 +397,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-27T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "all day",
+      "what": "POPCS: Parent/Teacher Conferences - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-09-29T00:00:00-04:00"
     }
   ],
   "kids": [
@@ -733,7 +733,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Leftovers / butter noodles",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -741,8 +741,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Chicken Fajitas (cast iron, zucchini + corn)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -750,7 +750,7 @@
       "dow_short": "Thu",
       "name": "Tuscan Chicken Pasta (rigatoni, creamy parm-tomato sauce)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "tuscan-chicken-pasta",
         "name": "Tuscan Chicken Pasta",
@@ -917,19 +917,12 @@
   "weather": {
     "now": {
       "temp": 82,
-      "hi": 93,
-      "lo": 74,
+      "hi": 100,
+      "lo": 77,
       "icon": "⛈",
       "code": 95
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛈",
-        "hi": 100,
-        "lo": 77,
-        "code": 95
-      },
       {
         "d": "Thu",
         "icon": "⛈",
@@ -957,24 +950,31 @@
         "hi": 96,
         "lo": 74,
         "code": 51
+      },
+      {
+        "d": "Mon",
+        "icon": "🌦",
+        "hi": 98,
+        "lo": 71,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-06-30T06:19",
         "2026-07-01T06:19",
         "2026-07-02T06:20",
         "2026-07-03T06:20",
         "2026-07-04T06:21",
-        "2026-07-05T06:21"
+        "2026-07-05T06:21",
+        "2026-07-06T06:22"
       ],
       "sunsets": [
-        "2026-06-30T20:47",
         "2026-07-01T20:47",
         "2026-07-02T20:47",
         "2026-07-03T20:46",
         "2026-07-04T20:46",
-        "2026-07-05T20:46"
+        "2026-07-05T20:46",
+        "2026-07-06T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2136,6 +2136,6 @@
     "creditDebt": -24548.27,
     "netLiquid": -10531.5,
     "source": "ynab",
-    "updatedAt": "2026-07-01T03:45:42.793Z"
+    "updatedAt": "2026-07-01T04:00:43.588Z"
   }
 }
