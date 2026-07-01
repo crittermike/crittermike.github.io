@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T19:15:11.726Z",
+  "generated_at": "2026-07-01T19:30:11.656Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-07-02T00:00:00-04:00"
+    },
+    {
+      "date": "2026-07-02",
+      "time": "6p",
+      "what": "Nancy doing Nadia's hair",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-02T19:00:00-04:00"
     },
     {
       "date": "2026-07-03",
@@ -916,7 +925,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 96,
+      "temp": 95,
       "hi": 97,
       "lo": 78,
       "icon": "☀️",
@@ -2136,6 +2145,6 @@
     "creditDebt": -25129.07,
     "netLiquid": -11155.41,
     "source": "ynab",
-    "updatedAt": "2026-07-01T19:15:10.269Z"
+    "updatedAt": "2026-07-01T19:30:10.339Z"
   }
 }
