@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-02T03:45:23.572Z",
+  "generated_at": "2026-07-02T04:00:24.973Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-01",
-      "time": "all day",
-      "what": "📚 Library books due (Pelham Road)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-07-02T00:00:00-04:00"
-    },
     {
       "date": "2026-07-02",
       "time": "6p",
@@ -849,7 +840,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Grilled hamburgers + corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -857,8 +848,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Tuscan Chicken Pasta (rigatoni, creamy parm-tomato sauce)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "tuscan-chicken-pasta",
         "name": "Tuscan Chicken Pasta",
@@ -965,7 +956,7 @@
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1025,19 +1016,12 @@
   "weather": {
     "now": {
       "temp": 83,
-      "hi": 94,
-      "lo": 78,
+      "hi": 101,
+      "lo": 77,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 101,
-        "lo": 77,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -1065,24 +1049,31 @@
         "hi": 95,
         "lo": 71,
         "code": 80
+      },
+      {
+        "d": "Tue",
+        "icon": "🌦",
+        "hi": 99,
+        "lo": 71,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-01T06:19",
         "2026-07-02T06:20",
         "2026-07-03T06:20",
         "2026-07-04T06:21",
         "2026-07-05T06:21",
-        "2026-07-06T06:22"
+        "2026-07-06T06:22",
+        "2026-07-07T06:22"
       ],
       "sunsets": [
-        "2026-07-01T20:47",
         "2026-07-02T20:47",
         "2026-07-03T20:46",
         "2026-07-04T20:46",
         "2026-07-05T20:46",
-        "2026-07-06T20:46"
+        "2026-07-06T20:46",
+        "2026-07-07T20:46"
       ],
       "timezone": "America/New_York"
     }
@@ -2244,6 +2235,6 @@
     "creditDebt": -25129.07,
     "netLiquid": -11155.41,
     "source": "ynab",
-    "updatedAt": "2026-07-02T03:45:22.451Z"
+    "updatedAt": "2026-07-02T04:00:23.669Z"
   }
 }
