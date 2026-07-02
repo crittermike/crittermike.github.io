@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T12:30:37.826Z",
+  "generated_at": "2026-07-02T12:45:37.694Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1015,7 +1015,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 82,
       "hi": 101,
       "lo": 77,
       "icon": "☀️",
@@ -2228,13 +2228,30 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 6.5,
-    "totalSpend": 0,
+    "totalSpend": 265.24,
     "totalBudget": 0,
-    "categories": [],
-    "liquidCash": 13973.66,
-    "creditDebt": -25129.07,
-    "netLiquid": -11155.41,
+    "categories": [
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 230.33,
+        "balance": -230.33,
+        "pct": 0
+      },
+      {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 34.91,
+        "balance": -34.91,
+        "pct": 0
+      }
+    ],
+    "liquidCash": 11773.57,
+    "creditDebt": -25557.51,
+    "netLiquid": -13783.94,
     "source": "ynab",
-    "updatedAt": "2026-07-02T12:30:36.743Z"
+    "updatedAt": "2026-07-02T12:45:36.572Z"
   }
 }
