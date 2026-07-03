@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-03T03:46:06.413Z",
+  "generated_at": "2026-07-03T04:01:07.879Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-02",
-      "time": "6p",
-      "what": "Nancy doing Nadia's hair",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-02T19:00:00-04:00"
-    },
     {
       "date": "2026-07-03",
       "time": "all day",
@@ -429,6 +420,10 @@
         {
           "id": "summer-solutions",
           "label": "Summer Solutions"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -456,6 +451,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -483,6 +482,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -502,6 +505,10 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -749,7 +756,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Tuscan Chicken Pasta (rigatoni, creamy parm-tomato sauce)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "tuscan-chicken-pasta",
@@ -856,8 +863,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -865,7 +872,7 @@
       "dow_short": "Sat",
       "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "grilled-hamburgers-and-hotdogs-corn",
         "name": "Grilled hamburgers & hotdogs + corn",
@@ -2089,6 +2096,6 @@
     "creditDebt": -25557.51,
     "netLiquid": -13783.94,
     "source": "ynab",
-    "updatedAt": "2026-07-03T03:45:57.678Z"
+    "updatedAt": "2026-07-03T04:00:59.028Z"
   }
 }
