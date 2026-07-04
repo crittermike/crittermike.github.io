@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-04T03:45:36.063Z",
+  "generated_at": "2026-07-04T04:00:36.469Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-03",
-      "time": "all day",
-      "what": "Dad off work",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-07-04T00:00:00-04:00"
-    },
-    {
-      "date": "2026-07-03",
-      "time": "3p",
-      "what": "Poppy grooming (DOG Full Groom) 🐩",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-03T16:00:00-04:00"
-    },
     {
       "date": "2026-07-04",
       "time": "all day",
@@ -418,12 +400,8 @@
       },
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -445,16 +423,8 @@
       },
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -476,16 +446,8 @@
       },
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -503,12 +465,40 @@
       },
       "assignments": [
         {
-          "id": "take-medicine",
-          "label": "Take medicine"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         },
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "sch-2026-07-05-summer-pe-perry-sex-ed-pre-test-minor-ta",
+          "label": "Summer PE (Perry): Sex Ed Pre-test (MINOR) — take FIRST before other unit assignments"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-healthy-unhealthy-relati",
+          "label": "Summer PE (Perry): Healthy & Unhealthy Relationships (Lesson 6) — watch videos, mark done"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-male-lesson-reproductive",
+          "label": "Summer PE (Perry): Male Lesson — Reproductive Systems & Health Concerns (MINOR, Lesson 8)"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-pregnancy-prevention-abs",
+          "label": "Summer PE (Perry): Pregnancy Prevention & Abstinence (MINOR, Lessons 11-12)"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-laws-consent-abuse-minor",
+          "label": "Summer PE (Perry): Laws, Consent, Abuse (MINOR, Lesson 13)"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-sexually-transmitted-dis",
+          "label": "Summer PE (Perry): Sexually Transmitted Diseases (MINOR, Lesson 14)"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-week-5-fitness-log-add-g",
+          "label": "Summer PE (Perry): Week 5 Fitness Log — add goal to top + reflection questions p.2"
+        },
+        {
+          "id": "sch-2026-07-05-summer-pe-perry-post-test-major-one-atte",
+          "label": "Summer PE (Perry): Post Test (MAJOR) — one attempt only, take LAST"
         }
       ]
     }
@@ -770,7 +760,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -908,7 +898,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -916,8 +906,8 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "grilled-hamburgers-and-hotdogs-corn",
         "name": "Grilled hamburgers & hotdogs + corn",
@@ -969,19 +959,12 @@
   "weather": {
     "now": {
       "temp": 82,
-      "hi": 97,
-      "lo": 74,
+      "hi": 101,
+      "lo": 75,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 101,
-        "lo": 75,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "🌦",
@@ -1009,24 +992,31 @@
         "hi": 92,
         "lo": 73,
         "code": 55
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 98,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-03T06:20",
         "2026-07-04T06:21",
         "2026-07-05T06:21",
         "2026-07-06T06:22",
         "2026-07-07T06:22",
-        "2026-07-08T06:23"
+        "2026-07-08T06:23",
+        "2026-07-09T06:23"
       ],
       "sunsets": [
-        "2026-07-03T20:46",
         "2026-07-04T20:46",
         "2026-07-05T20:46",
         "2026-07-06T20:46",
         "2026-07-07T20:46",
-        "2026-07-08T20:45"
+        "2026-07-08T20:45",
+        "2026-07-09T20:45"
       ],
       "timezone": "America/New_York"
     }
@@ -2213,6 +2203,6 @@
     "creditDebt": -26192.75,
     "netLiquid": -14919.18,
     "source": "ynab",
-    "updatedAt": "2026-07-04T03:45:34.980Z"
+    "updatedAt": "2026-07-04T04:00:35.225Z"
   }
 }
