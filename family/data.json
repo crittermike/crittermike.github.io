@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T23:45:37.647Z",
+  "generated_at": "2026-07-04T00:00:40.721Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -712,12 +712,57 @@
     ]
   },
   "dinner": {
-    "name": "Pizza night (delivery or frozen)",
-    "protein_g": 32,
+    "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
+    "protein_g": 50,
     "cal": 800,
-    "effort": "none",
-    "note": "Moved from Saturday since Sat is the 4th of July cookout. Dad off work, holiday-weekend kickoff, no cook.",
-    "recipe": null
+    "effort": "easy",
+    "note": "4th of July. Swapped in for the usual pizza (moved to Friday). Fire up the grill.",
+    "recipe": {
+      "slug": "grilled-hamburgers-and-hotdogs-corn",
+      "name": "Grilled hamburgers & hotdogs + corn",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "grilled-hamburgers-and-hotdogs-corn"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 800,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "ground beef patties",
+            "hotdogs",
+            "buns",
+            "corn on the cob",
+            "cheese slices",
+            "condiments"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "ground beef patties",
+        "hotdogs",
+        "buns",
+        "corn on the cob",
+        "cheese slices",
+        "condiments"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -2071,7 +2116,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 9.7,
+    "dayPct": 12.9,
     "totalSpend": 495.23,
     "totalBudget": 0,
     "categories": [
@@ -2104,6 +2149,6 @@
     "creditDebt": -26192.75,
     "netLiquid": -14919.18,
     "source": "ynab",
-    "updatedAt": "2026-07-03T23:45:28.948Z"
+    "updatedAt": "2026-07-04T00:00:31.667Z"
   }
 }
