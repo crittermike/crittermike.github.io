@@ -210,6 +210,44 @@
   @media (max-width: 600px) {
     .ed-gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
   }
+  /* Quick facts card */
+  .ed-quickfacts {
+    background: var(--accent-dim);
+    border: 1px solid rgba(74, 143, 163, 0.38);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 22px 0 8px;
+  }
+  .ed-quickfacts h2 {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .ed-qf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px 26px;
+  }
+  .ed-qf-item { display: flex; flex-direction: column; gap: 3px; }
+  .ed-qf-item .qf-label {
+    font-size: 0.63rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-mid);
+    font-weight: 700;
+  }
+  .ed-qf-item .qf-value {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  @media (max-width: 600px) {
+    .ed-qf-grid { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="ed-wrap">
@@ -219,6 +257,37 @@
     <h1 class="ed-title">Lake Hartwell</h1>
     <p class="ed-deck">A 5,000 sq ft lakefront house on Lake Hartwell, near the Georgia/South Carolina border. Five nights, a private covered dock, and room for a big group.</p>
   </header>
+
+  <!-- Quick facts -->
+  <section class="ed-quickfacts">
+    <h2>Quick facts</h2>
+    <div class="ed-qf-grid">
+      <div class="ed-qf-item">
+        <span class="qf-label">House address</span>
+        <span class="qf-value"><a class="ed-link" href="https://www.google.com/maps/search/675+Old+Mill+Road+Hartwell+GA+30643" target="_blank">675 Old Mill Road, Hartwell, GA 30643</a></span>
+      </div>
+      <div class="ed-qf-item">
+        <span class="qf-label">Airbnb listing</span>
+        <span class="qf-value"><a class="ed-link" href="https://www.airbnb.com/rooms/934751170644664612" target="_blank">View on Airbnb</a></span>
+      </div>
+      <div class="ed-qf-item">
+        <span class="qf-label">Check-in</span>
+        <span class="qf-value">Mon, Jul 6 · 4:00 PM</span>
+      </div>
+      <div class="ed-qf-item">
+        <span class="qf-label">Checkout</span>
+        <span class="qf-value">Sat, Jul 11 · 11:00 AM</span>
+      </div>
+      <div class="ed-qf-item">
+        <span class="qf-label">Door code</span>
+        <span class="qf-value">TBD</span>
+      </div>
+      <div class="ed-qf-item">
+        <span class="qf-label">Boat pickup</span>
+        <span class="qf-value"><a class="ed-link" href="https://www.google.com/maps/search/117+Chestnut+Lane+Anderson+SC+29625" target="_blank">117 Chestnut Lane, Anderson, SC</a> · Tue Jul 7, 8:30 AM</span>
+      </div>
+    </div>
+  </section>
 
   <div class="ed-meta ed-meta-5">
     <div class="ed-meta-item"><div class="label">Dates</div><div class="value">Jul 6–11</div></div>
