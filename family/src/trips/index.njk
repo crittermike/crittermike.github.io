@@ -50,6 +50,27 @@ permalink: "/trips/index.html"
   @media (max-width: 600px) {
     .ed-gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
   }
+  /* Lead hero photo */
+  .ed-hero {
+    display: block;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 22px 0 4px;
+    aspect-ratio: 16 / 10;
+    background: var(--card, #161b22);
+  }
+  .ed-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* In-section photo (e.g. the boat) */
+  .ed-photo {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 18px;
+    background: var(--card, #161b22);
+  }
+  .ed-photo img { width: 100%; height: auto; display: block; }
   /* Quick facts card */
   .ed-quickfacts {
     background: var(--accent-dim);
@@ -128,6 +149,11 @@ permalink: "/trips/index.html"
       </div>
     </div>
   </section>
+
+  <!-- Lead photo: the house -->
+  <a class="ed-hero" href="/family/assets/hartwell/house-exterior.jpg" target="_blank">
+    <img src="/family/assets/hartwell/house-exterior.jpg" alt="Front exterior of the sage-green lakefront house with two-car garage">
+  </a>
 
   <div class="ed-meta ed-meta-5">
     <div class="ed-meta-item"><div class="label">Dates</div><div class="value">Jul 6–11</div></div>
@@ -234,6 +260,10 @@ permalink: "/trips/index.html"
       </div>
 
     </div>
+
+    <a class="ed-photo" href="/family/assets/hartwell/boat.jpg" target="_blank">
+      <img src="/family/assets/hartwell/boat.jpg" alt="The booked 2014 Premier 220 SunSation pontoon on a lift under a covered dock" loading="lazy">
+    </a>
   </section>
 
   <!-- Activities -->
