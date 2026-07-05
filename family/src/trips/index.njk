@@ -24,6 +24,32 @@ permalink: "/trips/index.html"
     margin: 26px 0 8px;
   }
   .ed-subhead:first-of-type { margin-top: 6px; }
+  /* Photo gallery */
+  .ed-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 24px 0 8px;
+  }
+  .ed-gallery a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+    background: var(--card, #161b22);
+  }
+  .ed-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .ed-gallery a:hover img { transform: scale(1.04); }
+  @media (max-width: 600px) {
+    .ed-gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  }
 </style>
 
 <div class="ed-wrap">
@@ -40,6 +66,16 @@ permalink: "/trips/index.html"
     <div class="ed-meta-item"><div class="label">Bedrooms</div><div class="value">7</div></div>
     <div class="ed-meta-item"><div class="label">Sleeps</div><div class="value">16+</div></div>
     <div class="ed-meta-item"><div class="label">Rating</div><div class="value">4.98 ★</div></div>
+  </div>
+
+  <!-- Photo gallery -->
+  <div class="ed-gallery">
+    <a href="/family/assets/hartwell/dock-aerial.jpg" target="_blank"><img src="/family/assets/hartwell/dock-aerial.jpg" alt="Aerial view of the private covered dock on Lake Hartwell" loading="lazy"></a>
+    <a href="/family/assets/hartwell/dock-lounge.jpg" target="_blank"><img src="/family/assets/hartwell/dock-lounge.jpg" alt="Covered dock with lounge seating over the water" loading="lazy"></a>
+    <a href="/family/assets/hartwell/fire-pit.jpg" target="_blank"><img src="/family/assets/hartwell/fire-pit.jpg" alt="Lakeside fire pit with Adirondack chairs" loading="lazy"></a>
+    <a href="/family/assets/hartwell/kitchen.jpg" target="_blank"><img src="/family/assets/hartwell/kitchen.jpg" alt="Open kitchen with island and stainless appliances" loading="lazy"></a>
+    <a href="/family/assets/hartwell/game-pool-table.jpg" target="_blank"><img src="/family/assets/hartwell/game-pool-table.jpg" alt="Game room with pool table" loading="lazy"></a>
+    <a href="/family/assets/hartwell/game-ping-pong.jpg" target="_blank"><img src="/family/assets/hartwell/game-ping-pong.jpg" alt="Game room with ping pong table" loading="lazy"></a>
   </div>
 
   <!-- Overview -->
