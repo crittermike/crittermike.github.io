@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T14:30:31.917Z",
+  "generated_at": "2026-07-05T14:45:32.224Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -398,6 +398,7 @@
       "allowance": {
         "balance_str": "$79.09"
       },
+      "guineaPig": null,
       "assignments": []
     },
     {
@@ -416,6 +417,7 @@
       "allowance": {
         "balance_str": "$0.00"
       },
+      "guineaPig": "$119.34",
       "assignments": []
     },
     {
@@ -434,6 +436,7 @@
       "allowance": {
         "balance_str": "$80.13"
       },
+      "guineaPig": null,
       "assignments": []
     },
     {
@@ -448,6 +451,7 @@
       "allowance": {
         "balance_str": "$-274.23"
       },
+      "guineaPig": null,
       "assignments": [
         {
           "id": "sch-2026-07-05-summer-pe-perry-sex-ed-pre-test-minor-ta",
@@ -895,10 +899,10 @@
   "weather": {
     "now": {
       "temp": 87,
-      "hi": 97,
+      "hi": 95,
       "lo": 75,
-      "icon": "🌤",
-      "code": 1
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -2147,6 +2151,6 @@
     "creditDebt": -26322.63,
     "netLiquid": -15049.06,
     "source": "ynab",
-    "updatedAt": "2026-07-05T14:30:30.702Z"
+    "updatedAt": "2026-07-05T14:45:31.023Z"
   }
 }
