@@ -873,6 +873,29 @@ eleventyExcludeFromCollections: true
   }
   .kidtile-stat .v.danger { color: var(--accent-rose); }
   .kidtile-stat .v.warn   { color: var(--accent-gold); }
+  .kidtile-gpfund {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: var(--surface-mute);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 6px 11px;
+  }
+  .kidtile-gpfund .lbl {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    white-space: nowrap;
+  }
+  .kidtile-gpfund .v {
+    font-size: 1.02rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dark);
+    white-space: nowrap;
+  }
   .kidtile-sec {
     border-top: 1px solid var(--border-soft);
     padding-top: 8px;
@@ -1948,13 +1971,13 @@ eleventyExcludeFromCollections: true
             <span class="v">—</span>
           {% endif %}
         </div>
-        {% if kid.guineaPig %}
-        <div class="kidtile-stat">
-          <span class="lbl" title="Guinea Pig Fund">🐹</span>
-          <span class="v">{{ kid.guineaPig }}</span>
-        </div>
-        {% endif %}
       </div>
+      {% if kid.guineaPig %}
+      <div class="kidtile-gpfund">
+        <span class="lbl">🐹 Guinea Pig Fund</span>
+        <span class="v">{{ kid.guineaPig }}</span>
+      </div>
+      {% endif %}
 
       {% if kid.reading %}
       <div class="kidtile-sec">
