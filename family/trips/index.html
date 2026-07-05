@@ -174,6 +174,16 @@
   @media (max-width: 600px) {
     .ed-meta-5 { grid-template-columns: repeat(2, 1fr) !important; }
   }
+  /* Sub-heads inside a section (Food & supplies groups) */
+  .ed-subhead {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    font-weight: 600;
+    margin: 26px 0 8px;
+  }
+  .ed-subhead:first-of-type { margin-top: 6px; }
 </style>
 
 <div class="ed-wrap">
@@ -245,27 +255,28 @@
 
   <!-- Pontoon -->
   <section class="ed-section">
-    <div class="ed-section-head"><h2>Renting a pontoon</h2></div>
+    <div class="ed-section-head"><h2>The boat</h2><div class="aside">Booked</div></div>
     <div class="ed-prose">
-      <p>Worth doing for at least a few days. Peer-to-peer rentals through <a class="ed-link" href="https://www.boatsetter.com" target="_blank">Boatsetter</a> are straightforward, and there are local marinas around the lake too. Book the middle of the week so you're not fighting weekend crowds.</p>
+      <p>A pontoon is booked for the middle three days through <a class="ed-link" href="https://www.boatsetter.com" target="_blank">Boatsetter</a>. Self-drive, no captain. Pickup is on the Anderson, SC side of the lake, about 50 minutes from the house.</p>
     </div>
     <div class="ed-grid">
 
       <div class="ed-cell">
-        <div class="ttl">What to look for</div>
+        <div class="ttl">The boat</div>
         <div class="body">
-          <strong>Tritoon, ~150hp</strong>
+          <strong>2014 Premier 220 SunSation RE</strong>
           <div class="leg">
-            A triple-tube pontoon around 22 ft comfortably seats a big group. Look for a Bluetooth stereo, swim ladder, anchor, and life jackets included. A 150hp tritoon pulls tubes easily; wakeboarding is doable but not aggressive.
+            Tritoon (triple tube), 150hp, 22 ft. Seats up to 12. Bluetooth stereo, swim ladder, anchor, and life jackets aboard. Pulls tubes easily; wakeboarding is doable but not aggressive.
           </div>
         </div>
       </div>
 
       <div class="ed-cell">
-        <div class="ttl">Add-ons to ask about</div>
+        <div class="ttl">Schedule</div>
         <div class="body">
+          <strong>Tue Jul 7 – Thu Jul 9</strong>
           <div class="leg">
-            Many rentals offer paddleboards, a floating mat or island, fishing gear, a cooler, tubes, and wakeboards. Decide up front so they're loaded before pickup.
+            Pickup Tue Jul 7 at 8:30 AM. Return Thu Jul 9 by 6:00 PM. Three full days on the water.
           </div>
         </div>
       </div>
@@ -274,7 +285,7 @@
         <div class="ttl">Good to know</div>
         <div class="body">
           <div class="leg">
-            Most owner rentals are self-drive (no captain). Fuel is usually not included, so refuel before you return to avoid a service fee. Being late runs into hourly and late charges. Check the cancellation window before you book.
+            Fuel isn't included, so top it off before returning to avoid a fee. Don't be late bringing it back. Bring the add-ons you want (tubes, paddleboards, cooler) or arrange them ahead of pickup.
           </div>
         </div>
       </div>
@@ -303,9 +314,30 @@
     <dl class="ed-kv">
       <dt>From Greenville</dt><dd>~1.5 hours via I-85</dd>
       <dt>Address</dt><dd>675 Old Mill Road, Hartwell, GA 30643</dd>
-      <dt>Groceries</dt><dd>Walmart and Ingles are ~8 miles away. Stock up on the way in.</dd>
+      <dt>Groceries</dt><dd>Ingles and Walmart in Hartwell, about 20 minutes away. Stock up on the way in.</dd>
       <dt>Parking</dt><dd>Plenty on the property.</dd>
     </dl>
+  </section>
+
+  <!-- Food & supplies -->
+  <section class="ed-section">
+    <div class="ed-section-head"><h2>Food &amp; supplies</h2><div class="aside">In Hartwell, ~20 min</div></div>
+    <div class="ed-prose">
+      <p>The house is out on the lake, so town is about a 20-minute drive. Worth one big grocery run on the way in. A few places we'd point you to:</p>
+    </div>
+
+    <h3 class="ed-subhead">Groceries &amp; supplies</h3>
+    <ul class="ed-2col-list">
+      <li><span class="lbl"><a class="ed-link" href="https://www.google.com/maps/search/Ingles+1000+E+Franklin+St+Hartwell+GA" target="_blank">Ingles Market</a></span><span class="note">Full grocery store. Open early to late. Best for a big stock-up run.</span></li>
+      <li><span class="lbl"><a class="ed-link" href="https://www.google.com/maps/search/Walmart+1572+Anderson+Hwy+Hartwell+GA" target="_blank">Walmart Supercenter</a></span><span class="note">Groceries plus anything else you forgot to pack.</span></li>
+    </ul>
+
+    <h3 class="ed-subhead">Eating out</h3>
+    <ul class="ed-2col-list">
+      <li><span class="lbl"><a class="ed-link" href="https://www.google.com/maps/search/Boat+House+Grill+149+Hartwell+Marina+Dr+Hartwell+GA" target="_blank">Boat House Grill</a></span><span class="note">Waterfront bar and grill at the marina. Come by boat or car, live music on weekends. Seasonal.</span></li>
+      <li><span class="lbl"><a class="ed-link" href="https://www.google.com/maps/search/Downtown+Cafe+63+Depot+St+Hartwell+GA" target="_blank">Downtown Cafe</a></span><span class="note">Longtime local spot downtown, Greek and Italian. Reservations a good idea.</span></li>
+      <li><span class="lbl"><a class="ed-link" href="https://www.google.com/maps/search/Backstreet+BBQ+290+W+Franklin+St+Hartwell+GA" target="_blank">Backstreet BBQ</a></span><span class="note">Casual barbecue in town. Easy dinner for a crowd.</span></li>
+    </ul>
   </section>
 
   <!-- What to bring -->
@@ -316,7 +348,7 @@
       <li><span class="lbl">Sunscreen</span><span class="note">July in the South is hot. Hats too.</span></li>
       <li><span class="lbl">Bug spray</span><span class="note">Lakefront in July.</span></li>
       <li><span class="lbl">Fishing gear</span><span class="note">If you have it. Otherwise rent on the boat.</span></li>
-      <li><span class="lbl">Snacks</span><span class="note">Nearest stores are ~8 miles away.</span></li>
+      <li><span class="lbl">Snacks</span><span class="note">Nearest stores are ~20 min away.</span></li>
       <li><span class="lbl">Cooler</span><span class="note">For the dock and the pontoon.</span></li>
       <li><span class="lbl">Flashlights</span><span class="note">For the walk down to the dock at night.</span></li>
       <li><span class="lbl">Games</span><span class="note">The house has some; bring favorites for downtime.</span></li>
