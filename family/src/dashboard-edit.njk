@@ -1948,6 +1948,12 @@ eleventyExcludeFromCollections: true
             <span class="v">—</span>
           {% endif %}
         </div>
+        {% if kid.guineaPig %}
+        <div class="kidtile-stat">
+          <span class="lbl" title="Guinea Pig Fund">🐹</span>
+          <span class="v">{{ kid.guineaPig }}</span>
+        </div>
+        {% endif %}
       </div>
 
       {% if kid.reading %}

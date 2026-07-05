@@ -193,10 +193,24 @@ function loadAllowance() {
   return balances;
 }
 
+/**
+ * Parse William's Guinea Pig Fund balance from allowance.md.
+ * Source line: "### 🐹 William's Guinea Pig Fund: $119.34"
+ * William-only (60% of his positive additions auto-save here). Returns the
+ * formatted string or null.
+ */
+function loadGuineaPigFund() {
+  const text = readSafe(ALLOWANCE);
+  if (!text) return null;
+  const m = text.match(/Guinea Pig Fund:\s*(\$-?[\d,]+\.\d{2})/i);
+  return m ? m[1] : null;
+}
+
 module.exports = function () {
   const reading = loadReading();
   const sugar = loadSugar();
   const allowance = loadAllowance();
+  const guineaPig = loadGuineaPigFund();
 
   return KIDS.map(k => ({
     key: k.key,
@@ -210,6 +224,8 @@ module.exports = function () {
     allowance: {
       balance_str: allowance[k.key] || null,
     },
+    // William-only: 60/40 Guinea Pig Fund savings balance. null for everyone else.
+    guineaPig: k.key === 'william' ? guineaPig : null,
     assignments: todaysAssignments(k.key),
   }));
 };
