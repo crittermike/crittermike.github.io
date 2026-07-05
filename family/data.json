@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-04T23:45:09.218Z",
+  "generated_at": "2026-07-05T00:00:13.028Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -702,57 +702,12 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
-    "protein_g": 50,
-    "cal": 800,
-    "effort": "easy",
-    "note": "4th of July. Swapped in for the usual pizza (moved to Friday). Fire up the grill.",
-    "recipe": {
-      "slug": "grilled-hamburgers-and-hotdogs-corn",
-      "name": "Grilled hamburgers & hotdogs + corn",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "grilled-hamburgers-and-hotdogs-corn"
-      ],
-      "in_rotation": true,
-      "effort": "easy",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 800,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "ground beef patties",
-            "hotdogs",
-            "buns",
-            "corn on the cob",
-            "cheese slices",
-            "condiments"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "ground beef patties",
-        "hotdogs",
-        "buns",
-        "corn on the cob",
-        "cheese slices",
-        "condiments"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Leftovers or whatever you can scrounge up",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Mike never cooks Sunday. Standing rule.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -975,29 +930,29 @@
       {
         "d": "Mon",
         "icon": "🌦",
-        "hi": 96,
+        "hi": 99,
         "lo": 73,
-        "code": 51
+        "code": 80
       },
       {
         "d": "Tue",
         "icon": "🌦",
-        "hi": 94,
-        "lo": 71,
-        "code": 80
+        "hi": 95,
+        "lo": 72,
+        "code": 53
       },
       {
         "d": "Wed",
         "icon": "⛅",
         "hi": 98,
-        "lo": 71,
+        "lo": 72,
         "code": 3
       },
       {
         "d": "Thu",
         "icon": "🌤",
-        "hi": 98,
-        "lo": 72,
+        "hi": 100,
+        "lo": 75,
         "code": 1
       }
     ],
@@ -2170,7 +2125,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 12.9,
+    "dayPct": 16.1,
     "totalSpend": 615.32,
     "totalBudget": 0,
     "categories": [
@@ -2211,6 +2166,6 @@
     "creditDebt": -26322.63,
     "netLiquid": -15049.06,
     "source": "ynab",
-    "updatedAt": "2026-07-04T23:45:08.002Z"
+    "updatedAt": "2026-07-05T00:00:10.385Z"
   }
 }
