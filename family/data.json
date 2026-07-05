@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-05T03:45:14.757Z",
+  "generated_at": "2026-07-05T04:00:15.833Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-04",
-      "time": "all day",
-      "what": "🇺🇸 4th of July",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-07-05T00:00:00-04:00"
-    },
     {
       "date": "2026-07-05",
       "time": "8a",
@@ -379,6 +370,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-29T00:00:00-04:00"
+    },
+    {
+      "date": "2026-10-02",
+      "time": "all day",
+      "what": "POPCS: No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-10-03T00:00:00-04:00"
     }
   ],
   "kids": [
@@ -398,12 +398,7 @@
       "allowance": {
         "balance_str": "$79.09"
       },
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -421,12 +416,7 @@
       "allowance": {
         "balance_str": "$0.00"
       },
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -444,12 +434,7 @@
       "allowance": {
         "balance_str": "$80.13"
       },
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -464,10 +449,6 @@
         "balance_str": "$-274.23"
       },
       "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
         {
           "id": "sch-2026-07-05-summer-pe-perry-sex-ed-pre-test-minor-ta",
           "label": "Summer PE (Perry): Sex Ed Pre-test (MINOR) — take FIRST before other unit assignments"
@@ -714,8 +695,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -723,7 +704,7 @@
       "dow_short": "Mon",
       "name": "Leftovers / butter noodles",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -861,7 +842,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Grilled hamburgers & hotdogs + corn (4th of July cookout)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "grilled-hamburgers-and-hotdogs-corn",
@@ -914,19 +895,12 @@
   "weather": {
     "now": {
       "temp": 81,
-      "hi": 95,
-      "lo": 77,
+      "hi": 96,
+      "lo": 75,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 96,
-        "lo": 75,
-        "code": 3
-      },
       {
         "d": "Mon",
         "icon": "🌦",
@@ -954,24 +928,31 @@
         "hi": 100,
         "lo": 75,
         "code": 1
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 98,
+        "lo": 75,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-04T06:21",
         "2026-07-05T06:21",
         "2026-07-06T06:22",
         "2026-07-07T06:22",
         "2026-07-08T06:23",
-        "2026-07-09T06:23"
+        "2026-07-09T06:23",
+        "2026-07-10T06:24"
       ],
       "sunsets": [
-        "2026-07-04T20:46",
         "2026-07-05T20:46",
         "2026-07-06T20:46",
         "2026-07-07T20:46",
         "2026-07-08T20:45",
-        "2026-07-09T20:45"
+        "2026-07-09T20:45",
+        "2026-07-10T20:45"
       ],
       "timezone": "America/New_York"
     }
@@ -2166,6 +2147,6 @@
     "creditDebt": -26322.63,
     "netLiquid": -15049.06,
     "source": "ynab",
-    "updatedAt": "2026-07-05T03:45:13.567Z"
+    "updatedAt": "2026-07-05T04:00:14.385Z"
   }
 }
