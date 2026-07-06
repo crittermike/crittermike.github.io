@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T19:15:21.742Z",
+  "generated_at": "2026-07-06T19:30:21.810Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -893,8 +893,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 90,
-      "hi": 92,
+      "temp": 91,
+      "hi": 93,
       "lo": 73,
       "icon": "🌤",
       "code": 2
@@ -902,10 +902,10 @@
     "days": [
       {
         "d": "Tue",
-        "icon": "⛅",
+        "icon": "🌦",
         "hi": 94,
         "lo": 73,
-        "code": 3
+        "code": 53
       },
       {
         "d": "Wed",
@@ -2106,31 +2106,39 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 19.4,
-    "totalSpend": 615.32,
+    "totalSpend": 1052.2,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 335.51,
-        "balance": -335.51,
+        "spent": 418.49,
+        "balance": -418.49,
         "pct": 0
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 160.69,
-        "balance": -160.69,
+        "spent": 321.5,
+        "balance": -321.5,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 61.29,
-        "balance": -61.29,
+        "spent": 189.88,
+        "balance": -189.88,
+        "pct": 0
+      },
+      {
+        "name": "🐶 Pets",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 64.5,
+        "balance": -64.5,
         "pct": 0
       },
       {
@@ -2143,9 +2151,9 @@
       }
     ],
     "liquidCash": 11273.57,
-    "creditDebt": -26322.63,
-    "netLiquid": -15049.06,
+    "creditDebt": -27236.18,
+    "netLiquid": -15962.61,
     "source": "ynab",
-    "updatedAt": "2026-07-06T19:15:20.519Z"
+    "updatedAt": "2026-07-06T19:30:20.573Z"
   }
 }
