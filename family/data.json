@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-06T03:45:51.506Z",
+  "generated_at": "2026-07-06T04:00:53.982Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-05",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-05T09:00:00-04:00"
-    },
     {
       "date": "2026-07-06",
       "time": "1p",
@@ -399,7 +390,12 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        }
+      ]
     },
     {
       "key": "william",
@@ -418,7 +414,16 @@
         "balance_str": "$0.00"
       },
       "guineaPig": "$119.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -437,7 +442,16 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -454,36 +468,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-07-05-summer-pe-perry-sex-ed-pre-test-minor-ta",
-          "label": "Summer PE (Perry): Sex Ed Pre-test (MINOR) — take FIRST before other unit assignments"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-healthy-unhealthy-relati",
-          "label": "Summer PE (Perry): Healthy & Unhealthy Relationships (Lesson 6) — watch videos, mark done"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-male-lesson-reproductive",
-          "label": "Summer PE (Perry): Male Lesson — Reproductive Systems & Health Concerns (MINOR, Lesson 8)"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-pregnancy-prevention-abs",
-          "label": "Summer PE (Perry): Pregnancy Prevention & Abstinence (MINOR, Lessons 11-12)"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-laws-consent-abuse-minor",
-          "label": "Summer PE (Perry): Laws, Consent, Abuse (MINOR, Lesson 13)"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-sexually-transmitted-dis",
-          "label": "Summer PE (Perry): Sexually Transmitted Diseases (MINOR, Lesson 14)"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-week-5-fitness-log-add-g",
-          "label": "Summer PE (Perry): Week 5 Fitness Log — add goal to top + reflection questions p.2"
-        },
-        {
-          "id": "sch-2026-07-05-summer-pe-perry-post-test-major-one-atte",
-          "label": "Summer PE (Perry): Post Test (MAJOR) — one attempt only, take LAST"
+          "id": "take-medicine",
+          "label": "Take medicine"
         }
       ]
     }
@@ -699,7 +685,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -707,8 +693,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Pick up dinner on the drive in (rotisserie chicken + sides)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -716,7 +702,7 @@
       "dow_short": "Tue",
       "name": "Chicken fajitas (cast iron)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "chicken-fajitas",
         "name": "Chicken Fajitas (Cast Iron)",
@@ -908,19 +894,12 @@
   "weather": {
     "now": {
       "temp": 76,
-      "hi": 95,
-      "lo": 75,
+      "hi": 92,
+      "lo": 72,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 72,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -948,24 +927,31 @@
         "hi": 101,
         "lo": 74,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 100,
+        "lo": 74,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-05T06:21",
         "2026-07-06T06:22",
         "2026-07-07T06:22",
         "2026-07-08T06:23",
         "2026-07-09T06:23",
-        "2026-07-10T06:24"
+        "2026-07-10T06:24",
+        "2026-07-11T06:25"
       ],
       "sunsets": [
-        "2026-07-05T20:46",
         "2026-07-06T20:46",
         "2026-07-07T20:46",
         "2026-07-08T20:45",
         "2026-07-09T20:45",
-        "2026-07-10T20:45"
+        "2026-07-10T20:45",
+        "2026-07-11T20:45"
       ],
       "timezone": "America/New_York"
     }
@@ -2160,6 +2146,6 @@
     "creditDebt": -26322.63,
     "netLiquid": -15049.06,
     "source": "ynab",
-    "updatedAt": "2026-07-06T03:45:50.259Z"
+    "updatedAt": "2026-07-06T04:00:52.752Z"
   }
 }
