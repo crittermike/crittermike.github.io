@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T23:45:27.485Z",
+  "generated_at": "2026-07-07T00:00:30.457Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -673,12 +673,71 @@
     ]
   },
   "dinner": {
-    "name": "Pick up dinner on the drive in (rotisserie chicken + sides)",
+    "name": "Chicken fajitas (cast iron)",
     "protein_g": 55,
-    "cal": 550,
-    "effort": "none",
-    "note": "LAKE WEEK travel/check-in day -- leave house ~1pm, check in 4pm. No cook night one. Grab rotisserie chicken + sides at the Ingles/Walmart ~8 mi from the house (or fire up the grill for dogs if you feel like it).",
-    "recipe": null
+    "cal": 600,
+    "effort": "easy",
+    "note": "Carryover -- bumped from last week's pool (fajitas got swapped for burgers 7/1). Skip bell peppers: onions + zucchini + corn per the recipe. Cilantro on the side only (Nancy). Weigh your portion for macros.",
+    "recipe": {
+      "slug": "chicken-fajitas",
+      "name": "Chicken Fajitas (Cast Iron)",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "chicken-fajitas",
+        "fajitas"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 48,
+      "cal": 600,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "1.5–2 lb chicken breasts, sliced into 1/4\" strips",
+            "2 tbsp fajita seasoning (or to taste)",
+            "2 medium onions, sliced into half-moons",
+            "2 medium zucchini, halved lengthwise then sliced 1/4\" thick",
+            "1.5 cups corn (frozen or fresh kernels off the cob)",
+            "2 tbsp olive oil, divided",
+            "8–10 tortillas",
+            "Salt + pepper"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "1.5–2 lb chicken breasts, sliced into 1/4\" strips",
+        "2 tbsp fajita seasoning (or to taste)",
+        "2 medium onions, sliced into half-moons",
+        "2 medium zucchini, halved lengthwise then sliced 1/4\" thick",
+        "1.5 cups corn (frozen or fresh kernels off the cob)",
+        "2 tbsp olive oil, divided",
+        "8–10 tortillas",
+        "Salt + pepper"
+      ],
+      "steps": [
+        "**Marinate:** Toss sliced chicken with 1 tbsp olive oil and 1.5 tbsp fajita seasoning. Let it sit 15+ min while you prep veg.",
+        "**Heat the cast iron:** Crank a 12\" cast iron over medium-high until it's smoking lightly (~3 min).",
+        "**Sear chicken:** Add chicken in a single layer, don't crowd. Cook untouched 2–3 min until charred, flip and cook another 2 min. Pull to a plate. Work in two batches if needed.",
+        "**Cook onions:** Add remaining 1 tbsp oil and onions to the same pan. 3–4 min until they get color.",
+        "**Add zucchini + corn:** Toss in zucchini and corn with the rest of the fajita seasoning + pinch of salt. Cook 4–5 min, stirring once or twice. You want char on the zucchini, not mush. Don't stir constantly.",
+        "**Combine:** Return chicken (and any juices) to the pan, toss everything together 1 min to reheat.",
+        "**Warm tortillas:** Wrap in foil and stick in a 300°F oven for 5 min, or char them one at a time over an open gas flame for 10 sec/side.",
+        "**Serve:** Pile into tortillas. Toppings optional but lime juice, cilantro, salsa, or a dab of sour cream all work."
+      ],
+      "notes": "<h3>Pitfalls</h3>\n<ul>\n<li>Don't crowd the pan or chicken steams instead of searing.</li>\n<li>Zucchini turns to mush fast — keep it moving and pull it before it looks done.</li>\n<li>Cast iron stays scorching after you turn it off, so move stuff off the heat once chicken is back in.</li>\n</ul>\n",
+      "body_html": "<h1>Chicken Fajitas (Cast Iron, with Zucchini + Corn)</h1>\n<p>Serves 4–5. ~600 cal / 48–62g protein per serving (2 tortillas + filling).</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1.5–2 lb chicken breasts, sliced into 1/4&quot; strips</li>\n<li>2 tbsp fajita seasoning (or to taste)</li>\n<li>2 medium onions, sliced into half-moons</li>\n<li>2 medium zucchini, halved lengthwise then sliced 1/4&quot; thick</li>\n<li>1.5 cups corn (frozen or fresh kernels off the cob)</li>\n<li>2 tbsp olive oil, divided</li>\n<li>8–10 tortillas</li>\n<li>Salt + pepper</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li><strong>Marinate:</strong> Toss sliced chicken with 1 tbsp olive oil and 1.5 tbsp fajita seasoning. Let it sit 15+ min while you prep veg.</li>\n<li><strong>Heat the cast iron:</strong> Crank a 12&quot; cast iron over medium-high until it's smoking lightly (~3 min).</li>\n<li><strong>Sear chicken:</strong> Add chicken in a single layer, don't crowd. Cook untouched 2–3 min until charred, flip and cook another 2 min. Pull to a plate. Work in two batches if needed.</li>\n<li><strong>Cook onions:</strong> Add remaining 1 tbsp oil and onions to the same pan. 3–4 min until they get color.</li>\n<li><strong>Add zucchini + corn:</strong> Toss in zucchini and corn with the rest of the fajita seasoning + pinch of salt. Cook 4–5 min, stirring once or twice. You want char on the zucchini, not mush. Don't stir constantly.</li>\n<li><strong>Combine:</strong> Return chicken (and any juices) to the pan, toss everything together 1 min to reheat.</li>\n<li><strong>Warm tortillas:</strong> Wrap in foil and stick in a 300°F oven for 5 min, or char them one at a time over an open gas flame for 10 sec/side.</li>\n<li><strong>Serve:</strong> Pile into tortillas. Toppings optional but lime juice, cilantro, salsa, or a dab of sour cream all work.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Don't crowd the pan or chicken steams instead of searing.</li>\n<li>Zucchini turns to mush fast — keep it moving and pull it before it looks done.</li>\n<li>Cast iron stays scorching after you turn it off, so move stuff off the heat once chicken is back in.</li>\n</ul>\n",
+      "last_reviewed": "2026-05-29T00:00:00.000Z"
+    }
   },
   "mealweek": [
     {
@@ -923,10 +982,10 @@
       },
       {
         "d": "Fri",
-        "icon": "🌦",
+        "icon": "🌤",
         "hi": 101,
         "lo": 75,
-        "code": 51
+        "code": 2
       },
       {
         "d": "Sat",
@@ -2105,7 +2164,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 19.4,
+    "dayPct": 22.6,
     "totalSpend": 1052.2,
     "totalBudget": 0,
     "categories": [
@@ -2154,6 +2213,6 @@
     "creditDebt": -27236.18,
     "netLiquid": -15962.61,
     "source": "ynab",
-    "updatedAt": "2026-07-06T23:45:26.369Z"
+    "updatedAt": "2026-07-07T00:00:28.696Z"
   }
 }
