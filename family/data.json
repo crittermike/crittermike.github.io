@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-07T03:45:33.271Z",
+  "generated_at": "2026-07-07T04:00:35.990Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-06",
-      "time": "1p",
-      "what": "🐟 Go to the lake",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-06T15:00:00-04:00"
-    },
     {
       "date": "2026-07-11",
       "time": "10a",
@@ -370,6 +361,24 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-10-03T00:00:00-04:00"
+    },
+    {
+      "date": "2026-10-04",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-04T09:00:00-04:00"
+    },
+    {
+      "date": "2026-10-04",
+      "time": "6:30p",
+      "what": "Peace Center: Maybe Happy Ending",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-04T21:30:00-04:00"
     }
   ],
   "kids": [
@@ -752,7 +761,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Pick up dinner on the drive in (rotisserie chicken + sides)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -760,8 +769,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken fajitas (cast iron)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "chicken-fajitas",
         "name": "Chicken Fajitas (Cast Iron)",
@@ -828,7 +837,7 @@
       "dow_short": "Wed",
       "name": "Grilled burgers & hot dogs + corn (lake cookout)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -953,19 +962,12 @@
   "weather": {
     "now": {
       "temp": 80,
-      "hi": 92,
-      "lo": 73,
+      "hi": 94,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "🌦",
-        "hi": 94,
-        "lo": 74,
-        "code": 53
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -993,24 +995,31 @@
         "hi": 101,
         "lo": 76,
         "code": 3
+      },
+      {
+        "d": "Sun",
+        "icon": "⛅",
+        "hi": 102,
+        "lo": 76,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-06T06:22",
         "2026-07-07T06:22",
         "2026-07-08T06:23",
         "2026-07-09T06:23",
         "2026-07-10T06:24",
-        "2026-07-11T06:25"
+        "2026-07-11T06:25",
+        "2026-07-12T06:25"
       ],
       "sunsets": [
-        "2026-07-06T20:46",
         "2026-07-07T20:46",
         "2026-07-08T20:45",
         "2026-07-09T20:45",
         "2026-07-10T20:45",
-        "2026-07-11T20:45"
+        "2026-07-11T20:45",
+        "2026-07-12T20:44"
       ],
       "timezone": "America/New_York"
     }
@@ -2221,6 +2230,6 @@
     "creditDebt": -27269.15,
     "netLiquid": -15995.58,
     "source": "ynab",
-    "updatedAt": "2026-07-07T03:45:32.084Z"
+    "updatedAt": "2026-07-07T04:00:34.812Z"
   }
 }
