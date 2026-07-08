@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T03:45:13.016Z",
+  "generated_at": "2026-07-08T04:00:13.671Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -710,7 +710,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken fajitas (cast iron)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "chicken-fajitas",
@@ -777,8 +777,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Grilled burgers & hot dogs + corn (lake cookout)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -786,7 +786,7 @@
       "dow_short": "Thu",
       "name": "Korean beef + broccoli bowls",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "korean-beef-broccoli-bowls",
         "name": "Korean Beef + Broccoli Bowls",
@@ -903,19 +903,12 @@
   "weather": {
     "now": {
       "temp": 78,
-      "hi": 93,
-      "lo": 74,
+      "hi": 95,
+      "lo": 73,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "🌤",
-        "hi": 95,
-        "lo": 73,
-        "code": 2
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -943,24 +936,31 @@
         "hi": 95,
         "lo": 71,
         "code": 53
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 77,
+        "lo": 66,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-07T06:22",
         "2026-07-08T06:23",
         "2026-07-09T06:23",
         "2026-07-10T06:24",
         "2026-07-11T06:25",
-        "2026-07-12T06:25"
+        "2026-07-12T06:25",
+        "2026-07-13T06:26"
       ],
       "sunsets": [
-        "2026-07-07T20:46",
         "2026-07-08T20:45",
         "2026-07-09T20:45",
         "2026-07-10T20:45",
         "2026-07-11T20:45",
-        "2026-07-12T20:44"
+        "2026-07-12T20:44",
+        "2026-07-13T20:44"
       ],
       "timezone": "America/New_York"
     }
@@ -2171,6 +2171,6 @@
     "creditDebt": -27587.29,
     "netLiquid": -16313.72,
     "source": "ynab",
-    "updatedAt": "2026-07-08T03:45:11.709Z"
+    "updatedAt": "2026-07-08T04:00:12.271Z"
   }
 }
