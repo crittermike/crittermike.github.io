@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T23:00:48.465Z",
+  "generated_at": "2026-07-08T23:15:48.866Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -289,6 +289,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-10T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-10",
+      "time": "7:30p",
+      "what": "Confirmation 2027: Mandatory Parent Meeting #1",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-10T20:30:00-04:00"
     },
     {
       "date": "2026-09-13",
@@ -2171,6 +2180,6 @@
     "creditDebt": -27975.94,
     "netLiquid": -16702.37,
     "source": "ynab",
-    "updatedAt": "2026-07-08T23:00:47.387Z"
+    "updatedAt": "2026-07-08T23:15:47.742Z"
   }
 }
