@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-10T03:45:30.462Z",
+  "generated_at": "2026-07-10T04:00:31.093Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-09",
-      "time": "all day",
-      "what": "Poppy’s birthday 🎂",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-07-10T00:00:00-04:00"
-    },
     {
       "date": "2026-07-11",
       "time": "10a",
@@ -397,6 +388,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-04T21:30:00-04:00"
+    },
+    {
+      "date": "2026-10-07",
+      "time": "8:40a",
+      "what": "Charlie - Pediatric Dentist Appt",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-07T09:40:00-04:00"
     }
   ],
   "kids": [
@@ -421,6 +421,10 @@
         {
           "id": "summer-solutions",
           "label": "Summer Solutions"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -449,6 +453,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -477,6 +485,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -497,6 +509,10 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -803,7 +819,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Korean beef + broccoli bowls",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "korean-beef-broccoli-bowls",
@@ -905,8 +921,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out (last lake night)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -914,7 +930,7 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
@@ -922,18 +938,11 @@
     "now": {
       "temp": 78,
       "hi": 94,
-      "lo": 74,
+      "lo": 72,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 94,
-        "lo": 72,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "🌧",
@@ -961,24 +970,31 @@
         "hi": 81,
         "lo": 68,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 91,
+        "lo": 71,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-09T06:23",
         "2026-07-10T06:24",
         "2026-07-11T06:25",
         "2026-07-12T06:25",
         "2026-07-13T06:26",
-        "2026-07-14T06:26"
+        "2026-07-14T06:26",
+        "2026-07-15T06:27"
       ],
       "sunsets": [
-        "2026-07-09T20:45",
         "2026-07-10T20:45",
         "2026-07-11T20:45",
         "2026-07-12T20:44",
         "2026-07-13T20:44",
-        "2026-07-14T20:43"
+        "2026-07-14T20:43",
+        "2026-07-15T20:43"
       ],
       "timezone": "America/New_York"
     }
@@ -2189,6 +2205,6 @@
     "creditDebt": -28287.06,
     "netLiquid": -17013.49,
     "source": "ynab",
-    "updatedAt": "2026-07-10T03:45:29.245Z"
+    "updatedAt": "2026-07-10T04:00:29.864Z"
   }
 }
