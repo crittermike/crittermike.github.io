@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T10:30:17.119Z",
+  "generated_at": "2026-07-11T10:45:17.051Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2125,7 +2125,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 35.5,
-    "totalSpend": 1893.36,
+    "totalSpend": 1907.13,
     "totalBudget": 0,
     "categories": [
       {
@@ -2172,15 +2172,15 @@
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 32.97,
-        "balance": -32.97,
+        "spent": 46.74,
+        "balance": -46.74,
         "pct": 0
       }
     ],
-    "liquidCash": 11273.64,
-    "creditDebt": -28626.1,
-    "netLiquid": -17352.46,
+    "liquidCash": 11245.03,
+    "creditDebt": -29073.86,
+    "netLiquid": -17828.83,
     "source": "ynab",
-    "updatedAt": "2026-07-11T10:30:15.857Z"
+    "updatedAt": "2026-07-11T10:45:15.966Z"
   }
 }
