@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T22:15:35.427Z",
+  "generated_at": "2026-07-11T22:30:35.852Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -28,6 +28,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-13T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-13",
+      "time": "11a",
+      "what": "Nancy doc appointment ",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-13T12:00:00-04:00"
     },
     {
       "date": "2026-07-14",
@@ -932,7 +941,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 84,
       "hi": 85,
       "lo": 72,
       "icon": "⛅",
@@ -943,7 +952,7 @@
         "d": "Sun",
         "icon": "🌦",
         "hi": 89,
-        "lo": 72,
+        "lo": 71,
         "code": 82
       },
       {
@@ -2201,6 +2210,6 @@
     "creditDebt": -29073.86,
     "netLiquid": -17828.83,
     "source": "ynab",
-    "updatedAt": "2026-07-11T22:15:34.231Z"
+    "updatedAt": "2026-07-11T22:30:34.760Z"
   }
 }
