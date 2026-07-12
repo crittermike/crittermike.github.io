@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-12T03:45:43.208Z",
+  "generated_at": "2026-07-12T04:00:43.945Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-11",
-      "time": "10a",
-      "what": "Come home from the lake",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-11T12:00:00-04:00"
-    },
     {
       "date": "2026-07-12",
       "time": "8a",
@@ -426,12 +417,7 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -450,12 +436,7 @@
         "balance_str": "$0.00"
       },
       "guineaPig": "$119.34",
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -474,12 +455,7 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -495,10 +471,6 @@
       },
       "guineaPig": null,
       "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
         {
           "id": "sch-2026-07-12-basketball-assessment-summer-pe-perry-",
           "label": "Basketball Assessment (Summer PE, Perry)"
@@ -733,8 +705,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -742,7 +714,7 @@
       "dow_short": "Mon",
       "name": "Pick up dinner on the drive in (rotisserie chicken + sides)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -934,7 +906,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -942,19 +914,12 @@
   "weather": {
     "now": {
       "temp": 73,
-      "hi": 85,
-      "lo": 72,
+      "hi": 92,
+      "lo": 71,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 71,
-        "code": 3
-      },
       {
         "d": "Mon",
         "icon": "🌦",
@@ -982,24 +947,31 @@
         "hi": 97,
         "lo": 73,
         "code": 3
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 100,
+        "lo": 78,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-11T06:25",
         "2026-07-12T06:25",
         "2026-07-13T06:26",
         "2026-07-14T06:26",
         "2026-07-15T06:27",
-        "2026-07-16T06:28"
+        "2026-07-16T06:28",
+        "2026-07-17T06:28"
       ],
       "sunsets": [
-        "2026-07-11T20:45",
         "2026-07-12T20:44",
         "2026-07-13T20:44",
         "2026-07-14T20:43",
         "2026-07-15T20:43",
-        "2026-07-16T20:43"
+        "2026-07-16T20:43",
+        "2026-07-17T20:42"
       ],
       "timezone": "America/New_York"
     }
@@ -2210,6 +2182,6 @@
     "creditDebt": -29073.86,
     "netLiquid": -17828.83,
     "source": "ynab",
-    "updatedAt": "2026-07-12T03:45:42.162Z"
+    "updatedAt": "2026-07-12T04:00:42.820Z"
   }
 }
