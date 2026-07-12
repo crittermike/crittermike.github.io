@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-12T10:30:57.055Z",
+  "generated_at": "2026-07-12T10:45:54.428Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2126,31 +2126,71 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 38.7,
-    "totalSpend": 1907.13,
+    "totalSpend": 6173.49,
     "totalBudget": 0,
     "categories": [
       {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
+        "name": "🏠 Home",
+        "group": "Needs",
         "budgeted": 0,
-        "spent": 883.1,
-        "balance": -883.1,
+        "spent": 2426.69,
+        "balance": -2426.69,
         "pct": 0
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 665.08,
-        "balance": -665.08,
+        "spent": 923.79,
+        "balance": -923.79,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 189.88,
-        "balance": -189.88,
+        "spent": 879.82,
+        "balance": -879.82,
+        "pct": 0
+      },
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 827.79,
+        "balance": -827.79,
+        "pct": 0
+      },
+      {
+        "name": "🍿 Entertainment",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 447.46,
+        "balance": -447.46,
+        "pct": 0
+      },
+      {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 225.19,
+        "balance": -225.19,
+        "pct": 0
+      },
+      {
+        "name": "🏝️ Vacation",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 222.9,
+        "balance": -222.9,
+        "pct": 0
+      },
+      {
+        "name": "🚗 Cars",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 155.35,
+        "balance": -155.35,
         "pct": 0
       },
       {
@@ -2160,28 +2200,12 @@
         "spent": 64.5,
         "balance": -64.5,
         "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 57.83,
-        "balance": -57.83,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 46.74,
-        "balance": -46.74,
-        "pct": 0
       }
     ],
     "liquidCash": 11245.03,
     "creditDebt": -29073.86,
     "netLiquid": -17828.83,
     "source": "ynab",
-    "updatedAt": "2026-07-12T10:30:55.660Z"
+    "updatedAt": "2026-07-12T10:45:53.326Z"
   }
 }
