@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T20:15:51.376Z",
+  "generated_at": "2026-07-13T20:30:51.883Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -926,7 +926,7 @@
         "d": "Tue",
         "icon": "⛅",
         "hi": 83,
-        "lo": 70,
+        "lo": 71,
         "code": 3
       },
       {
@@ -2128,7 +2128,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 41.9,
-    "totalSpend": 6173.49,
+    "totalSpend": 6202.46,
     "totalBudget": 0,
     "categories": [
       {
@@ -2167,16 +2167,16 @@
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 447.46,
-        "balance": -447.46,
+        "spent": 473.44,
+        "balance": -473.44,
         "pct": 0
       },
       {
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 225.19,
-        "balance": -225.19,
+        "spent": 228.18,
+        "balance": -228.18,
         "pct": 0
       },
       {
@@ -2205,9 +2205,9 @@
       }
     ],
     "liquidCash": 11245.03,
-    "creditDebt": -29253.74,
-    "netLiquid": -18008.71,
+    "creditDebt": -29557.44,
+    "netLiquid": -18312.41,
     "source": "ynab",
-    "updatedAt": "2026-07-13T20:15:50.095Z"
+    "updatedAt": "2026-07-13T20:30:50.559Z"
   }
 }
