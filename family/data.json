@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T18:15:48.002Z",
+  "generated_at": "2026-07-13T18:30:48.003Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -916,7 +916,7 @@
   "weather": {
     "now": {
       "temp": 78,
-      "hi": 79,
+      "hi": 78,
       "lo": 71,
       "icon": "⛅",
       "code": 3
@@ -924,10 +924,10 @@
     "days": [
       {
         "d": "Tue",
-        "icon": "🌦",
+        "icon": "🌧",
         "hi": 83,
         "lo": 70,
-        "code": 53
+        "code": 65
       },
       {
         "d": "Wed",
@@ -2125,89 +2125,5 @@
       "last_reviewed": null
     }
   ],
-  "finance": {
-    "month": "July 2026",
-    "dayPct": 41.9,
-    "totalSpend": 6173.49,
-    "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2426.69,
-        "balance": -2426.69,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 923.79,
-        "balance": -923.79,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 879.82,
-        "balance": -879.82,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 827.79,
-        "balance": -827.79,
-        "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 447.46,
-        "balance": -447.46,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 225.19,
-        "balance": -225.19,
-        "pct": 0
-      },
-      {
-        "name": "🏝️ Vacation",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 222.9,
-        "balance": -222.9,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 155.35,
-        "balance": -155.35,
-        "pct": 0
-      },
-      {
-        "name": "🐶 Pets",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 64.5,
-        "balance": -64.5,
-        "pct": 0
-      }
-    ],
-    "liquidCash": 11245.03,
-    "creditDebt": -29253.74,
-    "netLiquid": -18008.71,
-    "source": "ynab",
-    "updatedAt": "2026-07-13T18:15:46.738Z"
-  }
+  "finance": null
 }
