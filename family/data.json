@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-13T03:45:21.938Z",
+  "generated_at": "2026-07-13T04:00:23.002Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-12",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-12T09:00:00-04:00"
-    },
     {
       "date": "2026-07-13",
       "time": "9a",
@@ -417,7 +408,12 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        }
+      ]
     },
     {
       "key": "william",
@@ -436,7 +432,16 @@
         "balance_str": "$0.00"
       },
       "guineaPig": "$119.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -455,7 +460,16 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -472,24 +486,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-07-12-basketball-assessment-summer-pe-perry-",
-          "label": "Basketball Assessment (Summer PE, Perry)"
-        },
-        {
-          "id": "sch-2026-07-12-edpuzzle-how-to-dribble-a-basketball-sum",
-          "label": "Edpuzzle - How to Dribble a Basketball (Summer PE, Perry)"
-        },
-        {
-          "id": "sch-2026-07-12-basketball-rules-quiz-summer-pe-perry-",
-          "label": "Basketball Rules Quiz (Summer PE, Perry)"
-        },
-        {
-          "id": "sch-2026-07-12-edpuzzle-developing-basketball-shooting-",
-          "label": "Edpuzzle - Developing Basketball Shooting Form (Summer PE, Perry)"
-        },
-        {
-          "id": "sch-2026-07-12-week-6-fitness-log-complete-reflection-q",
-          "label": "Week 6 Fitness Log - complete reflection questions p2 (Summer PE, Perry)"
+          "id": "take-medicine",
+          "label": "Take medicine"
         }
       ]
     }
@@ -750,7 +748,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -758,8 +756,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Crockpot chicken & dumplings",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -812,7 +810,7 @@
       "dow_short": "Tue",
       "name": "Tuscan chicken pasta",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "tuscan-chicken-pasta",
         "name": "Tuscan Chicken Pasta",
@@ -1044,19 +1042,12 @@
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 86,
-      "lo": 72,
+      "hi": 80,
+      "lo": 71,
       "icon": "🌤",
       "code": 2
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "🌦",
-        "hi": 80,
-        "lo": 71,
-        "code": 53
-      },
       {
         "d": "Tue",
         "icon": "🌧",
@@ -1084,24 +1075,31 @@
         "hi": 100,
         "lo": 80,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 102,
+        "lo": 79,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-12T06:25",
         "2026-07-13T06:26",
         "2026-07-14T06:26",
         "2026-07-15T06:27",
         "2026-07-16T06:28",
-        "2026-07-17T06:28"
+        "2026-07-17T06:28",
+        "2026-07-18T06:29"
       ],
       "sunsets": [
-        "2026-07-12T20:44",
         "2026-07-13T20:44",
         "2026-07-14T20:43",
         "2026-07-15T20:43",
         "2026-07-16T20:43",
-        "2026-07-17T20:42"
+        "2026-07-17T20:42",
+        "2026-07-18T20:42"
       ],
       "timezone": "America/New_York"
     }
@@ -2336,6 +2334,6 @@
     "creditDebt": -29073.86,
     "netLiquid": -17828.83,
     "source": "ynab",
-    "updatedAt": "2026-07-13T03:45:20.737Z"
+    "updatedAt": "2026-07-13T04:00:21.905Z"
   }
 }
