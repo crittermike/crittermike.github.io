@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T12:30:37.448Z",
+  "generated_at": "2026-07-13T12:45:37.692Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -691,57 +691,12 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot chicken & dumplings",
-    "protein_g": 45,
-    "cal": 550,
-    "effort": "easy",
-    "note": "Crockpot -- start it before Nancy's 11am appt, done by dinner. High 3-4 hrs, biscuits cut in 8 added last 30 min.",
-    "recipe": {
-      "slug": "crockpot-chicken-and-dumplings",
-      "name": "Crockpot Chicken and Dumplings",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "crockpot-chicken-and-dumplings"
-      ],
-      "in_rotation": true,
-      "effort": "easy",
-      "kid_friendly": true,
-      "protein_g": 45,
-      "cal": 550,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chicken broth",
-            "chicken breast",
-            "dried minced onion",
-            "dried parsley",
-            "cream of chicken soup (2 cans)",
-            "refrigerated biscuits"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chicken broth",
-        "chicken breast",
-        "dried minced onion",
-        "dried parsley",
-        "cream of chicken soup (2 cans)",
-        "refrigerated biscuits"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Date night — kids get Burger King",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Mike + Nancy date night. Boys get Burger King.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -755,9 +710,17 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Crockpot chicken & dumplings",
+      "name": "Date night — kids get Burger King",
       "isToday": true,
       "isTomorrow": false,
+      "recipe": null
+    },
+    {
+      "dow": "Tuesday",
+      "dow_short": "Tue",
+      "name": "Crockpot chicken & dumplings",
+      "isToday": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -803,113 +766,6 @@
         "notes": "",
         "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
         "last_reviewed": null
-      }
-    },
-    {
-      "dow": "Tuesday",
-      "dow_short": "Tue",
-      "name": "Tuscan chicken pasta",
-      "isToday": false,
-      "isTomorrow": true,
-      "recipe": {
-        "slug": "tuscan-chicken-pasta",
-        "name": "Tuscan Chicken Pasta",
-        "source": "https://iamhomesteader.com/wprm_print/tuscan-chicken-pasta",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "tuscan-chicken-pasta",
-          "tuscan-chicken"
-        ],
-        "in_rotation": true,
-        "effort": "medium",
-        "kid_friendly": true,
-        "protein_g": 30,
-        "cal": 471,
-        "servings": 6,
-        "prep_min": 30,
-        "cook_min": 20,
-        "ingredient_groups": [
-          {
-            "heading": "Chicken",
-            "items": [
-              "2 boneless skinless chicken breasts (~1 lb)",
-              "3 tbsp olive oil, divided",
-              "1 tsp paprika",
-              "1 tsp garlic powder",
-              "1 tsp kosher salt",
-              "½ tsp black pepper"
-            ]
-          },
-          {
-            "heading": "Pasta + Sauce",
-            "items": [
-              "8 oz rigatoni, cooked al dente",
-              "4 tbsp (½ stick) unsalted butter",
-              "¼ cup shallot, finely diced",
-              "¼ cup sun-dried tomatoes, softened in hot water and chopped",
-              "1 tsp garlic, minced",
-              "2 tbsp tomato paste",
-              "1 tsp oregano",
-              "1 tsp paprika",
-              "½ tsp garlic powder",
-              "½ tsp kosher salt",
-              "¼ tsp black pepper",
-              "1½ cups heavy cream",
-              "1½ cups milk",
-              "1 cup fresh spinach",
-              "1 cup parmesan cheese, grated (plus more for garnish)",
-              "1 cup cherry tomatoes, halved",
-              "Fresh parsley, for garnish",
-              "Salt + pepper, to taste"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "2 boneless skinless chicken breasts (~1 lb)",
-          "3 tbsp olive oil, divided",
-          "1 tsp paprika",
-          "1 tsp garlic powder",
-          "1 tsp kosher salt",
-          "½ tsp black pepper",
-          "8 oz rigatoni, cooked al dente",
-          "4 tbsp (½ stick) unsalted butter",
-          "¼ cup shallot, finely diced",
-          "¼ cup sun-dried tomatoes, softened in hot water and chopped",
-          "1 tsp garlic, minced",
-          "2 tbsp tomato paste",
-          "1 tsp oregano",
-          "1 tsp paprika",
-          "½ tsp garlic powder",
-          "½ tsp kosher salt",
-          "¼ tsp black pepper",
-          "1½ cups heavy cream",
-          "1½ cups milk",
-          "1 cup fresh spinach",
-          "1 cup parmesan cheese, grated (plus more for garnish)",
-          "1 cup cherry tomatoes, halved",
-          "Fresh parsley, for garnish",
-          "Salt + pepper, to taste"
-        ],
-        "steps": [
-          "Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.",
-          "Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.",
-          "In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).",
-          "Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm. ### Pasta + Sauce",
-          "Boil rigatoni in salted water, cook al dente (~14 min). Drain.",
-          "In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.",
-          "Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.",
-          "Add heavy cream and milk, stir to combine.",
-          "Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.",
-          "Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.",
-          "Serve topped with extra parmesan and parsley. Salt + pepper to taste."
-        ],
-        "notes": "<h3>Pitfalls</h3>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
-        "body_html": "<h1>Tuscan Chicken Pasta</h1>\n<p>Rigatoni in a creamy parmesan-tomato sauce with spinach and sun-dried tomatoes, topped with baked seasoned chicken. Serves 6. ~471 cal / ~30g protein per serving. Weigh your portion and load extra chicken + parmesan to hit your macro target.</p>\n<h2>Ingredients</h2>\n<h3>Chicken</h3>\n<ul>\n<li>2 boneless skinless chicken breasts (~1 lb)</li>\n<li>3 tbsp olive oil, divided</li>\n<li>1 tsp paprika</li>\n<li>1 tsp garlic powder</li>\n<li>1 tsp kosher salt</li>\n<li>½ tsp black pepper</li>\n</ul>\n<h3>Pasta + Sauce</h3>\n<ul>\n<li>8 oz rigatoni, cooked al dente</li>\n<li>4 tbsp (½ stick) unsalted butter</li>\n<li>¼ cup shallot, finely diced</li>\n<li>¼ cup sun-dried tomatoes, softened in hot water and chopped</li>\n<li>1 tsp garlic, minced</li>\n<li>2 tbsp tomato paste</li>\n<li>1 tsp oregano</li>\n<li>1 tsp paprika</li>\n<li>½ tsp garlic powder</li>\n<li>½ tsp kosher salt</li>\n<li>¼ tsp black pepper</li>\n<li>1½ cups heavy cream</li>\n<li>1½ cups milk</li>\n<li>1 cup fresh spinach</li>\n<li>1 cup parmesan cheese, grated (plus more for garnish)</li>\n<li>1 cup cherry tomatoes, halved</li>\n<li>Fresh parsley, for garnish</li>\n<li>Salt + pepper, to taste</li>\n</ul>\n<h2>Steps</h2>\n<h3>Chicken</h3>\n<ol>\n<li>Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.</li>\n<li>Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.</li>\n<li>In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).</li>\n<li>Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm.</li>\n</ol>\n<h3>Pasta + Sauce</h3>\n<ol start=\"5\">\n<li>Boil rigatoni in salted water, cook al dente (~14 min). Drain.</li>\n<li>In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.</li>\n<li>Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.</li>\n<li>Add heavy cream and milk, stir to combine.</li>\n<li>Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.</li>\n<li>Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.</li>\n<li>Serve topped with extra parmesan and parsley. Salt + pepper to taste.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
-        "last_reviewed": "2026-06-25T00:00:00.000Z"
       }
     },
     {
@@ -1041,8 +897,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
-      "hi": 77,
+      "temp": 72,
+      "hi": 83,
       "lo": 71,
       "icon": "⛅",
       "code": 3
@@ -1050,10 +906,10 @@
     "days": [
       {
         "d": "Tue",
-        "icon": "⛅",
+        "icon": "🌧",
         "hi": 85,
         "lo": 70,
-        "code": 3
+        "code": 63
       },
       {
         "d": "Wed",
@@ -2334,6 +2190,6 @@
     "creditDebt": -29253.74,
     "netLiquid": -18008.71,
     "source": "ynab",
-    "updatedAt": "2026-07-13T12:30:36.210Z"
+    "updatedAt": "2026-07-13T12:45:36.591Z"
   }
 }
