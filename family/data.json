@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T21:45:53.924Z",
+  "generated_at": "2026-07-13T22:00:54.566Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -28,6 +28,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-14T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-14",
+      "time": "3p",
+      "what": "Nancy nail appointment",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-14T16:00:00-04:00"
     },
     {
       "date": "2026-07-15",
@@ -915,11 +924,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 78,
       "hi": 80,
       "lo": 71,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
       {
@@ -2208,6 +2217,6 @@
     "creditDebt": -29557.44,
     "netLiquid": -18312.41,
     "source": "ynab",
-    "updatedAt": "2026-07-13T21:45:52.700Z"
+    "updatedAt": "2026-07-13T22:00:53.356Z"
   }
 }
