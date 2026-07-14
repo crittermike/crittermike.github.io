@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T23:45:57.741Z",
+  "generated_at": "2026-07-14T00:00:59.092Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -718,12 +718,57 @@
     ]
   },
   "dinner": {
-    "name": "Date night — kids get Burger King",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike + Nancy date night. Boys get Burger King.",
-    "recipe": null
+    "name": "Crockpot chicken & dumplings",
+    "protein_g": 45,
+    "cal": 550,
+    "effort": "easy",
+    "note": "High 3-4 hrs, biscuits cut in 8 added last 30 min.",
+    "recipe": {
+      "slug": "crockpot-chicken-and-dumplings",
+      "name": "Crockpot Chicken and Dumplings",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "crockpot-chicken-and-dumplings"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 45,
+      "cal": 550,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "chicken broth",
+            "chicken breast",
+            "dried minced onion",
+            "dried parsley",
+            "cream of chicken soup (2 cans)",
+            "refrigerated biscuits"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "chicken broth",
+        "chicken breast",
+        "dried minced onion",
+        "dried parsley",
+        "cream of chicken soup (2 cans)",
+        "refrigerated biscuits"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -2136,7 +2181,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 41.9,
+    "dayPct": 45.2,
     "totalSpend": 6202.46,
     "totalBudget": 0,
     "categories": [
@@ -2217,6 +2262,6 @@
     "creditDebt": -29557.44,
     "netLiquid": -18312.41,
     "source": "ynab",
-    "updatedAt": "2026-07-13T23:45:56.505Z"
+    "updatedAt": "2026-07-14T00:00:57.602Z"
   }
 }
