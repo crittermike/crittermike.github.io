@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-14T03:46:04.821Z",
+  "generated_at": "2026-07-14T04:01:05.331Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-13",
-      "time": "9a",
-      "what": "Archery Camp (William)",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-13T11:30:00-04:00"
-    },
-    {
-      "date": "2026-07-13",
-      "time": "11a",
-      "what": "Nancy doc appointment ",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-13T12:00:00-04:00"
-    },
     {
       "date": "2026-07-14",
       "time": "9a",
@@ -415,6 +397,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-07T09:40:00-04:00"
+    },
+    {
+      "date": "2026-10-11",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-11T09:00:00-04:00"
     }
   ],
   "kids": [
@@ -783,7 +774,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Date night — kids get Burger King",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -791,8 +782,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Crockpot chicken & dumplings",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -845,7 +836,7 @@
       "dow_short": "Wed",
       "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
         "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
@@ -969,20 +960,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 71,
-      "hi": 78,
-      "lo": 71,
+      "temp": 70,
+      "hi": 83,
+      "lo": 69,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "🌧",
-        "hi": 83,
-        "lo": 69,
-        "code": 61
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -1010,24 +994,31 @@
         "hi": 96,
         "lo": 78,
         "code": 95
+      },
+      {
+        "d": "Sun",
+        "icon": "⛅",
+        "hi": 95,
+        "lo": 74,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-13T06:26",
         "2026-07-14T06:26",
         "2026-07-15T06:27",
         "2026-07-16T06:28",
         "2026-07-17T06:28",
-        "2026-07-18T06:29"
+        "2026-07-18T06:29",
+        "2026-07-19T06:30"
       ],
       "sunsets": [
-        "2026-07-13T20:44",
         "2026-07-14T20:43",
         "2026-07-15T20:43",
         "2026-07-16T20:43",
         "2026-07-17T20:42",
-        "2026-07-18T20:42"
+        "2026-07-18T20:42",
+        "2026-07-19T20:41"
       ],
       "timezone": "America/New_York"
     }
@@ -2182,7 +2173,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 45.2,
-    "totalSpend": 6202.46,
+    "totalSpend": 6254.63,
     "totalBudget": 0,
     "categories": [
       {
@@ -2194,19 +2185,19 @@
         "pct": 0
       },
       {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 931.99,
+        "balance": -931.99,
+        "pct": 0
+      },
+      {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
         "spent": 923.79,
         "balance": -923.79,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 879.82,
-        "balance": -879.82,
         "pct": 0
       },
       {
@@ -2259,9 +2250,9 @@
       }
     ],
     "liquidCash": 11245.03,
-    "creditDebt": -29557.44,
-    "netLiquid": -18312.41,
+    "creditDebt": -29609.61,
+    "netLiquid": -18364.58,
     "source": "ynab",
-    "updatedAt": "2026-07-14T03:46:03.493Z"
+    "updatedAt": "2026-07-14T04:01:04.042Z"
   }
 }
