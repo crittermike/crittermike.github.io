@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T12:30:19.378Z",
+  "generated_at": "2026-07-14T12:45:19.682Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -964,7 +964,7 @@
       "hi": 85,
       "lo": 71,
       "icon": "🌦",
-      "code": 53
+      "code": 51
     },
     "days": [
       {
@@ -2173,15 +2173,23 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 45.2,
-    "totalSpend": 6254.63,
+    "totalSpend": 6367.94,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🏠 Home",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 2426.69,
-        "balance": -2426.69,
+        "spent": 2481.69,
+        "balance": -2481.69,
+        "pct": 0
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 982.1,
+        "balance": -982.1,
         "pct": 0
       },
       {
@@ -2190,14 +2198,6 @@
         "budgeted": 0,
         "spent": 931.99,
         "balance": -931.99,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 923.79,
-        "balance": -923.79,
         "pct": 0
       },
       {
@@ -2249,10 +2249,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 11245.03,
-    "creditDebt": -29609.61,
-    "netLiquid": -18364.58,
+    "liquidCash": 23468.39,
+    "creditDebt": -15445.61,
+    "netLiquid": 8022.78,
     "source": "ynab",
-    "updatedAt": "2026-07-14T12:30:18.198Z"
+    "updatedAt": "2026-07-14T12:45:18.505Z"
   }
 }
