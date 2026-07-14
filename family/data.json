@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T17:15:27.222Z",
+  "generated_at": "2026-07-14T17:30:27.637Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -709,14 +709,14 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot chicken & dumplings",
-    "protein_g": 45,
-    "cal": 550,
+    "name": "Mexican beef & refried bean burritos + onions",
+    "protein_g": 50,
+    "cal": 750,
     "effort": "easy",
-    "note": "High 3-4 hrs, biscuits cut in 8 added last 30 min.",
+    "note": "Ground beef, refried beans, tortillas, onions, cheese, sour cream, and taco seasoning.",
     "recipe": {
-      "slug": "crockpot-chicken-and-dumplings",
-      "name": "Crockpot Chicken and Dumplings",
+      "slug": "mexican-beef-and-refried-bean-burritos-onions",
+      "name": "Mexican beef & refried bean burritos + onions",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -724,13 +724,13 @@
         "dinner"
       ],
       "aliases": [
-        "crockpot-chicken-and-dumplings"
+        "mexican-beef-and-refried-bean-burritos-onions"
       ],
       "in_rotation": true,
       "effort": "easy",
       "kid_friendly": true,
-      "protein_g": 45,
-      "cal": 550,
+      "protein_g": 50,
+      "cal": 750,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -738,26 +738,28 @@
         {
           "heading": null,
           "items": [
-            "chicken broth",
-            "chicken breast",
-            "dried minced onion",
-            "dried parsley",
-            "cream of chicken soup (2 cans)",
-            "refrigerated biscuits"
+            "ground beef",
+            "refried beans",
+            "tortillas",
+            "onions",
+            "cheese",
+            "sour cream",
+            "taco seasoning"
           ]
         }
       ],
       "all_ingredients": [
-        "chicken broth",
-        "chicken breast",
-        "dried minced onion",
-        "dried parsley",
-        "cream of chicken soup (2 cans)",
-        "refrigerated biscuits"
+        "ground beef",
+        "refried beans",
+        "tortillas",
+        "onions",
+        "cheese",
+        "sour cream",
+        "taco seasoning"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
+      "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -781,9 +783,64 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Crockpot chicken & dumplings",
+      "name": "Mexican beef & refried bean burritos + onions",
       "isToday": true,
       "isTomorrow": false,
+      "recipe": {
+        "slug": "mexican-beef-and-refried-bean-burritos-onions",
+        "name": "Mexican beef & refried bean burritos + onions",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "mexican-beef-and-refried-bean-burritos-onions"
+        ],
+        "in_rotation": true,
+        "effort": "easy",
+        "kid_friendly": true,
+        "protein_g": 50,
+        "cal": 750,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "ground beef",
+              "refried beans",
+              "tortillas",
+              "onions",
+              "cheese",
+              "sour cream",
+              "taco seasoning"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "ground beef",
+          "refried beans",
+          "tortillas",
+          "onions",
+          "cheese",
+          "sour cream",
+          "taco seasoning"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
+        "last_reviewed": null
+      }
+    },
+    {
+      "dow": "Wednesday",
+      "dow_short": "Wed",
+      "name": "Crockpot chicken & dumplings",
+      "isToday": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -828,65 +885,6 @@
         "steps": [],
         "notes": "",
         "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
-        "last_reviewed": null
-      }
-    },
-    {
-      "dow": "Wednesday",
-      "dow_short": "Wed",
-      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-      "isToday": false,
-      "isTomorrow": true,
-      "recipe": {
-        "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
-        "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
-        ],
-        "in_rotation": true,
-        "effort": "easy",
-        "kid_friendly": true,
-        "protein_g": 35,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "smoked sausage (kielbasa)",
-              "baby potatoes",
-              "broccoli",
-              "olive oil",
-              "garlic",
-              "Italian seasoning",
-              "paprika",
-              "salt",
-              "pepper"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "smoked sausage (kielbasa)",
-          "baby potatoes",
-          "broccoli",
-          "olive oil",
-          "garlic",
-          "Italian seasoning",
-          "paprika",
-          "salt",
-          "pepper"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
@@ -960,7 +958,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
+      "temp": 73,
       "hi": 85,
       "lo": 70,
       "icon": "🌤",
@@ -2253,6 +2251,6 @@
     "creditDebt": -15445.61,
     "netLiquid": 8022.78,
     "source": "ynab",
-    "updatedAt": "2026-07-14T17:15:25.975Z"
+    "updatedAt": "2026-07-14T17:30:26.356Z"
   }
 }
