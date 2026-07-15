@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T23:45:35.942Z",
+  "generated_at": "2026-07-15T00:00:37.966Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -709,14 +709,14 @@
     ]
   },
   "dinner": {
-    "name": "Mexican beef & refried bean burritos + onions",
-    "protein_g": 50,
-    "cal": 750,
+    "name": "Crockpot chicken & dumplings",
+    "protein_g": 45,
+    "cal": 550,
     "effort": "easy",
-    "note": "Ground beef, refried beans, tortillas, onions, cheese, sour cream, and taco seasoning.",
+    "note": "High 3-4 hrs, biscuits cut in 8 added last 30 min.",
     "recipe": {
-      "slug": "mexican-beef-and-refried-bean-burritos-onions",
-      "name": "Mexican beef & refried bean burritos + onions",
+      "slug": "crockpot-chicken-and-dumplings",
+      "name": "Crockpot Chicken and Dumplings",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -724,13 +724,13 @@
         "dinner"
       ],
       "aliases": [
-        "mexican-beef-and-refried-bean-burritos-onions"
+        "crockpot-chicken-and-dumplings"
       ],
       "in_rotation": true,
       "effort": "easy",
       "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 750,
+      "protein_g": 45,
+      "cal": 550,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -738,28 +738,26 @@
         {
           "heading": null,
           "items": [
-            "ground beef",
-            "refried beans",
-            "tortillas",
-            "onions",
-            "cheese",
-            "sour cream",
-            "taco seasoning"
+            "chicken broth",
+            "chicken breast",
+            "dried minced onion",
+            "dried parsley",
+            "cream of chicken soup (2 cans)",
+            "refrigerated biscuits"
           ]
         }
       ],
       "all_ingredients": [
-        "ground beef",
-        "refried beans",
-        "tortillas",
-        "onions",
-        "cheese",
-        "sour cream",
-        "taco seasoning"
+        "chicken broth",
+        "chicken breast",
+        "dried minced onion",
+        "dried parsley",
+        "cream of chicken soup (2 cans)",
+        "refrigerated biscuits"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
+      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -958,7 +956,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 81,
       "hi": 83,
       "lo": 70,
       "icon": "🌤",
@@ -2170,7 +2168,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 45.2,
+    "dayPct": 48.4,
     "totalSpend": 6367.94,
     "totalBudget": 0,
     "categories": [
@@ -2251,6 +2249,6 @@
     "creditDebt": -15445.61,
     "netLiquid": 8022.78,
     "source": "ynab",
-    "updatedAt": "2026-07-14T23:45:34.901Z"
+    "updatedAt": "2026-07-15T00:00:36.765Z"
   }
 }
