@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T23:00:10.934Z",
+  "generated_at": "2026-07-15T23:15:10.810Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,15 +10,6 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-15T11:30:00-04:00"
-    },
-    {
-      "date": "2026-07-16",
-      "time": "8a",
-      "what": "Lowe's delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-16T20:00:00-04:00"
     },
     {
       "date": "2026-07-16",
@@ -37,6 +28,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-16T11:30:00-04:00"
+    },
+    {
+      "date": "2026-07-16",
+      "time": "12:30p",
+      "what": "Lowe's delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-16T16:30:00-04:00"
     },
     {
       "date": "2026-07-17",
@@ -959,8 +959,8 @@
       "temp": 92,
       "hi": 92,
       "lo": 69,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
@@ -2249,6 +2249,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-15T23:00:09.753Z"
+    "updatedAt": "2026-07-15T23:15:09.667Z"
   }
 }
