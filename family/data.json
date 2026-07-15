@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-15T03:45:42.034Z",
+  "generated_at": "2026-07-15T04:00:43.174Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-14",
-      "time": "9a",
-      "what": "Archery Camp (William)",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-14T11:30:00-04:00"
-    },
-    {
-      "date": "2026-07-14",
-      "time": "3p",
-      "what": "Nancy nail appointment",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-14T16:00:00-04:00"
-    },
     {
       "date": "2026-07-15",
       "time": "9a",
@@ -406,6 +388,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-11T09:00:00-04:00"
+    },
+    {
+      "date": "2026-10-12",
+      "time": "8:40a",
+      "what": "Thomas & Charlie Dentist",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-12T09:40:00-04:00"
     }
   ],
   "kids": [
@@ -782,7 +773,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Mexican beef & refried bean burritos + onions",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "mexican-beef-and-refried-bean-burritos-onions",
@@ -837,8 +828,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Crockpot chicken & dumplings",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -891,7 +882,7 @@
       "dow_short": "Thu",
       "name": "Pot roast with carrots & potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -956,20 +947,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 81,
+      "temp": 74,
+      "hi": 94,
       "lo": 70,
-      "icon": "🌤",
-      "code": 2
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 94,
-        "lo": 70,
-        "code": 3
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -997,24 +981,31 @@
         "hi": 95,
         "lo": 73,
         "code": 55
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 99,
+        "lo": 72,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-14T06:26",
         "2026-07-15T06:27",
         "2026-07-16T06:28",
         "2026-07-17T06:28",
         "2026-07-18T06:29",
-        "2026-07-19T06:30"
+        "2026-07-19T06:30",
+        "2026-07-20T06:30"
       ],
       "sunsets": [
-        "2026-07-14T20:43",
         "2026-07-15T20:43",
         "2026-07-16T20:43",
         "2026-07-17T20:42",
         "2026-07-18T20:42",
-        "2026-07-19T20:41"
+        "2026-07-19T20:41",
+        "2026-07-20T20:41"
       ],
       "timezone": "America/New_York"
     }
@@ -2169,7 +2160,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 48.4,
-    "totalSpend": 6367.94,
+    "totalSpend": 6402.92,
     "totalBudget": 0,
     "categories": [
       {
@@ -2216,8 +2207,8 @@
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 228.18,
-        "balance": -228.18,
+        "spent": 263.16,
+        "balance": -263.16,
         "pct": 0
       },
       {
@@ -2246,9 +2237,9 @@
       }
     ],
     "liquidCash": 23468.39,
-    "creditDebt": -15445.61,
-    "netLiquid": 8022.78,
+    "creditDebt": -15480.59,
+    "netLiquid": 7987.8,
     "source": "ynab",
-    "updatedAt": "2026-07-15T03:45:40.827Z"
+    "updatedAt": "2026-07-15T04:00:42.101Z"
   }
 }
