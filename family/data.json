@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T17:01:01.013Z",
+  "generated_at": "2026-07-15T17:16:01.454Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -956,7 +956,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 90,
+      "temp": 91,
       "hi": 95,
       "lo": 69,
       "icon": "🌤",
@@ -2166,89 +2166,5 @@
       "last_reviewed": null
     }
   ],
-  "finance": {
-    "month": "July 2026",
-    "dayPct": 48.4,
-    "totalSpend": 6402.92,
-    "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2481.69,
-        "balance": -2481.69,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 982.1,
-        "balance": -982.1,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 931.99,
-        "balance": -931.99,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 827.79,
-        "balance": -827.79,
-        "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 473.44,
-        "balance": -473.44,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 263.16,
-        "balance": -263.16,
-        "pct": 0
-      },
-      {
-        "name": "🏝️ Vacation",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 222.9,
-        "balance": -222.9,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 155.35,
-        "balance": -155.35,
-        "pct": 0
-      },
-      {
-        "name": "🐶 Pets",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 64.5,
-        "balance": -64.5,
-        "pct": 0
-      }
-    ],
-    "liquidCash": 23468.39,
-    "creditDebt": -15480.59,
-    "netLiquid": 7987.8,
-    "source": "ynab",
-    "updatedAt": "2026-07-15T17:00:59.708Z"
-  }
+  "finance": null
 }
