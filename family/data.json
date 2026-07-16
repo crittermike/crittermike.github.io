@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T23:00:45.556Z",
+  "generated_at": "2026-07-16T23:15:45.368Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -486,6 +486,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "sch-2026-07-17-popcs-furniture-moving-volunteer-opportu",
+          "label": "POPCS furniture-moving volunteer opportunity, 9:00-11:00 AM"
         }
       ]
     },
@@ -2206,6 +2210,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-16T23:00:44.498Z"
+    "updatedAt": "2026-07-16T23:15:44.329Z"
   }
 }
