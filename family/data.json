@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-16T03:45:18.617Z",
+  "generated_at": "2026-07-16T04:00:19.516Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-15",
-      "time": "9a",
-      "what": "Archery Camp (William)",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-15T11:30:00-04:00"
-    },
     {
       "date": "2026-07-16",
       "time": "9a",
@@ -835,7 +826,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Crockpot chicken & dumplings",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
@@ -888,8 +879,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Pot roast with carrots & potatoes",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -940,7 +931,7 @@
       "dow_short": "Fri",
       "name": "Takeout / eat out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -954,20 +945,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
-      "hi": 92,
-      "lo": 69,
+      "temp": 78,
+      "hi": 100,
+      "lo": 73,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 100,
-        "lo": 73,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "🌧",
@@ -995,24 +979,31 @@
         "hi": 101,
         "lo": 74,
         "code": 3
+      },
+      {
+        "d": "Tue",
+        "icon": "🌦",
+        "hi": 102,
+        "lo": 78,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-15T06:27",
         "2026-07-16T06:28",
         "2026-07-17T06:28",
         "2026-07-18T06:29",
         "2026-07-19T06:30",
-        "2026-07-20T06:30"
+        "2026-07-20T06:30",
+        "2026-07-21T06:31"
       ],
       "sunsets": [
-        "2026-07-15T20:43",
         "2026-07-16T20:43",
         "2026-07-17T20:42",
         "2026-07-18T20:42",
         "2026-07-19T20:41",
-        "2026-07-20T20:41"
+        "2026-07-20T20:41",
+        "2026-07-21T20:40"
       ],
       "timezone": "America/New_York"
     }
@@ -2247,6 +2238,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-16T03:45:17.501Z"
+    "updatedAt": "2026-07-16T04:00:18.169Z"
   }
 }
