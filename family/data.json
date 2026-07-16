@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T16:00:37.415Z",
+  "generated_at": "2026-07-16T16:15:37.264Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-19T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-23",
+      "time": "9:30a",
+      "what": "Mom appointment at LifeStance",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-23T10:30:00-04:00"
     },
     {
       "date": "2026-07-25",
@@ -895,7 +904,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 92,
+      "temp": 93,
       "hi": 98,
       "lo": 73,
       "icon": "🌤",
@@ -2188,6 +2197,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-16T16:00:36.116Z"
+    "updatedAt": "2026-07-16T16:15:36.070Z"
   }
 }
