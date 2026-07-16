@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-16T12:45:32.133Z",
+  "generated_at": "2026-07-16T13:00:32.133Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-16",
-      "time": "9a",
-      "what": "Mom - Lymphedema clinic appt",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-16T10:00:00-04:00"
-    },
     {
       "date": "2026-07-16",
       "time": "9a",
@@ -700,14 +691,14 @@
     ]
   },
   "dinner": {
-    "name": "Pot roast with carrots & potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "Crockpot all day. Cleanest protein of the week. Weigh your portion.",
+    "name": "Crockpot chicken & dumplings",
+    "protein_g": 45,
+    "cal": 550,
+    "effort": "easy",
+    "note": "Tonight. High 3-4 hrs, biscuits cut in 8 added last 30 min.",
     "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
+      "slug": "crockpot-chicken-and-dumplings",
+      "name": "Crockpot Chicken and Dumplings",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -715,13 +706,13 @@
         "dinner"
       ],
       "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
+        "crockpot-chicken-and-dumplings"
       ],
       "in_rotation": true,
-      "effort": "easy-slow",
+      "effort": "easy",
       "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
+      "protein_g": 45,
+      "cal": 550,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -729,24 +720,26 @@
         {
           "heading": null,
           "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth"
+            "chicken broth",
+            "chicken breast",
+            "dried minced onion",
+            "dried parsley",
+            "cream of chicken soup (2 cans)",
+            "refrigerated biscuits"
           ]
         }
       ],
       "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth"
+        "chicken broth",
+        "chicken breast",
+        "dried minced onion",
+        "dried parsley",
+        "cream of chicken soup (2 cans)",
+        "refrigerated biscuits"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -770,6 +763,14 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
+      "name": "(NOT cooked - burritos moved to Wednesday)",
+      "isToday": false,
+      "isTomorrow": false,
+      "recipe": null
+    },
+    {
+      "dow": "Wednesday",
+      "dow_short": "Wed",
       "name": "Mexican beef & refried bean burritos + onions",
       "isToday": false,
       "isTomorrow": false,
@@ -823,10 +824,10 @@
       }
     },
     {
-      "dow": "Wednesday",
-      "dow_short": "Wed",
+      "dow": "Thursday",
+      "dow_short": "Thu",
       "name": "Crockpot chicken & dumplings",
-      "isToday": false,
+      "isToday": true,
       "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
@@ -876,57 +877,6 @@
       }
     },
     {
-      "dow": "Thursday",
-      "dow_short": "Thu",
-      "name": "Pot roast with carrots & potatoes",
-      "isToday": true,
-      "isTomorrow": false,
-      "recipe": {
-        "slug": "pot-roast-with-carrots-and-potatoes",
-        "name": "Pot roast with carrots and potatoes",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "pot-roast-with-carrots-and-potatoes"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "chuck roast",
-              "carrots",
-              "potatoes",
-              "onions",
-              "beef broth"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "chuck roast",
-          "carrots",
-          "potatoes",
-          "onions",
-          "beef broth"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
-        "last_reviewed": null
-      }
-    },
-    {
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
@@ -945,7 +895,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 81,
       "hi": 99,
       "lo": 73,
       "icon": "☀️",
@@ -2238,6 +2188,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-16T12:45:30.900Z"
+    "updatedAt": "2026-07-16T13:00:30.912Z"
   }
 }
