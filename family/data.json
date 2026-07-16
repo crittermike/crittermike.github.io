@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T17:00:38.754Z",
+  "generated_at": "2026-07-16T17:15:38.443Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -91,6 +91,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-02T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-04",
+      "time": "5:45p",
+      "what": "Advanced Manufacturing and Engineering Night at Fluor Field (Charlie)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-04T20:30:00-04:00"
     },
     {
       "date": "2026-08-09",
@@ -2197,6 +2206,6 @@
     "creditDebt": -1421.29,
     "netLiquid": 7768.07,
     "source": "ynab",
-    "updatedAt": "2026-07-16T17:00:37.524Z"
+    "updatedAt": "2026-07-16T17:15:37.401Z"
   }
 }
