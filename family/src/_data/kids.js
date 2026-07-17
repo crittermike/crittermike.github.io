@@ -80,11 +80,14 @@ function todaysAssignments(kidKey) {
     out.push({ id: 'take-medicine',  label: 'Take medicine' });
     // popcs-video removed 2026-06-25 — Charlie finished the POPCS video.
   }
-  // Friday laundry — every boy brings his laundry down so Mike can wash it.
-  // Year-round chore (NOT summer-gated), all 4 kids, Fridays only. Stable id so
-  // the daily kid-todos localStorage check persists through Friday and resets Sat.
-  if (dow === 'Fri') {
-    out.push({ id: 'laundry-friday', label: '🧺 Bring down laundry' });
+  // Friday laundry — every boy brings laundry down so Mike can wash it.
+  // William also brings his down Monday for the Monday laundry load. Both are
+  // year-round chores with stable IDs so their checkbox state is day-specific.
+  if (dow === 'Fri' || (dow === 'Mon' && kidKey === 'william')) {
+    out.push({
+      id: dow === 'Mon' ? 'laundry-monday' : 'laundry-friday',
+      label: '🧺 Bring down laundry',
+    });
   }
   // Saturday laundry — every boy puts his (now-washed) laundry away. Mirror of
   // the Friday bring-down chore: year-round, all 4 kids, Saturdays only. Stable
