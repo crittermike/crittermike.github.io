@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-17T03:45:51.221Z",
+  "generated_at": "2026-07-17T04:00:51.648Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-16",
-      "time": "9a",
-      "what": "Archery Camp (William)",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-16T11:30:00-04:00"
-    },
-    {
-      "date": "2026-07-16",
-      "time": "12:30p",
-      "what": "Lowe's delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-16T16:30:00-04:00"
-    },
     {
       "date": "2026-07-17",
       "time": "9a",
@@ -430,6 +412,10 @@
         {
           "id": "summer-solutions",
           "label": "Summer Solutions"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -458,6 +444,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -488,6 +478,10 @@
           "label": "Read 20 min"
         },
         {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
+        },
+        {
           "id": "sch-2026-07-17-popcs-furniture-moving-volunteer-opportu",
           "label": "POPCS furniture-moving volunteer opportunity, 9:00-11:00 AM"
         }
@@ -510,6 +504,10 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -804,7 +802,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Crockpot chicken & dumplings",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
@@ -857,8 +855,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -866,26 +864,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 81,
-      "hi": 95,
-      "lo": 73,
+      "temp": 80,
+      "hi": 100,
+      "lo": 77,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "🌦",
-        "hi": 100,
-        "lo": 77,
-        "code": 51
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -913,24 +904,31 @@
         "hi": 96,
         "lo": 72,
         "code": 53
+      },
+      {
+        "d": "Wed",
+        "icon": "⛈",
+        "hi": 101,
+        "lo": 73,
+        "code": 95
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-16T06:28",
         "2026-07-17T06:28",
         "2026-07-18T06:29",
         "2026-07-19T06:30",
         "2026-07-20T06:30",
-        "2026-07-21T06:31"
+        "2026-07-21T06:31",
+        "2026-07-22T06:32"
       ],
       "sunsets": [
-        "2026-07-16T20:43",
         "2026-07-17T20:42",
         "2026-07-18T20:42",
         "2026-07-19T20:41",
         "2026-07-20T20:41",
-        "2026-07-21T20:40"
+        "2026-07-21T20:40",
+        "2026-07-22T20:39"
       ],
       "timezone": "America/New_York"
     }
@@ -2181,6 +2179,6 @@
     "creditDebt": -1852.23,
     "netLiquid": 7125.44,
     "source": "ynab",
-    "updatedAt": "2026-07-17T03:45:50.072Z"
+    "updatedAt": "2026-07-17T04:00:50.609Z"
   }
 }
