@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T23:45:21.486Z",
+  "generated_at": "2026-07-18T00:00:25.994Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -738,11 +738,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout / eat out",
-    "protein_g": 40,
-    "cal": 700,
+    "name": "Pizza night (delivery)",
+    "protein_g": 32,
+    "cal": 800,
     "effort": "none",
-    "note": "Standing Friday out/takeout. Not Lent -- meat is fine. No cook.",
+    "note": "Standing Saturday pizza.",
     "recipe": null
   },
   "mealweek": [
@@ -2109,7 +2109,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 54.8,
+    "dayPct": 58.1,
     "totalSpend": 6997.24,
     "totalBudget": 0,
     "categories": [
@@ -2206,6 +2206,6 @@
     "creditDebt": -1852.23,
     "netLiquid": 7125.44,
     "source": "ynab",
-    "updatedAt": "2026-07-17T23:45:20.454Z"
+    "updatedAt": "2026-07-18T00:00:24.492Z"
   }
 }
