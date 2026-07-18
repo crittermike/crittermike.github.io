@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T10:15:38.428Z",
+  "generated_at": "2026-07-18T10:30:38.947Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2068,7 +2068,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 58.1,
-    "totalSpend": 7016.4,
+    "totalSpend": 9402.36,
     "totalBudget": 0,
     "categories": [
       {
@@ -2080,19 +2080,27 @@
         "pct": 0
       },
       {
+        "name": "😌 Emergency fund",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 2000,
+        "balance": -2000,
+        "pct": 0
+      },
+      {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1120.51,
-        "balance": -1120.51,
+        "spent": 1281.05,
+        "balance": -1281.05,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1037.07,
-        "balance": -1037.07,
+        "spent": 1106.45,
+        "balance": -1106.45,
         "pct": 0
       },
       {
@@ -2107,8 +2115,8 @@
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 473.44,
-        "balance": -473.44,
+        "spent": 609.49,
+        "balance": -609.49,
         "pct": 0
       },
       {
@@ -2131,8 +2139,8 @@
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 155.35,
-        "balance": -155.35,
+        "spent": 175.34,
+        "balance": -175.34,
         "pct": 0
       },
       {
@@ -2160,10 +2168,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 8977.67,
-    "creditDebt": -1871.39,
-    "netLiquid": 7106.28,
+    "liquidCash": 6535.56,
+    "creditDebt": -2775.39,
+    "netLiquid": 3760.17,
     "source": "ynab",
-    "updatedAt": "2026-07-18T10:15:37.380Z"
+    "updatedAt": "2026-07-18T10:30:37.933Z"
   }
 }
