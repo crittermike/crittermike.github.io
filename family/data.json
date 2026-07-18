@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-18T03:45:28.155Z",
+  "generated_at": "2026-07-18T04:00:28.299Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-17",
-      "time": "9a",
-      "what": "Archery Camp (William)",
-      "who": "william",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-17T11:30:00-04:00"
-    },
-    {
-      "date": "2026-07-17",
-      "time": "11:10a",
-      "what": "Dentist appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-17T12:10:00-04:00"
-    },
     {
       "date": "2026-07-19",
       "time": "8a",
@@ -437,12 +419,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -465,16 +443,8 @@
       "guineaPig": "$119.34",
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -497,20 +467,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
-        },
-        {
-          "id": "sch-2026-07-17-popcs-furniture-moving-volunteer-opportu",
-          "label": "POPCS furniture-moving volunteer opportunity, 9:00-11:00 AM"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -529,12 +487,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "take-medicine",
-          "label": "Take medicine"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         },
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "sch-2026-07-19-final-exam-videos-tests-record-sheet-ref",
+          "label": "Final Exam - videos/tests + record sheet + reflection, 100 pts (Summer PE, Perry)"
         }
       ]
     }
@@ -751,7 +709,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -882,7 +840,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -890,8 +848,8 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
@@ -899,18 +857,11 @@
     "now": {
       "temp": 80,
       "hi": 97,
-      "lo": 77,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 97,
-        "lo": 74,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "🌧",
@@ -938,24 +889,31 @@
         "hi": 102,
         "lo": 77,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "⛅",
+        "hi": 91,
+        "lo": 71,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-17T06:28",
         "2026-07-18T06:29",
         "2026-07-19T06:30",
         "2026-07-20T06:30",
         "2026-07-21T06:31",
-        "2026-07-22T06:32"
+        "2026-07-22T06:32",
+        "2026-07-23T06:32"
       ],
       "sunsets": [
-        "2026-07-17T20:42",
         "2026-07-18T20:42",
         "2026-07-19T20:41",
         "2026-07-20T20:41",
         "2026-07-21T20:40",
-        "2026-07-22T20:39"
+        "2026-07-22T20:39",
+        "2026-07-23T20:39"
       ],
       "timezone": "America/New_York"
     }
@@ -2206,6 +2164,6 @@
     "creditDebt": -1871.39,
     "netLiquid": 7106.28,
     "source": "ynab",
-    "updatedAt": "2026-07-18T03:45:26.945Z"
+    "updatedAt": "2026-07-18T04:00:27.164Z"
   }
 }
