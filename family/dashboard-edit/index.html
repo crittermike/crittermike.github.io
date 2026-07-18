@@ -1990,7 +1990,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg></span>
-        <span class="dh-temp">77°</span>
+        <span class="dh-temp">78°</span>
         <span class="dh-hilo">H 97° · L 74°</span>
       </div>
       <div class="dh-days">
@@ -2085,7 +2085,7 @@
           
             
             
-            <div class="v">125g</div>
+            <div class="v">185g</div>
           
           
             
@@ -2096,7 +2096,7 @@
           
             
             
-            <div class="v danger">-2g</div>
+            <div class="v">58g</div>
           
           
             
@@ -2107,7 +2107,7 @@
           
             
             
-            <div class="v">63g</div>
+            <div class="v">123g</div>
           
           
             
@@ -2118,7 +2118,7 @@
           
             
             
-            <div class="v">71g</div>
+            <div class="v">131g</div>
           
           
             
@@ -2144,7 +2144,7 @@
           
             
             
-            <span class="v">125g</span>
+            <span class="v">185g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2206,7 +2206,7 @@
           
             
             
-            <span class="v danger">-2g</span>
+            <span class="v">58g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2273,7 +2273,7 @@
           
             
             
-            <span class="v">63g</span>
+            <span class="v">123g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2335,7 +2335,7 @@
           
             
             
-            <span class="v">71g</span>
+            <span class="v">131g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3719,7 +3719,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":125,"refill":60},"allowance":{"balance_str":"$79.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":-2,"refill":60},"allowance":{"balance_str":"$0.00"},"guineaPig":"$119.34","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":63,"refill":60},"allowance":{"balance_str":"$80.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":71,"refill":60},"allowance":{"balance_str":"$-274.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-07-19-final-exam-videos-tests-record-sheet-ref","label":"Final Exam - videos/tests + record sheet + reflection, 100 pts (Summer PE, Perry)"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":185,"refill":60},"allowance":{"balance_str":"$79.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$0.00"},"guineaPig":"$119.34","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":123,"refill":60},"allowance":{"balance_str":"$80.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":131,"refill":60},"allowance":{"balance_str":"$-274.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-07-19-final-exam-videos-tests-record-sheet-ref","label":"Final Exam - videos/tests + record sheet + reflection, 100 pts (Summer PE, Perry)"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
