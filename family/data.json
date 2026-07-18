@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T00:45:22.979Z",
+  "generated_at": "2026-07-18T01:00:23.772Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -897,7 +897,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 89,
+      "temp": 88,
       "hi": 97,
       "lo": 77,
       "icon": "☀️",
@@ -2110,7 +2110,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 58.1,
-    "totalSpend": 6997.24,
+    "totalSpend": 7016.4,
     "totalBudget": 0,
     "categories": [
       {
@@ -2125,8 +2125,8 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1101.35,
-        "balance": -1101.35,
+        "spent": 1120.51,
+        "balance": -1120.51,
         "pct": 0
       },
       {
@@ -2203,9 +2203,9 @@
       }
     ],
     "liquidCash": 8977.67,
-    "creditDebt": -1852.23,
-    "netLiquid": 7125.44,
+    "creditDebt": -1871.39,
+    "netLiquid": 7106.28,
     "source": "ynab",
-    "updatedAt": "2026-07-18T00:45:21.837Z"
+    "updatedAt": "2026-07-18T01:00:22.625Z"
   }
 }
