@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T03:46:02.831Z",
+  "generated_at": "2026-07-19T04:01:02.809Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -426,12 +426,7 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -450,12 +445,7 @@
         "balance_str": "$0.00"
       },
       "guineaPig": "$119.34",
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -474,12 +464,7 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -495,10 +480,6 @@
       },
       "guineaPig": null,
       "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
         {
           "id": "sch-2026-07-19-final-exam-videos-tests-record-sheet-ref",
           "label": "Final Exam - videos/tests + record sheet + reflection, 100 pts (Summer PE, Perry)"
@@ -717,8 +698,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -726,7 +707,7 @@
       "dow_short": "Mon",
       "name": "Date night — kids get Burger King",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -857,7 +838,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -865,19 +846,12 @@
   "weather": {
     "now": {
       "temp": 76,
-      "hi": 93,
-      "lo": 74,
+      "hi": 96,
+      "lo": 73,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌦",
-        "hi": 96,
-        "lo": 73,
-        "code": 55
-      },
       {
         "d": "Mon",
         "icon": "⛅",
@@ -905,24 +879,31 @@
         "hi": 92,
         "lo": 72,
         "code": 3
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 91,
+        "lo": 70,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-18T06:29",
         "2026-07-19T06:30",
         "2026-07-20T06:30",
         "2026-07-21T06:31",
         "2026-07-22T06:32",
-        "2026-07-23T06:32"
+        "2026-07-23T06:32",
+        "2026-07-24T06:33"
       ],
       "sunsets": [
-        "2026-07-18T20:42",
         "2026-07-19T20:41",
         "2026-07-20T20:41",
         "2026-07-21T20:40",
         "2026-07-22T20:39",
-        "2026-07-23T20:39"
+        "2026-07-23T20:39",
+        "2026-07-24T20:38"
       ],
       "timezone": "America/New_York"
     }
@@ -2181,6 +2162,6 @@
     "creditDebt": -2843.64,
     "netLiquid": 3691.92,
     "source": "ynab",
-    "updatedAt": "2026-07-19T03:46:01.515Z"
+    "updatedAt": "2026-07-19T04:01:01.540Z"
   }
 }
