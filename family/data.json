@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T17:00:25.931Z",
+  "generated_at": "2026-07-19T17:15:27.676Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-19T13:30:00-04:00"
+    },
+    {
+      "date": "2026-07-19",
+      "time": "5:30p",
+      "what": "Amazon delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-19T20:30:00-04:00"
     },
     {
       "date": "2026-07-23",
@@ -705,15 +714,58 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Date night — kids get Burger King",
+      "name": "Crockpot pot roast with carrots and potatoes",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": null
+      "recipe": {
+        "slug": "pot-roast-with-carrots-and-potatoes",
+        "name": "Pot roast with carrots and potatoes",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "pot-roast-with-carrots-and-potatoes"
+        ],
+        "in_rotation": true,
+        "effort": "easy-slow",
+        "kid_friendly": true,
+        "protein_g": 55,
+        "cal": 650,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "chuck roast",
+              "carrots",
+              "potatoes",
+              "onions",
+              "beef broth"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "chuck roast",
+          "carrots",
+          "potatoes",
+          "onions",
+          "beef broth"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "(NOT cooked - burritos moved to Wednesday)",
+      "name": "Korean beef and broccoli bowls with rice",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -721,81 +773,128 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Mexican beef & refried bean burritos + onions",
+      "name": "Tuscan chicken pasta",
       "isToday": false,
       "isTomorrow": false,
       "recipe": {
-        "slug": "mexican-beef-and-refried-bean-burritos-onions",
-        "name": "Mexican beef & refried bean burritos + onions",
-        "source": "markdown",
+        "slug": "tuscan-chicken-pasta",
+        "name": "Tuscan Chicken Pasta",
+        "source": "https://iamhomesteader.com/wprm_print/tuscan-chicken-pasta",
         "hasFullRecipe": true,
         "tags": [
           "recipe",
           "dinner"
         ],
         "aliases": [
-          "mexican-beef-and-refried-bean-burritos-onions"
+          "tuscan-chicken-pasta",
+          "tuscan-chicken"
         ],
         "in_rotation": true,
-        "effort": "easy",
+        "effort": "medium",
         "kid_friendly": true,
-        "protein_g": 50,
-        "cal": 750,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
+        "protein_g": 30,
+        "cal": 471,
+        "servings": 6,
+        "prep_min": 30,
+        "cook_min": 20,
         "ingredient_groups": [
           {
-            "heading": null,
+            "heading": "Chicken",
             "items": [
-              "ground beef",
-              "refried beans",
-              "tortillas",
-              "onions",
-              "cheese",
-              "sour cream",
-              "taco seasoning"
+              "2 boneless skinless chicken breasts (~1 lb)",
+              "3 tbsp olive oil, divided",
+              "1 tsp paprika",
+              "1 tsp garlic powder",
+              "1 tsp kosher salt",
+              "½ tsp black pepper"
+            ]
+          },
+          {
+            "heading": "Pasta + Sauce",
+            "items": [
+              "8 oz rigatoni, cooked al dente",
+              "4 tbsp (½ stick) unsalted butter",
+              "¼ cup shallot, finely diced",
+              "¼ cup sun-dried tomatoes, softened in hot water and chopped",
+              "1 tsp garlic, minced",
+              "2 tbsp tomato paste",
+              "1 tsp oregano",
+              "1 tsp paprika",
+              "½ tsp garlic powder",
+              "½ tsp kosher salt",
+              "¼ tsp black pepper",
+              "1½ cups heavy cream",
+              "1½ cups milk",
+              "1 cup fresh spinach",
+              "1 cup parmesan cheese, grated (plus more for garnish)",
+              "1 cup cherry tomatoes, halved",
+              "Fresh parsley, for garnish",
+              "Salt + pepper, to taste"
             ]
           }
         ],
         "all_ingredients": [
-          "ground beef",
-          "refried beans",
-          "tortillas",
-          "onions",
-          "cheese",
-          "sour cream",
-          "taco seasoning"
+          "2 boneless skinless chicken breasts (~1 lb)",
+          "3 tbsp olive oil, divided",
+          "1 tsp paprika",
+          "1 tsp garlic powder",
+          "1 tsp kosher salt",
+          "½ tsp black pepper",
+          "8 oz rigatoni, cooked al dente",
+          "4 tbsp (½ stick) unsalted butter",
+          "¼ cup shallot, finely diced",
+          "¼ cup sun-dried tomatoes, softened in hot water and chopped",
+          "1 tsp garlic, minced",
+          "2 tbsp tomato paste",
+          "1 tsp oregano",
+          "1 tsp paprika",
+          "½ tsp garlic powder",
+          "½ tsp kosher salt",
+          "¼ tsp black pepper",
+          "1½ cups heavy cream",
+          "1½ cups milk",
+          "1 cup fresh spinach",
+          "1 cup parmesan cheese, grated (plus more for garnish)",
+          "1 cup cherry tomatoes, halved",
+          "Fresh parsley, for garnish",
+          "Salt + pepper, to taste"
         ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Mexican beef &amp; refried bean burritos + onions</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>refried beans</li>\n<li>tortillas</li>\n<li>onions</li>\n<li>cheese</li>\n<li>sour cream</li>\n<li>taco seasoning</li>\n</ul>\n",
-        "last_reviewed": null
+        "steps": [
+          "Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.",
+          "Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.",
+          "In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).",
+          "Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm. ### Pasta + Sauce",
+          "Boil rigatoni in salted water, cook al dente (~14 min). Drain.",
+          "In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.",
+          "Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.",
+          "Add heavy cream and milk, stir to combine.",
+          "Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.",
+          "Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.",
+          "Serve topped with extra parmesan and parsley. Salt + pepper to taste."
+        ],
+        "notes": "<h3>Pitfalls</h3>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
+        "body_html": "<h1>Tuscan Chicken Pasta</h1>\n<p>Rigatoni in a creamy parmesan-tomato sauce with spinach and sun-dried tomatoes, topped with baked seasoned chicken. Serves 6. ~471 cal / ~30g protein per serving. Weigh your portion and load extra chicken + parmesan to hit your macro target.</p>\n<h2>Ingredients</h2>\n<h3>Chicken</h3>\n<ul>\n<li>2 boneless skinless chicken breasts (~1 lb)</li>\n<li>3 tbsp olive oil, divided</li>\n<li>1 tsp paprika</li>\n<li>1 tsp garlic powder</li>\n<li>1 tsp kosher salt</li>\n<li>½ tsp black pepper</li>\n</ul>\n<h3>Pasta + Sauce</h3>\n<ul>\n<li>8 oz rigatoni, cooked al dente</li>\n<li>4 tbsp (½ stick) unsalted butter</li>\n<li>¼ cup shallot, finely diced</li>\n<li>¼ cup sun-dried tomatoes, softened in hot water and chopped</li>\n<li>1 tsp garlic, minced</li>\n<li>2 tbsp tomato paste</li>\n<li>1 tsp oregano</li>\n<li>1 tsp paprika</li>\n<li>½ tsp garlic powder</li>\n<li>½ tsp kosher salt</li>\n<li>¼ tsp black pepper</li>\n<li>1½ cups heavy cream</li>\n<li>1½ cups milk</li>\n<li>1 cup fresh spinach</li>\n<li>1 cup parmesan cheese, grated (plus more for garnish)</li>\n<li>1 cup cherry tomatoes, halved</li>\n<li>Fresh parsley, for garnish</li>\n<li>Salt + pepper, to taste</li>\n</ul>\n<h2>Steps</h2>\n<h3>Chicken</h3>\n<ol>\n<li>Preheat oven to 350°F. Drizzle 2 tbsp olive oil over the chicken on all sides, rub it in.</li>\n<li>Combine paprika, garlic powder, salt, and pepper. Sprinkle over chicken on all sides.</li>\n<li>In a large oven-safe skillet over medium-high, heat the remaining 1 tbsp oil. Sear chicken 3 min per side until browned (not cooked through).</li>\n<li>Transfer skillet to oven, cook 10–15 min until internal temp hits 165°F. Move chicken to a plate, tent to keep warm.</li>\n</ol>\n<h3>Pasta + Sauce</h3>\n<ol start=\"5\">\n<li>Boil rigatoni in salted water, cook al dente (~14 min). Drain.</li>\n<li>In the same skillet, melt butter over medium. Add shallots + sun-dried tomatoes, cook 3–5 min until softened. Add garlic, cook 1 more min.</li>\n<li>Add tomato paste, oregano, paprika, garlic powder, salt, pepper. Stir.</li>\n<li>Add heavy cream and milk, stir to combine.</li>\n<li>Add spinach, parmesan, and cherry tomatoes. Reduce heat to low, simmer 8–10 min until cheese melts and spinach wilts.</li>\n<li>Add cooked pasta, toss to coat. Slice or cube the chicken and fold in.</li>\n<li>Serve topped with extra parmesan and parsley. Salt + pepper to taste.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Chicken won't be cooked through after searing — the oven finishes it. Pull at 165°F so it doesn't dry out.</li>\n<li>Soften the sun-dried tomatoes in hot water first or they stay leathery.</li>\n<li>Sauce thickens as it sits, so don't over-reduce before adding pasta.</li>\n<li>Nancy-safe: no mushrooms, peppers, fish, feta, lemon, or cilantro. Clear.</li>\n</ul>\n",
+        "last_reviewed": "2026-06-25T00:00:00.000Z"
       }
     },
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Crockpot chicken & dumplings",
+      "name": "Homemade hamburger helper",
       "isToday": false,
       "isTomorrow": false,
       "recipe": {
-        "slug": "crockpot-chicken-and-dumplings",
-        "name": "Crockpot Chicken and Dumplings",
+        "slug": "homemade-hamburger-helper",
+        "name": "Homemade Hamburger Helper",
         "source": "markdown",
         "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "crockpot-chicken-and-dumplings"
-        ],
-        "in_rotation": true,
-        "effort": "easy",
+        "tags": [],
+        "aliases": [],
+        "in_rotation": false,
+        "effort": null,
         "kid_friendly": true,
-        "protein_g": 45,
-        "cal": 550,
+        "protein_g": null,
+        "cal": null,
         "servings": null,
         "prep_min": null,
         "cook_min": null,
@@ -803,26 +902,47 @@
           {
             "heading": null,
             "items": [
-              "chicken broth",
-              "chicken breast",
-              "dried minced onion",
-              "dried parsley",
-              "cream of chicken soup (2 cans)",
-              "refrigerated biscuits"
+              "1 onion, diced",
+              "Olive oil",
+              "Garlic, minced",
+              "1 package ground beef",
+              "Salt, pepper, paprika, garlic powder",
+              "1 tbsp tomato paste",
+              "1 can Italian-seasoned diced tomatoes, drained",
+              "2 cups beef broth",
+              "1 cup heavy cream",
+              "2 cups uncooked noodles",
+              "Shredded cheddar"
             ]
           }
         ],
         "all_ingredients": [
-          "chicken broth",
-          "chicken breast",
-          "dried minced onion",
-          "dried parsley",
-          "cream of chicken soup (2 cans)",
-          "refrigerated biscuits"
+          "1 onion, diced",
+          "Olive oil",
+          "Garlic, minced",
+          "1 package ground beef",
+          "Salt, pepper, paprika, garlic powder",
+          "1 tbsp tomato paste",
+          "1 can Italian-seasoned diced tomatoes, drained",
+          "2 cups beef broth",
+          "1 cup heavy cream",
+          "2 cups uncooked noodles",
+          "Shredded cheddar"
         ],
-        "steps": [],
+        "steps": [
+          "Cook onion in olive oil.",
+          "Add garlic, cook a minute or so.",
+          "Add ground beef, brown.",
+          "Season with salt, pepper, paprika, garlic powder.",
+          "Stir in tomato paste + drained diced tomatoes.",
+          "Add beef broth + heavy cream.",
+          "Add uncooked noodles.",
+          "Cover, cook 15 min.",
+          "Uncover, cook 2 more min.",
+          "Off heat, top with cheddar, stir."
+        ],
         "notes": "",
-        "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
+        "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
@@ -837,7 +957,7 @@
     {
       "dow": "Saturday",
       "dow_short": "Sat",
-      "name": "Pizza night (delivery)",
+      "name": "Pizza night (delivery or frozen)",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -845,7 +965,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 92,
+      "temp": 93,
       "hi": 97,
       "lo": 73,
       "icon": "☀️",
@@ -2162,6 +2282,6 @@
     "creditDebt": -2843.64,
     "netLiquid": 3691.92,
     "source": "ynab",
-    "updatedAt": "2026-07-19T17:00:24.716Z"
+    "updatedAt": "2026-07-19T17:15:26.427Z"
   }
 }
