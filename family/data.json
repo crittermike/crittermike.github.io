@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T23:45:56.750Z",
+  "generated_at": "2026-07-19T00:00:57.404Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -705,11 +705,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza night (delivery)",
-    "protein_g": 32,
-    "cal": 800,
+    "name": "Leftovers or whatever you can scrounge up",
+    "protein_g": null,
+    "cal": null,
     "effort": "none",
-    "note": "Standing Saturday pizza.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -864,7 +864,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 91,
+      "temp": 88,
       "hi": 93,
       "lo": 74,
       "icon": "☀️",
@@ -2076,7 +2076,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 58.1,
+    "dayPct": 61.3,
     "totalSpend": 9402.36,
     "totalBudget": 0,
     "categories": [
@@ -2181,6 +2181,6 @@
     "creditDebt": -2843.64,
     "netLiquid": 3691.92,
     "source": "ynab",
-    "updatedAt": "2026-07-18T23:45:55.501Z"
+    "updatedAt": "2026-07-19T00:00:56.181Z"
   }
 }
