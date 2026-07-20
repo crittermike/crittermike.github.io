@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T10:00:52.123Z",
+  "generated_at": "2026-07-20T10:15:52.646Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2221,7 +2221,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 64.5,
-    "totalSpend": 9402.36,
+    "totalSpend": 10036.05,
     "totalBudget": 0,
     "categories": [
       {
@@ -2241,6 +2241,14 @@
         "pct": 0
       },
       {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 1417.05,
+        "balance": -1417.05,
+        "pct": 0
+      },
+      {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
@@ -2252,24 +2260,16 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1106.45,
-        "balance": -1106.45,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 995.78,
-        "balance": -995.78,
+        "spent": 1165.76,
+        "balance": -1165.76,
         "pct": 0
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 609.49,
-        "balance": -609.49,
+        "spent": 672.6,
+        "balance": -672.6,
         "pct": 0
       },
       {
@@ -2313,6 +2313,14 @@
         "pct": 0
       },
       {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 90,
+        "balance": -90,
+        "pct": 0
+      },
+      {
         "name": "🐶 Pets",
         "group": "Needs",
         "budgeted": 0,
@@ -2322,9 +2330,9 @@
       }
     ],
     "liquidCash": 6535.56,
-    "creditDebt": -2843.64,
-    "netLiquid": 3691.92,
+    "creditDebt": -3719.83,
+    "netLiquid": 2815.73,
     "source": "ynab",
-    "updatedAt": "2026-07-20T10:00:50.970Z"
+    "updatedAt": "2026-07-20T10:15:51.516Z"
   }
 }
