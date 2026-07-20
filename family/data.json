@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-07-20T03:45:42.055Z",
+  "generated_at": "2026-07-20T04:00:43.068Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-19",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-19T09:00:00-04:00"
-    },
-    {
-      "date": "2026-07-19",
-      "time": "11:20a",
-      "what": "Nancy: George Washington movie",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-19T13:30:00-04:00"
-    },
-    {
-      "date": "2026-07-19",
-      "time": "5:30p",
-      "what": "Amazon delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-19T20:30:00-04:00"
-    },
     {
       "date": "2026-07-23",
       "time": "9:30a",
@@ -435,7 +408,12 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        }
+      ]
     },
     {
       "key": "william",
@@ -454,7 +432,20 @@
         "balance_str": "$0.00"
       },
       "guineaPig": "$119.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-monday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -473,7 +464,16 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "summer-solutions",
+          "label": "Summer Solutions"
+        },
+        {
+          "id": "reading-20m",
+          "label": "Read 20 min"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -490,8 +490,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-07-19-final-exam-videos-tests-record-sheet-ref",
-          "label": "Final Exam - videos/tests + record sheet + reflection, 100 pts (Summer PE, Perry)"
+          "id": "take-medicine",
+          "label": "Take medicine"
         }
       ]
     }
@@ -750,7 +750,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -758,8 +758,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Crockpot pot roast with carrots and potatoes",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -810,7 +810,7 @@
       "dow_short": "Tue",
       "name": "Korean beef and broccoli bowls with rice",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1009,19 +1009,12 @@
   "weather": {
     "now": {
       "temp": 78,
-      "hi": 95,
+      "hi": 97,
       "lo": 73,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 97,
-        "lo": 73,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -1049,24 +1042,31 @@
         "hi": 88,
         "lo": 69,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 78,
+        "lo": 63,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-19T06:30",
         "2026-07-20T06:30",
         "2026-07-21T06:31",
         "2026-07-22T06:32",
         "2026-07-23T06:32",
-        "2026-07-24T06:33"
+        "2026-07-24T06:33",
+        "2026-07-25T06:34"
       ],
       "sunsets": [
-        "2026-07-19T20:41",
         "2026-07-20T20:41",
         "2026-07-21T20:40",
         "2026-07-22T20:39",
         "2026-07-23T20:39",
-        "2026-07-24T20:38"
+        "2026-07-24T20:38",
+        "2026-07-25T20:37"
       ],
       "timezone": "America/New_York"
     }
@@ -2325,6 +2325,6 @@
     "creditDebt": -2843.64,
     "netLiquid": 3691.92,
     "source": "ynab",
-    "updatedAt": "2026-07-20T03:45:40.985Z"
+    "updatedAt": "2026-07-20T04:00:41.945Z"
   }
 }
