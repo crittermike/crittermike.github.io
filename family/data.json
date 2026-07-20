@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T17:01:06.032Z",
+  "generated_at": "2026-07-20T17:16:05.468Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-27T11:00:00-04:00"
+    },
+    {
+      "date": "2026-07-29",
+      "time": "8a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-29T09:00:00-04:00"
     },
     {
       "date": "2026-07-30",
@@ -1008,7 +1017,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 93,
+      "temp": 94,
       "hi": 97,
       "lo": 73,
       "icon": "🌤",
@@ -2333,6 +2342,6 @@
     "creditDebt": -3719.83,
     "netLiquid": 2815.73,
     "source": "ynab",
-    "updatedAt": "2026-07-20T17:01:04.796Z"
+    "updatedAt": "2026-07-20T17:16:04.214Z"
   }
 }
