@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T23:45:15.730Z",
+  "generated_at": "2026-07-21T00:00:20.280Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -704,55 +704,12 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot pot roast with carrots and potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "Carryover from last week. Add extra roast to Mike's plate to reach protein target.",
-    "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Korean beef and broccoli bowls with rice",
+    "protein_g": 60,
+    "cal": 600,
+    "effort": "easy",
+    "note": "Use 93% lean ground beef; keep red pepper flakes light for the kids.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -1017,7 +974,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 91,
+      "temp": 90,
       "hi": 95,
       "lo": 73,
       "icon": "☀️",
@@ -2229,7 +2186,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 64.5,
+    "dayPct": 67.7,
     "totalSpend": 10036.05,
     "totalBudget": 0,
     "categories": [
@@ -2342,6 +2299,6 @@
     "creditDebt": -3719.83,
     "netLiquid": 2815.73,
     "source": "ynab",
-    "updatedAt": "2026-07-20T23:45:14.600Z"
+    "updatedAt": "2026-07-21T00:00:18.226Z"
   }
 }
