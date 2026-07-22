@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T20:00:58.615Z",
+  "generated_at": "2026-07-22T20:15:58.865Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1092,9 +1092,9 @@
       {
         "d": "Thu",
         "icon": "🌧",
-        "hi": 85,
-        "lo": 70,
-        "code": 63
+        "hi": 90,
+        "lo": 69,
+        "code": 61
       },
       {
         "d": "Fri",
@@ -2292,5 +2292,121 @@
       "last_reviewed": null
     }
   ],
-  "finance": null
+  "finance": {
+    "month": "July 2026",
+    "dayPct": 71,
+    "totalSpend": 10964.24,
+    "totalBudget": 0,
+    "categories": [
+      {
+        "name": "🏠 Home",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 2481.69,
+        "balance": -2481.69,
+        "pct": 0
+      },
+      {
+        "name": "😌 Emergency fund",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 2000,
+        "balance": -2000,
+        "pct": 0
+      },
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 1848.77,
+        "balance": -1848.77,
+        "pct": 0
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 1378.29,
+        "balance": -1378.29,
+        "pct": 0
+      },
+      {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 1232.31,
+        "balance": -1232.31,
+        "pct": 0
+      },
+      {
+        "name": "🍿 Entertainment",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 745.98,
+        "balance": -745.98,
+        "pct": 0
+      },
+      {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 279.15,
+        "balance": -279.15,
+        "pct": 0
+      },
+      {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 270.95,
+        "balance": -270.95,
+        "pct": 0
+      },
+      {
+        "name": "🚗 Cars",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 237.7,
+        "balance": -237.7,
+        "pct": 0
+      },
+      {
+        "name": "🏝️ Vacation",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 222.9,
+        "balance": -222.9,
+        "pct": 0
+      },
+      {
+        "name": "💅 Personal Care",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 102,
+        "balance": -102,
+        "pct": 0
+      },
+      {
+        "name": "🎁 Charity",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 100,
+        "balance": -100,
+        "pct": 0
+      },
+      {
+        "name": "🐶 Pets",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 64.5,
+        "balance": -64.5,
+        "pct": 0
+      }
+    ],
+    "liquidCash": 6203.56,
+    "creditDebt": -4894.84,
+    "netLiquid": 1308.72,
+    "source": "ynab",
+    "updatedAt": "2026-07-22T20:15:57.639Z"
+  }
 }
