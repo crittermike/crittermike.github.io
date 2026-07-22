@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T13:00:47.708Z",
+  "generated_at": "2026-07-22T13:15:47.452Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1082,7 +1082,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 80,
       "hi": 93,
       "lo": 75,
       "icon": "⛅",
@@ -2295,7 +2295,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 71,
-    "totalSpend": 10768.29,
+    "totalSpend": 10964.24,
     "totalBudget": 0,
     "categories": [
       {
@@ -2318,8 +2318,8 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1833.77,
-        "balance": -1833.77,
+        "spent": 1848.77,
+        "balance": -1848.77,
         "pct": 0
       },
       {
@@ -2355,6 +2355,14 @@
         "pct": 0
       },
       {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 270.95,
+        "balance": -270.95,
+        "pct": 0
+      },
+      {
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 0,
@@ -2387,14 +2395,6 @@
         "pct": 0
       },
       {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 90,
-        "balance": -90,
-        "pct": 0
-      },
-      {
         "name": "🐶 Pets",
         "group": "Needs",
         "budgeted": 0,
@@ -2403,10 +2403,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 6384.51,
-    "creditDebt": -4879.84,
-    "netLiquid": 1504.67,
+    "liquidCash": 6203.56,
+    "creditDebt": -4894.84,
+    "netLiquid": 1308.72,
     "source": "ynab",
-    "updatedAt": "2026-07-22T13:00:46.457Z"
+    "updatedAt": "2026-07-22T13:15:46.160Z"
   }
 }
