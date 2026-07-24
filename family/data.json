@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-24T03:45:52.396Z",
+  "generated_at": "2026-07-24T04:00:53.573Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-23",
-      "time": "9:30a",
-      "what": "Mom appointment at LifeStance",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-23T10:30:00-04:00"
-    },
     {
       "date": "2026-07-24",
       "time": "10:30a",
@@ -430,6 +421,10 @@
         {
           "id": "summer-solutions",
           "label": "Summer Solutions"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -458,6 +453,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -486,6 +485,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -506,6 +509,10 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -895,7 +902,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Homemade hamburger helper",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
@@ -964,8 +971,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -973,26 +980,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 66,
-      "hi": 84,
-      "lo": 66,
+      "hi": 74,
+      "lo": 65,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "🌦",
-        "hi": 74,
-        "lo": 65,
-        "code": 53
-      },
       {
         "d": "Sat",
         "icon": "🌦",
@@ -1020,24 +1020,31 @@
         "hi": 91,
         "lo": 75,
         "code": 51
+      },
+      {
+        "d": "Wed",
+        "icon": "🌦",
+        "hi": 89,
+        "lo": 76,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-23T06:32",
         "2026-07-24T06:33",
         "2026-07-25T06:34",
         "2026-07-26T06:35",
         "2026-07-27T06:35",
-        "2026-07-28T06:36"
+        "2026-07-28T06:36",
+        "2026-07-29T06:37"
       ],
       "sunsets": [
-        "2026-07-23T20:39",
         "2026-07-24T20:38",
         "2026-07-25T20:37",
         "2026-07-26T20:37",
         "2026-07-27T20:36",
-        "2026-07-28T20:35"
+        "2026-07-28T20:35",
+        "2026-07-29T20:34"
       ],
       "timezone": "America/New_York"
     }
@@ -2320,6 +2327,6 @@
     "creditDebt": -4478.71,
     "netLiquid": 1639.85,
     "source": "ynab",
-    "updatedAt": "2026-07-24T03:45:51.157Z"
+    "updatedAt": "2026-07-24T04:00:52.168Z"
   }
 }
