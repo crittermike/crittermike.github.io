@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T23:45:46.620Z",
+  "generated_at": "2026-07-24T00:00:47.330Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -709,73 +709,12 @@
     ]
   },
   "dinner": {
-    "name": "Homemade hamburger helper",
+    "name": "Takeout / eat out",
     "protein_g": 60,
     "cal": 650,
-    "effort": "easy",
-    "note": "Use 2 lb lean ground beef for six and Mike's protein target.",
-    "recipe": {
-      "slug": "homemade-hamburger-helper",
-      "name": "Homemade Hamburger Helper",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [],
-      "aliases": [],
-      "in_rotation": false,
-      "effort": null,
-      "kid_friendly": true,
-      "protein_g": null,
-      "cal": null,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "1 onion, diced",
-            "Olive oil",
-            "Garlic, minced",
-            "1 package ground beef",
-            "Salt, pepper, paprika, garlic powder",
-            "1 tbsp tomato paste",
-            "1 can Italian-seasoned diced tomatoes, drained",
-            "2 cups beef broth",
-            "1 cup heavy cream",
-            "2 cups uncooked noodles",
-            "Shredded cheddar"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "1 onion, diced",
-        "Olive oil",
-        "Garlic, minced",
-        "1 package ground beef",
-        "Salt, pepper, paprika, garlic powder",
-        "1 tbsp tomato paste",
-        "1 can Italian-seasoned diced tomatoes, drained",
-        "2 cups beef broth",
-        "1 cup heavy cream",
-        "2 cups uncooked noodles",
-        "Shredded cheddar"
-      ],
-      "steps": [
-        "Cook onion in olive oil.",
-        "Add garlic, cook a minute or so.",
-        "Add ground beef, brown.",
-        "Season with salt, pepper, paprika, garlic powder.",
-        "Stir in tomato paste + drained diced tomatoes.",
-        "Add beef broth + heavy cream.",
-        "Add uncooked noodles.",
-        "Cover, cook 15 min.",
-        "Uncover, cook 2 more min.",
-        "Off heat, top with cheddar, stir."
-      ],
-      "notes": "",
-      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "effort": "none",
+    "note": "Friday takeout or dinner out. No Lent restriction this week; Mike should choose a protein-forward order.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -2252,7 +2191,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 74.2,
+    "dayPct": 77.4,
     "totalSpend": 14708.09,
     "totalBudget": 0,
     "categories": [
@@ -2381,6 +2320,6 @@
     "creditDebt": -4478.71,
     "netLiquid": 1639.85,
     "source": "ynab",
-    "updatedAt": "2026-07-23T23:45:45.372Z"
+    "updatedAt": "2026-07-24T00:00:45.974Z"
   }
 }
