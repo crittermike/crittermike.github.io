@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T11:00:51.695Z",
+  "generated_at": "2026-07-25T11:15:51.903Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2166,7 +2166,7 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 80.6,
-    "totalSpend": 15110.31,
+    "totalSpend": 15279.2,
     "totalBudget": 0,
     "categories": [
       {
@@ -2181,16 +2181,16 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2070,
-        "balance": -2070,
+        "spent": 2145,
+        "balance": -2145,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2037.17,
-        "balance": -2037.17,
+        "spent": 2059.36,
+        "balance": -2059.36,
         "pct": 0
       },
       {
@@ -2205,8 +2205,8 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1743.71,
-        "balance": -1743.71,
+        "spent": 1815.41,
+        "balance": -1815.41,
         "pct": 0
       },
       {
@@ -2290,10 +2290,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 5363.66,
-    "creditDebt": -5417.67,
-    "netLiquid": -54.01,
+    "liquidCash": 5288.66,
+    "creditDebt": -5842.56,
+    "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-25T11:00:50.478Z"
+    "updatedAt": "2026-07-25T11:15:50.731Z"
   }
 }
