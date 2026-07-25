@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T23:45:30.850Z",
+  "generated_at": "2026-07-25T00:00:33.331Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -725,11 +725,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout / eat out",
-    "protein_g": 60,
-    "cal": 650,
+    "name": "Pizza night (delivery or frozen)",
+    "protein_g": 40,
+    "cal": 750,
     "effort": "none",
-    "note": "Friday takeout or dinner out. No Lent restriction this week; Mike should choose a protein-forward order.",
+    "note": "Hadestown starts at 3:50 PM. Keep dinner easy; Mike can add a protein side if needed.",
     "recipe": null
   },
   "mealweek": [
@@ -2207,7 +2207,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 77.4,
+    "dayPct": 80.6,
     "totalSpend": 15110.31,
     "totalBudget": 0,
     "categories": [
@@ -2336,6 +2336,6 @@
     "creditDebt": -5417.67,
     "netLiquid": -54.01,
     "source": "ynab",
-    "updatedAt": "2026-07-24T23:45:29.561Z"
+    "updatedAt": "2026-07-25T00:00:31.809Z"
   }
 }
