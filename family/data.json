@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T16:31:01.749Z",
+  "generated_at": "2026-07-25T16:46:01.942Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -429,9 +429,9 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$0.00"
+        "balance_str": "$4.40"
       },
-      "guineaPig": "$119.34",
+      "guineaPig": "$125.94",
       "assignments": [
         {
           "id": "laundry-saturday",
@@ -953,8 +953,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 82,
+      "temp": 78,
+      "hi": 84,
       "lo": 70,
       "icon": "🌤",
       "code": 2
@@ -2294,6 +2294,6 @@
     "creditDebt": -5842.56,
     "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-25T16:31:00.435Z"
+    "updatedAt": "2026-07-25T16:46:00.794Z"
   }
 }
