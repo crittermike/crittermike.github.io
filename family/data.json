@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-26T20:00:49.398Z",
+  "generated_at": "2026-07-26T20:15:48.177Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-26T09:00:00-04:00"
+    },
+    {
+      "date": "2026-07-26",
+      "time": "4:15p",
+      "what": "Wizards of Wormbly - Spare Time Entertainment (x4)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-26T17:45:00-04:00"
     },
     {
       "date": "2026-07-27",
@@ -768,11 +777,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 81,
       "hi": 86,
       "lo": 74,
-      "icon": "🌦",
-      "code": 55
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
       {
@@ -2109,6 +2118,6 @@
     "creditDebt": -5842.56,
     "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-26T20:00:47.344Z"
+    "updatedAt": "2026-07-26T20:15:47.008Z"
   }
 }
