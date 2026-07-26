@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T23:45:13.380Z",
+  "generated_at": "2026-07-26T00:00:21.728Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -683,11 +683,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza night (delivery or frozen)",
-    "protein_g": 40,
-    "cal": 750,
+    "name": "Leftovers or whatever you can scrounge up",
+    "protein_g": null,
+    "cal": null,
     "effort": "none",
-    "note": "Hadestown starts at 3:50 PM. Keep dinner easy; Mike can add a protein side if needed.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -2165,7 +2165,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 80.6,
+    "dayPct": 83.9,
     "totalSpend": 15279.2,
     "totalBudget": 0,
     "categories": [
@@ -2294,6 +2294,6 @@
     "creditDebt": -5842.56,
     "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-25T23:45:12.221Z"
+    "updatedAt": "2026-07-26T00:00:19.035Z"
   }
 }
