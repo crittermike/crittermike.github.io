@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-26T03:45:20.165Z",
+  "generated_at": "2026-07-26T04:00:23.814Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-25",
-      "time": "3:50p",
-      "what": "Hadestown (movie, 3 tickets)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-25T18:30:00-04:00"
-    },
     {
       "date": "2026-07-26",
       "time": "8a",
@@ -408,12 +399,7 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -432,12 +418,7 @@
         "balance_str": "$4.40"
       },
       "guineaPig": "$125.94",
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -456,12 +437,7 @@
         "balance_str": "$80.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -476,12 +452,7 @@
         "balance_str": "$-274.23"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -695,8 +666,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -704,7 +675,7 @@
       "dow_short": "Mon",
       "name": "Crockpot pot roast with carrots and potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -946,7 +917,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -954,19 +925,12 @@
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 82,
-      "lo": 70,
+      "hi": 86,
+      "lo": 72,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌦",
-        "hi": 86,
-        "lo": 72,
-        "code": 51
-      },
       {
         "d": "Mon",
         "icon": "⛅",
@@ -994,24 +958,31 @@
         "hi": 95,
         "lo": 72,
         "code": 2
+      },
+      {
+        "d": "Fri",
+        "icon": "🌦",
+        "hi": 93,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-25T06:34",
         "2026-07-26T06:35",
         "2026-07-27T06:35",
         "2026-07-28T06:36",
         "2026-07-29T06:37",
-        "2026-07-30T06:37"
+        "2026-07-30T06:37",
+        "2026-07-31T06:38"
       ],
       "sunsets": [
-        "2026-07-25T20:37",
         "2026-07-26T20:37",
         "2026-07-27T20:36",
         "2026-07-28T20:35",
         "2026-07-29T20:34",
-        "2026-07-30T20:33"
+        "2026-07-30T20:33",
+        "2026-07-31T20:32"
       ],
       "timezone": "America/New_York"
     }
@@ -2294,6 +2265,6 @@
     "creditDebt": -5842.56,
     "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-26T03:45:18.787Z"
+    "updatedAt": "2026-07-26T04:00:19.221Z"
   }
 }
