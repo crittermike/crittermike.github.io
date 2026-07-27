@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T22:00:41.414Z",
+  "generated_at": "2026-07-27T22:15:40.076Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -37,6 +37,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-30T12:00:00-04:00"
+    },
+    {
+      "date": "2026-07-31",
+      "time": "10a",
+      "what": "Fire wood",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-07-31T11:00:00-04:00"
     },
     {
       "date": "2026-08-02",
@@ -2201,6 +2210,6 @@
     "creditDebt": -6685.97,
     "netLiquid": -1397.31,
     "source": "ynab",
-    "updatedAt": "2026-07-27T22:00:39.048Z"
+    "updatedAt": "2026-07-27T22:15:38.880Z"
   }
 }
