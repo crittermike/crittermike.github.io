@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T12:45:20.635Z",
+  "generated_at": "2026-07-27T13:00:22.469Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2060,31 +2060,31 @@
   "finance": {
     "month": "July 2026",
     "dayPct": 87.1,
-    "totalSpend": 15279.2,
+    "totalSpend": 15847.46,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🏠 Home",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 3869.28,
-        "balance": -3869.28,
+        "spent": 4073.5,
+        "balance": -4073.5,
         "pct": 0
       },
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2145,
-        "balance": -2145,
+        "spent": 2289.02,
+        "balance": -2289.02,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2059.36,
-        "balance": -2059.36,
+        "spent": 2179.39,
+        "balance": -2179.39,
         "pct": 0
       },
       {
@@ -2099,16 +2099,16 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1815.41,
-        "balance": -1815.41,
+        "spent": 1820.4,
+        "balance": -1820.4,
         "pct": 0
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 918.68,
-        "balance": -918.68,
+        "spent": 985.07,
+        "balance": -985.07,
         "pct": 0
       },
       {
@@ -2147,8 +2147,8 @@
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 301.73,
-        "balance": -301.73,
+        "spent": 330.34,
+        "balance": -330.34,
         "pct": 0
       },
       {
@@ -2185,9 +2185,9 @@
       }
     ],
     "liquidCash": 5288.66,
-    "creditDebt": -5842.56,
-    "netLiquid": -553.9,
+    "creditDebt": -6685.97,
+    "netLiquid": -1397.31,
     "source": "ynab",
-    "updatedAt": "2026-07-27T12:45:19.366Z"
+    "updatedAt": "2026-07-27T13:00:19.386Z"
   }
 }
