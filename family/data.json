@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-26T23:45:53.553Z",
+  "generated_at": "2026-07-27T00:00:55.632Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -663,12 +663,59 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
-    "recipe": null
+    "name": "Marry me chicken with rice and green beans",
+    "protein_g": 62,
+    "cal": 620,
+    "effort": "medium",
+    "note": "Use 2.5 lb chicken breast for six plus Mike's protein target. No mushrooms.",
+    "recipe": {
+      "slug": "marry-me-chicken",
+      "name": "Marry Me chicken",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "marry-me-chicken"
+      ],
+      "in_rotation": true,
+      "effort": "medium",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 600,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "chicken breasts",
+            "sun-dried tomatoes",
+            "heavy cream",
+            "parmesan",
+            "garlic",
+            "spinach",
+            "Italian seasoning"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "chicken breasts",
+        "sun-dried tomatoes",
+        "heavy cream",
+        "parmesan",
+        "garlic",
+        "spinach",
+        "Italian seasoning"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -1989,7 +2036,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 83.9,
+    "dayPct": 87.1,
     "totalSpend": 15279.2,
     "totalBudget": 0,
     "categories": [
@@ -2118,6 +2165,6 @@
     "creditDebt": -5842.56,
     "netLiquid": -553.9,
     "source": "ynab",
-    "updatedAt": "2026-07-26T23:45:52.368Z"
+    "updatedAt": "2026-07-27T00:00:54.135Z"
   }
 }
