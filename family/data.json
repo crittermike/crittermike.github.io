@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T14:00:14.756Z",
+  "generated_at": "2026-07-28T14:15:13.929Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -37,6 +37,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-02T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-02",
+      "time": "12p",
+      "what": "Fig - DOG Full Groom (Kavin Vasquez)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-02T13:30:00-04:00"
     },
     {
       "date": "2026-08-04",
@@ -903,17 +912,17 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 84,
       "hi": 98,
       "lo": 77,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
         "d": "Wed",
         "icon": "⛅",
-        "hi": 92,
+        "hi": 91,
         "lo": 74,
         "code": 3
       },
@@ -2244,6 +2253,6 @@
     "creditDebt": -7567.1,
     "netLiquid": -892.62,
     "source": "ynab",
-    "updatedAt": "2026-07-28T14:00:12.732Z"
+    "updatedAt": "2026-07-28T14:15:12.654Z"
   }
 }
