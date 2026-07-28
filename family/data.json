@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T12:00:14.915Z",
+  "generated_at": "2026-07-28T12:15:10.047Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -695,12 +695,59 @@
     ]
   },
   "dinner": {
-    "name": "Sheet pan smoked sausage and baby potatoes with broccoli",
-    "protein_g": 58,
-    "cal": 640,
-    "effort": "easy",
-    "note": "One pan, minimal cleanup. Mike takes a heavier sausage portion and lighter potatoes.",
-    "recipe": null
+    "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
+    "protein_g": 45,
+    "cal": 700,
+    "effort": "medium",
+    "note": "Swapped in for sheet pan smoked sausage (skipped).",
+    "recipe": {
+      "slug": "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash",
+      "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash"
+      ],
+      "in_rotation": true,
+      "effort": "medium",
+      "kid_friendly": true,
+      "protein_g": 45,
+      "cal": 700,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "ground beef",
+            "elbow macaroni",
+            "diced tomatoes",
+            "tomato sauce",
+            "kielbasa",
+            "zucchini",
+            "yellow squash"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "ground beef",
+        "elbow macaroni",
+        "diced tomatoes",
+        "tomato sauce",
+        "kielbasa",
+        "zucchini",
+        "yellow squash"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Goulash + grilled kielbasa + pan-fried zucchini and squash</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>elbow macaroni</li>\n<li>diced tomatoes</li>\n<li>tomato sauce</li>\n<li>kielbasa</li>\n<li>zucchini</li>\n<li>yellow squash</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -769,10 +816,57 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Sheet pan smoked sausage and baby potatoes with broccoli",
+      "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash",
+        "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash"
+        ],
+        "in_rotation": true,
+        "effort": "medium",
+        "kid_friendly": true,
+        "protein_g": 45,
+        "cal": 700,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "ground beef",
+              "elbow macaroni",
+              "diced tomatoes",
+              "tomato sauce",
+              "kielbasa",
+              "zucchini",
+              "yellow squash"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "ground beef",
+          "elbow macaroni",
+          "diced tomatoes",
+          "tomato sauce",
+          "kielbasa",
+          "zucchini",
+          "yellow squash"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Goulash + grilled kielbasa + pan-fried zucchini and squash</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>elbow macaroni</li>\n<li>diced tomatoes</li>\n<li>tomato sauce</li>\n<li>kielbasa</li>\n<li>zucchini</li>\n<li>yellow squash</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Wednesday",
@@ -809,7 +903,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 78,
       "hi": 98,
       "lo": 77,
       "icon": "⛅",
@@ -2150,6 +2244,6 @@
     "creditDebt": -7567.1,
     "netLiquid": -892.62,
     "source": "ynab",
-    "updatedAt": "2026-07-28T12:00:12.274Z"
+    "updatedAt": "2026-07-28T12:15:08.750Z"
   }
 }
