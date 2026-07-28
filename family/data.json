@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-07-28T03:45:49.604Z",
+  "generated_at": "2026-07-28T04:00:49.920Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-27",
-      "time": "10a",
-      "what": "Mom - Prosthetic doctor appt",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-27T11:00:00-04:00"
-    },
-    {
-      "date": "2026-07-27",
-      "time": "4p",
-      "what": "Walmart grocery delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-27T18:00:00-04:00"
-    },
     {
       "date": "2026-07-29",
       "time": "8a",
@@ -406,6 +388,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-10-25T00:00:00-04:00"
+    },
+    {
+      "date": "2026-10-25",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-25T09:00:00-04:00"
     }
   ],
   "kids": [
@@ -453,10 +444,6 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-monday",
-          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -728,7 +715,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Marry me chicken with rice and green beans",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "marry-me-chicken",
@@ -783,8 +770,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Sheet pan smoked sausage and baby potatoes with broccoli",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -792,7 +779,7 @@
       "dow_short": "Wed",
       "name": "Mexican beef and refried bean burritos with onions",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -822,20 +809,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
-      "hi": 93,
-      "lo": 75,
+      "temp": 80,
+      "hi": 94,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "🌦",
-        "hi": 94,
-        "lo": 74,
-        "code": 53
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -863,24 +843,31 @@
         "hi": 89,
         "lo": 70,
         "code": 53
+      },
+      {
+        "d": "Sun",
+        "icon": "⛈",
+        "hi": 83,
+        "lo": 69,
+        "code": 95
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-27T06:35",
         "2026-07-28T06:36",
         "2026-07-29T06:37",
         "2026-07-30T06:37",
         "2026-07-31T06:38",
-        "2026-08-01T06:39"
+        "2026-08-01T06:39",
+        "2026-08-02T06:40"
       ],
       "sunsets": [
-        "2026-07-27T20:36",
         "2026-07-28T20:35",
         "2026-07-29T20:34",
         "2026-07-30T20:33",
         "2026-07-31T20:32",
-        "2026-08-01T20:32"
+        "2026-08-01T20:32",
+        "2026-08-02T20:31"
       ],
       "timezone": "America/New_York"
     }
@@ -2163,6 +2150,6 @@
     "creditDebt": -6685.97,
     "netLiquid": -1397.31,
     "source": "ynab",
-    "updatedAt": "2026-07-28T03:45:48.420Z"
+    "updatedAt": "2026-07-28T04:00:48.733Z"
   }
 }
