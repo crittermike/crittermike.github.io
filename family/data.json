@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:45:43.108Z",
+  "generated_at": "2026-07-28T00:00:47.479Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -708,59 +708,12 @@
     ]
   },
   "dinner": {
-    "name": "Marry me chicken with rice and green beans",
-    "protein_g": 62,
-    "cal": 620,
-    "effort": "medium",
-    "note": "Use 2.5 lb chicken breast for six plus Mike's protein target. No mushrooms.",
-    "recipe": {
-      "slug": "marry-me-chicken",
-      "name": "Marry Me chicken",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "marry-me-chicken"
-      ],
-      "in_rotation": true,
-      "effort": "medium",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 600,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chicken breasts",
-            "sun-dried tomatoes",
-            "heavy cream",
-            "parmesan",
-            "garlic",
-            "spinach",
-            "Italian seasoning"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chicken breasts",
-        "sun-dried tomatoes",
-        "heavy cream",
-        "parmesan",
-        "garlic",
-        "spinach",
-        "Italian seasoning"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Sheet pan smoked sausage and baby potatoes with broccoli",
+    "protein_g": 58,
+    "cal": 640,
+    "effort": "easy",
+    "note": "One pan, minimal cleanup. Mike takes a heavier sausage portion and lighter potatoes.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -2081,7 +2034,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 87.1,
+    "dayPct": 90.3,
     "totalSpend": 15847.46,
     "totalBudget": 0,
     "categories": [
@@ -2210,6 +2163,6 @@
     "creditDebt": -6685.97,
     "netLiquid": -1397.31,
     "source": "ynab",
-    "updatedAt": "2026-07-27T23:45:41.921Z"
+    "updatedAt": "2026-07-28T00:00:43.467Z"
   }
 }
