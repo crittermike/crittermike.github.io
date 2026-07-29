@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T12:45:40.346Z",
+  "generated_at": "2026-07-29T13:00:40.788Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -129,6 +129,15 @@
       "end": "2026-08-12T10:30:00-04:00"
     },
     {
+      "date": "2026-08-12",
+      "time": "3p",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-12T16:00:00-04:00"
+    },
+    {
       "date": "2026-08-13",
       "time": "all day",
       "what": "POPCS: First Day of School (12p dismissal)",
@@ -192,6 +201,15 @@
       "end": "2026-08-19T09:30:00-04:00"
     },
     {
+      "date": "2026-08-20",
+      "time": "9a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-20T10:00:00-04:00"
+    },
+    {
       "date": "2026-08-23",
       "time": "8a",
       "what": "Mass",
@@ -199,6 +217,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-23T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "9a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-26T10:00:00-04:00"
     },
     {
       "date": "2026-08-28",
@@ -217,6 +244,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-30T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "9a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-02T10:00:00-04:00"
     },
     {
       "date": "2026-09-06",
@@ -247,6 +283,15 @@
     },
     {
       "date": "2026-09-10",
+      "time": "9a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-10T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-10",
       "time": "9:15a",
       "what": "Henry med check - Parkside Pediatrics",
       "who": "henry",
@@ -271,6 +316,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-13T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "9a",
+      "what": "Mom lymphedema appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-15T10:00:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -869,7 +923,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 78,
       "hi": 91,
       "lo": 72,
       "icon": "☀️",
@@ -2210,6 +2264,6 @@
     "creditDebt": -7850.94,
     "netLiquid": -1176.46,
     "source": "ynab",
-    "updatedAt": "2026-07-29T12:45:39.025Z"
+    "updatedAt": "2026-07-29T13:00:39.531Z"
   }
 }
