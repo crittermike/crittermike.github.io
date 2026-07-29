@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T20:45:57.625Z",
+  "generated_at": "2026-07-29T21:00:58.085Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,15 +10,6 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-07-29T09:00:00-04:00"
-    },
-    {
-      "date": "2026-07-30",
-      "time": "9a",
-      "what": "EHS 101",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-30T12:00:00-04:00"
     },
     {
       "date": "2026-07-31",
@@ -2264,6 +2255,6 @@
     "creditDebt": -7850.94,
     "netLiquid": -1176.46,
     "source": "ynab",
-    "updatedAt": "2026-07-29T20:45:56.305Z"
+    "updatedAt": "2026-07-29T21:00:56.754Z"
   }
 }
