@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T03:45:39.385Z",
+  "generated_at": "2026-07-29T04:00:40.785Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -501,6 +501,10 @@
         {
           "id": "take-medicine",
           "label": "Take medicine"
+        },
+        {
+          "id": "sch-2026-07-30-ehs-101-new-to-eastside-rising-9th-orien",
+          "label": "EHS 101: new-to-Eastside/rising 9th orientation, 9:00 AM-12:00 PM; $25 registration via SchoolCash Online"
         }
       ]
     }
@@ -779,7 +783,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash",
@@ -834,8 +838,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Mexican beef and refried bean burritos with onions",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -843,7 +847,7 @@
       "dow_short": "Thu",
       "name": "Shake n bake chicken with mac and cheese and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -865,20 +869,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
-      "hi": 94,
-      "lo": 77,
+      "temp": 75,
+      "hi": 92,
+      "lo": 73,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "🌤",
-        "hi": 92,
-        "lo": 73,
-        "code": 1
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -906,24 +903,31 @@
         "hi": 91,
         "lo": 70,
         "code": 55
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 94,
+        "lo": 72,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-28T06:36",
         "2026-07-29T06:37",
         "2026-07-30T06:37",
         "2026-07-31T06:38",
         "2026-08-01T06:39",
-        "2026-08-02T06:40"
+        "2026-08-02T06:40",
+        "2026-08-03T06:41"
       ],
       "sunsets": [
-        "2026-07-28T20:35",
         "2026-07-29T20:34",
         "2026-07-30T20:33",
         "2026-07-31T20:32",
         "2026-08-01T20:32",
-        "2026-08-02T20:31"
+        "2026-08-02T20:31",
+        "2026-08-03T20:30"
       ],
       "timezone": "America/New_York"
     }
@@ -2206,6 +2210,6 @@
     "creditDebt": -7567.1,
     "netLiquid": -892.62,
     "source": "ynab",
-    "updatedAt": "2026-07-29T03:45:38.037Z"
+    "updatedAt": "2026-07-29T04:00:39.041Z"
   }
 }
