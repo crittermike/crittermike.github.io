@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T23:45:32.038Z",
+  "generated_at": "2026-07-29T00:00:36.068Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -704,59 +704,12 @@
     ]
   },
   "dinner": {
-    "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
-    "protein_g": 45,
-    "cal": 700,
-    "effort": "medium",
-    "note": "Swapped in for sheet pan smoked sausage (skipped).",
-    "recipe": {
-      "slug": "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash",
-      "name": "Goulash + grilled kielbasa + pan-fried zucchini and squash",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "goulash-grilled-kielbasa-pan-fried-zucchini-and-squash"
-      ],
-      "in_rotation": true,
-      "effort": "medium",
-      "kid_friendly": true,
-      "protein_g": 45,
-      "cal": 700,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "ground beef",
-            "elbow macaroni",
-            "diced tomatoes",
-            "tomato sauce",
-            "kielbasa",
-            "zucchini",
-            "yellow squash"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "ground beef",
-        "elbow macaroni",
-        "diced tomatoes",
-        "tomato sauce",
-        "kielbasa",
-        "zucchini",
-        "yellow squash"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Goulash + grilled kielbasa + pan-fried zucchini and squash</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>elbow macaroni</li>\n<li>diced tomatoes</li>\n<li>tomato sauce</li>\n<li>kielbasa</li>\n<li>zucchini</li>\n<li>yellow squash</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Mexican beef and refried bean burritos with onions",
+    "protein_g": 62,
+    "cal": 610,
+    "effort": "easy",
+    "note": "No bell peppers. Mike: two burritos with extra beef, skip the sour cream.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -912,7 +865,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 87,
+      "temp": 85,
       "hi": 94,
       "lo": 77,
       "icon": "⛅",
@@ -2124,7 +2077,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 90.3,
+    "dayPct": 93.5,
     "totalSpend": 16399.45,
     "totalBudget": 0,
     "categories": [
@@ -2253,6 +2206,6 @@
     "creditDebt": -7567.1,
     "netLiquid": -892.62,
     "source": "ynab",
-    "updatedAt": "2026-07-28T23:45:30.798Z"
+    "updatedAt": "2026-07-29T00:00:33.883Z"
   }
 }
