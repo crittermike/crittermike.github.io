@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-30T03:45:11.165Z",
+  "generated_at": "2026-07-30T04:00:13.211Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-29",
-      "time": "8a",
-      "what": "Mom lymphedema appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-29T09:00:00-04:00"
-    },
     {
       "date": "2026-07-30",
       "time": "8:45a",
@@ -901,7 +892,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Mexican beef and refried bean burritos with onions",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -909,8 +900,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Shake n bake chicken with mac and cheese and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -918,7 +909,7 @@
       "dow_short": "Fri",
       "name": "Takeout / eat out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -933,19 +924,12 @@
   "weather": {
     "now": {
       "temp": 73,
-      "hi": 91,
-      "lo": 72,
+      "hi": 89,
+      "lo": 66,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "☀️",
-        "hi": 89,
-        "lo": 66,
-        "code": 0
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -973,24 +957,31 @@
         "hi": 79,
         "lo": 71,
         "code": 95
+      },
+      {
+        "d": "Tue",
+        "icon": "🌦",
+        "hi": 82,
+        "lo": 70,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-29T06:37",
         "2026-07-30T06:37",
         "2026-07-31T06:38",
         "2026-08-01T06:39",
         "2026-08-02T06:40",
-        "2026-08-03T06:41"
+        "2026-08-03T06:41",
+        "2026-08-04T06:41"
       ],
       "sunsets": [
-        "2026-07-29T20:34",
         "2026-07-30T20:33",
         "2026-07-31T20:32",
         "2026-08-01T20:32",
         "2026-08-02T20:31",
-        "2026-08-03T20:30"
+        "2026-08-03T20:30",
+        "2026-08-04T20:29"
       ],
       "timezone": "America/New_York"
     }
@@ -2273,6 +2264,6 @@
     "creditDebt": -7850.94,
     "netLiquid": -1176.46,
     "source": "ynab",
-    "updatedAt": "2026-07-30T03:45:09.796Z"
+    "updatedAt": "2026-07-30T04:00:11.399Z"
   }
 }
