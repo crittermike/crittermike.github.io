@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T12:00:35.215Z",
+  "generated_at": "2026-07-30T12:15:31.021Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -762,12 +762,57 @@
     ]
   },
   "dinner": {
-    "name": "Shake n bake chicken with mac and cheese and cabbage",
-    "protein_g": 60,
-    "cal": 620,
+    "name": "Grilled hamburgers & hotdogs + corn",
+    "protein_g": 50,
+    "cal": 800,
     "effort": "easy",
-    "note": "Kid-proof. Mike takes 2 breasts and a half portion of mac.",
-    "recipe": null
+    "note": "Swapped in for shake n bake chicken (not cooked, bumped to next week). Mike: 2 patties, skip second bun.",
+    "recipe": {
+      "slug": "grilled-hamburgers-and-hotdogs-corn",
+      "name": "Grilled hamburgers & hotdogs + corn",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "grilled-hamburgers-and-hotdogs-corn"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 800,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "ground beef patties",
+            "hotdogs",
+            "buns",
+            "corn on the cob",
+            "cheese slices",
+            "condiments"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "ground beef patties",
+        "hotdogs",
+        "buns",
+        "corn on the cob",
+        "cheese slices",
+        "condiments"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -899,10 +944,55 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Shake n bake chicken with mac and cheese and cabbage",
+      "name": "Grilled hamburgers & hotdogs + corn",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "grilled-hamburgers-and-hotdogs-corn",
+        "name": "Grilled hamburgers & hotdogs + corn",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "grilled-hamburgers-and-hotdogs-corn"
+        ],
+        "in_rotation": true,
+        "effort": "easy",
+        "kid_friendly": true,
+        "protein_g": 50,
+        "cal": 800,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "ground beef patties",
+              "hotdogs",
+              "buns",
+              "corn on the cob",
+              "cheese slices",
+              "condiments"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "ground beef patties",
+          "hotdogs",
+          "buns",
+          "corn on the cob",
+          "cheese slices",
+          "condiments"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Friday",
@@ -923,7 +1013,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 69,
+      "temp": 70,
       "hi": 89,
       "lo": 66,
       "icon": "☀️",
@@ -2264,6 +2354,6 @@
     "creditDebt": -8248.38,
     "netLiquid": 2429.67,
     "source": "ynab",
-    "updatedAt": "2026-07-30T12:00:32.867Z"
+    "updatedAt": "2026-07-30T12:15:29.538Z"
   }
 }
