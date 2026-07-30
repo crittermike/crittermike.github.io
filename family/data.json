@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T21:00:48.928Z",
+  "generated_at": "2026-07-30T21:15:48.955Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-02T13:30:00-04:00"
+    },
+    {
+      "date": "2026-08-03",
+      "time": "3:30p",
+      "what": "SC DMV Appointment - Automobile (Class D)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-03T16:30:00-04:00"
     },
     {
       "date": "2026-08-04",
@@ -2354,6 +2363,6 @@
     "creditDebt": -8248.38,
     "netLiquid": 2429.67,
     "source": "ynab",
-    "updatedAt": "2026-07-30T21:00:47.503Z"
+    "updatedAt": "2026-07-30T21:15:47.662Z"
   }
 }
