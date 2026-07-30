@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T23:00:52.783Z",
+  "generated_at": "2026-07-30T23:15:52.314Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -52,6 +52,15 @@
       "time": "3:30p",
       "what": "SC DMV Appointment - Automobile (Class D)",
       "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-03T16:30:00-04:00"
+    },
+    {
+      "date": "2026-08-03",
+      "time": "3:30p",
+      "what": "Charlie DMV Road Test (Class D Skills)",
+      "who": "charlie",
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-03T16:30:00-04:00"
@@ -2363,6 +2372,6 @@
     "creditDebt": -8248.38,
     "netLiquid": 2429.67,
     "source": "ynab",
-    "updatedAt": "2026-07-30T23:00:51.349Z"
+    "updatedAt": "2026-07-30T23:15:51.003Z"
   }
 }
