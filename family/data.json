@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T23:46:03.318Z",
+  "generated_at": "2026-07-30T00:01:05.044Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -753,11 +753,11 @@
     ]
   },
   "dinner": {
-    "name": "Mexican beef and refried bean burritos with onions",
-    "protein_g": 62,
-    "cal": 610,
+    "name": "Shake n bake chicken with mac and cheese and cabbage",
+    "protein_g": 60,
+    "cal": 620,
     "effort": "easy",
-    "note": "No bell peppers. Mike: two burritos with extra beef, skip the sour cream.",
+    "note": "Kid-proof. Mike takes 2 breasts and a half portion of mac.",
     "recipe": null
   },
   "mealweek": [
@@ -914,7 +914,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 91,
       "lo": 72,
       "icon": "☀️",
@@ -2126,7 +2126,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 93.5,
+    "dayPct": 96.8,
     "totalSpend": 16629.23,
     "totalBudget": 0,
     "categories": [
@@ -2255,6 +2255,6 @@
     "creditDebt": -7850.94,
     "netLiquid": -1176.46,
     "source": "ynab",
-    "updatedAt": "2026-07-29T23:46:01.708Z"
+    "updatedAt": "2026-07-30T00:01:02.897Z"
   }
 }
