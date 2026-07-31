@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-07-31T03:46:00.483Z",
+  "generated_at": "2026-07-31T04:01:02.568Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-30",
-      "time": "8:45a",
-      "what": "Nancy hair appointment",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-30T11:30:00-04:00"
-    },
     {
       "date": "2026-07-31",
       "time": "9a",
@@ -478,6 +469,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-25T09:00:00-04:00"
+    },
+    {
+      "date": "2026-10-28",
+      "time": "8:40a",
+      "what": "William Dentist",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-28T09:40:00-04:00"
     }
   ],
   "kids": [
@@ -498,7 +498,12 @@
         "balance_str": "$79.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "william",
@@ -525,6 +530,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -553,6 +562,10 @@
         {
           "id": "reading-20m",
           "label": "Read 20 min"
+        },
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     },
@@ -575,8 +588,8 @@
           "label": "Take medicine"
         },
         {
-          "id": "sch-2026-07-30-ehs-101-new-to-eastside-rising-9th-orien",
-          "label": "EHS 101: new-to-Eastside/rising 9th orientation, 9:00 AM-12:00 PM; $25 registration via SchoolCash Online"
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -918,7 +931,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers & hotdogs + corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "grilled-hamburgers-and-hotdogs-corn",
@@ -971,8 +984,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -980,26 +993,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 72,
-      "hi": 87,
+      "hi": 92,
       "lo": 66,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 66,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -1027,24 +1033,31 @@
         "hi": 88,
         "lo": 68,
         "code": 53
+      },
+      {
+        "d": "Wed",
+        "icon": "🌦",
+        "hi": 88,
+        "lo": 70,
+        "code": 55
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-30T06:37",
         "2026-07-31T06:38",
         "2026-08-01T06:39",
         "2026-08-02T06:40",
         "2026-08-03T06:41",
-        "2026-08-04T06:41"
+        "2026-08-04T06:41",
+        "2026-08-05T06:42"
       ],
       "sunsets": [
-        "2026-07-30T20:33",
         "2026-07-31T20:32",
         "2026-08-01T20:32",
         "2026-08-02T20:31",
         "2026-08-03T20:30",
-        "2026-08-04T20:29"
+        "2026-08-04T20:29",
+        "2026-08-05T20:28"
       ],
       "timezone": "America/New_York"
     }
@@ -2327,6 +2340,6 @@
     "creditDebt": -8248.38,
     "netLiquid": 2429.67,
     "source": "ynab",
-    "updatedAt": "2026-07-31T03:45:58.834Z"
+    "updatedAt": "2026-07-31T04:01:01.042Z"
   }
 }
