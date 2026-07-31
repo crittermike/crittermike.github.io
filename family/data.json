@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T23:45:53.199Z",
+  "generated_at": "2026-07-31T00:00:55.487Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -780,57 +780,12 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hamburgers & hotdogs + corn",
-    "protein_g": 50,
-    "cal": 800,
-    "effort": "easy",
-    "note": "Swapped in for shake n bake chicken (not cooked, bumped to next week). Mike: 2 patties, skip second bun.",
-    "recipe": {
-      "slug": "grilled-hamburgers-and-hotdogs-corn",
-      "name": "Grilled hamburgers & hotdogs + corn",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "grilled-hamburgers-and-hotdogs-corn"
-      ],
-      "in_rotation": true,
-      "effort": "easy",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 800,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "ground beef patties",
-            "hotdogs",
-            "buns",
-            "corn on the cob",
-            "cheese slices",
-            "condiments"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "ground beef patties",
-        "hotdogs",
-        "buns",
-        "corn on the cob",
-        "cheese slices",
-        "condiments"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Grilled hamburgers &amp; hotdogs + corn</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef patties</li>\n<li>hotdogs</li>\n<li>buns</li>\n<li>corn on the cob</li>\n<li>cheese slices</li>\n<li>condiments</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Takeout / eat out",
+    "protein_g": 60,
+    "cal": 650,
+    "effort": "none",
+    "note": "No Lent restriction in July. Mike orders protein-forward, skip the fried sides.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -1031,7 +986,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 87,
       "lo": 66,
       "icon": "☀️",
@@ -2243,7 +2198,7 @@
   ],
   "finance": {
     "month": "July 2026",
-    "dayPct": 96.8,
+    "dayPct": 100,
     "totalSpend": 16732.93,
     "totalBudget": 0,
     "categories": [
@@ -2372,6 +2327,6 @@
     "creditDebt": -8248.38,
     "netLiquid": 2429.67,
     "source": "ynab",
-    "updatedAt": "2026-07-30T23:45:51.778Z"
+    "updatedAt": "2026-07-31T00:00:53.799Z"
   }
 }
