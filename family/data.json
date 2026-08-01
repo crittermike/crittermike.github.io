@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-01T03:45:46.691Z",
+  "generated_at": "2026-08-01T04:00:47.708Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-07-31",
-      "time": "9a",
-      "what": "Gravel delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-31T10:00:00-04:00"
-    },
-    {
-      "date": "2026-07-31",
-      "time": "10a",
-      "what": "Fire wood",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-07-31T11:00:00-04:00"
-    },
     {
       "date": "2026-08-02",
       "time": "8a",
@@ -500,8 +482,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -524,16 +506,8 @@
       "guineaPig": "$125.94",
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -556,16 +530,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "summer-solutions",
-          "label": "Summer Solutions"
-        },
-        {
-          "id": "reading-20m",
-          "label": "Read 20 min"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -584,12 +550,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "take-medicine",
-          "label": "Take medicine"
-        },
-        {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     }
@@ -806,7 +768,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -984,7 +946,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -992,27 +954,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 89,
-      "lo": 65,
+      "temp": 74,
+      "hi": 88,
+      "lo": 68,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "🌦",
-        "hi": 88,
-        "lo": 68,
-        "code": 51
-      },
       {
         "d": "Sun",
         "icon": "🌧",
@@ -1040,24 +995,31 @@
         "hi": 94,
         "lo": 71,
         "code": 51
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 93,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-07-31T06:38",
         "2026-08-01T06:39",
         "2026-08-02T06:40",
         "2026-08-03T06:41",
         "2026-08-04T06:41",
-        "2026-08-05T06:42"
+        "2026-08-05T06:42",
+        "2026-08-06T06:43"
       ],
       "sunsets": [
-        "2026-07-31T20:32",
         "2026-08-01T20:32",
         "2026-08-02T20:31",
         "2026-08-03T20:30",
         "2026-08-04T20:29",
-        "2026-08-05T20:28"
+        "2026-08-05T20:28",
+        "2026-08-06T20:27"
       ],
       "timezone": "America/New_York"
     }
@@ -2219,6 +2181,6 @@
     "creditDebt": -8999.97,
     "netLiquid": -821.92,
     "source": "ynab",
-    "updatedAt": "2026-08-01T03:45:45.426Z"
+    "updatedAt": "2026-08-01T04:00:46.369Z"
   }
 }
