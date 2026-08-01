@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T22:15:20.099Z",
+  "generated_at": "2026-08-01T22:30:20.786Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -521,7 +521,7 @@
         "pct": 0
       },
       "sugar": {
-        "balance": 173,
+        "balance": 128,
         "refill": 60
       },
       "allowance": {
@@ -2181,6 +2181,6 @@
     "creditDebt": -9417.12,
     "netLiquid": -1139.07,
     "source": "ynab",
-    "updatedAt": "2026-08-01T22:15:18.895Z"
+    "updatedAt": "2026-08-01T22:30:19.509Z"
   }
 }
