@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>How to Get the Vengeful True Sun God (BTD6)</title>
+<meta name="description" content="Step-by-step guide to summoning the VTSG (Vengeful True Sun God) in Bloons TD 6, including sacrifice rules, costs, and common mistakes.">
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --border:#30363d;
+    --text:#e6edf3; --mid:#8b949e; --dim:#484f58;
+    --gold:#e3b341; --orange:#E8834A; --red:#f85149;
+    --green:#3fb950; --blue:#58a6ff; --purple:#bc8cff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:32px 20px 80px;}
+  header{border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:32px;}
+  .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:700;}
+  h1{font-size:2.1rem; line-height:1.15; margin:10px 0 12px; letter-spacing:-.02em;}
+  .deck{color:var(--mid); font-size:1.05rem; margin:0;}
+  h2{font-size:1.35rem; margin:44px 0 14px; letter-spacing:-.01em;
+     border-left:3px solid var(--orange); padding-left:12px;}
+  h3{font-size:1.02rem; margin:26px 0 8px; color:var(--gold);}
+  p{margin:0 0 14px;}
+  ul,ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:9px;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px;
+        padding:18px 20px; margin:18px 0;}
+  .warn{border-color:rgba(248,81,73,.5); background:rgba(248,81,73,.08);}
+  .warn .lbl{color:var(--red);}
+  .tip{border-color:rgba(63,185,80,.45); background:rgba(63,185,80,.07);}
+  .tip .lbl{color:var(--green);}
+  .note{border-color:rgba(88,166,255,.4); background:rgba(88,166,255,.07);}
+  .note .lbl{color:var(--blue);}
+  .lbl{font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; display:block; margin-bottom:6px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:.94rem;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--border);}
+  th{font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:var(--mid);}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap;}
+  code{background:#22272e; border:1px solid var(--border); border-radius:5px;
+       padding:1px 6px; font-size:.9em; color:var(--gold);}
+  .steps{counter-reset:s; list-style:none; padding-left:0;}
+  .steps > li{counter-increment:s; position:relative; padding-left:46px; margin-bottom:22px;}
+  .steps > li::before{
+    content:counter(s); position:absolute; left:0; top:0;
+    width:32px; height:32px; border-radius:50%;
+    background:var(--orange); color:#0d1117; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:.95rem;
+  }
+  .steps > li strong{display:block; font-size:1.05rem; margin-bottom:4px;}
+  .cat{display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px;
+       border-radius:20px; margin-right:6px;}
+  .c-pri{background:rgba(232,131,74,.18); color:var(--orange);}
+  .c-mil{background:rgba(63,185,80,.18); color:var(--green);}
+  .c-mag{background:rgba(188,140,255,.18); color:var(--purple);}
+  .c-sup{background:rgba(88,166,255,.18); color:var(--blue);}
+  footer{margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+         color:var(--dim); font-size:.85rem;}
+  a{color:var(--blue);}
+  @media(max-width:600px){ h1{font-size:1.65rem} .wrap{padding:24px 16px 60px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Bloons TD 6 · Guide</div>
+  <h1>How to Get the Vengeful True Sun God</h1>
+  <p class="deck">The VTSG is the strongest non-Paragon tower in the game. It is not an upgrade you buy. It is a hidden transformation that only happens when you set up several things in exactly the right order.</p>
+</header>
+
+<h2>The short version</h2>
+<ol>
+  <li>Build a Sun Temple with maxed sacrifices in <strong>3 of the 4</strong> tower categories.</li>
+  <li>Place an <strong>Anti-Bloon</strong> and a <strong>Legend of the Night</strong> outside its range.</li>
+  <li>Feed the Sun Temple maxed sacrifices in <strong>all 4</strong> categories.</li>
+  <li>Upgrade it to True Sun God. It eats the other two Super Monkeys and becomes the VTSG.</li>
+</ol>
+
+<h2>Before you start: the checklist</h2>
+<p>If any one of these is wrong, you get a plain True Sun God and you have wasted a lot of money. Check all five.</p>
+<div class="card">
+  <ul style="margin-bottom:0">
+    <li>Every Super Monkey upgrade is unlocked (all three paths, tier 5).</li>
+    <li>The Monkey Knowledge <strong>There Can Be Only One</strong> is unlocked in the Magic tree.</li>
+    <li>Monkey Knowledge is <strong>enabled</strong>. Look for the green dot next to the Knowledge button on the main menu. Red dot means it is off.</li>
+    <li>You are <strong>not</strong> playing CHIMPS. CHIMPS disables Monkey Knowledge, so a VTSG is impossible there.</li>
+    <li>If it is a Challenge, the challenge rules are not disabling Monkey Knowledge.</li>
+  </ul>
+</div>
+<div class="note card">
+  <span class="lbl">Sandbox</span>
+  You can make a VTSG in Sandbox, but only after you have already made one in a real game at least once.
+</div>
+
+<h2>How sacrificing actually works</h2>
+<p>When you upgrade a Super Monkey into a Sun Temple, it destroys every tower inside its circle and absorbs their power. Same thing again when the Sun Temple becomes a True Sun God.</p>
+<p>The game sorts every tower into one of four categories. What matters is the total <strong>cash you spent</strong> on towers and upgrades in each category inside the circle.</p>
+
+<table>
+  <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><span class="cat c-pri">Primary</span></td><td>Dart, Boomerang, Bomb Shooter, Tack Shooter, Ice, Glue, Desperado</td></tr>
+    <tr><td><span class="cat c-mil">Military</span></td><td>Sniper, Sub, Buccaneer, Ace, Heli, Mortar, Dartling</td></tr>
+    <tr><td><span class="cat c-mag">Magic</span></td><td>Wizard, Super Monkey, Ninja, Alchemist, Druid, Mermonkey, Skywarden</td></tr>
+    <tr><td><span class="cat c-sup">Support</span></td><td>Banana Farm, Spike Factory, Monkey Village, Engineer, Beast Handler</td></tr>
+  </tbody>
+</table>
+<div class="warn card">
+  <span class="lbl">Watch out</span>
+  <strong>Ninja Monkey counts as Magic.</strong> A lot of people assume it is Military because of how it plays. It is not. Dartling Gunner is the Military one people forget.
+</div>
+
+<h3>The magic number is $50,000</h3>
+<p>A category is "maxed" once you have spent <strong>$50,001 or more</strong> on towers of that category inside the circle. Anything above that is wasted, so aim for just over.</p>
+
+<table>
+  <thead><tr><th>Upgrade</th><th>Categories needed</th><th class="num">Minimum spend</th></tr></thead>
+  <tbody>
+    <tr><td>Super Monkey → Sun Temple</td><td>Any 3 of 4</td><td class="num">$150,000</td></tr>
+    <tr><td>Sun Temple → True Sun God</td><td>All 4</td><td class="num">$200,000</td></tr>
+  </tbody>
+</table>
+
+<div class="tip card">
+  <span class="lbl">Two things that save you money</span>
+  <ul style="margin-bottom:0">
+    <li>The exact towers do not matter. Only the total cash per category. Use whatever is cheapest to reach $50k.</li>
+    <li>On Easy difficulty towers cost less, so you have to buy <em>more</em> of them to hit $50k. Hard mode towers cost more, so you need fewer.</li>
+  </ul>
+</div>
+
+<h2>The full walkthrough</h2>
+<ol class="steps">
+  <li>
+    <strong>Place the Super Monkey that will become the VTSG</strong>
+    Pick a spot with plenty of open ground around it. You need room for a lot of towers inside its circle, twice. Do not put it in a cramped corner.
+  </li>
+  <li>
+    <strong>Fill its circle with $150,000+ of sacrifices</strong>
+    Pick any three categories and spend at least $50,001 on each, all inside the Super Monkey's range circle. A common easy trio is Primary, Military, and Magic. Tap the Super Monkey to see its range circle before you place anything.
+  </li>
+  <li>
+    <strong>Upgrade to Sun Temple (4-x-x)</strong>
+    That is the fourth upgrade on the top path. It eats everything in the circle. Check the temple's info panel afterward to confirm it registered three maxed categories.
+  </li>
+  <li>
+    <strong>Place two more Super Monkeys OUTSIDE the temple's range</strong>
+    Upgrade one to <strong>The Anti-Bloon</strong> (x-5-x, middle path) and the other to <strong>Legend of the Night</strong> (x-x-5, bottom path). They must be outside the circle or the temple will eat them as ordinary sacrifices and the whole thing fails.
+  </li>
+  <li>
+    <strong>Fill the circle again with $200,000+ of sacrifices</strong>
+    This time you need all four categories maxed, including Support. Same $50,001 minimum each.
+  </li>
+  <li>
+    <strong>Upgrade Sun Temple → True Sun God (5-x-x)</strong>
+    It transforms into a normal True Sun God first. Wait a second. It then reaches out, absorbs the Anti-Bloon and the Legend of the Night, and becomes the VTSG. The model and portrait change to a dark, glowing version.
+  </li>
+</ol>
+
+<h2>Common mistakes</h2>
+<div class="card warn">
+  <span class="lbl">Why yours turned out normal</span>
+  <ul style="margin-bottom:0">
+    <li><strong>Anti-Bloon or Legend of the Night was inside the circle.</strong> They got sacrificed as regular towers instead of being absorbed.</li>
+    <li><strong>A VTSG already exists on the map.</strong> Only one can exist at a time. A second attempt always produces a plain True Sun God.</li>
+    <li><strong>Monkey Knowledge was off</strong>, or you were in CHIMPS.</li>
+    <li><strong>A category came up just short of $50,001.</strong> Being at $49,900 in one category silently downgrades the result.</li>
+    <li><strong>Support discount trap.</strong> If you sacrificed Support towers to the Sun Temple, it now hands out price discounts to towers in its range. Everything you buy for the second round costs less, which means it also counts for less. You have to buy more to compensate.</li>
+  </ul>
+</div>
+
+<h3>Quick way to check your totals</h3>
+<p>If you are unsure whether a category hit the threshold, look at the <strong>sell values</strong> of the towers in the circle. Sell value is 70% of what you spent, so each category should show at least <strong>$35,000</strong> in combined sell value. With the Better Sell Deals knowledge, aim for $37,500.</p>
+
+<h2>What you get</h2>
+<ul>
+  <li>Main attack does <strong>+35 damage</strong> over a normal True Sun God.</li>
+  <li>Every bonus attack it inherited from the sacrifices does <strong>double damage</strong>.</li>
+  <li>Its Sun Avatars become Vengeful Sun Avatars.</li>
+  <li>If Adora is on the map and already transformed, she becomes Vengeful Adora, which unlocks the <em>Strangely Adorable</em> achievement.</li>
+  <li>You cannot buy another Anti-Bloon or Legend of the Night while the VTSG is alive. Selling the VTSG unlocks them again.</li>
+</ul>
+
+<div class="note card">
+  <span class="lbl">Reality check</span>
+  This costs roughly $350,000 across both stages plus the Super Monkeys themselves. It is a late freeplay project, round 100 and beyond. Do not try it in the first 60 rounds.
+</div>
+
+<footer>
+  Written for Bloons TD 6. Numbers verified against the Blooncyclopedia
+  <a href="https://www.bloonswiki.com/VTSG" target="_blank" rel="noopener">VTSG</a> and
+  <a href="https://www.bloonswiki.com/Temple_Sacrifice_(BTD6)" target="_blank" rel="noopener">Temple Sacrifice</a> pages.
+  Ninja Kiwi changes balance between versions, so exact damage numbers can shift.
+</footer>
+
+</div>
+</body>
+</html>
