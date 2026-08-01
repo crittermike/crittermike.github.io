@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T13:01:06.807Z",
+  "generated_at": "2026-08-01T13:16:04.307Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -477,7 +477,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$79.09"
+        "balance_str": "$91.09"
       },
       "guineaPig": null,
       "assignments": [
@@ -501,9 +501,9 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$4.40"
+        "balance_str": "$9.20"
       },
-      "guineaPig": "$125.94",
+      "guineaPig": "$133.14",
       "assignments": [
         {
           "id": "laundry-saturday",
@@ -525,7 +525,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$80.13"
+        "balance_str": "$92.13"
       },
       "guineaPig": null,
       "assignments": [
@@ -545,7 +545,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$-274.23"
+        "balance_str": "$-262.23"
       },
       "guineaPig": null,
       "assignments": [
@@ -2181,6 +2181,6 @@
     "creditDebt": -9417.12,
     "netLiquid": -1139.07,
     "source": "ynab",
-    "updatedAt": "2026-08-01T13:01:05.394Z"
+    "updatedAt": "2026-08-01T13:16:02.902Z"
   }
 }
