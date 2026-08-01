@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T23:45:39.644Z",
+  "generated_at": "2026-08-01T00:00:44.620Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -793,11 +793,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout / eat out",
-    "protein_g": 60,
-    "cal": 650,
+    "name": "Pizza night (delivery or frozen)",
+    "protein_g": 40,
+    "cal": 750,
     "effort": "none",
-    "note": "No Lent restriction in July. Mike orders protein-forward, skip the fried sides.",
+    "note": "Standing Saturday. Mike can add grilled chicken or a protein side.",
     "recipe": null
   },
   "mealweek": [
@@ -999,7 +999,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 85,
       "hi": 89,
       "lo": 65,
       "icon": "🌤",
@@ -2210,136 +2210,15 @@
     }
   ],
   "finance": {
-    "month": "July 2026",
-    "dayPct": 100,
-    "totalSpend": 17269.01,
+    "month": "August 2026",
+    "dayPct": 3.2,
+    "totalSpend": 0,
     "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 4073.5,
-        "balance": -4073.5,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 3020.99,
-        "balance": -3020.99,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 2348.88,
-        "balance": -2348.88,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2024.75,
-        "balance": -2024.75,
-        "pct": 0
-      },
-      {
-        "name": "😌 Emergency fund",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2000,
-        "balance": -2000,
-        "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 1102.67,
-        "balance": -1102.67,
-        "pct": 0
-      },
-      {
-        "name": "⚡️ Utilities",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 668.27,
-        "balance": -668.27,
-        "pct": 0
-      },
-      {
-        "name": "🏝️ Vacation",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 447.88,
-        "balance": -447.88,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 400.42,
-        "balance": -400.42,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 364.32,
-        "balance": -364.32,
-        "pct": 0
-      },
-      {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 351.83,
-        "balance": -351.83,
-        "pct": 0
-      },
-      {
-        "name": "🎁 Charity",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 160,
-        "balance": -160,
-        "pct": 0
-      },
-      {
-        "name": "🐶 Pets",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 104.5,
-        "balance": -104.5,
-        "pct": 0
-      },
-      {
-        "name": "💅 Personal Care",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 102,
-        "balance": -102,
-        "pct": 0
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 99,
-        "balance": -99,
-        "pct": 0
-      }
-    ],
+    "categories": [],
     "liquidCash": 8178.05,
     "creditDebt": -8999.97,
     "netLiquid": -821.92,
     "source": "ynab",
-    "updatedAt": "2026-07-31T23:45:38.451Z"
+    "updatedAt": "2026-08-01T00:00:42.170Z"
   }
 }
