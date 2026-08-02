@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T23:00:38.658Z",
+  "generated_at": "2026-08-02T23:15:37.340Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -39,6 +39,15 @@
       "end": "2026-08-05T12:30:00-04:00"
     },
     {
+      "date": "2026-08-06",
+      "time": "10a",
+      "what": "Charlie: EHS returning-student orientation (alternate window 1-2p)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-06T11:00:00-04:00"
+    },
+    {
       "date": "2026-08-09",
       "time": "8a",
       "what": "Mass",
@@ -67,15 +76,6 @@
     },
     {
       "date": "2026-08-11",
-      "time": "all day",
-      "what": "POPCS: Back to School Night",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-12T00:00:00-04:00"
-    },
-    {
-      "date": "2026-08-11",
       "time": "8a",
       "what": "EHS First Day of School (Charlie)",
       "who": "charlie",
@@ -90,7 +90,7 @@
       "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-08-11T19:30:00-04:00"
+      "end": "2026-08-11T20:00:00-04:00"
     },
     {
       "date": "2026-08-12",
@@ -112,21 +112,21 @@
     },
     {
       "date": "2026-08-13",
-      "time": "all day",
-      "what": "POPCS: First Day of School (12p dismissal)",
+      "time": "8a",
+      "what": "POPCS: Cheers and Tears",
       "who": "family",
       "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-14T00:00:00-04:00"
+      "all_day": false,
+      "end": "2026-08-13T09:00:00-04:00"
     },
     {
       "date": "2026-08-13",
       "time": "8a",
-      "what": "POPCS: First Day of School (12p dismissal)",
+      "what": "POPCS: First Day of School (12:15p dismissal)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-08-13T12:00:00-04:00"
+      "end": "2026-08-13T12:15:00-04:00"
     },
     {
       "date": "2026-08-13",
@@ -139,15 +139,6 @@
     },
     {
       "date": "2026-08-16",
-      "time": "all day",
-      "what": "POPCS: Back to School Dinner",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-17T00:00:00-04:00"
-    },
-    {
-      "date": "2026-08-16",
       "time": "8a",
       "what": "Mass",
       "who": "family",
@@ -157,12 +148,12 @@
     },
     {
       "date": "2026-08-16",
-      "time": "5p",
+      "time": "4p",
       "what": "POPCS: Back to School Dinner (Pasta La Vista)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-08-16T19:00:00-04:00"
+      "end": "2026-08-16T18:00:00-04:00"
     },
     {
       "date": "2026-08-18",
@@ -199,6 +190,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-23T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-24",
+      "time": "7p",
+      "what": "Charlie: EHS Open House (time TBD)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-24T22:00:00-04:00"
     },
     {
       "date": "2026-08-26",
@@ -802,11 +802,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
+      "temp": 74,
       "hi": 83,
       "lo": 72,
-      "icon": "🌧",
-      "code": 63
+      "icon": "🌦",
+      "code": 51
     },
     "days": [
       {
@@ -2022,6 +2022,6 @@
     "creditDebt": -9417.12,
     "netLiquid": -1139.07,
     "source": "ynab",
-    "updatedAt": "2026-08-02T23:00:37.173Z"
+    "updatedAt": "2026-08-02T23:15:36.048Z"
   }
 }
