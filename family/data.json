@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-03T03:45:46.107Z",
+  "generated_at": "2026-08-03T04:00:46.231Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-02",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-02T09:00:00-04:00"
-    },
     {
       "date": "2026-08-03",
       "time": "3:30p",
@@ -499,7 +490,12 @@
         "balance_str": "$9.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-monday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -533,7 +529,12 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-04-advanced-manufacturing-engineering-night",
+          "label": "Advanced Manufacturing & Engineering Night at Fluor Field, gates 5:45pm (complimentary student tickets)"
+        }
+      ]
     }
   ],
   "chores": {
@@ -747,7 +748,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -755,8 +756,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -764,7 +765,7 @@
       "dow_short": "Tue",
       "name": "Italian sausage with onions and zucchini over rice",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -803,19 +804,12 @@
   "weather": {
     "now": {
       "temp": 73,
-      "hi": 83,
-      "lo": 73,
+      "hi": 90,
+      "lo": 68,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "🌦",
-        "hi": 90,
-        "lo": 68,
-        "code": 51
-      },
       {
         "d": "Tue",
         "icon": "🌫",
@@ -843,24 +837,31 @@
         "hi": 93,
         "lo": 71,
         "code": 53
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 93,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-02T06:40",
         "2026-08-03T06:41",
         "2026-08-04T06:41",
         "2026-08-05T06:42",
         "2026-08-06T06:43",
-        "2026-08-07T06:44"
+        "2026-08-07T06:44",
+        "2026-08-08T06:44"
       ],
       "sunsets": [
-        "2026-08-02T20:31",
         "2026-08-03T20:30",
         "2026-08-04T20:29",
         "2026-08-05T20:28",
         "2026-08-06T20:27",
-        "2026-08-07T20:26"
+        "2026-08-07T20:26",
+        "2026-08-08T20:25"
       ],
       "timezone": "America/New_York"
     }
@@ -2022,6 +2023,6 @@
     "creditDebt": -9417.12,
     "netLiquid": -1139.07,
     "source": "ynab",
-    "updatedAt": "2026-08-03T03:45:44.754Z"
+    "updatedAt": "2026-08-03T04:00:44.981Z"
   }
 }
