@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T23:45:38.073Z",
+  "generated_at": "2026-08-03T00:00:43.309Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -735,11 +735,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Shake n Bake chicken with mac and cheese and cabbage",
+    "protein_g": 62,
+    "cal": 650,
+    "effort": "easy",
+    "note": "Carried over from last week. Use 2.5 lb chicken; Mike takes a larger chicken portion and a smaller mac and cheese portion.",
     "recipe": null
   },
   "mealweek": [
@@ -802,7 +802,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
+      "temp": 75,
       "hi": 83,
       "lo": 73,
       "icon": "🌤",
@@ -2014,7 +2014,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 6.5,
+    "dayPct": 9.7,
     "totalSpend": 0,
     "totalBudget": 0,
     "categories": [],
@@ -2022,6 +2022,6 @@
     "creditDebt": -9417.12,
     "netLiquid": -1139.07,
     "source": "ynab",
-    "updatedAt": "2026-08-02T23:45:36.848Z"
+    "updatedAt": "2026-08-03T00:00:40.929Z"
   }
 }
