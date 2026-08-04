@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T01:30:28.816Z",
+  "generated_at": "2026-08-04T01:45:28.589Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -113,20 +113,20 @@
     {
       "date": "2026-08-13",
       "time": "8a",
-      "what": "POPCS: Cheers and Tears",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-13T09:00:00-04:00"
-    },
-    {
-      "date": "2026-08-13",
-      "time": "8a",
       "what": "POPCS: First Day of School (12:15p dismissal)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-13T12:15:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
+      "time": "9:30a",
+      "what": "Mom appointment at LifeStance",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-13T10:30:00-04:00"
     },
     {
       "date": "2026-08-13",
@@ -2089,6 +2089,6 @@
     "creditDebt": -11513.28,
     "netLiquid": -3228.32,
     "source": "ynab",
-    "updatedAt": "2026-08-04T01:30:27.074Z"
+    "updatedAt": "2026-08-04T01:45:27.216Z"
   }
 }
