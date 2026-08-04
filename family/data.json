@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-04T03:45:31.916Z",
+  "generated_at": "2026-08-04T04:00:32.551Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-03",
-      "time": "3:30p",
-      "what": "Charlie DMV Road Test (Class D Skills)",
-      "who": "charlie",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-03T16:30:00-04:00"
-    },
     {
       "date": "2026-08-04",
       "time": "12p",
@@ -460,6 +451,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-30T22:00:00-04:00"
+    },
+    {
+      "date": "2026-11-01",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-11-01T09:00:00-05:00"
     }
   ],
   "kids": [
@@ -499,12 +499,7 @@
         "balance_str": "$35.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "laundry-monday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -765,7 +760,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -773,8 +768,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Italian sausage with onions and zucchini over rice",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -782,7 +777,7 @@
       "dow_short": "Wed",
       "name": "Meatloaf with mashed potatoes and green beans",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -813,19 +808,12 @@
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 89,
-      "lo": 69,
+      "hi": 84,
+      "lo": 72,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 84,
-        "lo": 72,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "🌦",
@@ -853,24 +841,31 @@
         "hi": 93,
         "lo": 72,
         "code": 53
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 95,
+        "lo": 72,
+        "code": 81
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-03T06:41",
         "2026-08-04T06:41",
         "2026-08-05T06:42",
         "2026-08-06T06:43",
         "2026-08-07T06:44",
-        "2026-08-08T06:44"
+        "2026-08-08T06:44",
+        "2026-08-09T06:45"
       ],
       "sunsets": [
-        "2026-08-03T20:30",
         "2026-08-04T20:29",
         "2026-08-05T20:28",
         "2026-08-06T20:27",
         "2026-08-07T20:26",
-        "2026-08-08T20:25"
+        "2026-08-08T20:25",
+        "2026-08-09T20:24"
       ],
       "timezone": "America/New_York"
     }
@@ -2089,6 +2084,6 @@
     "creditDebt": -11513.28,
     "netLiquid": -3228.32,
     "source": "ynab",
-    "updatedAt": "2026-08-04T03:45:30.588Z"
+    "updatedAt": "2026-08-04T04:00:31.200Z"
   }
 }
