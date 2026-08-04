@@ -1,15 +1,24 @@
 {
-  "generated_at": "2026-08-04T14:45:53.921Z",
+  "generated_at": "2026-08-04T15:00:53.801Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
       "date": "2026-08-04",
-      "time": "12p",
+      "time": "8a",
+      "what": "New Event",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-04T08:15:00-04:00"
+    },
+    {
+      "date": "2026-08-04",
+      "time": "1:30p",
       "what": "Fig - DOG Full Groom (Kavin Vasquez)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-08-04T13:30:00-04:00"
+      "end": "2026-08-04T15:00:00-04:00"
     },
     {
       "date": "2026-08-04",
@@ -21,15 +30,6 @@
       "end": "2026-08-04T15:00:00-04:00"
     },
     {
-      "date": "2026-08-05",
-      "time": "10:30a",
-      "what": "Declan's birthday party",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-05T12:30:00-04:00"
-    },
-    {
       "date": "2026-08-06",
       "time": "10a",
       "what": "Charlie: EHS returning-student orientation (alternate window 1-2p)",
@@ -37,6 +37,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-06T11:00:00-04:00"
+    },
+    {
+      "date": "2026-08-08",
+      "time": "12:30p",
+      "what": "Thomas and Jack play date",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-08T14:30:00-04:00"
     },
     {
       "date": "2026-08-09",
@@ -807,7 +816,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 78,
       "hi": 85,
       "lo": 73,
       "icon": "🌤",
@@ -2092,6 +2101,6 @@
     "creditDebt": -11678.07,
     "netLiquid": 6411.73,
     "source": "ynab",
-    "updatedAt": "2026-08-04T14:45:52.606Z"
+    "updatedAt": "2026-08-04T15:00:52.555Z"
   }
 }
