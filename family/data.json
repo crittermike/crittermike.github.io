@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T00:45:27.339Z",
+  "generated_at": "2026-08-04T01:00:28.091Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -487,7 +487,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$9.20"
+        "balance_str": "$35.20"
       },
       "guineaPig": "$133.14",
       "assignments": [
@@ -2016,38 +2016,70 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 12.9,
-    "totalSpend": 80.5,
+    "totalSpend": 1908.86,
     "totalBudget": 0,
     "categories": [
       {
-        "name": "🍿 Entertainment",
+        "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 49.83,
-        "balance": -49.83,
+        "spent": 548.73,
+        "balance": -548.73,
+        "pct": 0
+      },
+      {
+        "name": "🏠 Home",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 463.57,
+        "balance": -463.57,
         "pct": 0
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 29.87,
-        "balance": -29.87,
+        "spent": 438.69,
+        "balance": -438.69,
+        "pct": 0
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 287.24,
+        "balance": -287.24,
+        "pct": 0
+      },
+      {
+        "name": "🍿 Entertainment",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 87.61,
+        "balance": -87.61,
+        "pct": 0
+      },
+      {
+        "name": "🚗 Cars",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 58.22,
+        "balance": -58.22,
         "pct": 0
       },
       {
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 0.8,
-        "balance": -0.8,
+        "spent": 24.8,
+        "balance": -24.8,
         "pct": 0
       }
     ],
     "liquidCash": 8284.96,
-    "creditDebt": -9497.82,
-    "netLiquid": -1212.86,
+    "creditDebt": -11513.28,
+    "netLiquid": -3228.32,
     "source": "ynab",
-    "updatedAt": "2026-08-04T00:45:25.946Z"
+    "updatedAt": "2026-08-04T01:00:26.717Z"
   }
 }
