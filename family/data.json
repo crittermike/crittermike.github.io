@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T23:45:25.037Z",
+  "generated_at": "2026-08-04T00:00:32.312Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -736,11 +736,11 @@
     ]
   },
   "dinner": {
-    "name": "Shake n Bake chicken with mac and cheese and cabbage",
-    "protein_g": 62,
+    "name": "Italian sausage with onions and zucchini over rice",
+    "protein_g": 55,
     "cal": 650,
     "effort": "easy",
-    "note": "Carried over from last week. Use 2.5 lb chicken; Mike takes a larger chicken portion and a smaller mac and cheese portion.",
+    "note": "Mike takes two sausage links and a moderate rice portion.",
     "recipe": null
   },
   "mealweek": [
@@ -803,7 +803,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 84,
       "hi": 89,
       "lo": 69,
       "icon": "☀️",
@@ -2015,7 +2015,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 9.7,
+    "dayPct": 12.9,
     "totalSpend": 80.5,
     "totalBudget": 0,
     "categories": [
@@ -2048,6 +2048,6 @@
     "creditDebt": -9497.82,
     "netLiquid": -1212.86,
     "source": "ynab",
-    "updatedAt": "2026-08-03T23:45:23.743Z"
+    "updatedAt": "2026-08-04T00:00:29.891Z"
   }
 }
