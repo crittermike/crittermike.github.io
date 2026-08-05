@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T23:45:09.695Z",
+  "generated_at": "2026-08-05T00:00:19.092Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -749,11 +749,11 @@
     ]
   },
   "dinner": {
-    "name": "Italian sausage with onions and zucchini over rice",
-    "protein_g": 55,
+    "name": "Meatloaf with mashed potatoes and green beans",
+    "protein_g": 62,
     "cal": 650,
-    "effort": "easy",
-    "note": "Mike takes two sausage links and a moderate rice portion.",
+    "effort": "medium",
+    "note": "Green beans replace cabbage to avoid repeating Monday's side. Use lean beef; Mike takes a larger meatloaf portion and a smaller potato portion.",
     "recipe": null
   },
   "mealweek": [
@@ -832,31 +832,31 @@
       },
       {
         "d": "Thu",
-        "icon": "⛅",
-        "hi": 92,
+        "icon": "🌦",
+        "hi": 88,
         "lo": 71,
-        "code": 3
+        "code": 80
       },
       {
         "d": "Fri",
         "icon": "🌦",
-        "hi": 88,
-        "lo": 72,
-        "code": 51
+        "hi": 93,
+        "lo": 70,
+        "code": 81
       },
       {
         "d": "Sat",
         "icon": "🌦",
         "hi": 93,
         "lo": 70,
-        "code": 55
+        "code": 80
       },
       {
         "d": "Sun",
         "icon": "🌦",
-        "hi": 93,
-        "lo": 70,
-        "code": 81
+        "hi": 94,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
@@ -2028,7 +2028,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 12.9,
+    "dayPct": 16.1,
     "totalSpend": 4581.44,
     "totalBudget": 0,
     "categories": [
@@ -2101,6 +2101,6 @@
     "creditDebt": -11678.07,
     "netLiquid": 6411.73,
     "source": "ynab",
-    "updatedAt": "2026-08-04T23:45:08.385Z"
+    "updatedAt": "2026-08-05T00:00:16.715Z"
   }
 }
