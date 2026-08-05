@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T03:30:16.716Z",
+  "generated_at": "2026-08-05T03:45:16.896Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -31,12 +31,30 @@
     },
     {
       "date": "2026-08-06",
+      "time": "9:30a",
+      "what": "Nancy at POPCS",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-06T14:30:00-04:00"
+    },
+    {
+      "date": "2026-08-06",
       "time": "10a",
       "what": "Charlie: EHS returning-student orientation (alternate window 1-2p)",
       "who": "charlie",
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-06T11:00:00-04:00"
+    },
+    {
+      "date": "2026-08-07",
+      "time": "8a",
+      "what": "Nancy at POPCS",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-07T15:00:00-04:00"
     },
     {
       "date": "2026-08-08",
@@ -75,10 +93,28 @@
       "end": "2026-08-10T11:00:00-04:00"
     },
     {
+      "date": "2026-08-10",
+      "time": "11a",
+      "what": "Nancy at POPCS",
+      "who": "nancy",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-10T15:00:00-04:00"
+    },
+    {
       "date": "2026-08-11",
       "time": "8a",
       "what": "EHS First Day of School (Charlie)",
       "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-11T08:30:00-04:00"
+    },
+    {
+      "date": "2026-08-11",
+      "time": "8:30a",
+      "what": "Nancy at POPCS",
+      "who": "nancy",
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-11T15:00:00-04:00"
@@ -816,11 +852,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
+      "temp": 71,
       "hi": 85,
       "lo": 72,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
@@ -2101,6 +2137,6 @@
     "creditDebt": -11792.51,
     "netLiquid": 6297.29,
     "source": "ynab",
-    "updatedAt": "2026-08-05T03:30:15.374Z"
+    "updatedAt": "2026-08-05T03:45:15.570Z"
   }
 }
