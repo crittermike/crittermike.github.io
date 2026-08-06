@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T23:45:51.333Z",
+  "generated_at": "2026-08-06T00:00:55.258Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -758,11 +758,11 @@
     ]
   },
   "dinner": {
-    "name": "Meatloaf with mashed potatoes and green beans",
+    "name": "Chicken fajitas with onions, zucchini and corn",
     "protein_g": 62,
-    "cal": 650,
-    "effort": "medium",
-    "note": "Green beans replace cabbage to avoid repeating Monday's side. Use lean beef; Mike takes a larger meatloaf portion and a smaller potato portion.",
+    "cal": 600,
+    "effort": "easy",
+    "note": "No bell peppers, cilantro or heavy lime. Use 2.5 lb chicken for six and Mike's protein target.",
     "recipe": null
   },
   "mealweek": [
@@ -825,7 +825,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 83,
       "hi": 87,
       "lo": 69,
       "icon": "⛅",
@@ -2037,7 +2037,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 16.1,
+    "dayPct": 19.4,
     "totalSpend": 4782.76,
     "totalBudget": 0,
     "categories": [
@@ -2110,6 +2110,6 @@
     "creditDebt": -12195.81,
     "netLiquid": 5093.99,
     "source": "ynab",
-    "updatedAt": "2026-08-05T23:45:50.142Z"
+    "updatedAt": "2026-08-06T00:00:53.794Z"
   }
 }
