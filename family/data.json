@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T23:45:41.070Z",
+  "generated_at": "2026-08-07T00:00:48.272Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -758,11 +758,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken fajitas with onions, zucchini and corn",
-    "protein_g": 62,
-    "cal": 600,
-    "effort": "easy",
-    "note": "No bell peppers, cilantro or heavy lime. Use 2.5 lb chicken for six and Mike's protein target.",
+    "name": "Takeout / eat out",
+    "protein_g": 60,
+    "cal": 650,
+    "effort": "none",
+    "note": "No Lent restriction in August. Mike orders a protein-forward entree.",
     "recipe": null
   },
   "mealweek": [
@@ -825,7 +825,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 77,
       "hi": 88,
       "lo": 69,
       "icon": "⛅",
@@ -2037,7 +2037,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 19.4,
+    "dayPct": 22.6,
     "totalSpend": 5085.12,
     "totalBudget": 0,
     "categories": [
@@ -2118,6 +2118,6 @@
     "creditDebt": -12498.17,
     "netLiquid": 4791.63,
     "source": "ynab",
-    "updatedAt": "2026-08-06T23:45:39.826Z"
+    "updatedAt": "2026-08-07T00:00:44.201Z"
   }
 }
