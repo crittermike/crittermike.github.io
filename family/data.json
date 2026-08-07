@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-07T03:45:47.568Z",
+  "generated_at": "2026-08-07T04:00:47.795Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-06",
-      "time": "9:30a",
-      "what": "Nancy at POPCS",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-06T14:30:00-04:00"
-    },
-    {
-      "date": "2026-08-06",
-      "time": "10a",
-      "what": "Charlie: EHS returning-student orientation (alternate window 1-2p)",
-      "who": "charlie",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-06T11:00:00-04:00"
-    },
     {
       "date": "2026-08-07",
       "time": "8a",
@@ -498,7 +480,12 @@
         "balance_str": "$91.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "william",
@@ -517,7 +504,12 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -536,7 +528,12 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -553,8 +550,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-06-ehs-returning-student-orientation-attend",
-          "label": "EHS returning-student orientation: attend 10-11a or 1-2p; collect final schedule and ID; parking tag requires cleared debts and completed parking form"
+          "id": "laundry-friday",
+          "label": "🧺 Bring down laundry"
         }
       ]
     }
@@ -802,7 +799,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Chicken fajitas with onions, zucchini and corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -810,8 +807,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -819,26 +816,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 72,
-      "hi": 88,
+      "hi": 89,
       "lo": 69,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "🌫",
-        "hi": 89,
-        "lo": 69,
-        "code": 45
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -866,24 +856,31 @@
         "hi": 98,
         "lo": 74,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 96,
+        "lo": 74,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-06T06:43",
         "2026-08-07T06:44",
         "2026-08-08T06:44",
         "2026-08-09T06:45",
         "2026-08-10T06:46",
-        "2026-08-11T06:47"
+        "2026-08-11T06:47",
+        "2026-08-12T06:47"
       ],
       "sunsets": [
-        "2026-08-06T20:27",
         "2026-08-07T20:26",
         "2026-08-08T20:25",
         "2026-08-09T20:24",
         "2026-08-10T20:23",
-        "2026-08-11T20:22"
+        "2026-08-11T20:22",
+        "2026-08-12T20:21"
       ],
       "timezone": "America/New_York"
     }
@@ -2118,6 +2115,6 @@
     "creditDebt": -12498.17,
     "netLiquid": 4791.63,
     "source": "ynab",
-    "updatedAt": "2026-08-07T03:45:46.237Z"
+    "updatedAt": "2026-08-07T04:00:46.520Z"
   }
 }
