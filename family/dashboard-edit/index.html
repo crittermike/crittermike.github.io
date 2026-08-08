@@ -2085,7 +2085,7 @@
           
             
             
-            <div class="v">125g</div>
+            <div class="v">185g</div>
           
           
             
@@ -2096,7 +2096,7 @@
           
             
             
-            <div class="v warn">0g</div>
+            <div class="v">60g</div>
           
           
             
@@ -2107,7 +2107,7 @@
           
             
             
-            <div class="v">128g</div>
+            <div class="v">188g</div>
           
           
             
@@ -2118,7 +2118,7 @@
           
             
             
-            <div class="v">96g</div>
+            <div class="v">156g</div>
           
           
             
@@ -2144,7 +2144,7 @@
           
             
             
-            <span class="v">125g</span>
+            <span class="v">185g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2206,7 +2206,7 @@
           
             
             
-            <span class="v warn">0g</span>
+            <span class="v">60g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2273,7 +2273,7 @@
           
             
             
-            <span class="v">128g</span>
+            <span class="v">188g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2335,7 +2335,7 @@
           
             
             
-            <span class="v">96g</span>
+            <span class="v">156g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3706,7 +3706,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":125,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":128,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":96,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":185,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":188,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":156,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');

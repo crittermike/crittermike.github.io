@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T11:45:51.327Z",
+  "generated_at": "2026-08-08T12:00:59.395Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -464,7 +464,7 @@
         "pct": 0
       },
       "sugar": {
-        "balance": 125,
+        "balance": 185,
         "refill": 60
       },
       "allowance": {
@@ -488,7 +488,7 @@
         "pct": 0
       },
       "sugar": {
-        "balance": 0,
+        "balance": 60,
         "refill": 60
       },
       "allowance": {
@@ -512,7 +512,7 @@
         "pct": 0
       },
       "sugar": {
-        "balance": 128,
+        "balance": 188,
         "refill": 60
       },
       "allowance": {
@@ -532,7 +532,7 @@
       "grade": "rising 11th",
       "reading": null,
       "sugar": {
-        "balance": 96,
+        "balance": 156,
         "refill": 60
       },
       "allowance": {
@@ -2106,6 +2106,6 @@
     "creditDebt": -13150.07,
     "netLiquid": 5249.66,
     "source": "ynab",
-    "updatedAt": "2026-08-08T11:45:50.139Z"
+    "updatedAt": "2026-08-08T12:00:56.992Z"
   }
 }
