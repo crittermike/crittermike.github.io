@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T23:45:26.973Z",
+  "generated_at": "2026-08-08T00:00:33.714Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -755,11 +755,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout / eat out",
-    "protein_g": 60,
-    "cal": 650,
+    "name": "Pizza night (delivery or frozen)",
+    "protein_g": 40,
+    "cal": 750,
     "effort": "none",
-    "note": "No Lent restriction in August. Mike orders a protein-forward entree.",
+    "note": "Mike can add grilled chicken or another protein side.",
     "recipe": null
   },
   "mealweek": [
@@ -822,7 +822,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 83,
       "hi": 88,
       "lo": 70,
       "icon": "☀️",
@@ -2034,7 +2034,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 22.6,
+    "dayPct": 25.8,
     "totalSpend": 5588.45,
     "totalBudget": 0,
     "categories": [
@@ -2115,6 +2115,6 @@
     "creditDebt": -13150.07,
     "netLiquid": 5249.66,
     "source": "ynab",
-    "updatedAt": "2026-08-07T23:45:25.757Z"
+    "updatedAt": "2026-08-08T00:00:31.238Z"
   }
 }
