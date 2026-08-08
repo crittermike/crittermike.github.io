@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-08T03:45:34.545Z",
+  "generated_at": "2026-08-08T04:00:35.488Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-07",
-      "time": "8a",
-      "what": "Nancy at POPCS",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-07T15:00:00-04:00"
-    },
     {
       "date": "2026-08-08",
       "time": "12:30p",
@@ -482,8 +473,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -506,8 +497,8 @@
       "guineaPig": "$133.14",
       "assignments": [
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -530,8 +521,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     },
@@ -550,8 +541,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-friday",
-          "label": "🧺 Bring down laundry"
+          "id": "laundry-saturday",
+          "label": "🧺 Put laundry away"
         }
       ]
     }
@@ -768,7 +759,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -807,7 +798,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout / eat out",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -815,27 +806,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 88,
-      "lo": 70,
+      "hi": 95,
+      "lo": 69,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 95,
-        "lo": 69,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "🌧",
@@ -863,24 +847,31 @@
         "hi": 97,
         "lo": 75,
         "code": 51
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 100,
+        "lo": 74,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-07T06:44",
         "2026-08-08T06:44",
         "2026-08-09T06:45",
         "2026-08-10T06:46",
         "2026-08-11T06:47",
-        "2026-08-12T06:47"
+        "2026-08-12T06:47",
+        "2026-08-13T06:48"
       ],
       "sunsets": [
-        "2026-08-07T20:26",
         "2026-08-08T20:25",
         "2026-08-09T20:24",
         "2026-08-10T20:23",
         "2026-08-11T20:22",
-        "2026-08-12T20:21"
+        "2026-08-12T20:21",
+        "2026-08-13T20:20"
       ],
       "timezone": "America/New_York"
     }
@@ -2115,6 +2106,6 @@
     "creditDebt": -13150.07,
     "netLiquid": 5249.66,
     "source": "ynab",
-    "updatedAt": "2026-08-08T03:45:33.155Z"
+    "updatedAt": "2026-08-08T04:00:34.089Z"
   }
 }
