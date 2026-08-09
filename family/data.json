@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T16:30:42.329Z",
+  "generated_at": "2026-08-09T16:45:42.490Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-09T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-09",
+      "time": "3:30p",
+      "what": "Declan's 11th Birthday Party",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-10T17:30:00-04:00"
     },
     {
       "date": "2026-08-10",
@@ -784,8 +793,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 90,
-      "hi": 94,
+      "temp": 91,
+      "hi": 93,
       "lo": 70,
       "icon": "🌤",
       "code": 1
@@ -2077,6 +2086,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-09T16:30:41.014Z"
+    "updatedAt": "2026-08-09T16:45:41.202Z"
   }
 }
