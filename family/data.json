@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T23:00:54.604Z",
+  "generated_at": "2026-08-09T23:15:53.830Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -95,6 +95,15 @@
     {
       "date": "2026-08-13",
       "time": "8a",
+      "what": "POPCS: Cheers and Tears",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-13T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
+      "time": "8a",
       "what": "POPCS: First Day of School (12:15p dismissal)",
       "who": "family",
       "calendar": "home",
@@ -118,6 +127,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-13T12:20:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
+      "time": "12:15p",
+      "what": "POPCS: Spirit Lunch",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-13T15:00:00-04:00"
+    },
+    {
+      "date": "2026-08-14",
+      "time": "2:45p",
+      "what": "POPCS: First Rosary",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-14T15:15:00-04:00"
     },
     {
       "date": "2026-08-16",
@@ -524,7 +551,12 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu",
+          "label": "EHS parking pass pickup for approved student drivers"
+        }
+      ]
     }
   ],
   "chores": {
@@ -2217,6 +2249,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-09T23:00:53.272Z"
+    "updatedAt": "2026-08-09T23:15:52.623Z"
   }
 }
