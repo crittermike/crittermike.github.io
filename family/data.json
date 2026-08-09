@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-09T03:45:20.215Z",
+  "generated_at": "2026-08-09T04:00:21.652Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-08",
-      "time": "12:30p",
-      "what": "Thomas and Jack play date",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-08T14:30:00-04:00"
-    },
     {
       "date": "2026-08-09",
       "time": "8a",
@@ -471,12 +462,7 @@
         "balance_str": "$91.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -495,12 +481,7 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -519,12 +500,7 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -539,12 +515,7 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -758,8 +729,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -767,7 +738,7 @@
       "dow_short": "Mon",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -806,7 +777,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -815,18 +786,11 @@
     "now": {
       "temp": 74,
       "hi": 93,
-      "lo": 72,
+      "lo": 71,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 93,
-        "lo": 71,
-        "code": 3
-      },
       {
         "d": "Mon",
         "icon": "🌦",
@@ -854,24 +818,31 @@
         "hi": 95,
         "lo": 71,
         "code": 53
+      },
+      {
+        "d": "Fri",
+        "icon": "🌦",
+        "hi": 86,
+        "lo": 73,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-08T06:44",
         "2026-08-09T06:45",
         "2026-08-10T06:46",
         "2026-08-11T06:47",
         "2026-08-12T06:47",
-        "2026-08-13T06:48"
+        "2026-08-13T06:48",
+        "2026-08-14T06:49"
       ],
       "sunsets": [
-        "2026-08-08T20:25",
         "2026-08-09T20:24",
         "2026-08-10T20:23",
         "2026-08-11T20:22",
         "2026-08-12T20:21",
-        "2026-08-13T20:20"
+        "2026-08-13T20:20",
+        "2026-08-14T20:19"
       ],
       "timezone": "America/New_York"
     }
@@ -2106,6 +2077,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-09T03:45:18.982Z"
+    "updatedAt": "2026-08-09T04:00:20.287Z"
   }
 }
