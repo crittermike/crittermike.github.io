@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T23:45:54.757Z",
+  "generated_at": "2026-08-10T00:00:57.261Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -758,12 +758,73 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
-    "recipe": null
+    "name": "Homemade Hamburger Helper with green beans",
+    "protein_g": 62,
+    "cal": 650,
+    "effort": "easy",
+    "note": "Use 2.5 lb lean ground beef. Mike takes a larger beef portion and a moderate noodle portion.",
+    "recipe": {
+      "slug": "homemade-hamburger-helper",
+      "name": "Homemade Hamburger Helper",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [],
+      "aliases": [],
+      "in_rotation": false,
+      "effort": null,
+      "kid_friendly": true,
+      "protein_g": null,
+      "cal": null,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "1 onion, diced",
+            "Olive oil",
+            "Garlic, minced",
+            "1 package ground beef",
+            "Salt, pepper, paprika, garlic powder",
+            "1 tbsp tomato paste",
+            "1 can Italian-seasoned diced tomatoes, drained",
+            "2 cups beef broth",
+            "1 cup heavy cream",
+            "2 cups uncooked noodles",
+            "Shredded cheddar"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "1 onion, diced",
+        "Olive oil",
+        "Garlic, minced",
+        "1 package ground beef",
+        "Salt, pepper, paprika, garlic powder",
+        "1 tbsp tomato paste",
+        "1 can Italian-seasoned diced tomatoes, drained",
+        "2 cups beef broth",
+        "1 cup heavy cream",
+        "2 cups uncooked noodles",
+        "Shredded cheddar"
+      ],
+      "steps": [
+        "Cook onion in olive oil.",
+        "Add garlic, cook a minute or so.",
+        "Add ground beef, brown.",
+        "Season with salt, pepper, paprika, garlic powder.",
+        "Stir in tomato paste + drained diced tomatoes.",
+        "Add beef broth + heavy cream.",
+        "Add uncooked noodles.",
+        "Cover, cook 15 min.",
+        "Uncover, cook 2 more min.",
+        "Off heat, top with cheddar, stir."
+      ],
+      "notes": "",
+      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -956,7 +1017,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 77,
       "hi": 92,
       "lo": 70,
       "icon": "🌤",
@@ -2168,7 +2229,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 29,
+    "dayPct": 32.3,
     "totalSpend": 5821.92,
     "totalBudget": 0,
     "categories": [
@@ -2249,6 +2310,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-09T23:45:53.506Z"
+    "updatedAt": "2026-08-10T00:00:54.786Z"
   }
 }
