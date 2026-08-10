@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T01:30:59.600Z",
+  "generated_at": "2026-08-10T01:45:59.836Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2230,7 +2230,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 32.3,
-    "totalSpend": 5821.92,
+    "totalSpend": 7141.7,
     "totalBudget": 0,
     "categories": [
       {
@@ -2245,8 +2245,16 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1291.59,
-        "balance": -1291.59,
+        "spent": 1833.3,
+        "balance": -1833.3,
+        "pct": 0
+      },
+      {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 971.76,
+        "balance": -971.76,
         "pct": 0
       },
       {
@@ -2258,11 +2266,19 @@
         "pct": 0
       },
       {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
+        "name": "🚗 Cars",
+        "group": "Needs",
         "budgeted": 0,
-        "spent": 687.06,
-        "balance": -687.06,
+        "spent": 255.24,
+        "balance": -255.24,
+        "pct": 0
+      },
+      {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 207.13,
+        "balance": -207.13,
         "pct": 0
       },
       {
@@ -2274,35 +2290,19 @@
         "pct": 0
       },
       {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 125,
+        "balance": -125,
+        "pct": 0
+      },
+      {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
         "spent": 116.16,
         "balance": -116.16,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 58.22,
-        "balance": -58.22,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 35.78,
-        "balance": -35.78,
-        "pct": 0
-      },
-      {
-        "name": "😌 Emergency fund",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": -12500,
-        "balance": 12500,
         "pct": 0
       }
     ],
@@ -2310,6 +2310,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-10T01:30:58.167Z"
+    "updatedAt": "2026-08-10T01:45:58.445Z"
   }
 }
