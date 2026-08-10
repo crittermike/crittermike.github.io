@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-10T03:46:02.875Z",
+  "generated_at": "2026-08-10T04:01:04.143Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-09",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-09T09:00:00-04:00"
-    },
-    {
-      "date": "2026-08-09",
-      "time": "3:30p",
-      "what": "Declan's 11th Birthday Party",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-09T17:30:00-04:00"
-    },
     {
       "date": "2026-08-10",
       "time": "all day",
@@ -498,7 +480,16 @@
         "balance_str": "$91.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-11-back-to-school-night",
+          "label": "Back to School Night"
+        },
+        {
+          "id": "sch-2026-08-11-organize-binders-supplies-per-mrs-cannon",
+          "label": "Organize binders & supplies per Mrs. Cannon's 3rd grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + Summer Reading Log, due first day)"
+        }
+      ]
     },
     {
       "key": "william",
@@ -517,7 +508,20 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-monday",
+          "label": "🧺 Bring down laundry"
+        },
+        {
+          "id": "sch-2026-08-11-back-to-school-night",
+          "label": "Back to School Night"
+        },
+        {
+          "id": "sch-2026-08-11-organize-binders-supplies-per-mrs-marlar",
+          "label": "Organize binders & supplies per Mrs. Marlar's 5th grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + signed Summer Reading Challenge)"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -536,7 +540,12 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-11-back-to-school-night",
+          "label": "Back to School Night"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -555,6 +564,14 @@
         {
           "id": "sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu",
           "label": "EHS parking pass pickup for approved student drivers"
+        },
+        {
+          "id": "sch-2026-08-11-ehs-first-day-of-school",
+          "label": "EHS first day of school"
+        },
+        {
+          "id": "sch-2026-08-11-gcs-first-day-schools-will-not-serve-as-",
+          "label": "GCS first day: schools will not serve as polling locations for the special primary election; Skyland precinct votes at Eastside Apostolic Lutheran Church, 2200 Mays Bridge Rd"
         }
       ]
     }
@@ -831,7 +848,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -839,8 +856,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Homemade Hamburger Helper with green beans",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
         "name": "Homemade Hamburger Helper",
@@ -909,7 +926,7 @@
       "dow_short": "Tue",
       "name": "Crockpot white chicken chili with tortilla chips",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "white-chicken-chili",
         "name": "White Chicken Chili",
@@ -1018,19 +1035,12 @@
   "weather": {
     "now": {
       "temp": 74,
-      "hi": 92,
+      "hi": 93,
       "lo": 70,
-      "icon": "🌦",
-      "code": 51
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "🌦",
-        "hi": 93,
-        "lo": 70,
-        "code": 51
-      },
       {
         "d": "Tue",
         "icon": "🌦",
@@ -1058,24 +1068,31 @@
         "hi": 100,
         "lo": 73,
         "code": 53
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 94,
+        "lo": 72,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-09T06:45",
         "2026-08-10T06:46",
         "2026-08-11T06:47",
         "2026-08-12T06:47",
         "2026-08-13T06:48",
-        "2026-08-14T06:49"
+        "2026-08-14T06:49",
+        "2026-08-15T06:50"
       ],
       "sunsets": [
-        "2026-08-09T20:24",
         "2026-08-10T20:23",
         "2026-08-11T20:22",
         "2026-08-12T20:21",
         "2026-08-13T20:20",
-        "2026-08-14T20:19"
+        "2026-08-14T20:19",
+        "2026-08-15T20:17"
       ],
       "timezone": "America/New_York"
     }
@@ -2310,6 +2327,6 @@
     "creditDebt": -13429.89,
     "netLiquid": 4905.27,
     "source": "ynab",
-    "updatedAt": "2026-08-10T03:46:01.368Z"
+    "updatedAt": "2026-08-10T04:01:02.554Z"
   }
 }
