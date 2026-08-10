@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T17:00:34.948Z",
+  "generated_at": "2026-08-10T17:01:01.203Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -480,16 +480,7 @@
         "balance_str": "$91.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-11-back-to-school-night",
-          "label": "Back to School Night"
-        },
-        {
-          "id": "sch-2026-08-11-organize-binders-supplies-per-mrs-cannon",
-          "label": "Organize binders & supplies per Mrs. Cannon's 3rd grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + Summer Reading Log, due first day)"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -512,14 +503,6 @@
         {
           "id": "laundry-monday",
           "label": "🧺 Bring down laundry"
-        },
-        {
-          "id": "sch-2026-08-11-back-to-school-night",
-          "label": "Back to School Night"
-        },
-        {
-          "id": "sch-2026-08-11-organize-binders-supplies-per-mrs-marlar",
-          "label": "Organize binders & supplies per Mrs. Marlar's 5th grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + signed Summer Reading Challenge)"
         }
       ]
     },
@@ -540,12 +523,7 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-11-back-to-school-night",
-          "label": "Back to School Night"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -562,20 +540,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu",
-          "label": "EHS parking pass pickup for approved student drivers"
-        },
-        {
           "id": "sch-2026-08-10-theatre-1-period-4-natalie-beaulieu-comp",
           "label": "Theatre 1 Period 4 (Natalie Beaulieu): Complete 'Getting to know you!' form; posted Aug 7, due date not shown"
-        },
-        {
-          "id": "sch-2026-08-11-ehs-first-day-of-school",
-          "label": "EHS first day of school"
-        },
-        {
-          "id": "sch-2026-08-11-gcs-first-day-schools-will-not-serve-as-",
-          "label": "GCS first day: schools will not serve as polling locations for the special primary election; Skyland precinct votes at Eastside Apostolic Lutheran Church, 2200 Mays Bridge Rd"
         }
       ]
     }
@@ -2371,6 +2337,6 @@
     "creditDebt": 1130.47,
     "netLiquid": 19465.63,
     "source": "ynab",
-    "updatedAt": "2026-08-10T17:00:33.444Z"
+    "updatedAt": "2026-08-10T17:00:59.500Z"
   }
 }
