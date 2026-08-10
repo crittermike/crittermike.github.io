@@ -1990,7 +1990,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg></span>
-        <span class="dh-temp">90°</span>
+        <span class="dh-temp">89°</span>
         <span class="dh-hilo">H 94° · L 72°</span>
       </div>
       <div class="dh-days">
@@ -2386,6 +2386,13 @@
               
               <li>
                 <label class="todo">
+                  <input type="checkbox" data-kid="charlie" data-id="sch-2026-08-10-theatre-1-period-4-natalie-beaulieu-comp">
+                  <span class="todo-label">Theatre 1 Period 4 (Natalie Beaulieu): Complete &#39;Getting to know you!&#39; form; posted Aug 7, due date not shown</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
                   <input type="checkbox" data-kid="charlie" data-id="sch-2026-08-11-ehs-first-day-of-school">
                   <span class="todo-label">EHS first day of school</span>
                 </label>
@@ -2728,6 +2735,13 @@
                     <label class="todo">
                       <input type="checkbox" data-kid="charlie" data-id="sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu">
                       <span class="todo-label">EHS parking pass pickup for approved student drivers</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="charlie" data-id="sch-2026-08-10-theatre-1-period-4-natalie-beaulieu-comp">
+                      <span class="todo-label">Theatre 1 Period 4 (Natalie Beaulieu): Complete &#39;Getting to know you!&#39; form; posted Aug 7, due date not shown</span>
                     </label>
                   </li>
                 
@@ -3776,7 +3790,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":185,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"},{"id":"sch-2026-08-11-organize-binders-supplies-per-mrs-cannon","label":"Organize binders & supplies per Mrs. Cannon's 3rd grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + Summer Reading Log, due first day)"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":35,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"},{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"},{"id":"sch-2026-08-11-organize-binders-supplies-per-mrs-marlar","label":"Organize binders & supplies per Mrs. Marlar's 5th grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + signed Summer Reading Challenge)"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":188,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":156,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu","label":"EHS parking pass pickup for approved student drivers"},{"id":"sch-2026-08-11-ehs-first-day-of-school","label":"EHS first day of school"},{"id":"sch-2026-08-11-gcs-first-day-schools-will-not-serve-as-","label":"GCS first day: schools will not serve as polling locations for the special primary election; Skyland precinct votes at Eastside Apostolic Lutheran Church, 2200 Mays Bridge Rd"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":185,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"},{"id":"sch-2026-08-11-organize-binders-supplies-per-mrs-cannon","label":"Organize binders & supplies per Mrs. Cannon's 3rd grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + Summer Reading Log, due first day)"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":35,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"},{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"},{"id":"sch-2026-08-11-organize-binders-supplies-per-mrs-marlar","label":"Organize binders & supplies per Mrs. Marlar's 5th grade binder setup PDF; bring supplies to Back to School Night (also bring Summer Solutions + signed Summer Reading Challenge)"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":188,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-11-back-to-school-night","label":"Back to School Night"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":156,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-10-ehs-parking-pass-pickup-for-approved-stu","label":"EHS parking pass pickup for approved student drivers"},{"id":"sch-2026-08-10-theatre-1-period-4-natalie-beaulieu-comp","label":"Theatre 1 Period 4 (Natalie Beaulieu): Complete 'Getting to know you!' form; posted Aug 7, due date not shown"},{"id":"sch-2026-08-11-ehs-first-day-of-school","label":"EHS first day of school"},{"id":"sch-2026-08-11-gcs-first-day-schools-will-not-serve-as-","label":"GCS first day: schools will not serve as polling locations for the special primary election; Skyland precinct votes at Eastside Apostolic Lutheran Church, 2200 Mays Bridge Rd"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
