@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T12:45:24.127Z",
+  "generated_at": "2026-08-10T13:00:33.645Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2247,86 +2247,126 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 32.3,
-    "totalSpend": 7141.7,
-    "totalBudget": 0,
+    "totalSpend": 7888.63,
+    "totalBudget": 17750.5,
     "categories": [
       {
         "name": "🏠 Home",
         "group": "Needs",
-        "budgeted": 0,
+        "budgeted": 4566.7,
         "spent": 2663.66,
-        "balance": -2663.66,
-        "pct": 0
+        "balance": 1903.04,
+        "pct": 58.3
       },
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
-        "budgeted": 0,
-        "spent": 1833.3,
-        "balance": -1833.3,
-        "pct": 0
+        "budgeted": 3490.68,
+        "spent": 2448.93,
+        "balance": 1041.75,
+        "pct": 70.2
       },
       {
         "name": "🍽️ Dining out",
         "group": "Wants",
-        "budgeted": 0,
-        "spent": 971.76,
-        "balance": -971.76,
-        "pct": 0
+        "budgeted": 2546.81,
+        "spent": 1044.07,
+        "balance": 1502.74,
+        "pct": 41
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
-        "budgeted": 0,
-        "spent": 831.87,
-        "balance": -831.87,
-        "pct": 0
+        "budgeted": 2024.75,
+        "spent": 857.18,
+        "balance": 1167.57,
+        "pct": 42.3
       },
       {
         "name": "🚗 Cars",
         "group": "Needs",
-        "budgeted": 0,
+        "budgeted": 981.05,
         "spent": 255.24,
-        "balance": -255.24,
-        "pct": 0
+        "balance": 725.81,
+        "pct": 26
       },
       {
         "name": "📺 Subscriptions",
         "group": "Bills",
-        "budgeted": 0,
-        "spent": 207.13,
-        "balance": -207.13,
-        "pct": 0
-      },
-      {
-        "name": "🐶 Pets",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 137.58,
-        "balance": -137.58,
-        "pct": 0
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 125,
-        "balance": -125,
-        "pct": 0
+        "budgeted": 364.32,
+        "spent": 210.3,
+        "balance": 154.02,
+        "pct": 57.7
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
-        "budgeted": 0,
-        "spent": 116.16,
-        "balance": -116.16,
+        "budgeted": 1698.71,
+        "spent": 146.67,
+        "balance": 1552.04,
+        "pct": 8.6
+      },
+      {
+        "name": "🐶 Pets",
+        "group": "Needs",
+        "budgeted": 104.5,
+        "spent": 137.58,
+        "balance": -33.08,
+        "pct": 131.7
+      },
+      {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 99,
+        "spent": 125,
+        "balance": -26,
+        "pct": 126.3
+      },
+      {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 351.83,
+        "spent": 0,
+        "balance": 351.83,
+        "pct": 0
+      },
+      {
+        "name": "⚡️ Utilities",
+        "group": "Bills",
+        "budgeted": 668.27,
+        "spent": 0,
+        "balance": 668.27,
+        "pct": 0
+      },
+      {
+        "name": "🎁 Charity",
+        "group": "Needs",
+        "budgeted": 160,
+        "spent": 0,
+        "balance": 160,
+        "pct": 0
+      },
+      {
+        "name": "💅 Personal Care",
+        "group": "Wants",
+        "budgeted": 246,
+        "spent": 0,
+        "balance": 246,
+        "pct": 0
+      },
+      {
+        "name": "🏝️ Vacation",
+        "group": "Wants",
+        "budgeted": 447.88,
+        "spent": 0,
+        "balance": 447.88,
         "pct": 0
       }
     ],
     "liquidCash": 18335.16,
-    "creditDebt": -13429.89,
-    "netLiquid": 4905.27,
+    "creditDebt": 1130.47,
+    "netLiquid": 19465.63,
     "source": "ynab",
-    "updatedAt": "2026-08-10T12:45:22.752Z"
+    "updatedAt": "2026-08-10T13:00:31.399Z"
   }
 }
