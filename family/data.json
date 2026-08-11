@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T23:00:43.859Z",
+  "generated_at": "2026-08-11T23:15:43.535Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -397,6 +397,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-04T21:30:00-04:00"
+    },
+    {
+      "date": "2026-10-07",
+      "time": "all day",
+      "what": "Charlie: PSAT/NMSQT test",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-10-08T00:00:00-04:00"
     },
     {
       "date": "2026-10-07",
@@ -1079,11 +1088,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 78,
       "hi": 94,
       "lo": 68,
       "icon": "🌦",
-      "code": 81
+      "code": 53
     },
     "days": [
       {
@@ -2412,6 +2421,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-11T23:00:42.159Z"
+    "updatedAt": "2026-08-11T23:15:42.003Z"
   }
 }
