@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T22:30:40.986Z",
+  "generated_at": "2026-08-11T22:45:40.957Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -408,6 +408,15 @@
       "end": "2026-10-07T09:40:00-04:00"
     },
     {
+      "date": "2026-10-08",
+      "time": "6p",
+      "what": "POPCS: PTO Pop-In",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-08T20:00:00-04:00"
+    },
+    {
       "date": "2026-10-11",
       "time": "8a",
       "what": "Mass",
@@ -435,13 +444,40 @@
       "end": "2026-10-18T09:00:00-04:00"
     },
     {
+      "date": "2026-10-23",
+      "time": "all day",
+      "what": "POPCS: Book Fair",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-10-24T00:00:00-04:00"
+    },
+    {
       "date": "2026-10-24",
       "time": "all day",
-      "what": "POPCS: POPtoberfest",
+      "what": "POPCS: Book Fair",
       "who": "family",
       "calendar": "home",
       "all_day": true,
       "end": "2026-10-25T00:00:00-04:00"
+    },
+    {
+      "date": "2026-10-24",
+      "time": "6p",
+      "what": "POPCS: POPtoberfest",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-24T21:00:00-04:00"
+    },
+    {
+      "date": "2026-10-25",
+      "time": "all day",
+      "what": "POPCS: Book Fair",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-10-26T00:00:00-04:00"
     },
     {
       "date": "2026-10-25",
@@ -1043,11 +1079,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 92,
+      "temp": 82,
       "hi": 94,
       "lo": 68,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌦",
+      "code": 51
     },
     "days": [
       {
@@ -2376,6 +2412,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-11T22:30:39.160Z"
+    "updatedAt": "2026-08-11T22:45:39.423Z"
   }
 }
