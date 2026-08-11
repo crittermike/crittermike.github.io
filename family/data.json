@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T22:15:40.060Z",
+  "generated_at": "2026-08-11T22:30:40.986Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -235,6 +235,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-02T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "4:30p",
+      "what": "POPCS: Spirit Night at Roller Sports",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-04T18:30:00-04:00"
     },
     {
       "date": "2026-09-06",
@@ -1034,7 +1043,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 93,
+      "temp": 92,
       "hi": 94,
       "lo": 68,
       "icon": "☀️",
@@ -2367,6 +2376,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-11T22:15:38.477Z"
+    "updatedAt": "2026-08-11T22:30:39.160Z"
   }
 }
