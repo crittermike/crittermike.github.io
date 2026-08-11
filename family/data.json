@@ -1,43 +1,7 @@
 {
-  "generated_at": "2026-08-11T03:46:07.669Z",
+  "generated_at": "2026-08-11T04:01:08.318Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-10",
-      "time": "all day",
-      "what": "Resume school crons (school-study-reminder, school-morning-reminder, henry-bedtime-homework-check)",
-      "who": "henry",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-11T00:00:00-04:00"
-    },
-    {
-      "date": "2026-08-10",
-      "time": "10a",
-      "what": "Mom prosthetics appointment ",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-10T11:00:00-04:00"
-    },
-    {
-      "date": "2026-08-10",
-      "time": "11a",
-      "what": "Nancy at POPCS",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-10T15:00:00-04:00"
-    },
-    {
-      "date": "2026-08-10",
-      "time": "4p",
-      "what": "Walmart grocery delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-10T18:00:00-04:00"
-    },
     {
       "date": "2026-08-11",
       "time": "all day",
@@ -496,6 +460,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-11-01T09:00:00-05:00"
+    },
+    {
+      "date": "2026-11-08",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-11-08T09:00:00-05:00"
     }
   ],
   "kids": [
@@ -535,12 +508,7 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "laundry-monday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -576,16 +544,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-10-theatre-1-period-4-natalie-beaulieu-comp",
-          "label": "Theatre 1 Period 4 (Natalie Beaulieu): Complete 'Getting to know you!' form; posted Aug 7, due date not shown"
-        },
-        {
           "id": "sch-2026-08-11-ehs-first-day-of-school",
           "label": "EHS first day of school"
         },
         {
           "id": "sch-2026-08-11-ehs-dual-enrollment-first-day-attendance",
           "label": "EHS Dual Enrollment first-day attendance for B-day schedule; A-day students attend Wed Aug 12"
+        },
+        {
+          "id": "sch-2026-08-12-ehs-dual-enrollment-first-day-attendance",
+          "label": "EHS Dual Enrollment first-day attendance for A-day schedule; B-day students attend Tue Aug 11"
         }
       ]
     }
@@ -879,7 +847,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Homemade Hamburger Helper with green beans",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
@@ -948,8 +916,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Crockpot white chicken chili with tortilla chips",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "white-chicken-chili",
         "name": "White Chicken Chili",
@@ -1027,7 +995,7 @@
       "dow_short": "Wed",
       "name": "Korean beef and broccoli bowls",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1057,20 +1025,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
-      "hi": 92,
-      "lo": 72,
+      "temp": 71,
+      "hi": 97,
+      "lo": 68,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 97,
-        "lo": 68,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "🌧",
@@ -1098,24 +1059,31 @@
         "hi": 94,
         "lo": 73,
         "code": 80
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 99,
+        "lo": 76,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-10T06:46",
         "2026-08-11T06:47",
         "2026-08-12T06:47",
         "2026-08-13T06:48",
         "2026-08-14T06:49",
-        "2026-08-15T06:50"
+        "2026-08-15T06:50",
+        "2026-08-16T06:50"
       ],
       "sunsets": [
-        "2026-08-10T20:23",
         "2026-08-11T20:22",
         "2026-08-12T20:21",
         "2026-08-13T20:20",
         "2026-08-14T20:19",
-        "2026-08-15T20:17"
+        "2026-08-15T20:17",
+        "2026-08-16T20:16"
       ],
       "timezone": "America/New_York"
     }
@@ -2390,6 +2358,6 @@
     "creditDebt": 1130.47,
     "netLiquid": 19465.63,
     "source": "ynab",
-    "updatedAt": "2026-08-11T03:46:05.919Z"
+    "updatedAt": "2026-08-11T04:01:06.617Z"
   }
 }
