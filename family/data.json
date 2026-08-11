@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T13:00:23.269Z",
+  "generated_at": "2026-08-11T13:15:24.068Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -190,6 +190,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-24T22:00:00-04:00"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "2:15p",
+      "what": "Carolina Dermatology appointment (2:30 PM)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-25T15:30:00-04:00"
     },
     {
       "date": "2026-08-26",
@@ -1025,7 +1034,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
+      "temp": 78,
       "hi": 97,
       "lo": 68,
       "icon": "☀️",
@@ -2358,6 +2367,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-11T13:00:21.735Z"
+    "updatedAt": "2026-08-11T13:15:22.626Z"
   }
 }
