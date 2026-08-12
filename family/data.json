@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T13:15:32.818Z",
+  "generated_at": "2026-08-12T14:06:24.994Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -49,12 +49,12 @@
     },
     {
       "date": "2026-08-13",
-      "time": "9:30a",
+      "time": "9a",
       "what": "Mom appointment at LifeStance",
       "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-08-13T10:30:00-04:00"
+      "end": "2026-08-13T10:00:00-04:00"
     },
     {
       "date": "2026-08-13",
@@ -1046,11 +1046,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
-      "hi": 89,
+      "temp": 79,
+      "hi": 91,
       "lo": 69,
-      "icon": "🌤",
-      "code": 2
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -1063,30 +1063,30 @@
       {
         "d": "Fri",
         "icon": "🌦",
-        "hi": 98,
-        "lo": 75,
-        "code": 55
+        "hi": 102,
+        "lo": 74,
+        "code": 53
       },
       {
         "d": "Sat",
         "icon": "🌦",
-        "hi": 99,
-        "lo": 75,
-        "code": 51
+        "hi": 98,
+        "lo": 72,
+        "code": 80
       },
       {
         "d": "Sun",
         "icon": "🌦",
-        "hi": 103,
-        "lo": 74,
+        "hi": 94,
+        "lo": 73,
         "code": 53
       },
       {
         "d": "Mon",
         "icon": "🌦",
-        "hi": 104,
-        "lo": 78,
-        "code": 51
+        "hi": 101,
+        "lo": 73,
+        "code": 53
       }
     ],
     "sun": {
@@ -2379,6 +2379,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-12T13:15:29.796Z"
+    "updatedAt": "2026-08-12T14:06:23.137Z"
   }
 }

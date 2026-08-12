@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const {
   normalizeTodoState,
   dismissTodo,
+  updateStoredTodoState,
   bindLongPress,
 } = require('../src/assets/assignment-long-press.js');
 
@@ -62,6 +63,28 @@ test('dismissTodo records only the selected kid and task', () => {
   dismissTodo(state, 'william|laundry-friday');
 
   assert.deepEqual(state.dismissed, { 'william|laundry-friday': true });
+});
+
+test('updateStoredTodoState reads the latest state before writing', () => {
+  let raw = JSON.stringify({
+    date: '2026-08-12',
+    checks: {},
+    dismissed: { 'thomas|math': true },
+  });
+  const storage = {
+    getItem() { return raw; },
+    setItem(key, value) { raw = value; },
+  };
+
+  updateStoredTodoState(storage, 'kid-todos', '2026-08-12', state => {
+    state.checks['william|reading'] = true;
+  });
+
+  assert.deepEqual(JSON.parse(raw), {
+    date: '2026-08-12',
+    checks: { 'william|reading': true },
+    dismissed: { 'thomas|math': true },
+  });
 });
 
 test('bindLongPress fires after the hold delay and suppresses the following click', () => {
