@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T17:00:49.826Z",
+  "generated_at": "2026-08-12T17:15:48.393Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -31,6 +31,15 @@
     },
     {
       "date": "2026-08-13",
+      "time": "8a",
+      "what": "POPCS: First day and 12:15 PM dismissal",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-13T12:15:00-04:00"
+    },
+    {
+      "date": "2026-08-13",
       "time": "9a",
       "what": "Mom appointment at LifeStance",
       "who": "family",
@@ -55,6 +64,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-13T15:00:00-04:00"
+    },
+    {
+      "date": "2026-08-14",
+      "time": "all day",
+      "what": "POPCS: Spirit Wear Friday",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-08-15T00:00:00-04:00"
     },
     {
       "date": "2026-08-14",
@@ -527,6 +545,10 @@
         {
           "id": "sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor",
           "label": "POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"
+        },
+        {
+          "id": "sch-2026-08-13-bring-snack-water-bottle-cursive-writing",
+          "label": "Bring snack, water bottle, cursive writing book, and Simple Solutions book for first day (Mrs. Cannon)"
         }
       ]
     },
@@ -2361,6 +2383,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-12T17:00:47.130Z"
+    "updatedAt": "2026-08-12T17:15:46.394Z"
   }
 }
