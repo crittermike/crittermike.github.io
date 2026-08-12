@@ -1363,6 +1363,8 @@ eleventyExcludeFromCollections: true
     gap: 8px;
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
     font-size: 0.85rem;
     color: var(--text-dark);
   }
@@ -2263,6 +2265,7 @@ eleventyExcludeFromCollections: true
   <button class="nag-dismiss" id="nagDismiss">Snooze 30 min</button>
 </div>
 
+<script src="/family/assets/assignment-long-press.js"></script>
 <script>
 (function(){
   const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
@@ -2788,6 +2791,11 @@ eleventyExcludeFromCollections: true
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
+  const ASSIGNMENT_KID_NAMES = {{ (kids | default([])) | dump | safe }}.reduce(function (names, kid) {
+    names[kid.key] = kid.name;
+    return names;
+  }, {});
+
   function hydrateAssignments() {
     function todayKey() {
       const parts = new Intl.DateTimeFormat('en-CA', {
@@ -2802,17 +2810,70 @@ eleventyExcludeFromCollections: true
     const STORAGE_KEY = 'kid-todos';
     let state = {};
     try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
-    if (state.date !== date) state = { date, checks: {} };
+    state = AssignmentLongPress.normalizeTodoState(state, date);
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function removeTodoFromPage(key) {
+      document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(candidate => {
+        const candidateKey = candidate.dataset.kid + '|' + candidate.dataset.id;
+        if (candidateKey !== key) return;
+        const item = candidate.closest('li');
+        if (item) item.remove();
+      });
+
+      document.querySelectorAll('.assn-list .todo-list').forEach(list => {
+        if (list.children.length) return;
+        const kidGroup = list.closest('.assn-kid');
+        if (kidGroup) {
+          kidGroup.remove();
+          return;
+        }
+        const empty = document.createElement('div');
+        empty.className = 'placeholder';
+        empty.textContent = 'Nothing today 🎉';
+        list.replaceWith(empty);
+      });
+
+      document.querySelectorAll('.assn-list').forEach(list => {
+        if (list.querySelector('.todo-list, .assn-kid, .placeholder')) return;
+        const empty = document.createElement('div');
+        empty.className = 'placeholder';
+        empty.textContent = 'Nothing assigned today. Go outside.';
+        list.appendChild(empty);
+      });
+    }
+
+    Object.keys(state.dismissed).forEach(removeTodoFromPage);
 
     document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(box => {
       if (box.dataset._wired) return;
       box.dataset._wired = '1';
       const key = box.dataset.kid + '|' + box.dataset.id;
       if (state.checks[key]) box.checked = true;
+
+      const todo = box.closest('.todo');
+      if (todo && !todo.dataset._deleteWired) {
+        todo.dataset._deleteWired = '1';
+        AssignmentLongPress.bindLongPress(todo, () => {
+          const kid = ASSIGNMENT_KID_NAMES[box.dataset.kid] || box.dataset.kid;
+          const labelEl = todo.querySelector('.todo-label');
+          const label = labelEl ? labelEl.textContent.trim() : 'this task';
+          if (!confirm('Delete “' + label + '” from ' + kid + '’s list for today?')) return;
+          AssignmentLongPress.dismissTodo(state, key);
+          saveState();
+          removeTodoFromPage(key);
+          showToast('Task deleted for today');
+          if (window.__refreshNag) window.__refreshNag();
+        });
+      }
+
       box.addEventListener('change', () => {
         if (box.checked) state.checks[key] = true;
         else delete state.checks[key];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveState();
         if (box.checked) {
           const group = box.closest('.todo-list');
           const boxes = group ? group.querySelectorAll('input[type="checkbox"]') : [];
@@ -2822,7 +2883,7 @@ eleventyExcludeFromCollections: true
         if (window.__refreshNag) window.__refreshNag();
       });
     });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    saveState();
   }
 
   // === RECIPE OF THE DAY (deterministic daily pick from rotation) ===

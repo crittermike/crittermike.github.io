@@ -1522,6 +1522,8 @@
     gap: 8px;
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
     font-size: 0.85rem;
     color: var(--text-dark);
   }
@@ -1989,8 +1991,8 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">76°</span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
+        <span class="dh-temp">77°</span>
         <span class="dh-hilo">H 89° · L 69°</span>
       </div>
       <div class="dh-days">
@@ -2954,6 +2956,7 @@
   <button class="nag-dismiss" id="nagDismiss">Snooze 30 min</button>
 </div>
 
+<script src="/family/assets/assignment-long-press.js"></script>
 <script>
 (function(){
   const STORAGE_KEY = 'crittercrew.dashedit.layout.v1';
@@ -3479,6 +3482,11 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-13-first-day-of-school-12-15p-dismissal-aft","label":"First Day of School (12:15p dismissal; After Care offered; no School Mass)"},{"id":"sch-2026-08-13--summer-reading-challenge-due-rising-3rd","label":"📚 Summer Reading Challenge due (rising 3rd) — 200 pages min, log title/author/genre/pages, first 200 pages = quiz grade, +chance at B&N gift card per 100 pages, PRINT EDITIONS ONLY (arbookfind.com for e-book page counts)"},{"id":"sch-2026-08-13-math-summer-solutions-due-bring-complete","label":"Math Summer Solutions due; bring completed book on first day"},{"id":"sch-2026-08-13-cheers-and-tears-after-drop-off-about-8a","label":"Cheers and Tears after drop-off, about 8a, Croghan Hall"},{"id":"sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor","label":"POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"sch-2026-08-13-first-day-of-school-12-15p-dismissal-aft","label":"First Day of School (12:15p dismissal; After Care offered; no School Mass)"},{"id":"sch-2026-08-13--summer-reading-challenge-due-rising-5th","label":"📚 Summer Reading Challenge due (rising 5th) — 400 pages min, log title/author/genre/pages, first 400 pages = quiz grade, +chance at B&N gift card per 100 pages, PRINT EDITIONS ONLY (arbookfind.com for e-book page counts)"},{"id":"sch-2026-08-13-math-summer-solutions-due-bring-complete","label":"Math Summer Solutions due; bring completed book on first day"},{"id":"sch-2026-08-13-cheers-and-tears-after-drop-off-about-8a","label":"Cheers and Tears after drop-off, about 8a, Croghan Hall"},{"id":"sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor","label":"POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":18,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-13-first-day-of-school-12-15p-dismissal-aft","label":"First Day of School (12:15p dismissal; After Care offered; no School Mass)"},{"id":"sch-2026-08-13--summer-reading-challenge-due-rising-8th","label":"📚 Summer Reading Challenge due (rising 8th/MS) — 500 pages min, log title/author/genre/pages, first 500 pages = quiz grade, +chance at B&N gift card per 100 pages, PRINT EDITIONS ONLY (arbookfind.com for e-book page counts)"},{"id":"sch-2026-08-13-math-summer-solutions-due-bring-complete","label":"Math Summer Solutions due; bring completed book on first day"},{"id":"sch-2026-08-13-cheers-and-tears-after-drop-off-about-8a","label":"Cheers and Tears after drop-off, about 8a, Croghan Hall"},{"id":"sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor","label":"POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":156,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-12-ehs-dual-enrollment-first-day-attendance","label":"EHS Dual Enrollment first-day attendance for A-day schedule; B-day students attend Tue Aug 11"}]}].reduce(function (names, kid) {
+    names[kid.key] = kid.name;
+    return names;
+  }, {});
+
   function hydrateAssignments() {
     function todayKey() {
       const parts = new Intl.DateTimeFormat('en-CA', {
@@ -3493,17 +3501,70 @@
     const STORAGE_KEY = 'kid-todos';
     let state = {};
     try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
-    if (state.date !== date) state = { date, checks: {} };
+    state = AssignmentLongPress.normalizeTodoState(state, date);
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function removeTodoFromPage(key) {
+      document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(candidate => {
+        const candidateKey = candidate.dataset.kid + '|' + candidate.dataset.id;
+        if (candidateKey !== key) return;
+        const item = candidate.closest('li');
+        if (item) item.remove();
+      });
+
+      document.querySelectorAll('.assn-list .todo-list').forEach(list => {
+        if (list.children.length) return;
+        const kidGroup = list.closest('.assn-kid');
+        if (kidGroup) {
+          kidGroup.remove();
+          return;
+        }
+        const empty = document.createElement('div');
+        empty.className = 'placeholder';
+        empty.textContent = 'Nothing today 🎉';
+        list.replaceWith(empty);
+      });
+
+      document.querySelectorAll('.assn-list').forEach(list => {
+        if (list.querySelector('.todo-list, .assn-kid, .placeholder')) return;
+        const empty = document.createElement('div');
+        empty.className = 'placeholder';
+        empty.textContent = 'Nothing assigned today. Go outside.';
+        list.appendChild(empty);
+      });
+    }
+
+    Object.keys(state.dismissed).forEach(removeTodoFromPage);
 
     document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(box => {
       if (box.dataset._wired) return;
       box.dataset._wired = '1';
       const key = box.dataset.kid + '|' + box.dataset.id;
       if (state.checks[key]) box.checked = true;
+
+      const todo = box.closest('.todo');
+      if (todo && !todo.dataset._deleteWired) {
+        todo.dataset._deleteWired = '1';
+        AssignmentLongPress.bindLongPress(todo, () => {
+          const kid = ASSIGNMENT_KID_NAMES[box.dataset.kid] || box.dataset.kid;
+          const labelEl = todo.querySelector('.todo-label');
+          const label = labelEl ? labelEl.textContent.trim() : 'this task';
+          if (!confirm('Delete “' + label + '” from ' + kid + '’s list for today?')) return;
+          AssignmentLongPress.dismissTodo(state, key);
+          saveState();
+          removeTodoFromPage(key);
+          showToast('Task deleted for today');
+          if (window.__refreshNag) window.__refreshNag();
+        });
+      }
+
       box.addEventListener('change', () => {
         if (box.checked) state.checks[key] = true;
         else delete state.checks[key];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveState();
         if (box.checked) {
           const group = box.closest('.todo-list');
           const boxes = group ? group.querySelectorAll('input[type="checkbox"]') : [];
@@ -3513,7 +3574,7 @@
         if (window.__refreshNag) window.__refreshNag();
       });
     });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    saveState();
   }
 
   // === RECIPE OF THE DAY (deterministic daily pick from rotation) ===

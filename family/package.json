@@ -4,6 +4,7 @@
   "description": "Crittenden family dashboard with 11ty",
   "scripts": {
     "build": "eleventy",
+    "test": "node --test test/*.test.js",
     "dev": "eleventy --serve",
     "start": "eleventy --serve",
     "clean": "rm -rf _site"
