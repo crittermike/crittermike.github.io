@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T23:45:43.261Z",
+  "generated_at": "2026-08-12T00:00:47.490Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -820,82 +820,12 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot white chicken chili with tortilla chips",
-    "protein_g": 62,
+    "name": "Korean beef and broccoli bowls",
+    "protein_g": 60,
     "cal": 600,
-    "effort": "easy-slow",
-    "note": "Back to School Night is 6:00-8:00 PM. Use 2.5 lb chicken breast and plain diced tomatoes instead of Rotel to avoid peppers. Mike limits chips and cheese.",
-    "recipe": {
-      "slug": "white-chicken-chili",
-      "name": "White Chicken Chili",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner",
-        "crockpot"
-      ],
-      "aliases": [
-        "white-chicken-chili"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 550,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "1 can black beans",
-            "1 can corn",
-            "1 can rotel",
-            "2 chicken breasts",
-            "1 pkg ranch dressing mix",
-            "1 cream cheese",
-            "1 pound mexican cheese",
-            "1 bag tortilla chips",
-            "1 pkg sour cream"
-          ]
-        },
-        {
-          "heading": "Toppings",
-          "items": [
-            "Mexican cheese (shredded)",
-            "Tortilla chips",
-            "Sour cream"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "1 can black beans",
-        "1 can corn",
-        "1 can rotel",
-        "2 chicken breasts",
-        "1 pkg ranch dressing mix",
-        "1 cream cheese",
-        "1 pound mexican cheese",
-        "1 bag tortilla chips",
-        "1 pkg sour cream",
-        "Mexican cheese (shredded)",
-        "Tortilla chips",
-        "Sour cream"
-      ],
-      "steps": [
-        "Drain and rinse black beans.",
-        "Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.",
-        "Top with seasonings and ranch mix. Stir together.",
-        "Place cream cheese on top.",
-        "Cover with lid and cook on low for 6-8 hours.",
-        "Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve."
-      ],
-      "notes": "",
-      "body_html": "<h1>White Chicken Chili</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>1 can black beans</li>\n<li>1 can corn</li>\n<li>1 can rotel</li>\n<li>2 chicken breasts</li>\n<li>1 pkg ranch dressing mix</li>\n<li>1 cream cheese</li>\n<li>1 pound mexican cheese</li>\n<li>1 bag tortilla chips</li>\n<li>1 pkg sour cream</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Drain and rinse black beans.</li>\n<li>Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.</li>\n<li>Top with seasonings and ranch mix. Stir together.</li>\n<li>Place cream cheese on top.</li>\n<li>Cover with lid and cook on low for 6-8 hours.</li>\n<li>Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve.</li>\n</ol>\n<h2>Toppings</h2>\n<ul>\n<li>Mexican cheese (shredded)</li>\n<li>Tortilla chips</li>\n<li>Sour cream</li>\n</ul>\n",
-      "last_reviewed": "2026-05-29T00:00:00.000Z"
-    }
+    "effort": "easy",
+    "note": "Use 2 lb 93% lean beef. Keep red pepper flakes and sriracha off the family batch.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -1088,7 +1018,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
+      "temp": 71,
       "hi": 94,
       "lo": 68,
       "icon": "🌦",
@@ -2300,7 +2230,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 35.5,
+    "dayPct": 38.7,
     "totalSpend": 8287.56,
     "totalBudget": 17750.5,
     "categories": [
@@ -2421,6 +2351,6 @@
     "creditDebt": 15629.43,
     "netLiquid": 18964.59,
     "source": "ynab",
-    "updatedAt": "2026-08-11T23:45:41.778Z"
+    "updatedAt": "2026-08-12T00:00:44.724Z"
   }
 }
