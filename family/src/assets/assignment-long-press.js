@@ -31,6 +31,13 @@
     return state;
   }
 
+  function syncTodoCopies(root, key, checked) {
+    root.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(function (box) {
+      const boxKey = box.dataset.kid + '|' + box.dataset.id;
+      if (boxKey === key) box.checked = checked;
+    });
+  }
+
   function bindLongPress(target, onLongPress, options) {
     const opts = options || {};
     const delay = opts.delay == null ? 700 : opts.delay;
@@ -102,6 +109,7 @@
     normalizeTodoState: normalizeTodoState,
     dismissTodo: dismissTodo,
     updateStoredTodoState: updateStoredTodoState,
+    syncTodoCopies: syncTodoCopies,
     bindLongPress: bindLongPress,
   };
 });

@@ -2870,6 +2870,7 @@ eleventyExcludeFromCollections: true
       }
 
       box.addEventListener('change', () => {
+        AssignmentLongPress.syncTodoCopies(document, key, box.checked);
         updateState(currentState => {
           if (box.checked) currentState.checks[key] = true;
           else delete currentState.checks[key];

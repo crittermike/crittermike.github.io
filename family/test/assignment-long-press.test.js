@@ -5,6 +5,7 @@ const {
   normalizeTodoState,
   dismissTodo,
   updateStoredTodoState,
+  syncTodoCopies,
   bindLongPress,
 } = require('../src/assets/assignment-long-press.js');
 
@@ -85,6 +86,20 @@ test('updateStoredTodoState reads the latest state before writing', () => {
     checks: { 'william|reading': true },
     dismissed: { 'thomas|math': true },
   });
+});
+
+test('syncTodoCopies keeps duplicate renderings in the same checked state', () => {
+  const boxes = [
+    { dataset: { kid: 'thomas', id: 'math' }, checked: true },
+    { dataset: { kid: 'thomas', id: 'math' }, checked: false },
+    { dataset: { kid: 'thomas', id: 'reading' }, checked: false },
+    { dataset: { kid: 'william', id: 'math' }, checked: false },
+  ];
+  const root = { querySelectorAll() { return boxes; } };
+
+  syncTodoCopies(root, 'thomas|math', true);
+
+  assert.deepEqual(boxes.map(box => box.checked), [true, true, false, false]);
 });
 
 test('bindLongPress fires after the hold delay and suppresses the following click', () => {
