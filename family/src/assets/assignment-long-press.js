@@ -22,6 +22,15 @@
     return state;
   }
 
+  function updateStoredTodoState(storage, storageKey, date, update) {
+    let value = {};
+    try { value = JSON.parse(storage.getItem(storageKey) || '{}'); } catch (error) {}
+    const state = normalizeTodoState(value, date);
+    update(state);
+    storage.setItem(storageKey, JSON.stringify(state));
+    return state;
+  }
+
   function bindLongPress(target, onLongPress, options) {
     const opts = options || {};
     const delay = opts.delay == null ? 700 : opts.delay;
@@ -92,6 +101,7 @@
   return {
     normalizeTodoState: normalizeTodoState,
     dismissTodo: dismissTodo,
+    updateStoredTodoState: updateStoredTodoState,
     bindLongPress: bindLongPress,
   };
 });

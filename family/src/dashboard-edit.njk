@@ -2812,8 +2812,8 @@ eleventyExcludeFromCollections: true
     try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
     state = AssignmentLongPress.normalizeTodoState(state, date);
 
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    function updateState(update) {
+      return AssignmentLongPress.updateStoredTodoState(localStorage, STORAGE_KEY, date, update);
     }
 
     function removeTodoFromPage(key) {
@@ -2862,8 +2862,7 @@ eleventyExcludeFromCollections: true
           const labelEl = todo.querySelector('.todo-label');
           const label = labelEl ? labelEl.textContent.trim() : 'this task';
           if (!confirm('Delete “' + label + '” from ' + kid + '’s list for today?')) return;
-          AssignmentLongPress.dismissTodo(state, key);
-          saveState();
+          updateState(currentState => AssignmentLongPress.dismissTodo(currentState, key));
           removeTodoFromPage(key);
           showToast('Task deleted for today');
           if (window.__refreshNag) window.__refreshNag();
@@ -2871,9 +2870,10 @@ eleventyExcludeFromCollections: true
       }
 
       box.addEventListener('change', () => {
-        if (box.checked) state.checks[key] = true;
-        else delete state.checks[key];
-        saveState();
+        updateState(currentState => {
+          if (box.checked) currentState.checks[key] = true;
+          else delete currentState.checks[key];
+        });
         if (box.checked) {
           const group = box.closest('.todo-list');
           const boxes = group ? group.querySelectorAll('input[type="checkbox"]') : [];
@@ -2883,7 +2883,7 @@ eleventyExcludeFromCollections: true
         if (window.__refreshNag) window.__refreshNag();
       });
     });
-    saveState();
+    updateState(function () {});
   }
 
   // === RECIPE OF THE DAY (deterministic daily pick from rotation) ===
