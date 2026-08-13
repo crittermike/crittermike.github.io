@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T01:01:02.210Z",
+  "generated_at": "2026-08-13T01:16:03.901Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2263,7 +2263,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 41.9,
-    "totalSpend": 8287.56,
+    "totalSpend": 8623.48,
     "totalBudget": 17750.5,
     "categories": [
       {
@@ -2278,9 +2278,9 @@
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 3490.68,
-        "spent": 2448.93,
-        "balance": 1041.75,
-        "pct": 70.2
+        "spent": 2571.11,
+        "balance": 919.57,
+        "pct": 73.7
       },
       {
         "name": "🍽️ Dining out",
@@ -2294,33 +2294,33 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 2024.75,
-        "spent": 857.18,
-        "balance": 1167.57,
-        "pct": 42.3
+        "spent": 947.37,
+        "balance": 1077.38,
+        "pct": 46.8
       },
       {
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 981.05,
-        "spent": 255.24,
-        "balance": 725.81,
-        "pct": 26
+        "spent": 309.81,
+        "balance": 671.24,
+        "pct": 31.6
       },
       {
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 364.32,
-        "spent": 224.07,
-        "balance": 140.25,
-        "pct": 61.5
+        "spent": 227.06,
+        "balance": 137.26,
+        "pct": 62.3
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 1698.71,
-        "spent": 146.67,
-        "balance": 1552.04,
-        "pct": 8.6
+        "spent": 152.66,
+        "balance": 1546.05,
+        "pct": 9
       },
       {
         "name": "🐶 Pets",
@@ -2337,6 +2337,14 @@
         "spent": 125,
         "balance": -26,
         "pct": 126.3
+      },
+      {
+        "name": "💅 Personal Care",
+        "group": "Wants",
+        "budgeted": 246,
+        "spent": 60,
+        "balance": 186,
+        "pct": 24.4
       },
       {
         "name": "📱 Phone & Internet",
@@ -2363,14 +2371,6 @@
         "pct": 0
       },
       {
-        "name": "💅 Personal Care",
-        "group": "Wants",
-        "budgeted": 246,
-        "spent": 0,
-        "balance": 246,
-        "pct": 0
-      },
-      {
         "name": "🏝️ Vacation",
         "group": "Wants",
         "budgeted": 447.88,
@@ -2380,9 +2380,9 @@
       }
     ],
     "liquidCash": 3335.16,
-    "creditDebt": 15629.43,
-    "netLiquid": 18964.59,
+    "creditDebt": 15223.06,
+    "netLiquid": 18558.22,
     "source": "ynab",
-    "updatedAt": "2026-08-13T01:01:00.504Z"
+    "updatedAt": "2026-08-13T01:16:02.266Z"
   }
 }
