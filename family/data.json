@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T20:00:45.484Z",
+  "generated_at": "2026-08-13T20:15:42.713Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -548,6 +548,10 @@
         {
           "id": "sch-2026-08-14-wear-spirit-wear-uniform-mrs-cannon-",
           "label": "Wear Spirit Wear Uniform (Mrs. Cannon)"
+        },
+        {
+          "id": "sch-2026-08-14-bring-labeled-binder-dividers-and-any-mi",
+          "label": "Bring labeled binder dividers and any missing school supplies to class, if needed (Mrs. Cannon)"
         }
       ]
     },
@@ -1057,11 +1061,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 91,
+      "temp": 86,
       "hi": 93,
       "lo": 73,
       "icon": "🌤",
-      "code": 1
+      "code": 2
     },
     "days": [
       {
@@ -2390,6 +2394,6 @@
     "creditDebt": 15021.5,
     "netLiquid": 22181.22,
     "source": "ynab",
-    "updatedAt": "2026-08-13T20:00:42.461Z"
+    "updatedAt": "2026-08-13T20:15:41.443Z"
   }
 }
