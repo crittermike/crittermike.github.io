@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-08-13T03:46:08.230Z",
+  "generated_at": "2026-08-13T04:01:09.719Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-12",
-      "time": "all day",
-      "what": "EHS Dual Enrollment first day if Charlie is A-day",
-      "who": "charlie",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-13T00:00:00-04:00"
-    },
-    {
-      "date": "2026-08-12",
-      "time": "9:30a",
-      "what": "Mom appointment with Dr Wine",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-12T10:30:00-04:00"
-    },
-    {
-      "date": "2026-08-12",
-      "time": "3p",
-      "what": "Mom lymphedema appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-12T15:55:00-04:00"
-    },
     {
       "date": "2026-08-13",
       "time": "8a",
@@ -549,6 +522,14 @@
         {
           "id": "sch-2026-08-13-bring-snack-water-bottle-cursive-writing",
           "label": "Bring snack, water bottle, cursive writing book, and Simple Solutions book for first day (Mrs. Cannon)"
+        },
+        {
+          "id": "sch-2026-08-14-first-regular-school-day-first-rosary-at",
+          "label": "First regular school day; First Rosary at 2:45p"
+        },
+        {
+          "id": "sch-2026-08-14-wear-spirit-wear-uniform-mrs-cannon-",
+          "label": "Wear Spirit Wear Uniform (Mrs. Cannon)"
         }
       ]
     },
@@ -589,6 +570,10 @@
         {
           "id": "sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor",
           "label": "POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"
+        },
+        {
+          "id": "sch-2026-08-14-first-regular-school-day-first-rosary-at",
+          "label": "First regular school day; First Rosary at 2:45p"
         }
       ]
     },
@@ -629,6 +614,10 @@
         {
           "id": "sch-2026-08-13-popcs-spirit-lunch-at-chick-fil-a-taylor",
           "label": "POPCS Spirit Lunch at Chick-fil-A Taylors, 12:15-3:00p"
+        },
+        {
+          "id": "sch-2026-08-14-first-regular-school-day-first-rosary-at",
+          "label": "First regular school day; First Rosary at 2:45p"
         }
       ]
     },
@@ -647,8 +636,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-12-ehs-dual-enrollment-first-day-attendance",
-          "label": "EHS Dual Enrollment first-day attendance for A-day schedule; B-day students attend Tue Aug 11"
+          "id": "sch-2026-08-14-complete-and-return-ehs-student-emergenc",
+          "label": "Complete and return EHS Student Emergency Contact Form to advisory teacher"
         }
       ]
     }
@@ -1019,7 +1008,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Korean beef and broccoli bowls",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -1027,8 +1016,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Pesto chicken with noodles and roasted Brussels sprouts",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -1036,7 +1025,7 @@
       "dow_short": "Fri",
       "name": "Takeout / eat out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1051,19 +1040,12 @@
   "weather": {
     "now": {
       "temp": 76,
-      "hi": 89,
-      "lo": 69,
+      "hi": 93,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "🌦",
-        "hi": 93,
-        "lo": 74,
-        "code": 80
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -1091,24 +1073,31 @@
         "hi": 100,
         "lo": 74,
         "code": 81
+      },
+      {
+        "d": "Tue",
+        "icon": "🌦",
+        "hi": 101,
+        "lo": 74,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-12T06:47",
         "2026-08-13T06:48",
         "2026-08-14T06:49",
         "2026-08-15T06:50",
         "2026-08-16T06:50",
-        "2026-08-17T06:51"
+        "2026-08-17T06:51",
+        "2026-08-18T06:52"
       ],
       "sunsets": [
-        "2026-08-12T20:21",
         "2026-08-13T20:20",
         "2026-08-14T20:19",
         "2026-08-15T20:17",
         "2026-08-16T20:16",
-        "2026-08-17T20:15"
+        "2026-08-17T20:15",
+        "2026-08-18T20:14"
       ],
       "timezone": "America/New_York"
     }
@@ -2383,6 +2372,6 @@
     "creditDebt": 15223.06,
     "netLiquid": 18558.22,
     "source": "ynab",
-    "updatedAt": "2026-08-13T03:46:06.670Z"
+    "updatedAt": "2026-08-13T04:01:08.008Z"
   }
 }
