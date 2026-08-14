@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T10:15:10.711Z",
+  "generated_at": "2026-08-14T10:30:10.746Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2181,7 +2181,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 45.2,
-    "totalSpend": 9297.82,
+    "totalSpend": 9356.94,
     "totalBudget": 17750.5,
     "categories": [
       {
@@ -2204,9 +2204,9 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 2546.81,
-        "spent": 1163.6,
-        "balance": 1383.21,
-        "pct": 45.7
+        "spent": 1187.74,
+        "balance": 1359.07,
+        "pct": 46.6
       },
       {
         "name": "🛒 Groceries",
@@ -2228,9 +2228,9 @@
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 364.32,
-        "spent": 227.06,
-        "balance": 137.26,
-        "pct": 62.3
+        "spent": 262.04,
+        "balance": 102.28,
+        "pct": 71.9
       },
       {
         "name": "🍿 Entertainment",
@@ -2297,10 +2297,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 7159.72,
-    "creditDebt": 15021.5,
-    "netLiquid": 22181.22,
+    "liquidCash": 7135.58,
+    "creditDebt": 14986.52,
+    "netLiquid": 22122.1,
     "source": "ynab",
-    "updatedAt": "2026-08-14T10:15:09.156Z"
+    "updatedAt": "2026-08-14T10:30:09.297Z"
   }
 }
