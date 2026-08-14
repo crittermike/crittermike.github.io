@@ -312,6 +312,35 @@ select.btn{appearance:none;padding-right:1.6rem;
 .modal.open{display:flex;}
 .sheet{background:var(--panel);border-radius:22px;box-shadow:var(--shadow-lg);width:min(1000px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden;}
 .sheet.narrow{width:min(560px,100%);}
+#editModal .sheet{width:min(1280px,100%);}
+
+/* ---------- weekly editor: a drag-editable copy of the timeline ---------- */
+.ed-split{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(430px,1.18fr);gap:20px;align-items:start;}
+@media (max-width:940px){.ed-split{grid-template-columns:1fr;}}
+.ed-pane-h{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-faint);}
+.ed-pane-h .sp{margin-left:auto;}
+.ed-pane-h .btn{padding:.28rem .7rem;font-size:.76rem;text-transform:none;letter-spacing:0;}
+.ed-tl-scroll{
+  position:relative;overflow-y:auto;overscroll-behavior:contain;
+  height:clamp(340px,58vh,620px);
+  border:1px solid var(--line);border-radius:16px;background:var(--bg);
+  padding:12px 14px 12px 0;
+}
+.ed-tl-scroll::-webkit-scrollbar{width:9px;}
+.ed-tl-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px;}
+.ed-tl{--gut:66px;}
+.ed-tl .tl-hr b{padding-right:12px;font-size:.68rem;}
+.ed-tl .blk .blk-in{gap:7px;padding:0 10px 0 15px;}
+.ed-tl .blk .em{font-size:1.08rem;}
+.ed-tl .blk .nm{font-size:.9rem;}
+.ed-tl .blk .tm{font-size:.64rem;}
+.ed-tl .blk .len{font-size:.75rem;}
+.ed-tl .gap span{font-size:.68rem;}
+.ed-tl .blk.live.locked{cursor:grab;}   /* the template is where a locked time gets set */
+.ed-tl .blk.sel{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 62%,transparent),0 1px 2px rgba(22,35,58,.05);}
+.etable tr.sel td{background:color-mix(in srgb,var(--accent) 11%,transparent);}
+.etable tr.sel td:first-child{border-radius:9px 0 0 9px;}
+.etable tr.sel td:last-child{border-radius:0 9px 9px 0;}
 .sheet-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;}
 .sheet-head h2{font-size:1.3rem;display:flex;align-items:center;gap:.5rem;min-width:0;}
 .sheet-head h2 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -444,12 +473,20 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
         <label class="field"><span>Title shown at the top</span><input type="text" id="titleInput" placeholder="Mrs. Crittenden's Kindergarten"></label>
         <div class="tabs" id="dayTabs"></div>
         <div class="warnbox" id="warnBox"></div>
-        <p class="hint">This is the permanent week-in-week-out plan. For one-off changes (an activity running long, a surprise assembly) close this and tap a block right on the timeline instead. Tick <strong>🔒</strong> on anything that never moves — locked times can't be dragged or pushed around.</p>
-        <table class="etable">
-          <thead><tr><th style="width:118px">Start</th><th style="width:118px">End</th><th>Activity</th><th style="width:170px">Kind</th><th style="width:44px" title="Locked blocks never get pushed around">🔒</th><th style="width:40px"></th></tr></thead>
-          <tbody id="editRows"></tbody>
-        </table>
-        <button class="btn" id="addRow" style="margin-top:12px">+ Add a block</button>
+        <p class="hint">This is the permanent week-in-week-out plan. <strong>Drag a block up or down to move it</strong> (drag it past a neighbour to reorder), or <strong>pull its bottom edge</strong> to make it longer or shorter — everything else slides out of the way. Tap a block to rename it. For one-off changes (an activity running long, a surprise assembly) close this and tap a block on the main timeline instead. Tick <strong>🔒</strong> on anything that never moves — locked times can't be dragged or pushed around out on the main timeline.</p>
+        <div class="ed-split">
+          <div>
+            <p class="ed-pane-h">Drag to move · pull the bottom edge to resize</p>
+            <div class="ed-tl-scroll" id="edTlScroll"><div class="tl ed-tl" id="edTimeline"></div></div>
+          </div>
+          <div>
+            <p class="ed-pane-h">Exact times<span class="sp"></span><button class="btn" id="addRow">+ Add a block</button></p>
+            <table class="etable">
+              <thead><tr><th style="width:112px">Start</th><th style="width:112px">End</th><th>Activity</th><th style="width:150px">Kind</th><th style="width:40px" title="Locked blocks never get pushed around">🔒</th><th style="width:36px"></th></tr></thead>
+              <tbody id="editRows"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div id="editJson" hidden>
         <p class="hint">Copy this out to back it up, or paste a saved copy in and press <strong>Load pasted schedule</strong>.</p>
@@ -1505,16 +1542,20 @@ function applyTheme(t){
    WEEKLY SCHEDULE EDITOR
    ======================================================================= */
 let draft = null, editDay = 'mon';
+let edPpm = 4, edBounds = {a:480,b:900}, edSel = -1, edDrag = null;
 const em = {modal:$('editModal'), rows:$('editRows'), tabs:$('dayTabs'), titleInput:$('titleInput'),
   warn:$('warnBox'), main:$('editMain'), json:$('editJson'), jsonArea:$('jsonArea')};
 
 function openEditor(){
   draft = clone(schedule);
   editDay = DAY_KEYS.includes(viewDay) ? viewDay : 'mon';
+  DAY_KEYS.forEach(k => draft.days[k] = sortDay(draft.days[k]||[]));
+  edSel = -1;
   em.titleInput.value = draft.title;
   em.main.hidden=false; em.json.hidden=true;
+  em.modal.classList.add('open');   // open before drawing so the timeline pane has a height to fit into
   drawTabs(); drawRows();
-  em.modal.classList.add('open');
+  requestAnimationFrame(()=>{ if(draft) edDraw(); });
 }
 const closeEditor = () => { em.modal.classList.remove('open'); draft=null; };
 
@@ -1522,14 +1563,14 @@ function drawTabs(){
   em.tabs.innerHTML = DAY_KEYS.map(k =>
     '<button class="tab'+(k===editDay?' on':'')+'" data-d="'+k+'">'+DAY_NAMES[k]+
     ' <span style="opacity:.6">'+(draft.days[k]||[]).length+'</span></button>').join('');
-  em.tabs.querySelectorAll('.tab').forEach(t => t.onclick = () => { commitRows(); editDay=t.dataset.d; drawTabs(); drawRows(); });
+  em.tabs.querySelectorAll('.tab').forEach(t => t.onclick = () => { commitRows(); editDay=t.dataset.d; edSel=-1; drawTabs(); drawRows(); });
 }
 
 function drawRows(){
   const list = draft.days[editDay] || [];
   const opts = Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].icon+' '+TYPES[k].label+'</option>').join('');
   em.rows.innerHTML = list.map((b,i)=>
-    '<tr data-i="'+i+'">' +
+    '<tr data-i="'+i+'"'+(i===edSel?' class="sel"':'')+'>' +
       '<td><input type="time" class="f-start" value="'+esc(b.start)+'"></td>' +
       '<td><input type="time" class="f-end" value="'+esc(b.end)+'"></td>' +
       '<td><input type="text" class="f-name" value="'+esc(b.name)+'" placeholder="Activity name"></td>' +
@@ -1540,9 +1581,15 @@ function drawRows(){
     '</tr>').join('');
   em.rows.querySelectorAll('tr').forEach((tr,i)=>{
     tr.querySelector('.f-type').value = TYPES[list[i].type] ? list[i].type : 'other';
-    tr.querySelector('.f-del').onclick = () => { commitRows(); draft.days[editDay].splice(i,1); drawTabs(); drawRows(); };
-    tr.querySelectorAll('input,select').forEach(inp => inp.onchange = () => { commitRows(); checkOverlaps(); });
+    tr.querySelector('.f-del').onclick = () => { commitRows(); draft.days[editDay].splice(i,1); edSel=-1; drawTabs(); drawRows(); };
+    tr.addEventListener('pointerdown', () => edSelect(i, false));
+    // a time change can reorder the day, so re-sort and redraw both panes
+    tr.querySelectorAll('.f-start,.f-end').forEach(inp => inp.onchange = () => {
+      commitRows(); draft.days[editDay] = sortDay(draft.days[editDay]); drawRows();
+    });
+    tr.querySelectorAll('.f-name,.f-type,.f-lock').forEach(inp => inp.onchange = () => { commitRows(); edDraw(); checkOverlaps(); });
   });
+  edDraw();
   checkOverlaps();
 }
 
@@ -1560,6 +1607,168 @@ function commitRows(){
   });
   draft.days[editDay] = list;
   draft.title = em.titleInput.value.trim() || DEFAULT_SCHEDULE.title;
+}
+
+/* -----------------------------------------------------------------------
+   The editor's own proportional timeline. Same look and feel as the live
+   one, but it edits draft.days[editDay] and it lets you drag past a
+   neighbour to reorder, which the live timeline deliberately forbids.
+   ----------------------------------------------------------------------- */
+const edList = () => (draft.days[editDay] || (draft.days[editDay] = []));
+
+function edFit(bounds){
+  const box = $('edTlScroll'); if(!box) return;
+  const cs = getComputedStyle(box);
+  const avail = box.clientHeight - (parseFloat(cs.paddingTop)||0) - (parseFloat(cs.paddingBottom)||0);
+  edPpm = clampN((avail > 60 ? avail : 380) / Math.max(1, bounds.b - bounds.a), 2, 10);
+}
+
+function edDraw(){
+  const box = $('edTimeline'); if(!box || !draft) return;
+  const list = edList(), B = dayBounds(list);
+  edBounds = B; edFit(B);
+  const y = m => ((m - B.a) * edPpm).toFixed(1);
+  const showHalf = edPpm >= 3.4;
+  let h = '<div class="tl-rail"></div>';
+
+  for(let m = Math.ceil(B.a/30)*30; m <= B.b; m += 30){
+    const onHour = m % 60 === 0;
+    if(!onHour && !showHalf) continue;
+    h += '<div class="tl-hr'+(onHour?'':' half')+'" style="top:'+y(m)+'px"><b>'+shortTime(m)+'</b></div>';
+  }
+  for(let i=1;i<list.length;i++){
+    const gs = toMin(list[i-1].end), d = toMin(list[i].start) - gs;
+    if(d < 4) continue;
+    h += '<div class="gap" style="top:'+y(gs)+'px;height:'+(d*edPpm).toFixed(1)+'px">'+
+         (d*edPpm > 26 ? '<span>'+durLabel(d)+' open</span>' : '')+'</div>';
+  }
+  list.forEach((b,i)=>{
+    const T = typeOf(b.type), s = toMin(b.start), e = toMin(b.end);
+    const hpx = Math.max(9,(e-s)*edPpm);
+    const size = hpx < 32 ? ' xs' : (hpx < 58 ? ' sm' : '');
+    h += '<div class="blk live s-up'+size+(b.locked?' locked':'')+(i===edSel?' sel':'')+'"'+
+      ' style="--c:'+T.color+';top:'+y(s)+'px;height:'+hpx.toFixed(1)+'px" data-i="'+i+'"'+
+      ' tabindex="0" role="button" aria-label="'+esc(b.name)+', '+shortTime(s)+' to '+shortTime(e)+
+      '. Arrow keys move it, shift plus arrows resize it.">'+
+      '<div class="blk-in"><span class="em">'+T.icon+'</span><span class="nm">'+esc(b.name)+'</span>'+
+        (b.locked?'<span class="lock">\u{1F512}</span>':'')+
+        '<span class="meta"><span class="tm">'+shortTime(s)+'\u2013'+shortTime(e)+'</span>'+
+        '<span class="len">'+durLabel(Math.max(0,e-s))+'</span></span></div>'+
+      '<div class="grip" aria-hidden="true"><span></span></div></div>';
+  });
+
+  box.style.height = ((B.b - B.a) * edPpm).toFixed(1)+'px';
+  box.innerHTML = h;
+  box.querySelectorAll('.blk').forEach(n=>{
+    n.addEventListener('pointerdown', edDown);
+    n.addEventListener('keydown', edKey);
+  });
+}
+
+function edSelect(i, focusRow){
+  edSel = i;
+  const rows = em.rows.querySelectorAll('tr');
+  rows.forEach((tr,k)=>tr.classList.toggle('sel', k===i));
+  const tl = $('edTimeline');
+  if(tl) tl.querySelectorAll('.blk').forEach((n,k)=>n.classList.toggle('sel', k===i));
+  const tr = rows[i];
+  if(tr && focusRow){
+    tr.scrollIntoView({block:'nearest'});
+    const f = tr.querySelector('.f-name'); if(f) f.focus();
+  }
+}
+
+/* the block you dragged wins its new spot; the rest slide out of the way,
+   keeping their order and their length. Dropping past a neighbour reorders. */
+function edPushApart(list, anchor){
+  const s = sortDay(list), ai = s.indexOf(anchor);
+  if(ai < 0) return;
+  for(let i=ai+1;i<s.length;i++){
+    const lo = toMin(s[i-1].end);
+    if(toMin(s[i].start) < lo){
+      const dur = toMin(s[i].end) - toMin(s[i].start);
+      const a = clampN(lo, 0, 1435);
+      s[i].start = toHM(a); s[i].end = toHM(clampN(a + dur, 0, 1439));
+    }
+  }
+  for(let i=ai-1;i>=0;i--){
+    const hi = toMin(s[i+1].start);
+    if(toMin(s[i].end) > hi){
+      const dur = toMin(s[i].end) - toMin(s[i].start);
+      const b = clampN(hi, 5, 1439);
+      s[i].end = toHM(b); s[i].start = toHM(clampN(b - dur, 0, 1435));
+    }
+  }
+}
+
+function edApply(b){
+  const list = edList();
+  edPushApart(list, b);
+  draft.days[editDay] = sortDay(list);
+  edSel = draft.days[editDay].indexOf(b);
+  drawRows();
+}
+
+function edDown(e){
+  if(edDrag || (e.button !== undefined && e.button !== 0)) return;
+  const node = e.currentTarget, b = edList()[+node.dataset.i];
+  if(!b) return;
+  edDrag = {node, i:+node.dataset.i, pid:e.pointerId, y0:e.clientY,
+            s0:toMin(b.start), e0:toMin(b.end), moved:false,
+            mode: e.target.closest('.grip') ? 'resize' : 'move'};
+  try{ node.setPointerCapture(e.pointerId); }catch(err){}
+  node.addEventListener('pointermove', edMove);
+  node.addEventListener('pointerup', edUp);
+  node.addEventListener('pointercancel', edUp);
+}
+
+function edMove(e){
+  const d = edDrag; if(!d) return;
+  const dy = e.clientY - d.y0;
+  if(!d.moved){ if(Math.abs(dy) < 5) return; d.moved = true; d.node.classList.add('dragging'); }
+  const B = edBounds, dur = d.e0 - d.s0;
+  const delta = Math.round((dy / edPpm) / SNAP) * SNAP;
+  let s, en;
+  if(d.mode === 'resize'){ s = d.s0; en = clampN(d.e0 + delta, d.s0 + MIN_DUR, Math.max(d.s0 + MIN_DUR, B.b)); }
+  else { s = clampN(d.s0 + delta, B.a, Math.max(B.a, B.b - dur)); en = s + dur; }
+  d.cur = {s:s, e:en};
+  d.node.style.top = ((s - B.a) * edPpm).toFixed(1)+'px';
+  d.node.style.height = Math.max(9,(en-s)*edPpm).toFixed(1)+'px';
+  const tm = d.node.querySelector('.tm'), ln = d.node.querySelector('.len');
+  if(tm) tm.textContent = shortTime(s)+'\u2013'+shortTime(en);
+  if(ln) ln.textContent = durLabel(en-s);
+}
+
+function edUp(){
+  const d = edDrag; if(!d) return;
+  edDrag = null;
+  try{ d.node.releasePointerCapture(d.pid); }catch(err){}
+  d.node.removeEventListener('pointermove', edMove);
+  d.node.removeEventListener('pointerup', edUp);
+  d.node.removeEventListener('pointercancel', edUp);
+  d.node.classList.remove('dragging');
+  const b = edList()[d.i];
+  if(!b){ drawRows(); return; }
+  if(!d.moved){ edSelect(d.i, true); return; }        // a tap just picks the block
+  if(d.cur && (d.cur.s !== d.s0 || d.cur.e !== d.e0)){
+    b.start = toHM(d.cur.s); b.end = toHM(d.cur.e);
+    edApply(b);
+  } else { drawRows(); }
+}
+
+function edKey(e){
+  const i = +e.currentTarget.dataset.i, b = edList()[i];
+  if(!b) return;
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); edSelect(i, true); return; }
+  const dir = e.key === 'ArrowUp' ? -SNAP : (e.key === 'ArrowDown' ? SNAP : 0);
+  if(!dir) return;
+  e.preventDefault();
+  const s0 = toMin(b.start), e0 = toMin(b.end);
+  if(e.shiftKey) b.end = toHM(Math.max(s0 + MIN_DUR, e0 + dir));
+  else { b.start = toHM(Math.max(0, s0 + dir)); b.end = toHM(Math.max(MIN_DUR, e0 + dir)); }
+  edApply(b);
+  const n = $('edTimeline').querySelector('.blk[data-i="'+edSel+'"]');
+  if(n) n.focus();
 }
 
 function checkOverlaps(){
@@ -1596,8 +1805,12 @@ $('addRow').onclick = () => {
   commitRows();
   const list = draft.days[editDay], last = sortDay(list)[list.length-1];
   const start = last ? last.end : '08:35';
-  list.push({start, end:toHM(toMin(start)+15), name:'New activity', type:'other'});
+  const nb = {start, end:toHM(toMin(start)+15), name:'New activity', type:'other'};
+  list.push(nb);
+  draft.days[editDay] = sortDay(list);
+  edSel = draft.days[editDay].indexOf(nb);
   drawTabs(); drawRows();
+  edSelect(edSel, true);
 };
 $('saveEdit').onclick = () => {
   commitRows();
