@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Class Schedule</title>
+<title>Class Timeline</title>
 <meta name="description" content="A live classroom day timeline for the smart board — shows what's happening now, how much time is left, and what's next.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -431,7 +431,7 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
     <div class="brand">
       <span class="brand-emoji">🌟</span>
       <div style="min-width:0">
-        <h1 id="title">Class Schedule</h1>
+        <h1 id="title">Our Class</h1>
         <p class="dayline" id="dayline">—</p>
       </div>
     </div>
@@ -571,7 +571,7 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
     </div>
     <div class="sheet-body">
       <div id="editMain">
-        <label class="field"><span>Title shown at the top</span><input type="text" id="titleInput" placeholder="Mrs. Crittenden's Kindergarten"></label>
+        <label class="field"><span>Title shown at the top</span><input type="text" id="titleInput" placeholder="Mrs. Smith's Kindergarten"></label>
         <div class="tabs" id="dayTabs"></div>
         <div class="warnbox" id="warnBox"></div>
         <p class="hint">This is the permanent week-in-week-out plan. <strong>Drag a block up or down to move it</strong> (drag it past a neighbour to reorder), or <strong>pull its bottom edge</strong> to make it longer or shorter — everything else slides out of the way. Tap a block to rename it. For one-off changes (an activity running long, a surprise assembly) close this and tap a block on the main timeline instead. Tick <strong>🔒</strong> on anything that never moves — locked times can't be dragged or pushed around out on the main timeline.</p>
@@ -646,7 +646,7 @@ const B = (start,end,name,type) => ({start,end,name,type});
 const L = (start,end,name,type) => ({start,end,name,type,locked:true});
 
 const DEFAULT_SCHEDULE = {
-  title: "Mrs. Crittenden's Kindergarten",
+  title: "Our Class",
   days: {
     mon:[
       B('08:35','08:55','Daily Routines & Morning Meeting','meeting'),
@@ -765,7 +765,9 @@ function loadSchedule(){
     const s = JSON.parse(raw);
     if(!s || typeof s!=='object' || !s.days) return clone(DEFAULT_SCHEDULE);
     DAY_KEYS.forEach(k => { if(!Array.isArray(s.days[k])) s.days[k]=[]; });
-    s.title = s.title || DEFAULT_SCHEDULE.title;
+    /* Installs that predate the rename never stored a title of their own, so
+       keep the name they were already showing instead of the new default. */
+    s.title = s.title || "Mrs. Crittenden's Kindergarten";
     return s;
   }catch(e){ return clone(DEFAULT_SCHEDULE); }
 }
