@@ -62,9 +62,12 @@ button{font-family:inherit;cursor:pointer;}
   border-radius:99px;padding:.1rem .55rem;font-size:.78em;font-weight:800;letter-spacing:.02em;
 }
 html[data-theme="dark"] .tweaked{color:#fcd34d;}
+.preview{
+  background:color-mix(in srgb,#ef4444 20%,transparent);color:#b91c1c;border:1px solid color-mix(in srgb,#ef4444 55%,transparent);
+  border-radius:99px;padding:.1rem .55rem;font-size:.78em;font-weight:800;letter-spacing:.02em;
+}
+html[data-theme="dark"] .preview{color:#fca5a5;}
 .topbar-right{display:flex;align-items:center;gap:clamp(8px,1vw,16px);}
-.clock{font-family:'Fredoka',sans-serif;font-weight:600;font-size:clamp(1.4rem,2.6vw,2.6rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
-.clock .ampm{font-size:.44em;color:var(--ink-faint);margin-left:.18em;}
 .controls{display:flex;align-items:center;gap:6px;}
 .btn{
   border:1px solid var(--line);background:var(--panel);color:var(--ink-soft);
@@ -367,7 +370,6 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
       </div>
     </div>
     <div class="topbar-right">
-      <div class="clock" id="clock">—</div>
       <div class="controls">
         <select class="btn" id="daySelect" title="Look at a different day"></select>
         <button class="btn" id="soundBtn" title="Chime when activities change">🔕</button>
@@ -784,7 +786,7 @@ function closeGap(gapStart, gapEnd){
    ======================================================================= */
 const $ = id => document.getElementById(id);
 const el = {
-  title:$('title'), dayline:$('dayline'), clock:$('clock'), dayFill:$('dayFill'),
+  title:$('title'), dayline:$('dayline'), dayFill:$('dayFill'),
   nowPanel:$('nowPanel'), timeline:$('timeline'), tlScroll:$('tlScroll'),
   tlTitle:$('tlTitle'), tlCount:$('tlCount'), daySelect:$('daySelect'),
   soundBtn:$('soundBtn'), themeBtn:$('themeBtn'), editBtn:$('editBtn'), fsBtn:$('fsBtn'),
@@ -814,12 +816,11 @@ function render(){
 
   // ---- header ----
   el.title.textContent = schedule.title;
-  const c = fmt12(now);
-  el.clock.innerHTML = c.t + '<span class="ampm">' + c.ap + '</span>';
-  el.dayline.innerHTML = isToday
+  el.dayline.innerHTML = (isToday
     ? esc(new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})) +
       (hasOverride() ? ' <span class="tweaked">Adjusted for today</span>' : '')
-    : (noSchool ? 'No school today' : 'Looking at ' + DAY_NAMES[viewDay]);
+    : (noSchool ? 'No school today' : 'Looking at ' + DAY_NAMES[viewDay]))
+    + (forcedTime !== null ? ' <span class="preview">\u{1F441} Preview \u2014 pretending it\u2019s ' + esc(fmt12s(forcedTime)) + '</span>' : '');
   el.daySelect.value = viewDay;
   el.tlTitle.textContent = isToday ? "Today's Plan" : DAY_NAMES[viewDay] + "'s Plan";
 
