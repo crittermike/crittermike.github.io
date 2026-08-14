@@ -179,7 +179,7 @@ select.btn{appearance:none;padding-right:1.6rem;
   background:var(--panel);border:4px solid color-mix(in srgb,var(--c) 55%,var(--line));pointer-events:none;
   transition:background .3s ease,border-color .3s ease,box-shadow .3s ease,transform .3s ease;
 }
-.dot.s-done{background:var(--c);border-color:var(--c);}
+.dot.s-done{background:var(--c);border-color:var(--c);opacity:.42;filter:saturate(.28);}
 .dot.s-now{border-color:var(--c);background:var(--c);transform:scale(1.3);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent);}
 .dot.xs{width:13px;height:13px;margin-top:-6.5px;border-width:3px;left:calc(var(--gut) - 20px);}
 
@@ -312,6 +312,22 @@ select.btn{appearance:none;padding-right:1.6rem;
 .modal.open{display:flex;}
 .sheet{background:var(--panel);border-radius:22px;box-shadow:var(--shadow-lg);width:min(1000px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden;}
 .sheet.narrow{width:min(560px,100%);}
+/* click the class name to rename it */
+#title{cursor:text;border-radius:10px;padding:0 .3rem;margin-left:-.3rem;transition:background .15s ease;}
+#title:hover{background:color-mix(in srgb,var(--accent) 12%,transparent);}
+#titleEdit{font:inherit;font-family:'Fredoka',system-ui,sans-serif;font-weight:700;color:inherit;
+  background:var(--panel);border:2px solid var(--accent);border-radius:10px;padding:0 .3rem;margin-left:-.3rem;
+  width:min(100%,24ch);outline:none;}
+
+/* prev / next day pager */
+.daynav{display:flex;align-items:center;gap:3px;min-width:0;}
+.daynav .arrow{padding:.42rem .62rem;font-size:1.05rem;line-height:1;font-weight:900;}
+.daynav .arrow[disabled]{opacity:.35;cursor:not-allowed;}
+.daynav #daySelect{max-width:min(44vw,16rem);}
+.prepping{display:inline-block;margin-left:.45rem;padding:.08rem .55rem;border-radius:99px;
+  background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);
+  font-size:.78em;font-weight:800;vertical-align:middle;}
+
 #editModal .sheet{width:min(1280px,100%);}
 
 /* ---------- weekly editor: a drag-editable copy of the timeline ---------- */
@@ -400,7 +416,11 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
     </div>
     <div class="topbar-right">
       <div class="controls">
-        <select class="btn" id="daySelect" title="Look at a different day"></select>
+        <span class="daynav">
+          <button class="btn arrow" id="prevDay" title="Previous school day" aria-label="Previous school day">‹</button>
+          <select class="btn" id="daySelect" title="Look at a different day" aria-label="Pick a day"></select>
+          <button class="btn arrow" id="nextDay" title="Next school day" aria-label="Next school day">›</button>
+        </span>
         <button class="btn" id="soundBtn" title="Chime when activities change">🔕</button>
         <button class="btn" id="themeBtn" title="Light / dark">🌙</button>
         <button class="btn" id="editBtn" title="Edit the normal weekly schedule">✏️ Week</button>
@@ -421,8 +441,8 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
           <button id="zoomFit" title="Fit the whole day on screen">Fit</button>
           <button id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
         </div>
-        <button class="btn btn-sm" id="addTodayBtn" title="Add something to today only">➕ Add</button>
-        <button class="btn btn-sm btn-danger" id="resetTodayBtn" hidden title="Undo today's changes">↺ Undo today</button>
+        <button class="btn btn-sm" id="addTodayBtn" title="Add a block to this one day only">➕ Add</button>
+        <button class="btn btn-sm btn-danger" id="resetTodayBtn" hidden title="Undo this day's changes">↺ Undo</button>
         <span class="tl-count" id="tlCount"></span>
       </div>
       <div class="tl-scroll" id="tlScroll"><div class="tl" id="timeline"></div></div>
@@ -641,7 +661,7 @@ const JS_DAY    = {1:'mon',2:'tue',3:'wed',4:'thu',5:'fri'};
 /* =======================================================================
    STORAGE
    ======================================================================= */
-const LS_SCHEDULE='k5.schedule.v1', LS_TODAY='k5.today.v1', LS_SOUND='k5.sound.v1', LS_THEME='k5.theme.v1', LS_ZOOM='k5.zoom.v1';
+const LS_SCHEDULE='k5.schedule.v1', LS_TODAY='k5.today.v1', LS_DAYS='k5.days.v1', LS_SOUND='k5.sound.v1', LS_THEME='k5.theme.v1', LS_ZOOM='k5.zoom.v1';
 const clone = o => JSON.parse(JSON.stringify(o));
 const pad2  = n => String(n).padStart(2,'0');
 
@@ -660,27 +680,53 @@ function saveSchedule(s){ try{ localStorage.setItem(LS_SCHEDULE, JSON.stringify(
 
 let schedule = loadSchedule();
 
-/* ---- today-only overrides: a full snapshot of today's blocks, stamped with
-        the date so it self-destructs overnight ---- */
+/* ---- per-date overrides ----------------------------------------------
+   A full snapshot of one date's blocks, filed under that date. Today's
+   quick tweaks still evaporate overnight, but a plan you set up on Monday
+   for Wednesday is sitting there waiting on Wednesday. Anything older
+   than today is pruned on load. ------------------------------------- */
 function localDateStr(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
+function parseDateStr(s){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s||''));
+  if(!m) return null;
+  const d = new Date(+m[1], +m[2]-1, +m[3]);
+  return isNaN(d.getTime()) ? null : d;
+}
+const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+function addDays(d,n){ const x = startOfDay(d); x.setDate(x.getDate()+n); return x; }
 
-let override = null;
-(function loadOverride(){
+let dayOverrides = {};
+(function loadOverrides(){
   try{
-    const raw = localStorage.getItem(LS_TODAY);
-    if(!raw) return;
-    const o = JSON.parse(raw);
-    if(o && o.date === localDateStr(new Date()) && Array.isArray(o.blocks)) override = o;
-    else localStorage.removeItem(LS_TODAY);
+    const raw = localStorage.getItem(LS_DAYS);
+    if(raw){
+      const o = JSON.parse(raw);
+      if(o && typeof o === 'object'){
+        Object.keys(o).forEach(k => { if(Array.isArray(o[k])) dayOverrides[k] = o[k]; });
+      }
+    }
+    const legacy = localStorage.getItem(LS_TODAY);   // fold in the old single-day key
+    if(legacy){
+      const o = JSON.parse(legacy);
+      if(o && o.date && Array.isArray(o.blocks) && !dayOverrides[o.date]) dayOverrides[o.date] = o.blocks;
+      localStorage.removeItem(LS_TODAY);
+    }
   }catch(e){}
 })();
-function saveOverride(){
+/* ISO date strings sort lexicographically, so a plain < is a date compare */
+function pruneOverrides(){
+  const today = localDateStr(new Date());
+  let changed = false;
+  Object.keys(dayOverrides).forEach(k => { if(k < today){ delete dayOverrides[k]; changed = true; } });
+  return changed;
+}
+function saveOverrides(){
   try{
-    if(override) localStorage.setItem(LS_TODAY, JSON.stringify(override));
-    else localStorage.removeItem(LS_TODAY);
+    if(Object.keys(dayOverrides).length) localStorage.setItem(LS_DAYS, JSON.stringify(dayOverrides));
+    else localStorage.removeItem(LS_DAYS);
   }catch(e){}
 }
-const hasOverride = () => !!(override && override.blocks);
+if(pruneOverrides()) saveOverrides();
 
 /* =======================================================================
    TIME HELPERS
@@ -713,26 +759,74 @@ function nowMin(){
   const d=new Date(); return d.getHours()*60+d.getMinutes()+d.getSeconds()/60;
 }
 const todayKey = () => JS_DAY[new Date().getDay()] || null;
+const dayKeyOf = d => JS_DAY[d.getDay()] || null;
 
-let viewDay = forcedDayParam || todayKey() || 'mon';
-const viewingToday = () => !forcedDayParam && viewDay === todayKey();
+/* =======================================================================
+   WHICH DAY ARE WE LOOKING AT?
+   viewDate is a real date, not just a weekday, so "next Monday" and "this
+   Monday" are different days you can prep separately. It is always a
+   school day: weekends roll forward to the next Monday.
+   ======================================================================= */
+const MAX_BACK = 30, MAX_AHEAD = 120;      // how far the pager can wander
+function nextSchoolDay(d, dir){
+  let x = startOfDay(d);
+  for(let i=0;i<9;i++){ if(dayKeyOf(x)) return x; x = addDays(x, dir); }
+  return startOfDay(d);
+}
+function clampDate(d){
+  const t = startOfDay(new Date());
+  if(d < addDays(t,-MAX_BACK)) return nextSchoolDay(addDays(t,-MAX_BACK), 1);
+  if(d > addDays(t, MAX_AHEAD)) return nextSchoolDay(addDays(t, MAX_AHEAD), -1);
+  return d;
+}
+function initialDate(){
+  const q = parseDateStr(params.get('date'));
+  if(q) return clampDate(nextSchoolDay(q, 1));
+  const today = startOfDay(new Date());
+  if(forcedDayParam){                       // ?day=wed -> that weekday, this week
+    const want = DAY_KEYS.indexOf(forcedDayParam) + 1;   // JS: Sun=0, Mon=1 ...
+    return clampDate(addDays(today, want - today.getDay()));
+  }
+  return nextSchoolDay(today, 1);
+}
+let viewDate = initialDate();
+let viewDay  = dayKeyOf(viewDate) || 'mon';
+let titleEditing = false;
+
+function setViewDate(d){
+  viewDate = clampDate(startOfDay(d));
+  viewDay  = dayKeyOf(viewDate) || viewDay;
+  undoStack.length = 0; hideToast();
+  tlSig = null; lastScrolledIdx = -1;
+}
+const todayStr     = () => localDateStr(new Date());
+const viewStr      = () => localDateStr(viewDate);
+const viewingToday = () => viewStr() === todayStr();
+const viewingPast  = () => viewStr() <  todayStr();
+/* today and every day still ahead can be edited; yesterday is history */
+const canEdit      = () => !viewingPast();
+/* where the "back to today" button lands (next Monday if it's the weekend) */
+const homeStr      = () => localDateStr(nextSchoolDay(new Date(), 1));
 
 /* the list actually being displayed */
-function blocksFor(day){
-  if(day === todayKey() && !forcedDayParam && hasOverride()) return sortDay(override.blocks);
-  return sortDay(schedule.days[day] || []);
+function viewBlocks(){
+  const ov = dayOverrides[viewStr()];
+  return sortDay(ov || schedule.days[viewDay] || []);
 }
+const hasOverride = () => !!dayOverrides[viewStr()];
 
-/* snapshot today's blocks into an override so we can safely mutate them */
+/* snapshot this day's blocks into an override so we can safely mutate them */
 function ensureOverride(){
-  if(hasOverride()) return override.blocks;
-  override = {date: localDateStr(new Date()), blocks: clone(sortDay(schedule.days[todayKey()] || []))};
-  return override.blocks;
+  const ds = viewStr();
+  if(!dayOverrides[ds]) dayOverrides[ds] = clone(sortDay(schedule.days[viewDay] || []));
+  return dayOverrides[ds];
 }
 function commitOverride(){
-  resolveOverlaps(override.blocks);
-  override.blocks = sortDay(override.blocks);
-  saveOverride(); repaint();
+  const ds = viewStr(), l = dayOverrides[ds];
+  if(!l) return;
+  resolveOverlaps(l);
+  dayOverrides[ds] = sortDay(l);
+  saveOverrides(); repaint();
 }
 
 /* -----------------------------------------------------------------------
@@ -826,6 +920,7 @@ const el = {
   title:$('title'), dayline:$('dayline'), dayFill:$('dayFill'),
   nowPanel:$('nowPanel'), timeline:$('timeline'), tlScroll:$('tlScroll'),
   tlTitle:$('tlTitle'), tlCount:$('tlCount'), daySelect:$('daySelect'),
+  prevDay:$('prevDay'), nextDay:$('nextDay'),
   soundBtn:$('soundBtn'), themeBtn:$('themeBtn'), editBtn:$('editBtn'), fsBtn:$('fsBtn'),
   addToday:$('addTodayBtn'), resetToday:$('resetTodayBtn')
 };
@@ -846,62 +941,66 @@ function dayState(list, now){
 }
 
 function render(){
-  const now = nowMin();
-  const isToday = viewingToday();
-  const list = blocksFor(viewDay);
-  const noSchool = !todayKey();
+  const now  = nowMin();
+  const live = viewingToday();   // ticking now-line, chimes, done / now / next
+  const edit = canEdit();        // today or any school day still ahead
+  const list = viewBlocks();
+  const when = viewDate.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
 
   // ---- header ----
-  el.title.textContent = schedule.title;
-  el.dayline.innerHTML = (isToday
-    ? esc(new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})) +
-      (hasOverride() ? ' <span class="tweaked">Adjusted for today</span>' : '')
-    : (noSchool ? 'No school today' : 'Looking at ' + DAY_NAMES[viewDay]))
+  if(!titleEditing) el.title.textContent = schedule.title;
+  syncDayNav();
+  el.dayline.innerHTML = esc(when)
+    + (live
+        ? (hasOverride() ? ' <span class="tweaked">Adjusted for today</span>' : '')
+        : (edit ? ' <span class="prepping">\u270E Prepping ahead</span>'
+                     + (hasOverride() ? ' <span class="tweaked">Adjusted</span>' : '')
+                : ' <span class="tweaked">Already happened</span>'))
     + (forcedTime !== null ? ' <span class="preview">\u{1F441} Preview \u2014 pretending it\u2019s ' + esc(fmt12s(forcedTime)) + '</span>' : '');
-  el.daySelect.value = viewDay;
-  el.tlTitle.textContent = isToday ? "Today's Plan" : DAY_NAMES[viewDay] + "'s Plan";
+  el.tlTitle.textContent = live ? "Today's Plan" : DAY_NAMES[viewDay] + "'s Plan";
 
-  // ---- today-only controls only make sense on today ----
-  el.addToday.hidden = !isToday;
-  el.resetToday.hidden = !(isToday && hasOverride());
+  // ---- these edit today AND any day still ahead ----
+  el.addToday.hidden = !edit;
+  el.resetToday.hidden = !(edit && hasOverride());
 
-  const st = isToday ? dayState(list, now) : {current:null,next:null,idx:-1};
+  const st = live ? dayState(list, now) : {current:null,next:null,idx:-1};
   const dayStart = list.length ? toMin(list[0].start) : 0;
   const dayEnd   = list.length ? toMin(list[list.length-1].end) : 0;
 
-  el.dayFill.style.width = (isToday && list.length
+  el.dayFill.style.width = (live && list.length
     ? Math.max(0, Math.min(1,(now-dayStart)/Math.max(1,dayEnd-dayStart)))*100 : 0).toFixed(2)+'%';
 
-  const doneCount = isToday ? list.filter(b=>now>=toMin(b.end)).length : 0;
+  const doneCount = live ? list.filter(b=>now>=toMin(b.end)).length : 0;
   el.tlCount.textContent = list.length
-    ? (isToday ? doneCount+' of '+list.length+' done' : list.length+' blocks')
+    ? (live ? doneCount+' of '+list.length+' done' : list.length+' blocks')
     : '';
 
-  renderNow(list, st, now, isToday, noSchool);
-  renderTimeline(list, st, now, isToday);
+  renderNow(list, st, now, live, edit);
+  renderTimeline(list, st, now, live, edit);
 
-  const key = isToday ? (st.current ? st.current.start+'|'+st.current.name : 'gap:'+(st.next?st.next.start:'end')) : 'preview';
-  if(!firstPaint && key !== lastCurrentKey && isToday && st.current) chime();
+  const key = live ? (st.current ? st.current.start+'|'+st.current.name : 'gap:'+(st.next?st.next.start:'end')) : 'preview';
+  if(!firstPaint && key !== lastCurrentKey && live && st.current) chime();
   lastCurrentKey = key;
   firstPaint = false;
 }
 
-function renderNow(list, st, now, isToday, noSchool){
+function renderNow(list, st, now, live, edit){
   const p = el.nowPanel;
 
-  if(!isToday){
-    p.style.setProperty('--tint', noSchool ? '#22c55e' : '#f59e0b');
-    if(noSchool){
-      p.innerHTML = msgBlock('🎈','No school today','Pick a day above to look ahead.');
-      return;
-    }
+  if(!live){
+    p.style.setProperty('--tint', edit ? '#f59e0b' : '#64748b');
     const first=list[0], last=list[list.length-1];
-    p.innerHTML = '<div class="preview-flag">Just looking</div>' +
-      msgBlock('🔎', DAY_NAMES[viewDay], list.length
-        ? list.length+' blocks, '+fmt12s(toMin(first.start))+' to '+fmt12s(toMin(last.end))+'.'
-        : 'Nothing scheduled yet.') +
-      '<div class="msg-actions"><button class="btn btn-primary" id="backToday">Back to today</button></div>';
-    const b=$('backToday'); if(b) b.onclick = ()=>{ viewDay = todayKey() || 'mon'; lastScrolledIdx=-1; repaint(); };
+    const when = viewDate.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});
+    const body = (list.length
+      ? list.length+' blocks, '+fmt12s(toMin(first.start))+' to '+fmt12s(toMin(last.end))+'.'
+      : 'Nothing scheduled yet.')
+      + (edit ? ' Drag, resize or tap anything to set it up now \u2014 it only changes this one day.' : '');
+    const away = viewStr() !== homeStr();
+    p.innerHTML = '<div class="preview-flag">' + (edit ? '\u270E Planning ahead' : 'Just looking') + '</div>' +
+      msgBlock(edit ? '\u{1F5D3}\uFE0F' : '\u{1F50E}', when, body) +
+      (away ? '<div class="msg-actions"><button class="btn btn-primary" id="backToday">'
+              + (todayKey() ? 'Back to today' : 'Back to the next school day') + '</button></div>' : '');
+    const b=$('backToday'); if(b) b.onclick = ()=>{ setViewDate(nextSchoolDay(new Date(),1)); repaint(); autoScroll(true); };
     return;
   }
 
@@ -1054,16 +1153,16 @@ function applyFit(bounds){
   }
 }
 
-function renderTimeline(list, st, now, isToday){
+function renderTimeline(list, st, now, live, edit){
   const bounds = dayBounds(list);
   applyFit(bounds);
   tlBounds = bounds;
-  const sig = [JSON.stringify(list), viewDay, isToday, ppm.toFixed(3), bounds.a, bounds.b].join('|');
-  if(sig !== tlSig){ tlSig = sig; buildTimeline(list, isToday, bounds); }
-  paintTimelineNow(list, st, now, isToday, bounds);
+  const sig = [JSON.stringify(list), viewStr(), live, edit, ppm.toFixed(3), bounds.a, bounds.b].join('|');
+  if(sig !== tlSig){ tlSig = sig; buildTimeline(list, edit, bounds); }
+  paintTimelineNow(list, st, now, live, bounds);
 }
 
-function buildTimeline(list, isToday, bounds){
+function buildTimeline(list, edit, bounds){
   const y = m => ((m - bounds.a) * ppm).toFixed(1);
   let h = '<div class="tl-rail"><i id="railFill"></i></div>';
 
@@ -1080,7 +1179,7 @@ function buildTimeline(list, isToday, bounds){
     const d = ge - gs;
     if(d < 4) continue;
     const inner_gap = i>0 && i<list.length;
-    const tappable = inner_gap && isToday;
+    const tappable = inner_gap && edit;
     const inner = (inner_gap && d*ppm > 26)
       ? '<span>🔄 '+durLabel(d)+' open'+(tappable && d*ppm > 46 ? ' · tap to close' : '')+'</span>' : '';
     h += '<div class="gap'+(tappable?' live':'')+'" data-s="'+gs+'" data-e="'+ge+'"'+
@@ -1092,10 +1191,10 @@ function buildTimeline(list, isToday, bounds){
     const T = typeOf(b.type), s = toMin(b.start), e = toMin(b.end);
     const hpx = Math.max(8,(e-s)*ppm);
     const size = hpx < 32 ? ' xs' : (hpx < 58 ? ' sm' : '');
-    h += '<div class="blk s-up'+size+(b.added?' added':'')+(b.locked?' locked':'')+(isToday?' live':'')+'"'+
+    h += '<div class="blk s-up'+size+(b.added?' added':'')+(b.locked?' locked':'')+(edit?' live':'')+'"'+
       ' style="--c:'+T.color+';top:'+y(s)+'px;height:'+hpx.toFixed(1)+'px"'+
       ' data-i="'+i+'" data-s="'+s+'" data-e="'+e+'"'+
-      (isToday ? ' tabindex="0" role="button" aria-label="'+esc(b.name)+', '+shortTime(s)+' to '+shortTime(e)+'.'+(b.locked?' Locked.':'')+' Enter to edit'+(b.locked?'.':', arrows to move.')+'"' : '')+'>'+
+      (edit ? ' tabindex="0" role="button" aria-label="'+esc(b.name)+', '+shortTime(s)+' to '+shortTime(e)+'.'+(b.locked?' Locked.':'')+' Enter to edit'+(b.locked?'.':', arrows to move.')+'"' : '')+'>'+
       '<div class="blk-fill"></div>'+
       '<div class="blk-in">'+
         '<span class="em">'+T.icon+'</span>'+
@@ -1106,7 +1205,7 @@ function buildTimeline(list, isToday, bounds){
         '<span class="meta"><span class="tm">'+shortTime(s)+'–'+shortTime(e)+'</span>'+
           '<span class="len">'+durLabel(Math.max(0,e-s))+'</span></span>'+
       '</div>'+
-      (isToday && !b.locked ? '<div class="grip" aria-hidden="true"><span></span></div>' : '')+
+      (edit && !b.locked ? '<div class="grip" aria-hidden="true"><span></span></div>' : '')+
     '</div>'+
     '<div class="dot'+(size===' xs'?' xs':'')+'" data-d="'+i+'" data-s="'+s+'" style="--c:'+T.color+';top:'+y(s)+'px"></div>';
   });
@@ -1115,7 +1214,7 @@ function buildTimeline(list, isToday, bounds){
 
   el.timeline.style.height = ((bounds.b - bounds.a) * ppm).toFixed(1)+'px';
   el.timeline.innerHTML = h;
-  if(isToday){
+  if(edit){
     el.timeline.querySelectorAll('.blk').forEach(n => {
       n.addEventListener('pointerdown', onDragStart);
       n.addEventListener('keydown', onBlockKey);
@@ -1131,12 +1230,12 @@ function buildTimeline(list, isToday, bounds){
 }
 
 /* cheap per-second pass: no DOM rebuild, so drags + transitions survive */
-function paintTimelineNow(list, st, now, isToday, bounds){
+function paintTimelineNow(list, st, now, live, bounds){
   el.timeline.querySelectorAll('.blk').forEach(n => {
     const b = list[+n.dataset.i]; if(!b) return;
     const s = +n.dataset.s, e = +n.dataset.e;
     let cls = 's-up', pct = 0;
-    if(isToday){
+    if(live){
       if(now >= e){ cls = 's-done'; pct = 100; }
       else if(now >= s){ cls = 's-now'; pct = ((now - s)/Math.max(1,e-s))*100; }
       else if(st.next === b) cls = 's-up s-next';
@@ -1149,11 +1248,11 @@ function paintTimelineNow(list, st, now, isToday, bounds){
   });
 
   const rf = $('railFill');
-  if(rf) rf.style.height = (isToday ? clampN((now - bounds.a) * ppm, 0, (bounds.b - bounds.a) * ppm) : 0).toFixed(1)+'px';
+  if(rf) rf.style.height = (live ? clampN((now - bounds.a) * ppm, 0, (bounds.b - bounds.a) * ppm) : 0).toFixed(1)+'px';
 
   const nl = $('nowline');
   if(!nl) return;
-  const show = isToday && now >= bounds.a && now <= bounds.b;
+  const show = live && now >= bounds.a && now <= bounds.b;
   nl.hidden = !show;
   if(show){
     nl.style.top = ((now - bounds.a) * ppm).toFixed(1)+'px';
@@ -1167,7 +1266,7 @@ const MAGNET = 7;                                  /* minutes: snap flush to a n
 function onDragStart(e){
   if(dragging || (e.button !== undefined && e.button !== 0)) return;
   const node = e.currentTarget;
-  const list = blocksFor(viewDay);
+  const list = viewBlocks();
   const b = list[+node.dataset.i];
   if(!b) return;
   const s0 = toMin(b.start), e0 = toMin(b.end);
@@ -1283,7 +1382,7 @@ function onBlockKey(e){
   const dir = e.key === 'ArrowUp' ? -SNAP : (e.key === 'ArrowDown' ? SNAP : 0);
   if(!dir) return;
   e.preventDefault();
-  const day = blocksFor(viewDay);
+  const day = viewBlocks();
   const b = day[i]; if(!b) return;
   const s0 = toMin(b.start), e0 = toMin(b.end);
   if(b.locked){ toast('🔒 '+b.name+' is locked to '+fmt12s(s0)+' — unlock it to move it'); return; }
@@ -1319,14 +1418,16 @@ function onBlockKey(e){
 
 /* ---------- undo one edit at a time ---------- */
 function pushUndo(){
-  undoStack.push(override ? clone(override.blocks) : null);
+  const ds = viewStr();
+  undoStack.push({ds, blocks: dayOverrides[ds] ? clone(dayOverrides[ds]) : null});
   if(undoStack.length > 40) undoStack.shift();
 }
 function popUndo(){
   if(!undoStack.length) return;
   const prev = undoStack.pop();
-  override = prev ? {date: localDateStr(new Date()), blocks: prev} : null;
-  saveOverride();
+  if(prev.blocks) dayOverrides[prev.ds] = prev.blocks;
+  else delete dayOverrides[prev.ds];
+  saveOverrides();
   tlSig = null; lastScrolledIdx = -1;
   hideToast(); repaint();
 }
@@ -1380,13 +1481,16 @@ let editingIdx = -1, editingOrig = null;
 bm.type.innerHTML = Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].icon+' '+TYPES[k].label+'</option>').join('');
 
 function openBlock(i){
-  const list = blocksFor(viewDay);
+  const list = viewBlocks();
   const b = list[i];
   if(!b) return;
   editingIdx = i;
   editingOrig = clone(b);
   bm.title.innerHTML = '<span>'+typeOf(b.type).icon+' '+esc(b.name)+'</span>';
-  bm.hint.textContent = "Just for today. Tomorrow goes back to the normal schedule.";
+  bm.hint.textContent = viewingToday()
+    ? "Just for today. Tomorrow goes back to the normal schedule."
+    : "Just for " + viewDate.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'})
+      + ". Your normal weekly schedule stays as it is.";
   bm.name.value = b.name; bm.start.value = b.start; bm.end.value = b.end;
   bm.type.value = TYPES[b.type] ? b.type : 'other';
   bm.lock.checked = !!b.locked;
@@ -1483,8 +1587,10 @@ $('bSave').onclick = saveBlock;
 bm.del.onclick = deleteBlock;
 el.addToday.onclick = openNewBlock;
 el.resetToday.onclick = () => {
-  if(!confirm("Undo today's changes and go back to the normal schedule?")) return;
-  override = null; saveOverride(); undoStack.length=0; hideToast(); tlSig=null; lastScrolledIdx=-1; repaint();
+  const what = viewingToday() ? "today's" : DAY_NAMES[viewDay]+"'s";
+  if(!confirm('Undo '+what+' changes and go back to the normal schedule?')) return;
+  delete dayOverrides[viewStr()]; saveOverrides();
+  undoStack.length=0; hideToast(); tlSig=null; lastScrolledIdx=-1; repaint();
 };
 
 /* =======================================================================
@@ -1784,8 +1890,84 @@ function checkOverlaps(){
 /* =======================================================================
    WIRE UP
    ======================================================================= */
-el.daySelect.innerHTML = DAY_KEYS.map(k=>'<option value="'+k+'">'+DAY_NAMES[k]+'</option>').join('');
-el.daySelect.onchange = () => { viewDay = el.daySelect.value; lastScrolledIdx=-1; repaint(); };
+/* ---------- day pager: every school day from a month back to ~4 months out ---------- */
+let daySelSig = '';
+const navSig = () => localDateStr(new Date()) + '|' + Object.keys(dayOverrides).sort().join(',');
+function dayLabel(d){
+  const ds = localDateStr(d), n = new Date();
+  if(ds === localDateStr(n))              return 'Today \u00b7 ' + DAY_NAMES[dayKeyOf(d)];
+  if(ds === localDateStr(addDays(n, 1)))  return 'Tomorrow \u00b7 ' + DAY_NAMES[dayKeyOf(d)];
+  if(ds === localDateStr(addDays(n,-1)))  return 'Yesterday \u00b7 ' + DAY_NAMES[dayKeyOf(d)];
+  return d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+}
+function buildDayNav(){
+  const today = startOfDay(new Date());
+  let html = '';
+  for(let i = -MAX_BACK; i <= MAX_AHEAD; i++){
+    const d = addDays(today, i);
+    if(!dayKeyOf(d)) continue;                       // school days only
+    const ds = localDateStr(d);
+    html += '<option value="'+ds+'">' + esc(dayLabel(d)) + (dayOverrides[ds] ? ' \u270E' : '') + '</option>';
+  }
+  el.daySelect.innerHTML = html;
+  daySelSig = navSig();
+}
+function syncDayNav(){
+  if(navSig() !== daySelSig) buildDayNav();
+  el.daySelect.value = viewStr();
+  const today = startOfDay(new Date());
+  el.prevDay.disabled = viewStr() <= localDateStr(addDays(today,-MAX_BACK));
+  el.nextDay.disabled = viewStr() >= localDateStr(addDays(today, MAX_AHEAD));
+}
+function goToDate(d){
+  setViewDate(d);
+  repaint();
+  autoScroll(true);
+}
+function stepDay(dir){
+  let d = addDays(viewDate, dir);
+  for(let i=0;i<9 && !dayKeyOf(d);i++) d = addDays(d, dir);   // hop the weekend
+  const today = startOfDay(new Date());
+  if(d < addDays(today,-MAX_BACK) || d > addDays(today, MAX_AHEAD)) return;
+  goToDate(d);
+}
+buildDayNav();
+el.daySelect.onchange = () => { const d = parseDateStr(el.daySelect.value); if(d) goToDate(d); };
+el.prevDay.onclick = () => stepDay(-1);
+el.nextDay.onclick = () => stepDay(1);
+
+/* ---------- click the class name to rename it (saved on this board only) ---------- */
+el.title.title = 'Click to rename your class';
+el.title.tabIndex = 0;
+el.title.setAttribute('role','button');
+function startTitleEdit(){
+  if(titleEditing) return;
+  titleEditing = true;
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.id = 'titleEdit'; inp.value = schedule.title;
+  inp.placeholder = DEFAULT_SCHEDULE.title;
+  inp.setAttribute('aria-label','Class name');
+  el.title.replaceWith(inp);
+  inp.focus(); inp.select();
+  const finish = keep => {
+    if(!titleEditing) return;
+    titleEditing = false;
+    if(keep){
+      schedule.title = inp.value.trim() || DEFAULT_SCHEDULE.title;
+      saveSchedule(schedule);
+    }
+    inp.replaceWith(el.title);
+    el.title.textContent = schedule.title;
+    document.title = schedule.title;
+  };
+  inp.onblur = () => finish(true);
+  inp.onkeydown = e => {
+    if(e.key === 'Enter'){ e.preventDefault(); finish(true); }
+    else if(e.key === 'Escape'){ e.preventDefault(); finish(false); }
+  };
+}
+el.title.onclick = startTitleEdit;
+el.title.onkeydown = e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); startTitleEdit(); } };
 
 el.soundBtn.onclick = () => {
   soundOn = !soundOn;
@@ -1822,7 +2004,8 @@ $('resetBtn').onclick = () => {
   if(!confirm('Throw away your changes and go back to the original schedule?')) return;
   try{ localStorage.removeItem(LS_SCHEDULE); }catch(e){}
   schedule = clone(DEFAULT_SCHEDULE);
-  closeEditor(); lastScrolledIdx=-1; firstPaint=true; repaint();
+  dayOverrides = {}; saveOverrides(); undoStack.length = 0; hideToast();
+  closeEditor(); tlSig=null; lastScrolledIdx=-1; firstPaint=true; buildDayNav(); repaint();
 };
 $('jsonBtn').onclick = () => {
   if(!em.json.hidden){ em.json.hidden=true; em.main.hidden=false; drawTabs(); drawRows(); }
@@ -1851,14 +2034,21 @@ document.addEventListener('keydown', e => {
    ======================================================================= */
 applyTheme(localStorage.getItem(LS_THEME)==='dark' ? 'dark' : 'light');
 syncSoundBtn();
+document.title = schedule.title;
 render();
 setTimeout(autoScroll, 350);
 setInterval(repaint, 1000);
 
-// if the board slept overnight, drop yesterday's one-off changes
+// if the board slept overnight: bin yesterday's one-off changes and roll forward
+let lastSeenDate = localDateStr(new Date());
 setInterval(()=>{
-  if(override && override.date !== localDateStr(new Date())){ override=null; saveOverride(); repaint(); }
-}, 60000);
+  const t = localDateStr(new Date());
+  if(t === lastSeenDate) return;
+  lastSeenDate = t;
+  if(pruneOverrides()) saveOverrides();
+  setViewDate(nextSchoolDay(new Date(), 1));
+  buildDayNav(); firstPaint = true; repaint();
+}, 30000);
 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ lastScrolledIdx=-1; repaint(); } });
 })();
