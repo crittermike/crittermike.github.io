@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T23:45:48.783Z",
+  "generated_at": "2026-08-14T00:00:50.539Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -863,11 +863,11 @@
     ]
   },
   "dinner": {
-    "name": "Pesto chicken with noodles and roasted Brussels sprouts",
-    "protein_g": 62,
+    "name": "Takeout / eat out",
+    "protein_g": 60,
     "cal": 650,
-    "effort": "medium",
-    "note": "Use 2.5 lb boneless chicken thighs. Mike takes extra chicken and a smaller noodle portion.",
+    "effort": "none",
+    "note": "Friday is outside Lent. Mike orders a protein-forward entree.",
     "recipe": null
   },
   "mealweek": [
@@ -2273,7 +2273,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 41.9,
+    "dayPct": 45.2,
     "totalSpend": 9297.82,
     "totalBudget": 17750.5,
     "categories": [
@@ -2394,6 +2394,6 @@
     "creditDebt": 15021.5,
     "netLiquid": 22181.22,
     "source": "ynab",
-    "updatedAt": "2026-08-13T23:45:47.470Z"
+    "updatedAt": "2026-08-14T00:00:48.900Z"
   }
 }
