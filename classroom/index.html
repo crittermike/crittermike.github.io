@@ -198,6 +198,9 @@ select.btn{appearance:none;padding-right:1.6rem;
   display:grid;place-items:center;overflow:hidden;
 }
 .gap span{font-size:clamp(.64rem,.82vw,.9rem);font-weight:800;color:var(--ink-faint);padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.gap.live{pointer-events:auto;cursor:pointer;transition:background .16s ease,border-color .16s ease;}
+.gap.live:hover{border-color:color-mix(in srgb,var(--accent) 65%,transparent);background:color-mix(in srgb,var(--accent) 9%,transparent);}
+.gap.live:hover span{color:var(--accent);}
 
 /* blocks */
 .blk{
@@ -209,8 +212,9 @@ select.btn{appearance:none;padding-right:1.6rem;
   touch-action:none;user-select:none;-webkit-user-select:none;
   transition:opacity .35s ease,filter .35s ease,box-shadow .18s ease,border-color .18s ease,transform .18s ease;
 }
-.blk::before{content:'';position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--c);z-index:2;}
-.blk-fill{position:absolute;left:0;top:0;width:100%;height:0;z-index:0;pointer-events:none;background:color-mix(in srgb,var(--c) 20%,transparent);transition:height 1s linear;}
+/* the left stripe doubles as the progress bar: the track is dim, the fill is solid */
+.blk::before{content:'';position:absolute;left:0;top:0;bottom:0;width:7px;background:color-mix(in srgb,var(--c) 26%,var(--panel));z-index:2;}
+.blk-fill{position:absolute;left:0;top:0;width:7px;height:0;z-index:3;pointer-events:none;background:var(--c);border-radius:0 0 4px 0;transition:height 1s linear;}
 .blk-in{
   position:relative;z-index:1;height:100%;min-width:0;display:flex;align-items:center;
   gap:clamp(7px,.8vw,13px);padding:0 clamp(11px,1.05vw,17px) 0 clamp(16px,1.45vw,25px);
@@ -218,6 +222,7 @@ select.btn{appearance:none;padding-right:1.6rem;
 .blk .em{font-size:clamp(1.1rem,1.7vw,1.9rem);line-height:1;flex:none;}
 .blk .nm{font-size:clamp(.9rem,1.28vw,1.42rem);font-weight:800;line-height:1.14;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .blk .flag{flex:none;font-size:.82em;opacity:.8;}
+.blk .lock{flex:none;font-size:.82em;opacity:.62;}
 .blk .tick{flex:none;font-size:1.05em;font-weight:900;color:var(--done);display:none;}
 .blk .meta{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:0;line-height:1.16;font-variant-numeric:tabular-nums;text-align:right;}
 .blk .tm{font-size:clamp(.64rem,.82vw,.88rem);font-weight:800;color:var(--ink-faint);white-space:nowrap;}
@@ -229,7 +234,7 @@ select.btn{appearance:none;padding-right:1.6rem;
 .blk.sm .nm{font-size:clamp(.82rem,1.05vw,1.15rem);}
 .blk.sm .meta{flex-direction:row;align-items:baseline;gap:8px;}
 .blk.xs{border-radius:11px;border-width:2px;}
-.blk.xs::before{width:5px;}
+.blk.xs::before,.blk.xs .blk-fill{width:5px;}
 .blk.xs .blk-in{gap:6px;padding:0 9px 0 13px;}
 .blk.xs .em{font-size:clamp(.82rem,1.02vw,1.1rem);}
 .blk.xs .nm{font-size:clamp(.68rem,.86vw,.94rem);}
@@ -243,18 +248,21 @@ select.btn{appearance:none;padding-right:1.6rem;
 .blk.s-done{opacity:.48;filter:saturate(.28);}
 .blk.s-done .nm{text-decoration:line-through;text-decoration-thickness:2.5px;text-decoration-color:color-mix(in srgb,var(--ink) 45%,transparent);}
 .blk.s-done .tick{display:block;}
-.blk.s-done .blk-fill{background:color-mix(in srgb,var(--ink) 6%,transparent);}
 .blk.s-now{
   z-index:4;border-color:var(--c);
   box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 20%,transparent),0 14px 30px -10px color-mix(in srgb,var(--c) 60%,transparent);
 }
+.blk.s-now::before,.blk.s-now .blk-fill{width:11px;}
+.blk.s-now.xs::before,.blk.s-now.xs .blk-fill{width:8px;}
 .blk.s-now .nm{color:var(--ink);}
 .blk.s-now .len{color:var(--c);}
 .blk.s-next{z-index:2;border-style:dashed;border-color:color-mix(in srgb,var(--c) 62%,transparent);}
 .blk.added::before{background:repeating-linear-gradient(135deg,var(--c) 0 6px,color-mix(in srgb,var(--c) 45%,var(--panel)) 6px 12px);}
+.blk.locked::before{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 62%,var(--panel)) 0 4px,color-mix(in srgb,var(--c) 18%,var(--panel)) 4px 8px);}
 
 /* drag affordances */
 .blk.live{cursor:grab;}
+.blk.live.locked{cursor:pointer;}
 .blk.live:hover{border-color:color-mix(in srgb,var(--c) 70%,transparent);transform:translateX(1px);}
 .grip{position:absolute;left:0;right:0;bottom:0;height:15px;z-index:5;cursor:ns-resize;display:grid;place-items:center;opacity:.4;transition:opacity .15s ease;}
 .grip span{width:46px;height:5px;border-radius:99px;background:color-mix(in srgb,var(--c) 72%,transparent);}
@@ -271,16 +279,18 @@ select.btn{appearance:none;padding-right:1.6rem;
 
 /* now line */
 .nowline{position:absolute;left:0;right:0;top:0;height:0;z-index:0;pointer-events:none;transition:top 1s linear;--nc:#ef4444;}
-.nowline::before{content:'';position:absolute;left:var(--gut);right:0;top:-1.5px;height:3px;border-radius:99px;background:color-mix(in srgb,var(--nc) 55%,transparent);}
-.nowline::after{content:'';position:absolute;left:calc(var(--gut) - 6px);top:-7px;width:14px;height:14px;border-radius:99px;background:var(--nc);animation:nlpulse 2.4s ease-in-out infinite;}
+.nowline::before{content:'';position:absolute;left:calc(var(--gut) - 27px);right:0;top:-1.5px;height:3px;border-radius:99px;background:color-mix(in srgb,var(--nc) 55%,transparent);}
 .nowline .nl-t{
   position:absolute;left:0;top:50%;transform:translateY(-50%);
   background:var(--nc);color:#fff;font-weight:900;white-space:nowrap;
   font-size:clamp(.6rem,.78vw,.84rem);padding:3px 7px;border-radius:99px;
   font-variant-numeric:tabular-nums;letter-spacing:-.02em;
-  box-shadow:0 3px 10px color-mix(in srgb,var(--nc) 50%,transparent);
+  animation:nlpulse 2.4s ease-in-out infinite;
 }
-@keyframes nlpulse{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--nc) 28%,transparent);}50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--nc) 5%,transparent);}}
+@keyframes nlpulse{
+  0%,100%{box-shadow:0 3px 10px color-mix(in srgb,var(--nc) 50%,transparent),0 0 0 3px color-mix(in srgb,var(--nc) 26%,transparent);}
+  50%{box-shadow:0 3px 10px color-mix(in srgb,var(--nc) 50%,transparent),0 0 0 9px color-mix(in srgb,var(--nc) 0%,transparent);}
+}
 
 /* toast */
 .toast{
@@ -406,8 +416,10 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
         <label class="field"><span>Ends</span><input type="time" id="bEnd"></label>
       </div>
       <label class="field"><span>Kind</span><select id="bType"></select></label>
+      <label class="check"><input type="checkbox" id="bLock">
+        <span>🔒 Lock this time — nothing else can push it around</span></label>
       <label class="check"><input type="checkbox" id="bPush" checked>
-        <span>Move everything after this to match, so nothing overlaps</span></label>
+        <span>Slide the rest of the day to match (unchecked, only this block moves)</span></label>
     </div>
     <div class="sheet-foot">
       <button class="btn btn-danger" id="bDelete">🗑 Remove from today</button>
@@ -430,9 +442,9 @@ textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospac
         <label class="field"><span>Title shown at the top</span><input type="text" id="titleInput" placeholder="Mrs. Crittenden's Kindergarten"></label>
         <div class="tabs" id="dayTabs"></div>
         <div class="warnbox" id="warnBox"></div>
-        <p class="hint">This is the permanent week-in-week-out plan. For one-off changes (an activity running long, a surprise assembly) close this and tap a block right on the timeline instead.</p>
+        <p class="hint">This is the permanent week-in-week-out plan. For one-off changes (an activity running long, a surprise assembly) close this and tap a block right on the timeline instead. Tick <strong>🔒</strong> on anything that never moves — locked times can't be dragged or pushed around.</p>
         <table class="etable">
-          <thead><tr><th style="width:118px">Start</th><th style="width:118px">End</th><th>Activity</th><th style="width:170px">Kind</th><th style="width:40px"></th></tr></thead>
+          <thead><tr><th style="width:118px">Start</th><th style="width:118px">End</th><th>Activity</th><th style="width:170px">Kind</th><th style="width:44px" title="Locked blocks never get pushed around">🔒</th><th style="width:40px"></th></tr></thead>
           <tbody id="editRows"></tbody>
         </table>
         <button class="btn" id="addRow" style="margin-top:12px">+ Add a block</button>
@@ -490,6 +502,8 @@ const typeOf = t => TYPES[t] || TYPES.other;
    Everything here is editable in the app; this is just the starting point.
    ======================================================================= */
 const B = (start,end,name,type) => ({start,end,name,type});
+/* L = locked: a fixed point in the day (lunch, dismissal, all-school Mass). */
+const L = (start,end,name,type) => ({start,end,name,type,locked:true});
 
 const DEFAULT_SCHEDULE = {
   title: "Mrs. Crittenden's Kindergarten",
@@ -502,14 +516,14 @@ const DEFAULT_SCHEDULE = {
       B('10:00','10:40','Writing','writing'),
       B('10:40','11:00','Recess & Bathroom','recess'),
       B('11:00','11:30','Math — Dimensions','math'),
-      B('11:40','12:05','Lunch','lunch'),
+      L('11:40','12:05','Lunch','lunch'),
       B('12:15','12:30','Bathroom & Heads Down','quiet'),
       B('12:30','13:00','Religion','religion'),
       B('13:00','13:30','Science / Social Studies or Literacy Centers','literacy'),
       B('13:30','13:45','Pack Up','packup'),
       B('14:00','14:20','Recess','recess'),
       B('14:20','15:05','Art','art'),
-      B('15:05','15:15','Prayer, Dismissal & Clap Out','dismissal')
+      L('15:05','15:15','Prayer, Dismissal & Clap Out','dismissal')
     ],
     tue:[
       B('08:35','08:55','Daily Routines & Morning Meeting','meeting'),
@@ -519,7 +533,7 @@ const DEFAULT_SCHEDULE = {
       B('10:00','10:40','Writing','writing'),
       B('10:40','11:00','Recess & Bathroom','recess'),
       B('11:00','11:30','Math — Dimensions','math'),
-      B('11:40','12:05','Lunch','lunch'),
+      L('11:40','12:05','Lunch','lunch'),
       B('12:15','12:30','Bathroom & Heads Down','quiet'),
       B('12:30','12:40','Religion','religion'),
       B('12:40','12:45','Line Up','lineup'),
@@ -527,22 +541,22 @@ const DEFAULT_SCHEDULE = {
       B('13:30','14:15','Finish Religion & Bathroom Break','religion'),
       B('14:15','14:45','Wipe Desks & Pack Up','packup'),
       B('14:45','15:00','Recess','recess'),
-      B('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
+      L('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
     ],
     wed:[
-      B('08:30','09:30','Mass','mass'),
+      L('08:30','09:30','Mass','mass'),
       B('09:30','10:15','After Mass — Prayer, Snack & Bathroom','snack'),
       B('10:15','10:40','Recess','recess'),
       B('10:40','11:00','Super Kids','superkids'),
       B('11:00','11:30','Math — Dimensions','math'),
-      B('11:40','12:05','Lunch','lunch'),
+      L('11:40','12:05','Lunch','lunch'),
       B('12:15','12:30','Bathroom & Heads Down','quiet'),
       B('12:30','13:00','Recess','recess'),
       B('13:00','13:45','PE','pe'),
       B('13:45','14:00','Bathroom Break','packup'),
       B('14:00','14:30','Recess','recess'),
       B('14:30','15:00','Library','library'),
-      B('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
+      L('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
     ],
     thu:[
       B('08:35','08:55','Daily Routines & Morning Meeting','meeting'),
@@ -552,14 +566,14 @@ const DEFAULT_SCHEDULE = {
       B('10:00','10:40','Writing','writing'),
       B('10:40','11:00','Recess & Bathroom','recess'),
       B('11:00','11:30','Math — Dimensions','math'),
-      B('11:40','12:05','Lunch','lunch'),
+      L('11:40','12:05','Lunch','lunch'),
       B('12:15','12:30','Bathroom & Heads Down','quiet'),
       B('12:30','12:45','Religion','religion'),
       B('12:45','13:30','Art','art'),
       B('13:30','14:10','Literacy Centers / Science or Social Studies','literacy'),
       B('14:10','14:45','Bathroom & Pack Up','packup'),
       B('14:45','15:00','Recess','recess'),
-      B('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
+      L('15:00','15:15','Prayer, Dismissal & Clap Out','dismissal')
     ],
     fri:[
       B('08:35','08:55','Daily Routines & Morning Meeting','meeting'),
@@ -569,14 +583,14 @@ const DEFAULT_SCHEDULE = {
       B('10:00','10:40','Writing','writing'),
       B('10:40','11:00','Recess & Bathroom','recess'),
       B('11:00','11:30','Math — Dimensions','math'),
-      B('11:40','12:05','Lunch','lunch'),
+      L('11:40','12:05','Lunch','lunch'),
       B('12:15','12:30','Bathroom & Heads Down','quiet'),
       B('12:30','13:00','Religion','religion'),
       B('13:00','13:30','Literacy Centers','literacy'),
       B('13:30','14:00','Pack Up','packup'),
       B('14:00','14:20','Recess','recess'),
       B('14:20','15:05','Computer','computer'),
-      B('15:05','15:15','Prayer, Dismissal & Clap Out','dismissal')
+      L('15:05','15:15','Prayer, Dismissal & Clap Out','dismissal')
     ]
   }
 };
@@ -676,13 +690,93 @@ function ensureOverride(){
   override = {date: localDateStr(new Date()), blocks: clone(sortDay(schedule.days[todayKey()] || []))};
   return override.blocks;
 }
-function commitOverride(){ override.blocks = sortDay(override.blocks); saveOverride(); repaint(); }
+function commitOverride(){
+  resolveOverlaps(override.blocks);
+  override.blocks = sortDay(override.blocks);
+  saveOverride(); repaint();
+}
 
-/* push every block starting at/after `fromMin` by `delta` minutes */
+/* -----------------------------------------------------------------------
+   Locked blocks are fixed points in the day. Nothing may shove them, and
+   nothing may overlap anything — these three helpers enforce both rules.
+   ----------------------------------------------------------------------- */
+
+/* push every unlocked block starting at/after `fromMin` by `delta` minutes.
+   a shift stops dead at the first locked block it runs into. */
 function shiftAfter(list, fromMin, delta){
+  if(!delta) return;
+  for(const b of sortDay(list)){
+    if(toMin(b.start) < fromMin) continue;
+    if(b.locked) break;
+    b.start = toHM(toMin(b.start)+delta);
+    b.end   = toHM(toMin(b.end)+delta);
+  }
+}
+
+/* the free stretch around `atMin` that `ignore` can occupy untouched */
+function slotLimits(list, ignore, atMin){
+  let lo = 0, hi = 24*60;
   list.forEach(b => {
-    if(toMin(b.start) >= fromMin){ b.start = toHM(toMin(b.start)+delta); b.end = toHM(toMin(b.end)+delta); }
+    if(b === ignore) return;
+    const bs = toMin(b.start), be = toMin(b.end);
+    if(be <= atMin) lo = Math.max(lo, be);
+    else if(bs > atMin) hi = Math.min(hi, bs);
+    else lo = Math.max(lo, be);
   });
+  return {lo, hi};
+}
+
+/* squeeze [s,e] into a free window, keeping as much duration as will fit */
+function fitInto(s, e, lim){
+  const room = lim.hi - lim.lo;
+  let dur = Math.max(MIN_DUR, e - s);
+  if(dur > room) dur = Math.max(MIN_DUR, room);
+  const ns = clampN(s, lim.lo, Math.max(lim.lo, lim.hi - dur));
+  return {s:ns, e:ns + dur};
+}
+
+/* the first locked start at/after `fromMin` — a hard ceiling for growth */
+function lockCeiling(list, fromMin, ignore){
+  let hi = 24*60;
+  list.forEach(b => {
+    if(b === ignore || !b.locked) return;
+    const bs = toMin(b.start);
+    if(bs >= fromMin) hi = Math.min(hi, bs);
+  });
+  return hi;
+}
+
+/* walk the day forward and shove/trim until nothing overlaps */
+function resolveOverlaps(list){
+  const s = sortDay(list);
+  for(let i=1;i<s.length;i++){
+    const prev = s[i-1], cur = s[i];
+    const pe = toMin(prev.end), cs = toMin(cur.start);
+    if(cs >= pe) continue;
+    if(!cur.locked){
+      const dur = Math.max(MIN_DUR, toMin(cur.end) - cs);
+      cur.start = toHM(pe); cur.end = toHM(pe + dur);
+    }else if(!prev.locked){
+      const ps = toMin(prev.start);
+      if(cs - ps >= MIN_DUR) prev.end = toHM(cs);
+      else { prev.start = toHM(Math.max(0, cs - MIN_DUR)); prev.end = toHM(Math.max(MIN_DUR, cs)); }
+    }
+  }
+}
+
+/* pull the rest of the day up into an empty stretch */
+function closeGap(gapStart, gapEnd){
+  const amount = Math.round(gapEnd - gapStart);
+  if(amount < 1) return;
+  const list = ensureOverride();
+  const first = sortDay(list).find(b => toMin(b.start) >= gapEnd);
+  if(!first){ toast('Nothing after that to move up'); return; }
+  if(first.locked){ toast('🔒 '+first.name+' is locked to '+fmt12s(toMin(first.start))); return; }
+  pushUndo();
+  shiftAfter(list, gapEnd, -amount);
+  tlSig = null; lastScrolledIdx = -1;
+  commitOverride();
+  toast('Closed the '+durLabel(amount)+' gap');
 }
 
 /* =======================================================================
@@ -859,8 +953,10 @@ function nudge(block, delta){
   const target = list.find(x => x.start===block.start && x.name===block.name) || list[dayState(sortDay(list),nowMin()).idx];
   if(!target) return;
   const oldEnd = toMin(target.end);
-  // never let an activity end in the past
-  const newEnd = Math.max(Math.ceil(nowMin())+1, toMin(target.start)+5, oldEnd+delta);
+  const ceil = lockCeiling(list, oldEnd, target);
+  // never let an activity end in the past, or run past a locked block
+  let newEnd = Math.max(Math.ceil(nowMin())+1, toMin(target.start)+5, oldEnd+delta);
+  newEnd = Math.min(newEnd, Math.max(toMin(target.start)+5, ceil));
   const realDelta = newEnd - oldEnd;
   if(!realDelta) return;
   shiftAfter(list, oldEnd, realDelta);   // everything starting at/after the old end moves
@@ -945,28 +1041,34 @@ function buildTimeline(list, isToday, bounds){
     const ge = i===list.length ? bounds.b : toMin(list[i].start);
     const d = ge - gs;
     if(d < 4) continue;
-    const inner = (i>0 && i<list.length && d*ppm > 26) ? '<span>🔄 '+durLabel(d)+' open</span>' : '';
-    h += '<div class="gap" data-s="'+gs+'" style="top:'+y(gs)+'px;height:'+(d*ppm).toFixed(1)+'px">'+inner+'</div>';
+    const inner_gap = i>0 && i<list.length;
+    const tappable = inner_gap && isToday;
+    const inner = (inner_gap && d*ppm > 26)
+      ? '<span>🔄 '+durLabel(d)+' open'+(tappable && d*ppm > 46 ? ' · tap to close' : '')+'</span>' : '';
+    h += '<div class="gap'+(tappable?' live':'')+'" data-s="'+gs+'" data-e="'+ge+'"'+
+         (tappable ? ' role="button" tabindex="0" aria-label="Close the '+durLabel(d)+' gap at '+shortTime(gs)+'"' : '')+
+         ' style="top:'+y(gs)+'px;height:'+(d*ppm).toFixed(1)+'px">'+inner+'</div>';
   }
 
   list.forEach((b,i)=>{
     const T = typeOf(b.type), s = toMin(b.start), e = toMin(b.end);
     const hpx = Math.max(8,(e-s)*ppm);
     const size = hpx < 32 ? ' xs' : (hpx < 58 ? ' sm' : '');
-    h += '<div class="blk s-up'+size+(b.added?' added':'')+(isToday?' live':'')+'"'+
+    h += '<div class="blk s-up'+size+(b.added?' added':'')+(b.locked?' locked':'')+(isToday?' live':'')+'"'+
       ' style="--c:'+T.color+';top:'+y(s)+'px;height:'+hpx.toFixed(1)+'px"'+
       ' data-i="'+i+'" data-s="'+s+'" data-e="'+e+'"'+
-      (isToday ? ' tabindex="0" role="button" aria-label="'+esc(b.name)+', '+shortTime(s)+' to '+shortTime(e)+'. Enter to edit, arrows to move."' : '')+'>'+
+      (isToday ? ' tabindex="0" role="button" aria-label="'+esc(b.name)+', '+shortTime(s)+' to '+shortTime(e)+'.'+(b.locked?' Locked.':'')+' Enter to edit'+(b.locked?'.':', arrows to move.')+'"' : '')+'>'+
       '<div class="blk-fill"></div>'+
       '<div class="blk-in">'+
         '<span class="em">'+T.icon+'</span>'+
         '<span class="nm">'+esc(b.name)+'</span>'+
         (b.added ? '<span class="flag" title="Added just for today">✨</span>' : '')+
+        (b.locked ? '<span class="lock" title="Locked — this time never gets pushed around">🔒</span>' : '')+
         '<span class="tick">✓</span>'+
         '<span class="meta"><span class="tm">'+shortTime(s)+'–'+shortTime(e)+'</span>'+
           '<span class="len">'+durLabel(Math.max(0,e-s))+'</span></span>'+
       '</div>'+
-      (isToday ? '<div class="grip" aria-hidden="true"><span></span></div>' : '')+
+      (isToday && !b.locked ? '<div class="grip" aria-hidden="true"><span></span></div>' : '')+
     '</div>'+
     '<div class="dot'+(size===' xs'?' xs':'')+'" data-d="'+i+'" data-s="'+s+'" style="--c:'+T.color+';top:'+y(s)+'px"></div>';
   });
@@ -975,10 +1077,19 @@ function buildTimeline(list, isToday, bounds){
 
   el.timeline.style.height = ((bounds.b - bounds.a) * ppm).toFixed(1)+'px';
   el.timeline.innerHTML = h;
-  if(isToday) el.timeline.querySelectorAll('.blk').forEach(n => {
-    n.addEventListener('pointerdown', onDragStart);
-    n.addEventListener('keydown', onBlockKey);
-  });
+  if(isToday){
+    el.timeline.querySelectorAll('.blk').forEach(n => {
+      n.addEventListener('pointerdown', onDragStart);
+      n.addEventListener('keydown', onBlockKey);
+    });
+    el.timeline.querySelectorAll('.gap.live').forEach(n => {
+      const fire = () => closeGap(+n.dataset.s, +n.dataset.e);
+      n.addEventListener('click', fire);
+      n.addEventListener('keydown', ev => {
+        if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); fire(); }
+      });
+    });
+  }
 }
 
 /* cheap per-second pass: no DOM rebuild, so drags + transitions survive */
@@ -1013,19 +1124,37 @@ function paintTimelineNow(list, st, now, isToday, bounds){
 }
 
 /* ---------- drag: body = move, bottom grip = resize ---------- */
+const MAGNET = 7;                                  /* minutes: snap flush to a neighbour */
+
 function onDragStart(e){
   if(dragging || (e.button !== undefined && e.button !== 0)) return;
   const node = e.currentTarget;
-  const b = blocksFor(viewDay)[+node.dataset.i];
+  const list = blocksFor(viewDay);
+  const b = list[+node.dataset.i];
   if(!b) return;
   const s0 = toMin(b.start), e0 = toMin(b.end);
+  const B = tlBounds;
+  const lim = slotLimits(list, b, s0);              /* free window between neighbours */
+  const cap = lockCeiling(list, e0, b);             /* first locked start after this one */
+
+  /* growing pushes the tail down — it can only grow until the tail hits that lock */
+  const tail = list.filter(x => x !== b && toMin(x.start) >= e0 && toMin(x.start) < cap);
+  const tailEnd = tail.length ? Math.max.apply(null, tail.map(x => toMin(x.end))) : e0;
+  const growMax = cap >= 24*60 ? B.b : e0 + (cap - tailEnd);
+
   dragging = {
     node, i:+node.dataset.i, pid:e.pointerId, y0:e.clientY, s0, e0, moved:false,
-    mode: e.target.closest('.grip') ? 'resize' : 'move',
+    mode: b.locked ? 'locked' : (e.target.closest('.grip') ? 'resize' : 'move'),
+    lockName: b.name, lockAt: s0,
     key: {start:b.start, name:b.name, end:b.end},
-    bounds: tlBounds,
+    bounds: B,
+    lo: Math.max(B.a, lim.lo),
+    hi: Math.min(B.b, lim.hi),
+    minEnd: s0 + MIN_DUR,
+    maxEnd: Math.max(s0 + MIN_DUR, Math.min(B.b, growMax)),
     after: Array.from(el.timeline.querySelectorAll('.blk[data-s],.gap[data-s],.dot[data-s]'))
-             .filter(n => n !== node && n.dataset.d !== node.dataset.i && +n.dataset.s >= e0)
+             .filter(n => n !== node && n.dataset.d !== node.dataset.i &&
+                          +n.dataset.s >= e0 && +n.dataset.s < cap)
              .map(n => ({node:n, top:parseFloat(n.style.top)||0})),
     dot: el.timeline.querySelector('.dot[data-d="'+node.dataset.i+'"]'),
     dotTop: 0
@@ -1043,18 +1172,27 @@ function onDragMove(e){
     if(Math.abs(dy) < 5) return;
     d.moved = true;
     hideToast();
+    if(d.mode === 'locked'){                        /* refuse, and say why */
+      toast('🔒 '+d.lockName+' is locked to '+fmt12s(d.lockAt)+' — unlock it to move it');
+      return;
+    }
     d.node.classList.add('dragging');
     if(d.mode === 'resize') d.after.forEach(o => o.node.classList.add('slide'));
   }
-  const B = d.bounds;
+  if(d.mode === 'locked') return;
+
+  const B = d.bounds, dur = d.e0 - d.s0;
   let delta = Math.round((dy / ppm) / SNAP) * SNAP, s, en;
   if(d.mode === 'resize'){
-    en = clampN(d.e0 + delta, d.s0 + MIN_DUR, B.b);
+    en = clampN(d.e0 + delta, d.minEnd, d.maxEnd);
     s = d.s0; delta = en - d.e0;
     d.after.forEach(o => { o.node.style.top = (o.top + delta*ppm).toFixed(1)+'px'; });
   }else{
-    delta = clampN(delta, B.a - d.s0, B.b - d.e0);
-    s = d.s0 + delta; en = d.e0 + delta;
+    /* stay inside the free window, then snap flush so gaps actually close */
+    s = clampN(d.s0 + delta, d.lo, d.hi - dur);
+    if(Math.abs(s - d.lo) <= MAGNET) s = d.lo;
+    else if(Math.abs((s + dur) - d.hi) <= MAGNET) s = d.hi - dur;
+    en = s + dur;
   }
   d.cur = {s, e:en};
   d.node.style.top = ((s - B.a) * ppm).toFixed(1)+'px';
@@ -1107,21 +1245,30 @@ function onBlockKey(e){
   const dir = e.key === 'ArrowUp' ? -SNAP : (e.key === 'ArrowDown' ? SNAP : 0);
   if(!dir) return;
   e.preventDefault();
-  const b = blocksFor(viewDay)[i]; if(!b) return;
+  const day = blocksFor(viewDay);
+  const b = day[i]; if(!b) return;
   const s0 = toMin(b.start), e0 = toMin(b.end);
+  if(b.locked){ toast('🔒 '+b.name+' is locked to '+fmt12s(s0)+' — unlock it to move it'); return; }
   pushUndo();
   const list = ensureOverride();
   const t = list.find(x => x.start===b.start && x.name===b.name && x.end===b.end);
   if(!t){ undoStack.pop(); return; }
   let target;
   if(e.shiftKey){
-    const ne = Math.max(s0 + MIN_DUR, e0 + dir);
+    const cap = lockCeiling(list, e0, t);
+    const tail = list.filter(x => x !== t && toMin(x.start) >= e0 && toMin(x.start) < cap);
+    const tailEnd = tail.length ? Math.max.apply(null, tail.map(x => toMin(x.end))) : e0;
+    const maxEnd = cap >= 24*60 ? 24*60 : e0 + (cap - tailEnd);
+    const ne = clampN(e0 + dir, s0 + MIN_DUR, Math.max(s0 + MIN_DUR, maxEnd));
+    if(ne === e0){ undoStack.pop(); toast('🔒 No room to grow — something locked is next'); return; }
     shiftAfter(list, e0, ne - e0);
     t.end = toHM(ne); target = s0;
     toast(t.name+' → '+durLabel(ne - s0));
   }else{
-    target = Math.max(0, s0 + dir);
-    t.start = toHM(target); t.end = toHM(e0 + (target - s0));
+    const lim = slotLimits(list, t, s0), dur = e0 - s0;
+    target = clampN(s0 + dir, Math.max(0, lim.lo), Math.max(0, lim.hi - dur));
+    if(target === s0){ undoStack.pop(); toast('No room to move that way'); return; }
+    t.start = toHM(target); t.end = toHM(target + dur);
     toast(t.name+' moved to '+shortTime(target));
   }
   tlSig = null; lastScrolledIdx = -1;
@@ -1189,7 +1336,7 @@ function repaint(){ if(dragging) return; render(); autoScroll(); }
    ======================================================================= */
 const bm = {modal:$('blockModal'), title:$('blockTitle'), hint:$('blockHint'),
   name:$('bName'), start:$('bStart'), end:$('bEnd'), type:$('bType'),
-  push:$('bPush'), del:$('bDelete')};
+  push:$('bPush'), lock:$('bLock'), del:$('bDelete')};
 let editingIdx = -1, editingOrig = null;
 
 bm.type.innerHTML = Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k].icon+' '+TYPES[k].label+'</option>').join('');
@@ -1204,6 +1351,7 @@ function openBlock(i){
   bm.hint.textContent = "Just for today. Tomorrow goes back to the normal schedule.";
   bm.name.value = b.name; bm.start.value = b.start; bm.end.value = b.end;
   bm.type.value = TYPES[b.type] ? b.type : 'other';
+  bm.lock.checked = !!b.locked;
   bm.push.checked = true;
   bm.del.hidden = false;
   bm.modal.classList.add('open');
@@ -1217,6 +1365,7 @@ function openNewBlock(){
   bm.hint.textContent = "Surprise assembly, fire drill, guest reader — just for today.";
   bm.name.value = ''; bm.start.value = toHM(start); bm.end.value = toHM(start+30);
   bm.type.value = 'assembly';
+  bm.lock.checked = false;
   bm.push.checked = true;
   bm.del.hidden = true;
   bm.modal.classList.add('open');
@@ -1228,9 +1377,10 @@ function saveBlock(){
   const name = bm.name.value.trim() || 'Activity';
   let s = toMin(bm.start.value || '00:00'), e = toMin(bm.end.value || '00:00');
   if(e <= s) e = s + 5;
-  const type = bm.type.value;
+  const type = bm.type.value, locked = bm.lock.checked;
   pushUndo();
   const list = ensureOverride();
+  let squeezed = false;
 
   if(editingIdx >= 0){
     // find the block we opened (list may have been re-sorted since)
@@ -1238,16 +1388,36 @@ function saveBlock(){
     const target = idx >= 0 ? list[idx] : null;
     if(!target){ closeBlock(); return; }
     const oldEnd = toMin(target.end);
-    if(bm.push.checked && e !== oldEnd) shiftAfter(list, oldEnd, e - oldEnd);
+    if(bm.push.checked){
+      // "slide the rest of the day" — everything after keeps its shape
+      if(e !== oldEnd) shiftAfter(list, oldEnd, e - oldEnd);
+    }else{
+      // "only this block" — it has to fit the free window on its own
+      const lim = slotLimits(list, target, s);
+      const fit = fitInto(s, e, lim);
+      squeezed = fit.s !== s || fit.e !== e;
+      s = fit.s; e = fit.e;
+    }
     target.start = toHM(s); target.end = toHM(e); target.name = name; target.type = type;
+    if(locked) target.locked = true; else delete target.locked;
   } else {
-    if(bm.push.checked) shiftAfter(list, s, e - s);   // make room
-    list.push({start:toHM(s), end:toHM(e), name, type, added:true});
+    const nb = {start:toHM(s), end:toHM(e), name, type, added:true};
+    if(locked) nb.locked = true;
+    const lim = slotLimits(list, null, s);
+    if(!bm.push.checked && lim.hi - lim.lo >= MIN_DUR){
+      const fit = fitInto(s, e, lim);
+      squeezed = fit.s !== s || fit.e !== e;
+      nb.start = toHM(fit.s); nb.end = toHM(fit.e);
+    }else{
+      shiftAfter(list, s, e - s);                     // make room
+    }
+    list.push(nb);
   }
   closeBlock();
-  lastScrolledIdx = -1;
+  tlSig = null; lastScrolledIdx = -1;
   commitOverride();
-  toast(name + (editingIdx >= 0 ? ' updated' : ' added to today'));
+  toast(name + (editingIdx >= 0 ? ' updated' : ' added to today') +
+        (squeezed ? '  ·  trimmed to fit the open slot' : ''));
 }
 
 function deleteBlock(){
@@ -1263,7 +1433,7 @@ function deleteBlock(){
     if(bm.push.checked) shiftAfter(list, toMin(gone.end), -span);   // close the hole
   }
   closeBlock();
-  lastScrolledIdx = -1;
+  tlSig = null; lastScrolledIdx = -1;
   commitOverride();
   if(gone) toast(gone.name + ' removed from today');
 }
@@ -1363,6 +1533,8 @@ function drawRows(){
       '<td><input type="time" class="f-end" value="'+esc(b.end)+'"></td>' +
       '<td><input type="text" class="f-name" value="'+esc(b.name)+'" placeholder="Activity name"></td>' +
       '<td><select class="f-type">'+opts+'</select></td>' +
+      '<td style="text-align:center"><input type="checkbox" class="f-lock"'+(b.locked?' checked':'')+
+        ' title="Locked — this time never gets pushed around"></td>' +
       '<td><button class="icon-btn f-del" title="Remove">✕</button></td>' +
     '</tr>').join('');
   em.rows.querySelectorAll('tr').forEach((tr,i)=>{
@@ -1378,7 +1550,12 @@ function commitRows(){
   em.rows.querySelectorAll('tr').forEach(tr=>{
     const start=tr.querySelector('.f-start').value, end=tr.querySelector('.f-end').value;
     const name=tr.querySelector('.f-name').value.trim(), type=tr.querySelector('.f-type').value;
-    if(start && end) list.push({start,end,name:name||'Activity',type});
+    const locked=tr.querySelector('.f-lock').checked;
+    if(start && end){
+      const b={start,end,name:name||'Activity',type};
+      if(locked) b.locked=true;
+      list.push(b);
+    }
   });
   draft.days[editDay] = list;
   draft.title = em.titleInput.value.trim() || DEFAULT_SCHEDULE.title;
