@@ -1988,36 +1988,6 @@
     <div class="dh-date" id="dhDate"></div>
   </div>
   
-  <div class="dh-weather">
-    <div class="dh-top">
-      <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">96°</span>
-        <span class="dh-hilo">H 96° · L 75°</span>
-      </div>
-      <div class="dh-days">
-        
-          <div class="dh-day"><span class="d">Sun</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">98/77</span></div>
-        
-          <div class="dh-day"><span class="d">Mon</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">105/76</span></div>
-        
-          <div class="dh-day"><span class="d">Tue</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">103/78</span></div>
-        
-          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">101/77</span></div>
-        
-          <div class="dh-day"><span class="d">Thu</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">100/76</span></div>
-        
-      </div>
-    </div>
-    
-    <div class="dh-sun">
-      <div class="sun-bar" id="sunBar"
-           data-sunrise="2026-08-15T06:50"
-           data-sunset="2026-08-15T20:17"></div>
-    </div>
-    
-  </div>
-  
 </header>
 
 <div class="stage">
@@ -4058,7 +4028,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":["2026-08-15T06:50","2026-08-16T06:50","2026-08-17T06:51","2026-08-18T06:52","2026-08-19T06:53","2026-08-20T06:53"],"sunsets":["2026-08-15T20:17","2026-08-16T20:16","2026-08-17T20:15","2026-08-18T20:14","2026-08-19T20:13","2026-08-20T20:11"],"timezone":"America/New_York"};
+    const SUN = {"sunrises":[],"sunsets":[]};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
