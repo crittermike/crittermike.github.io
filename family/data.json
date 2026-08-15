@@ -1,7 +1,16 @@
 {
-  "generated_at": "2026-08-15T14:01:03.541Z",
+  "generated_at": "2026-08-15T14:16:03.038Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
+    {
+      "date": "2026-08-15",
+      "time": "10a",
+      "what": "Amazon delivery (2 items)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-15T15:00:00-04:00"
+    },
     {
       "date": "2026-08-16",
       "time": "8a",
@@ -938,7 +947,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 85,
       "hi": 96,
       "lo": 75,
       "icon": "☀️",
@@ -947,10 +956,10 @@
     "days": [
       {
         "d": "Sun",
-        "icon": "⛅",
+        "icon": "🌤",
         "hi": 98,
-        "lo": 78,
-        "code": 3
+        "lo": 76,
+        "code": 1
       },
       {
         "d": "Mon",
@@ -2271,6 +2280,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-15T14:01:00.599Z"
+    "updatedAt": "2026-08-15T14:16:01.203Z"
   }
 }
