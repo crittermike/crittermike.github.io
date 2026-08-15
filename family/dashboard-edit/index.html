@@ -2087,7 +2087,7 @@
           
             
             
-            <div class="v warn">0g</div>
+            <div class="v">60g</div>
           
           
             
@@ -2098,7 +2098,7 @@
           
             
             
-            <div class="v danger">-20g</div>
+            <div class="v">40g</div>
           
           
             
@@ -2109,7 +2109,7 @@
           
             
             
-            <div class="v danger">-2g</div>
+            <div class="v">58g</div>
           
           
             
@@ -2120,7 +2120,7 @@
           
             
             
-            <div class="v">116g</div>
+            <div class="v">176g</div>
           
           
             
@@ -2146,7 +2146,7 @@
           
             
             
-            <span class="v warn">0g</span>
+            <span class="v">60g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2215,7 +2215,7 @@
           
             
             
-            <span class="v danger">-20g</span>
+            <span class="v">40g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2289,7 +2289,7 @@
           
             
             
-            <span class="v danger">-2g</span>
+            <span class="v">58g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2358,7 +2358,7 @@
           
             
             
-            <span class="v">116g</span>
+            <span class="v">176g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3356,7 +3356,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":-20,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":-2,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":116,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":176,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3810,7 +3810,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":-20,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":-2,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":116,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"},{"id":"sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac","label":"POPCS Back to School Dinner, 4-6p, PAC"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":176,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"laundry-saturday","label":"🧺 Put laundry away"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
