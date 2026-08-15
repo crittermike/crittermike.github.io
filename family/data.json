@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T17:00:34.481Z",
+  "generated_at": "2026-08-15T17:15:31.167Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-16T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-16",
+      "time": "4p",
+      "what": "Pasta La Vista (POPCS)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-16T18:00:00-04:00"
     },
     {
       "date": "2026-08-16",
@@ -2280,6 +2289,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-15T17:00:32.573Z"
+    "updatedAt": "2026-08-15T17:15:29.454Z"
   }
 }
