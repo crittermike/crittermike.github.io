@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T03:30:41.516Z",
+  "generated_at": "2026-08-15T03:45:43.774Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -971,8 +971,8 @@
       "temp": 75,
       "hi": 94,
       "lo": 74,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
@@ -2181,7 +2181,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 48.4,
-    "totalSpend": 9356.94,
+    "totalSpend": 9523.67,
     "totalBudget": 17750.5,
     "categories": [
       {
@@ -2212,9 +2212,9 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 2024.75,
-        "spent": 947.37,
-        "balance": 1077.38,
-        "pct": 46.8
+        "spent": 1102.11,
+        "balance": 922.64,
+        "pct": 54.4
       },
       {
         "name": "🚗 Cars",
@@ -2228,9 +2228,9 @@
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 364.32,
-        "spent": 262.04,
-        "balance": 102.28,
-        "pct": 71.9
+        "spent": 274.03,
+        "balance": 90.29,
+        "pct": 75.2
       },
       {
         "name": "🍿 Entertainment",
@@ -2298,9 +2298,9 @@
       }
     ],
     "liquidCash": 7135.58,
-    "creditDebt": 14986.52,
-    "netLiquid": 22122.1,
+    "creditDebt": 17544.11,
+    "netLiquid": 24679.69,
     "source": "ynab",
-    "updatedAt": "2026-08-15T03:30:40.118Z"
+    "updatedAt": "2026-08-15T03:45:41.039Z"
   }
 }
