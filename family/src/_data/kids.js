@@ -67,8 +67,7 @@ function todaysAssignments(kidKey) {
   const dow = et.weekday; // Mon, Tue, Wed, Thu, Fri, Sat, Sun
   const isSummerWeekday = (month === 6 || month === 7) &&
     ['Mon','Tue','Wed','Thu','Fri'].includes(dow);
-  const todayISO = `${et.year}-${String(et.month).padStart(2,'0')}-${String(et.day).padStart(2,'0')}`;
-  // "Due today or tomorrow" window — gives Charlie a heads-up the night before.
+  // "Due tomorrow" window — heads-up the night before, not the due-date morning.
   const tomorrow = new Date(Date.UTC(parseInt(et.year,10), parseInt(et.month,10)-1, parseInt(et.day,10)+1));
   const tomorrowISO = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,'0')}-${String(tomorrow.getUTCDate()).padStart(2,'0')}`;
 
@@ -102,8 +101,11 @@ function todaysAssignments(kidKey) {
   if (dow === 'Sat') {
     out.push({ id: 'laundry-saturday', label: '🧺 Put laundry away' });
   }
-  // Append one-off items from school-assignments.md due today or tomorrow.
-  for (const item of loadSchoolToday(kidKey, [todayISO, tomorrowISO])) {
+  // Append one-off items from school-assignments.md due TOMORROW only.
+  // Showing on the due date itself is too late (homework's due that morning,
+  // not that evening) and just repeats what was already checked off the day
+  // before. The dashboard is a heads-up the night before, not a due-date log.
+  for (const item of loadSchoolToday(kidKey, [tomorrowISO])) {
     out.push(item);
   }
   return out;
