@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T16:00:17.272Z",
+  "generated_at": "2026-08-16T16:15:15.639Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -462,12 +462,7 @@
         "balance_str": "$91.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
-          "label": "POPCS Back to School Dinner, 4-6p, PAC"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -486,12 +481,7 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
-          "label": "POPCS Back to School Dinner, 4-6p, PAC"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -512,8 +502,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
-          "label": "POPCS Back to School Dinner, 4-6p, PAC"
+          "id": "sch-2026-08-17-math-1-1-25-32-100-pts-show-all-work-one",
+          "label": "Math 1.1 #25-32, 100 pts. Show ALL work, one step at a time; expressions never have an equals sign."
+        },
+        {
+          "id": "sch-2026-08-17-read-p-10-12-and-complete-worksheet-p-23",
+          "label": "Read p. 10-12 and complete Worksheet p. 23 #1-8, 100 pts."
         }
       ]
     },
@@ -935,7 +929,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 88,
+      "temp": 89,
       "hi": 95,
       "lo": 75,
       "icon": "☀️",
@@ -2268,6 +2262,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-16T16:00:13.271Z"
+    "updatedAt": "2026-08-16T16:15:14.318Z"
   }
 }
