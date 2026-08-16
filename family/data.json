@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-16T03:45:53.053Z",
+  "generated_at": "2026-08-16T04:00:55.770Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-15",
-      "time": "10a",
-      "what": "Amazon delivery (2 items)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-15T15:00:00-04:00"
-    },
     {
       "date": "2026-08-16",
       "time": "8a",
@@ -473,10 +464,6 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
-        {
           "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
           "label": "POPCS Back to School Dinner, 4-6p, PAC"
         }
@@ -500,10 +487,6 @@
       },
       "guineaPig": "$133.14",
       "assignments": [
-        {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
         {
           "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
           "label": "POPCS Back to School Dinner, 4-6p, PAC"
@@ -529,10 +512,6 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
-        },
-        {
           "id": "sch-2026-08-16-popcs-back-to-school-dinner-4-6p-pac",
           "label": "POPCS Back to School Dinner, 4-6p, PAC"
         }
@@ -553,8 +532,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "laundry-saturday",
-          "label": "🧺 Put laundry away"
+          "id": "sch-2026-08-17-if-applicable-contact-case-manager-about",
+          "label": "If applicable: contact case manager about PSAT accommodations before College Board deadline"
         }
       ]
     }
@@ -770,8 +749,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -779,7 +758,7 @@
       "dow_short": "Mon",
       "name": "Homemade Hamburger Helper with green beans",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "homemade-hamburger-helper",
         "name": "Homemade Hamburger Helper",
@@ -949,7 +928,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -957,19 +936,12 @@
   "weather": {
     "now": {
       "temp": 78,
-      "hi": 93,
-      "lo": 75,
+      "hi": 96,
+      "lo": 74,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "☀️",
-        "hi": 96,
-        "lo": 74,
-        "code": 0
-      },
       {
         "d": "Mon",
         "icon": "⛅",
@@ -997,24 +969,31 @@
         "hi": 104,
         "lo": 77,
         "code": 53
+      },
+      {
+        "d": "Fri",
+        "icon": "⛈",
+        "hi": 98,
+        "lo": 70,
+        "code": 95
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-15T06:50",
         "2026-08-16T06:50",
         "2026-08-17T06:51",
         "2026-08-18T06:52",
         "2026-08-19T06:53",
-        "2026-08-20T06:53"
+        "2026-08-20T06:53",
+        "2026-08-21T06:54"
       ],
       "sunsets": [
-        "2026-08-15T20:17",
         "2026-08-16T20:16",
         "2026-08-17T20:15",
         "2026-08-18T20:14",
         "2026-08-19T20:13",
-        "2026-08-20T20:11"
+        "2026-08-20T20:11",
+        "2026-08-21T20:10"
       ],
       "timezone": "America/New_York"
     }
@@ -2289,6 +2268,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-16T03:45:51.490Z"
+    "updatedAt": "2026-08-16T04:00:53.236Z"
   }
 }
