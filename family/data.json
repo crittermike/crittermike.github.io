@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T17:00:19.669Z",
+  "generated_at": "2026-08-16T17:15:15.470Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -750,154 +750,23 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Homemade Hamburger Helper with green beans",
+      "name": "Sheet-pan Italian sausage, onion, zucchini over rice",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": {
-        "slug": "homemade-hamburger-helper",
-        "name": "Homemade Hamburger Helper",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [],
-        "aliases": [],
-        "in_rotation": false,
-        "effort": null,
-        "kid_friendly": true,
-        "protein_g": null,
-        "cal": null,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "1 onion, diced",
-              "Olive oil",
-              "Garlic, minced",
-              "1 package ground beef",
-              "Salt, pepper, paprika, garlic powder",
-              "1 tbsp tomato paste",
-              "1 can Italian-seasoned diced tomatoes, drained",
-              "2 cups beef broth",
-              "1 cup heavy cream",
-              "2 cups uncooked noodles",
-              "Shredded cheddar"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "1 onion, diced",
-          "Olive oil",
-          "Garlic, minced",
-          "1 package ground beef",
-          "Salt, pepper, paprika, garlic powder",
-          "1 tbsp tomato paste",
-          "1 can Italian-seasoned diced tomatoes, drained",
-          "2 cups beef broth",
-          "1 cup heavy cream",
-          "2 cups uncooked noodles",
-          "Shredded cheddar"
-        ],
-        "steps": [
-          "Cook onion in olive oil.",
-          "Add garlic, cook a minute or so.",
-          "Add ground beef, brown.",
-          "Season with salt, pepper, paprika, garlic powder.",
-          "Stir in tomato paste + drained diced tomatoes.",
-          "Add beef broth + heavy cream.",
-          "Add uncooked noodles.",
-          "Cover, cook 15 min.",
-          "Uncover, cook 2 more min.",
-          "Off heat, top with cheddar, stir."
-        ],
-        "notes": "",
-        "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Crockpot white chicken chili with tortilla chips",
+      "name": "Chicken fajitas (cast iron, zucchini + corn, no peppers)",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "white-chicken-chili",
-        "name": "White Chicken Chili",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner",
-          "crockpot"
-        ],
-        "aliases": [
-          "white-chicken-chili"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 550,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "1 can black beans",
-              "1 can corn",
-              "1 can rotel",
-              "2 chicken breasts",
-              "1 pkg ranch dressing mix",
-              "1 cream cheese",
-              "1 pound mexican cheese",
-              "1 bag tortilla chips",
-              "1 pkg sour cream"
-            ]
-          },
-          {
-            "heading": "Toppings",
-            "items": [
-              "Mexican cheese (shredded)",
-              "Tortilla chips",
-              "Sour cream"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "1 can black beans",
-          "1 can corn",
-          "1 can rotel",
-          "2 chicken breasts",
-          "1 pkg ranch dressing mix",
-          "1 cream cheese",
-          "1 pound mexican cheese",
-          "1 bag tortilla chips",
-          "1 pkg sour cream",
-          "Mexican cheese (shredded)",
-          "Tortilla chips",
-          "Sour cream"
-        ],
-        "steps": [
-          "Drain and rinse black beans.",
-          "Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.",
-          "Top with seasonings and ranch mix. Stir together.",
-          "Place cream cheese on top.",
-          "Cover with lid and cook on low for 6-8 hours.",
-          "Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve."
-        ],
-        "notes": "",
-        "body_html": "<h1>White Chicken Chili</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>1 can black beans</li>\n<li>1 can corn</li>\n<li>1 can rotel</li>\n<li>2 chicken breasts</li>\n<li>1 pkg ranch dressing mix</li>\n<li>1 cream cheese</li>\n<li>1 pound mexican cheese</li>\n<li>1 bag tortilla chips</li>\n<li>1 pkg sour cream</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Drain and rinse black beans.</li>\n<li>Place chicken at the bottom of the crock pot, and pour the whole can of corn, rotel and rinsed/drained black beans.</li>\n<li>Top with seasonings and ranch mix. Stir together.</li>\n<li>Place cream cheese on top.</li>\n<li>Cover with lid and cook on low for 6-8 hours.</li>\n<li>Stir cream cheese into chili. Use 2 forks to shred chicken. Stir together and serve.</li>\n</ol>\n<h2>Toppings</h2>\n<ul>\n<li>Mexican cheese (shredded)</li>\n<li>Tortilla chips</li>\n<li>Sour cream</li>\n</ul>\n",
-        "last_reviewed": "2026-05-29T00:00:00.000Z"
-      }
+      "recipe": null
     },
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Korean beef and broccoli bowls",
+      "name": "Mexican beef and refried bean burritos with onions",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -905,10 +774,53 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Pesto chicken with noodles and roasted Brussels sprouts",
+      "name": "Crockpot pot roast with carrots and potatoes",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "pot-roast-with-carrots-and-potatoes",
+        "name": "Pot roast with carrots and potatoes",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "pot-roast-with-carrots-and-potatoes"
+        ],
+        "in_rotation": true,
+        "effort": "easy-slow",
+        "kid_friendly": true,
+        "protein_g": 55,
+        "cal": 650,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "chuck roast",
+              "carrots",
+              "potatoes",
+              "onions",
+              "beef broth"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "chuck roast",
+          "carrots",
+          "potatoes",
+          "onions",
+          "beef broth"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Friday",
@@ -2262,6 +2174,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-16T17:00:15.914Z"
+    "updatedAt": "2026-08-16T17:15:14.092Z"
   }
 }
