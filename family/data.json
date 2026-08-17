@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T12:31:00.906Z",
+  "generated_at": "2026-08-17T12:46:00.027Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -708,7 +708,7 @@
     "protein_g": 55,
     "cal": 650,
     "effort": "easy-slow",
-    "note": "Mike-requested swap. Thomas gets plain roasted potato cubes (dry) plus raw carrot sticks/pretzels on the side.",
+    "note": "Mike-requested swap.",
     "recipe": {
       "slug": "pot-roast-with-carrots-and-potatoes",
       "name": "Pot roast with carrots and potatoes",
@@ -949,7 +949,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 81,
       "hi": 100,
       "lo": 75,
       "icon": "☀️",
@@ -2282,6 +2282,6 @@
     "creditDebt": 18978.3,
     "netLiquid": 22740.68,
     "source": "ynab",
-    "updatedAt": "2026-08-17T12:30:59.179Z"
+    "updatedAt": "2026-08-17T12:45:58.702Z"
   }
 }
