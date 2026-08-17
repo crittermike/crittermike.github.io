@@ -1992,7 +1992,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg></span>
-        <span class="dh-temp">95°</span>
+        <span class="dh-temp">96°</span>
         <span class="dh-hilo">H 99° · L 76°</span>
       </div>
       <div class="dh-days">
@@ -2298,7 +2298,23 @@
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           
-            <div class="placeholder">Nothing today 🎉</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-08-18-spanish-adv-1-p-10-11">
+                  <span class="todo-label">Spanish Adv 1: P.10-11</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-08-18-algebra-1-2-15-30odd-1-3-25-30-all">
+                  <span class="todo-label">Algebra: 1.2 #15-30odd; 1.3 #25-30 all</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2605,6 +2621,28 @@
             </div>
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-08-18-spanish-adv-1-p-10-11">
+                      <span class="todo-label">Spanish Adv 1: P.10-11</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-08-18-algebra-1-2-15-30odd-1-3-25-30-all">
+                      <span class="todo-label">Algebra: 1.2 #15-30odd; 1.3 #25-30 all</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3242,7 +3280,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-18-spanish-adv-1-p-10-11","label":"Spanish Adv 1: P.10-11"},{"id":"sch-2026-08-18-algebra-1-2-15-30odd-1-3-25-30-all","label":"Algebra: 1.2 #15-30odd; 1.3 #25-30 all"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3696,7 +3734,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":60,"refill":60},"allowance":{"balance_str":"$91.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[{"id":"laundry-monday","label":"🧺 Bring down laundry"}]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-18-spanish-adv-1-p-10-11","label":"Spanish Adv 1: P.10-11"},{"id":"sch-2026-08-18-algebra-1-2-15-30odd-1-3-25-30-all","label":"Algebra: 1.2 #15-30odd; 1.3 #25-30 all"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
