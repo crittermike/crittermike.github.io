@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-08-17T03:45:33.040Z",
+  "generated_at": "2026-08-17T04:00:34.643Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-16",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-16T09:00:00-04:00"
-    },
-    {
-      "date": "2026-08-16",
-      "time": "4p",
-      "what": "Pasta La Vista (POPCS)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-16T18:00:00-04:00"
-    },
-    {
-      "date": "2026-08-16",
-      "time": "4p",
-      "what": "POPCS: Back to School Dinner (Pasta La Vista)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-16T18:00:00-04:00"
-    },
     {
       "date": "2026-08-18",
       "time": "all day",
@@ -490,7 +463,12 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "laundry-monday",
+          "label": "🧺 Bring down laundry"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -509,16 +487,7 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-17-math-1-1-25-32-100-pts-show-all-work-one",
-          "label": "Math 1.1 #25-32, 100 pts. Show ALL work, one step at a time; expressions never have an equals sign."
-        },
-        {
-          "id": "sch-2026-08-17-read-p-10-12-and-complete-worksheet-p-23",
-          "label": "Read p. 10-12 and complete Worksheet p. 23 #1-8, 100 pts."
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -533,12 +502,7 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-17-if-applicable-contact-case-manager-about",
-          "label": "If applicable: contact case manager about PSAT accommodations before College Board deadline"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -795,7 +759,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -803,8 +767,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Crockpot pot roast with carrots and potatoes",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -855,7 +819,7 @@
       "dow_short": "Tue",
       "name": "Crockpot chicken and dumplings",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -986,19 +950,12 @@
   "weather": {
     "now": {
       "temp": 80,
-      "hi": 94,
+      "hi": 100,
       "lo": 75,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 100,
-        "lo": 75,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -1026,24 +983,31 @@
         "hi": 98,
         "lo": 74,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 97,
+        "lo": 71,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-16T06:50",
         "2026-08-17T06:51",
         "2026-08-18T06:52",
         "2026-08-19T06:53",
         "2026-08-20T06:53",
-        "2026-08-21T06:54"
+        "2026-08-21T06:54",
+        "2026-08-22T06:55"
       ],
       "sunsets": [
-        "2026-08-16T20:16",
         "2026-08-17T20:15",
         "2026-08-18T20:14",
         "2026-08-19T20:13",
         "2026-08-20T20:11",
-        "2026-08-21T20:10"
+        "2026-08-21T20:10",
+        "2026-08-22T20:09"
       ],
       "timezone": "America/New_York"
     }
@@ -2318,6 +2282,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-17T03:45:31.663Z"
+    "updatedAt": "2026-08-17T04:00:32.520Z"
   }
 }
