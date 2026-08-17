@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T11:45:58.566Z",
+  "generated_at": "2026-08-17T12:01:07.075Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -949,7 +949,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 78,
       "hi": 100,
       "lo": 75,
       "icon": "☀️",
@@ -2162,16 +2162,16 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 54.8,
-    "totalSpend": 10542.65,
+    "totalSpend": 11399.35,
     "totalBudget": 17750.5,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 3490.68,
-        "spent": 3149.62,
-        "balance": 341.06,
-        "pct": 90.2
+        "spent": 3678.72,
+        "balance": -188.04,
+        "pct": 105.4
       },
       {
         "name": "🏠 Home",
@@ -2185,17 +2185,17 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 2546.81,
-        "spent": 1372.45,
-        "balance": 1174.36,
-        "pct": 53.9
+        "spent": 1444.79,
+        "balance": 1102.02,
+        "pct": 56.7
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 2024.75,
-        "spent": 1173.99,
-        "balance": 850.76,
-        "pct": 58
+        "spent": 1320.26,
+        "balance": 704.49,
+        "pct": 65.2
       },
       {
         "name": "⚡️ Utilities",
@@ -2222,12 +2222,20 @@
         "pct": 75.2
       },
       {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 99,
+        "spent": 224,
+        "balance": -125,
+        "pct": 226.3
+      },
+      {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 1698.71,
-        "spent": 152.66,
-        "balance": 1546.05,
-        "pct": 9
+        "spent": 162.65,
+        "balance": 1536.06,
+        "pct": 9.6
       },
       {
         "name": "🐶 Pets",
@@ -2236,14 +2244,6 @@
         "spent": 137.58,
         "balance": -33.08,
         "pct": 131.7
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 99,
-        "spent": 125,
-        "balance": -26,
-        "pct": 126.3
       },
       {
         "name": "💅 Personal Care",
@@ -2279,9 +2279,9 @@
       }
     ],
     "liquidCash": 3762.38,
-    "creditDebt": 19898.33,
-    "netLiquid": 23660.71,
+    "creditDebt": 18978.3,
+    "netLiquid": 22740.68,
     "source": "ynab",
-    "updatedAt": "2026-08-17T11:45:57.261Z"
+    "updatedAt": "2026-08-17T12:01:04.174Z"
   }
 }
