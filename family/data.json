@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T23:45:26.421Z",
+  "generated_at": "2026-08-17T00:00:31.236Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -740,12 +740,55 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
-    "recipe": null
+    "name": "Crockpot pot roast with carrots and potatoes",
+    "protein_g": 55,
+    "cal": 650,
+    "effort": "easy-slow",
+    "note": "Mike-requested swap. Thomas gets plain roasted potato cubes (dry) plus raw carrot sticks/pretzels on the side.",
+    "recipe": {
+      "slug": "pot-roast-with-carrots-and-potatoes",
+      "name": "Pot roast with carrots and potatoes",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "pot-roast-with-carrots-and-potatoes"
+      ],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 55,
+      "cal": 650,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "chuck roast",
+            "carrots",
+            "potatoes",
+            "onions",
+            "beef broth"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "chuck roast",
+        "carrots",
+        "potatoes",
+        "onions",
+        "beef broth"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -2154,7 +2197,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 51.6,
+    "dayPct": 54.8,
     "totalSpend": 10501.66,
     "totalBudget": 17750.5,
     "categories": [
@@ -2275,6 +2318,6 @@
     "creditDebt": 19939.32,
     "netLiquid": 23701.7,
     "source": "ynab",
-    "updatedAt": "2026-08-16T23:45:25.070Z"
+    "updatedAt": "2026-08-17T00:00:28.608Z"
   }
 }
