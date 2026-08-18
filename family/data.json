@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T23:45:24.329Z",
+  "generated_at": "2026-08-18T00:00:30.470Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -717,14 +717,14 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot pot roast with carrots and potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "Mike-requested swap.",
+    "name": "Crockpot chicken and dumplings",
+    "protein_g": 45,
+    "cal": 550,
+    "effort": "easy",
+    "note": "Mike-requested swap. Crockpot high 3-4 hrs, biscuits cut into 8 pieces, added last 30 min.",
     "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
+      "slug": "crockpot-chicken-and-dumplings",
+      "name": "Crockpot Chicken and Dumplings",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -732,13 +732,13 @@
         "dinner"
       ],
       "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
+        "crockpot-chicken-and-dumplings"
       ],
       "in_rotation": true,
-      "effort": "easy-slow",
+      "effort": "easy",
       "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
+      "protein_g": 45,
+      "cal": 550,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -746,24 +746,26 @@
         {
           "heading": null,
           "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth"
+            "chicken broth",
+            "chicken breast",
+            "dried minced onion",
+            "dried parsley",
+            "cream of chicken soup (2 cans)",
+            "refrigerated biscuits"
           ]
         }
       ],
       "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth"
+        "chicken broth",
+        "chicken breast",
+        "dried minced onion",
+        "dried parsley",
+        "cream of chicken soup (2 cans)",
+        "refrigerated biscuits"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -962,7 +964,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 92,
+      "temp": 91,
       "hi": 97,
       "lo": 76,
       "icon": "☀️",
@@ -2174,7 +2176,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 54.8,
+    "dayPct": 58.1,
     "totalSpend": 11399.35,
     "totalBudget": 17750.5,
     "categories": [
@@ -2295,6 +2297,6 @@
     "creditDebt": 18978.3,
     "netLiquid": 22740.68,
     "source": "ynab",
-    "updatedAt": "2026-08-17T23:45:23.028Z"
+    "updatedAt": "2026-08-18T00:00:27.319Z"
   }
 }
