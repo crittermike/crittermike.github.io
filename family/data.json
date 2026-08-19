@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-18T01:45:27.626Z",
+  "generated_at": "2026-08-19T21:10:53.236Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-18",
-      "time": "all day",
-      "what": "John's birthday 🎂",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-08-19T00:00:00-04:00"
-    },
     {
       "date": "2026-08-19",
       "time": "8:30a",
@@ -424,6 +415,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-11-08T09:00:00-05:00"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-11-15T09:00:00-05:00"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "6:30p",
+      "what": "Peace Center: Dirty Dancing: The Musical",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-11-15T21:30:00-05:00"
     }
   ],
   "kids": [
@@ -441,10 +450,27 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$91.09"
+        "balance_str": "$84.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-20-1-1-reading-comprehension-and-vocabulary",
+          "label": "1.1 Reading Comprehension and Vocabulary Test for Wolf! (crossed out on newsletter - verify if still happening)"
+        },
+        {
+          "id": "sch-2026-08-20-reading-read-30-min",
+          "label": "Reading: read 30 min"
+        },
+        {
+          "id": "sch-2026-08-20-spelling-choice-board-triples-learn-word",
+          "label": "Spelling: Choice Board - Triples; learn words 16-20 (write 3x each); study Thursday DOL, review all 4 days for Friday DOL Quiz"
+        },
+        {
+          "id": "sch-2026-08-20-math-workbook-p-11-12",
+          "label": "Math: Workbook p.11-12"
+        }
+      ]
     },
     {
       "key": "william",
@@ -463,12 +489,7 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "laundry-monday",
-          "label": "🧺 Bring down laundry"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -489,16 +510,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-18-spanish-adv-1-p-10-11",
-          "label": "Spanish Adv 1: P.10-11"
+          "id": "sch-2026-08-20-spanish-simon-p-14-y-15",
+          "label": "Spanish (Simon): P.14 y 15"
         },
         {
-          "id": "sch-2026-08-18-algebra-1-2-15-30odd-1-3-25-30-all",
-          "label": "Algebra: 1.2 #15-30odd; 1.3 #25-30 all"
+          "id": "sch-2026-08-20-algebra-edwards-quiz-1-1-1-6",
+          "label": "Algebra (Edwards): Quiz 1.1-1.6"
         },
         {
-          "id": "sch-2026-08-18-chemistry-finish-page-23",
-          "label": "Chemistry: Finish page 23"
+          "id": "sch-2026-08-20-algebra-edwards-1-6-8-9-11",
+          "label": "Algebra (Edwards): 1.6 # 8,9,11"
         }
       ]
     },
@@ -721,7 +742,7 @@
     "protein_g": 45,
     "cal": 550,
     "effort": "easy",
-    "note": "Mike-requested swap. Crockpot high 3-4 hrs, biscuits cut into 8 pieces, added last 30 min.",
+    "note": "Moved from Tue for John's birthday dinner.",
     "recipe": {
       "slug": "crockpot-chicken-and-dumplings",
       "name": "Crockpot Chicken and Dumplings",
@@ -782,7 +803,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Crockpot pot roast with carrots and potatoes",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
@@ -812,7 +833,8 @@
               "carrots",
               "potatoes",
               "onions",
-              "beef broth"
+              "beef broth",
+              "salt, black pepper"
             ]
           }
         ],
@@ -821,20 +843,36 @@
           "carrots",
           "potatoes",
           "onions",
-          "beef broth"
+          "beef broth",
+          "salt, black pepper"
         ],
-        "steps": [],
+        "steps": [
+          "Season roast all over with salt and pepper.",
+          "Put onions in bottom of crockpot. Place roast on top.",
+          "Add carrots and potatoes around/on top of roast.",
+          "Pour in beef broth.",
+          "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
+          "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
+        ],
         "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
         "last_reviewed": null
       }
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Crockpot chicken and dumplings",
+      "name": "John's birthday dinner (out)",
       "isToday": false,
-      "isTomorrow": true,
+      "isTomorrow": false,
+      "recipe": null
+    },
+    {
+      "dow": "Wednesday",
+      "dow_short": "Wed",
+      "name": "Crockpot chicken and dumplings",
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-and-dumplings",
         "name": "Crockpot Chicken and Dumplings",
@@ -883,11 +921,11 @@
       }
     },
     {
-      "dow": "Wednesday",
-      "dow_short": "Wed",
+      "dow": "Thursday",
+      "dow_short": "Thu",
       "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli",
         "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
@@ -938,14 +976,6 @@
       }
     },
     {
-      "dow": "Thursday",
-      "dow_short": "Thu",
-      "name": "Mexican beef and refried bean burritos with onions",
-      "isToday": false,
-      "isTomorrow": false,
-      "recipe": null
-    },
-    {
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
@@ -964,65 +994,65 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
-      "hi": 97,
-      "lo": 76,
-      "icon": "⛅",
-      "code": 3
+      "temp": 92,
+      "hi": 92,
+      "lo": 72,
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
-        "d": "Tue",
+        "d": "Thu",
         "icon": "⛅",
-        "hi": 95,
+        "hi": 99,
         "lo": 74,
         "code": 3
       },
       {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 101,
-        "lo": 72,
-        "code": 3
-      },
-      {
-        "d": "Thu",
-        "icon": "🌦",
-        "hi": 105,
-        "lo": 73,
-        "code": 80
-      },
-      {
         "d": "Fri",
         "icon": "🌦",
-        "hi": 94,
-        "lo": 72,
+        "hi": 93,
+        "lo": 71,
         "code": 55
       },
       {
         "d": "Sat",
         "icon": "🌦",
-        "hi": 92,
+        "hi": 93,
         "lo": 69,
-        "code": 51
+        "code": 53
+      },
+      {
+        "d": "Sun",
+        "icon": "⛅",
+        "hi": 96,
+        "lo": 70,
+        "code": 3
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 95,
+        "lo": 70,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-17T06:51",
-        "2026-08-18T06:52",
         "2026-08-19T06:53",
         "2026-08-20T06:53",
         "2026-08-21T06:54",
-        "2026-08-22T06:55"
+        "2026-08-22T06:55",
+        "2026-08-23T06:55",
+        "2026-08-24T06:56"
       ],
       "sunsets": [
-        "2026-08-17T20:15",
-        "2026-08-18T20:14",
         "2026-08-19T20:13",
         "2026-08-20T20:11",
         "2026-08-21T20:10",
-        "2026-08-22T20:09"
+        "2026-08-22T20:09",
+        "2026-08-23T20:08",
+        "2026-08-24T20:06"
       ],
       "timezone": "America/New_York"
     }
@@ -1698,7 +1728,8 @@
             "carrots",
             "potatoes",
             "onions",
-            "beef broth"
+            "beef broth",
+            "salt, black pepper"
           ]
         }
       ],
@@ -1707,11 +1738,19 @@
         "carrots",
         "potatoes",
         "onions",
-        "beef broth"
+        "beef broth",
+        "salt, black pepper"
       ],
-      "steps": [],
+      "steps": [
+        "Season roast all over with salt and pepper.",
+        "Put onions in bottom of crockpot. Place roast on top.",
+        "Add carrots and potatoes around/on top of roast.",
+        "Pour in beef broth.",
+        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
+        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
+      ],
       "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n</ul>\n",
+      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
       "last_reviewed": null
     },
     {
@@ -2176,17 +2215,17 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 58.1,
-    "totalSpend": 11399.35,
+    "dayPct": 61.3,
+    "totalSpend": 13568.17,
     "totalBudget": 17750.5,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 3490.68,
-        "spent": 3678.72,
-        "balance": -188.04,
-        "pct": 105.4
+        "spent": 3780.36,
+        "balance": -289.68,
+        "pct": 108.3
       },
       {
         "name": "🏠 Home",
@@ -2197,20 +2236,28 @@
         "pct": 66.2
       },
       {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 99,
+        "spent": 1782.46,
+        "balance": -1683.46,
+        "pct": 1800.5
+      },
+      {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 2546.81,
-        "spent": 1444.79,
-        "balance": 1102.02,
-        "pct": 56.7
+        "spent": 1720.82,
+        "balance": 825.99,
+        "pct": 67.6
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 2024.75,
-        "spent": 1320.26,
-        "balance": 704.49,
-        "pct": 65.2
+        "spent": 1371.73,
+        "balance": 653.02,
+        "pct": 67.7
       },
       {
         "name": "⚡️ Utilities",
@@ -2224,9 +2271,9 @@
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 981.05,
-        "spent": 424.4,
-        "balance": 556.65,
-        "pct": 43.3
+        "spent": 505.62,
+        "balance": 475.43,
+        "pct": 51.5
       },
       {
         "name": "📺 Subscriptions",
@@ -2235,14 +2282,6 @@
         "spent": 274.03,
         "balance": 90.29,
         "pct": 75.2
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 99,
-        "spent": 224,
-        "balance": -125,
-        "pct": 226.3
       },
       {
         "name": "🍿 Entertainment",
@@ -2261,6 +2300,14 @@
         "pct": 131.7
       },
       {
+        "name": "🎁 Charity",
+        "group": "Needs",
+        "budgeted": 160,
+        "spent": 100,
+        "balance": 60,
+        "pct": 62.5
+      },
+      {
         "name": "💅 Personal Care",
         "group": "Wants",
         "budgeted": 246,
@@ -2277,14 +2324,6 @@
         "pct": 0
       },
       {
-        "name": "🎁 Charity",
-        "group": "Needs",
-        "budgeted": 160,
-        "spent": 0,
-        "balance": 160,
-        "pct": 0
-      },
-      {
         "name": "🏝️ Vacation",
         "group": "Wants",
         "budgeted": 447.88,
@@ -2293,10 +2332,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 3762.38,
-    "creditDebt": 18978.3,
-    "netLiquid": 22740.68,
+    "liquidCash": 1513.92,
+    "creditDebt": 18402.34,
+    "netLiquid": 19916.26,
     "source": "ynab",
-    "updatedAt": "2026-08-18T01:45:26.374Z"
+    "updatedAt": "2026-08-19T21:10:51.873Z"
   }
 }
