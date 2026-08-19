@@ -86,21 +86,7 @@ function todaysAssignments(kidKey) {
     out.push({ id: 'take-medicine',  label: 'Take medicine' });
     // popcs-video removed 2026-06-25 — Charlie finished the POPCS video.
   }
-  // Friday laundry — every boy brings laundry down so Mike can wash it.
-  // William also brings his down Monday for the Monday laundry load. Both are
-  // year-round chores with stable IDs so their checkbox state is day-specific.
-  if (dow === 'Fri' || (dow === 'Mon' && kidKey === 'william')) {
-    out.push({
-      id: dow === 'Mon' ? 'laundry-monday' : 'laundry-friday',
-      label: '🧺 Bring down laundry',
-    });
-  }
-  // Saturday laundry — every boy puts his (now-washed) laundry away. Mirror of
-  // the Friday bring-down chore: year-round, all 4 kids, Saturdays only. Stable
-  // id so the kid-todos localStorage check persists through Sat and resets Sun.
-  if (dow === 'Sat') {
-    out.push({ id: 'laundry-saturday', label: '🧺 Put laundry away' });
-  }
+  // Laundry chores removed from kid todos per Mike 2026-08-17.
   // Append one-off items from school-assignments.md due TOMORROW only.
   // Showing on the due date itself is too late (homework's due that morning,
   // not that evening) and just repeats what was already checked off the day
