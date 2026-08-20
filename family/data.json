@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T23:45:25.836Z",
+  "generated_at": "2026-08-20T00:00:28.710Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -738,14 +738,14 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot chicken and dumplings",
-    "protein_g": 45,
-    "cal": 550,
-    "effort": "easy",
-    "note": "Moved from Tue for John's birthday dinner.",
+    "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
+    "protein_g": 40,
+    "cal": 650,
+    "effort": "medium",
+    "note": "Moved from Wed. Mexican burritos (originally Thu) skipped this week, bumped to next week.",
     "recipe": {
-      "slug": "crockpot-chicken-and-dumplings",
-      "name": "Crockpot Chicken and Dumplings",
+      "slug": "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli",
+      "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -753,13 +753,13 @@
         "dinner"
       ],
       "aliases": [
-        "crockpot-chicken-and-dumplings"
+        "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli"
       ],
       "in_rotation": true,
-      "effort": "easy",
+      "effort": "medium",
       "kid_friendly": true,
-      "protein_g": 45,
-      "cal": 550,
+      "protein_g": 40,
+      "cal": 650,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -767,26 +767,28 @@
         {
           "heading": null,
           "items": [
-            "chicken broth",
-            "chicken breast",
-            "dried minced onion",
-            "dried parsley",
-            "cream of chicken soup (2 cans)",
-            "refrigerated biscuits"
+            "canned clams",
+            "protein noodles",
+            "garlic bread",
+            "broccoli",
+            "olive oil",
+            "garlic",
+            "white wine"
           ]
         }
       ],
       "all_ingredients": [
-        "chicken broth",
-        "chicken breast",
-        "dried minced onion",
-        "dried parsley",
-        "cream of chicken soup (2 cans)",
-        "refrigerated biscuits"
+        "canned clams",
+        "protein noodles",
+        "garlic bread",
+        "broccoli",
+        "olive oil",
+        "garlic",
+        "white wine"
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n",
+      "body_html": "<h1>Clam spaghetti (protein noodles) + garlic bread + roasted broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>canned clams</li>\n<li>protein noodles</li>\n<li>garlic bread</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>white wine</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -994,7 +996,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 88,
+      "temp": 87,
       "hi": 92,
       "lo": 72,
       "icon": "☀️",
@@ -2215,7 +2217,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 61.3,
+    "dayPct": 64.5,
     "totalSpend": 13568.17,
     "totalBudget": 17750.5,
     "categories": [
@@ -2336,6 +2338,6 @@
     "creditDebt": 18402.34,
     "netLiquid": 19916.26,
     "source": "ynab",
-    "updatedAt": "2026-08-19T23:45:24.532Z"
+    "updatedAt": "2026-08-20T00:00:26.550Z"
   }
 }
