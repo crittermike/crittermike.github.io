@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T20:00:53.922Z",
+  "generated_at": "2026-08-20T20:15:54.195Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -91,6 +91,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-02T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "8:10a",
+      "what": "Pediatrician appt - Dr. Erin Bhatia",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-03T09:00:00-04:00"
     },
     {
       "date": "2026-09-04",
@@ -968,16 +977,16 @@
     "days": [
       {
         "d": "Fri",
-        "icon": "⛅",
-        "hi": 93,
-        "lo": 73,
-        "code": 3
+        "icon": "🌧",
+        "hi": 94,
+        "lo": 74,
+        "code": 65
       },
       {
         "d": "Sat",
         "icon": "🌦",
         "hi": 93,
-        "lo": 70,
+        "lo": 71,
         "code": 51
       },
       {
@@ -2301,6 +2310,6 @@
     "creditDebt": 15960,
     "netLiquid": 37292.52,
     "source": "ynab",
-    "updatedAt": "2026-08-20T20:00:52.423Z"
+    "updatedAt": "2026-08-20T20:15:52.902Z"
   }
 }
