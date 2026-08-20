@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T01:30:27.981Z",
+  "generated_at": "2026-08-20T01:36:59.603Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -439,12 +439,7 @@
     {
       "key": "thomas",
       "name": "Thomas",
-      "grade": "rising 3rd",
-      "reading": {
-        "pages": 0,
-        "target": 200,
-        "pct": 0
-      },
+      "grade": "3rd",
       "sugar": {
         "balance": 150,
         "refill": 60
@@ -475,12 +470,7 @@
     {
       "key": "william",
       "name": "William",
-      "grade": "rising 5th",
-      "reading": {
-        "pages": 0,
-        "target": 400,
-        "pct": 0
-      },
+      "grade": "5th",
       "sugar": {
         "balance": 40,
         "refill": 60
@@ -494,12 +484,7 @@
     {
       "key": "henry",
       "name": "Henry",
-      "grade": "rising 8th",
-      "reading": {
-        "pages": 0,
-        "target": 500,
-        "pct": 0
-      },
+      "grade": "8th",
       "sugar": {
         "balance": 58,
         "refill": 60
@@ -526,8 +511,7 @@
     {
       "key": "charlie",
       "name": "Charlie",
-      "grade": "rising 11th",
-      "reading": null,
+      "grade": "11th",
       "sugar": {
         "balance": 136,
         "refill": 60
@@ -2338,6 +2322,6 @@
     "creditDebt": 18402.34,
     "netLiquid": 19916.26,
     "source": "ynab",
-    "updatedAt": "2026-08-20T01:30:26.665Z"
+    "updatedAt": "2026-08-20T01:36:58.427Z"
   }
 }

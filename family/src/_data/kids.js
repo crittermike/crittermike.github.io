@@ -1,18 +1,18 @@
 /**
- * Per-kid dashboard data: summer reading progress + sugar balance + allowance balance.
+ * Per-kid dashboard data: sugar balance + allowance balance + today's assignments.
  *
  * Sources of truth (read-only at build time, no duplication):
- *   - wiki/concepts/summer-reading-2026.md   (Progress log: latest line wins)
  *   - wiki/concepts/sugar.md                 (Balances table)
  *   - wiki/concepts/allowance.md             (Balances table)
+ *   - wiki/concepts/school-assignments.md    (Upcoming, due-tomorrow rows)
  *
  * Returns:
  *   [
- *     { key, name, grade, reading: {pages, target, pct} | null, sugar: {balance, refill}, allowance: {balance_str} },
+ *     { key, name, grade, sugar: {balance, refill}, allowance: {balance_str} },
  *     ...
  *   ]
  *
- * The kid roster + display order is defined here. Targets (reading & sugar refill)
+ * The kid roster + display order is defined here. Targets (sugar refill)
  * are pulled from the source files themselves so they stay in sync.
  */
 
@@ -25,36 +25,21 @@ const SUGAR = path.join(WIKI, 'sugar.md');
 const ALLOWANCE = path.join(WIKI, 'allowance.md');
 const SCHOOL = path.join(WIKI, 'school-assignments.md');
 
-// Summer reading 2026 — targets hardcoded; running totals live entirely in the
-// dashboard's localStorage (`reading-local-adds`). No wiki source. Mike will
-// tell us to remove this block at end of summer.
-const READING_TARGETS = {
-  thomas:  200,
-  william: 400,
-  henry:   500,
-};
-
-// Kids who've finished their summer reading. They drop the daily "Read 20 min"
-// dashboard checkbox (but keep Summer Solutions). Add/remove keys here as kids
-// finish. Cleared at end of summer along with the reading block.
-const READING_DONE = new Set(['thomas']);
-
-// Kids who've finished their Summer Solutions workbook. They drop the daily
-// "Summer Solutions" dashboard checkbox. Add/remove keys here as kids finish.
-// Cleared at end of summer along with the rest of the summer block.
-const SOLUTIONS_DONE = new Set(['thomas']);
+// Summer reading + Summer Solutions removed 2026-08-19 (school year started, per Mike).
+// The old READING_TARGETS / READING_DONE / SOLUTIONS_DONE sets and the summer-weekday
+// branch are gone. Kid todos now come solely from school-assignments.md (due tomorrow).
 
 // Display order matches the dashboard grid: youngest → oldest
 const KIDS = [
-  { key: 'thomas',  name: 'Thomas',  grade: 'rising 3rd'  },
-  { key: 'william', name: 'William', grade: 'rising 5th'  },
-  { key: 'henry',   name: 'Henry',   grade: 'rising 8th'  },
-  { key: 'charlie', name: 'Charlie', grade: 'rising 11th' },
+  { key: 'thomas',  name: 'Thomas',  grade: '3rd'  },
+  { key: 'william', name: 'William', grade: '5th'  },
+  { key: 'henry',   name: 'Henry',   grade: '8th'  },
+  { key: 'charlie', name: 'Charlie', grade: '11th' },
 ];
 
 /**
  * Today's recurring assignments per kid.
- * Summer mode (Jun/Jul, Mon-Fri): non-Charlie kids get Summer Solutions + 20 min reading.
+ * School year: one-off items from school-assignments.md due TOMORROW.
  * Returns [{id, label}, ...] — id must be stable so localStorage checkbox state survives.
  */
 function todaysAssignments(kidKey) {
@@ -63,29 +48,11 @@ function todaysAssignments(kidKey) {
     timeZone: 'America/New_York',
     year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short',
   }).formatToParts(new Date()).reduce((a, p) => (a[p.type] = p.value, a), {});
-  const month = parseInt(et.month, 10);
-  const dow = et.weekday; // Mon, Tue, Wed, Thu, Fri, Sat, Sun
-  const isSummerWeekday = (month === 6 || month === 7) &&
-    ['Mon','Tue','Wed','Thu','Fri'].includes(dow);
   // "Due tomorrow" window — heads-up the night before, not the due-date morning.
   const tomorrow = new Date(Date.UTC(parseInt(et.year,10), parseInt(et.month,10)-1, parseInt(et.day,10)+1));
   const tomorrowISO = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,'0')}-${String(tomorrow.getUTCDate()).padStart(2,'0')}`;
 
   const out = [];
-  if (isSummerWeekday && kidKey !== 'charlie') {
-    if (!SOLUTIONS_DONE.has(kidKey)) {
-      out.push({ id: 'summer-solutions', label: 'Summer Solutions' });
-    }
-    // Kids who've finished their summer reading skip the daily "Read 20 min"
-    // checkbox but keep Summer Solutions. (Thomas done 2026-06-23.)
-    if (!READING_DONE.has(kidKey)) {
-      out.push({ id: 'reading-20m', label: 'Read 20 min' });
-    }
-  }
-  if (isSummerWeekday && kidKey === 'charlie') {
-    out.push({ id: 'take-medicine',  label: 'Take medicine' });
-    // popcs-video removed 2026-06-25 — Charlie finished the POPCS video.
-  }
   // Laundry chores removed from kid todos per Mike 2026-08-17.
   // Append one-off items from school-assignments.md due TOMORROW only.
   // Showing on the due date itself is too late (homework's due that morning,
@@ -130,20 +97,6 @@ function loadSchoolToday(kidKey, dateISOs) {
 
 function readSafe(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch { return ''; }
-}
-
-/**
- * Summer reading: server-side base is always 0. The dashboard's tap-to-add
- * widget keeps the running total in localStorage (`reading-local-adds`) and
- * reconciles client-side. We only emit the hardcoded targets here; pages=0 at
- * build time and the client adds its delta on render.
- */
-function loadReading() {
-  const out = {};
-  for (const [kid, target] of Object.entries(READING_TARGETS)) {
-    out[kid] = { pages: 0, target, pct: 0 };
-  }
-  return out;
 }
 
 /**
@@ -205,7 +158,6 @@ function loadGuineaPigFund() {
 }
 
 module.exports = function () {
-  const reading = loadReading();
   const sugar = loadSugar();
   const allowance = loadAllowance();
   const guineaPig = loadGuineaPigFund();
@@ -214,7 +166,6 @@ module.exports = function () {
     key: k.key,
     name: k.name,
     grade: k.grade,
-    reading: reading[k.key] || null,
     sugar: {
       balance: sugar.balances[k.key] != null ? sugar.balances[k.key] : null,
       refill: sugar.refill,

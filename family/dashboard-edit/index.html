@@ -982,7 +982,7 @@
   .kids-grid .v.danger { color: var(--accent-rose); }
   .kids-grid .v.warn   { color: var(--accent-gold); }
 
-  /* === PER-KID TILE (avatar header, stat chips, reading, today) === */
+  /* === PER-KID TILE (avatar header, stat chips, today) === */
   .kidcard-accent {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -1439,64 +1439,6 @@
   }
   .meal-list .nm { color: var(--text-dark); }
 
-  /* === SUMMER READING === */
-  .reading-list { display: flex; flex-direction: column; gap: 10px; }
-  .reading-row { cursor: pointer; -webkit-tap-highlight-color: transparent; }
-  .reading-row.editing { cursor: default; }
-  .reading-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 0.78rem;
-    margin-bottom: 3px;
-  }
-  .reading-name { color: var(--text-dark); font-weight: 700; }
-  .reading-count { color: var(--text-mid); font-variant-numeric: tabular-nums; }
-  .reading-row.editing .reading-count { display: none; }
-  .reading-editor {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    margin: 2px 0 4px;
-  }
-  .reading-editor[hidden] { display: none; }
-  .reading-input {
-    flex: 1 1 auto;
-    min-width: 0;
-    font-size: 0.9rem;
-    padding: 4px 6px;
-    border: 1px solid var(--border-soft);
-    border-radius: 6px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--card-bg);
-    color: var(--text-dark);
-  }
-  .reading-input::-webkit-outer-spin-button,
-  .reading-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .reading-add, .reading-cancel, .reading-reset {
-    border: 1px solid var(--border-soft);
-    background: var(--card-bg);
-    color: var(--text-dark);
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 0.78rem;
-    cursor: pointer;
-  }
-  .reading-add { background: var(--accent-teal); color: white; border-color: transparent; font-weight: 700; }
-  .reading-row .progress {
-    height: 6px;
-    background: var(--surface-mute-track);
-    border-radius: 999px;
-    overflow: hidden;
-    box-shadow: inset 0 1px 1.5px rgba(0,0,0,0.10);
-  }
-  .reading-row .progress .bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
-    border-radius: 999px;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-  }
 
   /* === TODAY'S ASSIGNMENTS === */
   .assn-list { display: flex; flex-direction: column; gap: 10px; }
@@ -2044,7 +1986,6 @@
   { "id": "calendar",   "label": "📅 Upcoming events",              "w": 10, "h": 10 },
   { "id": "chores",     "label": "🧹 Weekend chores",               "w": 8, "h": 10 },
   { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 6, "h": 6 },
-  { "id": "reading",     "label": "📚 Summer reading",               "w": 6, "h": 6 },
   { "id": "assignments", "label": "✏️ Today's assignments",          "w": 6, "h": 6 },
   { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 6, "h": 6 },
   { "id": "joke",        "label": "😂 Joke of the day",              "w": 6, "h": 4 },
@@ -2159,21 +2100,6 @@
       </div>
       
 
-      
-      <div class="kidtile-sec">
-        <div class="reading-row" data-kid="thomas" data-base="0" data-target="200">
-          <div class="kidtile-sec-lbl">📚 Reading <span class="ct reading-count"><span class="reading-pages">0</span> / 200 pgs</span></div>
-          <div class="reading-editor" hidden>
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-            <button type="button" class="reading-add">Save</button>
-            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-            <button type="button" class="reading-cancel">✕</button>
-          </div>
-          <div class="progress"><div class="bar reading-bar" style="width: 0%; background: var(--accent-blue)"></div></div>
-        </div>
-      </div>
-      
-
       <div class="kidtile-sec">
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
@@ -2247,21 +2173,6 @@
       </div>
       
 
-      
-      <div class="kidtile-sec">
-        <div class="reading-row" data-kid="william" data-base="0" data-target="400">
-          <div class="kidtile-sec-lbl">📚 Reading <span class="ct reading-count"><span class="reading-pages">0</span> / 400 pgs</span></div>
-          <div class="reading-editor" hidden>
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-            <button type="button" class="reading-add">Save</button>
-            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-            <button type="button" class="reading-cancel">✕</button>
-          </div>
-          <div class="progress"><div class="bar reading-bar" style="width: 0%; background: var(--accent-teal)"></div></div>
-        </div>
-      </div>
-      
-
       <div class="kidtile-sec">
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
@@ -2296,21 +2207,6 @@
             
             <span class="v">$92.13</span>
           
-        </div>
-      </div>
-      
-
-      
-      <div class="kidtile-sec">
-        <div class="reading-row" data-kid="henry" data-base="0" data-target="500">
-          <div class="kidtile-sec-lbl">📚 Reading <span class="ct reading-count"><span class="reading-pages">0</span> / 500 pgs</span></div>
-          <div class="reading-editor" hidden>
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-            <button type="button" class="reading-add">Save</button>
-            <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-            <button type="button" class="reading-cancel">✕</button>
-          </div>
-          <div class="progress"><div class="bar reading-bar" style="width: 0%; background: var(--accent-purple)"></div></div>
         </div>
       </div>
       
@@ -2374,8 +2270,6 @@
           
         </div>
       </div>
-      
-
       
 
       <div class="kidtile-sec">
@@ -2560,65 +2454,6 @@
             <span class="dow">Sat</span>
             <span class="nm">Restaurant</span>
           </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div data-tpl="reading">
-    <div class="tile-h"><span>📚 Summer reading</span></div>
-    <div class="tile-body">
-      <div class="reading-list">
-        
-          
-            <div class="reading-row" data-kid="thomas" data-base="0" data-target="200">
-              <div class="reading-head">
-                <span class="reading-name">Thomas</span>
-                <span class="reading-count"><span class="reading-pages">0</span> / 200 pgs</span>
-              </div>
-              <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-                <button type="button" class="reading-add">Save</button>
-                <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-                <button type="button" class="reading-cancel">✕</button>
-              </div>
-              <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
-            </div>
-          
-        
-          
-            <div class="reading-row" data-kid="william" data-base="0" data-target="400">
-              <div class="reading-head">
-                <span class="reading-name">William</span>
-                <span class="reading-count"><span class="reading-pages">0</span> / 400 pgs</span>
-              </div>
-              <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-                <button type="button" class="reading-add">Save</button>
-                <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-                <button type="button" class="reading-cancel">✕</button>
-              </div>
-              <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
-            </div>
-          
-        
-          
-            <div class="reading-row" data-kid="henry" data-base="0" data-target="500">
-              <div class="reading-head">
-                <span class="reading-name">Henry</span>
-                <span class="reading-count"><span class="reading-pages">0</span> / 500 pgs</span>
-              </div>
-              <div class="reading-editor" hidden>
-                <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="9999" step="1" class="reading-input" placeholder="total pages">
-                <button type="button" class="reading-add">Save</button>
-                <button type="button" class="reading-reset" title="Reset to 0">↺</button>
-                <button type="button" class="reading-cancel">✕</button>
-              </div>
-              <div class="progress"><div class="bar reading-bar" style="width: 0%"></div></div>
-            </div>
-          
-        
-          
         
       </div>
     </div>
@@ -3007,10 +2842,9 @@
     if (id === 'budget')       renderBudget();
     if (id === 'chores')       renderChoresPill();
     if (id === 'calendar')     renderCalendar();
-    if (id === 'reading')      hydrateReading();
     if (id === 'assignments')  hydrateAssignments();
     if (id === 'recipe')       renderRecipeOfDay();
-    if (id.indexOf('kid-') === 0) { hydrateReading(); hydrateAssignments(); }
+    if (id.indexOf('kid-') === 0) { hydrateAssignments(); }
   }
 
   // === CALENDAR (mirrors /dashboard/: filter past → bucket by today/tomorrow/this week/etc → render) ===
@@ -3264,79 +3098,8 @@
     });
   }
 
-  // === SUMMER READING (tap-to-add pages; persists locally) ===
-  function hydrateReading() {
-    const STORAGE_KEY = 'reading-local-adds';
-    let store = {};
-    try { store = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
-    function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
-
-    document.querySelectorAll('.reading-row').forEach(row => {
-      if (row.dataset._wired) return;
-      row.dataset._wired = '1';
-      const kid = row.dataset.kid;
-      const base = parseInt(row.dataset.base, 10) || 0;
-      const target = parseInt(row.dataset.target, 10) || 0;
-      const pagesEl = row.querySelector('.reading-pages');
-      const barEl = row.querySelector('.reading-bar');
-      const editor = row.querySelector('.reading-editor');
-      const input = row.querySelector('.reading-input');
-      const addBtn = row.querySelector('.reading-add');
-      const cancelBtn = row.querySelector('.reading-cancel');
-      const resetBtn = row.querySelector('.reading-reset');
-
-      // Drop stale local override once the server total catches up.
-      if (store[kid] != null && store[kid] <= base) { delete store[kid]; save(); }
-
-      function currentPages() { return store[kid] != null ? store[kid] : base; }
-      function render() {
-        const p = currentPages();
-        pagesEl.textContent = p;
-        const pct = target > 0 ? Math.min(100, Math.round((p / target) * 100)) : 0;
-        barEl.style.width = pct + '%';
-      }
-      function openEditor() {
-        row.classList.add('editing');
-        editor.hidden = false;
-        input.value = currentPages();
-        setTimeout(() => { input.focus(); input.select(); }, 0);
-      }
-      function closeEditor() {
-        row.classList.remove('editing');
-        editor.hidden = true;
-      }
-      row.addEventListener('click', (e) => {
-        if (row.classList.contains('editing')) return;
-        if (e.target.closest('.reading-editor')) return;
-        openEditor();
-      });
-      addBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const n = parseInt(input.value, 10);
-        if (!isNaN(n) && n >= 0) {
-          // Input is the TOTAL pages read so far. Keep a local override only
-          // when it's ahead of the server; otherwise follow the server value.
-          if (n > base) store[kid] = n; else delete store[kid];
-          save(); render();
-        }
-        closeEditor();
-      });
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { e.preventDefault(); addBtn.click(); }
-        if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
-      });
-      cancelBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEditor(); });
-      resetBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!confirm('Reset ' + kid + ' to ' + base + ' pgs?')) return;
-        delete store[kid]; save(); render(); closeEditor();
-      });
-      render();
-    });
-  }
-
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":150,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-1-1-reading-comprehension-and-vocabulary","label":"1.1 Reading Comprehension and Vocabulary Test for Wolf! (crossed out on newsletter - verify if still happening)"},{"id":"sch-2026-08-20-reading-read-30-min","label":"Reading: read 30 min"},{"id":"sch-2026-08-20-spelling-choice-board-triples-learn-word","label":"Spelling: Choice Board - Triples; learn words 16-20 (write 3x each); study Thursday DOL, review all 4 days for Friday DOL Quiz"},{"id":"sch-2026-08-20-math-workbook-p-11-12","label":"Math: Workbook p.11-12"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-spanish-simon-p-14-y-15","label":"Spanish (Simon): P.14 y 15"},{"id":"sch-2026-08-20-algebra-edwards-quiz-1-1-1-6","label":"Algebra (Edwards): Quiz 1.1-1.6"},{"id":"sch-2026-08-20-algebra-edwards-1-6-8-9-11","label":"Algebra (Edwards): 1.6 # 8,9,11"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":150,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-1-1-reading-comprehension-and-vocabulary","label":"1.1 Reading Comprehension and Vocabulary Test for Wolf! (crossed out on newsletter - verify if still happening)"},{"id":"sch-2026-08-20-reading-read-30-min","label":"Reading: read 30 min"},{"id":"sch-2026-08-20-spelling-choice-board-triples-learn-word","label":"Spelling: Choice Board - Triples; learn words 16-20 (write 3x each); study Thursday DOL, review all 4 days for Friday DOL Quiz"},{"id":"sch-2026-08-20-math-workbook-p-11-12","label":"Math: Workbook p.11-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-spanish-simon-p-14-y-15","label":"Spanish (Simon): P.14 y 15"},{"id":"sch-2026-08-20-algebra-edwards-quiz-1-1-1-6","label":"Algebra (Edwards): Quiz 1.1-1.6"},{"id":"sch-2026-08-20-algebra-edwards-1-6-8-9-11","label":"Algebra (Edwards): 1.6 # 8,9,11"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3790,7 +3553,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"rising 3rd","reading":{"pages":0,"target":200,"pct":0},"sugar":{"balance":150,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-1-1-reading-comprehension-and-vocabulary","label":"1.1 Reading Comprehension and Vocabulary Test for Wolf! (crossed out on newsletter - verify if still happening)"},{"id":"sch-2026-08-20-reading-read-30-min","label":"Reading: read 30 min"},{"id":"sch-2026-08-20-spelling-choice-board-triples-learn-word","label":"Spelling: Choice Board - Triples; learn words 16-20 (write 3x each); study Thursday DOL, review all 4 days for Friday DOL Quiz"},{"id":"sch-2026-08-20-math-workbook-p-11-12","label":"Math: Workbook p.11-12"}]},{"key":"william","name":"William","grade":"rising 5th","reading":{"pages":0,"target":400,"pct":0},"sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"rising 8th","reading":{"pages":0,"target":500,"pct":0},"sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-spanish-simon-p-14-y-15","label":"Spanish (Simon): P.14 y 15"},{"id":"sch-2026-08-20-algebra-edwards-quiz-1-1-1-6","label":"Algebra (Edwards): Quiz 1.1-1.6"},{"id":"sch-2026-08-20-algebra-edwards-1-6-8-9-11","label":"Algebra (Edwards): 1.6 # 8,9,11"}]},{"key":"charlie","name":"Charlie","grade":"rising 11th","reading":null,"sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":150,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-1-1-reading-comprehension-and-vocabulary","label":"1.1 Reading Comprehension and Vocabulary Test for Wolf! (crossed out on newsletter - verify if still happening)"},{"id":"sch-2026-08-20-reading-read-30-min","label":"Reading: read 30 min"},{"id":"sch-2026-08-20-spelling-choice-board-triples-learn-word","label":"Spelling: Choice Board - Triples; learn words 16-20 (write 3x each); study Thursday DOL, review all 4 days for Friday DOL Quiz"},{"id":"sch-2026-08-20-math-workbook-p-11-12","label":"Math: Workbook p.11-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":40,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":58,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-20-spanish-simon-p-14-y-15","label":"Spanish (Simon): P.14 y 15"},{"id":"sch-2026-08-20-algebra-edwards-quiz-1-1-1-6","label":"Algebra (Edwards): Quiz 1.1-1.6"},{"id":"sch-2026-08-20-algebra-edwards-1-6-8-9-11","label":"Algebra (Edwards): 1.6 # 8,9,11"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":136,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
