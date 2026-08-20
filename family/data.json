@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T17:01:02.849Z",
+  "generated_at": "2026-08-20T17:16:03.176Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -480,7 +480,12 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-21-spanish-p-16",
+          "label": "Spanish: P.16"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -954,7 +959,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 88,
+      "temp": 89,
       "hi": 97,
       "lo": 74,
       "icon": "☀️",
@@ -2296,6 +2301,6 @@
     "creditDebt": 15960,
     "netLiquid": 37292.52,
     "source": "ynab",
-    "updatedAt": "2026-08-20T17:01:01.079Z"
+    "updatedAt": "2026-08-20T17:16:01.486Z"
   }
 }
