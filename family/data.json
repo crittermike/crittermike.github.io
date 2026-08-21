@@ -1,7 +1,16 @@
 {
-  "generated_at": "2026-08-21T17:00:22.988Z",
+  "generated_at": "2026-08-21T17:15:25.781Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
+    {
+      "date": "2026-08-21",
+      "time": "4p",
+      "what": "Walmart delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-21T18:00:00-04:00"
+    },
     {
       "date": "2026-08-23",
       "time": "8a",
@@ -190,6 +199,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-15T12:00:00-04:00"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "5:30p",
+      "what": "Expressway to Tigertown Informational Meeting",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-15T18:30:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -903,11 +921,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 87,
       "hi": 92,
       "lo": 71,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
@@ -2320,6 +2338,6 @@
     "creditDebt": 31381.35,
     "netLiquid": 53766.2,
     "source": "ynab",
-    "updatedAt": "2026-08-21T17:00:21.257Z"
+    "updatedAt": "2026-08-21T17:15:24.445Z"
   }
 }
