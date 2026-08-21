@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-21T03:45:38.524Z",
+  "generated_at": "2026-08-21T04:00:42.435Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-20",
-      "time": "9a",
-      "what": "Mom lymphedema appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-20T10:00:00-04:00"
-    },
     {
       "date": "2026-08-23",
       "time": "8a",
@@ -457,20 +448,7 @@
         "balance_str": "$84.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-21-spelling-test",
-          "label": "Spelling Test"
-        },
-        {
-          "id": "sch-2026-08-21-dol-quiz",
-          "label": "DOL Quiz"
-        },
-        {
-          "id": "sch-2026-08-21-reading-cold-read-quiz-no-study-prep-nee",
-          "label": "Reading Cold Read Quiz (no study prep needed)"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -498,12 +476,7 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-21-spanish-p-16",
-          "label": "Spanish: P.16"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -860,7 +833,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli",
@@ -915,8 +888,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -924,26 +897,19 @@
       "dow_short": "Sat",
       "name": "Restaurant",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 77,
       "hi": 92,
-      "lo": 74,
+      "lo": 73,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 73,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -971,24 +937,31 @@
         "hi": 82,
         "lo": 70,
         "code": 55
+      },
+      {
+        "d": "Wed",
+        "icon": "🌦",
+        "hi": 86,
+        "lo": 69,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-20T06:53",
         "2026-08-21T06:54",
         "2026-08-22T06:55",
         "2026-08-23T06:55",
         "2026-08-24T06:56",
-        "2026-08-25T06:57"
+        "2026-08-25T06:57",
+        "2026-08-26T06:58"
       ],
       "sunsets": [
-        "2026-08-20T20:11",
         "2026-08-21T20:10",
         "2026-08-22T20:09",
         "2026-08-23T20:08",
         "2026-08-24T20:06",
-        "2026-08-25T20:05"
+        "2026-08-25T20:05",
+        "2026-08-26T20:04"
       ],
       "timezone": "America/New_York"
     }
@@ -2347,6 +2320,6 @@
     "creditDebt": 15960,
     "netLiquid": 37292.52,
     "source": "ynab",
-    "updatedAt": "2026-08-21T03:45:37.164Z"
+    "updatedAt": "2026-08-21T04:00:41.126Z"
   }
 }
