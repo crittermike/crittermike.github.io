@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T23:46:02.040Z",
+  "generated_at": "2026-08-21T00:01:07.182Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -710,59 +710,12 @@
     ]
   },
   "dinner": {
-    "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
+    "name": "Pizza night (delivery or frozen)",
     "protein_g": 40,
-    "cal": 650,
-    "effort": "medium",
-    "note": "Moved from Wed. Mexican burritos (originally Thu) skipped this week, bumped to next week.",
-    "recipe": {
-      "slug": "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli",
-      "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli"
-      ],
-      "in_rotation": true,
-      "effort": "medium",
-      "kid_friendly": true,
-      "protein_g": 40,
-      "cal": 650,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "canned clams",
-            "protein noodles",
-            "garlic bread",
-            "broccoli",
-            "olive oil",
-            "garlic",
-            "white wine"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "canned clams",
-        "protein noodles",
-        "garlic bread",
-        "broccoli",
-        "olive oil",
-        "garlic",
-        "white wine"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Clam spaghetti (protein noodles) + garlic bread + roasted broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>canned clams</li>\n<li>protein noodles</li>\n<li>garlic bread</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>white wine</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "cal": 750,
+    "effort": "none",
+    "note": "Mike-requested swap, moved from Saturday. Mike can add grilled chicken or another protein side.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -968,7 +921,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 89,
+      "temp": 88,
       "hi": 92,
       "lo": 74,
       "icon": "☀️",
@@ -2264,7 +2217,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 64.5,
+    "dayPct": 67.7,
     "totalSpend": 14148.04,
     "totalBudget": 17750.5,
     "categories": [
@@ -2385,6 +2338,6 @@
     "creditDebt": 15960,
     "netLiquid": 37292.52,
     "source": "ynab",
-    "updatedAt": "2026-08-20T23:46:00.549Z"
+    "updatedAt": "2026-08-21T00:01:05.466Z"
   }
 }
