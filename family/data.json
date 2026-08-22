@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-22T03:45:58.628Z",
+  "generated_at": "2026-08-22T04:00:59.756Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-21",
-      "time": "4p",
-      "what": "Walmart delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-21T18:00:00-04:00"
-    },
-    {
-      "date": "2026-08-21",
-      "time": "7p",
-      "what": "Walmart delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-21T19:15:00-04:00"
-    },
     {
       "date": "2026-08-23",
       "time": "8a",
@@ -503,7 +485,20 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-23-spelling-test",
+          "label": "Spelling Test"
+        },
+        {
+          "id": "sch-2026-08-23-dol-quiz",
+          "label": "DOL Quiz"
+        },
+        {
+          "id": "sch-2026-08-23-reading-cold-read-quiz",
+          "label": "Reading Cold Read Quiz"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -732,7 +727,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -915,7 +910,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -923,27 +918,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Restaurant",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 70,
-      "hi": 88,
+      "hi": 84,
       "lo": 70,
-      "icon": "🌧",
-      "code": 63
+      "icon": "🌦",
+      "code": 51
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "🌧",
-        "hi": 84,
-        "lo": 70,
-        "code": 65
-      },
       {
         "d": "Sun",
         "icon": "⛅",
@@ -971,24 +959,31 @@
         "hi": 93,
         "lo": 71,
         "code": 80
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 83,
+        "lo": 70,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-21T06:54",
         "2026-08-22T06:55",
         "2026-08-23T06:55",
         "2026-08-24T06:56",
         "2026-08-25T06:57",
-        "2026-08-26T06:58"
+        "2026-08-26T06:58",
+        "2026-08-27T06:58"
       ],
       "sunsets": [
-        "2026-08-21T20:10",
         "2026-08-22T20:09",
         "2026-08-23T20:08",
         "2026-08-24T20:06",
         "2026-08-25T20:05",
-        "2026-08-26T20:04"
+        "2026-08-26T20:04",
+        "2026-08-27T20:02"
       ],
       "timezone": "America/New_York"
     }
@@ -2347,6 +2342,6 @@
     "creditDebt": 31381.35,
     "netLiquid": 53766.2,
     "source": "ynab",
-    "updatedAt": "2026-08-22T03:45:57.326Z"
+    "updatedAt": "2026-08-22T04:00:58.539Z"
   }
 }
