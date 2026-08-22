@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T23:00:33.558Z",
+  "generated_at": "2026-08-22T23:15:32.972Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -473,7 +473,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 35,
+        "balance": 0,
         "refill": 60
       },
       "allowance": {
@@ -934,7 +934,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 79,
       "hi": 82,
       "lo": 70,
       "icon": "☀️",
@@ -2351,6 +2351,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-22T23:00:32.145Z"
+    "updatedAt": "2026-08-22T23:15:31.618Z"
   }
 }
