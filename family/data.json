@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T17:00:48.464Z",
+  "generated_at": "2026-08-22T17:15:52.458Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -199,6 +199,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-15T18:30:00-04:00"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "10a",
+      "what": "Novant Health video visit with Caitlan Tucker",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-17T10:15:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -928,8 +937,8 @@
       "temp": 78,
       "hi": 83,
       "lo": 70,
-      "icon": "🌤",
-      "code": 1
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -2342,6 +2351,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-22T17:00:47.046Z"
+    "updatedAt": "2026-08-22T17:15:51.143Z"
   }
 }
