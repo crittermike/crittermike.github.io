@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T23:00:20.917Z",
+  "generated_at": "2026-08-23T23:15:24.895Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -58,6 +58,15 @@
     },
     {
       "date": "2026-08-26",
+      "time": "8:30a",
+      "what": "POPCS School Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-26T09:30:00-04:00"
+    },
+    {
+      "date": "2026-08-26",
       "time": "9a",
       "what": "Mom lymphedema appointment",
       "who": "family",
@@ -104,6 +113,15 @@
     {
       "date": "2026-09-04",
       "time": "4:30p",
+      "what": "POPCS Spirit Night",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-04T18:30:00-04:00"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "4:30p",
       "what": "POPCS: Spirit Night at Roller Sports",
       "who": "family",
       "calendar": "home",
@@ -127,6 +145,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-08T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "3:45p",
+      "what": "EHS DECA interest meeting",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-08T16:30:00-04:00"
     },
     {
       "date": "2026-09-09",
@@ -466,7 +493,12 @@
         "balance_str": "$84.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-24-monday-folder-comes-home",
+          "label": "Monday folder comes home"
+        }
+      ]
     },
     {
       "key": "william",
@@ -480,7 +512,12 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-24-monday-folder-comes-home",
+          "label": "Monday folder comes home"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -502,6 +539,10 @@
         {
           "id": "sch-2026-08-24-english-demarrais-the-most-dangerous-gam",
           "label": "English (deMarrais): The Most Dangerous Game Test"
+        },
+        {
+          "id": "sch-2026-08-24-monday-folder-comes-home",
+          "label": "Monday folder comes home"
         }
       ]
     },
@@ -525,6 +566,14 @@
         {
           "id": "sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d",
           "label": "Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"
+        },
+        {
+          "id": "sch-2026-08-24-ehs-club-rush-during-lunch",
+          "label": "EHS Club Rush during lunch"
+        },
+        {
+          "id": "sch-2026-08-24-psat-nmsqt-registration-form-and-14-fee-",
+          "label": "PSAT/NMSQT registration form and $14 fee due by 3:30pm"
         }
       ]
     }
@@ -795,7 +844,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 82,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -2212,6 +2261,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-23T23:00:19.416Z"
+    "updatedAt": "2026-08-23T23:15:23.756Z"
   }
 }
