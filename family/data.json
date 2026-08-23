@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T17:00:34.738Z",
+  "generated_at": "2026-08-23T17:15:34.505Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -498,6 +498,10 @@
         {
           "id": "sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1",
           "label": "Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"
+        },
+        {
+          "id": "sch-2026-08-24-english-demarrais-the-most-dangerous-gam",
+          "label": "English (deMarrais): The Most Dangerous Game Test"
         }
       ]
     },
@@ -743,67 +747,15 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Crockpot pot roast with carrots and potatoes",
+      "name": "Takeout night",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": {
-        "slug": "pot-roast-with-carrots-and-potatoes",
-        "name": "Pot roast with carrots and potatoes",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "pot-roast-with-carrots-and-potatoes"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "chuck roast",
-              "carrots",
-              "potatoes",
-              "onions",
-              "beef broth",
-              "salt, black pepper"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "chuck roast",
-          "carrots",
-          "potatoes",
-          "onions",
-          "beef broth",
-          "salt, black pepper"
-        ],
-        "steps": [
-          "Season roast all over with salt and pepper.",
-          "Put onions in bottom of crockpot. Place roast on top.",
-          "Add carrots and potatoes around/on top of roast.",
-          "Pour in beef broth.",
-          "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-          "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-        ],
-        "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "John's birthday dinner (out)",
+      "name": "Mexican beef and refried bean burritos with onions",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -811,115 +763,23 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Crockpot chicken and dumplings",
+      "name": "Shake n Bake chicken with mac and cheese and cabbage",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "crockpot-chicken-and-dumplings",
-        "name": "Crockpot Chicken and Dumplings",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "crockpot-chicken-and-dumplings"
-        ],
-        "in_rotation": true,
-        "effort": "easy",
-        "kid_friendly": true,
-        "protein_g": 45,
-        "cal": 550,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "chicken broth",
-              "chicken breast",
-              "dried minced onion",
-              "dried parsley",
-              "cream of chicken soup (2 cans)",
-              "refrigerated biscuits"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "chicken broth",
-          "chicken breast",
-          "dried minced onion",
-          "dried parsley",
-          "cream of chicken soup (2 cans)",
-          "refrigerated biscuits"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n<h2>Quantities</h2>\n<ul>\n<li>2 cups chicken broth per 1 lb chicken breast (source recipe ratio).</li>\n<li>2 tbsp dried minced onion, 1 tbsp dried parsley.</li>\n<li>No salt/pepper/poultry seasoning called out in the saved recipe.</li>\n</ul>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
+      "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli",
-        "name": "Clam spaghetti (protein noodles) + garlic bread + roasted broccoli",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "clam-spaghetti-protein-noodles-garlic-bread-roasted-broccoli"
-        ],
-        "in_rotation": true,
-        "effort": "medium",
-        "kid_friendly": true,
-        "protein_g": 40,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "canned clams",
-              "protein noodles",
-              "garlic bread",
-              "broccoli",
-              "olive oil",
-              "garlic",
-              "white wine"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "canned clams",
-          "protein noodles",
-          "garlic bread",
-          "broccoli",
-          "olive oil",
-          "garlic",
-          "white wine"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Clam spaghetti (protein noodles) + garlic bread + roasted broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>canned clams</li>\n<li>protein noodles</li>\n<li>garlic bread</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>white wine</li>\n</ul>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Pizza night (delivery or frozen)",
+      "name": "Grilled hamburgers and hotdogs with corn",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -927,7 +787,7 @@
     {
       "dow": "Saturday",
       "dow_short": "Sat",
-      "name": "Restaurant",
+      "name": "Pizza night (delivery or frozen)",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -935,7 +795,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 83,
       "hi": 85,
       "lo": 68,
       "icon": "☀️",
@@ -2352,6 +2212,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-23T17:00:32.692Z"
+    "updatedAt": "2026-08-23T17:15:33.270Z"
   }
 }
