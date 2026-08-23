@@ -2050,7 +2050,7 @@
           
             
             
-            <div class="v">54g</div>
+            <div class="v warn">24g</div>
           
           
             
@@ -2168,7 +2168,7 @@
           
             
             
-            <span class="v">54g</span>
+            <span class="v warn">24g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -3043,7 +3043,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"}]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"}]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3497,7 +3497,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
