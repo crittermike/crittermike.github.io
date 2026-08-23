@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T17:15:34.505Z",
+  "generated_at": "2026-08-23T17:30:36.864Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -747,7 +747,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Takeout night",
+      "name": "Clam spaghetti with protein noodles, garlic bread, and roasted broccoli",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -806,7 +806,7 @@
         "d": "Mon",
         "icon": "⛅",
         "hi": 89,
-        "lo": 65,
+        "lo": 66,
         "code": 3
       },
       {
@@ -2212,6 +2212,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-23T17:15:33.270Z"
+    "updatedAt": "2026-08-23T17:30:35.516Z"
   }
 }
