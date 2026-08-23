@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T23:45:34.100Z",
+  "generated_at": "2026-08-23T00:00:37.798Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -723,11 +723,11 @@
     ]
   },
   "dinner": {
-    "name": "Restaurant",
-    "protein_g": 60,
-    "cal": 650,
+    "name": "Leftovers or whatever you can scrounge up",
+    "protein_g": null,
+    "cal": null,
     "effort": "none",
-    "note": "Mike-requested swap, moved from Friday. Mike orders a protein-forward entree.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -2230,7 +2230,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 71,
+    "dayPct": 74.2,
     "totalSpend": 14718.63,
     "totalBudget": 17750.5,
     "categories": [
@@ -2351,6 +2351,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-22T23:45:32.743Z"
+    "updatedAt": "2026-08-23T00:00:36.098Z"
   }
 }
