@@ -2104,7 +2104,37 @@
         <div class="kidtile-sec-lbl">✏️ Today</div>
         <div class="assn-list">
           
-            <div class="placeholder">Nothing today 🎉</div>
+            <ul class="todo-list" data-kid="thomas">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-reading-study-1-1-vocabulary-reread-wolf">
+                  <span class="todo-label">Reading: study 1.1 vocabulary; reread Wolf! p.10-29</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-spelling-workbook-p-10-learn-words-1-5-b">
+                  <span class="todo-label">Spelling: workbook p.10; learn words 1-5 by writing each 3 times; study Monday DOL</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-math-workbook-p-11-12">
+                  <span class="todo-label">Math: workbook p.11-12</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-english-eie-p-5">
+                  <span class="todo-label">English: EIE p.5</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2458,6 +2488,42 @@
       <div class="assn-list">
         
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Thomas</div>
+              <ul class="todo-list" data-kid="thomas">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-reading-study-1-1-vocabulary-reread-wolf">
+                      <span class="todo-label">Reading: study 1.1 vocabulary; reread Wolf! p.10-29</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-spelling-workbook-p-10-learn-words-1-5-b">
+                      <span class="todo-label">Spelling: workbook p.10; learn words 1-5 by writing each 3 times; study Monday DOL</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-math-workbook-p-11-12">
+                      <span class="todo-label">Math: workbook p.11-12</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-2026-08-24-english-eie-p-5">
+                      <span class="todo-label">English: EIE p.5</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3085,7 +3151,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"},{"id":"sch-2026-08-24-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Test"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"},{"id":"sch-2026-08-24-ehs-club-rush-during-lunch","label":"EHS Club Rush during lunch"},{"id":"sch-2026-08-24-psat-nmsqt-registration-form-and-14-fee-","label":"PSAT/NMSQT registration form and $14 fee due by 3:30pm"}]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-reading-study-1-1-vocabulary-reread-wolf","label":"Reading: study 1.1 vocabulary; reread Wolf! p.10-29"},{"id":"sch-2026-08-24-spelling-workbook-p-10-learn-words-1-5-b","label":"Spelling: workbook p.10; learn words 1-5 by writing each 3 times; study Monday DOL"},{"id":"sch-2026-08-24-math-workbook-p-11-12","label":"Math: workbook p.11-12"},{"id":"sch-2026-08-24-english-eie-p-5","label":"English: EIE p.5"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"},{"id":"sch-2026-08-24-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Test"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"},{"id":"sch-2026-08-24-ehs-club-rush-during-lunch","label":"EHS Club Rush during lunch"},{"id":"sch-2026-08-24-psat-nmsqt-registration-form-and-14-fee-","label":"PSAT/NMSQT registration form and $14 fee due by 3:30pm"}]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3539,7 +3605,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"},{"id":"sch-2026-08-24-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Test"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"},{"id":"sch-2026-08-24-ehs-club-rush-during-lunch","label":"EHS Club Rush during lunch"},{"id":"sch-2026-08-24-psat-nmsqt-registration-form-and-14-fee-","label":"PSAT/NMSQT registration form and $14 fee due by 3:30pm"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-reading-study-1-1-vocabulary-reread-wolf","label":"Reading: study 1.1 vocabulary; reread Wolf! p.10-29"},{"id":"sch-2026-08-24-spelling-workbook-p-10-learn-words-1-5-b","label":"Spelling: workbook p.10; learn words 1-5 by writing each 3 times; study Monday DOL"},{"id":"sch-2026-08-24-math-workbook-p-11-12","label":"Math: workbook p.11-12"},{"id":"sch-2026-08-24-english-eie-p-5","label":"English: EIE p.5"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-spanish-mrs-simon-quiz-study-parte-1-p-1","label":"Spanish (Mrs. Simon): Quiz Study Parte 1 p.1-11 — from Classroom email 8/21"},{"id":"sch-2026-08-24-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Test"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-24-ehs-first-semester-open-house-evening-ex","label":"EHS first-semester Open House, evening; exact time TBD"},{"id":"sch-2026-08-24-fall-psat-nmsqt-signup-form-and-14-fee-d","label":"Fall PSAT/NMSQT signup form and $14 fee due by 3:30 PM"},{"id":"sch-2026-08-24-ehs-club-rush-during-lunch","label":"EHS Club Rush during lunch"},{"id":"sch-2026-08-24-psat-nmsqt-registration-form-and-14-fee-","label":"PSAT/NMSQT registration form and $14 fee due by 3:30pm"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
