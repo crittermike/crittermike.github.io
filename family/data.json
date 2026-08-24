@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T23:45:33.472Z",
+  "generated_at": "2026-08-24T00:00:40.086Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -768,11 +768,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Clam spaghetti with protein noodles, garlic bread, and roasted broccoli",
+    "protein_g": 40,
+    "cal": 650,
+    "effort": "medium",
+    "note": "Replaced takeout night at Mike’s request.",
     "recipe": null
   },
   "mealweek": [
@@ -835,7 +835,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 78,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -2131,7 +2131,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 74.2,
+    "dayPct": 77.4,
     "totalSpend": 14718.63,
     "totalBudget": 17750.5,
     "categories": [
@@ -2252,6 +2252,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-23T23:45:32.226Z"
+    "updatedAt": "2026-08-24T00:00:38.436Z"
   }
 }
