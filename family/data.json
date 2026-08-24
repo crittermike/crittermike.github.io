@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T15:45:41.960Z",
+  "generated_at": "2026-08-24T16:00:47.226Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -73,6 +73,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-30T09:00:00-04:00"
+    },
+    {
+      "date": "2026-08-31",
+      "time": "1p",
+      "what": "Mom driving clinic appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-31T14:00:00-04:00"
     },
     {
       "date": "2026-09-02",
@@ -2233,6 +2242,6 @@
     "creditDebt": 46352.76,
     "netLiquid": 53037.82,
     "source": "ynab",
-    "updatedAt": "2026-08-24T15:45:40.730Z"
+    "updatedAt": "2026-08-24T16:00:45.868Z"
   }
 }
