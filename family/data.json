@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T01:31:06.937Z",
+  "generated_at": "2026-08-24T01:45:10.783Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -484,12 +484,7 @@
         "balance_str": "$84.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-24-monday-folder-comes-home",
-          "label": "Monday folder comes home"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -503,12 +498,7 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": [
-        {
-          "id": "sch-2026-08-24-monday-folder-comes-home",
-          "label": "Monday folder comes home"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -530,10 +520,6 @@
         {
           "id": "sch-2026-08-24-english-demarrais-the-most-dangerous-gam",
           "label": "English (deMarrais): The Most Dangerous Game Test"
-        },
-        {
-          "id": "sch-2026-08-24-monday-folder-comes-home",
-          "label": "Monday folder comes home"
         }
       ]
     },
@@ -835,7 +821,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
+      "temp": 75,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -2252,6 +2238,6 @@
     "creditDebt": 46534.69,
     "netLiquid": 53219.75,
     "source": "ynab",
-    "updatedAt": "2026-08-24T01:31:05.462Z"
+    "updatedAt": "2026-08-24T01:45:09.501Z"
   }
 }
