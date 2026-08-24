@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T10:30:59.588Z",
+  "generated_at": "2026-08-24T10:46:04.112Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2113,7 +2113,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 77.4,
-    "totalSpend": 14718.63,
+    "totalSpend": 14900.56,
     "totalBudget": 17750.5,
     "categories": [
       {
@@ -2136,9 +2136,9 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 2546.81,
-        "spent": 1796.87,
-        "balance": 749.94,
-        "pct": 70.6
+        "spent": 1918.8,
+        "balance": 628.01,
+        "pct": 75.3
       },
       {
         "name": "📚 School",
@@ -2197,20 +2197,20 @@
         "pct": 10.2
       },
       {
+        "name": "🎁 Charity",
+        "group": "Needs",
+        "budgeted": 160,
+        "spent": 160,
+        "balance": 0,
+        "pct": 100
+      },
+      {
         "name": "🐶 Pets",
         "group": "Needs",
         "budgeted": 104.5,
         "spent": 137.58,
         "balance": -33.08,
         "pct": 131.7
-      },
-      {
-        "name": "🎁 Charity",
-        "group": "Needs",
-        "budgeted": 160,
-        "spent": 100,
-        "balance": 60,
-        "pct": 62.5
       },
       {
         "name": "💅 Personal Care",
@@ -2230,9 +2230,9 @@
       }
     ],
     "liquidCash": 6685.06,
-    "creditDebt": 46534.69,
-    "netLiquid": 53219.75,
+    "creditDebt": 46352.76,
+    "netLiquid": 53037.82,
     "source": "ynab",
-    "updatedAt": "2026-08-24T10:30:58.218Z"
+    "updatedAt": "2026-08-24T10:46:02.631Z"
   }
 }
