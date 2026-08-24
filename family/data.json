@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T20:01:04.548Z",
+  "generated_at": "2026-08-24T20:16:08.080Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -545,6 +545,14 @@
         {
           "id": "sch-2026-08-25-spanish-simon-p-18-19",
           "label": "Spanish (Simon): p.18-19"
+        },
+        {
+          "id": "sch-2026-08-25-chemistry-edwards-complete-the-chapter-r",
+          "label": "Chemistry (Edwards): Complete the chapter review"
+        },
+        {
+          "id": "sch-2026-08-25-algebra-edwards-1-9-32-40-all",
+          "label": "Algebra (Edwards): 1.9 #32-40 all"
         }
       ]
     },
@@ -847,7 +855,7 @@
         "d": "Wed",
         "icon": "🌦",
         "hi": 92,
-        "lo": 67,
+        "lo": 66,
         "code": 81
       },
       {
@@ -2246,6 +2254,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52791.64,
     "source": "ynab",
-    "updatedAt": "2026-08-24T20:01:02.788Z"
+    "updatedAt": "2026-08-24T20:16:06.762Z"
   }
 }
