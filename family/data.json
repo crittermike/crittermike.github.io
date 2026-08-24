@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T17:01:06.782Z",
+  "generated_at": "2026-08-24T17:15:11.206Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -541,6 +541,10 @@
         {
           "id": "sch-2026-08-25-1-1-reading-comprehension-and-vocabulary",
           "label": "1.1 Reading Comprehension and Vocabulary Test (rescheduled)"
+        },
+        {
+          "id": "sch-2026-08-25-spanish-simon-p-18-19",
+          "label": "Spanish (Simon): p.18-19"
         }
       ]
     },
@@ -825,7 +829,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 83,
       "hi": 89,
       "lo": 66,
       "icon": "☀️",
@@ -2242,6 +2246,6 @@
     "creditDebt": 46352.76,
     "netLiquid": 53037.82,
     "source": "ynab",
-    "updatedAt": "2026-08-24T17:01:05.195Z"
+    "updatedAt": "2026-08-24T17:15:09.862Z"
   }
 }
