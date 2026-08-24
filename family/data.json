@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T11:45:25.318Z",
+  "generated_at": "2026-08-24T12:00:33.748Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -749,11 +749,11 @@
     ]
   },
   "dinner": {
-    "name": "Clam spaghetti with protein noodles, garlic bread, and roasted broccoli",
-    "protein_g": 40,
-    "cal": 650,
-    "effort": "medium",
-    "note": "Replaced takeout night at Mike’s request.",
+    "name": "Nana is babysitting",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Mike and Nancy are going on a date night.",
     "recipe": null
   },
   "mealweek": [
@@ -768,7 +768,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Clam spaghetti with protein noodles, garlic bread, and roasted broccoli",
+      "name": "Nana is babysitting",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -816,7 +816,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 67,
       "hi": 90,
       "lo": 65,
       "icon": "☀️",
@@ -833,28 +833,28 @@
       {
         "d": "Wed",
         "icon": "🌦",
-        "hi": 97,
-        "lo": 69,
+        "hi": 92,
+        "lo": 68,
         "code": 53
       },
       {
         "d": "Thu",
         "icon": "⛈",
-        "hi": 89,
-        "lo": 72,
+        "hi": 80,
+        "lo": 68,
         "code": 95
       },
       {
         "d": "Fri",
         "icon": "⛅",
-        "hi": 93,
-        "lo": 70,
+        "hi": 89,
+        "lo": 69,
         "code": 3
       },
       {
         "d": "Sat",
         "icon": "🌦",
-        "hi": 96,
+        "hi": 90,
         "lo": 70,
         "code": 80
       }
@@ -2233,6 +2233,6 @@
     "creditDebt": 46352.76,
     "netLiquid": 53037.82,
     "source": "ynab",
-    "updatedAt": "2026-08-24T11:45:23.710Z"
+    "updatedAt": "2026-08-24T12:00:31.643Z"
   }
 }
