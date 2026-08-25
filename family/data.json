@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T23:45:52.575Z",
+  "generated_at": "2026-08-25T00:00:55.650Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -770,11 +770,11 @@
     ]
   },
   "dinner": {
-    "name": "Nana is babysitting",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike and Nancy are going on a date night.",
+    "name": "Mexican beef and refried bean burritos with onions",
+    "protein_g": 50,
+    "cal": 750,
+    "effort": "easy",
+    "note": "Carryover bumped from last week.",
     "recipe": null
   },
   "mealweek": [
@@ -837,11 +837,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 81,
       "hi": 88,
       "lo": 66,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
@@ -2133,7 +2133,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 77.4,
+    "dayPct": 80.6,
     "totalSpend": 15134.69,
     "totalBudget": 17750.5,
     "categories": [
@@ -2254,6 +2254,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52791.64,
     "source": "ynab",
-    "updatedAt": "2026-08-24T23:45:51.377Z"
+    "updatedAt": "2026-08-25T00:00:53.955Z"
   }
 }
