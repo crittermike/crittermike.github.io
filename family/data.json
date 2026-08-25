@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T17:00:44.644Z",
+  "generated_at": "2026-08-25T17:15:48.431Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -539,6 +539,10 @@
         {
           "id": "sch-2026-08-26-algebra-edwards-quiz-1-7-1-9",
           "label": "Algebra (Edwards): Quiz 1.7-1.9"
+        },
+        {
+          "id": "sch-2026-08-26-spanish-simon-p-20-21",
+          "label": "Spanish (Simon): P.20-21"
         }
       ]
     },
@@ -2245,6 +2249,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52684.72,
     "source": "ynab",
-    "updatedAt": "2026-08-25T17:00:42.901Z"
+    "updatedAt": "2026-08-25T17:15:47.057Z"
   }
 }
