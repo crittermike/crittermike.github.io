@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T17:00:44.710Z",
+  "generated_at": "2026-08-26T17:15:48.165Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -514,6 +514,10 @@
         {
           "id": "sch-2026-08-27-algebra-edwards-chapter-1-test",
           "label": "Algebra (Edwards): Chapter 1 test"
+        },
+        {
+          "id": "sch-2026-08-27-spanish-simon-p-22-23-secciones-1-3",
+          "label": "Spanish (Simon): P.22-23, secciones 1-3"
         }
       ]
     },
@@ -798,7 +802,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 83,
       "hi": 87,
       "lo": 67,
       "icon": "☀️",
@@ -2215,6 +2219,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52657.72,
     "source": "ynab",
-    "updatedAt": "2026-08-26T17:00:42.713Z"
+    "updatedAt": "2026-08-26T17:15:46.865Z"
   }
 }
