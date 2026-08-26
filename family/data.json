@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-26T03:45:22.818Z",
+  "generated_at": "2026-08-26T04:00:28.797Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-25",
-      "time": "2:15p",
-      "what": "Carolina Dermatology appointment (2:30 PM)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-25T15:30:00-04:00"
-    },
     {
       "date": "2026-08-28",
       "time": "10a",
@@ -459,32 +450,28 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-26-school-mass-8-30am-wear-mass-uniform",
-          "label": "School Mass 8:30am; wear Mass uniform"
+          "id": "sch-2026-08-27-1-3-cold-read-quiz",
+          "label": "1.3 Cold Read quiz"
         },
         {
-          "id": "sch-2026-08-26-simple-solutions-quiz",
-          "label": "Simple Solutions quiz"
-        },
-        {
-          "id": "sch-2026-08-26-reading-read-20-minutes",
+          "id": "sch-2026-08-27-reading-read-20-minutes",
           "label": "Reading: read 20 minutes"
         },
         {
-          "id": "sch-2026-08-26-spelling-workbook-p-12-learn-words-11-15",
-          "label": "Spelling: workbook p.12; learn words 11-15 by writing each 3 times; study Wednesday DOL"
+          "id": "sch-2026-08-27-spelling-choice-board-pyramid-words-lear",
+          "label": "Spelling: Choice Board pyramid words; learn words 16-20 by writing each 3 times; study for spelling test"
         },
         {
-          "id": "sch-2026-08-26-math-workbook-p-19-20",
-          "label": "Math: workbook p.19-20"
+          "id": "sch-2026-08-27-study-thursday-dol-and-review-all-four-d",
+          "label": "Study Thursday DOL and review all four days for DOL quiz"
         },
         {
-          "id": "sch-2026-08-26-english-eie-p-7",
-          "label": "English: EIE p.7"
+          "id": "sch-2026-08-27-math-workbook-p-23-24",
+          "label": "Math: workbook p.23-24"
         },
         {
-          "id": "sch-2026-08-26-school-mass-wear-full-mass-uniform-inclu",
-          "label": "School Mass: wear full Mass uniform including dress shoes, appropriate tie, vest and belt for boys, ankle-covering socks for girls"
+          "id": "sch-2026-08-27-english-eie-p-8",
+          "label": "English: EIE p.8"
         }
       ]
     },
@@ -502,16 +489,12 @@
       "guineaPig": "$133.14",
       "assignments": [
         {
-          "id": "sch-2026-08-26-school-mass-8-30am-wear-mass-uniform",
-          "label": "School Mass 8:30am; wear Mass uniform"
+          "id": "sch-2026-08-27-reading-poem-recitation-courage-by-sr-m-",
+          "label": "Reading: Poem recitation, Courage by Sr. M. Eulalia (Fifth Grade Newsletter 8/24)"
         },
         {
-          "id": "sch-2026-08-26-reading-the-cay-quiz-chapters-2-3-fifth-",
-          "label": "Reading: The Cay quiz, chapters 2-3 (Fifth Grade Newsletter 8/24)"
-        },
-        {
-          "id": "sch-2026-08-26-simple-solutions-quiz-fifth-grade-newsle",
-          "label": "Simple Solutions quiz (Fifth Grade Newsletter 8/24)"
+          "id": "sch-2026-08-27-grammar-first-10-prepositions-fifth-grad",
+          "label": "Grammar: First 10 prepositions (Fifth Grade Newsletter 8/24)"
         }
       ]
     },
@@ -529,20 +512,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-26-school-mass-8-30am-wear-mass-uniform",
-          "label": "School Mass 8:30am; wear Mass uniform"
-        },
-        {
-          "id": "sch-2026-08-26-english-demarrais-allusion-assignment",
-          "label": "English (deMarrais): Allusion assignment"
-        },
-        {
-          "id": "sch-2026-08-26-algebra-edwards-quiz-1-7-1-9",
-          "label": "Algebra (Edwards): Quiz 1.7-1.9"
-        },
-        {
-          "id": "sch-2026-08-26-spanish-simon-p-20-21",
-          "label": "Spanish (Simon): P.20-21"
+          "id": "sch-2026-08-27-algebra-edwards-chapter-1-test",
+          "label": "Algebra (Edwards): Chapter 1 test"
         }
       ]
     },
@@ -558,12 +529,7 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-26-pe-1-sex-education-begins-aug-26-sep-8",
-          "label": "PE 1 sex education begins, Aug 26-Sep 8"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -793,7 +759,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Mexican beef and refried bean burritos with onions",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -801,8 +767,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -810,7 +776,7 @@
       "dow_short": "Thu",
       "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -833,19 +799,12 @@
   "weather": {
     "now": {
       "temp": 70,
-      "hi": 86,
+      "hi": 89,
       "lo": 65,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 89,
-        "lo": 65,
-        "code": 3
-      },
       {
         "d": "Thu",
         "icon": "🌦",
@@ -873,24 +832,31 @@
         "hi": 88,
         "lo": 70,
         "code": 51
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 92,
+        "lo": 73,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-25T06:57",
         "2026-08-26T06:58",
         "2026-08-27T06:58",
         "2026-08-28T06:59",
         "2026-08-29T07:00",
-        "2026-08-30T07:01"
+        "2026-08-30T07:01",
+        "2026-08-31T07:01"
       ],
       "sunsets": [
-        "2026-08-25T20:05",
         "2026-08-26T20:04",
         "2026-08-27T20:02",
         "2026-08-28T20:01",
         "2026-08-29T20:00",
-        "2026-08-30T19:59"
+        "2026-08-30T19:59",
+        "2026-08-31T19:57"
       ],
       "timezone": "America/New_York"
     }
@@ -2249,6 +2215,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52684.72,
     "source": "ynab",
-    "updatedAt": "2026-08-26T03:45:21.406Z"
+    "updatedAt": "2026-08-26T04:00:27.362Z"
   }
 }
