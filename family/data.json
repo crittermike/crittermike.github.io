@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T21:30:25.098Z",
+  "generated_at": "2026-08-26T21:45:23.840Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -735,11 +735,11 @@
     ]
   },
   "dinner": {
-    "name": "Shake n Bake chicken with mac and cheese and cabbage",
+    "name": "Mexican beef and refried bean burritos with onions",
     "protein_g": 50,
-    "cal": 650,
+    "cal": 750,
     "effort": "easy",
-    "note": "",
+    "note": "Replaced Shake n Bake chicken at Mike’s request. Shake n Bake chicken bumped to next week.",
     "recipe": null
   },
   "mealweek": [
@@ -770,7 +770,7 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Shake n Bake chicken with mac and cheese and cabbage",
+      "name": "Mexican beef and refried bean burritos with onions",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -802,11 +802,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
-      "hi": 85,
+      "temp": 78,
+      "hi": 86,
       "lo": 67,
-      "icon": "🌧",
-      "code": 65
+      "icon": "🌦",
+      "code": 51
     },
     "days": [
       {
@@ -2219,6 +2219,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52657.72,
     "source": "ynab",
-    "updatedAt": "2026-08-26T21:30:23.686Z"
+    "updatedAt": "2026-08-26T21:45:22.416Z"
   }
 }
