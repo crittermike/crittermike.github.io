@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T10:15:32.886Z",
+  "generated_at": "2026-08-26T10:30:35.434Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2095,7 +2095,7 @@
   "finance": {
     "month": "August 2026",
     "dayPct": 83.9,
-    "totalSpend": 15241.61,
+    "totalSpend": 15268.61,
     "totalBudget": 17750.5,
     "categories": [
       {
@@ -2142,9 +2142,9 @@
         "name": "⚡️ Utilities",
         "group": "Bills",
         "budgeted": 668.27,
-        "spent": 648.88,
-        "balance": 19.39,
-        "pct": 97.1
+        "spent": 675.88,
+        "balance": -7.61,
+        "pct": 101.1
       },
       {
         "name": "🚗 Cars",
@@ -2211,10 +2211,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 6578.14,
+    "liquidCash": 6551.14,
     "creditDebt": 46106.58,
-    "netLiquid": 52684.72,
+    "netLiquid": 52657.72,
     "source": "ynab",
-    "updatedAt": "2026-08-26T10:15:30.916Z"
+    "updatedAt": "2026-08-26T10:30:34.096Z"
   }
 }
