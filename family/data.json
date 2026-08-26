@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T23:45:29.072Z",
+  "generated_at": "2026-08-26T00:00:35.983Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -765,11 +765,11 @@
     ]
   },
   "dinner": {
-    "name": "Mexican beef and refried bean burritos with onions",
+    "name": "Shake n Bake chicken with mac and cheese and cabbage",
     "protein_g": 50,
-    "cal": 750,
+    "cal": 650,
     "effort": "easy",
-    "note": "Carryover bumped from last week.",
+    "note": "",
     "recipe": null
   },
   "mealweek": [
@@ -832,7 +832,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 78,
       "hi": 86,
       "lo": 65,
       "icon": "☀️",
@@ -2128,7 +2128,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 80.6,
+    "dayPct": 83.9,
     "totalSpend": 15241.61,
     "totalBudget": 17750.5,
     "categories": [
@@ -2249,6 +2249,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52684.72,
     "source": "ynab",
-    "updatedAt": "2026-08-25T23:45:27.677Z"
+    "updatedAt": "2026-08-26T00:00:33.819Z"
   }
 }
