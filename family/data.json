@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T17:00:37.174Z",
+  "generated_at": "2026-08-27T17:15:34.984Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -527,6 +527,10 @@
         {
           "id": "sch-2026-08-28-cardinal-friday",
           "label": "Cardinal Friday"
+        },
+        {
+          "id": "sch-2026-08-28-spanish-simon-p-24-25",
+          "label": "Spanish (Simon): P.24-25"
         }
       ]
     },
@@ -811,7 +815,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 83,
       "hi": 89,
       "lo": 70,
       "icon": "⛅",
@@ -2228,6 +2232,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52607.72,
     "source": "ynab",
-    "updatedAt": "2026-08-27T17:00:34.779Z"
+    "updatedAt": "2026-08-27T17:15:33.536Z"
   }
 }
