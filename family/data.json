@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T23:45:51.942Z",
+  "generated_at": "2026-08-27T00:00:56.786Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -735,11 +735,11 @@
     ]
   },
   "dinner": {
-    "name": "Mexican beef and refried bean burritos with onions",
-    "protein_g": 50,
-    "cal": 750,
-    "effort": "easy",
-    "note": "Replaced Shake n Bake chicken at Mike’s request. Shake n Bake chicken bumped to next week.",
+    "name": "Meatloaf with mashed potatoes and cabbage",
+    "protein_g": 45,
+    "cal": 700,
+    "effort": "medium",
+    "note": "",
     "recipe": null
   },
   "mealweek": [
@@ -2098,7 +2098,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 83.9,
+    "dayPct": 87.1,
     "totalSpend": 15268.61,
     "totalBudget": 17750.5,
     "categories": [
@@ -2219,6 +2219,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52657.72,
     "source": "ynab",
-    "updatedAt": "2026-08-26T23:45:50.713Z"
+    "updatedAt": "2026-08-27T00:00:55.430Z"
   }
 }
