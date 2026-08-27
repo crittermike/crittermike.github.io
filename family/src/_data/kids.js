@@ -48,16 +48,18 @@ function todaysAssignments(kidKey) {
     timeZone: 'America/New_York',
     year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short',
   }).formatToParts(new Date()).reduce((a, p) => (a[p.type] = p.value, a), {});
+  const todayISO = `${et.year}-${String(et.month).padStart(2,'0')}-${String(et.day).padStart(2,'0')}`;
   // "Due tomorrow" window — heads-up the night before, not the due-date morning.
   const tomorrow = new Date(Date.UTC(parseInt(et.year,10), parseInt(et.month,10)-1, parseInt(et.day,10)+1));
   const tomorrowISO = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,'0')}-${String(tomorrow.getUTCDate()).padStart(2,'0')}`;
 
   const out = [];
-  // Laundry chores removed from kid todos per Mike 2026-08-17.
-  // Append one-off items from school-assignments.md due TOMORROW only.
-  // Showing on the due date itself is too late (homework's due that morning,
-  // not that evening) and just repeats what was already checked off the day
-  // before. The dashboard is a heads-up the night before, not a due-date log.
+  // Daily homework-plan rows are filed on the evening they must be completed.
+  // Assessments/deadlines remain tomorrow-only so they do not repeat on the due date.
+  const assessmentRe = /\b(test|quiz|due|recitation|cardinal friday|school mass)\b/i;
+  for (const item of loadSchoolToday(kidKey, [todayISO])) {
+    if (!assessmentRe.test(item.label)) out.push(item);
+  }
   for (const item of loadSchoolToday(kidKey, [tomorrowISO])) {
     out.push(item);
   }
