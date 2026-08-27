@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T03:46:02.695Z",
+  "generated_at": "2026-08-27T04:01:03.069Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -433,6 +433,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-11-22T09:00:00-05:00"
+    },
+    {
+      "date": "2026-11-24",
+      "time": "all day",
+      "what": "POPCS: Thanksgiving Break Begins (12p dismissal)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-11-25T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -450,28 +459,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-27-1-3-cold-read-quiz",
-          "label": "1.3 Cold Read quiz"
+          "id": "sch-2026-08-28-cardinal-friday",
+          "label": "Cardinal Friday"
         },
         {
-          "id": "sch-2026-08-27-reading-read-20-minutes",
-          "label": "Reading: read 20 minutes"
+          "id": "sch-2026-08-28-spelling-test",
+          "label": "Spelling test"
         },
         {
-          "id": "sch-2026-08-27-spelling-choice-board-pyramid-words-lear",
-          "label": "Spelling: Choice Board pyramid words; learn words 16-20 by writing each 3 times; study for spelling test"
-        },
-        {
-          "id": "sch-2026-08-27-study-thursday-dol-and-review-all-four-d",
-          "label": "Study Thursday DOL and review all four days for DOL quiz"
-        },
-        {
-          "id": "sch-2026-08-27-math-workbook-p-23-24",
-          "label": "Math: workbook p.23-24"
-        },
-        {
-          "id": "sch-2026-08-27-english-eie-p-8",
-          "label": "English: EIE p.8"
+          "id": "sch-2026-08-28-dol-quiz",
+          "label": "DOL quiz"
         }
       ]
     },
@@ -489,12 +486,20 @@
       "guineaPig": "$133.14",
       "assignments": [
         {
-          "id": "sch-2026-08-27-reading-poem-recitation-courage-by-sr-m-",
-          "label": "Reading: Poem recitation, Courage by Sr. M. Eulalia (Fifth Grade Newsletter 8/24)"
+          "id": "sch-2026-08-28-cardinal-friday",
+          "label": "Cardinal Friday"
         },
         {
-          "id": "sch-2026-08-27-grammar-first-10-prepositions-fifth-grad",
-          "label": "Grammar: First 10 prepositions (Fifth Grade Newsletter 8/24)"
+          "id": "sch-2026-08-28-religion-lesson-3-4-vocabulary-quiz-fift",
+          "label": "Religion: Lesson 3-4 vocabulary quiz (Fifth Grade Newsletter 8/24)"
+        },
+        {
+          "id": "sch-2026-08-28-dol-quiz-fifth-grade-newsletter-8-24-",
+          "label": "DOL quiz (Fifth Grade Newsletter 8/24)"
+        },
+        {
+          "id": "sch-2026-08-28-spelling-lesson-2-test-fifth-grade-newsl",
+          "label": "Spelling: Lesson 2 test (Fifth Grade Newsletter 8/24)"
         }
       ]
     },
@@ -512,12 +517,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-27-algebra-edwards-chapter-1-test",
-          "label": "Algebra (Edwards): Chapter 1 test"
+          "id": "sch-2026-08-28-english-demarrais-text-of-the-most-dange",
+          "label": "English (deMarrais): Text of The Most Dangerous Game"
         },
         {
-          "id": "sch-2026-08-27-spanish-simon-p-22-23-secciones-1-3",
-          "label": "Spanish (Simon): P.22-23, secciones 1-3"
+          "id": "sch-2026-08-28-english-demarrais-the-most-dangerous-gam",
+          "label": "English (deMarrais): The Most Dangerous Game Post Reading"
+        },
+        {
+          "id": "sch-2026-08-28-cardinal-friday",
+          "label": "Cardinal Friday"
         }
       ]
     },
@@ -771,7 +780,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Mexican beef and refried bean burritos with onions",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -779,8 +788,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -788,7 +797,7 @@
       "dow_short": "Fri",
       "name": "Grilled hamburgers and hotdogs with corn",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -803,19 +812,12 @@
   "weather": {
     "now": {
       "temp": 71,
-      "hi": 87,
+      "hi": 90,
       "lo": 67,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "🌧",
-        "hi": 90,
-        "lo": 67,
-        "code": 65
-      },
       {
         "d": "Fri",
         "icon": "🌦",
@@ -843,24 +845,31 @@
         "hi": 98,
         "lo": 74,
         "code": 51
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 100,
+        "lo": 77,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-26T06:58",
         "2026-08-27T06:58",
         "2026-08-28T06:59",
         "2026-08-29T07:00",
         "2026-08-30T07:01",
-        "2026-08-31T07:01"
+        "2026-08-31T07:01",
+        "2026-09-01T07:02"
       ],
       "sunsets": [
-        "2026-08-26T20:04",
         "2026-08-27T20:02",
         "2026-08-28T20:01",
         "2026-08-29T20:00",
         "2026-08-30T19:59",
-        "2026-08-31T19:57"
+        "2026-08-31T19:57",
+        "2026-09-01T19:56"
       ],
       "timezone": "America/New_York"
     }
@@ -2219,6 +2228,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 52657.72,
     "source": "ynab",
-    "updatedAt": "2026-08-27T03:46:01.239Z"
+    "updatedAt": "2026-08-27T04:01:01.281Z"
   }
 }
