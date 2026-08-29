@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T23:45:31.319Z",
+  "generated_at": "2026-08-29T00:00:43.249Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -473,7 +473,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 0,
+        "balance": -30,
         "refill": 60
       },
       "allowance": {
@@ -487,7 +487,7 @@
       "name": "Henry",
       "grade": "8th",
       "sugar": {
-        "balance": 24,
+        "balance": -6,
         "refill": 60
       },
       "allowance": {
@@ -723,11 +723,11 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hamburgers and hotdogs with corn",
-    "protein_g": 50,
-    "cal": 800,
-    "effort": "easy",
-    "note": "Easy grill dinner while Nancy is at the 7 PM show.",
+    "name": "Pizza night (delivery or frozen)",
+    "protein_g": 40,
+    "cal": 750,
+    "effort": "none",
+    "note": "",
     "recipe": null
   },
   "mealweek": [
@@ -790,11 +790,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 73,
       "hi": 88,
       "lo": 69,
-      "icon": "🌤",
-      "code": 2
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
       {
@@ -2086,7 +2086,7 @@
   ],
   "finance": {
     "month": "August 2026",
-    "dayPct": 90.3,
+    "dayPct": 93.5,
     "totalSpend": 15318.61,
     "totalBudget": 17750.5,
     "categories": [
@@ -2207,6 +2207,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-28T23:45:29.802Z"
+    "updatedAt": "2026-08-29T00:00:37.887Z"
   }
 }

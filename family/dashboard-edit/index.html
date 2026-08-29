@@ -1933,8 +1933,8 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">74°</span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
+        <span class="dh-temp">73°</span>
         <span class="dh-hilo">H 88° · L 69°</span>
       </div>
       <div class="dh-days">
@@ -2039,7 +2039,7 @@
           
             
             
-            <div class="v warn">0g</div>
+            <div class="v danger">-30g</div>
           
           
             
@@ -2050,7 +2050,7 @@
           
             
             
-            <div class="v warn">24g</div>
+            <div class="v danger">-6g</div>
           
           
             
@@ -2125,7 +2125,7 @@
           
             
             
-            <span class="v warn">0g</span>
+            <span class="v danger">-30g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2168,7 +2168,7 @@
           
             
             
-            <span class="v warn">24g</span>
+            <span class="v danger">-6g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2521,7 +2521,7 @@
       
         <div class="quote-card joke">
           <div class="quote-mark">“</div>
-          <div class="joke-text">I&#39;m tired of following my dreams. I&#39;m just going to ask them where they are going and meet up with them later.</div>
+          <div class="joke-text">Did you hear about the guy whose whole left side was cut off? He&#39;s all right now.</div>
         </div>
       
     </div>
@@ -3033,7 +3033,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-28-english-demarrais-text-of-the-most-dange","label":"English (deMarrais): Text of The Most Dangerous Game"},{"id":"sch-2026-08-28-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Post Reading"},{"id":"sch-2026-08-28-spanish-simon-p-24-25","label":"Spanish (Simon): P.24-25"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":-30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-6,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-28-english-demarrais-text-of-the-most-dange","label":"English (deMarrais): Text of The Most Dangerous Game"},{"id":"sch-2026-08-28-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Post Reading"},{"id":"sch-2026-08-28-spanish-simon-p-24-25","label":"Spanish (Simon): P.24-25"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3487,7 +3487,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":24,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-28-english-demarrais-text-of-the-most-dange","label":"English (deMarrais): Text of The Most Dangerous Game"},{"id":"sch-2026-08-28-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Post Reading"},{"id":"sch-2026-08-28-spanish-simon-p-24-25","label":"Spanish (Simon): P.24-25"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":-30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-6,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-08-28-english-demarrais-text-of-the-most-dange","label":"English (deMarrais): Text of The Most Dangerous Game"},{"id":"sch-2026-08-28-english-demarrais-the-most-dangerous-gam","label":"English (deMarrais): The Most Dangerous Game Post Reading"},{"id":"sch-2026-08-28-spanish-simon-p-24-25","label":"Spanish (Simon): P.24-25"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
