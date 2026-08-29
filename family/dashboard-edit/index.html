@@ -2028,7 +2028,7 @@
           
             
             
-            <div class="v">170g</div>
+            <div class="v">230g</div>
           
           
             
@@ -2039,7 +2039,7 @@
           
             
             
-            <div class="v danger">-30g</div>
+            <div class="v">30g</div>
           
           
             
@@ -2050,7 +2050,7 @@
           
             
             
-            <div class="v danger">-6g</div>
+            <div class="v">54g</div>
           
           
             
@@ -2061,7 +2061,7 @@
           
             
             
-            <div class="v">196g</div>
+            <div class="v">256g</div>
           
           
             
@@ -2087,7 +2087,7 @@
           
             
             
-            <span class="v">170g</span>
+            <span class="v">230g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2125,7 +2125,7 @@
           
             
             
-            <span class="v danger">-30g</span>
+            <span class="v">30g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2168,7 +2168,7 @@
           
             
             
-            <span class="v danger">-6g</span>
+            <span class="v">54g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2206,7 +2206,7 @@
           
             
             
-            <span class="v">196g</span>
+            <span class="v">256g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2983,7 +2983,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":-30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-6,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3437,7 +3437,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":170,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":-30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-6,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":196,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$84.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$32.20"},"guineaPig":"$133.14","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$92.13"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-262.23"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
