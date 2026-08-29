@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-29T03:45:56.709Z",
+  "generated_at": "2026-08-29T04:01:02.882Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-28",
-      "time": "10a",
-      "what": "Mom confession",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-28T11:00:00-04:00"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "7p",
-      "what": "Fortune Feimster comedy - Nancy (not Mike)",
-      "who": "nancy",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-28T21:00:00-04:00"
-    },
     {
       "date": "2026-08-30",
       "time": "8a",
@@ -451,6 +433,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-11-26T00:00:00-05:00"
+    },
+    {
+      "date": "2026-11-26",
+      "time": "all day",
+      "what": "POPCS: Thanksgiving Break - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-11-27T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -494,20 +485,7 @@
         "balance_str": "$92.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-08-28-english-demarrais-text-of-the-most-dange",
-          "label": "English (deMarrais): Text of The Most Dangerous Game"
-        },
-        {
-          "id": "sch-2026-08-28-english-demarrais-the-most-dangerous-gam",
-          "label": "English (deMarrais): The Most Dangerous Game Post Reading"
-        },
-        {
-          "id": "sch-2026-08-28-spanish-simon-p-24-25",
-          "label": "Spanish (Simon): P.24-25"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -736,7 +714,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -775,7 +753,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -783,27 +761,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 68,
-      "hi": 88,
-      "lo": 69,
-      "icon": "⛅",
-      "code": 3
+      "hi": 86,
+      "lo": 66,
+      "icon": "🌤",
+      "code": 2
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 86,
-        "lo": 66,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "⛅",
@@ -831,24 +802,31 @@
         "hi": 100,
         "lo": 77,
         "code": 2
+      },
+      {
+        "d": "Thu",
+        "icon": "⛅",
+        "hi": 104,
+        "lo": 79,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-28T06:59",
         "2026-08-29T07:00",
         "2026-08-30T07:01",
         "2026-08-31T07:01",
         "2026-09-01T07:02",
-        "2026-09-02T07:03"
+        "2026-09-02T07:03",
+        "2026-09-03T07:04"
       ],
       "sunsets": [
-        "2026-08-28T20:01",
         "2026-08-29T20:00",
         "2026-08-30T19:59",
         "2026-08-31T19:57",
         "2026-09-01T19:56",
-        "2026-09-02T19:54"
+        "2026-09-02T19:54",
+        "2026-09-03T19:53"
       ],
       "timezone": "America/New_York"
     }
@@ -2207,6 +2185,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-29T03:45:55.341Z"
+    "updatedAt": "2026-08-29T04:01:01.251Z"
   }
 }
