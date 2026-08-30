@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T22:30:31.097Z",
+  "generated_at": "2026-08-30T22:45:35.263Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -935,7 +935,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 87,
+      "temp": 86,
       "hi": 88,
       "lo": 71,
       "icon": "☀️",
@@ -2352,6 +2352,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-30T22:30:29.729Z"
+    "updatedAt": "2026-08-30T22:45:34.025Z"
   }
 }
