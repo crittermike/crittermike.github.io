@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T23:00:42.160Z",
+  "generated_at": "2026-08-30T23:15:41.529Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -28,6 +28,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-02T10:00:00-04:00"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "2p",
+      "what": "POPCS State of the School presentation",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-02T15:00:00-04:00"
     },
     {
       "date": "2026-09-03",
@@ -935,7 +944,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 85,
       "hi": 88,
       "lo": 71,
       "icon": "☀️",
@@ -2352,6 +2361,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-30T23:00:40.774Z"
+    "updatedAt": "2026-08-30T23:15:40.236Z"
   }
 }
