@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T18:45:30.379Z",
+  "generated_at": "2026-08-30T19:00:31.545Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -183,6 +183,15 @@
       "end": "2026-09-20T09:00:00-04:00"
     },
     {
+      "date": "2026-09-21",
+      "time": "6p",
+      "what": "POPCS PTO Board Meeting",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-21T19:00:00-04:00"
+    },
+    {
       "date": "2026-09-24",
       "time": "all day",
       "what": "POPCS: Parent/Teacher Conferences (12p dismissal)",
@@ -309,6 +318,15 @@
       "end": "2026-10-18T09:00:00-04:00"
     },
     {
+      "date": "2026-10-19",
+      "time": "6p",
+      "what": "POPCS PTO Board Meeting",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-19T19:00:00-04:00"
+    },
+    {
       "date": "2026-10-23",
       "time": "all day",
       "what": "POPCS: Book Fair",
@@ -406,6 +424,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-11-15T21:30:00-05:00"
+    },
+    {
+      "date": "2026-11-16",
+      "time": "6p",
+      "what": "POPCS PTO Board Meeting",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-11-16T19:00:00-05:00"
     },
     {
       "date": "2026-11-22",
@@ -2325,6 +2352,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-30T18:45:28.860Z"
+    "updatedAt": "2026-08-30T19:00:30.107Z"
   }
 }
