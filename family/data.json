@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T14:30:38.153Z",
+  "generated_at": "2026-08-31T14:45:41.839Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -823,12 +823,54 @@
     ]
   },
   "dinner": {
-    "name": "Salsa chicken",
+    "name": "Crockpot salsa chicken",
     "protein_g": 50,
     "cal": 500,
     "effort": "easy-slow",
     "note": "Replaced Shake n Bake chicken with mac and cheese and cabbage. Shake n Bake chicken with mac and cheese and cabbage bumped to next week.",
-    "recipe": null
+    "recipe": {
+      "slug": "crockpot-salsa-chicken",
+      "name": "Crockpot Salsa Chicken",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "chicken",
+        "crockpot",
+        "mexican",
+        "dinner"
+      ],
+      "aliases": [],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 500,
+      "servings": 6,
+      "prep_min": 5,
+      "cook_min": 180,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "2 lb boneless, skinless chicken breasts",
+            "1 jar mild salsa (16 oz)"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "2 lb boneless, skinless chicken breasts",
+        "1 jar mild salsa (16 oz)"
+      ],
+      "steps": [
+        "Put the chicken in the crockpot.",
+        "Pour the salsa over it.",
+        "Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.",
+        "Shred the chicken in the crockpot and stir it into the salsa."
+      ],
+      "notes": "",
+      "body_html": "<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 jar mild salsa (16 oz)</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the chicken in the crockpot.</li>\n<li>Pour the salsa over it.</li>\n<li>Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.</li>\n<li>Shred the chicken in the crockpot and stir it into the salsa.</li>\n</ol>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -842,10 +884,52 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Salsa chicken",
+      "name": "Crockpot salsa chicken",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "crockpot-salsa-chicken",
+        "name": "Crockpot Salsa Chicken",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "chicken",
+          "crockpot",
+          "mexican",
+          "dinner"
+        ],
+        "aliases": [],
+        "in_rotation": true,
+        "effort": "easy-slow",
+        "kid_friendly": true,
+        "protein_g": 50,
+        "cal": 500,
+        "servings": 6,
+        "prep_min": 5,
+        "cook_min": 180,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "2 lb boneless, skinless chicken breasts",
+              "1 jar mild salsa (16 oz)"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "2 lb boneless, skinless chicken breasts",
+          "1 jar mild salsa (16 oz)"
+        ],
+        "steps": [
+          "Put the chicken in the crockpot.",
+          "Pour the salsa over it.",
+          "Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.",
+          "Shred the chicken in the crockpot and stir it into the salsa."
+        ],
+        "notes": "",
+        "body_html": "<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 jar mild salsa (16 oz)</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the chicken in the crockpot.</li>\n<li>Pour the salsa over it.</li>\n<li>Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.</li>\n<li>Shred the chicken in the crockpot and stir it into the salsa.</li>\n</ol>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Tuesday",
@@ -1016,7 +1100,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 80,
       "hi": 93,
       "lo": 71,
       "icon": "☀️",
@@ -1353,6 +1437,49 @@
       "steps": [],
       "notes": "",
       "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n<h2>Quantities</h2>\n<ul>\n<li>2 cups chicken broth per 1 lb chicken breast (source recipe ratio).</li>\n<li>2 tbsp dried minced onion, 1 tbsp dried parsley.</li>\n<li>No salt/pepper/poultry seasoning called out in the saved recipe.</li>\n</ul>\n",
+      "last_reviewed": null
+    },
+    {
+      "slug": "crockpot-salsa-chicken",
+      "name": "Crockpot Salsa Chicken",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "chicken",
+        "crockpot",
+        "mexican",
+        "dinner"
+      ],
+      "aliases": [],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 50,
+      "cal": 500,
+      "servings": 6,
+      "prep_min": 5,
+      "cook_min": 180,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "2 lb boneless, skinless chicken breasts",
+            "1 jar mild salsa (16 oz)"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "2 lb boneless, skinless chicken breasts",
+        "1 jar mild salsa (16 oz)"
+      ],
+      "steps": [
+        "Put the chicken in the crockpot.",
+        "Pour the salsa over it.",
+        "Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.",
+        "Shred the chicken in the crockpot and stir it into the salsa."
+      ],
+      "notes": "",
+      "body_html": "<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 jar mild salsa (16 oz)</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the chicken in the crockpot.</li>\n<li>Pour the salsa over it.</li>\n<li>Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.</li>\n<li>Shred the chicken in the crockpot and stir it into the salsa.</li>\n</ol>\n",
       "last_reviewed": null
     },
     {
@@ -2433,6 +2560,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T14:30:36.426Z"
+    "updatedAt": "2026-08-31T14:45:40.562Z"
   }
 }
