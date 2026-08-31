@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T20:00:19.241Z",
+  "generated_at": "2026-08-31T20:15:38.353Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-31T18:00:00-04:00"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "6:30p",
+      "what": "LaunchGVL virtual information session",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-01T19:30:00-04:00"
     },
     {
       "date": "2026-09-02",
@@ -633,6 +642,10 @@
         {
           "id": "sch-2026-09-01-greenville-county-college-fair-permissio",
           "label": "Greenville County College Fair permission form due for juniors/seniors"
+        },
+        {
+          "id": "sch-2026-09-01-launchgvl-virtual-information-session-at",
+          "label": "LaunchGVL virtual information session at 6:30 PM"
         }
       ]
     }
@@ -1122,16 +1135,16 @@
     "days": [
       {
         "d": "Tue",
-        "icon": "☀️",
-        "hi": 97,
+        "icon": "🌤",
+        "hi": 96,
         "lo": 72,
-        "code": 0
+        "code": 1
       },
       {
         "d": "Wed",
         "icon": "🌦",
         "hi": 101,
-        "lo": 76,
+        "lo": 74,
         "code": 51
       },
       {
@@ -2573,6 +2586,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T20:00:17.424Z"
+    "updatedAt": "2026-08-31T20:15:36.898Z"
   }
 }
