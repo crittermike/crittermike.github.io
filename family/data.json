@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T14:00:29.174Z",
+  "generated_at": "2026-08-31T14:15:31.137Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -129,6 +129,15 @@
       "end": "2026-09-13T09:00:00-04:00"
     },
     {
+      "date": "2026-09-14",
+      "time": "9:35a",
+      "what": "Thomas: MAP Reading test",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-14T11:05:00-04:00"
+    },
+    {
       "date": "2026-09-15",
       "time": "9a",
       "what": "Mom lymphedema appointment",
@@ -163,6 +172,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-17T10:15:00-04:00"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "10:25a",
+      "what": "Thomas: MAP Math test",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-17T11:55:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -493,7 +511,48 @@
         "balance_str": "$84.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-08-31-reading-study-1-2-vocabulary-and-reread-",
+          "label": "Reading: study 1.2 vocabulary and reread Yoon and the Jade Bracelet"
+        },
+        {
+          "id": "sch-2026-08-31-spelling-workbook-p-14-words-1-5-three-t",
+          "label": "Spelling: workbook p.14; words 1-5 three times each; study Monday DOL"
+        },
+        {
+          "id": "sch-2026-08-31-math-workbook-p-25-26",
+          "label": "Math: workbook p.25-26"
+        },
+        {
+          "id": "sch-2026-08-31-english-eie-p-11",
+          "label": "English: EIE p.11"
+        },
+        {
+          "id": "sch-2026-09-01-reading-1-2-comprehension-and-vocabulary",
+          "label": "Reading 1.2 comprehension and vocabulary test: Yoon and the Jade Bracelet"
+        },
+        {
+          "id": "sch-2026-09-01-reading-read-20-minutes",
+          "label": "Reading: read 20 minutes"
+        },
+        {
+          "id": "sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-",
+          "label": "Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"
+        },
+        {
+          "id": "sch-2026-09-01-math-workbook-p-28-29",
+          "label": "Math: workbook p.28-29"
+        },
+        {
+          "id": "sch-2026-09-01-english-eie-p-12",
+          "label": "English: EIE p.12"
+        },
+        {
+          "id": "sch-2026-09-01-review-for-simple-solutions-quiz",
+          "label": "Review for Simple Solutions quiz"
+        }
+      ]
     },
     {
       "key": "william",
@@ -531,6 +590,10 @@
       },
       "guineaPig": null,
       "assignments": [
+        {
+          "id": "sch-2026-08-31-spanish-simon-p-24-25",
+          "label": "Spanish (Simon): P.24-25"
+        },
         {
           "id": "sch-2026-09-01-chemistry-edwards-chapter-1-test",
           "label": "Chemistry (Edwards): Chapter 1 test"
@@ -953,7 +1016,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 79,
       "hi": 93,
       "lo": 71,
       "icon": "☀️",
@@ -964,14 +1027,14 @@
         "d": "Tue",
         "icon": "☀️",
         "hi": 97,
-        "lo": 73,
+        "lo": 71,
         "code": 0
       },
       {
         "d": "Wed",
         "icon": "🌦",
         "hi": 101,
-        "lo": 77,
+        "lo": 76,
         "code": 53
       },
       {
@@ -2370,6 +2433,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T14:00:27.801Z"
+    "updatedAt": "2026-08-31T14:15:29.792Z"
   }
 }
