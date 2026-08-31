@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T17:01:18.606Z",
+  "generated_at": "2026-08-31T17:16:00.396Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-08-31T14:00:00-04:00"
+    },
+    {
+      "date": "2026-08-31",
+      "time": "4p",
+      "what": "Walmart delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-08-31T18:00:00-04:00"
     },
     {
       "date": "2026-09-02",
@@ -601,6 +610,10 @@
         {
           "id": "sch-2026-09-01-chemistry-edwards-kahoot-to-help-study-f",
           "label": "Chemistry (Edwards): Kahoot to help study for Tuesday's test"
+        },
+        {
+          "id": "sch-2026-09-01-spanish-prueba-parte-2-p-12-19",
+          "label": "Spanish: Prueba Parte 2 p.12-19"
         }
       ]
     },
@@ -2560,6 +2573,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T17:01:17.155Z"
+    "updatedAt": "2026-08-31T17:15:59.063Z"
   }
 }
