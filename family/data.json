@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T23:00:28.958Z",
+  "generated_at": "2026-08-31T23:15:32.109Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -632,6 +632,10 @@
         {
           "id": "sch-2026-09-01-spanish-prueba-parte-2-p-12-19",
           "label": "Spanish: Prueba Parte 2 p.12-19"
+        },
+        {
+          "id": "sch-2026-09-01-honors-english-demarrais-finish-biograph",
+          "label": "Honors English (deMarrais): Finish biography questions about Harper Lee"
         }
       ]
     },
@@ -1135,7 +1139,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 87,
+      "temp": 86,
       "hi": 93,
       "lo": 71,
       "icon": "⛅",
@@ -2595,6 +2599,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T23:00:27.403Z"
+    "updatedAt": "2026-08-31T23:15:30.652Z"
   }
 }
