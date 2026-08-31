@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-08-31T03:45:09.857Z",
+  "generated_at": "2026-08-31T04:00:15.311Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-08-30",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-08-30T09:00:00-04:00"
-    },
     {
       "date": "2026-08-31",
       "time": "1p",
@@ -516,7 +507,16 @@
         "balance_str": "$32.20"
       },
       "guineaPig": "$133.14",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-01-math-quiz-1-5-1-6-fifth-grade-newsletter",
+          "label": "Math: Quiz 1.5-1.6 (Fifth Grade Newsletter 8/24)"
+        },
+        {
+          "id": "sch-2026-09-01-religion-act-of-charity-recitation-fifth",
+          "label": "Religion: Act of Charity recitation (Fifth Grade Newsletter 8/24)"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -532,8 +532,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-08-31-spanish-simon-ixl-unit-1-3e-3b-due-compl",
-          "label": "Spanish (Simon): IXL Unit 1 - 3E & 3B due; complete over the preceding weekend"
+          "id": "sch-2026-09-01-chemistry-edwards-chapter-1-test",
+          "label": "Chemistry (Edwards): Chapter 1 test"
+        },
+        {
+          "id": "sch-2026-09-01-chemistry-edwards-kahoot-to-help-study-f",
+          "label": "Chemistry (Edwards): Kahoot to help study for Tuesday's test"
         }
       ]
     },
@@ -549,7 +553,12 @@
         "balance_str": "$-262.23"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-01-greenville-county-college-fair-permissio",
+          "label": "Greenville County College Fair permission form due for juniors/seniors"
+        }
+      ]
     }
   ],
   "chores": {
@@ -763,7 +772,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -771,8 +780,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -780,7 +789,7 @@
       "dow_short": "Tue",
       "name": "Pot roast with carrots and potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -944,20 +953,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
-      "hi": 88,
-      "lo": 71,
+      "temp": 75,
+      "hi": 93,
+      "lo": 70,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 93,
-        "lo": 70,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "🌤",
@@ -985,24 +987,31 @@
         "hi": 99,
         "lo": 76,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 100,
+        "lo": 73,
+        "code": 81
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-08-30T07:01",
         "2026-08-31T07:01",
         "2026-09-01T07:02",
         "2026-09-02T07:03",
         "2026-09-03T07:04",
-        "2026-09-04T07:04"
+        "2026-09-04T07:04",
+        "2026-09-05T07:05"
       ],
       "sunsets": [
-        "2026-08-30T19:59",
         "2026-08-31T19:57",
         "2026-09-01T19:56",
         "2026-09-02T19:54",
         "2026-09-03T19:53",
-        "2026-09-04T19:52"
+        "2026-09-04T19:52",
+        "2026-09-05T19:50"
       ],
       "timezone": "America/New_York"
     }
@@ -2361,6 +2370,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T03:45:08.410Z"
+    "updatedAt": "2026-08-31T04:00:13.644Z"
   }
 }
