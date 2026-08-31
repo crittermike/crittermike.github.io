@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T12:00:52.527Z",
+  "generated_at": "2026-08-31T12:15:52.904Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -760,11 +760,11 @@
     ]
   },
   "dinner": {
-    "name": "Shake n Bake chicken with mac and cheese and cabbage",
+    "name": "Salsa chicken",
     "protein_g": 50,
-    "cal": 650,
-    "effort": "easy",
-    "note": "Carryover bumped from last week.",
+    "cal": 500,
+    "effort": "easy-slow",
+    "note": "Replaced Shake n Bake chicken with mac and cheese and cabbage. Shake n Bake chicken with mac and cheese and cabbage bumped to next week.",
     "recipe": null
   },
   "mealweek": [
@@ -779,7 +779,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Shake n Bake chicken with mac and cheese and cabbage",
+      "name": "Salsa chicken",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -953,7 +953,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
+      "temp": 73,
       "hi": 94,
       "lo": 70,
       "icon": "☀️",
@@ -2370,6 +2370,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T12:00:50.303Z"
+    "updatedAt": "2026-08-31T12:15:51.547Z"
   }
 }
