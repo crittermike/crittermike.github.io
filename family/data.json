@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T12:45:29.878Z",
+  "generated_at": "2026-09-01T13:00:33.569Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -526,7 +526,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$84.09"
+        "balance_str": "$96.09"
       },
       "guineaPig": null,
       "assignments": [
@@ -581,9 +581,9 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$32.20"
+        "balance_str": "$37.00"
       },
-      "guineaPig": "$133.14",
+      "guineaPig": "$140.34",
       "assignments": [
         {
           "id": "sch-2026-09-02-history-european-countries-quiz-10-count",
@@ -604,7 +604,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$92.13"
+        "balance_str": "$104.13"
       },
       "guineaPig": null,
       "assignments": [
@@ -631,7 +631,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$-262.23"
+        "balance_str": "$-250.23"
       },
       "guineaPig": null,
       "assignments": [
@@ -841,55 +841,78 @@
     ]
   },
   "dinner": {
-    "name": "Chicken thigh and veggie soup with French bread",
+    "name": "Crockpot chicken thigh, vegetable, and lentil soup with French bread",
     "protein_g": 40,
-    "cal": 550,
-    "effort": "medium",
+    "cal": 500,
+    "effort": "easy-slow",
     "note": "Replaced pot roast with carrots and potatoes. Pot roast bumped to next week.",
     "recipe": {
-      "slug": "chicken-thigh-and-veggie-soup-with-french-bread",
-      "name": "Chicken thigh and veggie soup with French bread",
+      "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
+      "name": "Crockpot chicken thigh, vegetable, and lentil soup",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
         "recipe",
-        "dinner"
+        "dinner",
+        "crockpot",
+        "soup"
       ],
       "aliases": [
-        "chicken-thigh-and-veggie-soup-with-french-bread"
+        "crockpot-chicken-thigh-vegetable-lentil-soup"
       ],
       "in_rotation": true,
-      "effort": "medium",
+      "effort": "easy-slow",
       "kid_friendly": true,
       "protein_g": 40,
-      "cal": 550,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
+      "cal": 500,
+      "servings": 8,
+      "prep_min": 15,
+      "cook_min": 360,
       "ingredient_groups": [
         {
           "heading": null,
           "items": [
-            "chicken thighs",
-            "carrots",
-            "celery",
-            "onion",
-            "chicken broth",
-            "French bread"
+            "2 lb boneless, skinless chicken thighs",
+            "1 cup dry brown or green lentils, rinsed",
+            "4 carrots, sliced",
+            "3 celery stalks, sliced",
+            "1 yellow onion, diced",
+            "3 garlic cloves, minced",
+            "8 cups chicken broth",
+            "1 teaspoon dried thyme",
+            "1 teaspoon Italian seasoning",
+            "1 teaspoon kosher salt",
+            "1/2 teaspoon black pepper",
+            "2 bay leaves",
+            "1 loaf French bread, for serving"
           ]
         }
       ],
       "all_ingredients": [
-        "chicken thighs",
-        "carrots",
-        "celery",
-        "onion",
-        "chicken broth",
-        "French bread"
+        "2 lb boneless, skinless chicken thighs",
+        "1 cup dry brown or green lentils, rinsed",
+        "4 carrots, sliced",
+        "3 celery stalks, sliced",
+        "1 yellow onion, diced",
+        "3 garlic cloves, minced",
+        "8 cups chicken broth",
+        "1 teaspoon dried thyme",
+        "1 teaspoon Italian seasoning",
+        "1 teaspoon kosher salt",
+        "1/2 teaspoon black pepper",
+        "2 bay leaves",
+        "1 loaf French bread, for serving"
       ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Chicken thigh and veggie soup with French bread</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>carrots</li>\n<li>celery</li>\n<li>onion</li>\n<li>chicken broth</li>\n<li>French bread</li>\n</ul>\n",
+      "steps": [
+        "Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.",
+        "Place the chicken thighs on top and press them into the broth.",
+        "Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.",
+        "Remove the chicken, shred it, and return it to the soup.",
+        "Remove the bay leaves. Add salt or pepper if needed.",
+        "Serve with French bread."
+      ],
+      "notes": "<h3>Cooking note</h3>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
+      "body_html": "<h1>Crockpot chicken thigh, vegetable, and lentil soup</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken thighs</li>\n<li>1 cup dry brown or green lentils, rinsed</li>\n<li>4 carrots, sliced</li>\n<li>3 celery stalks, sliced</li>\n<li>1 yellow onion, diced</li>\n<li>3 garlic cloves, minced</li>\n<li>8 cups chicken broth</li>\n<li>1 teaspoon dried thyme</li>\n<li>1 teaspoon Italian seasoning</li>\n<li>1 teaspoon kosher salt</li>\n<li>1/2 teaspoon black pepper</li>\n<li>2 bay leaves</li>\n<li>1 loaf French bread, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.</li>\n<li>Place the chicken thighs on top and press them into the broth.</li>\n<li>Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.</li>\n<li>Remove the chicken, shred it, and return it to the soup.</li>\n<li>Remove the bay leaves. Add salt or pepper if needed.</li>\n<li>Serve with French bread.</li>\n</ol>\n<h2>Cooking note</h2>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
       "last_reviewed": null
     }
   },
@@ -955,53 +978,76 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Chicken thigh and veggie soup with French bread",
+      "name": "Crockpot chicken thigh, vegetable, and lentil soup with French bread",
       "isToday": true,
       "isTomorrow": false,
       "recipe": {
-        "slug": "chicken-thigh-and-veggie-soup-with-french-bread",
-        "name": "Chicken thigh and veggie soup with French bread",
+        "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
+        "name": "Crockpot chicken thigh, vegetable, and lentil soup",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
           "recipe",
-          "dinner"
+          "dinner",
+          "crockpot",
+          "soup"
         ],
         "aliases": [
-          "chicken-thigh-and-veggie-soup-with-french-bread"
+          "crockpot-chicken-thigh-vegetable-lentil-soup"
         ],
         "in_rotation": true,
-        "effort": "medium",
+        "effort": "easy-slow",
         "kid_friendly": true,
         "protein_g": 40,
-        "cal": 550,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
+        "cal": 500,
+        "servings": 8,
+        "prep_min": 15,
+        "cook_min": 360,
         "ingredient_groups": [
           {
             "heading": null,
             "items": [
-              "chicken thighs",
-              "carrots",
-              "celery",
-              "onion",
-              "chicken broth",
-              "French bread"
+              "2 lb boneless, skinless chicken thighs",
+              "1 cup dry brown or green lentils, rinsed",
+              "4 carrots, sliced",
+              "3 celery stalks, sliced",
+              "1 yellow onion, diced",
+              "3 garlic cloves, minced",
+              "8 cups chicken broth",
+              "1 teaspoon dried thyme",
+              "1 teaspoon Italian seasoning",
+              "1 teaspoon kosher salt",
+              "1/2 teaspoon black pepper",
+              "2 bay leaves",
+              "1 loaf French bread, for serving"
             ]
           }
         ],
         "all_ingredients": [
-          "chicken thighs",
-          "carrots",
-          "celery",
-          "onion",
-          "chicken broth",
-          "French bread"
+          "2 lb boneless, skinless chicken thighs",
+          "1 cup dry brown or green lentils, rinsed",
+          "4 carrots, sliced",
+          "3 celery stalks, sliced",
+          "1 yellow onion, diced",
+          "3 garlic cloves, minced",
+          "8 cups chicken broth",
+          "1 teaspoon dried thyme",
+          "1 teaspoon Italian seasoning",
+          "1 teaspoon kosher salt",
+          "1/2 teaspoon black pepper",
+          "2 bay leaves",
+          "1 loaf French bread, for serving"
         ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Chicken thigh and veggie soup with French bread</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>carrots</li>\n<li>celery</li>\n<li>onion</li>\n<li>chicken broth</li>\n<li>French bread</li>\n</ul>\n",
+        "steps": [
+          "Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.",
+          "Place the chicken thighs on top and press them into the broth.",
+          "Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.",
+          "Remove the chicken, shred it, and return it to the soup.",
+          "Remove the bay leaves. Add salt or pepper if needed.",
+          "Serve with French bread."
+        ],
+        "notes": "<h3>Cooking note</h3>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
+        "body_html": "<h1>Crockpot chicken thigh, vegetable, and lentil soup</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken thighs</li>\n<li>1 cup dry brown or green lentils, rinsed</li>\n<li>4 carrots, sliced</li>\n<li>3 celery stalks, sliced</li>\n<li>1 yellow onion, diced</li>\n<li>3 garlic cloves, minced</li>\n<li>8 cups chicken broth</li>\n<li>1 teaspoon dried thyme</li>\n<li>1 teaspoon Italian seasoning</li>\n<li>1 teaspoon kosher salt</li>\n<li>1/2 teaspoon black pepper</li>\n<li>2 bay leaves</li>\n<li>1 loaf French bread, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.</li>\n<li>Place the chicken thighs on top and press them into the broth.</li>\n<li>Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.</li>\n<li>Remove the chicken, shred it, and return it to the soup.</li>\n<li>Remove the bay leaves. Add salt or pepper if needed.</li>\n<li>Serve with French bread.</li>\n</ol>\n<h2>Cooking note</h2>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
         "last_reviewed": null
       }
     },
@@ -1114,7 +1160,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
+      "temp": 76,
       "hi": 95,
       "lo": 71,
       "icon": "☀️",
@@ -1451,6 +1497,75 @@
       "steps": [],
       "notes": "",
       "body_html": "<h1>Crockpot Chicken and Dumplings</h1>\n<p>Crockpot high 3-4 hrs. Cut biscuits into 8 pieces, add last 30 min. Source: <a href=\"http://cookingwithkarli.com\">cookingwithkarli.com</a></p>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken broth</li>\n<li>chicken breast</li>\n<li>dried minced onion</li>\n<li>dried parsley</li>\n<li>cream of chicken soup (2 cans)</li>\n<li>refrigerated biscuits</li>\n</ul>\n<h2>Quantities</h2>\n<ul>\n<li>2 cups chicken broth per 1 lb chicken breast (source recipe ratio).</li>\n<li>2 tbsp dried minced onion, 1 tbsp dried parsley.</li>\n<li>No salt/pepper/poultry seasoning called out in the saved recipe.</li>\n</ul>\n",
+      "last_reviewed": null
+    },
+    {
+      "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
+      "name": "Crockpot chicken thigh, vegetable, and lentil soup",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner",
+        "crockpot",
+        "soup"
+      ],
+      "aliases": [
+        "crockpot-chicken-thigh-vegetable-lentil-soup"
+      ],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 40,
+      "cal": 500,
+      "servings": 8,
+      "prep_min": 15,
+      "cook_min": 360,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "2 lb boneless, skinless chicken thighs",
+            "1 cup dry brown or green lentils, rinsed",
+            "4 carrots, sliced",
+            "3 celery stalks, sliced",
+            "1 yellow onion, diced",
+            "3 garlic cloves, minced",
+            "8 cups chicken broth",
+            "1 teaspoon dried thyme",
+            "1 teaspoon Italian seasoning",
+            "1 teaspoon kosher salt",
+            "1/2 teaspoon black pepper",
+            "2 bay leaves",
+            "1 loaf French bread, for serving"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "2 lb boneless, skinless chicken thighs",
+        "1 cup dry brown or green lentils, rinsed",
+        "4 carrots, sliced",
+        "3 celery stalks, sliced",
+        "1 yellow onion, diced",
+        "3 garlic cloves, minced",
+        "8 cups chicken broth",
+        "1 teaspoon dried thyme",
+        "1 teaspoon Italian seasoning",
+        "1 teaspoon kosher salt",
+        "1/2 teaspoon black pepper",
+        "2 bay leaves",
+        "1 loaf French bread, for serving"
+      ],
+      "steps": [
+        "Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.",
+        "Place the chicken thighs on top and press them into the broth.",
+        "Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.",
+        "Remove the chicken, shred it, and return it to the soup.",
+        "Remove the bay leaves. Add salt or pepper if needed.",
+        "Serve with French bread."
+      ],
+      "notes": "<h3>Cooking note</h3>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
+      "body_html": "<h1>Crockpot chicken thigh, vegetable, and lentil soup</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken thighs</li>\n<li>1 cup dry brown or green lentils, rinsed</li>\n<li>4 carrots, sliced</li>\n<li>3 celery stalks, sliced</li>\n<li>1 yellow onion, diced</li>\n<li>3 garlic cloves, minced</li>\n<li>8 cups chicken broth</li>\n<li>1 teaspoon dried thyme</li>\n<li>1 teaspoon Italian seasoning</li>\n<li>1 teaspoon kosher salt</li>\n<li>1/2 teaspoon black pepper</li>\n<li>2 bay leaves</li>\n<li>1 loaf French bread, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.</li>\n<li>Place the chicken thighs on top and press them into the broth.</li>\n<li>Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.</li>\n<li>Remove the chicken, shred it, and return it to the soup.</li>\n<li>Remove the bay leaves. Add salt or pepper if needed.</li>\n<li>Serve with French bread.</li>\n</ol>\n<h2>Cooking note</h2>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
       "last_reviewed": null
     },
     {
@@ -2461,6 +2576,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-09-01T12:45:28.362Z"
+    "updatedAt": "2026-09-01T13:00:31.992Z"
   }
 }
