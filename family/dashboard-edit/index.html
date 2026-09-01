@@ -1930,6 +1930,36 @@
     <div class="dh-date" id="dhDate"></div>
   </div>
   
+  <div class="dh-weather">
+    <div class="dh-top">
+      <div class="dh-now">
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.7" class="wx-s"/><g class="wx-ray"><line x1="12" y1="2" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22"/><line x1="2" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22" y2="12"/><line x1="5.1" y1="5.1" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17.3" y2="6.7"/><line x1="6.7" y1="17.3" x2="5.1" y2="18.9"/></g></svg></span>
+        <span class="dh-temp">81°</span>
+        <span class="dh-hilo">H 95° · L 71°</span>
+      </div>
+      <div class="dh-days">
+        
+          <div class="dh-day"><span class="d">Wed</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">98/74</span></div>
+        
+          <div class="dh-day"><span class="d">Thu</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">100/76</span></div>
+        
+          <div class="dh-day"><span class="d">Fri</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">101/74</span></div>
+        
+          <div class="dh-day"><span class="d">Sat</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="8.6" y1="17.6" x2="7.6" y2="21"/><line x1="12.6" y1="17.6" x2="11.6" y2="21"/><line x1="16.6" y1="17.6" x2="15.6" y2="21"/></g></svg></span><span class="hl">101/69</span></div>
+        
+          <div class="dh-day"><span class="d">Sun</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">88/69</span></div>
+        
+      </div>
+    </div>
+    
+    <div class="dh-sun">
+      <div class="sun-bar" id="sunBar"
+           data-sunrise="2026-09-01T07:02"
+           data-sunset="2026-09-01T19:55"></div>
+    </div>
+    
+  </div>
+  
 </header>
 
 <div class="stage">
@@ -2263,6 +2293,13 @@
                 <label class="todo">
                   <input type="checkbox" data-kid="henry" data-id="sch-2026-09-02-state-of-the-school-presentation-2-00p-p">
                   <span class="todo-label">State of the School presentation, 2:00p, Parish House</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-">
+                  <span class="todo-label">Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday</span>
                 </label>
               </li>
               
@@ -2630,6 +2667,13 @@
                     <label class="todo">
                       <input type="checkbox" data-kid="henry" data-id="sch-2026-09-02-state-of-the-school-presentation-2-00p-p">
                       <span class="todo-label">State of the School presentation, 2:00p, Parish House</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-">
+                      <span class="todo-label">Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday</span>
                     </label>
                   </li>
                 
@@ -3215,7 +3259,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$96.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-","label":"Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"},{"id":"sch-2026-09-01-math-workbook-p-28-29","label":"Math: workbook p.28-29"},{"id":"sch-2026-09-01-english-eie-p-12","label":"English: EIE p.12"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-simple-solutions-quiz","label":"Simple Solutions quiz"},{"id":"sch-2026-09-02-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-02-spelling-workbook-p-16-words-11-15-three","label":"Spelling: workbook p.16; words 11-15 three times each; study Wednesday DOL"},{"id":"sch-2026-09-02-math-workbook-p-31-32","label":"Math: workbook p.31-32"},{"id":"sch-2026-09-02-english-study-for-chapter-1-sentences-te","label":"English: study for Chapter 1 Sentences test"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$37.00"},"guineaPig":"$140.34","assignments":[{"id":"sch-2026-09-02-history-european-countries-quiz-10-count","label":"History: European Countries quiz, 10 countries (Fifth Grade Newsletter 8/24)"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$104.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-spanish-prueba-parte-2-p-12-19","label":"Spanish: Prueba Parte 2 p.12-19"},{"id":"sch-2026-09-01-honors-english-demarrais-finish-biograph","label":"Honors English (deMarrais): Finish biography questions about Harper Lee"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-250.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-launchgvl-virtual-information-session-at","label":"LaunchGVL virtual information session at 6:30 PM"}]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$96.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-","label":"Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"},{"id":"sch-2026-09-01-math-workbook-p-28-29","label":"Math: workbook p.28-29"},{"id":"sch-2026-09-01-english-eie-p-12","label":"English: EIE p.12"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-simple-solutions-quiz","label":"Simple Solutions quiz"},{"id":"sch-2026-09-02-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-02-spelling-workbook-p-16-words-11-15-three","label":"Spelling: workbook p.16; words 11-15 three times each; study Wednesday DOL"},{"id":"sch-2026-09-02-math-workbook-p-31-32","label":"Math: workbook p.31-32"},{"id":"sch-2026-09-02-english-study-for-chapter-1-sentences-te","label":"English: study for Chapter 1 Sentences test"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$37.00"},"guineaPig":"$140.34","assignments":[{"id":"sch-2026-09-02-history-european-countries-quiz-10-count","label":"History: European Countries quiz, 10 countries (Fifth Grade Newsletter 8/24)"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$104.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-spanish-prueba-parte-2-p-12-19","label":"Spanish: Prueba Parte 2 p.12-19"},{"id":"sch-2026-09-01-honors-english-demarrais-finish-biograph","label":"Honors English (deMarrais): Finish biography questions about Harper Lee"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-","label":"Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-250.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-launchgvl-virtual-information-session-at","label":"LaunchGVL virtual information session at 6:30 PM"}]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3669,7 +3713,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$96.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-","label":"Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"},{"id":"sch-2026-09-01-math-workbook-p-28-29","label":"Math: workbook p.28-29"},{"id":"sch-2026-09-01-english-eie-p-12","label":"English: EIE p.12"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-simple-solutions-quiz","label":"Simple Solutions quiz"},{"id":"sch-2026-09-02-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-02-spelling-workbook-p-16-words-11-15-three","label":"Spelling: workbook p.16; words 11-15 three times each; study Wednesday DOL"},{"id":"sch-2026-09-02-math-workbook-p-31-32","label":"Math: workbook p.31-32"},{"id":"sch-2026-09-02-english-study-for-chapter-1-sentences-te","label":"English: study for Chapter 1 Sentences test"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$37.00"},"guineaPig":"$140.34","assignments":[{"id":"sch-2026-09-02-history-european-countries-quiz-10-count","label":"History: European Countries quiz, 10 countries (Fifth Grade Newsletter 8/24)"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$104.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-spanish-prueba-parte-2-p-12-19","label":"Spanish: Prueba Parte 2 p.12-19"},{"id":"sch-2026-09-01-honors-english-demarrais-finish-biograph","label":"Honors English (deMarrais): Finish biography questions about Harper Lee"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-250.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-launchgvl-virtual-information-session-at","label":"LaunchGVL virtual information session at 6:30 PM"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":230,"refill":60},"allowance":{"balance_str":"$96.09"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-","label":"Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"},{"id":"sch-2026-09-01-math-workbook-p-28-29","label":"Math: workbook p.28-29"},{"id":"sch-2026-09-01-english-eie-p-12","label":"English: EIE p.12"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-simple-solutions-quiz","label":"Simple Solutions quiz"},{"id":"sch-2026-09-02-reading-read-20-minutes","label":"Reading: read 20 minutes"},{"id":"sch-2026-09-02-spelling-workbook-p-16-words-11-15-three","label":"Spelling: workbook p.16; words 11-15 three times each; study Wednesday DOL"},{"id":"sch-2026-09-02-math-workbook-p-31-32","label":"Math: workbook p.31-32"},{"id":"sch-2026-09-02-english-study-for-chapter-1-sentences-te","label":"English: study for Chapter 1 Sentences test"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":30,"refill":60},"allowance":{"balance_str":"$37.00"},"guineaPig":"$140.34","assignments":[{"id":"sch-2026-09-02-history-european-countries-quiz-10-count","label":"History: European Countries quiz, 10 countries (Fifth Grade Newsletter 8/24)"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":54,"refill":60},"allowance":{"balance_str":"$104.13"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-spanish-prueba-parte-2-p-12-19","label":"Spanish: Prueba Parte 2 p.12-19"},{"id":"sch-2026-09-01-honors-english-demarrais-finish-biograph","label":"Honors English (deMarrais): Finish biography questions about Harper Lee"},{"id":"sch-2026-09-02-state-of-the-school-presentation-2-00p-p","label":"State of the School presentation, 2:00p, Parish House"},{"id":"sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-","label":"Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":256,"refill":60},"allowance":{"balance_str":"$-250.23"},"guineaPig":null,"assignments":[{"id":"sch-2026-09-01-launchgvl-virtual-information-session-at","label":"LaunchGVL virtual information session at 6:30 PM"}]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
@@ -3917,7 +3961,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":[],"sunsets":[]};
+    const SUN = {"sunrises":["2026-09-01T07:02","2026-09-02T07:03","2026-09-03T07:03","2026-09-04T07:04","2026-09-05T07:05","2026-09-06T07:06"],"sunsets":["2026-09-01T19:55","2026-09-02T19:54","2026-09-03T19:53","2026-09-04T19:51","2026-09-05T19:50","2026-09-06T19:49"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 

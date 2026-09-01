@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T14:00:34.480Z",
+  "generated_at": "2026-09-01T14:15:33.261Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -619,6 +619,10 @@
         {
           "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
           "label": "State of the School presentation, 2:00p, Parish House"
+        },
+        {
+          "id": "sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-",
+          "label": "Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday"
         }
       ]
     },
@@ -1158,7 +1162,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 81,
+      "hi": 95,
+      "lo": 71,
+      "icon": "☀️",
+      "code": 0
+    },
+    "days": [
+      {
+        "d": "Wed",
+        "icon": "🌤",
+        "hi": 98,
+        "lo": 74,
+        "code": 2
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 100,
+        "lo": 76,
+        "code": 51
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 101,
+        "lo": 74,
+        "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 101,
+        "lo": 69,
+        "code": 81
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 88,
+        "lo": 69,
+        "code": 51
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-09-01T07:02",
+        "2026-09-02T07:03",
+        "2026-09-03T07:03",
+        "2026-09-04T07:04",
+        "2026-09-05T07:05",
+        "2026-09-06T07:06"
+      ],
+      "sunsets": [
+        "2026-09-01T19:55",
+        "2026-09-02T19:54",
+        "2026-09-03T19:53",
+        "2026-09-04T19:51",
+        "2026-09-05T19:50",
+        "2026-09-06T19:49"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2512,6 +2580,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-09-01T14:00:33.011Z"
+    "updatedAt": "2026-09-01T14:15:32.190Z"
   }
 }
