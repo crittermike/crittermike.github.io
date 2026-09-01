@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T23:45:38.322Z",
+  "generated_at": "2026-09-01T00:00:43.852Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -862,52 +862,62 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot salsa chicken",
-    "protein_g": 50,
-    "cal": 500,
+    "name": "Pot roast with carrots and potatoes",
+    "protein_g": 55,
+    "cal": 650,
     "effort": "easy-slow",
-    "note": "Replaced Shake n Bake chicken with mac and cheese and cabbage. Shake n Bake chicken with mac and cheese and cabbage bumped to next week.",
+    "note": "",
     "recipe": {
-      "slug": "crockpot-salsa-chicken",
-      "name": "Crockpot Salsa Chicken",
+      "slug": "pot-roast-with-carrots-and-potatoes",
+      "name": "Pot roast with carrots and potatoes",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
-        "chicken",
-        "crockpot",
-        "mexican",
+        "recipe",
         "dinner"
       ],
-      "aliases": [],
+      "aliases": [
+        "pot-roast-with-carrots-and-potatoes"
+      ],
       "in_rotation": true,
       "effort": "easy-slow",
       "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 500,
-      "servings": 6,
-      "prep_min": 5,
-      "cook_min": 180,
+      "protein_g": 55,
+      "cal": 650,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
       "ingredient_groups": [
         {
           "heading": null,
           "items": [
-            "2 lb boneless, skinless chicken breasts",
-            "1 jar mild salsa (16 oz)"
+            "chuck roast",
+            "carrots",
+            "potatoes",
+            "onions",
+            "beef broth",
+            "salt, black pepper"
           ]
         }
       ],
       "all_ingredients": [
-        "2 lb boneless, skinless chicken breasts",
-        "1 jar mild salsa (16 oz)"
+        "chuck roast",
+        "carrots",
+        "potatoes",
+        "onions",
+        "beef broth",
+        "salt, black pepper"
       ],
       "steps": [
-        "Put the chicken in the crockpot.",
-        "Pour the salsa over it.",
-        "Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.",
-        "Shred the chicken in the crockpot and stir it into the salsa."
+        "Season roast all over with salt and pepper.",
+        "Put onions in bottom of crockpot. Place roast on top.",
+        "Add carrots and potatoes around/on top of roast.",
+        "Pour in beef broth.",
+        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
+        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
       ],
       "notes": "",
-      "body_html": "<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 jar mild salsa (16 oz)</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the chicken in the crockpot.</li>\n<li>Pour the salsa over it.</li>\n<li>Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.</li>\n<li>Shred the chicken in the crockpot and stir it into the salsa.</li>\n</ol>\n",
+      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
       "last_reviewed": null
     }
   },
@@ -1139,7 +1149,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 82,
       "hi": 93,
       "lo": 71,
       "icon": "☀️",
@@ -2477,128 +2487,15 @@
     }
   ],
   "finance": {
-    "month": "August 2026",
-    "dayPct": 100,
-    "totalSpend": 15318.61,
-    "totalBudget": 17750.5,
-    "categories": [
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 3490.68,
-        "spent": 4263.21,
-        "balance": -772.53,
-        "pct": 122.1
-      },
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 4566.7,
-        "spent": 3267.4,
-        "balance": 1299.3,
-        "pct": 71.5
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 2546.81,
-        "spent": 2000.49,
-        "balance": 546.32,
-        "pct": 78.5
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 99,
-        "spent": 1782.46,
-        "balance": -1683.46,
-        "pct": 1800.5
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 2024.75,
-        "spent": 1603.52,
-        "balance": 421.23,
-        "pct": 79.2
-      },
-      {
-        "name": "⚡️ Utilities",
-        "group": "Bills",
-        "budgeted": 668.27,
-        "spent": 675.88,
-        "balance": -7.61,
-        "pct": 101.1
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 981.05,
-        "spent": 582.13,
-        "balance": 398.92,
-        "pct": 59.3
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 364.32,
-        "spent": 331.02,
-        "balance": 33.3,
-        "pct": 90.9
-      },
-      {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 351.83,
-        "spent": 281.68,
-        "balance": 70.15,
-        "pct": 80.1
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 1698.71,
-        "spent": 173.24,
-        "balance": 1525.47,
-        "pct": 10.2
-      },
-      {
-        "name": "🎁 Charity",
-        "group": "Needs",
-        "budgeted": 160,
-        "spent": 160,
-        "balance": 0,
-        "pct": 100
-      },
-      {
-        "name": "🐶 Pets",
-        "group": "Needs",
-        "budgeted": 104.5,
-        "spent": 137.58,
-        "balance": -33.08,
-        "pct": 131.7
-      },
-      {
-        "name": "💅 Personal Care",
-        "group": "Wants",
-        "budgeted": 246,
-        "spent": 60,
-        "balance": 186,
-        "pct": 24.4
-      },
-      {
-        "name": "🏝️ Vacation",
-        "group": "Wants",
-        "budgeted": 447.88,
-        "spent": 0,
-        "balance": 447.88,
-        "pct": 0
-      }
-    ],
+    "month": "September 2026",
+    "dayPct": 3.3,
+    "totalSpend": 0,
+    "totalBudget": 0,
+    "categories": [],
     "liquidCash": 10033.61,
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-08-31T23:45:36.945Z"
+    "updatedAt": "2026-09-01T00:00:41.701Z"
   }
 }
