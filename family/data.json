@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T23:00:35.982Z",
+  "generated_at": "2026-09-01T23:15:33.581Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -145,6 +145,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-14T11:05:00-04:00"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "11a",
+      "what": "Prince of Peace Golf Charity Greenville",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-14T18:00:00-04:00"
     },
     {
       "date": "2026-09-15",
@@ -1176,7 +1185,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 92,
+      "temp": 91,
       "hi": 95,
       "lo": 71,
       "icon": "☀️",
@@ -2592,6 +2601,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 55987.12,
     "source": "ynab",
-    "updatedAt": "2026-09-01T23:00:34.148Z"
+    "updatedAt": "2026-09-01T23:15:32.244Z"
   }
 }
