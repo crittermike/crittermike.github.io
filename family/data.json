@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T12:30:28.934Z",
+  "generated_at": "2026-09-01T12:45:29.878Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -841,14 +841,14 @@
     ]
   },
   "dinner": {
-    "name": "Pot roast with carrots and potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "",
+    "name": "Chicken thigh and veggie soup with French bread",
+    "protein_g": 40,
+    "cal": 550,
+    "effort": "medium",
+    "note": "Replaced pot roast with carrots and potatoes. Pot roast bumped to next week.",
     "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
+      "slug": "chicken-thigh-and-veggie-soup-with-french-bread",
+      "name": "Chicken thigh and veggie soup with French bread",
       "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
@@ -856,13 +856,13 @@
         "dinner"
       ],
       "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
+        "chicken-thigh-and-veggie-soup-with-french-bread"
       ],
       "in_rotation": true,
-      "effort": "easy-slow",
+      "effort": "medium",
       "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
+      "protein_g": 40,
+      "cal": 550,
       "servings": null,
       "prep_min": null,
       "cook_min": null,
@@ -870,33 +870,26 @@
         {
           "heading": null,
           "items": [
-            "chuck roast",
+            "chicken thighs",
             "carrots",
-            "potatoes",
-            "onions",
-            "beef broth",
-            "salt, black pepper"
+            "celery",
+            "onion",
+            "chicken broth",
+            "French bread"
           ]
         }
       ],
       "all_ingredients": [
-        "chuck roast",
+        "chicken thighs",
         "carrots",
-        "potatoes",
-        "onions",
-        "beef broth",
-        "salt, black pepper"
+        "celery",
+        "onion",
+        "chicken broth",
+        "French bread"
       ],
-      "steps": [
-        "Season roast all over with salt and pepper.",
-        "Put onions in bottom of crockpot. Place roast on top.",
-        "Add carrots and potatoes around/on top of roast.",
-        "Pour in beef broth.",
-        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-      ],
+      "steps": [],
       "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
+      "body_html": "<h1>Chicken thigh and veggie soup with French bread</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>carrots</li>\n<li>celery</li>\n<li>onion</li>\n<li>chicken broth</li>\n<li>French bread</li>\n</ul>\n",
       "last_reviewed": null
     }
   },
@@ -962,12 +955,12 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Pot roast with carrots and potatoes",
+      "name": "Chicken thigh and veggie soup with French bread",
       "isToday": true,
       "isTomorrow": false,
       "recipe": {
-        "slug": "pot-roast-with-carrots-and-potatoes",
-        "name": "Pot roast with carrots and potatoes",
+        "slug": "chicken-thigh-and-veggie-soup-with-french-bread",
+        "name": "Chicken thigh and veggie soup with French bread",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
@@ -975,13 +968,13 @@
           "dinner"
         ],
         "aliases": [
-          "pot-roast-with-carrots-and-potatoes"
+          "chicken-thigh-and-veggie-soup-with-french-bread"
         ],
         "in_rotation": true,
-        "effort": "easy-slow",
+        "effort": "medium",
         "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 650,
+        "protein_g": 40,
+        "cal": 550,
         "servings": null,
         "prep_min": null,
         "cook_min": null,
@@ -989,33 +982,26 @@
           {
             "heading": null,
             "items": [
-              "chuck roast",
+              "chicken thighs",
               "carrots",
-              "potatoes",
-              "onions",
-              "beef broth",
-              "salt, black pepper"
+              "celery",
+              "onion",
+              "chicken broth",
+              "French bread"
             ]
           }
         ],
         "all_ingredients": [
-          "chuck roast",
+          "chicken thighs",
           "carrots",
-          "potatoes",
-          "onions",
-          "beef broth",
-          "salt, black pepper"
+          "celery",
+          "onion",
+          "chicken broth",
+          "French bread"
         ],
-        "steps": [
-          "Season roast all over with salt and pepper.",
-          "Put onions in bottom of crockpot. Place roast on top.",
-          "Add carrots and potatoes around/on top of roast.",
-          "Pour in beef broth.",
-          "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-          "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-        ],
+        "steps": [],
         "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
+        "body_html": "<h1>Chicken thigh and veggie soup with French bread</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken thighs</li>\n<li>carrots</li>\n<li>celery</li>\n<li>onion</li>\n<li>chicken broth</li>\n<li>French bread</li>\n</ul>\n",
         "last_reviewed": null
       }
     },
@@ -1128,7 +1114,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 75,
       "hi": 95,
       "lo": 71,
       "icon": "☀️",
@@ -2475,6 +2461,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-09-01T12:30:27.545Z"
+    "updatedAt": "2026-09-01T12:45:28.362Z"
   }
 }
