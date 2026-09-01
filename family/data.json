@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T20:01:00.634Z",
+  "generated_at": "2026-09-01T20:16:05.158Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -631,6 +631,10 @@
         {
           "id": "sch-2026-09-02-spanish-simon-p-26-27",
           "label": "Spanish (Simon): P.26 & 27"
+        },
+        {
+          "id": "sch-2026-09-02-honors-english-demarrais-finish-reading-",
+          "label": "Honors English (deMarrais): Finish reading Chapter 1 and annotate"
         }
       ]
     },
@@ -1170,7 +1174,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 95,
+      "hi": 95,
+      "lo": 71,
+      "icon": "☀️",
+      "code": 0
+    },
+    "days": [
+      {
+        "d": "Wed",
+        "icon": "☀️",
+        "hi": 98,
+        "lo": 75,
+        "code": 0
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 101,
+        "lo": 75,
+        "code": 51
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 101,
+        "lo": 74,
+        "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 102,
+        "lo": 72,
+        "code": 80
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 95,
+        "lo": 70,
+        "code": 53
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-09-01T07:02",
+        "2026-09-02T07:03",
+        "2026-09-03T07:03",
+        "2026-09-04T07:04",
+        "2026-09-05T07:05",
+        "2026-09-06T07:06"
+      ],
+      "sunsets": [
+        "2026-09-01T19:55",
+        "2026-09-02T19:54",
+        "2026-09-03T19:53",
+        "2026-09-04T19:51",
+        "2026-09-05T19:50",
+        "2026-09-06T19:49"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2524,6 +2592,6 @@
     "creditDebt": 46106.58,
     "netLiquid": 56140.19,
     "source": "ynab",
-    "updatedAt": "2026-09-01T20:00:59.381Z"
+    "updatedAt": "2026-09-01T20:16:04.098Z"
   }
 }
