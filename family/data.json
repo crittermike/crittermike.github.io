@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-02T03:45:44.525Z",
+  "generated_at": "2026-09-02T04:00:45.343Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-01",
-      "time": "6:30p",
-      "what": "LaunchGVL virtual information session",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-01T19:30:00-04:00"
-    },
     {
       "date": "2026-09-02",
       "time": "9a",
@@ -540,28 +531,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-01-reading-read-20-minutes",
-          "label": "Reading: read 20 minutes"
-        },
-        {
-          "id": "sch-2026-09-01-spelling-workbook-p-15-words-6-10-three-",
-          "label": "Spelling: workbook p.15; words 6-10 three times each; study Tuesday DOL"
-        },
-        {
-          "id": "sch-2026-09-01-math-workbook-p-28-29",
-          "label": "Math: workbook p.28-29"
-        },
-        {
-          "id": "sch-2026-09-01-english-eie-p-12",
-          "label": "English: EIE p.12"
-        },
-        {
           "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
           "label": "State of the School presentation, 2:00p, Parish House"
-        },
-        {
-          "id": "sch-2026-09-02-simple-solutions-quiz",
-          "label": "Simple Solutions quiz"
         },
         {
           "id": "sch-2026-09-02-reading-read-20-minutes",
@@ -576,8 +547,28 @@
           "label": "Math: workbook p.31-32"
         },
         {
-          "id": "sch-2026-09-02-english-study-for-chapter-1-sentences-te",
-          "label": "English: study for Chapter 1 Sentences test"
+          "id": "sch-2026-09-03-reading-1-4-cold-read-quiz",
+          "label": "Reading 1.4 Cold Read quiz"
+        },
+        {
+          "id": "sch-2026-09-03-english-chapter-1-grammar-test-on-senten",
+          "label": "English Chapter 1 Grammar test on sentences"
+        },
+        {
+          "id": "sch-2026-09-03-reading-read-20-minutes",
+          "label": "Reading: read 20 minutes"
+        },
+        {
+          "id": "sch-2026-09-03-spelling-choice-board-abc-order-words-16",
+          "label": "Spelling: Choice Board ABC Order; words 16-20 three times each; study spelling"
+        },
+        {
+          "id": "sch-2026-09-03-study-thursday-dol-and-review-all-four-d",
+          "label": "Study Thursday DOL and review all four days for DOL quiz"
+        },
+        {
+          "id": "sch-2026-09-03-math-workbook-p-34-35",
+          "label": "Math: workbook p.34-35"
         }
       ]
     },
@@ -595,12 +586,12 @@
       "guineaPig": "$140.34",
       "assignments": [
         {
-          "id": "sch-2026-09-02-history-european-countries-quiz-10-count",
-          "label": "History: European Countries quiz, 10 countries (Fifth Grade Newsletter 8/24)"
-        },
-        {
           "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
           "label": "State of the School presentation, 2:00p, Parish House"
+        },
+        {
+          "id": "sch-2026-09-03-math-chapter-1-test-fifth-grade-newslett",
+          "label": "Math: Chapter 1 test (Fifth Grade Newsletter 8/24)"
         }
       ]
     },
@@ -618,24 +609,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-01-spanish-prueba-parte-2-p-12-19",
-          "label": "Spanish: Prueba Parte 2 p.12-19"
-        },
-        {
-          "id": "sch-2026-09-01-honors-english-demarrais-finish-biograph",
-          "label": "Honors English (deMarrais): Finish biography questions about Harper Lee"
-        },
-        {
-          "id": "sch-2026-09-01-lunch-changed-from-moe-s-to-pizza",
-          "label": "Lunch changed from Moe's to pizza"
-        },
-        {
           "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
           "label": "State of the School presentation, 2:00p, Parish House"
-        },
-        {
-          "id": "sch-2026-09-02-algebra-edwards-2-5-1-16-multiples-of-3-",
-          "label": "Algebra (Edwards): 2.5, 1-16 multiples of 3 and 17-46 odds; lesson 5-7 quiz Friday"
         },
         {
           "id": "sch-2026-09-02-spanish-simon-p-26-27",
@@ -659,12 +634,7 @@
         "balance_str": "$-250.23"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-01-launchgvl-virtual-information-session-at",
-          "label": "LaunchGVL virtual information session at 6:30 PM"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -936,7 +906,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Crockpot chicken thigh, vegetable, and lentil soup with French bread",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
@@ -1012,8 +982,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Italian sausage with onion, zucchini, and rice",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -1021,7 +991,7 @@
       "dow_short": "Thu",
       "name": "Beef enchiladas",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "beef-enchiladas",
         "name": "Beef enchiladas",
@@ -1118,19 +1088,12 @@
   "weather": {
     "now": {
       "temp": 79,
-      "hi": 95,
-      "lo": 71,
+      "hi": 97,
+      "lo": 75,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "🌤",
-        "hi": 97,
-        "lo": 75,
-        "code": 1
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -1158,24 +1121,31 @@
         "hi": 81,
         "lo": 69,
         "code": 53
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 86,
+        "lo": 69,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-01T07:02",
         "2026-09-02T07:03",
         "2026-09-03T07:04",
         "2026-09-04T07:04",
         "2026-09-05T07:05",
-        "2026-09-06T07:06"
+        "2026-09-06T07:06",
+        "2026-09-07T07:06"
       ],
       "sunsets": [
-        "2026-09-01T19:56",
         "2026-09-02T19:54",
         "2026-09-03T19:53",
         "2026-09-04T19:52",
         "2026-09-05T19:50",
-        "2026-09-06T19:49"
+        "2026-09-06T19:49",
+        "2026-09-07T19:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2533,6 +2503,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 55987.12,
     "source": "ynab",
-    "updatedAt": "2026-09-02T03:45:43.107Z"
+    "updatedAt": "2026-09-02T04:00:43.876Z"
   }
 }
