@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T18:15:54.969Z",
+  "generated_at": "2026-09-02T18:30:55.642Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -235,6 +235,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-29T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "1p",
+      "what": "Mom driving therapy appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T14:30:00-04:00"
     },
     {
       "date": "2026-10-02",
@@ -2498,6 +2507,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53732.03,
     "source": "ynab",
-    "updatedAt": "2026-09-02T18:15:53.570Z"
+    "updatedAt": "2026-09-02T18:30:54.190Z"
   }
 }
