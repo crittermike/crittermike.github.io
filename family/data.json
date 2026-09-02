@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-02T11:00:49.532Z",
+  "generated_at": "2026-09-02T11:15:48.567Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-02",
-      "time": "9a",
-      "what": "Mom lymphedema appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-02T10:00:00-04:00"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "2p",
-      "what": "POPCS State of the School presentation",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-02T15:00:00-04:00"
-    },
     {
       "date": "2026-09-03",
       "time": "8:10a",
@@ -2503,6 +2485,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 55987.12,
     "source": "ynab",
-    "updatedAt": "2026-09-02T11:00:48.012Z"
+    "updatedAt": "2026-09-02T11:15:47.021Z"
   }
 }
