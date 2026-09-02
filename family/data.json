@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T11:15:48.567Z",
+  "generated_at": "2026-09-02T11:30:50.590Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2478,13 +2478,22 @@
   "finance": {
     "month": "September 2026",
     "dayPct": 6.7,
-    "totalSpend": 0,
+    "totalSpend": 2255.09,
     "totalBudget": 0,
-    "categories": [],
-    "liquidCash": 9040.04,
+    "categories": [
+      {
+        "name": "🏠 Home",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 2255.09,
+        "balance": -955.79,
+        "pct": 0
+      }
+    ],
+    "liquidCash": 6784.95,
     "creditDebt": 46947.08,
-    "netLiquid": 55987.12,
+    "netLiquid": 53732.03,
     "source": "ynab",
-    "updatedAt": "2026-09-02T11:15:47.021Z"
+    "updatedAt": "2026-09-02T11:30:49.190Z"
   }
 }
