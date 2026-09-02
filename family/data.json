@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T17:00:39.071Z",
+  "generated_at": "2026-09-02T17:15:42.698Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -601,6 +601,10 @@
         {
           "id": "sch-2026-09-02-honors-english-demarrais-finish-reading-",
           "label": "Honors English (deMarrais): Finish reading Chapter 1 and annotate"
+        },
+        {
+          "id": "sch-2026-09-03-spanish-simon-p-28-29",
+          "label": "Spanish (Simon): p.28-29"
         }
       ]
     },
@@ -2494,6 +2498,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53732.03,
     "source": "ynab",
-    "updatedAt": "2026-09-02T17:00:37.515Z"
+    "updatedAt": "2026-09-02T17:15:41.186Z"
   }
 }
