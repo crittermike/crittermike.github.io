@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T23:45:34.963Z",
+  "generated_at": "2026-09-02T00:00:40.811Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -866,80 +866,12 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot chicken thigh, vegetable, and lentil soup with French bread",
-    "protein_g": 40,
-    "cal": 500,
-    "effort": "easy-slow",
-    "note": "Replaced pot roast with carrots and potatoes. Pot roast bumped to next week.",
-    "recipe": {
-      "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
-      "name": "Crockpot chicken thigh, vegetable, and lentil soup",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner",
-        "crockpot",
-        "soup"
-      ],
-      "aliases": [
-        "crockpot-chicken-thigh-vegetable-lentil-soup"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": 40,
-      "cal": 500,
-      "servings": 8,
-      "prep_min": 15,
-      "cook_min": 360,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "2 lb boneless, skinless chicken thighs",
-            "1 cup dry brown or green lentils, rinsed",
-            "4 carrots, sliced",
-            "3 celery stalks, sliced",
-            "1 yellow onion, diced",
-            "3 garlic cloves, minced",
-            "8 cups chicken broth",
-            "1 teaspoon dried thyme",
-            "1 teaspoon Italian seasoning",
-            "1 teaspoon kosher salt",
-            "1/2 teaspoon black pepper",
-            "2 bay leaves",
-            "1 loaf French bread, for serving"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "2 lb boneless, skinless chicken thighs",
-        "1 cup dry brown or green lentils, rinsed",
-        "4 carrots, sliced",
-        "3 celery stalks, sliced",
-        "1 yellow onion, diced",
-        "3 garlic cloves, minced",
-        "8 cups chicken broth",
-        "1 teaspoon dried thyme",
-        "1 teaspoon Italian seasoning",
-        "1 teaspoon kosher salt",
-        "1/2 teaspoon black pepper",
-        "2 bay leaves",
-        "1 loaf French bread, for serving"
-      ],
-      "steps": [
-        "Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.",
-        "Place the chicken thighs on top and press them into the broth.",
-        "Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.",
-        "Remove the chicken, shred it, and return it to the soup.",
-        "Remove the bay leaves. Add salt or pepper if needed.",
-        "Serve with French bread."
-      ],
-      "notes": "<h3>Cooking note</h3>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
-      "body_html": "<h1>Crockpot chicken thigh, vegetable, and lentil soup</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken thighs</li>\n<li>1 cup dry brown or green lentils, rinsed</li>\n<li>4 carrots, sliced</li>\n<li>3 celery stalks, sliced</li>\n<li>1 yellow onion, diced</li>\n<li>3 garlic cloves, minced</li>\n<li>8 cups chicken broth</li>\n<li>1 teaspoon dried thyme</li>\n<li>1 teaspoon Italian seasoning</li>\n<li>1 teaspoon kosher salt</li>\n<li>1/2 teaspoon black pepper</li>\n<li>2 bay leaves</li>\n<li>1 loaf French bread, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.</li>\n<li>Place the chicken thighs on top and press them into the broth.</li>\n<li>Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.</li>\n<li>Remove the chicken, shred it, and return it to the soup.</li>\n<li>Remove the bay leaves. Add salt or pepper if needed.</li>\n<li>Serve with French bread.</li>\n</ol>\n<h2>Cooking note</h2>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
-      "last_reviewed": null
-    }
+    "name": "Italian sausage with onion, zucchini, and rice",
+    "protein_g": 45,
+    "cal": 650,
+    "effort": "easy",
+    "note": "",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -2593,7 +2525,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 3.3,
+    "dayPct": 6.7,
     "totalSpend": 0,
     "totalBudget": 0,
     "categories": [],
@@ -2601,6 +2533,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 55987.12,
     "source": "ynab",
-    "updatedAt": "2026-09-01T23:45:33.582Z"
+    "updatedAt": "2026-09-02T00:00:38.685Z"
   }
 }
