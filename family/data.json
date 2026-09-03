@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T12:30:52.558Z",
+  "generated_at": "2026-09-03T12:45:52.934Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -244,6 +244,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-28T14:30:00-04:00"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "9:30a",
+      "what": "Dr. Bhattia Henry appointment ",
+      "who": "henry",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-01T10:30:00-04:00"
     },
     {
       "date": "2026-10-02",
@@ -1165,8 +1174,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
-      "hi": 97,
+      "temp": 79,
+      "hi": 96,
       "lo": 74,
       "icon": "☀️",
       "code": 0
@@ -2590,6 +2599,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53232.03,
     "source": "ynab",
-    "updatedAt": "2026-09-03T12:30:51.029Z"
+    "updatedAt": "2026-09-03T12:45:51.450Z"
   }
 }
