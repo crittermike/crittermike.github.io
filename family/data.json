@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T14:00:56.734Z",
+  "generated_at": "2026-09-03T14:16:00.788Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-08T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "10:30a",
+      "what": "Richard behind-the-wheel lesson",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-08T12:30:00-04:00"
     },
     {
       "date": "2026-09-08",
@@ -235,6 +244,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-29T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "9:30a",
+      "what": "Henry televisit with Erin Bhatia",
+      "who": "henry",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T09:45:00-04:00"
     },
     {
       "date": "2026-09-28",
@@ -1174,7 +1192,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 84,
       "hi": 96,
       "lo": 74,
       "icon": "☀️",
@@ -2599,6 +2617,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53232.03,
     "source": "ynab",
-    "updatedAt": "2026-09-03T14:00:55.575Z"
+    "updatedAt": "2026-09-03T14:15:59.605Z"
   }
 }
