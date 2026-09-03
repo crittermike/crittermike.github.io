@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T03:45:38.249Z",
+  "generated_at": "2026-09-03T04:00:34.912Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -522,30 +522,6 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
-          "label": "State of the School presentation, 2:00p, Parish House"
-        },
-        {
-          "id": "sch-2026-09-02-reading-read-20-minutes",
-          "label": "Reading: read 20 minutes"
-        },
-        {
-          "id": "sch-2026-09-02-spelling-workbook-p-16-words-11-15-three",
-          "label": "Spelling: workbook p.16; words 11-15 three times each; study Wednesday DOL"
-        },
-        {
-          "id": "sch-2026-09-02-math-workbook-p-31-32",
-          "label": "Math: workbook p.31-32"
-        },
-        {
-          "id": "sch-2026-09-03-reading-1-4-cold-read-quiz",
-          "label": "Reading 1.4 Cold Read quiz"
-        },
-        {
-          "id": "sch-2026-09-03-english-chapter-1-grammar-test-on-senten",
-          "label": "English Chapter 1 Grammar test on sentences"
-        },
-        {
           "id": "sch-2026-09-03-reading-read-20-minutes",
           "label": "Reading: read 20 minutes"
         },
@@ -554,12 +530,24 @@
           "label": "Spelling: Choice Board ABC Order; words 16-20 three times each; study spelling"
         },
         {
-          "id": "sch-2026-09-03-study-thursday-dol-and-review-all-four-d",
-          "label": "Study Thursday DOL and review all four days for DOL quiz"
-        },
-        {
           "id": "sch-2026-09-03-math-workbook-p-34-35",
           "label": "Math: workbook p.34-35"
+        },
+        {
+          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
+          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
+        },
+        {
+          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
+          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
+        },
+        {
+          "id": "sch-2026-09-04-spelling-test",
+          "label": "Spelling test"
+        },
+        {
+          "id": "sch-2026-09-04-dol-quiz",
+          "label": "DOL quiz"
         }
       ]
     },
@@ -577,12 +565,12 @@
       "guineaPig": "$140.34",
       "assignments": [
         {
-          "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
-          "label": "State of the School presentation, 2:00p, Parish House"
+          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
+          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
         },
         {
-          "id": "sch-2026-09-03-math-chapter-1-test-fifth-grade-newslett",
-          "label": "Math: Chapter 1 test (Fifth Grade Newsletter 8/24)"
+          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
+          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
         }
       ]
     },
@@ -600,18 +588,6 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-02-state-of-the-school-presentation-2-00p-p",
-          "label": "State of the School presentation, 2:00p, Parish House"
-        },
-        {
-          "id": "sch-2026-09-02-spanish-simon-p-26-27",
-          "label": "Spanish (Simon): P.26 & 27"
-        },
-        {
-          "id": "sch-2026-09-02-honors-english-demarrais-finish-reading-",
-          "label": "Honors English (deMarrais): Finish reading Chapter 1 and annotate"
-        },
-        {
           "id": "sch-2026-09-03-spanish-simon-p-28-29",
           "label": "Spanish (Simon): p.28-29"
         },
@@ -626,6 +602,22 @@
         {
           "id": "sch-2026-09-03-chemistry-edwards-read-pages-42-44",
           "label": "Chemistry (Edwards): Read pages 42-44"
+        },
+        {
+          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
+          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
+        },
+        {
+          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
+          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
+        },
+        {
+          "id": "sch-2026-09-04-honors-english-windows-to-the-world-test",
+          "label": "Honors English: Windows to the World Test; study pages 27-43, especially highlighted parts"
+        },
+        {
+          "id": "sch-2026-09-04-religion-recite-ccc-32",
+          "label": "Religion: Recite CCC 32"
         }
       ]
     },
@@ -641,7 +633,12 @@
         "balance_str": "$199.77"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-04-senior-jersey-orders-due-60",
+          "label": "Senior jersey orders due; $60"
+        }
+      ]
     }
   ],
   "chores": {
@@ -1063,7 +1060,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Italian sausage with onion, zucchini, and rice",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -1071,8 +1068,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Beef enchiladas",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "beef-enchiladas",
         "name": "Beef enchiladas",
@@ -1154,7 +1151,7 @@
       "dow_short": "Fri",
       "name": "Takeout after Roller Sports",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -2529,6 +2526,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53732.03,
     "source": "ynab",
-    "updatedAt": "2026-09-03T03:45:33.173Z"
+    "updatedAt": "2026-09-03T04:00:33.688Z"
   }
 }
