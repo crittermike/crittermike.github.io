@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subject Detective</title>
+<style>
+:root{--paper:#fffaf0;--ink:#202019;--muted:#696554;--line:#d7ccb3;--blue:#176b87;--green:#277a4b;--red:#b54235;--gold:#e9b949}
+*{box-sizing:border-box}body{margin:0;background:#eee5d2;color:var(--ink);font-family:Georgia,"Times New Roman",serif;min-height:100vh;padding:20px}
+main{width:min(760px,100%);margin:auto;background:var(--paper);border:2px solid var(--ink);box-shadow:7px 7px 0 #9c8f72;padding:clamp(20px,5vw,44px)}
+h1{font-size:clamp(2rem,7vw,4rem);line-height:.95;margin:0 0 10px;letter-spacing:-.04em}.kicker{font-family:Arial,sans-serif;text-transform:uppercase;font-weight:800;letter-spacing:.14em;color:var(--blue);font-size:.75rem}
+.rule{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:20px 0;font-size:1.05rem;line-height:1.5}.rule b{color:var(--blue)}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-family:Arial,sans-serif;font-weight:700}.progress{color:var(--muted)}
+.card{margin:24px 0}.prompt{font-family:Arial,sans-serif;color:var(--muted);font-weight:700;font-size:.9rem}.sentence{font-size:clamp(1.45rem,4vw,2.15rem);line-height:1.35;margin:12px 0 20px}
+.words{display:flex;flex-wrap:wrap;gap:8px}.word{border:2px solid var(--line);background:white;color:var(--ink);padding:11px 13px;min-height:48px;border-radius:4px;font:700 1rem Arial,sans-serif;cursor:pointer}.word:hover,.word:focus-visible{border-color:var(--blue);outline:none}.word.selected{background:#d9edf4;border-color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}button.action{min-height:48px;border:2px solid var(--ink);padding:10px 18px;font:800 1rem Arial,sans-serif;cursor:pointer;background:var(--gold);color:var(--ink)}button.secondary{background:white}button:disabled{opacity:.45;cursor:not-allowed}
+.feedback{min-height:78px;margin-top:18px;padding:14px;border:2px solid transparent;font:1rem/1.45 Arial,sans-serif}.feedback.good{border-color:var(--green);background:#e4f3e9}.feedback.bad{border-color:var(--red);background:#fae8e5}.answer{font-weight:800}
+.finish{text-align:center;padding:25px 0}.finish h2{font-size:2.5rem;margin:0}.scorebig{font:900 4rem Arial,sans-serif;color:var(--blue);margin:12px}
+.hidden{display:none}@media(max-width:520px){body{padding:8px}main{box-shadow:4px 4px 0 #9c8f72}.word{padding:10px}}
+</style>
+</head>
+<body><main>
+<div class="kicker">Grammar practice</div><h1>Subject Detective</h1>
+<div class="rule"><b>Complete subject:</b> every word that tells whom or what the sentence is about.<br><b>Simple subject:</b> the main noun or pronoun inside the complete subject.</div>
+<section id="game">
+<div class="top"><span id="score">Score: 0</span><span class="progress" id="progress"></span></div>
+<div class="card"><div class="prompt" id="prompt"></div><div class="sentence" id="sentence"></div><div class="words" id="words"></div></div>
+<div class="actions"><button class="action" id="check">Check answer</button><button class="action secondary hidden" id="next">Next</button><button class="action secondary" id="hint">Hint</button></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+</section>
+<section id="finish" class="finish hidden"><div class="kicker">Case closed</div><h2>Final score</h2><div class="scorebig" id="finalScore"></div><p id="finalMessage"></p><button class="action" id="again">Play again</button></section>
+</main>
+<script>
+const questions=[
+ {s:"The small brown dog barked at the mail carrier.",c:"The small brown dog",x:"dog"},
+ {s:"My older brother plays the drums.",c:"My older brother",x:"brother"},
+ {s:"Three noisy blue jays landed on the fence.",c:"Three noisy blue jays",x:"jays"},
+ {s:"The last slice of pizza disappeared quickly.",c:"The last slice of pizza",x:"slice"},
+ {s:"Our new science teacher showed us a fossil.",c:"Our new science teacher",x:"teacher"},
+ {s:"A box of old photographs sat in the attic.",c:"A box of old photographs",x:"box"},
+ {s:"The bright stars above the lake shimmered.",c:"The bright stars above the lake",x:"stars"},
+ {s:"Thomas and his best friend built a tall tower.",c:"Thomas and his best friend",x:"Thomas friend"},
+ {s:"Those two red bicycles belong to my cousins.",c:"Those two red bicycles",x:"bicycles"},
+ {s:"The loud crash from downstairs startled everyone.",c:"The loud crash from downstairs",x:"crash"},
+ {s:"Several students in our class earned perfect scores.",c:"Several students in our class",x:"students"},
+ {s:"She carried the heavy backpack upstairs.",c:"She",x:"She"}
+];
+let order=[],q=0,stage="complete",score=0,locked=false,selected=new Set();
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function clean(w){return w.replace(/[.,!?]/g,"")}
+function render(){locked=false;selected.clear();let item=order[q];$("progress").textContent=`Sentence ${q+1} of ${order.length}`;$("score").textContent=`Score: ${score}`;$("sentence").textContent=item.s;$("prompt").textContent=stage==="complete"?"First: Select the COMPLETE SUBJECT":"Now: Select the SIMPLE SUBJECT";$("words").innerHTML="";item.s.split(" ").forEach((w,i)=>{let b=document.createElement("button");b.className="word";b.textContent=w;b.dataset.word=clean(w);b.dataset.i=i;b.onclick=()=>{if(locked)return;b.classList.toggle("selected");b.classList.contains("selected")?selected.add(i):selected.delete(i)};$("words").appendChild(b)});$("feedback").className="feedback";$("feedback").textContent="";$("check").classList.remove("hidden");$("next").classList.add("hidden")}
+function chosen(){return [...selected].sort((a,b)=>a-b).map(i=>clean(order[q].s.split(" ")[i])).join(" ")}
+function expected(){return stage==="complete"?order[q].c:order[q].x}
+$("check").onclick=()=>{if(!selected.size){$("feedback").className="feedback bad";$("feedback").textContent="Select at least one word.";return}locked=true;let right=chosen().toLowerCase()===expected().toLowerCase();if(right){score++;$("feedback").className="feedback good";$("feedback").innerHTML=`<span class="answer">Correct.</span> ${stage==="complete"?"That whole group tells whom or what the sentence is about.":"That is the main noun or pronoun."}`}else{$("feedback").className="feedback bad";$("feedback").innerHTML=`Not quite. The ${stage} subject is <span class="answer">${expected()}</span>.`}$("score").textContent=`Score: ${score}`;$("check").classList.add("hidden");$("next").classList.remove("hidden");$("next").textContent=stage==="complete"?"Find the simple subject":"Next sentence"}
+$("next").onclick=()=>{if(stage==="complete")stage="simple";else{stage="complete";q++}if(q>=order.length)finish();else render()}
+$("hint").onclick=()=>{let t=stage==="complete"?"Find the verb first. Ask: Who or what does that action? Include all describing words before the verb.":"Look inside the complete subject. Choose only its main noun or pronoun. Do not include describing words.";$("feedback").className="feedback";$("feedback").textContent=t}
+function start(){order=shuffle(questions).slice(0,8);q=0;stage="complete";score=0;$("game").classList.remove("hidden");$("finish").classList.add("hidden");render()}
+function finish(){$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("finalScore").textContent=`${score} / ${order.length*2}`;$("finalMessage").textContent=score>=14?"Strong work. You can identify both kinds of subjects.":"Play again. Focus on finding the verb first, then ask who or what does it."}
+$("again").onclick=start;start();
+</script></body></html>
