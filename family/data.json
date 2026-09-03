@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T17:00:36.821Z",
+  "generated_at": "2026-09-03T17:15:36.126Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -645,6 +645,14 @@
         {
           "id": "sch-2026-09-04-religion-recite-ccc-32",
           "label": "Religion: Recite CCC 32"
+        },
+        {
+          "id": "sch-2026-09-04-spanish-simon-responde-actividad-8-p-25-",
+          "label": "Spanish (Simon): Responde actividad 8, p.25 del libro"
+        },
+        {
+          "id": "sch-2026-09-04-algebra-edwards-2-7-5-7-9-10-13-and-quiz",
+          "label": "Algebra (Edwards): 2.7 #5,7,9,10,13 and Quiz 2.5-2.7"
         }
       ]
     },
@@ -2617,6 +2625,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53232.03,
     "source": "ynab",
-    "updatedAt": "2026-09-03T17:00:35.175Z"
+    "updatedAt": "2026-09-03T17:15:34.602Z"
   }
 }
