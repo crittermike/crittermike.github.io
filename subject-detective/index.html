@@ -2,60 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Subject Detective</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Subject Quest</title>
 <style>
-:root{--paper:#fffaf0;--ink:#202019;--muted:#696554;--line:#d7ccb3;--blue:#176b87;--green:#277a4b;--red:#b54235;--gold:#e9b949}
-*{box-sizing:border-box}body{margin:0;background:#eee5d2;color:var(--ink);font-family:Georgia,"Times New Roman",serif;min-height:100vh;padding:20px}
-main{width:min(760px,100%);margin:auto;background:var(--paper);border:2px solid var(--ink);box-shadow:7px 7px 0 #9c8f72;padding:clamp(20px,5vw,44px)}
-h1{font-size:clamp(2rem,7vw,4rem);line-height:.95;margin:0 0 10px;letter-spacing:-.04em}.kicker{font-family:Arial,sans-serif;text-transform:uppercase;font-weight:800;letter-spacing:.14em;color:var(--blue);font-size:.75rem}
-.rule{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:20px 0;font-size:1.05rem;line-height:1.5}.rule b{color:var(--blue)}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-family:Arial,sans-serif;font-weight:700}.progress{color:var(--muted)}
-.card{margin:24px 0}.prompt{font-family:Arial,sans-serif;color:var(--muted);font-weight:700;font-size:.9rem}.sentence{font-size:clamp(1.45rem,4vw,2.15rem);line-height:1.35;margin:12px 0 20px}
-.words{display:flex;flex-wrap:wrap;gap:8px}.word{border:2px solid var(--line);background:white;color:var(--ink);padding:11px 13px;min-height:48px;border-radius:4px;font:700 1rem Arial,sans-serif;cursor:pointer}.word:hover,.word:focus-visible{border-color:var(--blue);outline:none}.word.selected{background:#d9edf4;border-color:var(--blue)}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}button.action{min-height:48px;border:2px solid var(--ink);padding:10px 18px;font:800 1rem Arial,sans-serif;cursor:pointer;background:var(--gold);color:var(--ink)}button.secondary{background:white}button:disabled{opacity:.45;cursor:not-allowed}
-.feedback{min-height:78px;margin-top:18px;padding:14px;border:2px solid transparent;font:1rem/1.45 Arial,sans-serif}.feedback.good{border-color:var(--green);background:#e4f3e9}.feedback.bad{border-color:var(--red);background:#fae8e5}.answer{font-weight:800}
-.finish{text-align:center;padding:25px 0}.finish h2{font-size:2.5rem;margin:0}.scorebig{font:900 4rem Arial,sans-serif;color:var(--blue);margin:12px}
-.hidden{display:none}@media(max-width:520px){body{padding:8px}main{box-shadow:4px 4px 0 #9c8f72}.word{padding:10px}}
+:root{--sky:#5fc9ff;--navy:#183153;--cream:#fffbed;--yellow:#ffd84d;--green:#27ae60;--red:#df4b4b;--purple:#7357d8;--line:#b7c9dc}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(#5fc9ff 0 38%,#a7e477 38%);color:var(--navy);font-family:"Trebuchet MS",Arial,sans-serif;padding:12px}
+main{width:min(760px,100%);margin:auto;background:var(--cream);border:4px solid var(--navy);border-radius:24px;box-shadow:0 8px 0 #183153;padding:clamp(16px,4vw,30px);min-height:min(720px,calc(100vh - 24px))}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:3px solid var(--line);padding-bottom:14px}h1{font-size:clamp(1.7rem,6vw,2.8rem);margin:0;letter-spacing:-.04em}.stats{display:flex;gap:8px}.pill{background:white;border:3px solid var(--navy);border-radius:999px;padding:8px 12px;font-size:1rem;font-weight:900;white-space:nowrap}.pill.score{background:var(--yellow)}
+.meter{height:13px;background:#dce6ef;border:2px solid var(--navy);border-radius:20px;margin:18px 0;overflow:hidden}.meter span{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.task{text-align:center;margin:22px 0 8px}.step{font-size:.9rem;font-weight:900;text-transform:uppercase;color:var(--purple);letter-spacing:.08em}.prompt{font-size:clamp(1.35rem,5vw,2rem);font-weight:900;margin:5px 0}.prompt strong{color:var(--purple)}
+.sentence{background:white;border:3px solid var(--navy);border-radius:16px;padding:18px;margin:20px 0;font-size:clamp(1.25rem,4vw,1.8rem);font-weight:800;line-height:1.35;text-align:center}
+.words{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.word{min-height:54px;padding:10px 15px;border:3px solid var(--line);border-radius:12px;background:white;color:var(--navy);font:900 clamp(1rem,3vw,1.2rem) "Trebuchet MS",Arial,sans-serif;cursor:pointer;box-shadow:0 4px 0 var(--line)}.word:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}.word.selected{background:#e4ddff;border-color:var(--purple);box-shadow:0 4px 0 #4f38ad}.word:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.actions{display:flex;justify-content:center;margin:24px 0 8px}.action{width:min(330px,100%);min-height:60px;border:3px solid var(--navy);border-radius:15px;background:var(--yellow);color:var(--navy);font:900 1.25rem "Trebuchet MS",Arial,sans-serif;box-shadow:0 5px 0 var(--navy);cursor:pointer}.action:active{transform:translateY(4px);box-shadow:0 1px 0 var(--navy)}.action.next{background:var(--green);color:white}
+.feedback{min-height:74px;text-align:center;padding:13px;font-size:1.15rem;font-weight:900;border-radius:14px}.feedback.good{background:#dff7e8;color:#126d36}.feedback.bad{background:#fde4e4;color:#a12525}.answer{color:var(--navy)}
+.finish{text-align:center;padding:70px 10px}.finish h2{font-size:clamp(2.5rem,10vw,5rem);margin:0}.trophy{font-size:5rem}.scorebig{font-size:3rem;font-weight:900;color:var(--purple);margin:15px}.finish p{font-size:1.25rem;font-weight:800}.hidden{display:none}.pop{animation:pop .35s ease}.confetti{position:fixed;top:-20px;width:12px;height:18px;animation:fall 1.4s linear forwards;z-index:10}@keyframes pop{50%{transform:scale(1.07)}}@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}@media(max-width:520px){body{padding:6px}main{min-height:calc(100vh - 12px);border-radius:18px;padding:14px}.stats{gap:5px}.pill{font-size:.85rem;padding:7px 9px}.sentence{margin:15px 0}.task{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body><main>
-<div class="kicker">Grammar practice</div><h1>Subject Detective</h1>
-<div class="rule"><b>Complete subject:</b> every word that tells whom or what the sentence is about.<br><b>Simple subject:</b> the main noun or pronoun inside the complete subject.</div>
+<header><h1>Subject Quest</h1><div class="stats"><span class="pill" id="streak">🔥 0</span><span class="pill score" id="score">⭐ 0</span></div></header>
 <section id="game">
-<div class="top"><span id="score">Score: 0</span><span class="progress" id="progress"></span></div>
-<div class="card"><div class="prompt" id="prompt"></div><div class="sentence" id="sentence"></div><div class="words" id="words"></div></div>
-<div class="actions"><button class="action" id="check">Check answer</button><button class="action secondary hidden" id="next">Next</button><button class="action secondary" id="hint">Hint</button></div>
+<div class="meter"><span id="meter"></span></div>
+<div class="task"><div class="step" id="step"></div><div class="prompt" id="prompt"></div></div>
+<div class="sentence" id="sentence"></div><div class="words" id="words"></div>
+<div class="actions"><button class="action" id="mainButton">CHECK</button></div>
 <div class="feedback" id="feedback" aria-live="polite"></div>
 </section>
-<section id="finish" class="finish hidden"><div class="kicker">Case closed</div><h2>Final score</h2><div class="scorebig" id="finalScore"></div><p id="finalMessage"></p><button class="action" id="again">Play again</button></section>
+<section id="finish" class="finish hidden"><div class="trophy">🏆</div><h2>Great job!</h2><div class="scorebig" id="finalScore"></div><p id="finalMessage"></p><button class="action next" id="again">PLAY AGAIN</button></section>
 </main>
 <script>
 const questions=[
- {s:"Traffic police keep people safe.",c:"Traffic police",x:"police"},
- {s:"A community provides goods and services.",c:"A community",x:"community"},
- {s:"The busy baker makes fresh bread.",c:"The busy baker",x:"baker"},
- {s:"Our school teaches many students.",c:"Our school",x:"school"},
- {s:"A good neighbor helps others.",c:"A good neighbor",x:"neighbor"},
- {s:"The town library lends books.",c:"The town library",x:"library"},
- {s:"The friendly nurse cares for patients.",c:"The friendly nurse",x:"nurse"},
- {s:"A local farmer grows food.",c:"A local farmer",x:"farmer"},
- {s:"The fire department protects homes.",c:"The fire department",x:"department"},
- {s:"Our city government makes laws.",c:"Our city government",x:"government"},
- {s:"The grocery store sells food.",c:"The grocery store",x:"store"},
- {s:"A school bus carries children.",c:"A school bus",x:"bus"}
+ {s:"Traffic police keep people safe.",c:"Traffic police",x:"police"},{s:"A community provides goods and services.",c:"A community",x:"community"},{s:"The busy baker makes fresh bread.",c:"The busy baker",x:"baker"},{s:"Our school teaches many students.",c:"Our school",x:"school"},{s:"A good neighbor helps others.",c:"A good neighbor",x:"neighbor"},{s:"The town library lends books.",c:"The town library",x:"library"},{s:"The friendly nurse cares for patients.",c:"The friendly nurse",x:"nurse"},{s:"A local farmer grows food.",c:"A local farmer",x:"farmer"},{s:"The fire department protects homes.",c:"The fire department",x:"department"},{s:"Our city government makes laws.",c:"Our city government",x:"government"},{s:"The grocery store sells food.",c:"The grocery store",x:"store"},{s:"A school bus carries children.",c:"A school bus",x:"bus"}
 ];
-let order=[],q=0,stage="complete",score=0,locked=false,selected=new Set();
-const $=id=>document.getElementById(id);
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function clean(w){return w.replace(/[.,!?]/g,"")}
-function render(){locked=false;selected.clear();let item=order[q];$("progress").textContent=`Sentence ${q+1} of ${order.length}`;$("score").textContent=`Score: ${score}`;$("sentence").textContent=item.s;$("prompt").textContent=stage==="complete"?"First: Select the COMPLETE SUBJECT":"Now: Select the SIMPLE SUBJECT";$("words").innerHTML="";item.s.split(" ").forEach((w,i)=>{let b=document.createElement("button");b.className="word";b.textContent=w;b.dataset.word=clean(w);b.dataset.i=i;b.onclick=()=>{if(locked)return;b.classList.toggle("selected");b.classList.contains("selected")?selected.add(i):selected.delete(i)};$("words").appendChild(b)});$("feedback").className="feedback";$("feedback").textContent="";$("check").classList.remove("hidden");$("next").classList.add("hidden")}
-function chosen(){return [...selected].sort((a,b)=>a-b).map(i=>clean(order[q].s.split(" ")[i])).join(" ")}
-function expected(){return stage==="complete"?order[q].c:order[q].x}
-$("check").onclick=()=>{if(!selected.size){$("feedback").className="feedback bad";$("feedback").textContent="Select at least one word.";return}locked=true;let right=chosen().toLowerCase()===expected().toLowerCase();if(right){score++;$("feedback").className="feedback good";$("feedback").innerHTML=`<span class="answer">Correct.</span> ${stage==="complete"?"That whole group tells whom or what the sentence is about.":"That is the main noun or pronoun."}`}else{$("feedback").className="feedback bad";$("feedback").innerHTML=`Not quite. The ${stage} subject is <span class="answer">${expected()}</span>.`}$("score").textContent=`Score: ${score}`;$("check").classList.add("hidden");$("next").classList.remove("hidden");$("next").textContent=stage==="complete"?"Find the simple subject":"Next sentence"}
-$("next").onclick=()=>{if(stage==="complete")stage="simple";else{stage="complete";q++}if(q>=order.length)finish();else render()}
-$("hint").onclick=()=>{let t=stage==="complete"?"Find the verb first. Ask: Who or what does that action? Include all describing words before the verb.":"Look inside the complete subject. Choose only its main noun or pronoun. Do not include describing words.";$("feedback").className="feedback";$("feedback").textContent=t}
-function start(){order=shuffle(questions).slice(0,8);q=0;stage="complete";score=0;$("game").classList.remove("hidden");$("finish").classList.add("hidden");render()}
-function finish(){$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("finalScore").textContent=`${score} / ${order.length*2}`;$("finalMessage").textContent=score>=14?"Strong work. You can identify both kinds of subjects.":"Play again. Focus on finding the verb first, then ask who or what does it."}
-$("again").onclick=start;start();
+let order=[],q=0,stage="complete",score=0,streak=0,locked=false,selected=new Set();const $=id=>document.getElementById(id);const clean=w=>w.replace(/[.,!?]/g,"");const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+function render(){locked=false;selected.clear();const item=order[q];const part=q*2+(stage==="simple"?1:0);$("meter").style.width=`${part/(order.length*2)*100}%`;$("step").textContent=`ROUND ${q+1} OF ${order.length}`;$("prompt").innerHTML=stage==="complete"?"Tap the <strong>complete subject</strong>":"Tap the <strong>simple subject</strong>";$("sentence").textContent=item.s;$("words").innerHTML="";item.s.split(" ").forEach((w,i)=>{const b=document.createElement("button");b.className="word";b.textContent=w;b.onclick=()=>{if(locked)return;b.classList.toggle("selected");b.classList.contains("selected")?selected.add(i):selected.delete(i)};$("words").appendChild(b)});$("feedback").className="feedback";$("feedback").textContent="";$("mainButton").className="action";$("mainButton").textContent="CHECK"}
+function chosen(){return [...selected].sort((a,b)=>a-b).map(i=>clean(order[q].s.split(" ")[i])).join(" ")}function expected(){return stage==="complete"?order[q].c:order[q].x}
+function celebrate(){document.querySelector("main").classList.remove("pop");void document.querySelector("main").offsetWidth;document.querySelector("main").classList.add("pop");for(let i=0;i<18;i++){const c=document.createElement("i");c.className="confetti";c.style.left=Math.random()*100+"vw";c.style.background=["#ffd84d","#27ae60","#7357d8","#5fc9ff","#df4b4b"][i%5];c.style.animationDelay=Math.random()*.3+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),1800)}}
+function check(){if(!selected.size){$("feedback").className="feedback bad";$("feedback").textContent="Tap your answer first!";return}locked=true;const right=chosen().toLowerCase()===expected().toLowerCase();if(right){streak++;const points=10+(streak>=3?5:0);score+=points;$("feedback").className="feedback good";$("feedback").textContent=streak>=3?`🎉 AMAZING! +${points} points`:`✅ CORRECT! +${points} points`;celebrate()}else{streak=0;$("feedback").className="feedback bad";$("feedback").innerHTML=`Answer: <span class="answer">${expected()}</span>`}$("score").textContent=`⭐ ${score}`;$("streak").textContent=`🔥 ${streak}`;$("mainButton").className="action next";$("mainButton").textContent=stage==="complete"?"NEXT: SIMPLE SUBJECT":"NEXT ROUND"}
+function advance(){if(stage==="complete")stage="simple";else{stage="complete";q++}if(q>=order.length)finish();else render()}$("mainButton").onclick=()=>locked?advance():check();
+function finish(){$("meter").style.width="100%";$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("finalScore").textContent=`⭐ ${score} points`;$("finalMessage").textContent=score>=180?"Subject superstar!":"Play again and beat your score!";celebrate()}
+function start(){order=shuffle(questions).slice(0,8);q=0;stage="complete";score=0;streak=0;$("score").textContent="⭐ 0";$("streak").textContent="🔥 0";$("game").classList.remove("hidden");$("finish").classList.add("hidden");render()}$("again").onclick=start;start();
 </script></body></html>
