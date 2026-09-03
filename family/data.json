@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T20:00:56.400Z",
+  "generated_at": "2026-09-03T20:16:00.002Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-03T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "6p",
+      "what": "Walmart delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-03T20:00:00-04:00"
     },
     {
       "date": "2026-09-04",
@@ -2625,6 +2634,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53232.03,
     "source": "ynab",
-    "updatedAt": "2026-09-03T20:00:54.695Z"
+    "updatedAt": "2026-09-03T20:15:58.598Z"
   }
 }
