@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Subject Quest</title>
 <style>
 :root{--sky:#5fc9ff;--navy:#183153;--cream:#fffbed;--yellow:#ffd84d;--green:#27ae60;--red:#df4b4b;--purple:#7357d8;--line:#b7c9dc}
@@ -43,18 +43,42 @@ const sentences=[
  {s:"The fire department protects homes.",cs:"The fire department",ss:"department",sp:"protects",cp:"protects homes"},
  {s:"Our city government makes laws.",cs:"Our city government",ss:"government",sp:"makes",cp:"makes laws"},
  {s:"The grocery store sells food.",cs:"The grocery store",ss:"store",sp:"sells",cp:"sells food"},
- {s:"A school bus carries children.",cs:"A school bus",ss:"bus",sp:"carries",cp:"carries children"}
+ {s:"A school bus carries children.",cs:"A school bus",ss:"bus",sp:"carries",cp:"carries children"},
+ {s:"Crossing guards help students.",cs:"Crossing guards",ss:"guards",sp:"help",cp:"help students"},
+ {s:"The bus driver follows the route.",cs:"The bus driver",ss:"driver",sp:"follows",cp:"follows the route"},
+ {s:"A caring doctor treats patients.",cs:"A caring doctor",ss:"doctor",sp:"treats",cp:"treats patients"},
+ {s:"Our math teacher explains problems.",cs:"Our math teacher",ss:"teacher",sp:"explains",cp:"explains problems"},
+ {s:"Brave firefighters stop fires.",cs:"Brave firefighters",ss:"firefighters",sp:"stop",cp:"stop fires"},
+ {s:"The mail carrier delivers letters.",cs:"The mail carrier",ss:"carrier",sp:"delivers",cp:"delivers letters"},
+ {s:"A skilled mechanic repairs cars.",cs:"A skilled mechanic",ss:"mechanic",sp:"repairs",cp:"repairs cars"},
+ {s:"The police officer directs traffic.",cs:"The police officer",ss:"officer",sp:"directs",cp:"directs traffic"},
+ {s:"A park ranger protects animals.",cs:"A park ranger",ss:"ranger",sp:"protects",cp:"protects animals"},
+ {s:"Our mayor leads the city.",cs:"Our mayor",ss:"mayor",sp:"leads",cp:"leads the city"},
+ {s:"The local store sells supplies.",cs:"The local store",ss:"store",sp:"sells",cp:"sells supplies"},
+ {s:"A small restaurant serves meals.",cs:"A small restaurant",ss:"restaurant",sp:"serves",cp:"serves meals"},
+ {s:"The sanitation crew collects trash.",cs:"The sanitation crew",ss:"crew",sp:"collects",cp:"collects trash"},
+ {s:"Public workers serve the community.",cs:"Public workers",ss:"workers",sp:"serve",cp:"serve the community"},
+ {s:"A large hospital treats sick people.",cs:"A large hospital",ss:"hospital",sp:"treats",cp:"treats sick people"},
+ {s:"The school cafeteria serves lunch.",cs:"The school cafeteria",ss:"cafeteria",sp:"serves",cp:"serves lunch"},
+ {s:"The animal shelter protects pets.",cs:"The animal shelter",ss:"shelter",sp:"protects",cp:"protects pets"},
+ {s:"A neighborhood bank keeps money safe.",cs:"A neighborhood bank",ss:"bank",sp:"keeps",cp:"keeps money safe"},
+ {s:"The town pharmacy sells medicine.",cs:"The town pharmacy",ss:"pharmacy",sp:"sells",cp:"sells medicine"},
+ {s:"The road crew fixes streets.",cs:"The road crew",ss:"crew",sp:"fixes",cp:"fixes streets"},
+ {s:"Our city council makes rules.",cs:"Our city council",ss:"council",sp:"makes",cp:"makes rules"},
+ {s:"The friendly barber cuts hair.",cs:"The friendly barber",ss:"barber",sp:"cuts",cp:"cuts hair"},
+ {s:"Our soccer coach teaches teamwork.",cs:"Our soccer coach",ss:"coach",sp:"teaches",cp:"teaches teamwork"},
+ {s:"A fair judge decides cases.",cs:"A fair judge",ss:"judge",sp:"decides",cp:"decides cases"}
 ];
 const types=[
  {key:"cs",label:"complete subject"},{key:"ss",label:"simple subject"},
  {key:"sp",label:"simple predicate"},{key:"cp",label:"complete predicate"}
 ];
 let order=[],q=0,score=0,streak=0,locked=false,selected=new Set();const $=id=>document.getElementById(id);const clean=w=>w.replace(/[.,!?]/g,"");const shuffle=a=>[...a].sort(()=>Math.random()-.5);
-function buildRound(){const pool=[];sentences.forEach(sentence=>types.forEach(type=>pool.push({sentence,type})));return shuffle(pool).slice(0,12)}
+function buildRound(){const roundTypes=shuffle([...types,...types,...types]);return shuffle(sentences).slice(0,12).map((sentence,i)=>({sentence,type:roundTypes[i]}))}
 function render(){locked=false;selected.clear();const item=order[q];$("meter").style.width=`${q/order.length*100}%`;$("step").textContent=`ROUND ${q+1} OF ${order.length}`;$("prompt").innerHTML=`Tap the <strong>${item.type.label}</strong>`;$("sentence").textContent=item.sentence.s;$("words").innerHTML="";item.sentence.s.split(" ").forEach((w,i)=>{const b=document.createElement("button");b.className="word";b.textContent=w;b.onclick=()=>{if(locked)return;b.classList.toggle("selected");b.classList.contains("selected")?selected.add(i):selected.delete(i)};$("words").appendChild(b)});$("feedback").className="feedback";$("feedback").textContent="";$("mainButton").className="action";$("mainButton").textContent="CHECK"}
 function chosen(){return [...selected].sort((a,b)=>a-b).map(i=>clean(order[q].sentence.s.split(" ")[i])).join(" ")}function expected(){const item=order[q];return item.sentence[item.type.key]}
 function celebrate(){document.querySelector("main").classList.remove("pop");void document.querySelector("main").offsetWidth;document.querySelector("main").classList.add("pop");for(let i=0;i<18;i++){const c=document.createElement("i");c.className="confetti";c.style.left=Math.random()*100+"vw";c.style.background=["#ffd84d","#27ae60","#7357d8","#5fc9ff","#df4b4b"][i%5];c.style.animationDelay=Math.random()*.3+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),1800)}}
-function check(){if(!selected.size){$("feedback").className="feedback bad";$("feedback").textContent="Tap your answer first!";return}locked=true;const right=chosen().toLowerCase()===expected().toLowerCase();if(right){streak++;const points=10+(streak>=3?5:0);score+=points;$("feedback").className="feedback good";$("feedback").textContent=streak>=3?`🎉 AMAZING! +${points} points`:`✅ CORRECT! +${points} points`;celebrate()}else{streak=0;$("feedback").className="feedback bad";$("feedback").innerHTML=`Answer: <span class="answer">${expected()}</span>`}$("score").textContent=`⭐ ${score}`;$("streak").textContent=`🔥 ${streak}`;$("mainButton").className="action next";$("mainButton").textContent="NEXT ROUND"}
+function check(){if(!selected.size){$("feedback").className="feedback bad";$("feedback").textContent="Tap your answer first!";return}locked=true;const right=chosen().toLowerCase()===expected().toLowerCase();if(right){streak++;const bonus=streak>=7?15:streak>=5?10:streak>=3?5:0;const points=10+bonus;score+=points;$("feedback").className="feedback good";$("feedback").textContent=bonus?`🔥 ${streak} STREAK! +${points} points (${bonus} bonus)`:`✅ CORRECT! +${points} points`;celebrate()}else{streak=0;$("feedback").className="feedback bad";$("feedback").innerHTML=`Answer: <span class="answer">${expected()}</span>`}$("score").textContent=`⭐ ${score}`;$("streak").textContent=`🔥 ${streak}`;$("mainButton").className="action next";$("mainButton").textContent="NEXT ROUND"}
 function advance(){q++;if(q>=order.length)finish();else render()}$("mainButton").onclick=()=>locked?advance():check();
 function finish(){$("meter").style.width="100%";$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("finalScore").textContent=`⭐ ${score} points`;$("finalMessage").textContent=score>=150?"Grammar superstar!":"Play again and beat your score!";celebrate()}
 function start(){order=buildRound();q=0;score=0;streak=0;$("score").textContent="⭐ 0";$("streak").textContent="🔥 0";$("game").classList.remove("hidden");$("finish").classList.add("hidden");render()}$("again").onclick=start;start();
