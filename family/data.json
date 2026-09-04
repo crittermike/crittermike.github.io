@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-04T03:45:38.792Z",
+  "generated_at": "2026-09-04T04:00:39.976Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-03",
-      "time": "8:10a",
-      "what": "Pediatrician appt - Dr. Erin Bhatia",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-03T09:00:00-04:00"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "6p",
-      "what": "Walmart delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-03T20:00:00-04:00"
-    },
     {
       "date": "2026-09-04",
       "time": "4:30p",
@@ -558,32 +540,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-03-reading-read-20-minutes",
-          "label": "Reading: read 20 minutes"
-        },
-        {
-          "id": "sch-2026-09-03-spelling-choice-board-abc-order-words-16",
-          "label": "Spelling: Choice Board ABC Order; words 16-20 three times each; study spelling"
-        },
-        {
-          "id": "sch-2026-09-03-math-workbook-p-34-35",
-          "label": "Math: workbook p.34-35"
-        },
-        {
           "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
           "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
         },
         {
           "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
           "label": "TAG Day: bring $1 to benefit the 8th grade trip"
-        },
-        {
-          "id": "sch-2026-09-04-spelling-test",
-          "label": "Spelling test"
-        },
-        {
-          "id": "sch-2026-09-04-dol-quiz",
-          "label": "DOL quiz"
         }
       ]
     },
@@ -624,22 +586,6 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-03-spanish-simon-p-28-29",
-          "label": "Spanish (Simon): p.28-29"
-        },
-        {
-          "id": "sch-2026-09-03-honors-english-demarrais-read-and-annota",
-          "label": "Honors English (deMarrais): Read and annotate Chapter 2"
-        },
-        {
-          "id": "sch-2026-09-03-algebra-edwards-2-6-13-37-odds",
-          "label": "Algebra (Edwards): 2.6 #13-37 odds"
-        },
-        {
-          "id": "sch-2026-09-03-chemistry-edwards-read-pages-42-44",
-          "label": "Chemistry (Edwards): Read pages 42-44"
-        },
-        {
           "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
           "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
         },
@@ -648,20 +594,12 @@
           "label": "TAG Day: bring $1 to benefit the 8th grade trip"
         },
         {
-          "id": "sch-2026-09-04-honors-english-windows-to-the-world-test",
-          "label": "Honors English: Windows to the World Test; study pages 27-43, especially highlighted parts"
-        },
-        {
           "id": "sch-2026-09-04-religion-recite-ccc-32",
           "label": "Religion: Recite CCC 32"
         },
         {
           "id": "sch-2026-09-04-spanish-simon-responde-actividad-8-p-25-",
           "label": "Spanish (Simon): Responde actividad 8, p.25 del libro"
-        },
-        {
-          "id": "sch-2026-09-04-algebra-edwards-2-7-5-7-9-10-13-and-quiz",
-          "label": "Algebra (Edwards): 2.7 #5,7,9,10,13 and Quiz 2.5-2.7"
         }
       ]
     },
@@ -677,12 +615,7 @@
         "balance_str": "$199.77"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-04-senior-jersey-orders-due-60",
-          "label": "Senior jersey orders due; $60"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -1038,7 +971,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Beef enchiladas",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "beef-enchiladas",
@@ -1120,8 +1053,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout after Roller Sports",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -1129,26 +1062,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 83,
-      "hi": 96,
-      "lo": 74,
+      "hi": 97,
+      "lo": 75,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 97,
-        "lo": 75,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "🌦",
@@ -1176,24 +1102,31 @@
         "hi": 87,
         "lo": 70,
         "code": 51
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 94,
+        "lo": 71,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-03T07:04",
         "2026-09-04T07:04",
         "2026-09-05T07:05",
         "2026-09-06T07:06",
         "2026-09-07T07:06",
-        "2026-09-08T07:07"
+        "2026-09-08T07:07",
+        "2026-09-09T07:08"
       ],
       "sunsets": [
-        "2026-09-03T19:53",
         "2026-09-04T19:52",
         "2026-09-05T19:50",
         "2026-09-06T19:49",
         "2026-09-07T19:47",
-        "2026-09-08T19:46"
+        "2026-09-08T19:46",
+        "2026-09-09T19:45"
       ],
       "timezone": "America/New_York"
     }
@@ -2560,6 +2493,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 53232.03,
     "source": "ynab",
-    "updatedAt": "2026-09-04T03:45:37.450Z"
+    "updatedAt": "2026-09-04T04:00:38.606Z"
   }
 }
