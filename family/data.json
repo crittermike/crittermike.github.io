@@ -1,7 +1,16 @@
 {
-  "generated_at": "2026-09-05T14:00:20.299Z",
+  "generated_at": "2026-09-05T14:15:19.682Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
+    {
+      "date": "2026-09-06",
+      "time": "4a",
+      "what": "Amazon delivery window",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-06T08:00:00-04:00"
+    },
     {
       "date": "2026-09-06",
       "time": "8a",
@@ -1042,7 +1051,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 84,
       "hi": 99,
       "lo": 75,
       "icon": "☀️",
@@ -1092,14 +1101,14 @@
         "2026-09-07T07:06",
         "2026-09-08T07:07",
         "2026-09-09T07:08",
-        "2026-09-10T07:08"
+        "2026-09-10T07:09"
       ],
       "sunsets": [
         "2026-09-05T19:50",
         "2026-09-06T19:49",
         "2026-09-07T19:47",
         "2026-09-08T19:46",
-        "2026-09-09T19:44",
+        "2026-09-09T19:45",
         "2026-09-10T19:43"
       ],
       "timezone": "America/New_York"
@@ -2467,6 +2476,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-05T14:00:19.175Z"
+    "updatedAt": "2026-09-05T14:15:18.218Z"
   }
 }
