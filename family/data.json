@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T18:15:38.787Z",
+  "generated_at": "2026-09-05T18:30:39.936Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -549,7 +549,7 @@
       "name": "Thomas",
       "grade": "3rd",
       "sugar": {
-        "balance": 270,
+        "balance": 123,
         "refill": 60
       },
       "allowance": {
@@ -567,7 +567,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$37.00"
+        "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
       "assignments": []
@@ -581,7 +581,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$104.13"
+        "balance_str": "$92.63"
       },
       "guineaPig": null,
       "assignments": []
@@ -2476,6 +2476,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-05T18:15:37.777Z"
+    "updatedAt": "2026-09-05T18:30:38.769Z"
   }
 }
