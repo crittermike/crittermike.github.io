@@ -1,11 +1,29 @@
 {
-  "generated_at": "2026-09-05T23:00:20.089Z",
+  "generated_at": "2026-09-05T23:15:18.514Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
+    {
+      "date": "2026-09-05",
+      "time": "6:14p",
+      "what": "Little Caesars pickup: order 1188910",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-05T18:19:00-04:00"
+    },
     {
       "date": "2026-09-06",
       "time": "4a",
       "what": "Amazon delivery window",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-06T08:00:00-04:00"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "4a",
+      "what": "Amazon delivery window: two hardware shipments",
       "who": "family",
       "calendar": "home",
       "all_day": false,
@@ -1051,7 +1069,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 95,
       "lo": 75,
       "icon": "🌤",
@@ -2476,6 +2494,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-05T23:00:17.650Z"
+    "updatedAt": "2026-09-05T23:15:17.106Z"
   }
 }
