@@ -3685,7 +3685,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":["2026-09-05T07:05","2026-09-06T07:06","2026-09-07T07:06","2026-09-08T07:07","2026-09-09T07:08","2026-09-10T07:09"],"sunsets":["2026-09-05T19:50","2026-09-06T19:49","2026-09-07T19:47","2026-09-08T19:46","2026-09-09T19:45","2026-09-10T19:43"],"timezone":"America/New_York"};
+    const SUN = {"sunrises":["2026-09-05T07:05","2026-09-06T07:06","2026-09-07T07:06","2026-09-08T07:07","2026-09-09T07:08","2026-09-10T07:08"],"sunsets":["2026-09-05T19:50","2026-09-06T19:49","2026-09-07T19:47","2026-09-08T19:46","2026-09-09T19:44","2026-09-10T19:43"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
