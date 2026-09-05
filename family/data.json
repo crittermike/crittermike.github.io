@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T18:30:39.936Z",
+  "generated_at": "2026-09-05T18:45:40.318Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -577,7 +577,7 @@
       "name": "Henry",
       "grade": "8th",
       "sugar": {
-        "balance": 34,
+        "balance": -66,
         "refill": 60
       },
       "allowance": {
@@ -1052,7 +1052,7 @@
   "weather": {
     "now": {
       "temp": 98,
-      "hi": 100,
+      "hi": 99,
       "lo": 75,
       "icon": "☀️",
       "code": 0
@@ -1101,14 +1101,14 @@
         "2026-09-07T07:06",
         "2026-09-08T07:07",
         "2026-09-09T07:08",
-        "2026-09-10T07:08"
+        "2026-09-10T07:09"
       ],
       "sunsets": [
         "2026-09-05T19:50",
         "2026-09-06T19:49",
         "2026-09-07T19:47",
         "2026-09-08T19:46",
-        "2026-09-09T19:44",
+        "2026-09-09T19:45",
         "2026-09-10T19:43"
       ],
       "timezone": "America/New_York"
@@ -2476,6 +2476,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-05T18:30:38.769Z"
+    "updatedAt": "2026-09-05T18:45:38.857Z"
   }
 }
