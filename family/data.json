@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-05T03:45:20.529Z",
+  "generated_at": "2026-09-05T04:00:26.784Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-04",
-      "time": "4:30p",
-      "what": "POPCS Spirit Night",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-04T18:30:00-04:00"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "4:30p",
-      "what": "POPCS: Spirit Night at Roller Sports",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-04T18:30:00-04:00"
-    },
     {
       "date": "2026-09-06",
       "time": "8a",
@@ -541,6 +523,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-11-29T09:00:00-05:00"
+    },
+    {
+      "date": "2026-12-03",
+      "time": "all day",
+      "what": "POPCS: Lessons and Carols Concert",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-04T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -556,16 +547,7 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
-          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
-        },
-        {
-          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
-          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -579,16 +561,7 @@
         "balance_str": "$37.00"
       },
       "guineaPig": "$140.34",
-      "assignments": [
-        {
-          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
-          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
-        },
-        {
-          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
-          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -602,24 +575,7 @@
         "balance_str": "$104.13"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-04-popcs-spirit-night-at-roller-sports-4-30",
-          "label": "POPCS Spirit Night at Roller Sports, 4:30-6:30pm"
-        },
-        {
-          "id": "sch-2026-09-04-tag-day-bring-1-to-benefit-the-8th-grade",
-          "label": "TAG Day: bring $1 to benefit the 8th grade trip"
-        },
-        {
-          "id": "sch-2026-09-04-religion-recite-ccc-32",
-          "label": "Religion: Recite CCC 32"
-        },
-        {
-          "id": "sch-2026-09-04-spanish-simon-responde-actividad-8-p-25-",
-          "label": "Spanish (Simon): Responde actividad 8, p.25 del libro"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -848,7 +804,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1071,7 +1027,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout after Roller Sports",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -1079,27 +1035,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 80,
-      "hi": 95,
+      "hi": 99,
       "lo": 75,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 99,
-        "lo": 75,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "🌦",
@@ -1127,24 +1076,31 @@
         "hi": 95,
         "lo": 69,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 97,
+        "lo": 72,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-04T07:04",
         "2026-09-05T07:05",
         "2026-09-06T07:06",
         "2026-09-07T07:06",
         "2026-09-08T07:07",
-        "2026-09-09T07:08"
+        "2026-09-09T07:08",
+        "2026-09-10T07:09"
       ],
       "sunsets": [
-        "2026-09-04T19:52",
         "2026-09-05T19:50",
         "2026-09-06T19:49",
         "2026-09-07T19:47",
         "2026-09-08T19:46",
-        "2026-09-09T19:45"
+        "2026-09-09T19:45",
+        "2026-09-10T19:43"
       ],
       "timezone": "America/New_York"
     }
@@ -2511,6 +2467,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-05T03:45:19.170Z"
+    "updatedAt": "2026-09-05T04:00:24.554Z"
   }
 }
