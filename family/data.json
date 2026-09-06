@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-06T03:45:38.924Z",
+  "generated_at": "2026-09-06T04:00:40.301Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-05",
-      "time": "6:14p",
-      "what": "Little Caesars pickup: order 1188910",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-05T18:19:00-04:00"
-    },
     {
       "date": "2026-09-06",
       "time": "4a",
@@ -574,7 +565,16 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-07-labor-day-no-school",
+          "label": "Labor Day - no school"
+        },
+        {
+          "id": "sch-2026-09-07-labor-day-no-school",
+          "label": "Labor Day - No School"
+        }
+      ]
     },
     {
       "key": "william",
@@ -588,7 +588,12 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-07-labor-day-no-school",
+          "label": "Labor Day - no school"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -602,7 +607,16 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-07-labor-day-no-school",
+          "label": "Labor Day - no school"
+        },
+        {
+          "id": "sch-2026-09-07-spanish-simon-ixl-unit-4-4j-4l-due-compl",
+          "label": "Spanish (Simon): IXL Unit 4 - 4J & 4L due; complete over the preceding weekend"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -830,8 +844,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -839,7 +853,7 @@
       "dow_short": "Mon",
       "name": "Crockpot salsa chicken",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "crockpot-salsa-chicken",
         "name": "Crockpot Salsa Chicken",
@@ -1062,27 +1076,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 73,
-      "hi": 95,
-      "lo": 73,
+      "temp": 72,
+      "hi": 92,
+      "lo": 71,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌦",
-        "hi": 92,
-        "lo": 71,
-        "code": 82
-      },
       {
         "d": "Mon",
         "icon": "🌦",
@@ -1110,24 +1117,31 @@
         "hi": 92,
         "lo": 72,
         "code": 53
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 96,
+        "lo": 71,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-05T07:05",
         "2026-09-06T07:06",
         "2026-09-07T07:06",
         "2026-09-08T07:07",
         "2026-09-09T07:08",
-        "2026-09-10T07:09"
+        "2026-09-10T07:09",
+        "2026-09-11T07:09"
       ],
       "sunsets": [
-        "2026-09-05T19:50",
         "2026-09-06T19:49",
         "2026-09-07T19:47",
         "2026-09-08T19:46",
         "2026-09-09T19:45",
-        "2026-09-10T19:43"
+        "2026-09-10T19:43",
+        "2026-09-11T19:42"
       ],
       "timezone": "America/New_York"
     }
@@ -2494,6 +2508,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-06T03:45:37.777Z"
+    "updatedAt": "2026-09-06T04:00:38.905Z"
   }
 }
