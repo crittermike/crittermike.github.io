@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T17:00:56.154Z",
+  "generated_at": "2026-09-06T17:15:48.788Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -860,133 +860,23 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Crockpot salsa chicken",
+      "name": "Grilled hamburgers and hotdogs with corn",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": {
-        "slug": "crockpot-salsa-chicken",
-        "name": "Crockpot Salsa Chicken",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "chicken",
-          "crockpot",
-          "mexican",
-          "dinner"
-        ],
-        "aliases": [],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 50,
-        "cal": 500,
-        "servings": 6,
-        "prep_min": 5,
-        "cook_min": 180,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "2 lb boneless, skinless chicken breasts",
-              "1 jar mild salsa (16 oz)"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "2 lb boneless, skinless chicken breasts",
-          "1 jar mild salsa (16 oz)"
-        ],
-        "steps": [
-          "Put the chicken in the crockpot.",
-          "Pour the salsa over it.",
-          "Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.",
-          "Shred the chicken in the crockpot and stir it into the salsa."
-        ],
-        "notes": "",
-        "body_html": "<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 jar mild salsa (16 oz)</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the chicken in the crockpot.</li>\n<li>Pour the salsa over it.</li>\n<li>Cover and cook on LOW for 4-6 hours or HIGH for 2-3 hours, until the chicken reaches 165°F.</li>\n<li>Shred the chicken in the crockpot and stir it into the salsa.</li>\n</ol>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Crockpot chicken thigh, vegetable, and lentil soup with French bread",
+      "name": "Shake n Bake chicken with mac and cheese and cabbage",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "crockpot-chicken-thigh-vegetable-lentil-soup",
-        "name": "Crockpot chicken thigh, vegetable, and lentil soup",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner",
-          "crockpot",
-          "soup"
-        ],
-        "aliases": [
-          "crockpot-chicken-thigh-vegetable-lentil-soup"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 40,
-        "cal": 500,
-        "servings": 8,
-        "prep_min": 15,
-        "cook_min": 360,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "2 lb boneless, skinless chicken thighs",
-              "1 cup dry brown or green lentils, rinsed",
-              "4 carrots, sliced",
-              "3 celery stalks, sliced",
-              "1 yellow onion, diced",
-              "3 garlic cloves, minced",
-              "8 cups chicken broth",
-              "1 teaspoon dried thyme",
-              "1 teaspoon Italian seasoning",
-              "1 teaspoon kosher salt",
-              "1/2 teaspoon black pepper",
-              "2 bay leaves",
-              "1 loaf French bread, for serving"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "2 lb boneless, skinless chicken thighs",
-          "1 cup dry brown or green lentils, rinsed",
-          "4 carrots, sliced",
-          "3 celery stalks, sliced",
-          "1 yellow onion, diced",
-          "3 garlic cloves, minced",
-          "8 cups chicken broth",
-          "1 teaspoon dried thyme",
-          "1 teaspoon Italian seasoning",
-          "1 teaspoon kosher salt",
-          "1/2 teaspoon black pepper",
-          "2 bay leaves",
-          "1 loaf French bread, for serving"
-        ],
-        "steps": [
-          "Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.",
-          "Place the chicken thighs on top and press them into the broth.",
-          "Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.",
-          "Remove the chicken, shred it, and return it to the soup.",
-          "Remove the bay leaves. Add salt or pepper if needed.",
-          "Serve with French bread."
-        ],
-        "notes": "<h3>Cooking note</h3>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
-        "body_html": "<h1>Crockpot chicken thigh, vegetable, and lentil soup</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>2 lb boneless, skinless chicken thighs</li>\n<li>1 cup dry brown or green lentils, rinsed</li>\n<li>4 carrots, sliced</li>\n<li>3 celery stalks, sliced</li>\n<li>1 yellow onion, diced</li>\n<li>3 garlic cloves, minced</li>\n<li>8 cups chicken broth</li>\n<li>1 teaspoon dried thyme</li>\n<li>1 teaspoon Italian seasoning</li>\n<li>1 teaspoon kosher salt</li>\n<li>1/2 teaspoon black pepper</li>\n<li>2 bay leaves</li>\n<li>1 loaf French bread, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Add the lentils, carrots, celery, onion, garlic, broth, thyme, Italian seasoning, salt, pepper, and bay leaves to the crockpot.</li>\n<li>Place the chicken thighs on top and press them into the broth.</li>\n<li>Cover and cook on LOW for 6 to 7 hours or HIGH for 3 to 4 hours, until the lentils are tender and the chicken reaches 165°F.</li>\n<li>Remove the chicken, shred it, and return it to the soup.</li>\n<li>Remove the bay leaves. Add salt or pepper if needed.</li>\n<li>Serve with French bread.</li>\n</ol>\n<h2>Cooking note</h2>\n<p>Use brown or green lentils. Red lentils break down and make the soup much thicker.</p>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Italian sausage with onion, zucchini, and rice",
+      "name": "Pesto chicken with noodles and roasted Brussels sprouts",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -994,12 +884,12 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Beef enchiladas",
+      "name": "Crockpot pot roast with carrots and potatoes",
       "isToday": false,
       "isTomorrow": false,
       "recipe": {
-        "slug": "beef-enchiladas",
-        "name": "Beef enchiladas",
+        "slug": "pot-roast-with-carrots-and-potatoes",
+        "name": "Pot roast with carrots and potatoes",
         "source": "markdown",
         "hasFullRecipe": true,
         "tags": [
@@ -1007,76 +897,54 @@
           "dinner"
         ],
         "aliases": [
-          "beef-enchiladas",
-          "enchiladas"
+          "pot-roast-with-carrots-and-potatoes"
         ],
         "in_rotation": true,
-        "effort": "medium",
+        "effort": "easy-slow",
         "kid_friendly": true,
-        "protein_g": 45,
-        "cal": 620,
-        "servings": 6,
-        "prep_min": 20,
-        "cook_min": 25,
+        "protein_g": 55,
+        "cal": 650,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
         "ingredient_groups": [
           {
             "heading": null,
             "items": [
-              "2 lb ground beef (85/15)",
-              "1 large yellow onion, diced",
-              "3 cloves garlic, minced",
-              "2 tbsp taco seasoning (or 1 packet)",
-              "1 tsp ground cumin",
-              "1 (16 oz) can refried beans",
-              "1/2 cup red enchilada sauce (from the batch below)",
-              "2 (10 oz) cans red enchilada sauce (mild), or 20 oz homemade",
-              "1 tbsp tomato paste",
-              "1/2 tsp ground cumin",
-              "12 flour tortillas (8 inch)",
-              "3 cups shredded Mexican cheese blend",
-              "Sour cream, for serving",
-              "Tortilla chips, for serving"
+              "chuck roast",
+              "carrots",
+              "potatoes",
+              "onions",
+              "beef broth",
+              "salt, black pepper"
             ]
           }
         ],
         "all_ingredients": [
-          "2 lb ground beef (85/15)",
-          "1 large yellow onion, diced",
-          "3 cloves garlic, minced",
-          "2 tbsp taco seasoning (or 1 packet)",
-          "1 tsp ground cumin",
-          "1 (16 oz) can refried beans",
-          "1/2 cup red enchilada sauce (from the batch below)",
-          "2 (10 oz) cans red enchilada sauce (mild), or 20 oz homemade",
-          "1 tbsp tomato paste",
-          "1/2 tsp ground cumin",
-          "12 flour tortillas (8 inch)",
-          "3 cups shredded Mexican cheese blend",
-          "Sour cream, for serving",
-          "Tortilla chips, for serving"
+          "chuck roast",
+          "carrots",
+          "potatoes",
+          "onions",
+          "beef broth",
+          "salt, black pepper"
         ],
         "steps": [
-          "Heat oven to 375°F. Grease a 9x13 baking dish.",
-          "Brown the beef in a large skillet over medium-high, breaking it up, about 8 minutes. Drain the fat.",
-          "Add the onion, cook 4 minutes until soft. Add the garlic, taco seasoning, and cumin, cook 1 minute.",
-          "Stir in the refried beans and 1/2 cup of the enchilada sauce. Cook 2 minutes until it holds together. Remove from heat.",
-          "Whisk the remaining enchilada sauce with the tomato paste and cumin.",
-          "Spread 3/4 cup of sauce across the bottom of the dish.",
-          "Warm the tortillas 20 seconds in the microwave under a damp towel so they roll without cracking.",
-          "Fill each tortilla with about 1/3 cup of the beef mixture plus a pinch of cheese. Roll tight, place seam-side down in the dish. 12 fit in two rows.",
-          "Pour the remaining sauce over the top, spreading to cover the ends. Scatter the remaining cheese over everything.",
-          "Bake uncovered 20 to 25 minutes, until the cheese is melted and the sauce bubbles at the edges.",
-          "Rest 5 minutes before serving. Top with sour cream."
+          "Season roast all over with salt and pepper.",
+          "Put onions in bottom of crockpot. Place roast on top.",
+          "Add carrots and potatoes around/on top of roast.",
+          "Pour in beef broth.",
+          "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
+          "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
         ],
-        "notes": "<h3>Notes</h3>\n<ul>\n<li>Reserve a portion of the seasoned beef before it hits the beans and sauce, and serve it dry alongside tortilla chips.</li>\n<li>Corn tortillas work but must be fried 10 seconds per side in oil first or they split.</li>\n<li>Macros are per 2 enchiladas.</li>\n<li>Assembles a day ahead. Cover, refrigerate, add 10 minutes to the bake.</li>\n<li>Leftovers reheat well covered at 350°F for 15 minutes. Microwave makes the tortillas gummy.</li>\n</ul>\n",
-        "body_html": "<h1>Beef enchiladas</h1>\n<p>Nancy-safe: no peppers, no cilantro.</p>\n<h2>Ingredients</h2>\n<p><strong>Filling</strong></p>\n<ul>\n<li>2 lb ground beef (85/15)</li>\n<li>1 large yellow onion, diced</li>\n<li>3 cloves garlic, minced</li>\n<li>2 tbsp taco seasoning (or 1 packet)</li>\n<li>1 tsp ground cumin</li>\n<li>1 (16 oz) can refried beans</li>\n<li>1/2 cup red enchilada sauce (from the batch below)</li>\n</ul>\n<p><strong>Sauce</strong></p>\n<ul>\n<li>2 (10 oz) cans red enchilada sauce (mild), or 20 oz homemade</li>\n<li>1 tbsp tomato paste</li>\n<li>1/2 tsp ground cumin</li>\n</ul>\n<p><strong>Assembly</strong></p>\n<ul>\n<li>12 flour tortillas (8 inch)</li>\n<li>3 cups shredded Mexican cheese blend</li>\n<li>Sour cream, for serving</li>\n<li>Tortilla chips, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Heat oven to 375°F. Grease a 9x13 baking dish.</li>\n<li>Brown the beef in a large skillet over medium-high, breaking it up, about 8 minutes. Drain the fat.</li>\n<li>Add the onion, cook 4 minutes until soft. Add the garlic, taco seasoning, and cumin, cook 1 minute.</li>\n<li>Stir in the refried beans and 1/2 cup of the enchilada sauce. Cook 2 minutes until it holds together. Remove from heat.</li>\n<li>Whisk the remaining enchilada sauce with the tomato paste and cumin.</li>\n<li>Spread 3/4 cup of sauce across the bottom of the dish.</li>\n<li>Warm the tortillas 20 seconds in the microwave under a damp towel so they roll without cracking.</li>\n<li>Fill each tortilla with about 1/3 cup of the beef mixture plus a pinch of cheese. Roll tight, place seam-side down in the dish. 12 fit in two rows.</li>\n<li>Pour the remaining sauce over the top, spreading to cover the ends. Scatter the remaining cheese over everything.</li>\n<li>Bake uncovered 20 to 25 minutes, until the cheese is melted and the sauce bubbles at the edges.</li>\n<li>Rest 5 minutes before serving. Top with sour cream.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>Reserve a portion of the seasoned beef before it hits the beans and sauce, and serve it dry alongside tortilla chips.</li>\n<li>Corn tortillas work but must be fried 10 seconds per side in oil first or they split.</li>\n<li>Macros are per 2 enchiladas.</li>\n<li>Assembles a day ahead. Cover, refrigerate, add 10 minutes to the bake.</li>\n<li>Leftovers reheat well covered at 350°F for 15 minutes. Microwave makes the tortillas gummy.</li>\n</ul>\n",
+        "notes": "",
+        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
         "last_reviewed": null
       }
     },
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Takeout after Roller Sports",
+      "name": "Takeout or dinner out",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -1092,7 +960,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 90,
+      "temp": 91,
       "hi": 93,
       "lo": 71,
       "icon": "☀️",
@@ -2517,6 +2385,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-06T17:00:54.956Z"
+    "updatedAt": "2026-09-06T17:15:47.559Z"
   }
 }
