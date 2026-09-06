@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T14:00:45.704Z",
+  "generated_at": "2026-09-06T14:15:36.116Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -91,6 +91,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-10T20:30:00-04:00"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "8:15a",
+      "what": "Charlie: behind-the-wheel driving lesson",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-11T10:15:00-04:00"
     },
     {
       "date": "2026-09-12",
@@ -1083,7 +1092,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 82,
       "hi": 93,
       "lo": 71,
       "icon": "☀️",
@@ -2508,6 +2517,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-06T14:00:44.247Z"
+    "updatedAt": "2026-09-06T14:15:34.889Z"
   }
 }
