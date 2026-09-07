@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T23:46:05.643Z",
+  "generated_at": "2026-09-07T00:01:10.836Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -841,11 +841,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Grilled hamburgers and hotdogs with corn",
+    "protein_g": 50,
+    "cal": 800,
+    "effort": "easy",
+    "note": "Labor Day. Saved macros are estimates for the standard meal, not a 600-calorie portion prescription. Serve condiments separately.",
     "recipe": null
   },
   "mealweek": [
@@ -960,7 +960,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
+      "temp": 72,
       "hi": 92,
       "lo": 71,
       "icon": "☀️",
@@ -2368,7 +2368,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 20,
+    "dayPct": 23.3,
     "totalSpend": 2255.09,
     "totalBudget": 0,
     "categories": [
@@ -2385,6 +2385,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-06T23:46:04.342Z"
+    "updatedAt": "2026-09-07T00:01:09.393Z"
   }
 }
