@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-09-07T03:45:22.619Z",
+  "generated_at": "2026-09-07T04:00:23.434Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-06",
-      "time": "4a",
-      "what": "Amazon delivery window",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-06T08:00:00-04:00"
-    },
-    {
-      "date": "2026-09-06",
-      "time": "4a",
-      "what": "Amazon delivery window: two hardware shipments",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-06T08:00:00-04:00"
-    },
-    {
-      "date": "2026-09-06",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-06T09:00:00-04:00"
-    },
     {
       "date": "2026-09-07",
       "time": "all day",
@@ -582,6 +555,18 @@
         {
           "id": "sch-2026-09-07-labor-day-no-school",
           "label": "Labor Day - No School"
+        },
+        {
+          "id": "sch-2026-09-08-return-covered-books-to-class-mrs-cannon",
+          "label": "Return covered books to class (Mrs. Cannon)"
+        },
+        {
+          "id": "sch-2026-09-08-all-books-due-back-covered",
+          "label": "All books due back covered"
+        },
+        {
+          "id": "sch-2026-09-08-cursive-handwriting-pages-7-20-due-for-c",
+          "label": "Cursive handwriting pages 7-20 due for completion and neatness"
         }
       ]
     },
@@ -622,8 +607,12 @@
           "label": "Labor Day - no school"
         },
         {
-          "id": "sch-2026-09-07-spanish-simon-ixl-unit-4-4j-4l-due-compl",
-          "label": "Spanish (Simon): IXL Unit 4 - 4J & 4L due; complete over the preceding weekend"
+          "id": "sch-2026-09-08-english-demarrais-the-donkey-recitation",
+          "label": "English (deMarrais): The Donkey recitation"
+        },
+        {
+          "id": "sch-2026-09-08-spanish-simon-p-154",
+          "label": "Spanish (Simon): P.154"
         }
       ]
     },
@@ -639,7 +628,16 @@
         "balance_str": "$199.77"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-08-deca-interest-meeting-3-45pm-room-123",
+          "label": "DECA interest meeting, 3:45pm, Room 123"
+        },
+        {
+          "id": "sch-2026-09-08-behind-the-wheel-lesson-10-30-am-12-30-p",
+          "label": "Behind-the-wheel lesson, 10:30 AM-12:30 PM at 911 Driving School, Greenville; instructor Michael Hamilton"
+        }
+      ]
     }
   ],
   "chores": {
@@ -853,7 +851,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -861,8 +859,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -870,7 +868,7 @@
       "dow_short": "Tue",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -960,20 +958,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
-      "hi": 92,
-      "lo": 71,
+      "temp": 71,
+      "hi": 78,
+      "lo": 68,
       "icon": "🌤",
       "code": 2
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "🌧",
-        "hi": 78,
-        "lo": 68,
-        "code": 63
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -1001,24 +992,31 @@
         "hi": 88,
         "lo": 72,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 95,
+        "lo": 69,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-06T07:06",
         "2026-09-07T07:06",
         "2026-09-08T07:07",
         "2026-09-09T07:08",
-        "2026-09-10T07:09",
-        "2026-09-11T07:09"
+        "2026-09-10T07:08",
+        "2026-09-11T07:09",
+        "2026-09-12T07:10"
       ],
       "sunsets": [
-        "2026-09-06T19:49",
         "2026-09-07T19:47",
         "2026-09-08T19:46",
-        "2026-09-09T19:45",
+        "2026-09-09T19:44",
         "2026-09-10T19:43",
-        "2026-09-11T19:42"
+        "2026-09-11T19:41",
+        "2026-09-12T19:40"
       ],
       "timezone": "America/New_York"
     }
@@ -2385,6 +2383,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-07T03:45:21.265Z"
+    "updatedAt": "2026-09-07T04:00:22.369Z"
   }
 }
