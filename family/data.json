@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T23:45:16.172Z",
+  "generated_at": "2026-09-08T00:00:32.805Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -953,11 +953,11 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hamburgers and hotdogs with corn",
+    "name": "Shake n Bake chicken with mac and cheese and cabbage",
     "protein_g": 50,
-    "cal": 800,
+    "cal": 650,
     "effort": "easy",
-    "note": "Labor Day. Saved macros are estimates for the standard meal, not a 600-calorie portion prescription. Serve condiments separately.",
+    "note": "Carryover from last week. Plate chicken, mac and cheese, and cabbage separately.",
     "recipe": null
   },
   "mealweek": [
@@ -1072,7 +1072,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
+      "temp": 74,
       "hi": 82,
       "lo": 70,
       "icon": "⛅",
@@ -2480,7 +2480,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 23.3,
+    "dayPct": 26.7,
     "totalSpend": 2255.09,
     "totalBudget": 0,
     "categories": [
@@ -2497,6 +2497,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-07T23:45:14.869Z"
+    "updatedAt": "2026-09-08T00:00:30.095Z"
   }
 }
