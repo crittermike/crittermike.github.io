@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T23:00:24.741Z",
+  "generated_at": "2026-09-08T23:15:19.426Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -112,6 +112,15 @@
     },
     {
       "date": "2026-09-14",
+      "time": "all day",
+      "what": "EHS decision: September 18 football venue, Eastside or Wade Hampton",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-09-15T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-14",
       "time": "9:35a",
       "what": "Thomas: MAP Reading test",
       "who": "thomas",
@@ -208,6 +217,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-18T19:00:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "7:30p",
+      "what": "EHS vs Wade Hampton football (if attending; venue pending Sept 14; end time unknown)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-18T19:30:00-04:00"
     },
     {
       "date": "2026-09-20",
@@ -1046,7 +1064,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 82,
       "hi": 85,
       "lo": 67,
       "icon": "☀️",
@@ -1093,18 +1111,18 @@
       "sunrises": [
         "2026-09-08T07:07",
         "2026-09-09T07:08",
-        "2026-09-10T07:09",
+        "2026-09-10T07:08",
         "2026-09-11T07:09",
         "2026-09-12T07:10",
         "2026-09-13T07:11"
       ],
       "sunsets": [
         "2026-09-08T19:46",
-        "2026-09-09T19:45",
+        "2026-09-09T19:44",
         "2026-09-10T19:43",
-        "2026-09-11T19:42",
+        "2026-09-11T19:41",
         "2026-09-12T19:40",
-        "2026-09-13T19:39"
+        "2026-09-13T19:38"
       ],
       "timezone": "America/New_York"
     }
@@ -2471,6 +2489,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-08T23:00:23.341Z"
+    "updatedAt": "2026-09-08T23:15:18.468Z"
   }
 }
