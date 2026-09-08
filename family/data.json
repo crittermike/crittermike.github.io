@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T20:00:19.292Z",
+  "generated_at": "2026-09-08T20:15:13.624Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-08T12:30:00-04:00"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "6p",
+      "what": "POPCS Drama Club informational meeting (if interested; end time unknown)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-08T18:00:00-04:00"
     },
     {
       "date": "2026-09-09",
@@ -2462,6 +2471,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-08T20:00:17.984Z"
+    "updatedAt": "2026-09-08T20:15:12.442Z"
   }
 }
