@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-09-09T03:45:35.873Z",
+  "generated_at": "2026-09-09T04:00:36.824Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-08",
-      "time": "all day",
-      "what": "Henry: Grade 8 free dress-down day",
-      "who": "henry",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-09T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "10:30a",
-      "what": "Richard behind-the-wheel lesson",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-08T12:30:00-04:00"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "6p",
-      "what": "POPCS Drama Club informational meeting (if interested; end time unknown)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-08T18:00:00-04:00"
-    },
     {
       "date": "2026-09-09",
       "time": "10a",
@@ -639,32 +612,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-08-return-covered-books-to-class-mrs-cannon",
-          "label": "Return covered books to class (Mrs. Cannon)"
+          "id": "sch-2026-09-10-august-prayer-recitation-prayer-before-m",
+          "label": "August Prayer Recitation - Prayer Before Meals"
         },
         {
-          "id": "sch-2026-09-08-reading-1-4-cold-read-assessment-cannon-",
-          "label": "Reading: 1.4 Cold Read assessment (Cannon newsletter 9/7-11)"
-        },
-        {
-          "id": "sch-2026-09-08-if-participating-school-choir-rehearsal-",
-          "label": "If participating: School Choir rehearsal at 3:15pm in Music Room; end time not provided (POPCS newsletter 7 Sept)"
-        },
-        {
-          "id": "sch-2026-09-09-chapter-1-math-test-numbers-to-10-000-st",
-          "label": "Chapter 1 Math Test: Numbers to 10,000. Study place value and digit values; tens/hundreds/thousands regrouping; standard, expanded and word forms; adding/subtracting hundreds; increasing/decreasing number patterns; ordering and comparing numbers; number-line intervals, locations and halfway points; rounding to nearest thousand, hundred and ten, including word problems. Date confirmed by Cannon newsletter 9/7-11; scope verified from all six study-guide photos received 2026-09-08. Photos: `wiki/assets/thomas/math-chapter-1-2026-09-08/`."
-        },
-        {
-          "id": "sch-2026-09-09-math-simple-solutions-quiz-cannon-newsle",
-          "label": "Math: Simple Solutions Quiz (Cannon newsletter 9/7-11)"
-        },
-        {
-          "id": "sch-2026-09-09-reading-1-3-reading-comprehension-and-vo",
-          "label": "Reading: 1.3 Reading Comprehension and Vocabulary Test for Gary the Dreamer (Cannon newsletter 9/7-11)"
-        },
-        {
-          "id": "sch-2026-09-09-wednesday-homework-study-read-20-minutes",
-          "label": "Wednesday homework/study: Read 20 minutes; Spelling WB p.19; write word range 3 times each (source prints 11-115; likely 11-15, unconfirmed); study Monday-Wednesday DOL; no math homework; English EIE p.16; review August Prayer Recitation (Cannon newsletter 9/7-11)"
+          "id": "sch-2026-09-10-thursday-homework-study-read-20-minutes-",
+          "label": "Thursday homework/study: Read 20 minutes; Spelling WB p.20; words 16-20 written 3 times each; study for spelling test; study Thursday DOL and review all four days for DOL Quiz; Math WB p.39-40; English EIE p.17 (Cannon newsletter 9/7-11)"
         }
       ]
     },
@@ -680,12 +633,7 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": [
-        {
-          "id": "sch-2026-09-08-if-participating-school-choir-rehearsal-",
-          "label": "If participating: School Choir rehearsal at 3:15pm in Music Room; end time not provided (POPCS newsletter 7 Sept)"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -701,20 +649,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-08-spanish-simon-p-154",
-          "label": "Spanish (Simon): P.154"
+          "id": "sch-2026-09-10-religion-five-ways-of-thomas-aquinas-tes",
+          "label": "Religion: Five Ways of Thomas Aquinas Test"
         },
         {
-          "id": "sch-2026-09-08-if-participating-school-choir-rehearsal-",
-          "label": "If participating: School Choir rehearsal at 3:15pm in Music Room; end time not provided (POPCS newsletter 7 Sept)"
+          "id": "sch-2026-09-10-religion-summa-theologiae-reading",
+          "label": "Religion: Summa Theologiae Reading"
         },
         {
-          "id": "sch-2026-09-08-grade-8-free-dress-down-day-wear-tag-day",
-          "label": "Grade 8 free dress-down day: wear TAG day attire; no money needed (Bunecke 9/7; Nancy forwarded same notice)"
-        },
-        {
-          "id": "sch-2026-09-09-spanish-simon-p-156-due-classroom-2026-0",
-          "label": "Spanish (Simon): P.156 due (Classroom 2026-09-08)"
+          "id": "sch-2026-09-10-spanish-simon-quiz-parte-3-study-textboo",
+          "label": "Spanish (Simon): Quiz Parte 3, study textbook pp.20-26 per direct teacher email 2026-09-08; earlier Classroom notice listed pp.20-23."
         }
       ]
     },
@@ -730,20 +674,7 @@
         "balance_str": "$199.77"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-08-deca-interest-meeting-3-45pm-room-123",
-          "label": "DECA interest meeting, 3:45pm, Room 123"
-        },
-        {
-          "id": "sch-2026-09-08-behind-the-wheel-lesson-10-30-am-12-30-p",
-          "label": "Behind-the-wheel lesson, 10:30 AM-12:30 PM at 911 Driving School, Greenville; instructor Michael Hamilton"
-        },
-        {
-          "id": "sch-2026-09-08-if-interested-mu-alpha-theta-interest-me",
-          "label": "If interested: Mu Alpha Theta interest meeting at 7:45am in Mr. Conrad room 203; requires Algebra 2 Honors completed and A-B math average (EHS update 7 Sept)"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
@@ -973,7 +904,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Shake n Bake chicken with mac and cheese and cabbage",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -981,8 +912,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Pesto chicken with noodles and roasted Brussels sprouts",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -990,7 +921,7 @@
       "dow_short": "Thu",
       "name": "Crockpot pot roast with carrots and potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -1065,19 +996,12 @@
   "weather": {
     "now": {
       "temp": 70,
-      "hi": 85,
-      "lo": 67,
+      "hi": 90,
+      "lo": 65,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 90,
-        "lo": 65,
-        "code": 3
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -1105,24 +1029,31 @@
         "hi": 89,
         "lo": 70,
         "code": 80
+      },
+      {
+        "d": "Mon",
+        "icon": "🌤",
+        "hi": 96,
+        "lo": 73,
+        "code": 1
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-08T07:07",
         "2026-09-09T07:08",
         "2026-09-10T07:08",
         "2026-09-11T07:09",
         "2026-09-12T07:10",
-        "2026-09-13T07:11"
+        "2026-09-13T07:11",
+        "2026-09-14T07:11"
       ],
       "sunsets": [
-        "2026-09-08T19:46",
         "2026-09-09T19:44",
         "2026-09-10T19:43",
         "2026-09-11T19:41",
         "2026-09-12T19:40",
-        "2026-09-13T19:38"
+        "2026-09-13T19:38",
+        "2026-09-14T19:37"
       ],
       "timezone": "America/New_York"
     }
@@ -2489,6 +2420,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-09T03:45:34.779Z"
+    "updatedAt": "2026-09-09T04:00:35.726Z"
   }
 }
