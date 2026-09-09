@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T14:30:16.930Z",
+  "generated_at": "2026-09-09T14:45:16.799Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -140,7 +140,7 @@
     {
       "date": "2026-09-16",
       "time": "9:30a",
-      "what": "Mom prosthetic appointment",
+      "what": "Drive Mom: prosthetics evaluation with Stephen H",
       "who": "family",
       "calendar": "home",
       "all_day": false,
@@ -148,8 +148,8 @@
     },
     {
       "date": "2026-09-16",
-      "time": "2:30p",
-      "what": "Mom cardiologist appointment",
+      "time": "2:15p",
+      "what": "Drive Mom: cardiology with Amy Gourley Perry, NP (2:30 PM; arrive 2:15)",
       "who": "family",
       "calendar": "home",
       "all_day": false,
@@ -284,11 +284,20 @@
     {
       "date": "2026-09-28",
       "time": "1p",
-      "what": "Mom driving therapy appointment",
+      "what": "Drive Mom: driving rehab OT evaluation with Brigitte King",
       "who": "family",
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-28T14:30:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "2:30p",
+      "what": "Drive Mom: driving rehab OT treatment with Brigitte King",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T15:30:00-04:00"
     },
     {
       "date": "2026-10-01",
@@ -986,7 +995,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 76,
+      "temp": 77,
       "hi": 89,
       "lo": 65,
       "icon": "☀️",
@@ -2419,6 +2428,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T14:30:15.559Z"
+    "updatedAt": "2026-09-09T14:45:15.321Z"
   }
 }
