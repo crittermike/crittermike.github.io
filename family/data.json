@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T17:00:25.965Z",
+  "generated_at": "2026-09-09T17:15:19.883Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -659,6 +659,14 @@
         {
           "id": "sch-2026-09-10-spanish-simon-quiz-parte-3-study-textboo",
           "label": "Spanish (Simon): Quiz Parte 3, study textbook pp.20-26 per direct teacher email 2026-09-08; earlier Classroom notice listed pp.20-23."
+        },
+        {
+          "id": "sch-2026-09-10-algebra-edwards-2-9-odd-numbered-problem",
+          "label": "Algebra (Edwards): 2.9 odd-numbered problems due (Classroom 2026-09-09)"
+        },
+        {
+          "id": "sch-2026-09-10-spanish-simon-blue-workbook-p-151-due-cl",
+          "label": "Spanish (Simon): Blue workbook p.151 due (Classroom 2026-09-09)"
         }
       ]
     },
@@ -995,7 +1003,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 85,
       "hi": 89,
       "lo": 65,
       "icon": "☀️",
@@ -2428,6 +2436,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T17:00:24.444Z"
+    "updatedAt": "2026-09-09T17:15:18.447Z"
   }
 }
