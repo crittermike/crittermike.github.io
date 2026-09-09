@@ -1955,7 +1955,7 @@
     <div class="dh-sun">
       <div class="sun-bar" id="sunBar"
            data-sunrise="2026-09-09T07:08"
-           data-sunset="2026-09-09T19:45"></div>
+           data-sunset="2026-09-09T19:44"></div>
     </div>
     
   </div>
@@ -3773,7 +3773,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":["2026-09-09T07:08","2026-09-10T07:09","2026-09-11T07:09","2026-09-12T07:10","2026-09-13T07:11","2026-09-14T07:11"],"sunsets":["2026-09-09T19:45","2026-09-10T19:43","2026-09-11T19:42","2026-09-12T19:40","2026-09-13T19:39","2026-09-14T19:37"],"timezone":"America/New_York"};
+    const SUN = {"sunrises":["2026-09-09T07:08","2026-09-10T07:08","2026-09-11T07:09","2026-09-12T07:10","2026-09-13T07:11","2026-09-14T07:11"],"sunsets":["2026-09-09T19:44","2026-09-10T19:43","2026-09-11T19:41","2026-09-12T19:40","2026-09-13T19:38","2026-09-14T19:37"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
