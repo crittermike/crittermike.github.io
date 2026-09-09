@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T11:15:57.610Z",
+  "generated_at": "2026-09-09T11:30:59.251Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -995,9 +995,9 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 65,
       "hi": 89,
-      "lo": 66,
+      "lo": 65,
       "icon": "🌤",
       "code": 1
     },
@@ -1041,18 +1041,18 @@
     "sun": {
       "sunrises": [
         "2026-09-09T07:08",
-        "2026-09-10T07:08",
+        "2026-09-10T07:09",
         "2026-09-11T07:09",
         "2026-09-12T07:10",
         "2026-09-13T07:11",
         "2026-09-14T07:11"
       ],
       "sunsets": [
-        "2026-09-09T19:44",
+        "2026-09-09T19:45",
         "2026-09-10T19:43",
-        "2026-09-11T19:41",
+        "2026-09-11T19:42",
         "2026-09-12T19:40",
-        "2026-09-13T19:38",
+        "2026-09-13T19:39",
         "2026-09-14T19:37"
       ],
       "timezone": "America/New_York"
@@ -2404,7 +2404,7 @@
   "finance": {
     "month": "September 2026",
     "dayPct": 30,
-    "totalSpend": 2255.09,
+    "totalSpend": 2409.1,
     "totalBudget": 0,
     "categories": [
       {
@@ -2414,12 +2414,20 @@
         "spent": 2255.09,
         "balance": -955.79,
         "pct": 0
+      },
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 154.01,
+        "balance": -154.01,
+        "pct": 0
       }
     ],
-    "liquidCash": 7447.28,
+    "liquidCash": 7293.27,
     "creditDebt": 46947.08,
-    "netLiquid": 54394.36,
+    "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T11:15:56.625Z"
+    "updatedAt": "2026-09-09T11:30:57.916Z"
   }
 }
