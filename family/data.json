@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T23:45:20.458Z",
+  "generated_at": "2026-09-09T00:00:31.736Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -945,11 +945,11 @@
     ]
   },
   "dinner": {
-    "name": "Shake n Bake chicken with mac and cheese and cabbage",
+    "name": "Pesto chicken with noodles and roasted Brussels sprouts",
     "protein_g": 50,
     "cal": 650,
-    "effort": "easy",
-    "note": "Carryover from last week. Plate chicken, mac and cheese, and cabbage separately.",
+    "effort": "medium",
+    "note": "Reserve plain chicken before adding pesto; serve balsamic glaze separately.",
     "recipe": null
   },
   "mealweek": [
@@ -1064,7 +1064,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 78,
       "hi": 85,
       "lo": 67,
       "icon": "☀️",
@@ -2472,7 +2472,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 26.7,
+    "dayPct": 30,
     "totalSpend": 2255.09,
     "totalBudget": 0,
     "categories": [
@@ -2489,6 +2489,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54394.36,
     "source": "ynab",
-    "updatedAt": "2026-09-08T23:45:19.415Z"
+    "updatedAt": "2026-09-09T00:00:30.040Z"
   }
 }
