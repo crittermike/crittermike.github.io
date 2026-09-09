@@ -39,6 +39,14 @@ function oracle(q) {
     default: assert.fail('Unknown concept '+q.concept);
   }
 }
+test('playable banks exclude worksheet examples and retain all practice concepts', () => {
+  const E=load();
+  for(let seed=1;seed<=25;seed++) {
+    const bank=E.buildBank(seeded(seed));
+    assert.ok(bank.every(q=>q.id.includes('-practice-')),'worksheet fixtures must not be playable');
+    assert.deepEqual([...new Set(bank.map(q=>q.concept))].sort(),[...E.concepts].sort());
+  }
+});
 test('balanced varied rounds have valid unique choices and independently computed answers', () => {
   const E=load();
   assert.equal(typeof E.buildRound,'function');
