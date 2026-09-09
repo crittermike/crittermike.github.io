@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T18:00:30.163Z",
+  "generated_at": "2026-09-09T18:15:27.366Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -1001,7 +1001,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 87,
+      "hi": 89,
+      "lo": 65,
+      "icon": "☀️",
+      "code": 0
+    },
+    "days": [
+      {
+        "d": "Thu",
+        "icon": "⛅",
+        "hi": 94,
+        "lo": 68,
+        "code": 3
+      },
+      {
+        "d": "Fri",
+        "icon": "🌦",
+        "hi": 97,
+        "lo": 72,
+        "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "🌦",
+        "hi": 92,
+        "lo": 71,
+        "code": 80
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 95,
+        "lo": 70,
+        "code": 80
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 96,
+        "lo": 72,
+        "code": 3
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-09-09T07:08",
+        "2026-09-10T07:08",
+        "2026-09-11T07:09",
+        "2026-09-12T07:10",
+        "2026-09-13T07:11",
+        "2026-09-14T07:11"
+      ],
+      "sunsets": [
+        "2026-09-09T19:44",
+        "2026-09-10T19:43",
+        "2026-09-11T19:41",
+        "2026-09-12T19:40",
+        "2026-09-13T19:38",
+        "2026-09-14T19:37"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2372,6 +2436,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T18:00:24.774Z"
+    "updatedAt": "2026-09-09T18:15:25.838Z"
   }
 }
