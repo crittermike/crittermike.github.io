@@ -205,7 +205,8 @@ function line(start=1000,step=100,ticks=20) {
   const end = start+step*ticks;
   return {start,end,ticks,labels:[{value:start,text:format(start)},{value:start+step*10,text:format(start+step*10)},{value:start+step*20,text:format(start+step*20)}]};
 }
-function buildBank(rng = Math.random) {
+// Worksheet examples are exclusion fixtures, never playable questions.
+function buildExamples(rng = Math.random) {
   const specs = [
     {id:'units-4300',concept:'units',n:4300,unit:10},
     {id:'units-210',concept:'units',n:210*10,givenUnit:10,unit:1},
@@ -236,6 +237,14 @@ function buildBank(rng = Math.random) {
     {id:'tacos-1995',concept:'context',n:1995,place:10},
     {id:'round-place-3100',concept:'roundPlace',n:3100,target:3000}
   ];
+  return specs.map(d => makeQuestion(d,rng));
+}
+function questionKey(q) {
+  return JSON.stringify([q.concept,q.prompt,q.sequence || null,q.line || null,q.type === 'order' ? [...q.answer].sort((a,b)=>a-b) : null]);
+}
+function buildBank(rng = Math.random) {
+  const specs = [];
+  const excluded = new Set(buildExamples(() => 0.5).map(questionKey));
   const int = (lo,hi) => lo+Math.floor(rng()*(hi-lo+1));
   for (let i=0;i<18;i++) {
     const n=int(1,8)*1000+int(0,9)*100+int(0,9)*10+int(0,9);
@@ -265,7 +274,7 @@ function buildBank(rng = Math.random) {
     generated.roundPlace.target=roundTo(generated.roundPlace.n,1000);
     for(const concept of concepts) specs.push({id:concept+'-practice-'+i,concept,...generated[concept]});
   }
-  return specs.map(d => makeQuestion(d,rng));
+  return specs.map(d => makeQuestion(d,rng)).filter(q => !excluded.has(questionKey(q)));
 }
 function buildRound(rng = Math.random) {
   const bank = buildBank(rng);
@@ -324,7 +333,7 @@ function createBestStore(storage) {
     return memory;
   }};
 }
-const API = { parseNumber, roundTo, toWords, format, shuffle, makeQuestion, buildBank, buildRound, concepts, Game, createBestStore, answerText };
+const API = { parseNumber, roundTo, toWords, format, shuffle, makeQuestion, buildExamples, questionKey, buildBank, buildRound, concepts, Game, createBestStore, answerText };
 root.MathQuest = API;
 if (typeof module !== 'undefined') module.exports = API;
 if (typeof document !== 'undefined') {

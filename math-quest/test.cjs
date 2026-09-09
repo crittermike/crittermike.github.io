@@ -44,6 +44,8 @@ test('playable banks exclude worksheet examples and retain all practice concepts
   for(let seed=1;seed<=25;seed++) {
     const bank=E.buildBank(seeded(seed));
     assert.ok(bank.every(q=>q.id.includes('-practice-')),'worksheet fixtures must not be playable');
+    const forbidden=new Set(E.buildExamples(seeded(seed)).map(E.questionKey));
+    assert.ok(bank.every(q=>!forbidden.has(E.questionKey(q))),'generated questions must not reproduce worksheet examples');
     assert.deepEqual([...new Set(bank.map(q=>q.concept))].sort(),[...E.concepts].sort());
   }
 });
@@ -76,7 +78,7 @@ test('balanced varied rounds have valid unique choices and independently compute
 test('verified guide examples are mathematically correct, including boundary and zero cases', () => {
   const E=load();
   assert.equal(typeof E.buildBank,'function');
-  const bank=E.buildBank(seeded(12));
+  const bank=E.buildExamples(seeded(12));
   const cases={
     'units-4300':430,'units-210':2100,'composed-5164':5164,'subtract-9006':8906,
     'value-4':4,'value-6':60,'value-1':100,'value-5':5000,'value-7543':40,'place-6912':'thousands',
@@ -100,7 +102,7 @@ test('verified guide examples are mathematically correct, including boundary and
   assert.deepEqual(plain(tricky.answer),[90,900,1000,9999,10000]);
 });
 test('sixth-page fixtures preserve printed operands, not handwritten answers', () => {
-  const bank=load().buildBank(seeded(6));
+  const bank=load().buildExamples(seeded(6));
   const expected=[
     ['round-place-3100',{n:3100,target:3000},'thousand','3,100'],
     ['value-7543',{n:7543,position:1},40,'7,543'],
@@ -139,7 +141,7 @@ test('every generated family has correct mathematics and unambiguous prompts acr
   },0);
   for(let seed=1;seed<=25;seed++) {
     const bank=E.buildBank(seeded(seed));
-    assert.equal(bank.length,431);
+    assert.ok(bank.length>=300 && bank.length<=396);
     assert.equal(new Set(bank.map(q=>q.id)).size,bank.length);
     for(const q of bank) {
       seen.add(q.concept);
@@ -190,7 +192,7 @@ test('every generated family has correct mathematics and unambiguous prompts acr
 test('scoring locks each answer, follows the streak ladder, and resets on mistakes', () => {
   const E=load();
   assert.equal(typeof E.Game,'function');
-  const bank=E.buildBank(seeded(11));
+  const bank=E.buildExamples(seeded(11));
   const q=bank.find(q=>q.id==='subtract-9006');
   const g=new E.Game(Array.from({length:10},(_,i)=>({...q,id:'q'+i})));
   assert.equal(g.next(),false);
@@ -229,15 +231,16 @@ test('all answer modes require deliberate complete valid input and grade the act
     assert.equal(g.check(answer).right,true,q.id);
     assert.equal(g.correct,1); g.next(); assert.equal(g.done,true);
   }
-  const multi=bank.find(q=>q.id==='multi-80');
+  const examples=E.buildExamples(seeded(2));
+  const multi=examples.find(q=>q.id==='multi-80');
   assert.equal(new E.Game([multi]).check([75,82,79]).right,true);
   assert.equal(new E.Game([multi]).check([75,82]).right,false);
   assert.equal(new E.Game([multi]).check([75,82,79,85]).right,false);
   assert.equal(new E.Game([multi]).check([75,75,75]).status,'incomplete');
-  const order=bank.find(q=>q.id==='order-guide');
+  const order=examples.find(q=>q.id==='order-guide');
   assert.equal(new E.Game([order]).check([1234]).status,'incomplete');
   assert.equal(new E.Game([order]).check([...order.answer].reverse()).right,false);
-  const mcq=bank.find(q=>q.id==='compare-equal');
+  const mcq=examples.find(q=>q.id==='compare-equal');
   assert.equal(new E.Game([mcq]).check('bogus').status,'incomplete');
 });
 test('best score is scoped and survives unavailable or corrupt storage', () => {

@@ -33,11 +33,11 @@ const fs = require('node:fs');
       assert.equal(await page.locator('#next').isVisible(),true);
       await noOverflow();
     }
-    // Exercise every exact fixture and every type through real rendered controls.
-    await page.evaluate(()=>MathQuest.ui.start(MathQuest.buildBank().filter(q=>!q.id.includes('practice'))));
+    // Exercise fresh generated questions across every taught concept.
+    await page.evaluate(()=>MathQuest.ui.start(MathQuest.buildRound()));
     const fixtureIds=await page.evaluate(()=>MathQuest.ui.getGame().questions.map(q=>q.id));
-    assert.equal(fixtureIds.length,35);
-    for(const id of ['round-place-3100','value-7543','round-4683','round-4521']) assert.ok(fixtureIds.includes(id),id);
+    assert.equal(fixtureIds.length,22);
+    assert.ok(fixtureIds.every(id=>id.includes('-practice-')));
     let count=0,numberLines=0;
     while(!await page.evaluate(()=>MathQuest.ui.getGame().done)) {
       const q=await page.evaluate(()=>MathQuest.ui.getGame().current);
@@ -100,7 +100,7 @@ const fs = require('node:fs');
     assert.equal(await page.locator('#feedback').textContent(),'');
     assert.equal(await page.locator('#next').isVisible(),false);
     // Native keyboard controls and explicit CHECK then NEXT.
-    await page.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.id==='words-5005')]));
+    await page.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.concept==='wordsToNumber')]));
     for(const raw of ['', ' ', '5,00', '1e3', '-1', '5.5']) {
       await page.locator('#number').fill(raw);
       await page.locator('#check').click();
@@ -110,14 +110,14 @@ const fs = require('node:fs');
     }
     await page.locator('#number').fill('');
     await page.locator('#number').focus();
-    await page.keyboard.type('5,005');
+    await page.keyboard.type(await page.evaluate(()=>String(MathQuest.ui.getGame().current.answer)));
     await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(()=>MathQuest.ui.getGame().correct),1);
     await page.locator('#next').focus(); await page.keyboard.press('Enter');
     assert.equal(await page.locator('#finish').isVisible(),true);
     await noOverflow();
     // Representative line screenshot for human inspection, outside the repository.
-    await page.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.id==='line-locate')]));
+    await page.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.concept==='lineLocate')]));
     await page.screenshot({path:process.env.SCREENSHOT_PATH||'/tmp/number-quest-mobile.png',fullPage:true});
     await page.setViewportSize({width:1280,height:900});
     await noOverflow();
@@ -131,8 +131,8 @@ const fs = require('node:fs');
     await denied.goto(url);
     await denied.locator('#start').click();
     assert.equal(await denied.locator('#check').isVisible(),true);
-    await denied.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.id==='round-4683')]));
-    await denied.locator('#number').fill('4,680');
+    await denied.evaluate(()=>MathQuest.ui.start([MathQuest.buildBank().find(q=>q.concept==='round10')]));
+    await denied.locator('#number').fill(await denied.evaluate(()=>String(MathQuest.ui.getGame().current.answer)));
     await denied.locator('#check').click();
     await denied.locator('#next').click();
     assert.equal(await denied.locator('#finish').isVisible(),true);
@@ -142,7 +142,7 @@ const fs = require('node:fs');
     assert.equal(await denied.evaluate(()=>MathQuest.ui.getGame().score),0);
     assert.deepEqual(errors,[]);
     await denied.close();
-    console.log(JSON.stringify({result:'PASS',url,fixtureFlows:count,balancedRoundQuestions:22,numberLines,viewports:['375x812','1280x900'],review:true,keyboard:true,reset:true,invalidInput:true,storageDenied:true,pageErrors:errors.length,networkRequests:network.length}));
+    console.log(JSON.stringify({result:'PASS',url,generatedFlows:count,balancedRoundQuestions:22,numberLines,viewports:['375x812','1280x900'],review:true,keyboard:true,reset:true,invalidInput:true,storageDenied:true,pageErrors:errors.length,networkRequests:network.length}));
   } catch(e) {
     console.error('BROWSER STATE',await page.evaluate(()=>({game:MathQuest.ui.getGame(),nextHidden:document.getElementById('nextActions').hidden,feedback:document.getElementById('feedback').textContent})),errors);
     await page.screenshot({path:'/tmp/number-quest-failure.png',fullPage:true});
