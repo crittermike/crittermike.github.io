@@ -24,33 +24,27 @@ button,input{font:inherit}button{cursor:pointer;color:var(--navy)}button:disable
 <main>
 <header><div><h1>Number Quest</h1><p class="subtitle">Numbers to 10,000</p></div><div class="stats" aria-label="Quest score"><span class="pill" id="streak">🔥 Streak 0</span><span class="pill score" id="score">⭐ 0 points</span></div></header>
 <section id="welcome" class="welcome">
-<div class="eyebrow">Your next adventure starts here</div><div class="hero-icon" aria-hidden="true">🗺️</div>
-<h2>Small steps.<br>Big number discoveries.</h2><p class="lede">Cross the number bridge, follow the pattern trail, and climb to the summit!</p>
-<ol class="mini-map" aria-label="Your adventure"><li><span>1</span>Camp</li><li><span>2</span>Bridge</li><li><span>3</span>Grove</li><li><span>4</span>Peak</li><li><span>★</span>Summit</li></ol>
-<p><strong>22 questions. No clock. Take your time.</strong><br>Check your answer, learn a strategy, then choose Next.</p>
-<button class="action" id="start" type="button">LET'S EXPLORE</button>
-<details class="rules"><summary>How do I earn points?</summary><p>Each correct answer earns 10 points. At a streak of 3, add 5 bonus points per answer; at 5, add 10; at 7 or more, add 15. A mistake resets the streak, not your points.</p><p>Finish every stop to earn your Explorer badge. Then practice just the questions you missed. Review is for learning, with no extra points.</p></details>
-<p class="quiet">Tap or use your keyboard. You can change an answer before checking it.</p>
+<button class="action" id="start" type="button">START</button>
 </section>
 <section id="game" hidden aria-label="Math adventure">
-<ol class="trail" aria-label="Adventure progress"><li><span>1</span>Camp</li><li><span>2</span>Bridge</li><li><span>3</span>Grove</li><li><span>4</span>Peak</li><li><span>★</span>Summit</li></ol>
+
 <div class="progress-label"><span id="step"></span><span id="accuracy">0 correct</span></div>
 <div class="meter" id="progress" role="progressbar" aria-label="Questions completed" aria-valuemin="0" aria-valuemax="22" aria-valuenow="0"><span id="meter"></span></div>
-<div class="task"><div class="eyebrow" id="topic"></div><h2 id="prompt" class="prompt" tabindex="-1"></h2></div>
+<div class="task"><h2 id="prompt" class="prompt" tabindex="-1"></h2></div>
 <div id="visual" class="visual" hidden></div>
 <form id="answerForm" novalidate>
 <p class="instructions" id="instructions"></p>
-<div class="entry" id="entry" hidden><label for="number">Your answer</label><input id="number" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="18" aria-describedby="numberHelp"><p class="quiet" id="numberHelp">Type a number. Commas are welcome.</p></div>
-<div id="ordering" hidden><div class="order-path"><p>YOUR PATH: least → greatest</p><ol id="ordered" aria-live="polite" aria-label="Your number order"></ol></div><div class="tools"><button class="secondary" id="undo" type="button">↶ Undo</button><button class="secondary" id="clear" type="button">Clear</button></div></div>
+<div class="entry" id="entry" hidden><input id="number" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="18" aria-label="Your answer"></div>
+<div id="ordering" hidden><div class="order-path"><ol id="ordered" aria-live="polite" aria-label="Your number order"></ol></div><div class="tools"><button class="secondary" id="undo" type="button">↶ Undo</button><button class="secondary" id="clear" type="button">Clear</button></div></div>
 <div class="choices" id="choices" role="group" aria-labelledby="prompt instructions"></div>
 <div class="actions"><button class="action" type="submit" id="check">CHECK</button></div>
 </form>
 <div class="feedback" id="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
 <div class="actions" id="nextActions" hidden><button class="action next" type="button" id="next">NEXT →</button></div>
 </section>
-<section id="finish" class="finish" hidden aria-labelledby="finishTitle"><div class="hero-icon" aria-hidden="true">🏆</div><div class="badge" id="badge">Explorer badge earned</div><h2 id="finishTitle" tabindex="-1">Summit reached!</h2><div class="scorebig" id="finalScore"></div><p id="finalAccuracy"></p><p id="finalMessage"></p><button class="action next" type="button" id="review">PRACTICE MISSED QUESTIONS</button><button class="action" type="button" id="again">NEW ADVENTURE</button></section>
+<section id="finish" class="finish" hidden aria-labelledby="finishTitle"><div class="hero-icon" aria-hidden="true">🏆</div><h2 id="finishTitle" tabindex="-1">Results</h2><div class="scorebig" id="finalScore"></div><p id="finalAccuracy"></p><button class="action next" type="button" id="review">RETRY MISSED</button><button class="action" type="button" id="again">PLAY AGAIN</button></section>
 <div class="best" id="best">Best quest: 0 points</div>
-<footer>Think it through. Mistakes help your brain grow.<br>Your best score stays in this browser. No sign-in needed.</footer>
+
 <noscript>This adventure needs JavaScript turned on in your browser.</noscript>
 </main>
 <script>
@@ -159,7 +153,7 @@ function makeQuestion(data, rng = Math.random) {
       q.strategy = `Each step ${d.step > 0 ? 'adds' : 'subtracts'} ${format(Math.abs(d.step))}. Count one step at a time to reach ${format(q.answer)}.`;
       break;
     case 'order':
-      q.prompt = 'Build a path from least to greatest.'; q.type = 'order';
+      q.prompt = 'Tap numbers from least to greatest.'; q.type = 'order';
       q.answer = [...d.values].sort((a,b) => a-b); q.choices = shuffle(d.values,rng);
       q.strategy = `Compare thousands first, then hundreds, tens, and ones. The path is ${q.answer.map(format).join(' → ')}.`;
       break;
@@ -407,8 +401,9 @@ if (typeof document !== 'undefined') {
     selected = [];
     const q = game.current;
     $('game').hidden = false; $('welcome').hidden = $('finish').hidden = true;
-    text('topic',q.label); text('prompt',q.prompt);
-    text('instructions',q.type === 'number' ? 'Type your answer, then press CHECK.' : q.type === 'order' ? 'Tap every tile in order. Use Undo or Clear to change your path.' : q.type === 'multi' ? 'Choose every match. Tap a selected number again to remove it.' : 'Choose one answer. You can change it before checking.');
+    text('prompt',q.prompt);
+    text('instructions','');
+    $('instructions').hidden = true;
     $('visual').replaceChildren(); $('visual').hidden = !q.line && !q.sequence;
     if (q.line) drawLine(q.line);
     if (q.sequence) {
@@ -445,7 +440,7 @@ if (typeof document !== 'undefined') {
     const out = game.check(raw);
     if (out.status === 'incomplete') {
       $('feedback').className = 'feedback bad';
-      text('feedback',q.type === 'number' ? 'Enter a whole number first, like 4,300. Use commas in groups of three.' : q.type === 'order' ? 'Build your whole path by tapping every tile first.' : 'Choose an answer first, then press CHECK.');
+      text('feedback',q.type === 'number' ? 'Enter a whole number.' : q.type === 'order' ? 'Tap all the numbers.' : 'Choose an answer.');
       if (q.type === 'number') { $('number').setAttribute('aria-invalid','true'); $('number').focus(); }
       return;
     }
@@ -456,10 +451,9 @@ if (typeof document !== 'undefined') {
     $('feedback').className = `feedback ${out.right ? 'good sparkle' : 'bad'}`;
     $('feedback').replaceChildren();
     const heading = document.createElement('strong');
-    heading.textContent = out.right ? game.isReview ? 'You got it! Keep growing.' : `Correct! +${out.points} points${out.points>10 ? ` (${out.points-10} streak bonus)` : ''}` : `Good effort! Correct answer: ${out.answer}`;
-    const strategy = document.createElement('p'); strategy.textContent = out.strategy;
-    $('feedback').append(heading,strategy);
-    $('nextActions').hidden = false; text('next',game.index === game.questions.length-1 ? 'SEE MY RESULTS →' : 'NEXT →');
+    heading.textContent = out.right ? game.isReview ? 'Correct ✓' : `Correct! +${out.points}${out.points>10 ? ` (${out.points-10} streak bonus)` : ''}` : `Correct answer: ${out.answer}`;
+    $('feedback').append(heading);
+    $('nextActions').hidden = false; text('next',game.index === game.questions.length-1 ? 'RESULTS →' : 'NEXT →');
     // Keep CHECK disabled in its original position. A double tap cannot hit NEXT.
     // Do not focus NEXT automatically: a held Enter must not skip the strategy.
     $('feedback').focus();
@@ -471,14 +465,11 @@ if (typeof document !== 'undefined') {
       bestStore.save(game.score);
     }
     text('best',`Best quest: ${bestStore.get()} points`);
-    text('finishTitle',game.isReview ? 'Practice complete!' : 'Summit reached!');
-    text('badge',game.isReview ? 'Brain builder badge earned' : 'Explorer badge earned');
-    text('finalScore',game.isReview ? 'A stronger number explorer!' : `⭐ ${game.score} points`);
-    text('finalAccuracy',`${game.correct} / ${game.questions.length} correct${game.isReview ? ' in this practice' : ' on this adventure'}.`);
-    text('finalMessage',game.missed.length ? `${game.missed.length} ${game.missed.length === 1 ? 'question is' : 'questions are'} ready for another try. Practice is how we grow!` : 'Every answer found! Try a fresh adventure for new number discoveries.');
-    if (game.isReview && original) text('finalMessage',`${$('finalMessage').textContent} Original quest: ${original.correct} / ${original.total} correct, ${original.score} points.`);
+    text('finishTitle',game.isReview ? 'Review complete' : 'Results');
+    text('finalScore',`⭐ ${game.isReview && original ? original.score : game.score} points`);
+    text('finalAccuracy',`${game.correct} / ${game.questions.length} correct`);
     $('review').hidden = game.missed.length === 0;
-    text('review',`PRACTICE ${game.missed.length} MISSED ${game.missed.length === 1 ? 'QUESTION' : 'QUESTIONS'}`);
+    text('review',`RETRY ${game.missed.length} MISSED`);
     $('finishTitle').focus();
   }
   function start(questions) {

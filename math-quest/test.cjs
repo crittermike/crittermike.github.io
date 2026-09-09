@@ -13,6 +13,12 @@ function load() {
   scripts.forEach(s => vm.runInNewContext(s[1], sandbox));
   return sandbox.module.exports;
 }
+test('interface has no adventure filler or automatic strategy paragraphs', () => {
+  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+  for(const phrase of ['Small steps.','Your next adventure starts here','How do I earn points?','Mistakes help your brain grow.','Good effort!','Keep growing.','Practice is how we grow!']) assert.ok(!html.includes(phrase),phrase);
+  assert.ok(!html.includes("$('feedback').append(heading,strategy)"));
+  assert.ok(html.includes('id="start" type="button">START</button>'));
+});
 const plain = x => JSON.parse(JSON.stringify(x));
 function seeded(seed) { return () => { seed = (Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; }; }
 function oracle(q) {
