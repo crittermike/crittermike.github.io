@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Number Quest | Numbers to 10,000</title>
+<meta name="theme-color" content="#5fc9ff">
+<style>
+:root{--sky:#5fc9ff;--navy:#183153;--cream:#fffbed;--yellow:#ffd84d;--green:#217d46;--purple:#6244bd;--line:#b7c9dc;--red:#a12525}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(#5fc9ff 0 38%,#a7e477 38%);color:var(--navy);font-family:"Trebuchet MS",Arial,sans-serif;padding:16px 12px 28px;line-height:1.45}
+main{width:min(760px,100%);margin:auto;background:var(--cream);border:4px solid var(--navy);border-radius:24px;box-shadow:0 8px 0 var(--navy);padding:clamp(16px,4vw,30px);min-height:730px}
+header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:3px solid var(--line);padding-bottom:16px}h1{font-size:clamp(1.8rem,6vw,2.7rem);line-height:1.05;margin:0;letter-spacing:-.045em}.subtitle{margin:5px 0 0;font-weight:bold;font-size:.95rem}.stats{display:flex;gap:8px;flex-wrap:wrap}.pill{background:white;border:3px solid var(--navy);border-radius:999px;padding:7px 12px;font-weight:900;white-space:nowrap}.pill.score{background:var(--yellow)}
+button,input{font:inherit}button{cursor:pointer;color:var(--navy)}button:disabled{cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:4px solid var(--purple);outline-offset:4px}[tabindex="-1"]:focus{outline:none}[hidden]{display:none!important}
+.eyebrow{font-size:.82rem;font-weight:900;text-transform:uppercase;color:var(--purple);letter-spacing:.1em}.welcome{text-align:center;padding:24px 0 8px}.welcome h2{font-size:clamp(1.8rem,6vw,2.7rem);line-height:1.15;max-width:550px;margin:14px auto}.welcome p{max-width:520px;margin:16px auto}.hero-icon{font-size:3.8rem;line-height:1.3}.lede{font-size:1.12rem}.mini-map,.trail{display:flex;justify-content:space-between;gap:6px;list-style:none;padding:0;margin:24px 0}.mini-map li,.trail li{flex:1;text-align:center;font-size:.76rem;font-weight:bold;position:relative}.mini-map span,.trail span{display:grid;place-items:center;width:42px;height:42px;margin:0 auto 6px;border:3px solid var(--navy);border-radius:50%;background:white;font-size:1.1rem;position:relative;z-index:1}.mini-map li:not(:last-child):after,.trail li:not(:last-child):after{content:"";position:absolute;top:20px;left:50%;width:calc(100% + 6px);height:3px;background:var(--line)}.mini-map li:first-child span,.trail .reached span{background:var(--yellow)}.trail{margin:18px 0 14px}.trail span{width:34px;height:34px;font-size:.95rem}.trail li:not(:last-child):after{top:16px}
+.rules{background:#eee9ff;border-radius:14px;padding:12px 16px;margin:18px 0;color:#3f2b7d;font-size:.94rem}.rules summary{cursor:pointer;font-weight:bold;min-height:28px}.rules p{margin:10px auto}.quiet{font-size:.88rem;color:#455a72}.task{text-align:center;margin-top:18px}h2.prompt{font-size:clamp(1.35rem,4.8vw,1.9rem);line-height:1.35;margin:8px 0 14px;overflow-wrap:anywhere}.instructions{font-size:.95rem;margin:8px 0 14px;text-align:center}.progress-label{display:flex;justify-content:space-between;gap:8px;font-size:.85rem;font-weight:bold}.meter{height:14px;background:#dce6ef;border:2px solid var(--navy);border-radius:20px;margin:6px 0 16px;overflow:hidden}.meter span{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.visual{background:white;border:3px solid var(--navy);border-radius:16px;padding:8px 4px;margin:14px 0}.visual svg{display:block;width:100%;height:auto;max-height:220px}.sequence{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;padding:12px}.sequence span{font-size:clamp(1.1rem,4vw,1.5rem);font-weight:900}.sequence span:not(:last-child):after{content:","}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choices.word-choices{grid-template-columns:1fr}.choice{min-height:58px;padding:12px 10px;border:3px solid var(--line);border-radius:13px;background:white;font-weight:900;font-size:1.1rem;box-shadow:0 4px 0 var(--line);overflow-wrap:anywhere;line-height:1.3}.choice.selected{background:#e4ddff;border-color:var(--purple);box-shadow:0 4px 0 #4f38ad}.choice.correct{border-color:var(--green);background:#dff7e8;box-shadow:0 4px 0 var(--green)}.choice:disabled{color:var(--navy)}.choice:active:not(:disabled),.action:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--navy)}.choice.used{opacity:.5;box-shadow:none}.entry{margin:20px auto;max-width:360px}.entry label{display:block;font-weight:bold;margin-bottom:6px}.entry input{display:block;width:100%;min-height:62px;border:3px solid var(--navy);border-radius:12px;text-align:center;font-size:1.8rem;font-weight:900;color:var(--navy);background:white;padding:8px}.entry input:disabled{background:#f2f5f8;opacity:1}.entry .quiet{margin:6px 0}.order-path{padding:12px;border:2px dashed var(--purple);border-radius:13px;background:#f1edff;margin:12px 0 16px;min-height:100px}.order-path p{font-size:.88rem;margin:0 0 6px}.order-path ol{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0;counter-reset:step}.order-path li{background:white;border:2px solid var(--purple);border-radius:8px;padding:6px;font-weight:bold;counter-increment:step}.order-path li:before{content:counter(step) ": ";font-size:.8rem;color:var(--purple)}.tools{display:flex;gap:10px;margin:10px 0}.secondary{min-height:46px;border:2px solid var(--navy);border-radius:10px;padding:8px 16px;background:white;font-weight:bold}.secondary:disabled{opacity:.45}
+.actions{display:flex;justify-content:center;margin:22px 0 12px}.action{display:block;width:min(380px,100%);min-height:62px;border:3px solid var(--navy);border-radius:15px;background:var(--yellow);color:var(--navy);font-weight:900;font-size:1.2rem;box-shadow:0 5px 0 var(--navy);padding:12px 16px;margin-left:auto;margin-right:auto}.action.next{background:var(--green);color:white}.action:disabled{background:#e2e8ee;color:#455a72;box-shadow:0 2px 0 var(--line);border-color:var(--line)}.feedback{border-radius:14px;padding:14px;text-align:center;margin-top:14px}.feedback:empty{display:none}.feedback.good{background:#dff7e8;color:#135c30}.feedback.bad{background:#fde4e4;color:var(--red)}.feedback strong{display:block;font-size:1.15rem}.feedback p{margin:8px 0 0;font-size:1rem;color:var(--navy)}.finish{text-align:center;padding:30px 0}.finish h2{font-size:clamp(2rem,7vw,3rem);margin:10px 0}.scorebig{font-size:2.2rem;font-weight:900;color:var(--purple);margin:10px}.finish .action{margin-top:16px}.badge{display:inline-block;background:var(--yellow);border:3px solid var(--navy);padding:8px 15px;border-radius:999px;font-weight:900}.best{text-align:center;font-size:.87rem;font-weight:bold;margin-top:20px}footer{border-top:2px solid var(--line);margin-top:24px;padding-top:12px;text-align:center;font-size:.8rem;color:#455a72}.sparkle{animation:pop .28s ease}@keyframes pop{50%{transform:scale(1.025)}}
+@media(max-width:520px){body{padding:8px 6px 22px}main{border-radius:18px;padding:15px;min-height:calc(100vh - 30px)}header{gap:12px}.stats{width:100%;justify-content:space-between}.pill{font-size:.88rem;padding:6px 12px}.welcome{padding-top:22px}.welcome h2{font-size:1.9rem}.trail li{font-size:.68rem}.choice{font-size:1rem}.visual{margin-left:-3px;margin-right:-3px}.word-choices .choice{text-align:left;padding:12px}.task{margin-top:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+<header><div><h1>Number Quest</h1><p class="subtitle">Numbers to 10,000</p></div><div class="stats" aria-label="Quest score"><span class="pill" id="streak">🔥 Streak 0</span><span class="pill score" id="score">⭐ 0 points</span></div></header>
+<section id="welcome" class="welcome">
+<div class="eyebrow">Your next adventure starts here</div><div class="hero-icon" aria-hidden="true">🗺️</div>
+<h2>Small steps.<br>Big number discoveries.</h2><p class="lede">Cross the number bridge, follow the pattern trail, and climb to the summit!</p>
+<ol class="mini-map" aria-label="Your adventure"><li><span>1</span>Camp</li><li><span>2</span>Bridge</li><li><span>3</span>Grove</li><li><span>4</span>Peak</li><li><span>★</span>Summit</li></ol>
+<p><strong>22 questions. No clock. Take your time.</strong><br>Check your answer, learn a strategy, then choose Next.</p>
+<button class="action" id="start" type="button">LET'S EXPLORE</button>
+<details class="rules"><summary>How do I earn points?</summary><p>Each correct answer earns 10 points. At a streak of 3, add 5 bonus points per answer; at 5, add 10; at 7 or more, add 15. A mistake resets the streak, not your points.</p><p>Finish every stop to earn your Explorer badge. Then practice just the questions you missed. Review is for learning, with no extra points.</p></details>
+<p class="quiet">Tap or use your keyboard. You can change an answer before checking it.</p>
+</section>
+<section id="game" hidden aria-label="Math adventure">
+<ol class="trail" aria-label="Adventure progress"><li><span>1</span>Camp</li><li><span>2</span>Bridge</li><li><span>3</span>Grove</li><li><span>4</span>Peak</li><li><span>★</span>Summit</li></ol>
+<div class="progress-label"><span id="step"></span><span id="accuracy">0 correct</span></div>
+<div class="meter" id="progress" role="progressbar" aria-label="Questions completed" aria-valuemin="0" aria-valuemax="22" aria-valuenow="0"><span id="meter"></span></div>
+<div class="task"><div class="eyebrow" id="topic"></div><h2 id="prompt" class="prompt" tabindex="-1"></h2></div>
+<div id="visual" class="visual" hidden></div>
+<form id="answerForm" novalidate>
+<p class="instructions" id="instructions"></p>
+<div class="entry" id="entry" hidden><label for="number">Your answer</label><input id="number" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="18" aria-describedby="numberHelp"><p class="quiet" id="numberHelp">Type a number. Commas are welcome.</p></div>
+<div id="ordering" hidden><div class="order-path"><p>YOUR PATH: least → greatest</p><ol id="ordered" aria-live="polite" aria-label="Your number order"></ol></div><div class="tools"><button class="secondary" id="undo" type="button">↶ Undo</button><button class="secondary" id="clear" type="button">Clear</button></div></div>
+<div class="choices" id="choices" role="group" aria-labelledby="prompt instructions"></div>
+<div class="actions"><button class="action" type="submit" id="check">CHECK</button></div>
+</form>
+<div class="feedback" id="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+<div class="actions" id="nextActions" hidden><button class="action next" type="button" id="next">NEXT →</button></div>
+</section>
+<section id="finish" class="finish" hidden aria-labelledby="finishTitle"><div class="hero-icon" aria-hidden="true">🏆</div><div class="badge" id="badge">Explorer badge earned</div><h2 id="finishTitle" tabindex="-1">Summit reached!</h2><div class="scorebig" id="finalScore"></div><p id="finalAccuracy"></p><p id="finalMessage"></p><button class="action next" type="button" id="review">PRACTICE MISSED QUESTIONS</button><button class="action" type="button" id="again">NEW ADVENTURE</button></section>
+<div class="best" id="best">Best quest: 0 points</div>
+<footer>Think it through. Mistakes help your brain grow.<br>Your best score stays in this browser. No sign-in needed.</footer>
+<noscript>This adventure needs JavaScript turned on in your browser.</noscript>
+</main>
+<script>
+(function (root) {
+'use strict';
+const format = n => Number(n).toLocaleString('en-US');
+function parseNumber(raw) {
+  const s = String(raw ?? '').trim();
+  if (!/^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(s)) return null;
+  const n = Number(s.replace(/,/g, ''));
+  return Number.isSafeInteger(n) ? n : null;
+}
+const roundTo = (n, place) => Math.floor((n + place / 2) / place) * place;
+function toWords(n) {
+  const small = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const tens = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  if (n < 20) return small[n];
+  if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 ? '-' + small[n % 10] : '');
+  if (n < 1000) return small[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' ' + toWords(n % 100) : '');
+  return toWords(Math.floor(n / 1000)) + ' thousand' + (n % 1000 ? ', ' + toWords(n % 1000) : '');
+}
+// Fisher-Yates: copy first so practice never mutates the question bank.
+function shuffle(values, rng = Math.random) {
+  const out = [...values];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+const places = ['ones','tens','hundreds','thousands'];
+const placeSingular = {10:'ten',100:'hundred',1000:'thousand'};
+const units = {1:'ones',10:'tens',100:'hundreds',1000:'thousands'};
+const concepts = ['units','composed','subtract100','add100','digitValue','digitPlace','expanded','wordsToNumber','numberToWords','compare','patternDown','patternUp','order','roundMulti','lineInterval','lineMidpoint','lineLocate','round10','round100','round1000','roundPlace','context'];
+const labels = {
+  units:'Unit bridge',composed:'Number builder',subtract100:'Hundred hop',add100:'Hundred hop',
+  digitValue:'Digit treasure',digitPlace:'Place-value peak',expanded:'Number builder',
+  wordsToNumber:'Word wizard',numberToWords:'Word wizard',compare:'Compare canyon',
+  patternDown:'Pattern trail',patternUp:'Pattern trail',order:'Order crossing',roundMulti:'Rounding grove',
+  lineInterval:'Number-line lookout',lineMidpoint:'Halfway hill',lineLocate:'Number-line lookout',
+  round10:'Rounding grove',round100:'Rounding grove',round1000:'Rounding grove',roundPlace:'Rounding grove',context:'Story summit'
+};
+function numericChoices(answer, candidates, rng) {
+  const values = [...new Set([answer, ...candidates].filter(n => Number.isInteger(n) && n >= 0 && n <= 10000))];
+  for (let step = 1; values.length < 4; step++) {
+    const n = answer + step <= 10000 ? answer + step : answer - step;
+    if (!values.includes(n)) values.push(n);
+  }
+  return shuffle(values.slice(0,4), rng);
+}
+function makeQuestion(data, rng = Math.random) {
+  const d = {...data};
+  const q = {id:d.id,concept:d.concept,data:d,type:'number',label:labels[d.concept]};
+  switch (d.concept) {
+    case 'units':
+      q.prompt = `${format(d.n / (d.givenUnit || 1))} ${units[d.givenUnit || 1]} = ___ ${units[d.unit]}`;
+      q.answer = d.n / d.unit;
+      q.strategy = `First find the number of ones. Each ${units[d.unit] === 'ones' ? 'one is 1' : placeSingular[d.unit] + ' is ' + format(d.unit)}. ${format(d.n)} ÷ ${format(d.unit)} = ${format(q.answer)}.`;
+      break;
+    case 'composed': case 'expanded':
+      q.answer = d.terms.reduce((sum,n) => sum + n, 0);
+      q.prompt = d.concept === 'expanded' ? `Write ${d.terms.map(format).join(' + ')} as one number.` : `Write as one number: ${d.terms.map((n,i) => `${n / 10 ** (3-i)} ${places[3-i]}`).join(' + ')}.`;
+      q.strategy = `Line up thousands, hundreds, tens, and ones. Use 0 for an empty place. ${d.terms.map(format).join(' + ')} = ${format(q.answer)}.`;
+      break;
+    case 'subtract100': case 'add100': {
+      const sign = d.concept === 'add100' ? 1 : -1;
+      q.prompt = `${format(d.n)} ${sign === 1 ? '+' : '−'} 100 = ___`;
+      q.answer = d.n + sign * 100;
+      q.strategy = `Move ${sign === 1 ? 'forward' : 'back'} one hundred. Regroup at a thousand boundary; the tens and ones stay the same. The result is ${format(q.answer)}.`;
+      break;
+    }
+    case 'digitValue': {
+      const digit = Math.floor(d.n / 10 ** d.position) % 10;
+      q.prompt = `In ${format(d.n)}, the ${places[d.position]} digit is ${digit}. What is its value?`;
+      q.answer = digit * 10 ** d.position;
+      q.type = 'mcq';
+      q.choices = numericChoices(q.answer, [digit, digit*10, digit*100, digit*1000], rng);
+      q.strategy = `Value means how much a digit is worth. ${digit} × ${format(10 ** d.position)} = ${format(q.answer)}.`;
+      break;
+    }
+    case 'digitPlace': {
+      const digit = Math.floor(d.n / 10 ** d.position) % 10;
+      q.prompt = `Which place is the digit ${digit} in: ${format(d.n)}?`;
+      q.answer = places[d.position]; q.type = 'mcq'; q.choices = shuffle(places,rng);
+      q.strategy = `From the right, name the places: ones, tens, hundreds, thousands. The ${digit} is in the ${q.answer} place.`;
+      break;
+    }
+    case 'wordsToNumber':
+      q.prompt = `Write in digits: ${toWords(d.n)}.`; q.answer = d.n;
+      q.strategy = `Put each part in its place. Empty places need a zero: ${format(d.n)}.`;
+      break;
+    case 'numberToWords':
+      q.prompt = `Which words name ${format(d.n)}?`; q.answer = toWords(d.n); q.type = 'mcq';
+      q.choices = numericChoices(d.n,[d.n+100,d.n-100,d.n+1000,d.n-1000],rng).map(toWords);
+      q.strategy = `Read the thousands first, then the hundreds, tens, and ones: ${q.answer}. Forty has no u.`;
+      break;
+    case 'compare':
+      q.prompt = `Choose the sign: ${d.leftText} ___ ${d.rightText}`;
+      q.answer = d.left === d.right ? '=' : d.left > d.right ? '>' : '<'; q.type = 'mcq'; q.choices = ['<','=','>'];
+      q.strategy = `Convert both sides to ones: ${format(d.left)} ${q.answer} ${format(d.right)}. The open side of < or > faces the larger number.`;
+      break;
+    case 'patternDown': case 'patternUp':
+      q.prompt = 'Find the missing number in the pattern.';
+      q.sequence = Array.from({length:6},(_,i) => i === d.missing ? '___' : format(d.start+d.step*i));
+      q.answer = d.start + d.step * d.missing;
+      q.strategy = `Each step ${d.step > 0 ? 'adds' : 'subtracts'} ${format(Math.abs(d.step))}. Count one step at a time to reach ${format(q.answer)}.`;
+      break;
+    case 'order':
+      q.prompt = 'Build a path from least to greatest.'; q.type = 'order';
+      q.answer = [...d.values].sort((a,b) => a-b); q.choices = shuffle(d.values,rng);
+      q.strategy = `Compare thousands first, then hundreds, tens, and ones. The path is ${q.answer.map(format).join(' → ')}.`;
+      break;
+    case 'roundMulti':
+      q.prompt = `Select ALL numbers that round to ${format(d.target)} to the nearest ${placeSingular[d.place]}.`;
+      q.type = 'multi'; q.choices = shuffle(d.values,rng);
+      q.answer = d.values.filter(n => roundTo(n,d.place) === d.target);
+      q.strategy = `Look one place to the right. 0 to 4: round down. 5 to 9: round up. The matching numbers are ${q.answer.map(format).join(', ')}.`;
+      break;
+    case 'lineInterval':
+      q.prompt = 'How much is one small step between neighboring ticks?';
+      q.line = d.line; q.answer = (d.line.end-d.line.start)/d.line.ticks;
+      q.strategy = `Count the spaces, not the tick marks. Divide the distance by the spaces: ${format(d.line.end-d.line.start)} ÷ ${d.line.ticks} = ${format(q.answer)}.`;
+      break;
+    case 'lineMidpoint':
+      q.prompt = `${format(d.mid)} is halfway between ${format(d.left)} and which number?`;
+      q.answer = d.mid + (d.mid-d.left);
+      q.line = {start:d.left,end:q.answer,ticks:10,labels:[{value:d.left,text:format(d.left)},{value:d.mid,text:format(d.mid)},{value:q.answer,text:'?'}]};
+      q.strategy = `Both halves have the same length. ${format(d.mid)} − ${format(d.left)} = ${format(d.mid-d.left)}. Add that distance again to get ${format(q.answer)}.`;
+      break;
+    case 'lineLocate':
+      q.prompt = `Which letter marks ${format(d.target)} on the number line?`;
+      q.type = 'mcq'; q.line = {...d.line,markers:d.markers}; q.choices = d.markers.map(m => m.label);
+      q.answer = d.markers.find(m => m.value === d.target).label;
+      q.strategy = `Each small space is ${format((d.line.end-d.line.start)/d.line.ticks)}. Start at a labeled tick and count equal steps to ${format(d.target)}: letter ${q.answer}.`;
+      break;
+    case 'round10': case 'round100': case 'round1000': case 'context':
+      q.prompt = d.concept === 'context' ? `A food stand sold ${format(d.n)} tacos. About how many is that, rounded to the nearest ${placeSingular[d.place]}?` : `Round ${format(d.n)} to the nearest ${placeSingular[d.place]}.`;
+      q.answer = roundTo(d.n,d.place);
+      q.strategy = `Look at the ${places[Math.log10(d.place)-1]} digit. 0 to 4: round down. 5 to 9: round up. ${format(d.n)} is about ${format(q.answer)} to the nearest ${placeSingular[d.place]}.`;
+      break;
+    case 'roundPlace':
+      q.prompt = `${format(d.n)} rounds to ${format(d.target)}. To which place was it rounded?`;
+      q.type = 'mcq'; q.choices = ['ten','hundred','thousand'];
+      q.answer = placeSingular[[10,100,1000].find(p => roundTo(d.n,p) === d.target)];
+      q.strategy = `Try each place: nearest ten is ${format(roundTo(d.n,10))}, hundred is ${format(roundTo(d.n,100))}, and thousand is ${format(roundTo(d.n,1000))}. Choose ${q.answer}.`;
+      break;
+    default: throw new Error('Unknown question concept: '+d.concept);
+  }
+  return q;
+}
+function line(start=1000,step=100,ticks=20) {
+  const end = start+step*ticks;
+  return {start,end,ticks,labels:[{value:start,text:format(start)},{value:start+step*10,text:format(start+step*10)},{value:start+step*20,text:format(start+step*20)}]};
+}
+function buildBank(rng = Math.random) {
+  const specs = [
+    {id:'units-4300',concept:'units',n:4300,unit:10},
+    {id:'units-210',concept:'units',n:210*10,givenUnit:10,unit:1},
+    {id:'composed-5164',concept:'composed',terms:[5*1000,1*100,6*10,4]},
+    {id:'subtract-9006',concept:'subtract100',n:9006},
+    {id:'add-995',concept:'add100',n:995},
+    ...[4,6,1,5].map((digit,position) => ({id:'value-'+digit,concept:'digitValue',n:5164,position})),
+    {id:'value-7543',concept:'digitValue',n:7543,position:1},
+    {id:'place-6912',concept:'digitPlace',n:6912,position:3},
+    {id:'expanded-3214',concept:'expanded',terms:[10,200,3000,4]},
+    {id:'expanded-8206',concept:'expanded',terms:[8000,6,200]},
+    {id:'words-5005',concept:'wordsToNumber',n:5005},
+    {id:'word-4348',concept:'numberToWords',n:4348},
+    {id:'compare-equal',concept:'compare',left:4*1000+2*10,right:20+40*100,leftText:'4 thousands + 2 tens',rightText:'20 ones + 40 hundreds'},
+    {id:'compare-regroup',concept:'compare',left:25*100+10*10,right:100+3*1000,leftText:'25 hundreds + 10 tens',rightText:'100 ones + 3 thousands'},
+    ...[2,3,5].map(missing => ({id:'down-'+missing,concept:'patternDown',start:5009,step:-1000,missing})),
+    ...[2,3,5].map(missing => ({id:'up-'+missing,concept:'patternUp',start:4374,step:100,missing})),
+    {id:'order-guide',concept:'order',values:[3421,1234,2413,2341,3412]},
+    {id:'multi-80',concept:'roundMulti',values:[72,82,79,74,75,85],place:10,target:80},
+    {id:'line-interval',concept:'lineInterval',line:line()},
+    {id:'line-midpoint',concept:'lineMidpoint',left:1500,mid:2000},
+    {id:'line-locate',concept:'lineLocate',line:line(1000,100,22),target:3100,markers:[{label:'A',value:1300},{label:'B',value:1900},{label:'C',value:2400},{label:'D',value:3100}]},
+    {id:'round-4348',concept:'round100',n:4348,place:100},
+    {id:'round-4683',concept:'round10',n:4683,place:10},
+    {id:'round-85',concept:'round10',n:85,place:10},
+    {id:'round-4521',concept:'round1000',n:4521,place:1000},
+    {id:'round-9500',concept:'round1000',n:9500,place:1000},
+    {id:'tacos-1995',concept:'context',n:1995,place:10},
+    {id:'round-place-3100',concept:'roundPlace',n:3100,target:3000}
+  ];
+  const int = (lo,hi) => lo+Math.floor(rng()*(hi-lo+1));
+  for (let i=0;i<18;i++) {
+    const n=int(1,8)*1000+int(0,9)*100+int(0,9)*10+int(0,9);
+    const digits=shuffle([1,2,3,4,5,6,7,8,9],rng).slice(0,4);
+    const terms=[Math.floor(n/1000)*1000,Math.floor(n/100)%10*100,Math.floor(n/10)%10*10,n%10];
+    const p=[10,100,1000][i%3];
+    const target=int(2,8)*p;
+    const start=int(1,5)*1000, step=[10,50,100][i%3];
+    const left=int(10,60)*100+int(0,9)*10;
+    const right=left+[-100,0,100][i%3];
+    const orderBase=int(1,7)*1000;
+    const generated = {
+      units:{n:int(10,90)*100,unit:[1,10,100][i%3],givenUnit:i%3===0?10:1},
+      composed:{terms},subtract100:{n:int(1,9)*1000+int(0,99)},add100:{n:int(1,8)*1000+int(900,999)},
+      digitValue:{n,position:i%4},digitPlace:{n:Number(digits.join('')),position:i%4},
+      expanded:{terms:shuffle(terms,rng)},wordsToNumber:{n:int(1,9)*1000+int(1,9)},numberToWords:{n},
+      compare:{left,right,leftText:`${Math.floor(left/100)} hundreds + ${left%100/10} tens`,rightText:`${Math.floor(right/1000)} thousands + ${right%1000} ones`},
+      patternDown:{start:int(6,9)*1000+int(0,99),step:-1000,missing:[2,3,5][i%3]},
+      patternUp:{start:int(1,8)*1000+int(0,99),step:100,missing:[2,3,5][i%3]},
+      order:{values:[orderBase+421,orderBase-234,orderBase+413,orderBase+341,orderBase+412]},
+      roundMulti:{values:[target-p+2,target+2,target-1,target-p/2-1,target-p/2,target+p/2],place:p,target},
+      lineInterval:{line:line(start,step)},lineMidpoint:{left:start,mid:start+step*5},
+      lineLocate:{line:line(start,step,22),target:start+step*[3,9,14,21][i%4],markers:[3,9,14,21].map((at,j) => ({label:'ABCD'[j],value:start+step*at}))},
+      round10:{n,place:10},round100:{n,place:100},round1000:{n,place:1000},
+      roundPlace:{n:int(1,8)*1000+103,target:0},context:{n:int(1,8)*1000+995,place:p}
+    };
+    generated.roundPlace.target=roundTo(generated.roundPlace.n,1000);
+    for(const concept of concepts) specs.push({id:concept+'-practice-'+i,concept,...generated[concept]});
+  }
+  return specs.map(d => makeQuestion(d,rng));
+}
+function buildRound(rng = Math.random) {
+  const bank = buildBank(rng);
+  return shuffle(concepts.map(c => {
+    const pool = bank.filter(q => q.concept === c);
+    return pool[Math.floor(rng()*pool.length)];
+  }),rng);
+}
+const answerText = q => Array.isArray(q.answer) ? q.answer.map(format).join(q.type === 'order' ? ' → ' : ', ') : typeof q.answer === 'number' ? format(q.answer) : q.answer;
+class Game {
+  constructor(questions = buildRound(), {review = false} = {}) {
+    this.questions = [...questions]; this.index = 0; this.score = 0; this.correct = 0;
+    this.streak = 0; this.locked = false; this.missed = []; this.isReview = review;
+  }
+  get done() { return this.index >= this.questions.length; }
+  get current() { return this.questions[this.index]; }
+  check(raw) {
+    if (this.done) return {status:'finished'};
+    if (this.locked) return {status:'locked'};
+    const q = this.current;
+    let value = raw, valid;
+    if (q.type === 'number') { value = parseNumber(raw); valid = value !== null; }
+    else if (q.type === 'mcq') valid = q.choices.includes(value);
+    else valid = Array.isArray(value) && value.length > 0 && new Set(value).size === value.length && value.every(v => q.choices.includes(v)) && (q.type !== 'order' || value.length === q.choices.length);
+    if (!valid) return {status:'incomplete'};
+    const right = q.type === 'multi' ? value.length === q.answer.length && q.answer.every(v => value.includes(v)) : q.type === 'order' ? q.answer.every((v,i) => value[i] === v) : value === q.answer;
+    this.locked = true;
+    let points = 0;
+    if (right) {
+      this.correct++; this.streak++;
+      if (!this.isReview) points = 10 + (this.streak >= 7 ? 15 : this.streak >= 5 ? 10 : this.streak >= 3 ? 5 : 0);
+      this.score += points;
+    } else { this.streak = 0; this.missed.push(q); }
+    return {status:'checked',right,points,answer:answerText(q),strategy:q.strategy};
+  }
+  next() {
+    if (this.done || !this.locked) return false;
+    this.index++; this.locked = false;
+    return true;
+  }
+  review() { return new Game(this.missed,{review:true}); }
+}
+function createBestStore(storage) {
+  const key = 'number-quest:v1:best';
+  let memory = 0;
+  const get = () => {
+    try {
+      const n = Number(storage?.getItem(key));
+      if (Number.isSafeInteger(n) && n >= 0) memory = Math.max(memory,n);
+    } catch (_) { /* Private browsing or denied storage: keep the in-memory best. */ }
+    return memory;
+  };
+  return {get,save(score) {
+    memory = Math.max(get(), Number.isSafeInteger(score) && score >= 0 ? score : 0);
+    try { storage?.setItem(key,String(memory)); } catch (_) { /* The game still works offline. */ }
+    return memory;
+  }};
+}
+const API = { parseNumber, roundTo, toWords, format, shuffle, makeQuestion, buildBank, buildRound, concepts, Game, createBestStore, answerText };
+root.MathQuest = API;
+if (typeof module !== 'undefined') module.exports = API;
+if (typeof document !== 'undefined') {
+  const $ = id => document.getElementById(id);
+  const text = (id,value) => { $(id).textContent = value; };
+  let storage;
+  try { storage = root.localStorage; } catch (_) { storage = null; }
+  const bestStore = createBestStore(storage);
+  let game, selected = [], original = null;
+  function updateStats() {
+    text('score',`⭐ ${game.isReview && original ? original.score : game.score} points`);
+    text('streak',`🔥 ${game.isReview ? 'Practice streak' : 'Streak'} ${game.streak}`);
+    text('accuracy',`${game.correct} correct`);
+    const completed = game.index + (game.locked ? 1 : 0);
+    text('step',`${game.isReview ? 'Review' : 'Question'} ${Math.min(game.index+1,game.questions.length)} / ${game.questions.length}`);
+    $('meter').style.width = `${completed / game.questions.length * 100}%`;
+    $('progress').setAttribute('aria-valuenow',completed);
+    $('progress').setAttribute('aria-valuemax',game.questions.length);
+    document.querySelectorAll('.trail li').forEach((el,i) => {
+      const reached = completed / game.questions.length >= i/4;
+      el.classList.toggle('reached',reached);
+      el.setAttribute('aria-label',`${['Camp','Bridge','Grove','Peak','Summit'][i]}${reached ? ' reached' : ''}`);
+    });
+  }
+  function drawLine(spec) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const node = (tag,attrs={},content) => {
+      const el = document.createElementNS(ns,tag);
+      Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k,v));
+      if (content !== undefined) el.textContent = content;
+      return el;
+    };
+    const svg = node('svg',{viewBox:'0 0 360 140',role:'img','aria-labelledby':'lineTitle lineDesc'});
+    const x = n => 30+(n-spec.start)/(spec.end-spec.start)*300;
+    const step = (spec.end-spec.start)/spec.ticks;
+    svg.append(node('title',{id:'lineTitle'},'Number line with equal spaces'));
+    const description = `${spec.ticks} equal spaces. ` + spec.labels.map(l => `Tick ${(l.value-spec.start)/step} is labeled ${l.text}.`).join(' ') + (spec.markers || []).map(m => ` Letter ${m.label} is at tick ${(m.value-spec.start)/step}.`).join('');
+    svg.append(node('desc',{id:'lineDesc'},description));
+    svg.append(node('line',{x1:30,y1:76,x2:330,y2:76,stroke:'#183153','stroke-width':2.5}));
+    for (let i=0;i<=spec.ticks;i++) {
+      const tickX = 30+i/spec.ticks*300;
+      const big = spec.labels.some(l => Math.abs(x(l.value)-tickX)<.1);
+      svg.append(node('line',{x1:tickX,y1:big?64:69,x2:tickX,y2:big?89:83,stroke:'#183153','stroke-width':big?2.5:1.5}));
+    }
+    for (const l of spec.labels) svg.append(node('text',{x:x(l.value),y:112,'text-anchor':'middle',fill:'#183153','font-size':16,'font-weight':'bold'},l.text));
+    for (const m of spec.markers || []) {
+      svg.append(node('line',{x1:x(m.value),y1:41,x2:x(m.value),y2:70,stroke:'#6244bd','stroke-width':2}));
+      svg.append(node('circle',{cx:x(m.value),cy:30,r:14,fill:'#6244bd'}));
+      svg.append(node('text',{x:x(m.value),y:36,'text-anchor':'middle',fill:'white','font-size':17,'font-weight':'bold'},m.label));
+    }
+    $('visual').append(svg);
+  }
+  function updateChoices() {
+    const q = game.current;
+    [...$('choices').children].forEach((b,i) => {
+      const v = q.choices[i], chosen = selected.includes(v);
+      b.classList.toggle('selected',chosen);
+      b.classList.toggle('used',q.type === 'order' && chosen && !game.locked);
+      b.disabled = game.locked || (q.type === 'order' && chosen);
+      b.setAttribute('aria-pressed',String(chosen));
+      b.classList.toggle('correct',game.locked && q.type !== 'order' && (Array.isArray(q.answer) ? q.answer.includes(v) : q.answer === v));
+    });
+    $('ordered').replaceChildren();
+    if (q.type === 'order') selected.forEach(v => {
+      const li = document.createElement('li'); li.textContent = format(v); $('ordered').append(li);
+    });
+    $('undo').disabled = $('clear').disabled = game.locked || selected.length === 0;
+  }
+  function render() {
+    if (game.done) { finish(); return; }
+    selected = [];
+    const q = game.current;
+    $('game').hidden = false; $('welcome').hidden = $('finish').hidden = true;
+    text('topic',q.label); text('prompt',q.prompt);
+    text('instructions',q.type === 'number' ? 'Type your answer, then press CHECK.' : q.type === 'order' ? 'Tap every tile in order. Use Undo or Clear to change your path.' : q.type === 'multi' ? 'Choose every match. Tap a selected number again to remove it.' : 'Choose one answer. You can change it before checking.');
+    $('visual').replaceChildren(); $('visual').hidden = !q.line && !q.sequence;
+    if (q.line) drawLine(q.line);
+    if (q.sequence) {
+      const row = document.createElement('div'); row.className = 'sequence';
+      q.sequence.forEach(v => {const el = document.createElement('span'); el.textContent = v; row.append(el);});
+      $('visual').append(row);
+    }
+    $('entry').hidden = q.type !== 'number'; $('ordering').hidden = q.type !== 'order';
+    $('number').value = ''; $('number').disabled = q.type !== 'number'; $('number').removeAttribute('aria-invalid');
+    $('choices').replaceChildren(); $('choices').hidden = q.type === 'number';
+    $('choices').className = 'choices' + (q.concept === 'numberToWords' ? ' word-choices' : '');
+    (q.choices || []).forEach(v => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'choice'; b.textContent = typeof v === 'number' ? format(v) : v;
+      if (q.concept === 'compare') b.setAttribute('aria-label',{'<':'Less than','=':'Equal to','>':'Greater than'}[v]);
+      b.onclick = () => {
+        if (game.locked) return;
+        if (q.type === 'mcq') selected = [v];
+        else if (q.type === 'order') { if (!selected.includes(v)) selected.push(v); }
+        else selected = selected.includes(v) ? selected.filter(n => n !== v) : [...selected,v];
+        updateChoices();
+      };
+      $('choices').append(b);
+    });
+    updateChoices(); updateStats();
+    $('check').disabled = false; text('check','CHECK');
+    $('nextActions').hidden = true;
+    $('feedback').className = 'feedback'; $('feedback').replaceChildren();
+    $('prompt').focus();
+  }
+  function check() {
+    if (!game || game.done || game.locked) return;
+    const q = game.current;
+    const raw = q.type === 'number' ? $('number').value : q.type === 'mcq' ? selected[0] : selected;
+    const out = game.check(raw);
+    if (out.status === 'incomplete') {
+      $('feedback').className = 'feedback bad';
+      text('feedback',q.type === 'number' ? 'Enter a whole number first, like 4,300. Use commas in groups of three.' : q.type === 'order' ? 'Build your whole path by tapping every tile first.' : 'Choose an answer first, then press CHECK.');
+      if (q.type === 'number') { $('number').setAttribute('aria-invalid','true'); $('number').focus(); }
+      return;
+    }
+    if (out.status !== 'checked') return;
+    $('number').disabled = true; $('number').removeAttribute('aria-invalid');
+    $('check').disabled = true; text('check','CHECKED ✓');
+    updateChoices(); updateStats();
+    $('feedback').className = `feedback ${out.right ? 'good sparkle' : 'bad'}`;
+    $('feedback').replaceChildren();
+    const heading = document.createElement('strong');
+    heading.textContent = out.right ? game.isReview ? 'You got it! Keep growing.' : `Correct! +${out.points} points${out.points>10 ? ` (${out.points-10} streak bonus)` : ''}` : `Good effort! Correct answer: ${out.answer}`;
+    const strategy = document.createElement('p'); strategy.textContent = out.strategy;
+    $('feedback').append(heading,strategy);
+    $('nextActions').hidden = false; text('next',game.index === game.questions.length-1 ? 'SEE MY RESULTS →' : 'NEXT →');
+    // Keep CHECK disabled in its original position. A double tap cannot hit NEXT.
+    // Do not focus NEXT automatically: a held Enter must not skip the strategy.
+    $('feedback').focus();
+  }
+  function finish() {
+    $('game').hidden = true; $('finish').hidden = false;
+    if (!game.isReview) {
+      original = {score:game.score,correct:game.correct,total:game.questions.length};
+      bestStore.save(game.score);
+    }
+    text('best',`Best quest: ${bestStore.get()} points`);
+    text('finishTitle',game.isReview ? 'Practice complete!' : 'Summit reached!');
+    text('badge',game.isReview ? 'Brain builder badge earned' : 'Explorer badge earned');
+    text('finalScore',game.isReview ? 'A stronger number explorer!' : `⭐ ${game.score} points`);
+    text('finalAccuracy',`${game.correct} / ${game.questions.length} correct${game.isReview ? ' in this practice' : ' on this adventure'}.`);
+    text('finalMessage',game.missed.length ? `${game.missed.length} ${game.missed.length === 1 ? 'question is' : 'questions are'} ready for another try. Practice is how we grow!` : 'Every answer found! Try a fresh adventure for new number discoveries.');
+    if (game.isReview && original) text('finalMessage',`${$('finalMessage').textContent} Original quest: ${original.correct} / ${original.total} correct, ${original.score} points.`);
+    $('review').hidden = game.missed.length === 0;
+    text('review',`PRACTICE ${game.missed.length} MISSED ${game.missed.length === 1 ? 'QUESTION' : 'QUESTIONS'}`);
+    $('finishTitle').focus();
+  }
+  function start(questions) {
+    original = null; game = new Game(questions || buildRound()); render();
+  }
+  $('start').onclick = () => start(); $('again').onclick = () => start();
+  $('answerForm').onsubmit = e => { e.preventDefault(); check(); };
+  $('next').onclick = e => { if (e.detail > 1) return; if (game.next()) render(); };
+  $('review').onclick = () => { game = game.review(); render(); };
+  $('undo').onclick = () => { if (!game.locked) { selected.pop(); updateChoices(); } };
+  $('clear').onclick = () => { if (!game.locked) { selected = []; updateChoices(); } };
+  text('best',`Best quest: ${bestStore.get()} points`);
+  // QA hook: uses the same engine and render path as the visible Start button.
+  API.ui = {start,getGame:() => game};
+}
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+</body>
+</html>
