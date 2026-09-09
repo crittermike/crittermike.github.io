@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T14:16:08.446Z",
+  "generated_at": "2026-09-09T14:30:16.930Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -16,15 +16,6 @@
       "time": "9a",
       "what": "Mom lymphedema appointment",
       "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-10T10:00:00-04:00"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "9:15a",
-      "what": "Henry med check - Parkside Pediatrics",
-      "who": "henry",
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-10T10:00:00-04:00"
@@ -995,7 +986,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 76,
       "hi": 89,
       "lo": 65,
       "icon": "☀️",
@@ -2428,6 +2419,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T14:16:07.032Z"
+    "updatedAt": "2026-09-09T14:30:15.559Z"
   }
 }
