@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T22:45:39.487Z",
+  "generated_at": "2026-09-09T23:00:43.339Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,15 +46,6 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-11T10:15:00-04:00"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "3:15p",
-      "what": "POPCS Chess Club, if participating",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-11T16:15:00-04:00"
     },
     {
       "date": "2026-09-12",
@@ -1003,7 +994,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 85,
       "hi": 88,
       "lo": 65,
       "icon": "☀️",
@@ -2436,6 +2427,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T22:45:38.368Z"
+    "updatedAt": "2026-09-09T23:00:42.280Z"
   }
 }
