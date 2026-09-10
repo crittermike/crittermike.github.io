@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T11:45:55.041Z",
+  "generated_at": "2026-09-10T12:00:58.122Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -876,64 +876,12 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot pot roast with carrots and potatoes",
+    "name": "Crockpot sirloin tip roast with carrots and potatoes",
     "protein_g": 55,
     "cal": 650,
     "effort": "easy-slow",
-    "note": "Carryover from last week. Start in the morning on low for 8 hours. Dinner before the 7:30 PM Confirmation parent meeting. Serve meat and vegetables separately, with broth on the side.",
-    "recipe": {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth",
-            "salt, black pepper"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth",
-        "salt, black pepper"
-      ],
-      "steps": [
-        "Season roast all over with salt and pepper.",
-        "Put onions in bottom of crockpot. Place roast on top.",
-        "Add carrots and potatoes around/on top of roast.",
-        "Pour in beef broth.",
-        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-      ],
-      "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
-      "last_reviewed": null
-    }
+    "note": "Sirloin tip substituted at Mike's request on September 10; Nancy prefers lean meat. No searing or added butter/oil. LOW about 8-10 hours, checking tenderness at 8 hours. Serve meat and vegetables separately, with juices on the side. Macro numbers are legacy estimates, not recalculated for this adaptation. Dinner before the 7:30 PM Confirmation parent meeting.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -971,62 +919,10 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Crockpot pot roast with carrots and potatoes",
+      "name": "Crockpot sirloin tip roast with carrots and potatoes",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "pot-roast-with-carrots-and-potatoes",
-        "name": "Pot roast with carrots and potatoes",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "pot-roast-with-carrots-and-potatoes"
-        ],
-        "in_rotation": true,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": 55,
-        "cal": 650,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "chuck roast",
-              "carrots",
-              "potatoes",
-              "onions",
-              "beef broth",
-              "salt, black pepper"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "chuck roast",
-          "carrots",
-          "potatoes",
-          "onions",
-          "beef broth",
-          "salt, black pepper"
-        ],
-        "steps": [
-          "Season roast all over with salt and pepper.",
-          "Put onions in bottom of crockpot. Place roast on top.",
-          "Add carrots and potatoes around/on top of roast.",
-          "Pour in beef broth.",
-          "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-          "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-        ],
-        "notes": "",
-        "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Friday",
@@ -1047,7 +943,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 67,
+      "temp": 68,
       "hi": 93,
       "lo": 67,
       "icon": "☀️",
@@ -1941,59 +1837,6 @@
       "last_reviewed": null
     },
     {
-      "slug": "pot-roast-with-carrots-and-potatoes",
-      "name": "Pot roast with carrots and potatoes",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "pot-roast-with-carrots-and-potatoes"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": 55,
-      "cal": 650,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chuck roast",
-            "carrots",
-            "potatoes",
-            "onions",
-            "beef broth",
-            "salt, black pepper"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chuck roast",
-        "carrots",
-        "potatoes",
-        "onions",
-        "beef broth",
-        "salt, black pepper"
-      ],
-      "steps": [
-        "Season roast all over with salt and pepper.",
-        "Put onions in bottom of crockpot. Place roast on top.",
-        "Add carrots and potatoes around/on top of roast.",
-        "Pour in beef broth.",
-        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
-        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
-      ],
-      "notes": "",
-      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
-      "last_reviewed": null
-    },
-    {
       "slug": "ritz-chicken-casserole",
       "name": "Ritz Chicken Casserole",
       "source": "thecountrycook.net",
@@ -2137,6 +1980,72 @@
       "steps": [],
       "notes": "",
       "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
+      "last_reviewed": null
+    },
+    {
+      "slug": "pot-roast-with-carrots-and-potatoes",
+      "name": "Slow-cooker sirloin tip roast with carrots and potatoes",
+      "source": "https://ifoodreal.com/crock-pot-sirloin-tip-roast/",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "pot-roast-with-carrots-and-potatoes"
+      ],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 55,
+      "cal": 650,
+      "servings": 6,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "3 lb sirloin tip roast, fully thawed, visible exterior fat and tough silverskin trimmed",
+            "1.5 lb baby potatoes, larger ones halved",
+            "2 cups baby carrots or thick carrot chunks",
+            "1 large yellow onion, thickly sliced",
+            "1 cup low-sodium beef broth",
+            "3 tbsp apple cider vinegar",
+            "3 tbsp reduced-sodium soy sauce",
+            "2 tbsp Worcestershire sauce",
+            "2 tsp garlic powder",
+            "2 tsp onion powder",
+            "1 tsp dried parsley",
+            "1 tsp black pepper",
+            "Salt to taste after cooking"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "3 lb sirloin tip roast, fully thawed, visible exterior fat and tough silverskin trimmed",
+        "1.5 lb baby potatoes, larger ones halved",
+        "2 cups baby carrots or thick carrot chunks",
+        "1 large yellow onion, thickly sliced",
+        "1 cup low-sodium beef broth",
+        "3 tbsp apple cider vinegar",
+        "3 tbsp reduced-sodium soy sauce",
+        "2 tbsp Worcestershire sauce",
+        "2 tsp garlic powder",
+        "2 tsp onion powder",
+        "1 tsp dried parsley",
+        "1 tsp black pepper",
+        "Salt to taste after cooking"
+      ],
+      "steps": [
+        "Put potatoes, carrots, and onion in a large slow cooker. Place the trimmed, thawed roast on top. No searing needed.",
+        "Mix broth, vinegar, soy sauce, Worcestershire, garlic powder, onion powder, parsley, and black pepper. Pour over the roast. The meat does not need to be submerged.",
+        "Cover and cook on LOW for about 8-10 hours. Check at 8 hours; it is ready when a fork slides in easily and the vegetables are tender. Timing varies with roast thickness and slow cooker. Do not keep cooking solely to force chuck-like shredding.",
+        "Transfer the roast to a cutting board and rest for 10 minutes. Slice thinly against the grain, or separate into pieces if it is already falling apart.",
+        "Skim visible fat from the cooking juices, taste, and add salt only if needed. Serve the meat and vegetables with juices spooned over or on the side."
+      ],
+      "notes": "",
+      "body_html": "<h1>Slow-cooker sirloin tip roast</h1>\n<p>Serves 6. No searing, no added butter or oil. Adapted from iFoodReal; butter and paprika omitted, lower-sodium broth and soy sauce preferred, and salt adjusted at the end.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>3 lb sirloin tip roast, fully thawed, visible exterior fat and tough silverskin trimmed</li>\n<li>1.5 lb baby potatoes, larger ones halved</li>\n<li>2 cups baby carrots or thick carrot chunks</li>\n<li>1 large yellow onion, thickly sliced</li>\n<li>1 cup low-sodium beef broth</li>\n<li>3 tbsp apple cider vinegar</li>\n<li>3 tbsp reduced-sodium soy sauce</li>\n<li>2 tbsp Worcestershire sauce</li>\n<li>2 tsp garlic powder</li>\n<li>2 tsp onion powder</li>\n<li>1 tsp dried parsley</li>\n<li>1 tsp black pepper</li>\n<li>Salt to taste after cooking</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put potatoes, carrots, and onion in a large slow cooker. Place the trimmed, thawed roast on top. No searing needed.</li>\n<li>Mix broth, vinegar, soy sauce, Worcestershire, garlic powder, onion powder, parsley, and black pepper. Pour over the roast. The meat does not need to be submerged.</li>\n<li>Cover and cook on LOW for about 8-10 hours. Check at 8 hours; it is ready when a fork slides in easily and the vegetables are tender. Timing varies with roast thickness and slow cooker. Do not keep cooking solely to force chuck-like shredding.</li>\n<li>Transfer the roast to a cutting board and rest for 10 minutes. Slice thinly against the grain, or separate into pieces if it is already falling apart.</li>\n<li>Skim visible fat from the cooking juices, taste, and add salt only if needed. Serve the meat and vegetables with juices spooned over or on the side.</li>\n</ol>\n<h2>Optional gravy</h2>\n<p>Transfer 2 cups cooking liquid to a saucepan. Mix 2 tbsp cornstarch with 2 tbsp cold water, whisk into the simmering liquid, and simmer until thickened.</p>\n",
       "last_reviewed": null
     },
     {
@@ -2480,6 +2389,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.4,
     "source": "ynab",
-    "updatedAt": "2026-09-10T11:45:53.567Z"
+    "updatedAt": "2026-09-10T12:00:56.428Z"
   }
 }
