@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-10T03:45:55.228Z",
+  "generated_at": "2026-09-10T04:00:56.947Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-09",
-      "time": "10a",
-      "what": "Mom appt with Dr Leblond (pain clinic)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-09T11:00:00-04:00"
-    },
     {
       "date": "2026-09-10",
       "time": "9a",
@@ -603,12 +594,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-10-august-prayer-recitation-prayer-before-m",
-          "label": "August Prayer Recitation - Prayer Before Meals"
+          "id": "sch-2026-09-11-spelling-lesson-4-test-hard-and-soft-c-a",
+          "label": "Spelling: Lesson 4 Test, hard and soft C and G sounds (Cannon newsletter 9/7-11)"
         },
         {
-          "id": "sch-2026-09-10-thursday-homework-study-read-20-minutes-",
-          "label": "Thursday homework/study: Read 20 minutes; Spelling WB p.20; words 16-20 written 3 times each; study for spelling test; study Thursday DOL and review all four days for DOL Quiz; Math WB p.39-40; English EIE p.17 (Cannon newsletter 9/7-11)"
+          "id": "sch-2026-09-11-dol-week-4-quiz-cannon-newsletter-9-7-11",
+          "label": "DOL: Week 4 Quiz (Cannon newsletter 9/7-11)"
+        },
+        {
+          "id": "sch-2026-09-11-cardinal-friday-if-participating-chess-c",
+          "label": "Cardinal Friday; if participating, Chess Club 3:15-4:15pm (POPCS newsletter 7 Sept)"
         }
       ]
     },
@@ -624,7 +619,12 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-11-cardinal-friday-if-participating-chess-c",
+          "label": "Cardinal Friday; if participating, Chess Club 3:15-4:15pm (POPCS newsletter 7 Sept)"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -640,24 +640,20 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-10-religion-five-ways-of-thomas-aquinas-tes",
-          "label": "Religion: Five Ways of Thomas Aquinas Test"
-        },
-        {
           "id": "sch-2026-09-10-religion-summa-theologiae-reading",
           "label": "Religion: Summa Theologiae Reading"
         },
         {
-          "id": "sch-2026-09-10-spanish-simon-quiz-parte-3-study-textboo",
-          "label": "Spanish (Simon): Quiz Parte 3, study textbook pp.20-26 per direct teacher email 2026-09-08; earlier Classroom notice listed pp.20-23."
+          "id": "sch-2026-09-11-cardinal-friday-if-participating-chess-c",
+          "label": "Cardinal Friday; if participating, Chess Club 3:15-4:15pm (POPCS newsletter 7 Sept)"
         },
         {
-          "id": "sch-2026-09-10-algebra-edwards-2-9-odd-numbered-problem",
-          "label": "Algebra (Edwards): 2.9 odd-numbered problems due (Classroom 2026-09-09). Direct teacher email 2026-09-09 confirms this catch-up work; complete as health allows, with makeup opportunities available. Revised deadline not specified."
+          "id": "sch-2026-09-11-algebra-edwards-test-on-2-5-2-9-classroo",
+          "label": "Algebra (Edwards): Test on 2.5-2.9 (Classroom 2026-09-09). Direct teacher email 2026-09-09 calls this the Chapter 2 test, planned for Friday; Henry may have extra preparation time if needed after illness. Makeup date not confirmed."
         },
         {
-          "id": "sch-2026-09-10-spanish-simon-blue-workbook-p-151-due-cl",
-          "label": "Spanish (Simon): Blue workbook p.151 due (Classroom 2026-09-09)"
+          "id": "sch-2026-09-11-honors-english-demarrais-literary-analys",
+          "label": "Honors English (deMarrais): Literary Analysis Essay rough copy due Friday (Classroom announcement 2026-09-09)."
         }
       ]
     },
@@ -673,7 +669,12 @@
         "balance_str": "$199.77"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-11-911-driving-school-behind-the-wheel-less",
+          "label": "911 Driving School: behind-the-wheel lesson 8:15-10:15 AM; pickup at 911 Driving School, Greenville; instructor Michael Hamilton"
+        }
+      ]
     }
   ],
   "chores": {
@@ -963,7 +964,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Pesto chicken with noodles and roasted Brussels sprouts",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -971,8 +972,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Crockpot pot roast with carrots and potatoes",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "pot-roast-with-carrots-and-potatoes",
         "name": "Pot roast with carrots and potatoes",
@@ -1032,7 +1033,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -1047,19 +1048,12 @@
   "weather": {
     "now": {
       "temp": 72,
-      "hi": 88,
-      "lo": 65,
+      "hi": 93,
+      "lo": 66,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 93,
-        "lo": 66,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "🌦",
@@ -1087,24 +1081,31 @@
         "hi": 95,
         "lo": 73,
         "code": 51
+      },
+      {
+        "d": "Tue",
+        "icon": "🌦",
+        "hi": 94,
+        "lo": 71,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-09T07:08",
         "2026-09-10T07:08",
         "2026-09-11T07:09",
         "2026-09-12T07:10",
         "2026-09-13T07:11",
-        "2026-09-14T07:11"
+        "2026-09-14T07:11",
+        "2026-09-15T07:12"
       ],
       "sunsets": [
-        "2026-09-09T19:44",
         "2026-09-10T19:43",
         "2026-09-11T19:41",
         "2026-09-12T19:40",
         "2026-09-13T19:38",
-        "2026-09-14T19:37"
+        "2026-09-14T19:37",
+        "2026-09-15T19:36"
       ],
       "timezone": "America/New_York"
     }
@@ -2479,6 +2480,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-10T03:45:53.789Z"
+    "updatedAt": "2026-09-10T04:00:55.547Z"
   }
 }
