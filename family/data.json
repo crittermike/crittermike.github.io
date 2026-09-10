@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T23:45:43.223Z",
+  "generated_at": "2026-09-10T00:00:51.960Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -875,12 +875,64 @@
     ]
   },
   "dinner": {
-    "name": "Pesto chicken with noodles and roasted Brussels sprouts",
-    "protein_g": 50,
+    "name": "Crockpot pot roast with carrots and potatoes",
+    "protein_g": 55,
     "cal": 650,
-    "effort": "medium",
-    "note": "Reserve plain chicken before adding pesto; serve balsamic glaze separately.",
-    "recipe": null
+    "effort": "easy-slow",
+    "note": "Carryover from last week. Start in the morning on low for 8 hours. Dinner before the 7:30 PM Confirmation parent meeting. Serve meat and vegetables separately, with broth on the side.",
+    "recipe": {
+      "slug": "pot-roast-with-carrots-and-potatoes",
+      "name": "Pot roast with carrots and potatoes",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "pot-roast-with-carrots-and-potatoes"
+      ],
+      "in_rotation": true,
+      "effort": "easy-slow",
+      "kid_friendly": true,
+      "protein_g": 55,
+      "cal": 650,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "chuck roast",
+            "carrots",
+            "potatoes",
+            "onions",
+            "beef broth",
+            "salt, black pepper"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "chuck roast",
+        "carrots",
+        "potatoes",
+        "onions",
+        "beef broth",
+        "salt, black pepper"
+      ],
+      "steps": [
+        "Season roast all over with salt and pepper.",
+        "Put onions in bottom of crockpot. Place roast on top.",
+        "Add carrots and potatoes around/on top of roast.",
+        "Pour in beef broth.",
+        "Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.",
+        "Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over."
+      ],
+      "notes": "",
+      "body_html": "<h1>Pot roast with carrots and potatoes</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chuck roast</li>\n<li>carrots</li>\n<li>potatoes</li>\n<li>onions</li>\n<li>beef broth</li>\n<li>salt, black pepper</li>\n</ul>\n<h2>Steps (no-sear version, Mike's preference — skips searing for time)</h2>\n<ol>\n<li>Season roast all over with salt and pepper.</li>\n<li>Put onions in bottom of crockpot. Place roast on top.</li>\n<li>Add carrots and potatoes around/on top of roast.</li>\n<li>Pour in beef broth.</li>\n<li>Cover, cook on low 8 hours or high 4-5 hours, until roast shreds easily with a fork.</li>\n<li>Remove roast, shred or slice. Serve with vegetables and some of the broth spooned over.</li>\n</ol>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -994,7 +1046,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 81,
       "hi": 88,
       "lo": 65,
       "icon": "☀️",
@@ -2402,7 +2454,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 30,
+    "dayPct": 33.3,
     "totalSpend": 2409.1,
     "totalBudget": 0,
     "categories": [
@@ -2427,6 +2479,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.35,
     "source": "ynab",
-    "updatedAt": "2026-09-09T23:45:41.462Z"
+    "updatedAt": "2026-09-10T00:00:50.465Z"
   }
 }
