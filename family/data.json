@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T23:45:29.768Z",
+  "generated_at": "2026-09-11T00:00:42.675Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -876,11 +876,11 @@
     ]
   },
   "dinner": {
-    "name": "Crockpot sirloin tip roast with carrots and potatoes",
-    "protein_g": 55,
-    "cal": 650,
-    "effort": "easy-slow",
-    "note": "Sirloin tip substituted at Mike's request on September 10; Nancy prefers lean meat. No searing or added butter/oil. LOW about 8-10 hours, checking tenderness at 8 hours. Serve meat and vegetables separately, with juices on the side. Macro numbers are legacy estimates, not recalculated for this adaptation. Dinner before the 7:30 PM Confirmation parent meeting.",
+    "name": "Takeout or dinner out",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Order undecided; macros unknown. Choose an option without Nancy's disliked ingredients.",
     "recipe": null
   },
   "mealweek": [
@@ -943,7 +943,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 85,
+      "temp": 84,
       "hi": 91,
       "lo": 68,
       "icon": "☀️",
@@ -2364,7 +2364,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 33.3,
+    "dayPct": 36.7,
     "totalSpend": 2409.1,
     "totalBudget": 0,
     "categories": [
@@ -2389,6 +2389,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.4,
     "source": "ynab",
-    "updatedAt": "2026-09-10T23:45:28.384Z"
+    "updatedAt": "2026-09-11T00:00:40.725Z"
   }
 }
