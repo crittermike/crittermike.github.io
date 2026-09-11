@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T14:00:53.393Z",
+  "generated_at": "2026-09-11T14:15:41.787Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-12T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "7a",
+      "what": "Amazon memory cards delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-11T11:00:00-04:00"
     },
     {
       "date": "2026-09-11",
@@ -899,7 +908,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 84,
       "hi": 94,
       "lo": 71,
       "icon": "☀️",
@@ -909,9 +918,9 @@
       {
         "d": "Sat",
         "icon": "🌦",
-        "hi": 84,
+        "hi": 82,
         "lo": 73,
-        "code": 82
+        "code": 51
       },
       {
         "d": "Sun",
@@ -2345,6 +2354,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.4,
     "source": "ynab",
-    "updatedAt": "2026-09-11T14:00:51.932Z"
+    "updatedAt": "2026-09-11T14:15:40.352Z"
   }
 }
