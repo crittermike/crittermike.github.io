@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T23:45:26.921Z",
+  "generated_at": "2026-09-12T00:00:38.399Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -841,11 +841,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout or dinner out",
+    "name": "Pizza night (delivery or frozen)",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Order undecided; macros unknown. Choose an option without Nancy's disliked ingredients.",
+    "note": "Macros depend on pizza and portion. No mushrooms, peppers, fish, feta, cilantro, tzatziki, or heavy lemon flavors.",
     "recipe": null
   },
   "mealweek": [
@@ -908,7 +908,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 85,
       "hi": 95,
       "lo": 71,
       "icon": "⛅",
@@ -925,29 +925,29 @@
       {
         "d": "Sun",
         "icon": "🌫",
-        "hi": 96,
+        "hi": 93,
         "lo": 70,
         "code": 45
       },
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 99,
-        "lo": 74,
+        "hi": 97,
+        "lo": 73,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛅",
-        "hi": 90,
+        "hi": 87,
         "lo": 70,
         "code": 3
       },
       {
         "d": "Wed",
         "icon": "🌦",
-        "hi": 90,
-        "lo": 71,
+        "hi": 91,
+        "lo": 68,
         "code": 51
       }
     ],
@@ -2329,7 +2329,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 36.7,
+    "dayPct": 40,
     "totalSpend": 2409.1,
     "totalBudget": 0,
     "categories": [
@@ -2354,6 +2354,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 54240.4,
     "source": "ynab",
-    "updatedAt": "2026-09-11T23:45:25.445Z"
+    "updatedAt": "2026-09-12T00:00:36.572Z"
   }
 }
