@@ -17,7 +17,8 @@ test('initial view is one numbered full leaderboard with immediate moves and rea
   assert.doesNotMatch(html, /Unranked|data-action="seed"|data-action="unrank"|data-action="rank"|Top pick|Choose your first/i);
   assert.ok(html.includes('posters/thor-ragnarok.jpg'));
   assert.ok(html.includes('poster-fallback'));
-  assert.ok(!html.includes('eternals.jpg'));
+  assert.ok(!html.slice(0, html.indexOf('id="unwatched-zone"')).includes('eternals.jpg'));
+  assert.ok(html.slice(html.indexOf('id="unwatched-zone"')).includes('eternals.jpg'));
 });
 
 test('ranked views expose accessible stable-ID moves and never renumber filtered results', () => {

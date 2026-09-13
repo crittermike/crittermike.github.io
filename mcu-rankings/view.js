@@ -20,7 +20,7 @@ export function renderLibrary(state, catalog, query = '', showWatched = false) {
 export function renderLists(state, catalog, query = '') {
   const { profile, ranked, canDrag } = selectMovies(state, catalog, query);
   return `<section aria-labelledby="ranked-heading" class="ranking-section">
-    <div class="section-heading"><h3 id="ranked-heading">The ranking <span class="count">${profile.ranking.length}</span></h3><span class="eyebrow">BEST TO WORST</span></div>
+    <div class="section-heading"><h3 id="ranked-heading">The ranking <span class="count">${profile.ranking.length}</span></h3><a class="jump-unwatched" href="#unwatched-heading">Unwatched ↓</a><span class="eyebrow">BEST TO WORST</span></div>
     <p class="starting-note">Every watched movie is already here. New lists use release order as a starting point, not a verdict. Existing choices stay in place; newly watched movies go to the bottom.</p>
     ${profile.ranking.length ? `<p class="list-help">${canDrag ? 'Drag the dotted handle to reorder. Use the arrows or tap Move for an exact position. On a focused handle: arrow keys move one spot; Home / End move to first / last.' : 'Clear search to drag. Move and arrows still use positions in the full ranking.'}</p>
       <ol id="ranked-list" class="movie-list ranked">${ranked.map(movie => `<li value="${movie.position}" class="movie-row" data-movie="${movie.id}">
@@ -33,5 +33,11 @@ export function renderLists(state, catalog, query = '') {
           <button class="icon-button drag-handle" data-action="drag" data-id="${movie.id}" ${canDrag ? '' : 'disabled'} aria-label="Reorder ${escapeHTML(movie.title)}. Use arrow keys, Home or End, or press Enter to choose a position."><span aria-hidden="true">⠿</span></button>
         </div></li>`).join('')}</ol>
       ${ranked.length ? '' : '<p class="no-results">No movies match in your ranking.</p>'}` : '<div class="empty-ranking"><div><h4>No watched movies yet.</h4><p>Mark a movie watched in the collection and it appears in every list automatically.</p><button data-action="library">Open movie collection</button></div></div>'}
+    </section>
+    <section id="unwatched-zone" class="unwatched-section" aria-labelledby="unwatched-heading">
+      <div class="section-heading"><h3 id="unwatched-heading" tabindex="-1">Unwatched <span class="count">${catalog.length - state.watched.length}</span></h3><a class="quiet" href="#ranked-heading">Back to ranking ↑</a></div>
+      <p class="unwatched-help">Drop a movie here to mark it not watched yet. This removes it from Everyone and all personal lists. Undo restores the previous rankings.</p>
+      <div class="unwatched-drop-hint" aria-hidden="true">Drop here: not watched yet</div>
+      ${renderLibrary(state, catalog, query, false)}
     </section>`;
 }

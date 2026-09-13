@@ -57,7 +57,7 @@ function rankDialog(id) {
   const movie = movieFor(id), profile = current(), index = profile.ranking.indexOf(id);
   if (index < 0) throw new Error('Only watched movies can be moved. Use the movie collection to mark it watched first.');
   const max = profile.ranking.length;
-  openDialog('Move to a position', `<div class="dialog-film">${poster(movie, true)}<div><h3>${esc(movie.title)}</h3><p>${movie.year} · ${esc(profile.name)}’s ranking</p></div></div><form id="rank-form"><label for="position">Position in the full list</label><input id="position" name="position" type="number" inputmode="numeric" min="1" max="${max}" value="${index + 1}" required autofocus><p class="fine-print">1 is best. ${max} is the last position. Other movies move automatically.</p><div class="button-row"><button type="submit" class="primary">Save position</button><button type="button" data-action="close">Cancel</button></div></form>`);
+  openDialog('Move to a position', `<div class="dialog-film">${poster(movie, true)}<div><h3>${esc(movie.title)}</h3><p>${movie.year} · ${esc(profile.name)}’s ranking</p></div></div><form id="rank-form"><label for="position">Position in the full list</label><input id="position" name="position" type="number" inputmode="numeric" min="1" max="${max}" value="${index + 1}" required autofocus><p class="fine-print">1 is best. ${max} is the last position. Other movies move automatically.</p><div class="button-row"><button type="submit" class="primary">Save position</button><button type="button" data-action="close">Cancel</button><button type="button" class="quiet" data-action="watched-remove" data-id="${id}">Not watched yet</button></div><p class="fine-print">Not watched applies to Everyone and all personal lists. Undo restores their previous positions.</p></form>`);
   $('#rank-form').onsubmit = event => { event.preventDefault(); try { const position = Number($('#position').value); commit(core.rankMovie(session.state, session.state.activeProfile, id, position), `${movie.title} is now #${position}`); closeDialog(); } catch (error) { showError(error); } };
   $('#position').select();
 }
@@ -95,12 +95,16 @@ function importPreview(fragment) {
 function startDrag(event, handle) {
   if (event.button !== undefined && event.button !== 0 || handle.disabled || $('#search').value.trim()) return;
   event.preventDefault(); const row = handle.closest('[data-movie]');
-  drag = { id: handle.dataset.id, pointer: event.pointerId, y: event.clientY, startY: event.clientY, moved: false, position: current().ranking.indexOf(handle.dataset.id) + 1, row, handle };
+  drag = { id: handle.dataset.id, pointer: event.pointerId, x: event.clientX, y: event.clientY, startY: event.clientY, moved: false, unwatched: false, position: current().ranking.indexOf(handle.dataset.id) + 1, row, handle };
   handle.setPointerCapture(event.pointerId); row.classList.add('dragging'); document.body.classList.add('is-dragging');
   function frame() { if (!drag) return; if (drag.moved) { const speed = core.scrollVelocity(drag.y, innerHeight); if (speed) window.scrollBy(0, speed); updateDrop(); } raf = requestAnimationFrame(frame); } raf = requestAnimationFrame(frame);
 }
 function updateDrop() {
   if (!drag) return;
+  const zone = $('#unwatched-zone');
+  drag.unwatched = drag.moved && core.isUnwatchedDrop(zone?.getBoundingClientRect(), drag.x, drag.y);
+  zone?.classList.toggle('drop-active', drag.unwatched);
+  if (drag.unwatched) { $('#drop-line').hidden = true; return; }
   const rows = [...document.querySelectorAll('#ranked-list > [data-movie]')].map(row => ({ id: row.dataset.movie, ...pickRect(row.getBoundingClientRect()) }));
   drag.position = core.dropPosition(rows, drag.id, drag.y);
   const others = rows.filter(row => row.id !== drag.id); const target = others[drag.position - 1]; const last = others.at(-1);
@@ -109,9 +113,12 @@ function updateDrop() {
 }
 function pickRect(rect) { return { top: rect.top, height: rect.height }; }
 function endDrag(cancel = false) {
-  if (!drag) return; const done = drag; drag = null; cancelAnimationFrame(raf); done.row.classList.remove('dragging'); document.body.classList.remove('is-dragging'); $('#drop-line').hidden = true;
+  if (!drag) return; const done = drag; drag = null; cancelAnimationFrame(raf); done.row.classList.remove('dragging'); document.body.classList.remove('is-dragging'); $('#drop-line').hidden = true; $('#unwatched-zone')?.classList.remove('drop-active');
   if (done.handle.hasPointerCapture(done.pointer)) done.handle.releasePointerCapture(done.pointer);
-  if (!cancel && done.moved) { commit(core.rankMovie(session.state, current().id, done.id, done.position), `${movieFor(done.id).title} moved to #${done.position}`); document.querySelector(`[data-action="drag"][data-id="${done.id}"]`)?.focus({ preventScroll: true }); }
+  if (!cancel && done.moved && done.unwatched) {
+    commit(core.setWatched(session.state, done.id, false, catalog), `${movieFor(done.id).title} marked not watched for all lists. Undo restores it.`);
+    $('#unwatched-heading')?.focus({ preventScroll: true });
+  } else if (!cancel && done.moved) { commit(core.rankMovie(session.state, current().id, done.id, done.position), `${movieFor(done.id).title} moved to #${done.position}`); document.querySelector(`[data-action="drag"][data-id="${done.id}"]`)?.focus({ preventScroll: true }); }
 }
 async function action(button) {
   const id = button.dataset.id;
@@ -124,7 +131,7 @@ async function action(button) {
     case 'close': closeDialog(); break;
     case 'library': libraryTab = false; libraryDialog(); break;
     case 'library-tab': libraryTab = button.dataset.tab === 'seen'; libraryDialog(); break;
-    case 'watched-add': commit(core.setWatched(session.state, id, true, catalog), `${movieFor(id).title} appended to every list`); renderLibraryResults(); break;
+    case 'watched-add': commit(core.setWatched(session.state, id, true, catalog), `${movieFor(id).title} appended to every list`); if (modal.open && $('#library-results')) renderLibraryResults(); break;
     case 'watched-remove': confirmAction('Mark as not watched?', `Remove ${movieFor(id).title} from the watched library and everyone’s rankings? You can undo this.`, 'Mark as not watched', () => commit(core.setWatched(session.state, id, false, catalog), 'Movie removed from watched library'), true); break;
     case 'clear-search': $('#search').value = ''; render(); $('#search').focus(); break;
     case 'add-profile': nameDialog(false); break;
@@ -161,8 +168,8 @@ async function boot() {
   $('#search').addEventListener('input', render);
   document.addEventListener('error', event => { if (event.target.tagName === 'IMG') event.target.hidden = true; }, true);
   document.addEventListener('pointerdown', event => { const handle = event.target.closest('[data-action="drag"]'); if (handle) startDrag(event, handle); });
-  document.addEventListener('pointermove', event => { if (drag && event.pointerId === drag.pointer) { drag.y = event.clientY; drag.moved ||= Math.abs(drag.y - drag.startY) > 5; } });
-  document.addEventListener('pointerup', event => { if (drag && event.pointerId === drag.pointer) endDrag(); });
+  document.addEventListener('pointermove', event => { if (drag && event.pointerId === drag.pointer) { drag.x = event.clientX; drag.y = event.clientY; drag.moved ||= Math.abs(drag.y - drag.startY) > 5; } });
+  document.addEventListener('pointerup', event => { if (drag && event.pointerId === drag.pointer) { drag.x = event.clientX; drag.y = event.clientY; updateDrop(); endDrag(); } });
   document.addEventListener('pointercancel', () => endDrag(true));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && drag) { event.preventDefault(); endDrag(true); return; }

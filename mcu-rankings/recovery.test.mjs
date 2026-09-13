@@ -27,10 +27,10 @@ function setup(initialRaw = '{broken') {
   };
   const context = vm.createContext({
     core, ...view, esc: view.escapeHTML, testCatalog: catalog, testStorage: storage,
-    document: { querySelector: node, activeElement: null,
+    document: { querySelector: node, activeElement: null, body: node('body'),
       createElement() { return { click() {} }; } },
     Blob, URL: { createObjectURL(blob) { downloads.push(blob); return 'blob:test'; }, revokeObjectURL() {} },
-    setTimeout() {}, clearTimeout() {}
+    setTimeout() {}, clearTimeout() {}, cancelAnimationFrame() {}
   });
   vm.runInContext(source, context, { filename: 'app.js' });
   vm.runInContext('catalog = testCatalog; storage = testStorage; const loaded = core.loadSaved(storage, catalog); session = { state: loaded.state, previous: null }; raw = loaded.raw; blocked = loaded.blocked;', context);
@@ -42,6 +42,28 @@ function setup(initialRaw = '{broken') {
   };
 }
 const newerRaw = () => JSON.stringify(core.rankMovie(core.createState(catalog), 'nancy', 'thor', 1));
+
+test('dropping into Unwatched removes globally and Undo restores all personal positions', async () => {
+  const initial = core.rankMovie(core.createState(catalog), 'nancy', 'thor', 1);
+  const app = setup(JSON.stringify(initial));
+  app.read('drag = {id:"thor",pointer:1,moved:true,unwatched:true,position:1,row:$("#test-row"),handle:{hasPointerCapture(){return false}}};endDrag()');
+  const saved=JSON.parse(app.getStored());
+  assert.ok(!saved.watched.includes('thor'));
+  assert.ok(saved.profiles.every(p=>!p.ranking.includes('thor')));
+  await app.action('undo');
+  assert.deepEqual(JSON.parse(app.getStored()),initial);
+});
+test('cancelled unwatched drag does not change watched status or write storage', () => {
+  const app=setup(null);
+  app.read('drag = {id:"thor",pointer:1,moved:true,unwatched:true,position:1,row:$("#test-row"),handle:{hasPointerCapture(){return false}}};endDrag(true)');
+  assert.equal(app.writes.length,0);
+  assert.ok(app.read('session.state.watched.includes("thor")'));
+});
+test('Move dialog offers a non-drag not-watched action', async () => {
+  const app=setup(null);await app.action('move','thor');
+  assert.ok(app.node('#modal-content').innerHTML.includes('data-action="watched-remove"'));
+  assert.ok(app.node('#modal-content').innerHTML.includes('Not watched yet'));
+});
 
 for (const initialRaw of ['{broken', JSON.stringify(core.createState(catalog)), null]) {
   test(`recovery rejects another tab's update after confirmation opens (baseline ${initialRaw === null ? 'empty' : initialRaw === '{broken' ? 'invalid' : 'valid'})`, async () => {

@@ -8,6 +8,10 @@ Everyone is the default, manually agreed family ranking, not an average of indiv
 
 Personal lists remain under the optional Personal lists disclosure. Everyone and each person's order are independent. The collection starts with 26 watched films and 11 remaining films. Marking a movie watched appends it to every list; marking it not watched removes it from every list with confirmation and Undo. Deadpool & Wolverine is excluded because it is rated R.
 
+## Watched and unwatched
+
+The Unwatched section sits below the full ranking and shows every not-yet-watched film. Drag a ranked film into this section to mark it not watched on all lists. The drop target highlights before release. Escape or a cancelled touch leaves data unchanged. The existing Undo button restores every person's prior position during this visit. For long lists or keyboard use, tap Move on a film, then Not watched yet and confirm. Mark a film Watched in the bottom section to append it to every ranking. Watched status remains shared; personal ranking order remains independent.
+
 ## Data safety
 
 Lists are saved only to this browser's localStorage, not to a server. Data & sharing exports/restores a whole-library JSON backup and shares ranking snapshots in URL fragments. Shared links are not automatic synchronization. Importing a snapshot creates a new personal list without replacing Everyone. Newly watched films in an imported snapshot are appended to all existing lists; other missing watched films are appended to the imported list.

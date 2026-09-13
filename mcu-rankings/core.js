@@ -153,6 +153,9 @@ export function selectMovies(state, catalog, query = '') {
     unwatched: catalog.filter(movie => !state.watched.includes(movie.id) && matches(movie))
   };
 }
+export function isUnwatchedDrop(rect, x, y) {
+  return Boolean(rect && x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom);
+}
 export function dropPosition(rows, draggedId, pointerY) {
   return 1 + rows.filter(row => row.id !== draggedId && pointerY >= row.top + row.height / 2).length;
 }
