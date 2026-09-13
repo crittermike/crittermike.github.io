@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-13T03:45:48.423Z",
+  "generated_at": "2026-09-13T04:00:48.924Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-12",
-      "time": "1:40p",
-      "what": "James's 9th birthday party",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-12T15:40:00-04:00"
-    },
     {
       "date": "2026-09-13",
       "time": "8a",
@@ -550,6 +541,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-12-09T12:00:00-05:00"
+    },
+    {
+      "date": "2026-12-11",
+      "time": "2p",
+      "what": "POPCS: St. Nicholas School Decorating",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-12-11T15:00:00-05:00"
     }
   ],
   "kids": [
@@ -565,7 +565,12 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-14-map-reading-test-9-35-11-05am",
+          "label": "MAP Reading test, 9:35-11:05am"
+        }
+      ]
     },
     {
       "key": "william",
@@ -593,7 +598,20 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-14-spanish-simon-ixl-4p-due-complete-over-t",
+          "label": "Spanish (Simon): IXL 4P due; complete over the preceding weekend"
+        },
+        {
+          "id": "sch-2026-09-14-prince-of-peace-6th-annual-golf-charity-",
+          "label": "Prince of Peace 6th Annual Golf Charity Greenville, registration 11:00am, shotgun start noon, cocktail party 5:00pm at Cherokee Valley Golf Club"
+        },
+        {
+          "id": "sch-2026-09-14-spanish-simon-read-textbook-p-228-and-an",
+          "label": "Spanish (Simon): Read textbook p.228 and answer activity 11 on p.229, due September 14 (Classroom email 2026-09-11, INBOX 329568)."
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -821,8 +839,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -830,7 +848,7 @@
       "dow_short": "Mon",
       "name": "Grilled hamburgers and hotdogs with corn",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -869,7 +887,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -877,19 +895,12 @@
   "weather": {
     "now": {
       "temp": 73,
-      "hi": 80,
-      "lo": 71,
+      "hi": 86,
+      "lo": 70,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌫",
-        "hi": 86,
-        "lo": 70,
-        "code": 45
-      },
       {
         "d": "Mon",
         "icon": "⛅",
@@ -917,24 +928,31 @@
         "hi": 91,
         "lo": 68,
         "code": 2
+      },
+      {
+        "d": "Fri",
+        "icon": "🌤",
+        "hi": 94,
+        "lo": 67,
+        "code": 2
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-12T07:10",
         "2026-09-13T07:11",
         "2026-09-14T07:11",
         "2026-09-15T07:12",
         "2026-09-16T07:13",
-        "2026-09-17T07:13"
+        "2026-09-17T07:13",
+        "2026-09-18T07:14"
       ],
       "sunsets": [
-        "2026-09-12T19:40",
         "2026-09-13T19:38",
         "2026-09-14T19:37",
         "2026-09-15T19:36",
         "2026-09-16T19:34",
-        "2026-09-17T19:33"
+        "2026-09-17T19:33",
+        "2026-09-18T19:31"
       ],
       "timezone": "America/New_York"
     }
@@ -2338,6 +2356,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-13T03:45:46.917Z"
+    "updatedAt": "2026-09-13T04:00:47.565Z"
   }
 }
