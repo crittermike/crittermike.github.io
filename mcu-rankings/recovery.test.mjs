@@ -16,7 +16,7 @@ function setup(initialRaw = '{broken') {
   const node = selector => {
     if (!nodes.has(selector)) nodes.set(selector, {
       open: false, hidden: true, textContent: '', innerHTML: '', value: '',
-      classList: { add() {}, remove() {} }, addEventListener() {}, focus() {},
+      classList: { add() {}, remove() {} }, addEventListener() {}, focus() {}, select() {},
       querySelector() { return null; }, showModal() { this.open = true; }, close() { this.open = false; }
     });
     return nodes.get(selector);
@@ -36,7 +36,7 @@ function setup(initialRaw = '{broken') {
   vm.runInContext('catalog = testCatalog; storage = testStorage; const loaded = core.loadSaved(storage, catalog); session = { state: loaded.state, previous: null }; raw = loaded.raw; blocked = loaded.blocked;', context);
   return { node, writes, downloads, storage,
     setStored(value) { stored = value; }, getStored() { return stored; },
-    action(name) { return vm.runInContext(`action({ dataset: { action: ${JSON.stringify(name)} } })`, context); },
+    action(name, id) { return vm.runInContext(`action({ dataset: { action: ${JSON.stringify(name)}, id: ${JSON.stringify(id)} } })`, context); },
     read(expression) { return vm.runInContext(expression, context); },
     confirm() { node('#confirm-action').onclick(); }
   };
@@ -117,5 +117,56 @@ test('Download original exports the latest other-tab ranking without changing th
   assert.equal(await app.downloads[0].text(), latest);
   assert.equal(app.read('raw'), '{broken');
   assert.equal(app.getStored(), latest);
+  assert.equal(app.writes.length, 0);
+});
+
+test('Everyone heading explains manual consensus and hides rename without hiding personal options', async () => {
+  const app = setup(null);
+  app.read('render()');
+  assert.equal(app.node('#person-heading').textContent, 'Everyone’s list');
+  assert.equal(app.node('#list-kind').textContent, 'FAMILY CONSENSUS');
+  assert.match(app.node('#list-description').textContent, /agree.*not an average/i);
+  assert.equal(app.node('#rename-profile').hidden, true);
+  await app.action('profile', 'mike');
+  assert.equal(app.node('#list-kind').textContent, 'PERSONAL LIST');
+  assert.equal(app.node('#rename-profile').hidden, false);
+  assert.match(app.node('#list-description').textContent, /Everyone.*unchanged/);
+});
+
+test('Move opens an exact full-list position dialog without add or remove chores and Undo restores it', async () => {
+  const app = setup(null);
+  await app.action('move', 'thor');
+  assert.equal(app.node('#modal').open, true);
+  const html = app.node('#modal-content').innerHTML;
+  assert.match(html, /max="26"/);
+  assert.match(html, /Save position/);
+  assert.doesNotMatch(html, /unrank|Add to ranking/i);
+  app.node('#position').value = '26';
+  app.node('#rank-form').onsubmit({ preventDefault() {} });
+  assert.equal(JSON.parse(app.getStored()).profiles[0].ranking.at(-1), 'thor');
+  assert.equal(app.node('#modal').open, false);
+  await app.action('undo');
+  assert.deepEqual(JSON.parse(app.getStored()), core.createState(catalog));
+});
+
+test('watched action appends every list immediately and Undo restores the whole library', async () => {
+  const app = setup(null);
+  await app.action('watched-add', 'eternals');
+  assert.ok(JSON.parse(app.getStored()).profiles.every(p => p.ranking.at(-1) === 'eternals'));
+  assert.match(app.node('#toast').textContent, /every list/i);
+  await app.action('undo');
+  assert.deepEqual(JSON.parse(app.getStored()), core.createState(catalog));
+});
+
+test('share preview discloses all completion effects before importing, never replaces Everyone', () => {
+  const app = setup(null);
+  const fragment = '#ranking=' + encodeURIComponent(JSON.stringify({ version: 1, name: 'Everyone', ranking: ['eternals'] }));
+  app.read(`importPreview(${JSON.stringify(fragment)})`);
+  const html = app.node('#modal-content').innerHTML;
+  assert.match(html, /new personal list/i);
+  assert.match(html, /missing watched movies.*release order/i);
+  assert.match(html, /newly watched movies.*every existing list/i);
+  assert.match(html, /Everyone.*not replaced/i);
+  assert.match(html, /Everyone \(shared\)/);
   assert.equal(app.writes.length, 0);
 });

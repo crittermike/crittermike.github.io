@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 const core = await import('./core.js').catch(() => ({}));
 const catalog = JSON.parse(await readFile(new URL('./catalog.json', import.meta.url)));
 
-test('a new library has the exact watched catalog and six independent empty rankings', () => {
+test('a new library opens Everyone with seven independent full release-order lists', () => {
   assert.equal(typeof core.createState, 'function');
   const state = core.createState(catalog);
   assert.equal(catalog.length, 37);
@@ -12,11 +12,12 @@ test('a new library has the exact watched catalog and six independent empty rank
   assert.ok(state.watched.includes('thor-ragnarok'));
   assert.ok(state.watched.includes('doctor-strange-in-the-multiverse-of-madness'));
   assert.ok(!catalog.some(movie => movie.id === 'deadpool-and-wolverine'));
-  assert.deepEqual(state.profiles.map(p => p.name), ['Mike', 'Nancy', 'Charlie', 'Henry', 'William', 'Thomas']);
-  assert.ok(state.profiles.every(p => p.ranking.length === 0));
+  assert.deepEqual(state.profiles.map(p => p.name), ['Everyone', 'Mike', 'Nancy', 'Charlie', 'Henry', 'William', 'Thomas']);
+  for (const profile of state.profiles) assert.deepEqual(profile.ranking, state.watched);
   assert.notEqual(state.profiles[0].ranking, state.profiles[1].ranking);
-  assert.equal(state.version, 1);
-  assert.equal(state.activeProfile, 'mike');
+  assert.equal(state.version, 2);
+  assert.equal(state.consensusProfile, 'everyone');
+  assert.equal(state.activeProfile, state.consensusProfile);
 });
 
 test('ranking at an explicit position is immutable, duplicate-free and profile-specific', () => {
@@ -24,38 +25,28 @@ test('ranking at an explicit position is immutable, duplicate-free and profile-s
   const initial = core.createState(catalog);
   const first = core.rankMovie(initial, 'mike', 'iron-man', 1);
   const second = core.rankMovie(first, 'mike', 'thor', 1);
-  assert.deepEqual(second.profiles[0].ranking, ['thor', 'iron-man']);
-  assert.deepEqual(second.profiles[1].ranking, []);
-  assert.deepEqual(initial.profiles[0].ranking, []);
+  assert.deepEqual(second.profiles.find(p => p.id === 'mike').ranking.slice(0, 2), ['thor', 'iron-man']);
+  assert.deepEqual(second.profiles.find(p => p.id === 'nancy').ranking, initial.watched);
+  assert.deepEqual(initial.profiles[0].ranking, initial.watched);
   const moved = core.rankMovie(second, 'mike', 'iron-man', 1);
-  assert.deepEqual(moved.profiles[0].ranking, ['iron-man', 'thor']);
+  assert.deepEqual(moved.profiles.find(p => p.id === 'mike').ranking.slice(0, 2), ['iron-man', 'thor']);
+  assert.equal(moved.profiles.find(p => p.id === 'mike').ranking.length, initial.watched.length);
   assert.throws(() => core.rankMovie(second, 'mike', 'eternals', 1));
   assert.throws(() => core.rankMovie(second, 'missing', 'thor', 1));
-  for (const position of [0, 3, 1.5, '1', NaN]) {
+  for (const position of [0, 27, 1.5, '1', NaN]) {
     assert.throws(() => core.rankMovie(second, 'mike', 'thor', position));
   }
 });
 
 
-test('release-order start appends unranked watched films without replacing personal choices', () => {
-  assert.equal(typeof core.seedReleaseOrder, 'function');
-  const state = core.rankMovie(core.createState(catalog), 'mike', 'thor', 1);
-  const seeded = core.seedReleaseOrder(state, 'mike', catalog);
-  assert.equal(seeded.profiles[0].ranking.length, 26);
-  assert.deepEqual(seeded.profiles[0].ranking.slice(0, 3), ['thor', 'iron-man', 'iron-man-2']);
-  assert.deepEqual(seeded.profiles[1].ranking, []);
-  assert.deepEqual(core.seedReleaseOrder(seeded, 'mike', catalog), seeded);
-});
-
-test('unranking one movie keeps it watched and does not affect another person', () => {
-  assert.equal(typeof core.unrankMovie, 'function');
-  let state = core.rankMovie(core.createState(catalog), 'mike', 'thor', 1);
-  state = core.rankMovie(state, 'nancy', 'thor', 1);
-  const result = core.unrankMovie(state, 'mike', 'thor');
-  assert.deepEqual(result.profiles[0].ranking, []);
-  assert.deepEqual(result.profiles[1].ranking, ['thor']);
-  assert.ok(result.watched.includes('thor'));
-  assert.deepEqual(state.profiles[0].ranking, ['thor']);
+test('Everyone is a manual full list independent of every personal preference', () => {
+  const initial = core.createState(catalog);
+  const personal = core.rankMovie(initial, 'mike', 'thor', 1);
+  assert.deepEqual(personal.profiles[0], initial.profiles[0]);
+  const agreed = core.rankMovie(personal, personal.consensusProfile, 'avengers-endgame', 1);
+  assert.deepEqual(agreed.profiles.slice(1), personal.profiles.slice(1));
+  assert.equal(agreed.profiles[0].ranking[0], 'avengers-endgame');
+  assert.equal(agreed.profiles[0].ranking.length, initial.watched.length);
 });
 
 test('the shared watched library adds real catalog films and safely removes them from every ranking', () => {
@@ -64,12 +55,12 @@ test('the shared watched library adds real catalog films and safely removes them
   let state = core.setWatched(original, 'eternals', true, catalog);
   state = core.setWatched(state, 'eternals', true, catalog);
   assert.equal(state.watched.length, 27);
-  assert.ok(state.profiles.every(p => p.ranking.length === 0));
+  assert.ok(state.profiles.every(p => p.ranking.length === 27 && p.ranking.at(-1) === 'eternals'));
   state = core.rankMovie(state, 'mike', 'eternals', 1);
   state = core.rankMovie(state, 'nancy', 'eternals', 1);
   const result = core.setWatched(state, 'eternals', false, catalog);
   assert.equal(result.watched.length, 26);
-  assert.ok(result.profiles.every(p => p.ranking.length === 0));
+  assert.ok(result.profiles.every(p => p.ranking.length === 26 && !p.ranking.includes('eternals')));
   assert.deepEqual(original, core.createState(catalog));
   assert.throws(() => core.setWatched(state, 'not-a-film', true, catalog));
   assert.throws(() => core.setWatched(state, 'thor', 'false', catalog));
@@ -80,7 +71,7 @@ test('backup validation accepts a clean schema but rejects malformed or inconsis
   const good = core.createState(catalog);
   assert.deepEqual(core.validateState(good, catalog), good);
   assert.notEqual(core.validateState(good, catalog), good);
-  const variants = [null, {}, { ...good, version: 2 }, { ...good, watched: ['unknown'] },
+  const variants = [null, {}, { ...good, version: 99 }, { ...good, watched: ['unknown'] },
     { ...good, watched: ['thor', 'thor'] }, { ...good, activeProfile: 'missing' },
     { ...good, profiles: [] }, { ...good, profiles: [...good.profiles, good.profiles[0]] },
     { ...good, profiles: [{ id: 'mike', name: '', ranking: [] }] },
@@ -100,15 +91,18 @@ test('adding or renaming a person preserves everyone else and validates names', 
   assert.equal(typeof core.editProfile, 'function');
   const state = core.createState(catalog);
   const added = core.editProfile(state, 'guest-1', '  Guest  ');
-  assert.equal(added.profiles.length, 7);
+  assert.equal(added.profiles.length, 8);
   assert.equal(added.activeProfile, 'guest-1');
-  assert.deepEqual(added.profiles[6], { id: 'guest-1', name: 'Guest', ranking: [] });
+  assert.deepEqual(added.profiles.at(-1), { id: 'guest-1', name: 'Guest', ranking: state.watched });
   const renamed = core.editProfile(core.rankMovie(added, 'guest-1', 'thor', 1), 'guest-1', 'Visitor');
-  assert.deepEqual(renamed.profiles[6], { id: 'guest-1', name: 'Visitor', ranking: ['thor'] });
+  assert.deepEqual(renamed.profiles.at(-1), { id: 'guest-1', name: 'Visitor', ranking: ['thor', ...state.watched.filter(id => id !== 'thor')] });
   assert.deepEqual(state, core.createState(catalog));
   assert.throws(() => core.editProfile(state, 'guest', ' '));
   assert.throws(() => core.editProfile(state, 'guest', 'Mike'));
   assert.throws(() => core.editProfile(state, '../bad', 'Guest'));
+  assert.throws(() => core.editProfile(state, state.consensusProfile, 'Renamed'), /Everyone/);
+  const atLimit = { ...state, profiles: [...state.profiles, ...Array.from({ length: 23 }, (_, i) => ({ id: `guest-${i}`, name: `Guest ${i}`, ranking: [...state.watched] }))] };
+  assert.equal(core.editProfile(atLimit, 'last', 'Last').profiles.length, 31);
 });
 
 test('local persistence round-trips, preserves corrupt originals and reports write or conflict failures', () => {
@@ -145,19 +139,28 @@ test('individual share links validate Unicode names and import only after explic
   assert.equal(typeof core.importShare, 'function');
   let state = core.rankMovie(core.createState(catalog), 'mike', 'thor', 1);
   state = core.editProfile(state, 'mike', 'Miké <3');
-  const fragment = core.encodeShare(state.profiles[0], catalog);
+  const fragment = core.encodeShare(state.profiles.find(p => p.id === 'mike'), catalog);
   assert.ok(fragment.startsWith('#ranking='));
   const preview = core.decodeShare(fragment, catalog);
-  assert.deepEqual(preview, { version: 1, name: 'Miké <3', ranking: ['thor'] });
+  assert.deepEqual(preview, { version: 1, name: 'Miké <3', ranking: state.profiles.find(p => p.id === 'mike').ranking });
   const imported = core.importShare(state, preview, 'incoming', 'Miké copy', catalog);
-  assert.equal(imported.profiles.length, 7);
-  assert.deepEqual(imported.profiles.slice(0, 6), state.profiles);
-  assert.deepEqual(imported.profiles[6].ranking, ['thor']);
+  assert.equal(imported.profiles.length, 8);
+  assert.deepEqual(imported.profiles.slice(0, 7), state.profiles);
+  assert.deepEqual(imported.profiles.at(-1).ranking, preview.ranking);
   assert.throws(() => core.importShare(state, preview, 'mike', 'Replacement', catalog));
   const incoming = { version: 1, name: 'Visitor', ranking: ['eternals'] };
   const withMovie = core.importShare(state, incoming, 'visitor', 'Visitor', catalog);
   assert.ok(withMovie.watched.includes('eternals'));
   assert.ok(!state.watched.includes('eternals'));
+  for (const old of state.profiles) assert.deepEqual(withMovie.profiles.find(p => p.id === old.id).ranking, [...old.ranking, 'eternals']);
+  assert.deepEqual(withMovie.profiles.at(-1).ranking, ['eternals', ...state.watched]);
+  assert.deepEqual(core.parseBackup(JSON.stringify(withMovie), catalog), withMovie);
+  assert.equal(withMovie.consensusProfile, state.consensusProfile);
+  const everyoneLink = core.decodeShare(core.encodeShare(state.profiles[0], catalog), catalog);
+  assert.throws(() => core.importShare(state, everyoneLink, state.consensusProfile, 'Everyone', catalog));
+  const everyoneCopy = core.importShare(state, everyoneLink, 'shared-everyone', 'Everyone (shared)', catalog);
+  assert.deepEqual(everyoneCopy.profiles[0], state.profiles[0]);
+  assert.deepEqual(everyoneCopy.profiles.at(-1).ranking, state.profiles[0].ranking);
   const encode = data => '#ranking=' + encodeURIComponent(JSON.stringify(data));
   for (const bad of ['#ranking=%broken', '#other=bad', encode({ ...preview, version: 2 }),
     encode({ ...preview, ranking: ['thor', 'thor'] }), encode({ ...preview, ranking: ['unknown'] }),
@@ -182,17 +185,18 @@ test('search separates watched shelves, retains absolute rank positions and disa
   assert.equal(typeof core.selectMovies, 'function');
   let state = core.rankMovie(core.createState(catalog), 'mike', 'iron-man', 1);
   state = core.rankMovie(state, 'mike', 'thor', 2);
+  state = { ...state, activeProfile: 'mike' };
   const filtered = core.selectMovies(state, catalog, '  THOR  ');
   assert.equal(filtered.canDrag, false);
-  assert.equal(filtered.ranked.length, 1);
+  assert.equal(filtered.ranked.length, 2);
   assert.equal(filtered.ranked[0].position, 2);
-  assert.deepEqual(filtered.unranked.map(m => m.id), ['thor-ragnarok']);
+  assert.equal(filtered.ranked[1].id, 'thor-ragnarok');
   const all = core.selectMovies(state, catalog, '');
   assert.equal(all.canDrag, true);
-  assert.equal(all.unranked.length, 24);
+  assert.equal(all.ranked.length, 26);
   assert.equal(all.unwatched.length, 11);
   assert.equal(core.selectMovies(state, catalog, 'no-match-xyz').ranked.length, 0);
-  assert.ok(core.selectMovies(state, catalog, '2017').unranked.length > 0);
+  assert.ok(core.selectMovies(state, catalog, '2017').ranked.length > 0);
 });
 
 test('pointer drop math uses stable IDs and clamps auto-scroll speed at viewport edges', () => {

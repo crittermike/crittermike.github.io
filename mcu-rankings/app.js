@@ -26,6 +26,10 @@ function render() {
   const state = session.state, profile = current();
   $('#profiles').innerHTML = renderProfiles(state);
   $('#person-heading').textContent = profile.name + '’s list';
+  const consensus = profile.id === state.consensusProfile;
+  $('#list-kind').textContent = consensus ? 'FAMILY CONSENSUS' : 'PERSONAL LIST';
+  $('#list-description').textContent = consensus ? 'Decide together, then move the movies into the order you all agree on. Everyone is not an average of personal lists.' : 'Your own order. Changes here leave Everyone and the other personal lists unchanged.';
+  $('#rename-profile').hidden = consensus;
   $('#lists').innerHTML = renderLists(state, catalog, $('#search').value);
   $('#watched-count').textContent = state.watched.length;
   $('#people-count').textContent = state.profiles.length;
@@ -51,8 +55,9 @@ function confirmAction(title, text, label, callback, danger = false) {
 }
 function rankDialog(id) {
   const movie = movieFor(id), profile = current(), index = profile.ranking.indexOf(id);
-  const max = profile.ranking.length + (index < 0 ? 1 : 0);
-  openDialog(index < 0 ? 'Where does it belong?' : 'Move to a position', `<div class="dialog-film">${poster(movie, true)}<div><h3>${esc(movie.title)}</h3><p>${movie.year} · ${esc(profile.name)}’s ranking</p></div></div><form id="rank-form"><label for="position">Position in your list</label><input id="position" name="position" type="number" inputmode="numeric" min="1" max="${max}" value="${index < 0 ? max : index + 1}" required autofocus><p class="fine-print">1 is your favorite. ${max > 1 ? `${max} is the last position. Other movies move automatically.` : 'This will be your first ranked movie.'}</p><div class="button-row"><button type="submit" class="primary">${index < 0 ? 'Add to ranking' : 'Save position'}</button><button type="button" data-action="close">Cancel</button>${index < 0 ? '' : `<button type="button" class="quiet" data-action="unrank" data-id="${id}">Move to unranked</button>`}</div></form>`);
+  if (index < 0) throw new Error('Only watched movies can be moved. Use the movie collection to mark it watched first.');
+  const max = profile.ranking.length;
+  openDialog('Move to a position', `<div class="dialog-film">${poster(movie, true)}<div><h3>${esc(movie.title)}</h3><p>${movie.year} · ${esc(profile.name)}’s ranking</p></div></div><form id="rank-form"><label for="position">Position in the full list</label><input id="position" name="position" type="number" inputmode="numeric" min="1" max="${max}" value="${index + 1}" required autofocus><p class="fine-print">1 is best. ${max} is the last position. Other movies move automatically.</p><div class="button-row"><button type="submit" class="primary">Save position</button><button type="button" data-action="close">Cancel</button></div></form>`);
   $('#rank-form').onsubmit = event => { event.preventDefault(); try { const position = Number($('#position').value); commit(core.rankMovie(session.state, session.state.activeProfile, id, position), `${movie.title} is now #${position}`); closeDialog(); } catch (error) { showError(error); } };
   $('#position').select();
 }
@@ -84,7 +89,7 @@ function importPreview(fragment) {
   const incoming = core.decodeShare(fragment, catalog); shareDraft = incoming;
   let name = incoming.name, n = 1;
   while (session.state.profiles.some(profile => profile.name.toLocaleLowerCase() === name.toLocaleLowerCase())) { name = incoming.name.slice(0, 26) + (n === 1 ? ' (shared)' : ` (shared ${n})`); n++; }
-  openDialog(`${incoming.name}’s shared ranking`, `<p>${incoming.ranking.length} ranked movies. Import as a new person to keep every existing ranking unchanged.</p><ol class="share-preview">${incoming.ranking.map(id => `<li>${esc(movieFor(id).title)}</li>`).join('')}</ol><form id="share-form"><label for="import-name">Save as</label><input id="import-name" maxlength="40" required value="${esc(name)}"><div class="button-row"><button class="primary" type="submit">Import ranking</button><button type="button" data-action="close">Cancel</button></div></form>`);
+  openDialog(`${incoming.name}’s shared ranking`, `<p>${incoming.ranking.length} movies in this snapshot. Import as a new personal list. Everyone and your other lists are not replaced.</p><p>The incoming order stays first; missing watched movies are appended in release order. Any newly watched movies from this snapshot are appended to every existing list, preserving its order.</p><ol class="share-preview">${incoming.ranking.map(id => `<li>${esc(movieFor(id).title)}</li>`).join('')}</ol><form id="share-form"><label for="import-name">Save as</label><input id="import-name" maxlength="40" required value="${esc(name)}"><div class="button-row"><button class="primary" type="submit">Import ranking</button><button type="button" data-action="close">Cancel</button></div></form>`);
   $('#share-form').onsubmit = event => { event.preventDefault(); try { commit(core.importShare(session.state, shareDraft, uid(), $('#import-name').value, catalog), 'Shared ranking imported'); history.replaceState(null, '', location.pathname + location.search); closeDialog(); } catch (error) { showError(error); } };
 }
 function startDrag(event, handle) {
@@ -112,15 +117,14 @@ async function action(button) {
   const id = button.dataset.id;
   switch (button.dataset.action) {
     case 'profile': session.state = { ...session.state, activeProfile: id }; persist(); render(); document.querySelector(`[data-action="profile"][data-id="${id}"]`)?.focus({ preventScroll: true }); break;
-    case 'seed': confirmAction('Start with release order?', 'This puts your unranked watched movies at the end of your list in release order. Then move them from best to worst. Any movies you already ranked stay in place.', 'Start in release order', () => commit(core.seedReleaseOrder(session.state, current().id, catalog), 'Release order added. Make it your own.')); break;
-    case 'rank': rankDialog(id); break;
+    case 'move': rankDialog(id); break;
     case 'up': case 'down': { const pos = current().ranking.indexOf(id) + (button.dataset.action === 'up' ? 0 : 2); commit(core.rankMovie(session.state, current().id, id, pos), `${movieFor(id).title} moved to #${pos}`); document.querySelector(`[data-action="${button.dataset.action}"][data-id="${id}"]`)?.focus({ preventScroll: true }); break; }
-    case 'unrank': commit(core.unrankMovie(session.state, current().id, id), 'Moved to the unranked shelf'); closeDialog(); break;
+
     case 'undo': session = core.undoSession(session); persist(); render(); announce('Last change undone'); break;
     case 'close': closeDialog(); break;
     case 'library': libraryTab = false; libraryDialog(); break;
     case 'library-tab': libraryTab = button.dataset.tab === 'seen'; libraryDialog(); break;
-    case 'watched-add': commit(core.setWatched(session.state, id, true, catalog), `${movieFor(id).title} added to everyone’s watched shelf`); renderLibraryResults(); break;
+    case 'watched-add': commit(core.setWatched(session.state, id, true, catalog), `${movieFor(id).title} appended to every list`); renderLibraryResults(); break;
     case 'watched-remove': confirmAction('Mark as not watched?', `Remove ${movieFor(id).title} from the watched library and everyone’s rankings? You can undo this.`, 'Mark as not watched', () => commit(core.setWatched(session.state, id, false, catalog), 'Movie removed from watched library'), true); break;
     case 'clear-search': $('#search').value = ''; render(); $('#search').focus(); break;
     case 'add-profile': nameDialog(false); break;

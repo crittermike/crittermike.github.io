@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#121313"><meta name="description" content="Your family's Marvel movie rankings. Every movie, every opinion, best to worst.">
+<meta name="theme-color" content="#121313"><meta name="description" content="One family MCU ranking, ready to rearrange. Personal lists are optional.">
 <title>MCU Ranked · Family movie night</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="stylesheet" href="styles.css">
 <script type="module" src="app.js"></script>
@@ -12,16 +12,17 @@
 <div class="app-shell">
 <header class="topbar"><a class="brand" href="./" aria-label="MCU Ranked home"><span class="brand-mark">MCU</span><strong>RANKED<span class="brand-dot">.</span></strong></a><span class="top-caption">FAMILY MOVIE NIGHT</span><button class="quiet" data-action="data">Data &amp; sharing <span aria-hidden="true">↗</span></button></header>
 <main>
-<section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="live-dot"></span> THE FAMILY COLLECTION</p><h1>Great movies.<br><span>Different opinions.</span></h1><p class="hero-deck">One collection. A best-to-worst list for each of you.</p><div class="hero-stats"><span><strong id="watched-count">26</strong> watched</span><span class="stat-divider"></span><span><strong id="people-count">6</strong> critics at home</span></div></div><div id="hero-art" class="hero-art" aria-hidden="true"></div></section>
-<section class="people-section" aria-label="Choose whose movies to rank"><div class="section-heading"><span class="eyebrow">WHO'S RANKING?</span><span class="subtle">Your list. Your call.</span></div><div id="profiles" class="profiles"></div></section>
+<section class="hero"><div class="hero-copy"><h1>One family.<br><span>One ranking.</span></h1><p class="hero-deck">Every watched movie is already on the list. Drag them into the order you agree on.</p><div class="hero-stats"><span><strong id="watched-count">…</strong> watched movies</span><span class="stat-divider"></span><span><strong id="people-count">…</strong> lists, including Everyone</span></div></div><div id="hero-art" class="hero-art" aria-hidden="true"></div></section>
+<section class="people-section" aria-label="Choose a ranking"><div id="profiles" class="profiles"></div></section>
 <div class="workspace">
-<div class="workspace-heading"><div><p class="eyebrow">PERSONAL RANKING</p><h2 id="person-heading">Mike’s list</h2></div><div class="button-row"><button id="undo" data-action="undo" disabled>↶ Undo</button><button class="primary" data-action="library">Add watched movie <span aria-hidden="true">＋</span></button></div></div>
-<div class="toolbar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a movie…" aria-label="Search watched movies" autocomplete="off"><button id="clear-search" data-action="clear-search" aria-label="Clear movie search" hidden>×</button></div><button class="quiet" data-action="rename">Edit name</button><button class="quiet" data-action="share">Share this ranking ↗</button></div>
-<p id="save-status" class="save-status" role="status">Saved on this device · Share a ranking to move it between devices.</p><div id="storage-warning" class="warning" hidden></div>
+<div class="workspace-heading"><div><p id="list-kind" class="eyebrow">FAMILY CONSENSUS</p><h2 id="person-heading">Everyone’s list</h2></div><div class="button-row"><button id="undo" data-action="undo" disabled>↶ Undo</button><button data-action="library">Movie collection</button></div></div>
+<p id="list-description" class="list-description">Decide together, then reorder. Personal lists are separate.</p>
+<div class="toolbar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a movie…" aria-label="Search watched movies" autocomplete="off"><button id="clear-search" data-action="clear-search" aria-label="Clear movie search" hidden>×</button></div><button id="rename-profile" class="quiet" data-action="rename" hidden>Edit name</button><button class="quiet" data-action="share">Share this ranking ↗</button></div>
+<p id="save-status" class="save-status" role="status">Saved on this device · Shared links are snapshots, not automatic sync.</p><div id="storage-warning" class="warning" hidden></div>
 <div id="lists" tabindex="-1"><p class="loading">Loading your collection…</p></div>
 </div>
 </main>
-<footer><span class="brand-mini">MCU RANKED</span><p>Personal rankings, not critic scores. Saved in this browser.</p><button class="quiet" data-action="data">Back up &amp; share</button></footer>
+<footer><span class="brand-mini">MCU RANKED</span><p>Family consensus and optional personal rankings. Saved in this browser.</p><button class="quiet" data-action="data">Back up &amp; share</button></footer>
 </div>
 <dialog id="modal" aria-labelledby="modal-title"><div class="modal-top"><h2 id="modal-title"></h2><button class="icon-button" data-action="close" aria-label="Close dialog">×</button></div><div id="modal-content"></div><p id="modal-error" class="error" role="alert" hidden></p></dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div><div id="drop-line" class="drop-line" hidden></div>

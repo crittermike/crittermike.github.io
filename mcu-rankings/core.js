@@ -1,5 +1,7 @@
-export const VERSION = 1;
+export const VERSION = 2;
 export const STORAGE_KEY = 'mcu-family-rankings:v1';
+// Ranking snapshots keep their existing wire format, independent of library backups.
+const SHARE_VERSION = 1;
 
 export function loadSaved(storage, catalog) {
   let raw = null;
@@ -32,7 +34,8 @@ function validIds(ids, allowed) {
 export function validateState(value, catalog) {
   const allowed = new Set(catalog.map(movie => movie.id));
   const invalid = () => { throw new Error('This data is not a supported MCU rankings backup. Nothing has been replaced.'); };
-  if (!value || value.version !== VERSION || !validIds(value.watched, allowed) || !Array.isArray(value.profiles) || value.profiles.length < 1 || value.profiles.length > 30) invalid();
+  const legacy = value?.version === 1;
+  if (!value || (!legacy && value.version !== VERSION) || !validIds(value.watched, allowed) || !Array.isArray(value.profiles) || value.profiles.length < 1 || value.profiles.length > (legacy ? 30 : 31)) invalid();
   const profileIds = new Set();
   const watched = new Set(value.watched);
   const profiles = value.profiles.map(profile => {
@@ -41,7 +44,19 @@ export function validateState(value, catalog) {
     return { id: profile.id, name: profile.name.trim(), ranking: [...profile.ranking] };
   });
   if (!profileIds.has(value.activeProfile)) invalid();
-  return { version: VERSION, watched: [...value.watched], profiles, activeProfile: value.activeProfile };
+  const releaseOrder = catalog.filter(movie => watched.has(movie.id)).map(movie => movie.id);
+  if (legacy) {
+    // Validate every old field first. Never reinterpret a person's name or ID as consensus.
+    let consensusProfile = 'everyone', suffix = 2;
+    while (profileIds.has(consensusProfile)) consensusProfile = `everyone-${suffix++}`;
+    return {
+      version: VERSION, watched: releaseOrder, consensusProfile, activeProfile: consensusProfile,
+      profiles: [{ id: consensusProfile, name: 'Everyone', ranking: [...releaseOrder] },
+        ...profiles.map(profile => ({ ...profile, ranking: completeRanking(profile.ranking, releaseOrder) }))]
+    };
+  }
+  if (!profileIds.has(value.consensusProfile) || profiles.find(profile => profile.id === value.consensusProfile).name !== 'Everyone' || profiles.some(profile => profile.ranking.length !== watched.size)) invalid();
+  return { version: VERSION, watched: releaseOrder, profiles, consensusProfile: value.consensusProfile, activeProfile: value.activeProfile };
 }
 export function parseBackup(text, catalog) {
   if (typeof text !== 'string' || text.length > 200000) throw new Error('The backup is too large or is not text.');
@@ -50,6 +65,9 @@ export function parseBackup(text, catalog) {
   return validateState(value, catalog);
 }
 
+function completeRanking(ranking, watched) {
+  return [...ranking, ...watched.filter(id => !ranking.includes(id))];
+}
 function profileFor(state, id) {
   const profile = state.profiles.find(item => item.id === id);
   if (!profile) throw new Error('Choose an existing person.');
@@ -81,24 +99,25 @@ export function setWatched(state, movieId, watched, catalog) {
   return {
     ...state,
     watched: catalog.filter(movie => selected.has(movie.id)).map(movie => movie.id),
-    profiles: state.profiles.map(profile => ({ ...profile, ranking: profile.ranking.filter(id => selected.has(id)) }))
+    profiles: state.profiles.map(profile => ({ ...profile, ranking: watched ? completeRanking(profile.ranking, [movieId]) : profile.ranking.filter(id => selected.has(id)) }))
   };
 }
 export function editProfile(state, id, name) {
+  if (id === state.consensusProfile) throw new Error('Everyone is the shared family list and cannot be renamed.');
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,63}$/.test(id) || !validName(name)) throw new Error('Use a name between 1 and 40 characters.');
   name = name.trim();
   if (state.profiles.some(profile => profile.id !== id && profile.name.toLocaleLowerCase() === name.toLocaleLowerCase())) throw new Error('That name is already in use. Choose a different name.');
   const existing = state.profiles.some(profile => profile.id === id);
-  if (!existing && state.profiles.length >= 30) throw new Error('This device supports up to 30 people.');
-  const profiles = existing ? state.profiles.map(profile => profile.id === id ? { ...profile, name } : profile) : [...state.profiles, { id, name, ranking: [] }];
+  if (!existing && state.profiles.length >= 31) throw new Error('This device supports Everyone plus up to 30 people.');
+  const profiles = existing ? state.profiles.map(profile => profile.id === id ? { ...profile, name } : profile) : [...state.profiles, { id, name, ranking: [...state.watched] }];
   return { ...state, profiles, activeProfile: id };
 }
 function validateShare(value, catalog) {
-  if (!value || value.version !== VERSION || !validName(value.name) || !validIds(value.ranking, new Set(catalog.map(movie => movie.id)))) throw new Error('This ranking link is invalid or uses an unsupported version.');
-  return { version: VERSION, name: value.name.trim(), ranking: [...value.ranking] };
+  if (!value || value.version !== SHARE_VERSION || !validName(value.name) || !validIds(value.ranking, new Set(catalog.map(movie => movie.id)))) throw new Error('This ranking link is invalid or uses an unsupported version.');
+  return { version: SHARE_VERSION, name: value.name.trim(), ranking: [...value.ranking] };
 }
 export function encodeShare(profile, catalog) {
-  return '#ranking=' + encodeURIComponent(JSON.stringify(validateShare({ version: VERSION, name: profile.name, ranking: profile.ranking }, catalog)));
+  return '#ranking=' + encodeURIComponent(JSON.stringify(validateShare({ version: SHARE_VERSION, name: profile.name, ranking: profile.ranking }, catalog)));
 }
 export function decodeShare(fragment, catalog) {
   if (typeof fragment !== 'string' || !fragment.startsWith('#ranking=') || fragment.length > 16000) throw new Error('This is not a supported ranking link.');
@@ -111,8 +130,9 @@ export function importShare(state, value, newId, name, catalog) {
   if (state.profiles.some(profile => profile.id === newId)) throw new Error('A shared ranking must be imported as a new person. Existing rankings will not be overwritten.');
   let result = editProfile(state, newId, name);
   const watched = new Set([...state.watched, ...incoming.ranking]);
-  result = { ...result, watched: catalog.filter(movie => watched.has(movie.id)).map(movie => movie.id) };
-  return replaceRanking(result, newId, incoming.ranking);
+  const releaseOrder = catalog.filter(movie => watched.has(movie.id)).map(movie => movie.id);
+  result = { ...result, watched: releaseOrder, profiles: result.profiles.map(profile => ({ ...profile, ranking: completeRanking(profile.ranking, releaseOrder) })) };
+  return replaceRanking(result, newId, completeRanking(incoming.ranking, releaseOrder));
 }
 export function changeSession(session, nextState) {
   return { state: nextState, previous: session.state };
@@ -143,10 +163,12 @@ export function scrollVelocity(pointerY, viewportHeight) {
   return 0;
 }
 export function createState(catalog) {
+  const watched = catalog.filter(movie => movie.watched).map(movie => movie.id);
   return {
     version: VERSION,
-    watched: catalog.filter(movie => movie.watched).map(movie => movie.id),
-    profiles: ['Mike', 'Nancy', 'Charlie', 'Henry', 'William', 'Thomas'].map(name => ({ id: name.toLowerCase(), name, ranking: [] })),
-    activeProfile: 'mike'
+    watched,
+    profiles: ['Everyone', 'Mike', 'Nancy', 'Charlie', 'Henry', 'William', 'Thomas'].map(name => ({ id: name.toLowerCase(), name, ranking: [...watched] })),
+    consensusProfile: 'everyone',
+    activeProfile: 'everyone'
   };
 }
