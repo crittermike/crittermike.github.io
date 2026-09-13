@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T16:30:23.169Z",
+  "generated_at": "2026-09-13T16:45:24.069Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -21,33 +21,6 @@
       "end": "2026-09-13T14:00:00-04:00"
     },
     {
-      "date": "2026-09-14",
-      "time": "all day",
-      "what": "EHS decision: September 18 football venue, Eastside or Wade Hampton",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-15T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "9:35a",
-      "what": "Thomas: MAP Reading test",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-14T11:05:00-04:00"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "11a",
-      "what": "Prince of Peace Golf Charity Greenville",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-14T18:00:00-04:00"
-    },
-    {
       "date": "2026-09-15",
       "time": "all day",
       "what": "EHS NEHS meeting, optional: choose 8:15am or 3:45pm",
@@ -58,30 +31,12 @@
     },
     {
       "date": "2026-09-15",
-      "time": "9a",
-      "what": "Mom lymphedema appointment",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-15T10:00:00-04:00"
-    },
-    {
-      "date": "2026-09-15",
       "time": "11a",
       "what": "Mom appointment at LifeStance",
       "who": "family",
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-15T12:00:00-04:00"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "5:30p",
-      "what": "Expressway to Tigertown Informational Meeting",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-15T18:30:00-04:00"
     },
     {
       "date": "2026-09-16",
@@ -586,7 +541,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 98,
+        "balance": 73,
         "refill": 60
       },
       "allowance": {
@@ -903,7 +858,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 81,
+      "temp": 82,
       "hi": 86,
       "lo": 71,
       "icon": "☀️",
@@ -2365,6 +2320,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-13T16:30:21.602Z"
+    "updatedAt": "2026-09-13T16:45:22.672Z"
   }
 }
