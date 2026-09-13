@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T23:01:13.665Z",
+  "generated_at": "2026-09-13T23:16:10.544Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -86,8 +86,8 @@
     {
       "date": "2026-09-18",
       "time": "6p",
-      "what": "POPCS: MS Information Night (Henry)",
-      "who": "henry",
+      "what": "POPCS: Middle School Information Night and Open House",
+      "who": "family",
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-18T19:00:00-04:00"
@@ -211,6 +211,15 @@
     },
     {
       "date": "2026-10-01",
+      "time": "8a",
+      "what": "Charlie: EHS NHS mandatory induction meeting, only if invited (end time unknown)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-01T08:00:00-04:00"
+    },
+    {
+      "date": "2026-10-01",
       "time": "9:30a",
       "what": "Dr. Bhattia Henry appointment ",
       "who": "henry",
@@ -244,6 +253,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-10-04T21:30:00-04:00"
+    },
+    {
+      "date": "2026-10-06",
+      "time": "6p",
+      "what": "Charlie: EHS NHS induction ceremony, only if invited (end time unknown)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-06T18:00:00-04:00"
     },
     {
       "date": "2026-10-07",
@@ -2376,6 +2394,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-13T23:01:12.287Z"
+    "updatedAt": "2026-09-13T23:16:08.935Z"
   }
 }
