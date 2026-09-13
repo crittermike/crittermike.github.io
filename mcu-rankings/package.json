@@ -1,0 +1,6 @@
+{
+  "name": "family-mcu-rankings",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test *.test.mjs", "check": "node --check app.js && node --check core.js && node --check view.js" }
+}

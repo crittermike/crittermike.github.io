@@ -1,0 +1,261 @@
+[
+  {
+    "id": "iron-man",
+    "title": "Iron Man",
+    "year": 2008,
+    "watched": true,
+    "poster": "posters/iron-man.jpg"
+  },
+  {
+    "id": "the-incredible-hulk",
+    "title": "The Incredible Hulk",
+    "year": 2008,
+    "watched": false,
+    "poster": "posters/the-incredible-hulk.jpg"
+  },
+  {
+    "id": "iron-man-2",
+    "title": "Iron Man 2",
+    "year": 2010,
+    "watched": true,
+    "poster": "posters/iron-man-2.jpg"
+  },
+  {
+    "id": "thor",
+    "title": "Thor",
+    "year": 2011,
+    "watched": true,
+    "poster": "posters/thor.jpg"
+  },
+  {
+    "id": "captain-america-the-first-avenger",
+    "title": "Captain America: The First Avenger",
+    "year": 2011,
+    "watched": true,
+    "poster": "posters/captain-america-the-first-avenger.jpg"
+  },
+  {
+    "id": "the-avengers",
+    "title": "The Avengers",
+    "year": 2012,
+    "watched": true,
+    "poster": "posters/the-avengers.jpg"
+  },
+  {
+    "id": "iron-man-3",
+    "title": "Iron Man 3",
+    "year": 2013,
+    "watched": true,
+    "poster": "posters/iron-man-3.jpg"
+  },
+  {
+    "id": "thor-the-dark-world",
+    "title": "Thor: The Dark World",
+    "year": 2013,
+    "watched": false,
+    "poster": "posters/thor-the-dark-world.jpg"
+  },
+  {
+    "id": "captain-america-the-winter-soldier",
+    "title": "Captain America: The Winter Soldier",
+    "year": 2014,
+    "watched": true,
+    "poster": "posters/captain-america-the-winter-soldier.jpg"
+  },
+  {
+    "id": "guardians-of-the-galaxy",
+    "title": "Guardians of the Galaxy",
+    "year": 2014,
+    "watched": true,
+    "poster": "posters/guardians-of-the-galaxy.jpg"
+  },
+  {
+    "id": "avengers-age-of-ultron",
+    "title": "Avengers: Age of Ultron",
+    "year": 2015,
+    "watched": true,
+    "poster": "posters/avengers-age-of-ultron.jpg"
+  },
+  {
+    "id": "ant-man",
+    "title": "Ant-Man",
+    "year": 2015,
+    "watched": true,
+    "poster": "posters/ant-man.jpg"
+  },
+  {
+    "id": "captain-america-civil-war",
+    "title": "Captain America: Civil War",
+    "year": 2016,
+    "watched": true,
+    "poster": "posters/captain-america-civil-war.jpg"
+  },
+  {
+    "id": "doctor-strange",
+    "title": "Doctor Strange",
+    "year": 2016,
+    "watched": true,
+    "poster": "posters/doctor-strange.jpg"
+  },
+  {
+    "id": "guardians-of-the-galaxy-vol-2",
+    "title": "Guardians of the Galaxy Vol. 2",
+    "year": 2017,
+    "watched": true,
+    "poster": "posters/guardians-of-the-galaxy-vol-2.jpg"
+  },
+  {
+    "id": "spider-man-homecoming",
+    "title": "Spider-Man: Homecoming",
+    "year": 2017,
+    "watched": true,
+    "poster": "posters/spider-man-homecoming.jpg"
+  },
+  {
+    "id": "thor-ragnarok",
+    "title": "Thor: Ragnarok",
+    "year": 2017,
+    "watched": true,
+    "poster": "posters/thor-ragnarok.jpg"
+  },
+  {
+    "id": "black-panther",
+    "title": "Black Panther",
+    "year": 2018,
+    "watched": true,
+    "poster": "posters/black-panther.jpg"
+  },
+  {
+    "id": "avengers-infinity-war",
+    "title": "Avengers: Infinity War",
+    "year": 2018,
+    "watched": true,
+    "poster": "posters/avengers-infinity-war.jpg"
+  },
+  {
+    "id": "ant-man-and-the-wasp",
+    "title": "Ant-Man and the Wasp",
+    "year": 2018,
+    "watched": true,
+    "poster": "posters/ant-man-and-the-wasp.jpg"
+  },
+  {
+    "id": "captain-marvel",
+    "title": "Captain Marvel",
+    "year": 2019,
+    "watched": true,
+    "poster": "posters/captain-marvel.jpg"
+  },
+  {
+    "id": "avengers-endgame",
+    "title": "Avengers: Endgame",
+    "year": 2019,
+    "watched": true,
+    "poster": "posters/avengers-endgame.jpg"
+  },
+  {
+    "id": "spider-man-far-from-home",
+    "title": "Spider-Man: Far From Home",
+    "year": 2019,
+    "watched": true,
+    "poster": "posters/spider-man-far-from-home.jpg"
+  },
+  {
+    "id": "black-widow",
+    "title": "Black Widow",
+    "year": 2021,
+    "watched": true,
+    "poster": "posters/black-widow.jpg"
+  },
+  {
+    "id": "shang-chi-and-the-legend-of-the-ten-rings",
+    "title": "Shang-Chi and the Legend of the Ten Rings",
+    "year": 2021,
+    "watched": true,
+    "poster": "posters/shang-chi-and-the-legend-of-the-ten-rings.jpg"
+  },
+  {
+    "id": "eternals",
+    "title": "Eternals",
+    "year": 2021,
+    "watched": false,
+    "poster": "posters/eternals.jpg"
+  },
+  {
+    "id": "spider-man-no-way-home",
+    "title": "Spider-Man: No Way Home",
+    "year": 2021,
+    "watched": true,
+    "poster": "posters/spider-man-no-way-home.jpg"
+  },
+  {
+    "id": "doctor-strange-in-the-multiverse-of-madness",
+    "title": "Doctor Strange in the Multiverse of Madness",
+    "year": 2022,
+    "watched": true,
+    "poster": "posters/doctor-strange-in-the-multiverse-of-madness.jpg"
+  },
+  {
+    "id": "thor-love-and-thunder",
+    "title": "Thor: Love and Thunder",
+    "year": 2022,
+    "watched": false,
+    "poster": "posters/thor-love-and-thunder.jpg"
+  },
+  {
+    "id": "black-panther-wakanda-forever",
+    "title": "Black Panther: Wakanda Forever",
+    "year": 2022,
+    "watched": false,
+    "poster": "posters/black-panther-wakanda-forever.jpg"
+  },
+  {
+    "id": "ant-man-and-the-wasp-quantumania",
+    "title": "Ant-Man and the Wasp: Quantumania",
+    "year": 2023,
+    "watched": false,
+    "poster": "posters/ant-man-and-the-wasp-quantumania.jpg"
+  },
+  {
+    "id": "guardians-of-the-galaxy-vol-3",
+    "title": "Guardians of the Galaxy Vol. 3",
+    "year": 2023,
+    "watched": false,
+    "poster": "posters/guardians-of-the-galaxy-vol-3.jpg"
+  },
+  {
+    "id": "the-marvels",
+    "title": "The Marvels",
+    "year": 2023,
+    "watched": false,
+    "poster": "posters/the-marvels.jpg"
+  },
+  {
+    "id": "captain-america-brave-new-world",
+    "title": "Captain America: Brave New World",
+    "year": 2025,
+    "watched": false,
+    "poster": "posters/captain-america-brave-new-world.jpg"
+  },
+  {
+    "id": "thunderbolts",
+    "title": "Thunderbolts*",
+    "year": 2025,
+    "watched": false,
+    "poster": "posters/thunderbolts.jpg"
+  },
+  {
+    "id": "the-fantastic-four-first-steps",
+    "title": "The Fantastic Four: First Steps",
+    "year": 2025,
+    "watched": false,
+    "poster": "posters/the-fantastic-four-first-steps.jpg"
+  },
+  {
+    "id": "spider-man-brand-new-day",
+    "title": "Spider-Man: Brand New Day",
+    "year": 2026,
+    "watched": true,
+    "poster": "posters/spider-man-brand-new-day.jpg"
+  }
+]

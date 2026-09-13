@@ -1,0 +1,28 @@
+import { selectMovies } from './core.js';
+
+export function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+}
+export function poster(movie, eager = false) {
+  return `<div class="poster" aria-hidden="true"><span class="poster-fallback"><small>MARVEL</small><strong>${escapeHTML(movie.title)}</strong><small>${movie.year}</small></span><img src="${escapeHTML(movie.poster)}" alt="" loading="${eager ? 'eager' : 'lazy'}" decoding="async" width="96" height="144"></div>`;
+}
+export function renderProfiles(state) {
+  return state.profiles.map(profile => `<button class="profile-button" data-action="profile" data-id="${escapeHTML(profile.id)}" aria-pressed="${profile.id === state.activeProfile}"><span class="avatar" aria-hidden="true">${escapeHTML(profile.name.slice(0, 1))}</span><span class="profile-copy"><strong>${escapeHTML(profile.name)}</strong><small>${profile.ranking.length} ranked</small></span></button>`).join('') + '<button class="add-profile" data-action="add-profile" aria-label="Add a person">＋</button>';
+}
+export function renderLibrary(state, catalog, query = '', showWatched = false) {
+  const term = query.trim().toLocaleLowerCase();
+  const movies = catalog.filter(movie => state.watched.includes(movie.id) === showWatched && `${movie.title} ${movie.year}`.toLocaleLowerCase().includes(term));
+  return `<ul class="movie-list library-list">${movies.map(movie => `<li class="movie-row">${poster(movie)}<div class="movie-info"><h4>${escapeHTML(movie.title)}</h4><p>${movie.year}</p></div><button data-action="watched-${showWatched ? 'remove' : 'add'}" data-id="${movie.id}" aria-label="${showWatched ? 'Mark as not watched:' : 'Mark as watched:'} ${escapeHTML(movie.title)}">${showWatched ? 'Not seen' : 'Watched ＋'}</button></li>`).join('')}</ul>${movies.length ? '' : `<p class="no-results">${term ? 'No movies match this search.' : showWatched ? 'Your watched library is empty.' : 'You have watched every movie in this collection.'}</p>`}${showWatched ? '' : '<p class="fine-print">Deadpool &amp; Wolverine is not included in this family collection because it is rated R.</p>'}`;
+}
+export function renderLists(state, catalog, query = '') {
+  const { profile, unranked, ranked, canDrag } = selectMovies(state, catalog, query);
+  const unrankedTotal = state.watched.length - profile.ranking.length;
+  return `<section aria-labelledby="ranked-heading" class="ranking-section">
+    <div class="section-heading"><h3 id="ranked-heading">The ranking <span class="count">${profile.ranking.length}</span></h3><span class="eyebrow">BEST TO WORST</span></div>
+    ${profile.ranking.length ? `<p class="list-help">${canDrag ? 'Drag the dotted handle to reorder. Use the arrows or tap Move for an exact position.' : 'Clear search to drag. Move and arrows still use positions in the full ranking.'}</p><ol id="ranked-list" class="movie-list ranked">${ranked.map(movie => `<li value="${movie.position}" class="movie-row" data-movie="${movie.id}"><span class="rank-number" aria-label="Position ${movie.position}">${String(movie.position).padStart(2, '0')}</span>${poster(movie)}<div class="movie-info"><h4>${escapeHTML(movie.title)}</h4><p>${movie.year}${movie.position === 1 ? '<span class="meta-dot">·</span><span class="top-pick">Top pick</span>' : ''}</p></div><div class="reorder-controls"><button class="icon-button arrow" data-action="up" data-id="${movie.id}" aria-label="Move ${escapeHTML(movie.title)} up" ${movie.position === 1 ? 'disabled' : ''}>↑</button><button class="icon-button arrow" data-action="down" data-id="${movie.id}" aria-label="Move ${escapeHTML(movie.title)} down" ${movie.position === profile.ranking.length ? 'disabled' : ''}>↓</button><button class="move-button" data-action="rank" data-id="${movie.id}" aria-label="Move ${escapeHTML(movie.title)} to position">Move</button><button class="icon-button drag-handle" data-action="drag" data-id="${movie.id}" ${canDrag ? '' : 'disabled'} aria-label="Reorder ${escapeHTML(movie.title)}. Use arrow keys, or press Enter to choose a position."><span aria-hidden="true">⠿</span></button></div></li>`).join('')}</ol>${ranked.length ? '' : '<p class="no-results">No movies match in your ranking.</p>'}` : `<div class="empty-ranking"><span class="empty-number" aria-hidden="true">01</span><div><h4>Your top spot is waiting.</h4><p>Pick a favorite from the watched shelf below, or start with release order and make it your own.</p><div class="button-row"><a class="button primary" href="#unranked-heading">Choose your first movie <span aria-hidden="true">↓</span></a><button data-action="seed">Start in release order</button></div></div></div>`}
+    </section>
+    <section class="unranked-section" aria-labelledby="unranked-heading"><div class="section-heading"><div><h3 id="unranked-heading" tabindex="-1">Unranked <span class="count">${unrankedTotal}</span></h3><p>Watched together. Waiting for your verdict.</p></div><span class="eyebrow">RELEASE ORDER</span></div>
+    <ul class="movie-list shelf">${unranked.map(movie => `<li class="movie-row" data-movie="${movie.id}">${poster(movie)}<div class="movie-info"><h4>${escapeHTML(movie.title)}</h4><p>${movie.year}<span class="meta-dot">·</span>Watched</p></div><button class="rank-button" data-action="rank" data-id="${movie.id}" aria-label="Rank ${escapeHTML(movie.title)}">Rank <span aria-hidden="true">＋</span></button></li>`).join('')}</ul>
+    ${unranked.length ? '' : `<p class="no-results">${unrankedTotal ? 'No movies match on the watched shelf.' : 'All caught up. Add your next movie after you watch it.'}</p>`}
+    </section>`;
+}
