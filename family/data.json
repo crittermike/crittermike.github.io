@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T20:00:57.779Z",
+  "generated_at": "2026-09-13T20:15:53.164Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-13T14:00:00-04:00"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "9:35a",
+      "what": "Thomas: MAP Reading test",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-14T11:05:00-04:00"
     },
     {
       "date": "2026-09-15",
@@ -533,6 +542,10 @@
         {
           "id": "sch-2026-09-14-map-reading-test-9-35-11-05am",
           "label": "MAP Reading test, 9:35-11:05am"
+        },
+        {
+          "id": "sch-2026-09-14-monday-homework-study-read-20-minutes-sp",
+          "label": "Monday homework/study: Read 20 minutes; Spelling WB p.22; words 1-5 three times each; study Monday DOL; Math WB p.41-42; English EIE WB p.17; begin studying for Religion Unit 1 test. Work for Monday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
         }
       ]
     },
@@ -905,7 +918,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 87,
       "hi": 87,
       "lo": 71,
       "icon": "☀️",
@@ -915,15 +928,15 @@
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 93,
-        "lo": 70,
+        "hi": 92,
+        "lo": 71,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛅",
         "hi": 88,
-        "lo": 71,
+        "lo": 70,
         "code": 3
       },
       {
@@ -2363,6 +2376,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-13T20:00:56.028Z"
+    "updatedAt": "2026-09-13T20:15:51.692Z"
   }
 }
