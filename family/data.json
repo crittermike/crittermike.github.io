@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-14T03:45:47.992Z",
+  "generated_at": "2026-09-14T04:00:52.667Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-13",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-13T09:00:00-04:00"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12p",
-      "what": "Walmart grocery delivery",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-13T14:00:00-04:00"
-    },
     {
       "date": "2026-09-14",
       "time": "9:35a",
@@ -585,12 +567,8 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-14-map-reading-test-9-35-11-05am",
-          "label": "MAP Reading test, 9:35-11:05am"
-        },
-        {
-          "id": "sch-2026-09-14-monday-homework-study-read-20-minutes-sp",
-          "label": "Monday homework/study: Read 20 minutes; Spelling WB p.22; words 1-5 three times each; study Monday DOL; Math WB p.41-42; English EIE WB p.17; begin studying for Religion Unit 1 test. Work for Monday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+          "id": "sch-2026-09-15-tuesday-homework-study-read-20-minutes-b",
+          "label": "Tuesday homework/study: Read 20 minutes; begin studying 1.4 All Aboard! reading comprehension and vocabulary; Spelling WB p.23; words 6-10 three times each; study Monday-Tuesday DOL; Math WB p.44-45; study for Wednesday Simple Solutions quiz and Ooey Gooey poetry recitation; study Religion Unit 1. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
         }
       ]
     },
@@ -622,16 +600,12 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-14-spanish-simon-ixl-4p-due-complete-over-t",
-          "label": "Spanish (Simon): IXL 4P due; complete over the preceding weekend"
-        },
-        {
           "id": "sch-2026-09-14-prince-of-peace-6th-annual-golf-charity-",
           "label": "Prince of Peace 6th Annual Golf Charity Greenville, registration 11:00am, shotgun start noon, cocktail party 5:00pm at Cherokee Valley Golf Club"
         },
         {
-          "id": "sch-2026-09-14-spanish-simon-read-textbook-p-228-and-an",
-          "label": "Spanish (Simon): Read textbook p.228 and answer activity 11 on p.229, due September 14 (Classroom email 2026-09-11, INBOX 329568)."
+          "id": "sch-2026-09-15-honors-english-demarrais-literary-analys",
+          "label": "Honors English (deMarrais): Literary Analysis Essay Final Draft due September 15 (Classroom assignment 2026-09-10, INBOX 329542)."
         }
       ]
     },
@@ -647,7 +621,16 @@
         "balance_str": "$299.77"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-15-expressway-to-tigertown-informational-me",
+          "label": "Expressway to Tigertown informational meeting, 5:30 PM at Greenville Tech Barton Campus, Prisma Health Building 101 multipurpose room"
+        },
+        {
+          "id": "sch-2026-09-15-national-english-honor-society-meeting-8",
+          "label": "National English Honor Society meeting, 8:15am or 3:45pm; new-member application required beforehand"
+        }
+      ]
     }
   ],
   "chores": {
@@ -861,7 +844,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -869,8 +852,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken fajitas with onions, zucchini, and corn",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -878,7 +861,7 @@
       "dow_short": "Tue",
       "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -964,19 +947,12 @@
   "weather": {
     "now": {
       "temp": 74,
-      "hi": 87,
+      "hi": 92,
       "lo": 71,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 92,
-        "lo": 71,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -1004,24 +980,31 @@
         "hi": 94,
         "lo": 70,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "☀️",
+        "hi": 95,
+        "lo": 71,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-13T07:11",
         "2026-09-14T07:11",
         "2026-09-15T07:12",
         "2026-09-16T07:13",
         "2026-09-17T07:13",
-        "2026-09-18T07:14"
+        "2026-09-18T07:14",
+        "2026-09-19T07:15"
       ],
       "sunsets": [
-        "2026-09-13T19:38",
         "2026-09-14T19:37",
         "2026-09-15T19:36",
         "2026-09-16T19:34",
         "2026-09-17T19:33",
-        "2026-09-18T19:31"
+        "2026-09-18T19:31",
+        "2026-09-19T19:30"
       ],
       "timezone": "America/New_York"
     }
@@ -2421,6 +2404,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-14T03:45:46.598Z"
+    "updatedAt": "2026-09-14T04:00:51.284Z"
   }
 }
