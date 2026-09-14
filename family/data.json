@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T02:00:37.510Z",
+  "generated_at": "2026-09-14T02:15:34.305Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -190,6 +190,33 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-28T09:45:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "10a",
+      "what": "Henry: Middle School parent-teacher conference",
+      "who": "henry",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T10:20:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "10:20a",
+      "what": "Thomas: Parent-teacher conference with Mrs. Cannon",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T10:40:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "10:40a",
+      "what": "William: Parent-teacher conference with Mrs. Marlar",
+      "who": "william",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T11:00:00-04:00"
     },
     {
       "date": "2026-09-28",
@@ -946,15 +973,15 @@
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 92,
+        "hi": 93,
         "lo": 71,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛅",
-        "hi": 88,
-        "lo": 70,
+        "hi": 84,
+        "lo": 71,
         "code": 3
       },
       {
@@ -2394,6 +2421,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-14T02:00:36.438Z"
+    "updatedAt": "2026-09-14T02:15:33.186Z"
   }
 }
