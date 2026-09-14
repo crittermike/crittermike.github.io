@@ -2,37 +2,24 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#11151c"><title>Fart Soundboard</title>
 <style>
 :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#11151c;color:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:32px 18px max(32px,env(safe-area-inset-bottom))}main{max-width:820px;margin:auto}header{text-align:center;margin-bottom:24px}.eyebrow{color:#a6e67d;text-transform:uppercase;letter-spacing:.2em;font-size:12px;font-weight:800}h1{font-size:clamp(36px,7vw,60px);margin:10px 0;letter-spacing:-.05em}p{color:#aab5c5;line-height:1.5}button{font:inherit;cursor:pointer;touch-action:manipulation;color:inherit}button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:4px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.pad{background:#1d2532;border:1px solid #39465a;border-radius:20px;padding:24px 10px;min-height:148px;box-shadow:0 5px 0 #070b10;transition:transform .1s,background .1s}.pad:hover{background:#29374a}.pad:active,.pad.playing{transform:translateY(4px);background:#384d2c;border-color:#a6e67d;box-shadow:0 1px 0 #070b10}.icon{display:block;font-size:34px;margin-bottom:10px}.name{font-size:16px;font-weight:750;display:block}.detail{display:block;font-size:12px;color:#aab5c5;margin-top:6px}.controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:25px;padding:18px;background:#19212c;border-radius:18px}.controls button{border:1px solid #4b5b70;border-radius:10px;background:#263449;padding:12px 18px;min-height:44px}#random{background:#a6e67d;color:#172211;border-color:#a6e67d;font-weight:750}.volume{display:flex;align-items:center;gap:10px;flex:1;min-width:190px}input{min-width:80px;width:100%;accent-color:#a6e67d}#status{min-height:24px;text-align:center;margin:22px 0 8px;font-size:14px}.foot{text-align:center;font-size:12px}@media(max-width:620px){.grid{grid-template-columns:repeat(2,1fr)}.pad{min-height:130px;padding:18px 8px}body{padding-top:22px}}@media(prefers-reduced-motion:reduce){.pad{transition:none}}
-</style></head><body><main><header><div class="eyebrow">Eight buttons. Zero dignity.</div><h1>Fart Soundboard</h1><p>Pick a button. Make a noise.</p></header><div class="grid" id="pads" aria-label="Sound buttons"></div><div class="controls"><button id="random" type="button">Random fart</button><button id="stop" type="button">Stop all</button><label class="volume" for="volume">Volume <input id="volume" type="range" min="0" max="100" value="55"><output id="level" for="volume">55%</output></label></div><p id="status" role="status" aria-live="polite">Tap any button to play.</p><p class="foot">Sound on. Works with headphones, too. Keys 1 through 8 play sounds; Escape stops.</p><noscript>Enable JavaScript to use the soundboard.</noscript></main>
+</style></head><body><main><header><div class="eyebrow">Eight buttons. Zero dignity.</div><h1>Fart Soundboard</h1><p>Pick a button. Make a noise.</p></header><div class="grid" id="pads" aria-label="Sound buttons"></div><div class="controls"><button id="random" type="button">Random fart</button><button id="stop" type="button">Stop all</button><label class="volume" for="volume">Volume <input id="volume" type="range" min="0" max="100" value="55"><output id="level" for="volume">55%</output></label></div><p id="status" role="status" aria-live="polite">Tap any button to play.</p><p class="foot">Sound on. Works with headphones, too. Keys 1 through 8 play sounds; Escape stops.</p><p class="foot">Recorded effects: <a style="color:#a6e67d" href="https://opengameart.org/content/gastric-distress">Gastric Distress by LFA</a> (CC0). Trimmed into eight clips.</p><noscript>Enable JavaScript to use the soundboard.</noscript></main>
 <script>
 'use strict';
 const sounds=[
- {name:'The Classic',icon:'💨',detail:'A proper raspberry',duration:1.05,freq:70,end:43,noise:.28,pulse:19,seed:11},
- {name:'Tiny Squeak',icon:'🐭',detail:'Small but noticeable',duration:.38,freq:220,end:105,noise:.1,pulse:32,seed:22},
- {name:'The Rumbler',icon:'🌋',detail:'Low and slow',duration:2.7,freq:43,end:27,noise:.35,pulse:10,seed:33},
- {name:'Wet Trouble',icon:'💦',detail:'Bubbles included',duration:1.55,freq:96,end:45,noise:.7,pulse:28,seed:44},
- {name:'Motorboat',icon:'🚤',detail:'Full throttle',duration:2.05,freq:85,end:62,noise:.18,pulse:15,seed:55},
- {name:'Sneak Attack',icon:'🥷',detail:'A quick surprise',duration:.22,freq:95,end:37,noise:.5,pulse:9,seed:66},
- {name:'Balloon Deflate',icon:'🎈',detail:'Running out of air',duration:2.3,freq:190,end:31,noise:.25,pulse:24,seed:77},
- {name:'The Grand Finale',icon:'💥',detail:'Three-part performance',duration:3.2,freq:72,end:34,noise:.42,pulse:17,seed:88}
+ {name:'The Classic',icon:'💨',detail:'Clip 1'},
+ {name:'Tiny Toot',icon:'🐭',detail:'Clip 2'},
+ {name:'The Long One',icon:'🌋',detail:'Clip 3'},
+ {name:'Bubble Trouble',icon:'💦',detail:'Clip 4'},
+ {name:'Motorboat',icon:'🚤',detail:'Clip 5'},
+ {name:'Sneak Attack',icon:'🥷',detail:'Clip 6'},
+ {name:'Quick Release',icon:'🎈',detail:'Clip 7'},
+ {name:'The Finale',icon:'💥',detail:'Clip 8'}
 ];
-// Original synthesized sound effects: pulsed, pitch-modulated rasp and filtered noise.
-function synthesize(s,sampleRate){
- const data=new Float32Array(Math.ceil(s.duration*sampleRate));let phase=0,low=0,seed=s.seed;
- for(let i=0;i<data.length;i++){
-  const t=i/sampleRate,u=t/s.duration;
-  seed=(Math.imul(seed,1664525)+1013904223)>>>0;const white=seed/2147483648-1;
-  low+=.18*(white-low);
-  let f=s.freq*Math.pow(s.end/s.freq,u)*(1+.12*Math.sin(t*47)+.05*Math.sin(t*113));
-  if(s.seed===77)f*=1+.28*Math.sin(t*13);
-  phase+=f/sampleRate;const cycle=phase%1;
-  const rasp=Math.tanh(3.5*Math.sin(cycle*Math.PI*2))*.6+Math.sin(cycle*Math.PI*6)*.15;
-  let pulse=.42+.58*Math.pow(.5+.5*Math.sin(t*s.pulse*Math.PI*2),2);
-  if(s.seed===55)pulse=Math.pow(.5+.5*Math.sin(t*17*Math.PI*2),3);
-  if(s.seed===88)pulse*=Math.sin(Math.PI*((u*3)%1))**2;
-  const envelope=Math.min(1,t/.012)*Math.min(1,(s.duration-t)/.07)*Math.pow(1-u,.45);
-  data[i]=Math.tanh((rasp*(1-s.noise)+low*3*s.noise)*pulse*2)*envelope*.72;
- }
- return data;
+const loading=new Map();
+async function loadSound(i){
+ if(cache.has(i))return cache.get(i);
+ if(!loading.has(i))loading.set(i,(async()=>{const response=await fetch('audio/fart-'+(i+1)+'.mp3');if(!response.ok)throw Error('Audio download failed');const buffer=await context.decodeAudioData(await response.arrayBuffer());cache.set(i,buffer);return buffer})().finally(()=>loading.delete(i)));
+ return loading.get(i);
 }
 let context,master,generation=0;const active=new Set(),cache=new Map();
 const pads=document.getElementById('pads'),status=document.getElementById('status'),volume=document.getElementById('volume');
@@ -44,9 +31,11 @@ async function play(i){
   if(!context){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw Error('unsupported');context=new Audio();master=context.createGain();master.gain.value=Number(volume.value)/100;master.connect(context.destination)}
   if(context.state!=='running')await context.resume();
   if(ticket!==generation)return;
+  status.textContent='Loading: '+sounds[i].name;
+  const buffer=await loadSound(i);
+  if(ticket!==generation)return;
   if(active.size>=4){const oldest=active.values().next().value;oldest.source.stop();active.delete(oldest)}
-  if(!cache.has(i)){const samples=synthesize(sounds[i],context.sampleRate);const b=context.createBuffer(1,samples.length,context.sampleRate);b.copyToChannel(samples,0);cache.set(i,b)}
-  const source=context.createBufferSource();source.buffer=cache.get(i);source.connect(master);const voice={source,i};active.add(voice);
+  const source=context.createBufferSource();source.buffer=buffer;source.connect(master);const voice={source,i};active.add(voice);
   const button=pads.children[i];button.classList.add('playing');status.textContent='Playing: '+sounds[i].name;
   source.onended=()=>{active.delete(voice);source.disconnect();if(![...active].some(v=>v.i===i))button.classList.remove('playing');if(!active.size&&ticket===generation)status.textContent='Ready for another.'};source.start();
  }catch(e){status.textContent='Audio could not start. Try again in Safari or Chrome with sound enabled.';console.error(e)}
