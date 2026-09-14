@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T23:45:16.279Z",
+  "generated_at": "2026-09-14T00:00:32.778Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -822,11 +822,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Chicken fajitas with onions, zucchini, and corn",
+    "protein_g": 48,
+    "cal": 600,
+    "effort": "easy",
+    "note": "Scale the saved 4-5 serving recipe for six. Use trimmed chicken breasts and pepper-free seasoning; no cilantro or salsa. Reserve chicken and a warm tortilla before combining the filling. Macros are unverified saved estimates.",
     "recipe": null
   },
   "mealweek": [
@@ -936,7 +936,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 83,
+      "temp": 82,
       "hi": 87,
       "lo": 71,
       "icon": "🌤",
@@ -2353,7 +2353,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 43.3,
+    "dayPct": 46.7,
     "totalSpend": 3190.97,
     "totalBudget": 0,
     "categories": [
@@ -2394,6 +2394,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-13T23:45:14.824Z"
+    "updatedAt": "2026-09-14T00:00:31.165Z"
   }
 }
