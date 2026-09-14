@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T20:00:23.621Z",
+  "generated_at": "2026-09-14T20:15:18.809Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -602,7 +602,20 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-15-reading-the-cay-quiz-chapters-8-13-marla",
+          "label": "Reading: The Cay quiz, chapters 8-13 (Marlar fifth-grade newsletter 9/14/2026)"
+        },
+        {
+          "id": "sch-2026-09-15-grammar-noun-test-marlar-fifth-grade-new",
+          "label": "Grammar: Noun Test (Marlar fifth-grade newsletter 9/14/2026)"
+        },
+        {
+          "id": "sch-2026-09-15-religion-lesson-5-vocabulary-quiz-marlar",
+          "label": "Religion: Lesson 5 vocabulary quiz (Marlar fifth-grade newsletter 9/14/2026)"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -2430,6 +2443,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-14T20:00:22.383Z"
+    "updatedAt": "2026-09-14T20:15:17.306Z"
   }
 }
