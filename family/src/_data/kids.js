@@ -19,6 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { dueTomorrowAssignments } = require('../lib/school-homework');
 
 const WIKI = path.join(os.homedir(), '.hermes', 'workspace', 'wiki', 'concepts');
 const SUGAR = path.join(WIKI, 'sugar.md');
@@ -36,66 +37,6 @@ const KIDS = [
   { key: 'henry',   name: 'Henry',   grade: '8th'  },
   { key: 'charlie', name: 'Charlie', grade: '11th' },
 ];
-
-/**
- * Today's recurring assignments per kid.
- * School year: one-off items from school-assignments.md due TOMORROW.
- * Returns [{id, label}, ...] — id must be stable so localStorage checkbox state survives.
- */
-function todaysAssignments(kidKey) {
-  // ET date components — server is UTC, so use Intl to avoid date drift.
-  const et = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/New_York',
-    year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short',
-  }).formatToParts(new Date()).reduce((a, p) => (a[p.type] = p.value, a), {});
-  const todayISO = `${et.year}-${String(et.month).padStart(2,'0')}-${String(et.day).padStart(2,'0')}`;
-  // "Due tomorrow" window — heads-up the night before, not the due-date morning.
-  const tomorrow = new Date(Date.UTC(parseInt(et.year,10), parseInt(et.month,10)-1, parseInt(et.day,10)+1));
-  const tomorrowISO = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,'0')}-${String(tomorrow.getUTCDate()).padStart(2,'0')}`;
-
-  const out = [];
-  // Daily homework-plan rows are filed on the evening they must be completed.
-  // Assessments/deadlines remain tomorrow-only so they do not repeat on the due date.
-  const assessmentRe = /\b(test|quiz|due|recitation|cardinal friday|school mass)\b/i;
-  for (const item of loadSchoolToday(kidKey, [todayISO])) {
-    if (!assessmentRe.test(item.label)) out.push(item);
-  }
-  for (const item of loadSchoolToday(kidKey, [tomorrowISO])) {
-    out.push(item);
-  }
-  return out;
-}
-
-/**
- * Parse school-assignments.md, return items for `kidKey` whose date is in `dateISOs`.
- * File structure: "### <Kid name> (...)" sections under "## Upcoming",
- * with rows like "- **2026-06-11 (Thu):** Finish video for POPCS".
- * Stops at "## Completed".
- */
-function loadSchoolToday(kidKey, dateISOs) {
-  const text = readSafe(SCHOOL);
-  if (!text) return [];
-  const upcoming = text.match(/## Upcoming([\s\S]*?)(?=^## Completed|\Z)/m);
-  const body = upcoming ? upcoming[1] : text;
-  const wanted = new Set(Array.isArray(dateISOs) ? dateISOs : [dateISOs]);
-
-  const sections = body.split(/^###\s+/m).slice(1);
-  const kidNameLower = kidKey.toLowerCase();
-  const out = [];
-  for (const sec of sections) {
-    const header = sec.split('\n', 1)[0].toLowerCase();
-    if (!header.startsWith(kidNameLower)) continue;
-    const rowRe = /^- \*\*(\d{4}-\d{2}-\d{2})[^*]*\*\*\s*(.+)$/gm;
-    let m;
-    while ((m = rowRe.exec(sec)) !== null) {
-      if (!wanted.has(m[1])) continue;
-      const desc = m[2].trim();
-      const id = `sch-${m[1]}-${desc.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)}`;
-      out.push({ id, label: desc });
-    }
-  }
-  return out;
-}
 
 function readSafe(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch { return ''; }
@@ -163,6 +104,8 @@ module.exports = function () {
   const sugar = loadSugar();
   const allowance = loadAllowance();
   const guineaPig = loadGuineaPigFund();
+  const school = readSafe(SCHOOL);
+  const now = new Date();
 
   return KIDS.map(k => ({
     key: k.key,
@@ -177,6 +120,6 @@ module.exports = function () {
     },
     // William-only: 60/40 Guinea Pig Fund savings balance. null for everyone else.
     guineaPig: k.key === 'william' ? guineaPig : null,
-    assignments: todaysAssignments(k.key),
+    assignments: dueTomorrowAssignments(school, k.key, now),
   }));
 };

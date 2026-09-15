@@ -7,6 +7,7 @@ const {
   updateStoredTodoState,
   syncTodoCopies,
   bindLongPress,
+  isDueTomorrow,
 } = require('../src/assets/assignment-long-press.js');
 
 function fakeTarget() {
@@ -34,6 +35,14 @@ function fakeTarget() {
     },
   };
 }
+
+test('a stale built school checkbox expires at the next ET date, including month/year boundaries', () => {
+  assert.equal(isDueTomorrow('2026-09-16', '2026-09-15'), true);
+  assert.equal(isDueTomorrow('2026-09-16', '2026-09-16'), false);
+  assert.equal(isDueTomorrow('2027-01-01', '2026-12-31'), true);
+  assert.equal(isDueTomorrow('2026-11-02', '2026-11-01'), true);
+  assert.equal(isDueTomorrow(undefined, '2026-09-15'), false);
+});
 
 test('normalizeTodoState preserves checks and dismissed tasks for the same ET date', () => {
   const state = normalizeTodoState({

@@ -5,6 +5,15 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
+  // today is the caller's ET calendar date, not a UTC timestamp.
+  function isDueTomorrow(dueDate, today) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dueDate || '') || !/^\d{4}-\d{2}-\d{2}$/.test(today || '')) return false;
+    const date = new Date(today + 'T12:00:00Z');
+    if (isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== today) return false;
+    date.setUTCDate(date.getUTCDate() + 1);
+    return dueDate === date.toISOString().slice(0, 10);
+  }
+
   function normalizeTodoState(value, date) {
     const source = value && typeof value === 'object' ? value : {};
     if (source.date !== date) return { date: date, checks: {}, dismissed: {} };
@@ -106,6 +115,7 @@
   }
 
   return {
+    isDueTomorrow: isDueTomorrow,
     normalizeTodoState: normalizeTodoState,
     dismissTodo: dismissTodo,
     updateStoredTodoState: updateStoredTodoState,

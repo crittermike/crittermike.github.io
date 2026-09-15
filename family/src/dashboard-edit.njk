@@ -1834,7 +1834,7 @@ eleventyExcludeFromCollections: true
   { "id": "calendar",   "label": "📅 Upcoming events",              "w": 10, "h": 10 },
   { "id": "chores",     "label": "🧹 Weekend chores",               "w": 8, "h": 10 },
   { "id": "meals",       "label": "🍽️ Meal plan",                    "w": 6, "h": 6 },
-  { "id": "assignments", "label": "✏️ Today's assignments",          "w": 6, "h": 6 },
+  { "id": "assignments", "label": "✏️ Due tomorrow",          "w": 6, "h": 6 },
   { "id": "recipe",      "label": "🍲 What's cooking (today + tomorrow)", "w": 6, "h": 6 },
   { "id": "joke",        "label": "😂 Joke of the day",              "w": 6, "h": 4 },
   { "id": "bible",       "label": "✝️ Verse of the day",             "w": 6, "h": 4 },
@@ -1923,21 +1923,21 @@ eleventyExcludeFromCollections: true
       {% endif %}
 
       <div class="kidtile-sec">
-        <div class="kidtile-sec-lbl">✏️ Today</div>
+        <div class="kidtile-sec-lbl">✏️ Due tomorrow</div>
         <div class="assn-list">
           {% if kid.assignments and kid.assignments.length %}
             <ul class="todo-list" data-kid="{{ kid.key }}">
               {% for a in kid.assignments %}
               <li>
                 <label class="todo">
-                  <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}">
+                  <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}" data-due-date="{{ a.dueDate }}">
                   <span class="todo-label">{{ a.label }}</span>
                 </label>
               </li>
               {% endfor %}
             </ul>
           {% else %}
-            <div class="placeholder">Nothing today 🎉</div>
+            <div class="placeholder">No confirmed assignments due tomorrow.</div>
           {% endif %}
         </div>
       </div>
@@ -2049,7 +2049,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <div data-tpl="assignments">
-    <div class="tile-h"><span>✏️ Today's assignments</span></div>
+    <div class="tile-h"><span>✏️ Due tomorrow</span></div>
     <div class="tile-body">
       <div class="assn-list">
         {% set anyAssn = false %}
@@ -2062,7 +2062,7 @@ eleventyExcludeFromCollections: true
                 {% for a in kid.assignments %}
                   <li>
                     <label class="todo">
-                      <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}">
+                      <input type="checkbox" data-kid="{{ kid.key }}" data-id="{{ a.id }}" data-due-date="{{ a.dueDate }}">
                       <span class="todo-label">{{ a.label }}</span>
                     </label>
                   </li>
@@ -2072,7 +2072,7 @@ eleventyExcludeFromCollections: true
           {% endif %}
         {% endfor %}
         {% if not anyAssn %}
-          <div class="placeholder">Nothing assigned today. Go outside.</div>
+          <div class="placeholder">No confirmed assignments due tomorrow.</div>
         {% endif %}
       </div>
     </div>
@@ -2662,7 +2662,7 @@ eleventyExcludeFromCollections: true
         }
         const empty = document.createElement('div');
         empty.className = 'placeholder';
-        empty.textContent = 'Nothing today 🎉';
+        empty.textContent = 'No confirmed assignments due tomorrow.';
         list.replaceWith(empty);
       });
 
@@ -2670,11 +2670,17 @@ eleventyExcludeFromCollections: true
         if (list.querySelector('.todo-list, .assn-kid, .placeholder')) return;
         const empty = document.createElement('div');
         empty.className = 'placeholder';
-        empty.textContent = 'Nothing assigned today. Go outside.';
+        empty.textContent = 'No confirmed assignments due tomorrow.';
         list.appendChild(empty);
       });
     }
 
+    // Old committed HTML must not keep yesterday's "due tomorrow" work alive.
+    document.querySelectorAll('.assn-list .todo input[data-due-date]').forEach(box => {
+      if (!AssignmentLongPress.isDueTomorrow(box.dataset.dueDate, date)) {
+        removeTodoFromPage(box.dataset.kid + '|' + box.dataset.id);
+      }
+    });
     Object.keys(state.dismissed).forEach(removeTodoFromPage);
 
     document.querySelectorAll('.assn-list .todo input[type="checkbox"]').forEach(box => {
@@ -2715,6 +2721,12 @@ eleventyExcludeFromCollections: true
     });
     updateState(function () {});
   }
+
+  // Expire stale school rows even while the kiosk remains open over midnight.
+  setInterval(hydrateAssignments, 60 * 1000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) hydrateAssignments();
+  });
 
   // === RECIPE OF THE DAY (deterministic daily pick from rotation) ===
   const RECIPES = {{ recipes | dump | safe }};
