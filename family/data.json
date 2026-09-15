@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-15T03:45:43.271Z",
+  "generated_at": "2026-09-15T04:00:45.922Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-14",
-      "time": "9:35a",
-      "what": "Thomas: MAP Reading test",
-      "who": "thomas",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-14T11:05:00-04:00"
-    },
     {
       "date": "2026-09-15",
       "time": "all day",
@@ -568,6 +559,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-12-11T15:00:00-05:00"
+    },
+    {
+      "date": "2026-12-13",
+      "time": "8a",
+      "what": "Mass",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-12-13T09:00:00-05:00"
     }
   ],
   "kids": [
@@ -585,8 +585,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-15-tuesday-homework-study-read-20-minutes-b",
-          "label": "Tuesday homework/study: Read 20 minutes; begin studying 1.4 All Aboard! reading comprehension and vocabulary; Spelling WB p.23; words 6-10 three times each; study Monday-Tuesday DOL; Math WB p.44-45; study for Wednesday Simple Solutions quiz and Ooey Gooey poetry recitation; study Religion Unit 1. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+          "id": "sch-2026-09-16-september-poetry-recitation-ooey-gooey",
+          "label": "September Poetry Recitation - Ooey Gooey"
+        },
+        {
+          "id": "sch-2026-09-16-wednesday-homework-study-read-20-minutes",
+          "label": "Wednesday homework/study: Read 20 minutes; study 1.4 All Aboard! reading comprehension and vocabulary for Thursday; Spelling WB p.24; words 11-15 three times each; study Monday-Wednesday DOL; Math WB p.47-48; no English homework; study Religion Unit 1 for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-math-simple-solutions-quiz-cannon-newsle",
+          "label": "Math: Simple Solutions Quiz (Cannon newsletter 9/14-18, email 2026-09-13)"
         }
       ]
     },
@@ -604,16 +612,12 @@
       "guineaPig": "$140.34",
       "assignments": [
         {
-          "id": "sch-2026-09-15-reading-the-cay-quiz-chapters-8-13-marla",
-          "label": "Reading: The Cay quiz, chapters 8-13 (Marlar fifth-grade newsletter 9/14/2026)"
+          "id": "sch-2026-09-16-science-astronomy-test-1-marlar-fifth-gr",
+          "label": "Science: Astronomy Test 1 (Marlar fifth-grade newsletter 9/14/2026)"
         },
         {
-          "id": "sch-2026-09-15-grammar-noun-test-marlar-fifth-grade-new",
-          "label": "Grammar: Noun Test (Marlar fifth-grade newsletter 9/14/2026)"
-        },
-        {
-          "id": "sch-2026-09-15-religion-lesson-5-vocabulary-quiz-marlar",
-          "label": "Religion: Lesson 5 vocabulary quiz (Marlar fifth-grade newsletter 9/14/2026)"
+          "id": "sch-2026-09-16-simple-solutions-quiz-marlar-fifth-grade",
+          "label": "Simple Solutions Quiz (Marlar fifth-grade newsletter 9/14/2026)"
         }
       ]
     },
@@ -629,24 +633,7 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-14-prince-of-peace-6th-annual-golf-charity-",
-          "label": "Prince of Peace 6th Annual Golf Charity Greenville, registration 11:00am, shotgun start noon, cocktail party 5:00pm at Cherokee Valley Golf Club"
-        },
-        {
-          "id": "sch-2026-09-15-honors-english-demarrais-literary-analys",
-          "label": "Honors English (deMarrais): Literary Analysis Essay Final Draft due September 15 (Classroom assignment 2026-09-10, INBOX 329542)."
-        },
-        {
-          "id": "sch-2026-09-15-spanish-simon-quiz-verbos-bota-e-ie-p-22",
-          "label": "Spanish (Simon): Quiz verbos bota e--ie, p.224-227, due September 15 (Classroom email 2026-09-14, INBOX 329628)."
-        },
-        {
-          "id": "sch-2026-09-15-honors-english-demarrais-socratic-questi",
-          "label": "Honors English (deMarrais): Socratic Questions for Chapter 9; thoroughly answer and prepare to discuss for a grade, due September 15 (Classroom email 2026-09-14, INBOX 329626)."
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -891,7 +878,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken fajitas with onions, zucchini, and corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -899,8 +886,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -908,7 +895,7 @@
       "dow_short": "Wed",
       "name": "Korean beef and broccoli bowls",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -985,20 +972,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 92,
-      "lo": 70,
+      "temp": 74,
+      "hi": 84,
+      "lo": 68,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 84,
-        "lo": 68,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -1026,24 +1006,31 @@
         "hi": 94,
         "lo": 70,
         "code": 3
+      },
+      {
+        "d": "Sun",
+        "icon": "⛅",
+        "hi": 92,
+        "lo": 72,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-14T07:11",
         "2026-09-15T07:12",
         "2026-09-16T07:13",
         "2026-09-17T07:13",
         "2026-09-18T07:14",
-        "2026-09-19T07:15"
+        "2026-09-19T07:15",
+        "2026-09-20T07:16"
       ],
       "sunsets": [
-        "2026-09-14T19:37",
         "2026-09-15T19:36",
         "2026-09-16T19:34",
         "2026-09-17T19:33",
         "2026-09-18T19:31",
-        "2026-09-19T19:30"
+        "2026-09-19T19:30",
+        "2026-09-20T19:29"
       ],
       "timezone": "America/New_York"
     }
@@ -2443,6 +2430,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-15T03:45:42.166Z"
+    "updatedAt": "2026-09-15T04:00:44.535Z"
   }
 }
