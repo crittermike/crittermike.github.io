@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T11:15:58.937Z",
+  "generated_at": "2026-09-15T11:31:06.229Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -585,12 +585,64 @@
       "guineaPig": null,
       "assignments": [
         {
+          "id": "sch-2026-09-15-reading-read-20-minutes-work-for-tuesday",
+          "label": "Reading: Read 20 minutes. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-reading-begin-studying-1-4-all-aboard-co",
+          "label": "Reading: Begin studying 1.4 All Aboard! comprehension and vocabulary. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-spelling-complete-wb-p-23-work-for-tuesd",
+          "label": "Spelling: Complete WB p.23. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-spelling-write-words-6-10-three-times-ea",
+          "label": "Spelling: Write words 6-10 three times each. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-dol-study-monday-tuesday-dol-work-for-tu",
+          "label": "DOL: Study Monday-Tuesday DOL. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-math-complete-wb-pp-44-45-work-for-tuesd",
+          "label": "Math: Complete WB pp.44-45. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-15-religion-study-unit-1-work-for-tuesday-s",
+          "label": "Religion: Study Unit 1. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
           "id": "sch-2026-09-16-september-poetry-recitation-ooey-gooey",
           "label": "September Poetry Recitation - Ooey Gooey"
         },
         {
-          "id": "sch-2026-09-16-wednesday-homework-study-read-20-minutes",
-          "label": "Wednesday homework/study: Read 20 minutes; study 1.4 All Aboard! reading comprehension and vocabulary for Thursday; Spelling WB p.24; words 11-15 three times each; study Monday-Wednesday DOL; Math WB p.47-48; no English homework; study Religion Unit 1 for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+          "id": "sch-2026-09-16-reading-read-20-minutes-work-for-wednesd",
+          "label": "Reading: Read 20 minutes. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-reading-study-1-4-all-aboard-comprehensi",
+          "label": "Reading: Study 1.4 All Aboard! comprehension and vocabulary for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-spelling-complete-wb-p-24-work-for-wedne",
+          "label": "Spelling: Complete WB p.24. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-spelling-write-words-11-15-three-times-e",
+          "label": "Spelling: Write words 11-15 three times each. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-dol-study-monday-wednesday-dol-work-for-",
+          "label": "DOL: Study Monday-Wednesday DOL. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-math-complete-wb-pp-47-48-work-for-wedne",
+          "label": "Math: Complete WB pp.47-48. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
+        },
+        {
+          "id": "sch-2026-09-16-religion-study-unit-1-for-thursday-work-",
+          "label": "Religion: Study Unit 1 for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
         },
         {
           "id": "sch-2026-09-16-math-simple-solutions-quiz-cannon-newsle",
@@ -972,9 +1024,9 @@
   ],
   "weather": {
     "now": {
-      "temp": 69,
-      "hi": 86,
-      "lo": 69,
+      "temp": 71,
+      "hi": 84,
+      "lo": 70,
       "icon": "⛅",
       "code": 3
     },
@@ -2430,6 +2482,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-15T11:15:57.670Z"
+    "updatedAt": "2026-09-15T11:31:04.769Z"
   }
 }
