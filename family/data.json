@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T23:45:48.545Z",
+  "generated_at": "2026-09-15T00:00:59.634Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -871,11 +871,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken fajitas with onions, zucchini, and corn",
-    "protein_g": 48,
-    "cal": 600,
-    "effort": "easy",
-    "note": "Scale the saved 4-5 serving recipe for six. Use trimmed chicken breasts and pepper-free seasoning; no cilantro or salsa. Reserve chicken and a warm tortilla before combining the filling. Macros are unverified saved estimates.",
+    "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
+    "protein_g": 40,
+    "cal": 650,
+    "effort": "medium",
+    "note": "Mike requested clam spaghetti for Tuesday September 15, replacing meatloaf on September 14. Plan for six; saved recipe is ingredient-only, with unverified quantities, method, and nutrition. Serve sides separately. Meatloaf has not been rescheduled.",
     "recipe": null
   },
   "mealweek": [
@@ -985,11 +985,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 92,
       "lo": 70,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
       {
@@ -1008,23 +1008,23 @@
       },
       {
         "d": "Thu",
-        "icon": "☀️",
-        "hi": 90,
-        "lo": 67,
-        "code": 0
+        "icon": "🌦",
+        "hi": 93,
+        "lo": 69,
+        "code": 51
       },
       {
         "d": "Fri",
-        "icon": "☀️",
+        "icon": "🌦",
         "hi": 93,
-        "lo": 68,
-        "code": 0
+        "lo": 71,
+        "code": 51
       },
       {
         "d": "Sat",
         "icon": "⛅",
-        "hi": 95,
-        "lo": 71,
+        "hi": 94,
+        "lo": 70,
         "code": 3
       }
     ],
@@ -2402,7 +2402,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 46.7,
+    "dayPct": 50,
     "totalSpend": 3190.97,
     "totalBudget": 0,
     "categories": [
@@ -2443,6 +2443,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-14T23:45:47.491Z"
+    "updatedAt": "2026-09-15T00:00:58.225Z"
   }
 }
