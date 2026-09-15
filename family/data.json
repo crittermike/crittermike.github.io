@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T15:15:38.490Z",
+  "generated_at": "2026-09-15T15:30:36.021Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-17T10:15:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "3p",
+      "what": "Mom CT",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-18T16:00:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "4p",
+      "what": "Mom MRI",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-18T17:00:00-04:00"
     },
     {
       "date": "2026-09-20",
@@ -921,7 +939,7 @@
   "weather": {
     "now": {
       "temp": 75,
-      "hi": 86,
+      "hi": 84,
       "lo": 70,
       "icon": "🌤",
       "code": 1
@@ -2378,6 +2396,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-15T15:15:37.025Z"
+    "updatedAt": "2026-09-15T15:30:34.572Z"
   }
 }
