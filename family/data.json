@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T17:00:51.086Z",
+  "generated_at": "2026-09-15T17:15:46.902Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -46,6 +46,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-17T10:15:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "all day",
+      "what": "Optional: Eastside vs. Wade Hampton varsity football (evening; kickoff time not provided)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-09-19T00:00:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -626,7 +635,13 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-16-d2f54d647b3036369cfd87e6143cf061a0f1e9bec224d0a79fed97e26c22b723",
+          "label": "Spanish (Simon): Textbook pp.36-37",
+          "dueDate": "2026-09-16"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -956,7 +971,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 79,
       "hi": 83,
       "lo": 70,
       "icon": "🌤",
@@ -2414,6 +2429,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69094.35,
     "source": "ynab",
-    "updatedAt": "2026-09-15T17:00:49.553Z"
+    "updatedAt": "2026-09-15T17:15:45.531Z"
   }
 }
