@@ -585,68 +585,9 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-15-reading-read-20-minutes-work-for-tuesday",
-          "label": "Reading: Read 20 minutes. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-reading-begin-studying-1-4-all-aboard-co",
-          "label": "Reading: Begin studying 1.4 All Aboard! comprehension and vocabulary. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-spelling-complete-wb-p-23-work-for-tuesd",
-          "label": "Spelling: Complete WB p.23. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-spelling-write-words-6-10-three-times-ea",
-          "label": "Spelling: Write words 6-10 three times each. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-dol-study-monday-tuesday-dol-work-for-tu",
-          "label": "DOL: Study Monday-Tuesday DOL. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-math-complete-wb-pp-44-45-work-for-tuesd",
-          "label": "Math: Complete WB pp.44-45. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-15-religion-study-unit-1-work-for-tuesday-s",
-          "label": "Religion: Study Unit 1. Work for Tuesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-september-poetry-recitation-ooey-gooey",
-          "label": "September Poetry Recitation - Ooey Gooey"
-        },
-        {
-          "id": "sch-2026-09-16-reading-read-20-minutes-work-for-wednesd",
-          "label": "Reading: Read 20 minutes. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-reading-study-1-4-all-aboard-comprehensi",
-          "label": "Reading: Study 1.4 All Aboard! comprehension and vocabulary for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-spelling-complete-wb-p-24-work-for-wedne",
-          "label": "Spelling: Complete WB p.24. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-spelling-write-words-11-15-three-times-e",
-          "label": "Spelling: Write words 11-15 three times each. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-dol-study-monday-wednesday-dol-work-for-",
-          "label": "DOL: Study Monday-Wednesday DOL. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-math-complete-wb-pp-47-48-work-for-wedne",
-          "label": "Math: Complete WB pp.47-48. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-religion-study-unit-1-for-thursday-work-",
-          "label": "Religion: Study Unit 1 for Thursday. Work for Wednesday, submission date not stated. (Cannon newsletter 9/14-18, email 2026-09-13)"
-        },
-        {
-          "id": "sch-2026-09-16-math-simple-solutions-quiz-cannon-newsle",
-          "label": "Math: Simple Solutions Quiz (Cannon newsletter 9/14-18, email 2026-09-13)"
+          "id": "sch-2026-09-16-0aac91e11d5d320887fa74059f02f3ba1f126c7082d3cf9c29059c74f54c504b",
+          "label": "Prepare: September Poetry Recitation - Ooey Gooey",
+          "dueDate": "2026-09-16"
         }
       ]
     },
@@ -662,16 +603,7 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": [
-        {
-          "id": "sch-2026-09-16-science-astronomy-test-1-marlar-fifth-gr",
-          "label": "Science: Astronomy Test 1 (Marlar fifth-grade newsletter 9/14/2026)"
-        },
-        {
-          "id": "sch-2026-09-16-simple-solutions-quiz-marlar-fifth-grade",
-          "label": "Simple Solutions Quiz (Marlar fifth-grade newsletter 9/14/2026)"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -699,16 +631,7 @@
         "balance_str": "$299.77"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-15-expressway-to-tigertown-informational-me",
-          "label": "Expressway to Tigertown informational meeting, 5:30 PM at Greenville Tech Barton Campus, Prisma Health Building 101 multipurpose room"
-        },
-        {
-          "id": "sch-2026-09-15-national-english-honor-society-meeting-8",
-          "label": "National English Honor Society meeting, 8:15am or 3:45pm; new-member application required beforehand"
-        }
-      ]
+      "assignments": []
     }
   ],
   "chores": {
