@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T11:45:50.781Z",
+  "generated_at": "2026-09-16T12:00:53.558Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -858,11 +858,11 @@
     ]
   },
   "dinner": {
-    "name": "Korean beef and broccoli bowls",
-    "protein_g": 60,
-    "cal": 600,
+    "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
+    "protein_g": 40,
+    "cal": 650,
     "effort": "medium",
-    "note": "About 25 minutes active cooking after Mom's appointments. Optional sauce and vegetable prep in the morning. Use 93% lean beef; omit red pepper flakes, sriracha, and kimchi. Reserve browned beef and broccoli before adding sauce. Saved Mike-portion macros are estimates, not a verified sixth of the batch.",
+    "note": "Mike moved the planned clam spaghetti to Wednesday September 16, replacing Korean beef and broccoli bowls. Korean beef is removed, not rescheduled. Plan for six; the saved recipe contains ingredients only, with quantities, method and nutrition unverified. Serve sides separately. This is a plan change, not confirmation of intake.",
     "recipe": null
   },
   "mealweek": [
@@ -893,7 +893,7 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Korean beef and broccoli bowls",
+      "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -2430,6 +2430,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69194.35,
     "source": "ynab",
-    "updatedAt": "2026-09-16T11:45:49.356Z"
+    "updatedAt": "2026-09-16T12:00:52.257Z"
   }
 }
