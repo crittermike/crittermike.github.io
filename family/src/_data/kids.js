@@ -4,7 +4,7 @@
  * Sources of truth (read-only at build time, no duplication):
  *   - wiki/concepts/sugar.md                 (Balances table)
  *   - wiki/concepts/allowance.md             (Balances table)
- *   - wiki/concepts/school-assignments.md    (Upcoming, due-tomorrow rows)
+ *   - wiki/concepts/school-assignments.md    (Upcoming, assigned tonight + due tomorrow)
  *
  * Returns:
  *   [
@@ -28,7 +28,7 @@ const SCHOOL = path.join(WIKI, 'school-assignments.md');
 
 // Summer reading + Summer Solutions removed 2026-08-19 (school year started, per Mike).
 // The old READING_TARGETS / READING_DONE / SOLUTIONS_DONE sets and the summer-weekday
-// branch are gone. Kid todos now come solely from school-assignments.md (due tomorrow).
+// branch are gone. Kid todos now come solely from school-assignments.md (assigned tonight or due tomorrow).
 
 // Display order matches the dashboard grid: youngest → oldest
 const KIDS = [

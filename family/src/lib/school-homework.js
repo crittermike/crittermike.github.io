@@ -1,9 +1,10 @@
 /**
  * Strict dashboard projection, not a general reminder feed.
- * Read only Upcoming/<kid>; the row date must be tomorrow in America/New_York.
+ * Read only Upcoming/<kid>: explicit homework assigned today, or due tomorrow.
  * Ordinary deliverables require explicit `due`/`deadline` evidence. A dated
  * standalone recitation is an assessed deliverable and renders as preparation.
- * Work-on dates, uncertain deadlines, events and study-only items never qualify.
+ * Work-on dates qualify only on their assigned day, never as invented deadlines.
+ * Tracking-only uncertainty, events and study-only items do not qualify.
  * Prefer atomic source rows; legacy lists can share `Homework due:` or a
  * standalone `; due <date>` clause. Never re-date a daily plan in this parser.
  */
@@ -69,14 +70,19 @@ function stripDue(text) {
   return text.replace(dueTextPattern, ' ').replace(/[.\s]+$/, '').trim();
 }
 
-function atomicLabels(description, date) {
+function atomicLabels(description, date, assignedTonight = false) {
+  // An explicit work-on assignment is not a submission deadline. Remove only
+  // its known metadata; other uncertainty/cancellation guards still apply.
+  if (assignedTonight) {
+    description = description.replace(/\s*(?:Work|Homework) for (?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:,\s*submission date not stated)?[.\s]*/gi, ' ').trim();
+  }
   // Fail closed: a dated tracking row or a future work-on plan is NOT evidence
   // of a deadline. Preserve uncertainty in the wiki; never infer next morning.
   if (UNCERTAIN.test(description) || NON_HOMEWORK.test(description) || conflictingDueDate(description, date)) return [];
   const hasDeadline = value => /\b(?:due(?!\s+to\b)|deadline)\b/i.test(value);
-  const bundleConfirmed = /^(?:homework|HW)\s+due\b|(?:^|;)\s*(?:due|deadline)\b/i.test(description);
+  const bundleConfirmed = assignedTonight || /^(?:homework|HW)\s+due\b|(?:^|;)\s*(?:due|deadline)\b/i.test(description);
   let text = description.replace(/\s*\([^()]*(?:newsletter|Classroom|email|INBOX)[^()]*\)/gi, '').trim();
-  text = text.replace(/^(?:homework|HW)(?:\s+due)?\s*:\s*/i, '');
+  text = text.replace(/^(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?(?:homework(?:\/study)?|HW)(?:\s+due)?\s*:\s*/i, '');
   // Semicolon-delimited tasks own their deadlines. Only a bundle heading or
   // standalone deadline clause confirms the whole list; a quiz's due date must
   // not turn its undated homework sibling into a confirmed assignment.
@@ -111,7 +117,7 @@ function atomicLabels(description, date) {
     body = stripDue(body);
     if (!body) continue;
     // Accept concrete deliverables, not arbitrary notices containing "due".
-    if (!recitation && !/\b(?:WB|workbook|worksheet|EIE|IXL|p(?:p)?\.?\s*\d+|pages?\s+\d+|read|annotate|words|questions|essay|draft|project|report|packet|assignment|corrections|notetaking|video|dialogue)\b|^\d+\.\d+\s*[#(]/i.test(body)) continue;
+    if (!recitation && !/\b(?:WB|workbook|worksheet|EIE|IXL|p(?:p)?\.?\s*\d+|pages?\s+\d+|read|annotate|words|questions|essay|draft|project|report|packet|assignment|choice board|corrections|notetaking|video|dialogue)\b|^\d+\.\d+\s*[#(]/i.test(body)) continue;
     const label = ownSubject ? clause : (subject ? `${subject}: ${clause}` : clause);
     const ixl = label.match(/^(.*\bIXL\s+(?:Unit\s+\d+\s*[-–]\s*)?)(\d+[A-Z](?:\s*(?:,|&|and)\s*\d+[A-Z])+)(.*)$/i);
     if (ixl) {
@@ -127,6 +133,10 @@ function atomicLabels(description, date) {
 // No IO or implicit clock: callers supply the source snapshot and instant.
 function dueTomorrowAssignments(text, kidKey, now) {
   const tomorrow = tomorrowInEastern(now);
+  const todayDate = new Date(tomorrow + 'T12:00:00Z');
+  todayDate.setUTCDate(todayDate.getUTCDate() - 1);
+  const today = todayDate.toISOString().slice(0, 10);
+  const todayWeekday = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: 'America/New_York' }).format(now);
   const out = [];
   let upcoming = false;
   let kid = '';
@@ -139,14 +149,18 @@ function dueTomorrowAssignments(text, kidKey, now) {
     if (header) kid = header[1].toLowerCase();
     if (!upcoming || kid !== kidKey.toLowerCase()) continue;
     const row = line.match(/^- \*\*(\d{4}-\d{2}-\d{2})(?:\s+\([A-Za-z]+\))?:?\*\*\s*(.+)$/);
-    if (!row || row[1] !== tomorrow) continue;
-    for (const rawLabel of atomicLabels(row[2].trim(), tomorrow)) {
+    if (!row) continue;
+    const workFor = row[2].match(/\b(?:Work|Homework) for (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b/i);
+    const assignedTonight = row[1] === today && workFor && workFor[1].toLowerCase() === todayWeekday.toLowerCase();
+    if (row[1] !== tomorrow && !assignedTonight) continue;
+    const actionDate = assignedTonight ? today : tomorrow;
+    for (const rawLabel of atomicLabels(row[2].trim(), row[1], !!assignedTonight)) {
       const label = rawLabel.replace(/\s+/g, ' ').trim();
       // Full task content, not its position or a truncated bundle prefix. Source
       // notes and a sibling's edits do not invalidate an existing checkbox.
-      const digest = createHash('sha256').update(`${kid}\n${tomorrow}\n${label.toLowerCase()}`).digest('hex');
-      const id = `sch-${tomorrow}-${digest}`;
-      if (!out.some(item => item.id === id)) out.push({ id, label, dueDate: tomorrow });
+      const digest = createHash('sha256').update(`${kid}\n${assignedTonight ? "work-on:" : ""}${actionDate}\n${label.toLowerCase()}`).digest('hex');
+      const id = `sch-${assignedTonight ? "work-on-" : ""}${actionDate}-${digest}`;
+      if (!out.some(item => item.id === id)) out.push(assignedTonight ? { id, label, dueDate: null, workOnDate: today } : { id, label, dueDate: tomorrow });
     }
   }
   return out;

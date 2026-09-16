@@ -41,7 +41,7 @@ function loadKids(text = SCHOOL) {
 
 module.exports = { loadKids };
 
-test('export and both dashboard renderings preserve atomic IDs and honest due-tomorrow labels', () => {
+test('export and both dashboard renderings preserve atomic IDs and honest tonight-homework labels', () => {
   const nunjucks = require('nunjucks');
   const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.resolve(__dirname, '../src/_includes')), { autoescape: true });
   const template = fs.readFileSync(path.resolve(__dirname, '../src/dashboard-edit.njk'), 'utf8');
@@ -50,8 +50,8 @@ test('export and both dashboard renderings preserve atomic IDs and honest due-to
   const html = env.renderString(template, context);
   const exported = JSON.parse(new (require('../src/data.11ty.js'))().render(context));
   assert.deepEqual(exported.kids, kids);
-  assert.match(html, /kidtile-sec-lbl">✏️ Due tomorrow</);
-  assert.match(html, /No confirmed assignments due tomorrow\./);
+  assert.match(html, /kidtile-sec-lbl">✏️ Tonight’s homework</);
+  assert.match(html, /No homework listed for tonight\./);
   assert.doesNotMatch(html, /Nothing today|Nothing assigned today/);
   for (const task of kids[0].assignments) {
     assert.equal(html.split(`data-id="${task.id}"`).length - 1, 2);
@@ -61,10 +61,10 @@ test('export and both dashboard renderings preserve atomic IDs and honest due-to
   assert.match(html, /data-tpl="calendar"/);
 });
 
-test('loader surfaces only the confirmed recitation tomorrow, not daily plans or assessments', () => {
+test('loader combines tonight homework with tomorrow recitation without pulling future daily plans or tests forward', () => {
   const kids = loadKids();
   assert.deepEqual(kids.map(k => k.assignments.map(a => a.label)), [
-    ['Prepare: September Poetry Recitation - Ooey Gooey'], [], [], [],
+    ['Spelling WB p.23', 'Math WB p.44-45', 'Prepare: September Poetry Recitation - Ooey Gooey'], [], [], [],
   ]);
   assert.equal(kids[0].sugar.balance, 42);
   assert.equal(kids[0].allowance.balance_str, '$10.00');

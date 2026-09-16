@@ -14,6 +14,10 @@
     return dueDate === date.toISOString().slice(0, 10);
   }
 
+  function isActionableTonight(dueDate, workOnDate, today) {
+    return isDueTomorrow(dueDate, today) || (!!workOnDate && /^\d{4}-\d{2}-\d{2}$/.test(today || '') && workOnDate === today);
+  }
+
   function normalizeTodoState(value, date) {
     const source = value && typeof value === 'object' ? value : {};
     if (source.date !== date) return { date: date, checks: {}, dismissed: {} };
@@ -116,6 +120,7 @@
 
   return {
     isDueTomorrow: isDueTomorrow,
+    isActionableTonight: isActionableTonight,
     normalizeTodoState: normalizeTodoState,
     dismissTodo: dismissTodo,
     updateStoredTodoState: updateStoredTodoState,
