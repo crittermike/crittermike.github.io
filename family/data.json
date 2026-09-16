@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T20:00:44.251Z",
+  "generated_at": "2026-09-16T20:15:41.636Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -55,6 +55,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-18T17:00:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "6p",
+      "what": "POPCS Middle School open house",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-18T19:00:00-04:00"
     },
     {
       "date": "2026-09-19",
@@ -316,6 +325,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-10-16T00:00:00-04:00"
+    },
+    {
+      "date": "2026-10-15",
+      "time": "5:30p",
+      "what": "POPCS Salva Dut community event (8th graders requested)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-15T18:30:00-04:00"
     },
     {
       "date": "2026-10-17",
@@ -972,7 +990,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 86,
+      "temp": 87,
       "hi": 87,
       "lo": 69,
       "icon": "☀️",
@@ -981,10 +999,10 @@
     "days": [
       {
         "d": "Thu",
-        "icon": "⛅",
+        "icon": "🌧",
         "hi": 92,
         "lo": 68,
-        "code": 3
+        "code": 65
       },
       {
         "d": "Fri",
@@ -2430,6 +2448,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69194.35,
     "source": "ynab",
-    "updatedAt": "2026-09-16T20:00:42.963Z"
+    "updatedAt": "2026-09-16T20:15:40.281Z"
   }
 }
