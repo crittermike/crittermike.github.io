@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T23:45:24.218Z",
+  "generated_at": "2026-09-16T00:00:43.032Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -857,11 +857,11 @@
     ]
   },
   "dinner": {
-    "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
-    "protein_g": 40,
-    "cal": 650,
+    "name": "Korean beef and broccoli bowls",
+    "protein_g": 60,
+    "cal": 600,
     "effort": "medium",
-    "note": "Mike requested clam spaghetti for Tuesday September 15, replacing meatloaf on September 14. Plan for six; saved recipe is ingredient-only, with unverified quantities, method, and nutrition. Serve sides separately. Meatloaf has not been rescheduled.",
+    "note": "About 25 minutes active cooking after Mom's appointments. Optional sauce and vegetable prep in the morning. Use 93% lean beef; omit red pepper flakes, sriracha, and kimchi. Reserve browned beef and broccoli before adding sauce. Saved Mike-portion macros are estimates, not a verified sixth of the batch.",
     "recipe": null
   },
   "mealweek": [
@@ -2388,7 +2388,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 50,
+    "dayPct": 53.3,
     "totalSpend": 3190.97,
     "totalBudget": 0,
     "categories": [
@@ -2429,6 +2429,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69194.35,
     "source": "ynab",
-    "updatedAt": "2026-09-15T23:45:22.697Z"
+    "updatedAt": "2026-09-16T00:00:39.955Z"
   }
 }
