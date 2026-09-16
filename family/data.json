@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T14:30:18.269Z",
+  "generated_at": "2026-09-16T14:45:15.972Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -211,12 +211,12 @@
     },
     {
       "date": "2026-10-01",
-      "time": "8a",
-      "what": "Charlie: EHS NHS mandatory induction meeting, only if invited (end time unknown)",
-      "who": "charlie",
+      "time": "9:30a",
+      "what": "Mom prosthetics appointment ",
+      "who": "family",
       "calendar": "home",
       "all_day": false,
-      "end": "2026-10-01T08:00:00-04:00"
+      "end": "2026-10-01T10:30:00-04:00"
     },
     {
       "date": "2026-10-01",
@@ -972,11 +972,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 87,
+      "temp": 76,
+      "hi": 86,
       "lo": 69,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 2
     },
     "days": [
       {
@@ -2430,6 +2430,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 69194.35,
     "source": "ynab",
-    "updatedAt": "2026-09-16T14:30:17.123Z"
+    "updatedAt": "2026-09-16T14:45:14.743Z"
   }
 }
