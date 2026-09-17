@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T14:00:59.568Z",
+  "generated_at": "2026-09-17T14:15:47.772Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-17T10:15:00-04:00"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "5p",
+      "what": "Amazon delivery: musical instruments and computer accessories",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-17T22:00:00-04:00"
     },
     {
       "date": "2026-09-18",
@@ -1007,7 +1016,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 75,
       "hi": 91,
       "lo": 67,
       "icon": "☀️",
@@ -2473,6 +2482,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 67410.89,
     "source": "ynab",
-    "updatedAt": "2026-09-17T14:00:57.639Z"
+    "updatedAt": "2026-09-17T14:15:46.386Z"
   }
 }
