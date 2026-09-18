@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-18T03:45:32.238Z",
+  "generated_at": "2026-09-18T04:00:33.210Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-17",
-      "time": "10a",
-      "what": "Novant Health video visit with Caitlan Tucker",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-17T10:15:00-04:00"
-    },
-    {
-      "date": "2026-09-17",
-      "time": "5p",
-      "what": "Amazon delivery: musical instruments and computer accessories",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-17T22:00:00-04:00"
-    },
     {
       "date": "2026-09-18",
       "time": "all day",
@@ -592,26 +574,7 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-09-17-b5433ef0dd2c1ada37727b7cfe637abd0a0f1db66f347e2d8400ca1c34c888dc",
-          "label": "Reading: Read 20 minutes",
-          "dueDate": null,
-          "workOnDate": "2026-09-17"
-        },
-        {
-          "id": "sch-work-on-2026-09-17-c9a35212d210e34fd2452b23f20cfcf67b2eb5951769af58e6ceb08b91bbbaf1",
-          "label": "Spelling: Complete Choice Board: What It’s Worth",
-          "dueDate": null,
-          "workOnDate": "2026-09-17"
-        },
-        {
-          "id": "sch-work-on-2026-09-17-8dd2064b53e21bd80bb3bdaa32a9adb13be3a5c8dbad55f42fff3dad089e738a",
-          "label": "Spelling: Write words 16-20 three times each",
-          "dueDate": null,
-          "workOnDate": "2026-09-17"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -899,7 +862,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Marry Me chicken",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "marry-me-chicken",
@@ -954,8 +917,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -963,26 +926,19 @@
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 73,
-      "hi": 91,
-      "lo": 67,
+      "hi": 95,
+      "lo": 69,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 95,
-        "lo": 69,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "🌦",
@@ -1010,24 +966,31 @@
         "hi": 90,
         "lo": 68,
         "code": 53
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 76,
+        "lo": 67,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-17T07:13",
         "2026-09-18T07:14",
         "2026-09-19T07:15",
         "2026-09-20T07:16",
         "2026-09-21T07:16",
-        "2026-09-22T07:17"
+        "2026-09-22T07:17",
+        "2026-09-23T07:18"
       ],
       "sunsets": [
-        "2026-09-17T19:33",
         "2026-09-18T19:31",
         "2026-09-19T19:30",
         "2026-09-20T19:29",
         "2026-09-21T19:27",
-        "2026-09-22T19:26"
+        "2026-09-22T19:26",
+        "2026-09-23T19:24"
       ],
       "timezone": "America/New_York"
     }
@@ -2435,6 +2398,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 67410.89,
     "source": "ynab",
-    "updatedAt": "2026-09-18T03:45:31.031Z"
+    "updatedAt": "2026-09-18T04:00:32.106Z"
   }
 }
