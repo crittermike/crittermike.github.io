@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T23:45:37.893Z",
+  "generated_at": "2026-09-18T00:00:55.025Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -855,59 +855,12 @@
     ]
   },
   "dinner": {
-    "name": "Marry Me chicken",
-    "protein_g": 50,
-    "cal": 600,
-    "effort": "medium",
-    "note": "Use trimmed chicken breasts and pepper-free Italian seasoning. Reserve plain cooked chicken before saucing. Saved recipe is ingredient-only; quantities and nutrition for six are not verified.",
-    "recipe": {
-      "slug": "marry-me-chicken",
-      "name": "Marry Me chicken",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "marry-me-chicken"
-      ],
-      "in_rotation": true,
-      "effort": "medium",
-      "kid_friendly": true,
-      "protein_g": 50,
-      "cal": 600,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "chicken breasts",
-            "sun-dried tomatoes",
-            "heavy cream",
-            "parmesan",
-            "garlic",
-            "spinach",
-            "Italian seasoning"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "chicken breasts",
-        "sun-dried tomatoes",
-        "heavy cream",
-        "parmesan",
-        "garlic",
-        "spinach",
-        "Italian seasoning"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Takeout or dinner out",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "Henry's information night is 6:00-7:00 PM, with optional football at 7:30 PM. Order undecided; macros unknown. Choose lean meat and no mushrooms, peppers, fish, tzatziki, feta, cilantro, or heavy lemon flavors.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -2433,7 +2386,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 56.7,
+    "dayPct": 60,
     "totalSpend": 4974.43,
     "totalBudget": 0,
     "categories": [
@@ -2482,6 +2435,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 67410.89,
     "source": "ynab",
-    "updatedAt": "2026-09-17T23:45:36.494Z"
+    "updatedAt": "2026-09-18T00:00:53.363Z"
   }
 }
