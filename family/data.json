@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T23:01:10.324Z",
+  "generated_at": "2026-09-18T23:16:06.422Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -37,6 +37,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-18T19:00:00-04:00"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "7p",
+      "what": "CityRange Steakhouse Greenville reservation for 2",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-18T20:00:00-04:00"
     },
     {
       "date": "2026-09-19",
@@ -932,7 +941,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 89,
+      "temp": 87,
       "hi": 94,
       "lo": 71,
       "icon": "☀️",
@@ -2398,6 +2407,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66573.22,
     "source": "ynab",
-    "updatedAt": "2026-09-18T23:01:08.872Z"
+    "updatedAt": "2026-09-18T23:16:05.142Z"
   }
 }
