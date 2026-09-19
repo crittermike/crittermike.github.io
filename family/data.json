@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T23:45:15.218Z",
+  "generated_at": "2026-09-19T00:00:35.737Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -827,11 +827,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout or dinner out",
+    "name": "Pizza night (delivery or frozen)",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Henry's information night is 6:00-7:00 PM, with optional football at 7:30 PM. Order undecided; macros unknown. Choose lean meat and no mushrooms, peppers, fish, tzatziki, feta, cilantro, or heavy lemon flavors.",
+    "note": "Macros depend on pizza and portion. Cheese pizza is the default; no mushrooms, peppers, fish, tzatziki, feta, cilantro, or heavy lemon flavors.",
     "recipe": null
   },
   "mealweek": [
@@ -941,7 +941,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 83,
       "hi": 94,
       "lo": 71,
       "icon": "🌤",
@@ -2358,7 +2358,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 60,
+    "dayPct": 63.3,
     "totalSpend": 4974.43,
     "totalBudget": 0,
     "categories": [
@@ -2407,6 +2407,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66573.22,
     "source": "ynab",
-    "updatedAt": "2026-09-18T23:45:13.869Z"
+    "updatedAt": "2026-09-19T00:00:32.798Z"
   }
 }
