@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T23:01:04.884Z",
+  "generated_at": "2026-09-19T23:16:03.125Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-19T19:45:00-04:00"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "7:13p",
+      "what": "Papa Johns delivery (estimated window)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-19T19:23:00-04:00"
     },
     {
       "date": "2026-09-20",
@@ -941,7 +950,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 80,
+      "temp": 79,
       "hi": 87,
       "lo": 72,
       "icon": "🌤",
@@ -2407,6 +2416,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-19T23:01:03.547Z"
+    "updatedAt": "2026-09-19T23:16:01.504Z"
   }
 }
