@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T14:15:21.093Z",
+  "generated_at": "2026-09-19T14:30:23.918Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -572,7 +572,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 133,
+        "balance": 104,
         "refill": 60
       },
       "allowance": {
@@ -586,7 +586,7 @@
       "name": "Henry",
       "grade": "8th",
       "sugar": {
-        "balance": 60,
+        "balance": 31,
         "refill": 60
       },
       "allowance": {
@@ -923,7 +923,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 78,
+      "temp": 79,
       "hi": 91,
       "lo": 72,
       "icon": "☀️",
@@ -932,16 +932,16 @@
     "days": [
       {
         "d": "Sun",
-        "icon": "🌦",
+        "icon": "🌧",
         "hi": 90,
-        "lo": 72,
-        "code": 55
+        "lo": 71,
+        "code": 61
       },
       {
         "d": "Mon",
         "icon": "🌦",
         "hi": 93,
-        "lo": 71,
+        "lo": 70,
         "code": 80
       },
       {
@@ -949,7 +949,7 @@
         "icon": "⛈",
         "hi": 84,
         "lo": 69,
-        "code": 95
+        "code": 96
       },
       {
         "d": "Wed",
@@ -2389,6 +2389,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66573.22,
     "source": "ynab",
-    "updatedAt": "2026-09-19T14:15:19.619Z"
+    "updatedAt": "2026-09-19T14:30:22.861Z"
   }
 }
