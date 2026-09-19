@@ -1,52 +1,7 @@
 {
-  "generated_at": "2026-09-19T03:46:05.109Z",
+  "generated_at": "2026-09-19T04:01:06.727Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-18",
-      "time": "all day",
-      "what": "Optional: Eastside vs. Wade Hampton varsity football (evening; kickoff time not provided)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-19T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-18",
-      "time": "3p",
-      "what": "Mom CT",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-18T16:00:00-04:00"
-    },
-    {
-      "date": "2026-09-18",
-      "time": "4p",
-      "what": "Mom MRI",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-18T17:00:00-04:00"
-    },
-    {
-      "date": "2026-09-18",
-      "time": "6p",
-      "what": "POPCS Middle School open house",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-18T19:00:00-04:00"
-    },
-    {
-      "date": "2026-09-18",
-      "time": "7p",
-      "what": "CityRange Steakhouse Greenville reservation for 2",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-18T20:00:00-04:00"
-    },
     {
       "date": "2026-09-19",
       "time": "5:15p",
@@ -867,7 +822,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -953,7 +908,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -961,27 +916,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 76,
-      "hi": 94,
-      "lo": 71,
+      "hi": 90,
+      "lo": 73,
       "icon": "🌤",
       "code": 2
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 90,
-        "lo": 73,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "🌦",
@@ -1009,24 +957,31 @@
         "hi": 77,
         "lo": 65,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "🌦",
+        "hi": 80,
+        "lo": 61,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-18T07:14",
         "2026-09-19T07:15",
         "2026-09-20T07:16",
         "2026-09-21T07:16",
         "2026-09-22T07:17",
-        "2026-09-23T07:18"
+        "2026-09-23T07:18",
+        "2026-09-24T07:19"
       ],
       "sunsets": [
-        "2026-09-18T19:31",
         "2026-09-19T19:30",
         "2026-09-20T19:29",
         "2026-09-21T19:27",
         "2026-09-22T19:26",
-        "2026-09-23T19:24"
+        "2026-09-23T19:24",
+        "2026-09-24T19:23"
       ],
       "timezone": "America/New_York"
     }
@@ -2434,6 +2389,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66573.22,
     "source": "ynab",
-    "updatedAt": "2026-09-19T03:46:03.983Z"
+    "updatedAt": "2026-09-19T04:01:05.591Z"
   }
 }
