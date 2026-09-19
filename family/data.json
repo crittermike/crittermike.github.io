@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T18:15:14.632Z",
+  "generated_at": "2026-09-19T18:30:18.190Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -181,6 +181,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-28T15:30:00-04:00"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "2:45p",
+      "what": "Mom: Cancer screening results appointment",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-28T15:45:00-04:00"
+    },
+    {
+      "date": "2026-09-30",
+      "time": "12p",
+      "what": "Odyssey tire appointment: Discount Tire",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-30T13:00:00-04:00"
     },
     {
       "date": "2026-10-01",
@@ -2389,6 +2407,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66573.22,
     "source": "ynab",
-    "updatedAt": "2026-09-19T18:15:13.585Z"
+    "updatedAt": "2026-09-19T18:30:17.133Z"
   }
 }
