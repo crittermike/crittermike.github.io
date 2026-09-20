@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T23:00:31.554Z",
+  "generated_at": "2026-09-20T23:15:23.477Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -190,6 +190,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-30T13:00:00-04:00"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "8a",
+      "what": "Charlie: EHS NHS mandatory induction meeting, only if invited (end time unknown)",
+      "who": "charlie",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-10-01T08:00:00-04:00"
     },
     {
       "date": "2026-10-01",
@@ -924,7 +933,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
+      "temp": 81,
       "hi": 88,
       "lo": 68,
       "icon": "⛅",
@@ -2390,6 +2399,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T23:00:29.560Z"
+    "updatedAt": "2026-09-20T23:15:22.258Z"
   }
 }
