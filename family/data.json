@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T23:46:05.021Z",
+  "generated_at": "2026-09-20T00:01:13.685Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -836,11 +836,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza night (delivery or frozen)",
+    "name": "Leftovers or whatever you can scrounge up",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Macros depend on pizza and portion. Cheese pizza is the default; no mushrooms, peppers, fish, tzatziki, feta, cilantro, or heavy lemon flavors.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -950,11 +950,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 75,
       "hi": 87,
       "lo": 72,
       "icon": "🌦",
-      "code": 80
+      "code": 53
     },
     "days": [
       {
@@ -2367,7 +2367,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 63.3,
+    "dayPct": 66.7,
     "totalSpend": 4974.43,
     "totalBudget": 0,
     "categories": [
@@ -2416,6 +2416,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-19T23:46:03.618Z"
+    "updatedAt": "2026-09-20T00:01:12.202Z"
   }
 }
