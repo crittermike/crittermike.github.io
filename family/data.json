@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T17:00:36.035Z",
+  "generated_at": "2026-09-20T17:15:25.178Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -852,7 +852,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken fajitas with onions, zucchini, and corn",
+      "name": "Takeout for Nancy and the kids",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -860,7 +860,7 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
+      "name": "Mexican beef and refried bean burritos with onions",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -868,7 +868,7 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Clam spaghetti (protein noodles) with garlic bread and roasted broccoli",
+      "name": "Ready-cooked chicken with rolls and broccoli",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -876,57 +876,10 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Marry Me chicken",
+      "name": "Leftovers or turkey-and-cheese sandwiches",
       "isToday": false,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "marry-me-chicken",
-        "name": "Marry Me chicken",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [
-          "marry-me-chicken"
-        ],
-        "in_rotation": true,
-        "effort": "medium",
-        "kid_friendly": true,
-        "protein_g": 50,
-        "cal": 600,
-        "servings": null,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "chicken breasts",
-              "sun-dried tomatoes",
-              "heavy cream",
-              "parmesan",
-              "garlic",
-              "spinach",
-              "Italian seasoning"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "chicken breasts",
-          "sun-dried tomatoes",
-          "heavy cream",
-          "parmesan",
-          "garlic",
-          "spinach",
-          "Italian seasoning"
-        ],
-        "steps": [],
-        "notes": "",
-        "body_html": "<h1>Marry Me chicken</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>chicken breasts</li>\n<li>sun-dried tomatoes</li>\n<li>heavy cream</li>\n<li>parmesan</li>\n<li>garlic</li>\n<li>spinach</li>\n<li>Italian seasoning</li>\n</ul>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Friday",
@@ -947,7 +900,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 84,
+      "temp": 85,
       "hi": 89,
       "lo": 68,
       "icon": "🌤",
@@ -2413,6 +2366,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T17:00:34.663Z"
+    "updatedAt": "2026-09-20T17:15:23.965Z"
   }
 }
