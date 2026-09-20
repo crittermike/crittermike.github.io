@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T17:45:23.518Z",
+  "generated_at": "2026-09-20T18:00:24.116Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -833,18 +833,18 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
+    "name": "Takeout",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "note": "Takeout per Mike; Nancy will not have time to cook. Restaurant and order undecided.",
     "recipe": null
   },
   "mealweek": [
     {
       "dow": "Sunday",
       "dow_short": "Sun",
-      "name": "Leftovers or whatever you can scrounge up",
+      "name": "Takeout",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -852,7 +852,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Takeout for Nancy and the kids",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -860,7 +860,7 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Mexican beef and refried bean burritos with onions",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -868,7 +868,7 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Ready-cooked chicken with rolls and broccoli",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -876,7 +876,7 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Leftovers or turkey-and-cheese sandwiches",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -884,7 +884,7 @@
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Takeout or dinner out",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -892,7 +892,7 @@
     {
       "dow": "Saturday",
       "dow_short": "Sat",
-      "name": "Pizza night (delivery or frozen)",
+      "name": "Takeout",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -2366,6 +2366,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T17:45:22.449Z"
+    "updatedAt": "2026-09-20T18:00:22.906Z"
   }
 }
