@@ -19,11 +19,11 @@ const SCHOOL = `## Upcoming
 ## Completed
 `;
 
-function loadKids(text = SCHOOL) {
+function loadKids(text = SCHOOL, instant = '2026-09-15T23:00:00Z') {
   const filename = path.resolve(__dirname, '../src/_data/kids.js');
   const module = { exports: {} };
   class FixedDate extends Date {
-    constructor(...args) { super(...(args.length ? args : ['2026-09-15T23:00:00Z'])); }
+    constructor(...args) { super(...(args.length ? args : [instant])); }
   }
   vm.runInNewContext(fs.readFileSync(filename, 'utf8'), {
     module, Date: FixedDate, Intl,
@@ -40,6 +40,24 @@ function loadKids(text = SCHOOL) {
 }
 
 module.exports = { loadKids };
+
+test('verbatim Henry rows survive the real loader, export, and both template copies', () => {
+  const source = fs.readFileSync(path.join(__dirname, 'fixtures/henry-sep21.md'), 'utf8');
+  const kids = loadKids(source, '2026-09-20T22:00:00Z');
+  const henry = kids.find(kid => kid.key === 'henry');
+  assert.equal(henry.assignments.length, 4);
+  const context = { kids, chores: {}, calendar: [], recipes: [], mealweek: [], weather: null };
+  const exported = JSON.parse(new (require('../src/data.11ty.js'))().render(context));
+  assert.deepEqual(exported.kids.find(kid => kid.key === 'henry').assignments, henry.assignments);
+  const nunjucks = require('nunjucks');
+  const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.resolve(__dirname, '../src/_includes')), { autoescape: true });
+  const html = env.renderString(fs.readFileSync(path.resolve(__dirname, '../src/dashboard-edit.njk'), 'utf8'), context);
+  for (const task of henry.assignments) {
+    assert.equal(html.split(`data-id="${task.id}"`).length - 1, 2);
+  }
+  assert.equal(html.split('data-due-date="2026-09-21"').length - 1, 8);
+  assert.doesNotMatch(html, /Trivia Quiz|INBOX 329/);
+});
 
 test('export and both dashboard renderings preserve atomic IDs and honest tonight-homework labels', () => {
   const nunjucks = require('nunjucks');

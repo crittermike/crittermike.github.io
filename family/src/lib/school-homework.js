@@ -1,7 +1,7 @@
 /**
  * Strict dashboard projection, not a general reminder feed.
  * Read only Upcoming/<kid>: explicit homework assigned today, or due tomorrow.
- * Ordinary deliverables require explicit `due`/`deadline` evidence. A dated
+ * Ordinary deliverables require deadline or dated submission evidence. A dated
  * standalone recitation is an assessed deliverable and renders as preparation.
  * Work-on dates qualify only on their assigned day, never as invented deadlines.
  * Tracking-only uncertainty, events and study-only items do not qualify.
@@ -21,6 +21,7 @@ function tomorrowInEastern(now) {
 
 const SUBJECT = '(?:Honors English|Language Arts|Social Studies|Simple Solutions|Course III|Reading|Spelling|Math|Algebra|English|Spanish|Chemistry|Biology|Science|Religion|History|Grammar|DOL)';
 const subjectStart = new RegExp(`^(${SUBJECT}(?:\\s*\\([^)]*\\))?)(?::|\\s+-|\\s+(?=WB|workbook|EIE|IXL))\\s*`, 'i');
+const CONTINUATION = /^(?:show all work|thoroughly answer|answer (?:any|all|one|each|the|these)\b.*\bprompts?\b|one step at a time)\b/i;
 
 // Split only at top level: semicolons in source notes and commas in page/problem
 // ranges belong to the same task. A conjunction is not inherently a new task.
@@ -47,20 +48,67 @@ const UNCERTAIN = /tracking date|submission date not stated|\b(?:unconfirmed|unk
 const NON_HOMEWORK = /\b(?:school mass|cardinal friday|field trip|choir|chess club|picture day|spirit (?:night|wear)|school (?:event|supplies)|binder setup|parking[- ]pass|jersey orders|eligibility paperwork|permission (?:slip|form)|registration|orientation|school concert|parent.teacher conference)\b/i;
 const MONTH = '(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)';
 const DATE_TOKEN = `(?:\\d{4}-\\d{2}-\\d{2}|${MONTH}\\.?\\s+\\d{1,2}(?:,\\s*\\d{4})?|\\d{1,2}/\\d{1,2}(?:/\\d{4})?|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)`;
-const dueDatePattern = new RegExp(`\\b(?:due|deadline)(?:\\s+(?:on|by))?\\s+(${DATE_TOKEN})`, 'gi');
-const dueTextPattern = new RegExp(`[,\\s]*\\b(?:due|deadline)(?:\\s+(?:on|by))?(?:\\s+${DATE_TOKEN})?\\s*:?`, 'gi');
+const DEADLINE_DATE = `${DATE_TOKEN}(?:,?\\s+${MONTH}\\.?\\s+\\d{1,2}(?:,\\s*\\d{4})?)?`;
+const dueDatePattern = new RegExp(`\\b(?:due|deadline)(?:\\s+(?:on|by))?\\s+(${DEADLINE_DATE})`, 'gi');
+const dueTextPattern = new RegExp(`[,\\s]*\\b(?:due|deadline)(?:\\s+(?:on|by))?(?:\\s+${DEADLINE_DATE})?\\s*:?`, 'gi');
+const SUBMITTED = '(?:submitted|turned in|handed in|uploaded)';
+const PASSIVE_SUBMISSION = `(?:must be|needs? to be|should be|to be)\\s+${SUBMITTED}`;
+const SUBMISSION_ACTION = new RegExp(`\\b(?:submit|turn in|hand in|upload|${PASSIVE_SUBMISSION})\\b`, 'i');
+const PENDING_STATUS = new RegExp(`\\b(?:not(?:\\s+yet)?(?:\\s+been)?|never|(?:still\\s+)?needs? to be|must be|should be|to be)\\s+(?:${SUBMITTED}|completed|done|finished)\\b`, 'gi');
+const OPTIONAL = /\b(?:optional (?:practice|work)|(?:completion|submission) (?:is )?not required|study resource)\b/i;
+
+// A submission imperative supplies deadline evidence without the word "due".
+// Source annotations are removed before inspecting dates. Do not borrow a date
+// from a sibling clause (e.g. an undated essay followed by Monday's quiz).
+function submissionDates(text) {
+  const dates = [];
+  for (const clause of splitClauses(text)) {
+    const action = clause.match(SUBMISSION_ACTION);
+    if (!action) continue;
+    const instruction = clause.slice(action.index).replace(/\b(Mr|Mrs|Ms|Dr|p|pp)\./gi, '$1')
+      .split(/\.(?:\s+|$)/)[0];
+    const deadline = instruction.match(new RegExp(`(?:\\b(?:by|on)\\s+(${DEADLINE_DATE})|\\b(${DEADLINE_DATE})(?=\\s*(?:$|for\\b|at\\b)))`, 'i'));
+    if (deadline) {
+      for (const match of (deadline[1] || deadline[2]).matchAll(new RegExp(DATE_TOKEN, 'gi'))) dates.push(match[0]);
+    }
+  }
+  return dates;
+}
+
+function hasDeadline(group, clause) {
+  return /\b(?:due(?!\s+to\b)|deadline)\b/i.test(group) || submissionDates(clause).length > 0;
+}
+
+// Action + object is evidence of work even when the teacher uses a new title
+// or deliverable noun. Bare notices still need a concrete coursework shape.
+function concreteTask(text) {
+  return SUBMISSION_ACTION.test(text) || /\b(?:complete|finish|write|answer|solve|respond to|create|draw|record|translate)\s+\S/i.test(text)
+    || /\b(?:WB|workbook|worksheet|EIE|IXL|p(?:p)?\.?\s*\d+|pages?\s+\d+|read|annotate|words|questions|essay|draft|project|report|packet|assignment|choice board|corrections|notetaking|video|dialogue)\b|^\d+\.\d+\s*(?:[#(]|(?:odd|even)(?:-numbered)?\b|problems?\b)/i.test(text);
+}
+
+function completedTask(text) {
+  // Negated/pending submission is not submission complete. Strip only these
+  // status phrases before checking positive completion, not the whole task.
+  const status = text.replace(PENDING_STATUS, '');
+  if (/\b(?:submitted|turned in|handed in|uploaded|submission (?:is )?complete)\b/i.test(status)) return true;
+  const workDone = /\b(?:already|is|was|has been)\s+(?:already\s+)?(?:completed|done|finished)\b|^(?:completed|done|finished)\b/i.test(status);
+  const pendingSubmission = SUBMISSION_ACTION.test(text) || text.match(PENDING_STATUS)?.some(value => new RegExp(SUBMITTED, 'i').test(value));
+  return workDone && !pendingSubmission;
+}
 
 function conflictingDueDate(description, date) {
-  for (const match of description.matchAll(dueDatePattern)) {
-    const token = match[1];
-    if (/day$/i.test(token)) {
-      const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: 'UTC' }).format(new Date(date));
-      if (weekday.toLowerCase() !== token.toLowerCase()) return true;
-    } else {
-      let parsed;
-      if (/^\d{4}-/.test(token)) parsed = new Date(token + 'T12:00:00Z');
-      else parsed = new Date(`${token}${/\d{4}$/.test(token) ? '' : ' ' + date.slice(0, 4)} 12:00:00 GMT`);
-      if (Number.isNaN(+parsed) || parsed.toISOString().slice(0, 10) !== date) return true;
+  for (const deadline of description.matchAll(dueDatePattern)) {
+    for (const match of deadline[1].matchAll(new RegExp(DATE_TOKEN, 'gi'))) {
+      const token = match[0];
+      if (/day$/i.test(token)) {
+        const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: 'UTC' }).format(new Date(date));
+        if (weekday.toLowerCase() !== token.toLowerCase()) return true;
+      } else {
+        let parsed;
+        if (/^\d{4}-/.test(token)) parsed = new Date(token + 'T12:00:00Z');
+        else parsed = new Date(`${token}${/\d{4}$/.test(token) ? '' : ' ' + date.slice(0, 4)} 12:00:00 GMT`);
+        if (Number.isNaN(+parsed) || parsed.toISOString().slice(0, 10) !== date) return true;
+      }
     }
   }
   return false;
@@ -78,46 +126,51 @@ function atomicLabels(description, date, assignedTonight = false) {
   }
   // Fail closed: a dated tracking row or a future work-on plan is NOT evidence
   // of a deadline. Preserve uncertainty in the wiki; never infer next morning.
-  if (UNCERTAIN.test(description) || NON_HOMEWORK.test(description) || conflictingDueDate(description, date)) return [];
-  const hasDeadline = value => /\b(?:due(?!\s+to\b)|deadline)\b/i.test(value);
+  if (UNCERTAIN.test(description) || NON_HOMEWORK.test(description)) return [];
+  description = description.replace(/\s*\([^()]*(?:newsletter|Classroom|email|INBOX|teacher reply)[^()]*\)/gi, '').trim();
+  // The row's date is a work-on date for explicit tonight work. A separately
+  // stated later submission deadline must not hide that work or be rewritten.
+  if (!assignedTonight && (conflictingDueDate(description, date)
+    || submissionDates(description).some(token => conflictingDueDate(`due ${token}`, date)))) return [];
+  const cleanLabel = value => assignedTonight ? value.replace(/[.\s]+$/, '').trim() : stripDue(value);
   const bundleConfirmed = assignedTonight || /^(?:homework|HW)\s+due\b|(?:^|;)\s*(?:due|deadline)\b/i.test(description);
-  let text = description.replace(/\s*\([^()]*(?:newsletter|Classroom|email|INBOX)[^()]*\)/gi, '').trim();
-  text = text.replace(/^(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?(?:homework(?:\/study)?|HW)(?:\s+due)?\s*:\s*/i, '');
+  const text = description.replace(/^(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?(?:homework(?:\/study)?|HW)(?:\s+due)?\s*:\s*/i, '');
   // Semicolon-delimited tasks own their deadlines. Only a bundle heading or
   // standalone deadline clause confirms the whole list; a quiz's due date must
   // not turn its undated homework sibling into a confirmed assignment.
   const groups = [];
   for (const part of splitClauses(text, false)) {
-    if (/^(?:show all work|thoroughly answer|one step at a time)\b/i.test(part) && groups.length) groups[groups.length - 1] += '; ' + part;
+    if ((CONTINUATION.test(part) || OPTIONAL.test(part) || /^(?:already |work (?:is |was )?)?(?:completed|done|finished|submitted|turned in|handed in|uploaded)\b/i.test(part)) && !subjectStart.test(part) && groups.length) groups[groups.length - 1] += '; ' + part;
     else groups.push(part);
   }
   const clauses = groups.flatMap(group => splitClauses(group).map(clause => ({
-    clause, confirmed: bundleConfirmed || hasDeadline(group),
+    clause, confirmed: bundleConfirmed || hasDeadline(group, clause), completed: completedTask(group) || OPTIONAL.test(group),
   })));
   let subject = '';
   let previousKept = false;
   const labels = [];
-  for (let { clause, confirmed } of clauses) {
+  for (let { clause, confirmed, completed } of clauses) {
     const ownSubject = clause.match(subjectStart);
     if (ownSubject) subject = ownSubject[1];
     let body = ownSubject ? clause.slice(ownSubject[0].length) : clause;
-    const continuation = /^(?:show all work|thoroughly answer|one step at a time)\b/i.test(body);
+    if (completed) { previousKept = false; continue; }
+    const continuation = CONTINUATION.test(body);
     if (continuation && previousKept && labels.length) {
-      labels[labels.length - 1] += '; ' + stripDue(clause);
+      labels[labels.length - 1] += '; ' + cleanLabel(clause);
       continue;
     }
     previousKept = false;
-    if (/^(?:study|review|begin studying|prepare for|no\b|complete over the preceding weekend)/i.test(body)) continue;
+    if (/^(?:study|review|begin studying|prepare for|no\b|do not\b|don't\b|complete over the preceding weekend)/i.test(body)) continue;
     const recitation = /\b(recitation|recite)\b/i.test(body);
     if (!confirmed && !recitation) continue;
     // Tests are reminders unless the clause explicitly assigns written work.
     const written = /\b(?:complete|finish|write|submit|turn in|answer)\b.*\b(?:worksheet|guide|corrections|questions|essay|dialogue|report|packet)\b|\b(?:worksheet|guide|corrections|questions|essay|dialogue|report|packet)\b.*\b(?:complete|finish|write|submit|turn in|answer)\b/i.test(body);
     if (!recitation && /\b(?:tests?|quizzes?|quiz|exam|assessment|prueba)\b/i.test(body) && !written) continue;
-    clause = stripDue(clause);
-    body = stripDue(body);
+    clause = cleanLabel(clause);
+    body = cleanLabel(body);
     if (!body) continue;
     // Accept concrete deliverables, not arbitrary notices containing "due".
-    if (!recitation && !/\b(?:WB|workbook|worksheet|EIE|IXL|p(?:p)?\.?\s*\d+|pages?\s+\d+|read|annotate|words|questions|essay|draft|project|report|packet|assignment|choice board|corrections|notetaking|video|dialogue)\b|^\d+\.\d+\s*[#(]/i.test(body)) continue;
+    if (!recitation && !concreteTask(body)) continue;
     const label = ownSubject ? clause : (subject ? `${subject}: ${clause}` : clause);
     const ixl = label.match(/^(.*\bIXL\s+(?:Unit\s+\d+\s*[-–]\s*)?)(\d+[A-Z](?:\s*(?:,|&|and)\s*\d+[A-Z])+)(.*)$/i);
     if (ixl) {
