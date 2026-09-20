@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-09-20T03:45:50.524Z",
+  "generated_at": "2026-09-20T04:00:53.357Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-19",
-      "time": "5:15p",
-      "what": "Nolan: Fall ball opening day",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-19T18:15:00-04:00"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "6:45p",
-      "what": "Norah: Fall ball opening day",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-19T19:45:00-04:00"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "7:13p",
-      "what": "Papa Johns delivery (estimated window)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-19T19:23:00-04:00"
-    },
     {
       "date": "2026-09-20",
       "time": "8a",
@@ -577,6 +550,24 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-12-13T09:00:00-05:00"
+    },
+    {
+      "date": "2026-12-18",
+      "time": "all day",
+      "what": "Thomas: 3rd-grade Christmas class party (time TBD)",
+      "who": "thomas",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-19T00:00:00-05:00"
+    },
+    {
+      "date": "2026-12-18",
+      "time": "all day",
+      "what": "POPCS: Christmas Break Begins (12p dismissal); Q2 Ends",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-19T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -620,7 +611,13 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-21-7bff6bc190c42402a8ff12db0e01c3fba8c0f384fc9ac5aca66adb40e91f0549",
+          "label": "Spanish (Simon): IXL 6T",
+          "dueDate": "2026-09-21"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -848,8 +845,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -857,7 +854,7 @@
       "dow_short": "Mon",
       "name": "Chicken fajitas with onions, zucchini, and corn",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -943,7 +940,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza night (delivery or frozen)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -951,19 +948,12 @@
   "weather": {
     "now": {
       "temp": 71,
-      "hi": 87,
-      "lo": 72,
+      "hi": 90,
+      "lo": 67,
       "icon": "🌤",
       "code": 1
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "⛅",
-        "hi": 90,
-        "lo": 67,
-        "code": 3
-      },
       {
         "d": "Mon",
         "icon": "🌦",
@@ -991,24 +981,31 @@
         "hi": 72,
         "lo": 60,
         "code": 51
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 74,
+        "lo": 57,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-19T07:15",
         "2026-09-20T07:16",
         "2026-09-21T07:16",
         "2026-09-22T07:17",
         "2026-09-23T07:18",
-        "2026-09-24T07:19"
+        "2026-09-24T07:19",
+        "2026-09-25T07:19"
       ],
       "sunsets": [
-        "2026-09-19T19:30",
         "2026-09-20T19:29",
         "2026-09-21T19:27",
         "2026-09-22T19:26",
         "2026-09-23T19:24",
-        "2026-09-24T19:23"
+        "2026-09-24T19:23",
+        "2026-09-25T19:21"
       ],
       "timezone": "America/New_York"
     }
@@ -2416,6 +2413,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T03:45:49.083Z"
+    "updatedAt": "2026-09-20T04:00:51.928Z"
   }
 }
