@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T18:30:24.801Z",
+  "generated_at": "2026-09-20T18:45:24.118Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,15 +10,6 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-20T09:00:00-04:00"
-    },
-    {
-      "date": "2026-09-20",
-      "time": "3p",
-      "what": "Fig grooming: Woof Gang (pending confirmation)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-20T16:30:00-04:00"
     },
     {
       "date": "2026-09-21",
@@ -91,6 +82,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-27T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "1p",
+      "what": "Fig grooming: Woof Gang (pending confirmation)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-27T14:30:00-04:00"
     },
     {
       "date": "2026-09-28",
@@ -900,7 +900,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 87,
+      "temp": 88,
       "hi": 89,
       "lo": 68,
       "icon": "☀️",
@@ -2366,6 +2366,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T18:30:22.585Z"
+    "updatedAt": "2026-09-20T18:45:22.592Z"
   }
 }
