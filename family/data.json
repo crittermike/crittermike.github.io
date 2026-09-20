@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T20:00:34.303Z",
+  "generated_at": "2026-09-20T20:15:23.619Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-20T09:00:00-04:00"
+    },
+    {
+      "date": "2026-09-21",
+      "time": "12:59p",
+      "what": "Flight AA 1876: Charlotte (CLT) to Toronto (YYZ)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-21T14:59:00-04:00"
     },
     {
       "date": "2026-09-21",
@@ -910,7 +919,7 @@
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 93,
+        "hi": 92,
         "lo": 71,
         "code": 3
       },
@@ -918,7 +927,7 @@
         "d": "Tue",
         "icon": "🌦",
         "hi": 92,
-        "lo": 70,
+        "lo": 69,
         "code": 55
       },
       {
@@ -2366,6 +2375,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-20T20:00:32.609Z"
+    "updatedAt": "2026-09-20T20:15:22.238Z"
   }
 }
