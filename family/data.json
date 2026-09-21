@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T20:00:32.484Z",
+  "generated_at": "2026-09-21T20:15:25.674Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -19,6 +19,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-21T19:00:00-04:00"
+    },
+    {
+      "date": "2026-09-21",
+      "time": "7p",
+      "what": "Walmart grocery delivery",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-21T21:00:00-04:00"
     },
     {
       "date": "2026-09-23",
@@ -645,7 +654,20 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-09-21-adf2651cbba84721d368d7b0b4e40bf0f453aa9194318acdccead3d9e59928f0",
+          "label": "Honors English (deMarrais): Read",
+          "dueDate": null,
+          "workOnDate": "2026-09-21"
+        },
+        {
+          "id": "sch-work-on-2026-09-21-f53a82cd2477fc0ce4817ec8b69fe45aa2ce2df0a2c732026dd3303ae535525b",
+          "label": "Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 12",
+          "dueDate": null,
+          "workOnDate": "2026-09-21"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -928,7 +950,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 90,
+      "temp": 91,
       "hi": 91,
       "lo": 70,
       "icon": "☀️",
@@ -2394,6 +2416,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-21T20:00:30.959Z"
+    "updatedAt": "2026-09-21T20:15:24.514Z"
   }
 }
