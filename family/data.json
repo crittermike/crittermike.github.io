@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-21T03:45:23.795Z",
+  "generated_at": "2026-09-21T04:00:24.623Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-20",
-      "time": "8a",
-      "what": "Mass",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-20T09:00:00-04:00"
-    },
     {
       "date": "2026-09-21",
       "time": "12:59p",
@@ -629,28 +620,7 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-21-7bff6bc190c42402a8ff12db0e01c3fba8c0f384fc9ac5aca66adb40e91f0549",
-          "label": "Spanish (Simon): IXL 6T",
-          "dueDate": "2026-09-21"
-        },
-        {
-          "id": "sch-2026-09-21-f75bf4bb0cc797e386a7b0d12170457adb5543f46a3982de528a5898e63eb67b",
-          "label": "Algebra (Edwards): 8.2 odd-numbered problems",
-          "dueDate": "2026-09-21"
-        },
-        {
-          "id": "sch-2026-09-21-f68289f32520176d61fbb51e3ef22437f53ec014611f128877a31ee4e74d2b26",
-          "label": "Honors English (deMarrais): A Long Walk to Water Student Stories . Write a response sharing memories of Iron Giraffe fundraising, lessons learned, or what Salva visiting Prince of Peace means to you; answer any or all prompts",
-          "dueDate": "2026-09-21"
-        },
-        {
-          "id": "sch-2026-09-21-15f97d8db224566263dee7a6a5c02e4f40d4ccaf310d58769fb35da9c5aca059",
-          "label": "Spanish (Simon): Turn in blue workbook p.155 by placing it in Mrs. Simon’s bin on Monday for partial credit. Mike reports the work is already completed but was not submitted",
-          "dueDate": "2026-09-21"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -878,7 +848,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -886,8 +856,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -895,7 +865,7 @@
       "dow_short": "Tue",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -933,20 +903,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 72,
-      "hi": 88,
+      "temp": 71,
+      "hi": 90,
       "lo": 68,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 90,
-        "lo": 68,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛈",
@@ -974,24 +937,31 @@
         "hi": 78,
         "lo": 55,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌤",
+        "hi": 84,
+        "lo": 58,
+        "code": 2
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-20T07:16",
         "2026-09-21T07:16",
         "2026-09-22T07:17",
         "2026-09-23T07:18",
         "2026-09-24T07:19",
-        "2026-09-25T07:19"
+        "2026-09-25T07:19",
+        "2026-09-26T07:20"
       ],
       "sunsets": [
-        "2026-09-20T19:29",
         "2026-09-21T19:27",
         "2026-09-22T19:26",
         "2026-09-23T19:24",
         "2026-09-24T19:23",
-        "2026-09-25T19:21"
+        "2026-09-25T19:21",
+        "2026-09-26T19:20"
       ],
       "timezone": "America/New_York"
     }
@@ -2399,6 +2369,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-21T03:45:22.550Z"
+    "updatedAt": "2026-09-21T04:00:23.120Z"
   }
 }
