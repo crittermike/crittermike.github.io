@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T17:00:29.225Z",
+  "generated_at": "2026-09-22T17:15:24.498Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-24T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-23",
+      "time": "7:30p",
+      "what": "Board game cafe with James Tran (Toronto)",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-23T20:30:00-04:00"
     },
     {
       "date": "2026-09-24",
@@ -630,7 +639,13 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-23-c7b0e5442edc5f76a6d4a802884e500ba2325c4c54b4a3466bf1de411b648411",
+          "label": "Spanish (Simon): P.165",
+          "dueDate": "2026-09-23"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -913,8 +928,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 82,
-      "hi": 85,
+      "temp": 83,
+      "hi": 84,
       "lo": 70,
       "icon": "⛅",
       "code": 3
@@ -923,7 +938,7 @@
       {
         "d": "Wed",
         "icon": "🌦",
-        "hi": 73,
+        "hi": 72,
         "lo": 61,
         "code": 55
       },
@@ -2379,6 +2394,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-22T17:00:28.063Z"
+    "updatedAt": "2026-09-22T17:15:23.129Z"
   }
 }
