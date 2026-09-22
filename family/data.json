@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T23:45:24.271Z",
+  "generated_at": "2026-09-22T00:00:39.243Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -2367,7 +2367,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 70,
+    "dayPct": 73.3,
     "totalSpend": 4974.43,
     "totalBudget": 0,
     "categories": [
@@ -2416,6 +2416,6 @@
     "creditDebt": 46947.08,
     "netLiquid": 66073.22,
     "source": "ynab",
-    "updatedAt": "2026-09-21T23:45:23.016Z"
+    "updatedAt": "2026-09-22T00:00:37.003Z"
   }
 }
