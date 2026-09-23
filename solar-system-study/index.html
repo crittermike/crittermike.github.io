@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1428">
+<meta name="description" content="A quick solar system study game with 15 science questions, rocket progress, and a review round.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🚀%3C/text%3E%3C/svg%3E">
+<title>Space Quest | Solar System Study</title>
+<style>
+:root { color-scheme: dark; --bg:#0d1428; --card:#172139; --text:#f1f5ff; --mid:#b8c7df; --gold:#ffce69; --blue:#83caff; --green:#91ebc0; --line:#394a68; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100svh; color:var(--text); font-family:ui-rounded,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(ellipse at 90% 0%,#253363 0,transparent 50%),var(--bg); }
+body::before { content:""; position:fixed; inset:0; pointer-events:none; background-image:radial-gradient(1px 1px at 12% 18%,#d3e8ff 95%,transparent),radial-gradient(2px 2px at 83% 29%,#98aed9 95%,transparent),radial-gradient(1px 1px at 44% 68%,#d3e8ff 95%,transparent); background-size:173px 211px,283px 297px,199px 151px; opacity:.35; }
+main { position:relative; width:min(100%,620px); margin:auto; padding:20px 16px max(28px,env(safe-area-inset-bottom)); }
+header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
+.eyebrow { color:var(--blue); font-size:.7rem; letter-spacing:.18em; font-weight:800; margin:0 0 3px; }
+h1 { font-size:1.65rem; margin:0; letter-spacing:-.035em; }
+button { font:inherit; color:inherit; cursor:pointer; touch-action:manipulation; border:0; }
+button:focus-visible, [tabindex="-1"]:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+button:disabled { cursor:default; }
+.sound { min-height:46px; min-width:92px; padding:10px 12px; border:1px solid var(--line); border-radius:14px; background:#1b2941; font-size:.85rem; font-weight:700; }
+.stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+.stat { background:#111d32; border:1px solid #30415e; border-radius:16px; padding:10px 8px; text-align:center; }
+.stat strong { display:block; font-size:1.6rem; line-height:1.1; font-variant-numeric:tabular-nums; color:var(--gold); }
+.stat span { display:block; margin-top:5px; font-size:.72rem; color:var(--mid); }
+.flight { margin:16px 0 18px; }
+.flight-label { display:flex; justify-content:space-between; font-size:.75rem; color:var(--mid); margin-bottom:17px; }
+.track { height:9px; background:#293752; border-radius:20px; margin:0 16px; position:relative; }
+#fuel { height:100%; width:0; border-radius:20px; background:linear-gradient(90deg,#698dff,#83eac7); transition:width .55s ease; }
+#rocket { position:absolute; top:-17px; left:0; transform:translateX(-50%) rotate(42deg); font-size:30px; transition:left .55s ease; }
+.card { background:linear-gradient(145deg,#1c2944,#131e34); border:1px solid #3a4b6c; border-radius:24px; padding:22px 18px; box-shadow:0 18px 50px #0003; }
+.card-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px; font-size:.78rem; color:var(--mid); }
+#selection { padding:5px 10px; border-radius:50px; color:var(--blue); background:#0c2845; font-weight:700; }
+h2 { font-size:clamp(1.25rem,4.7vw,1.65rem); line-height:1.35; letter-spacing:-.02em; margin:0 0 20px; overflow-wrap:break-word; }
+#options { display:grid; gap:10px; }
+.option { width:100%; display:flex; align-items:center; gap:12px; text-align:left; padding:14px; min-height:60px; border-radius:15px; border:2px solid var(--line); background:#111d32; font-size:1rem; line-height:1.35; }
+.mark { flex:0 0 26px; height:26px; display:grid; place-items:center; border:2px solid #7a90b1; border-radius:50%; font-size:.9rem; font-weight:800; }
+.option.multi .mark { border-radius:7px; }
+.option[aria-pressed="true"] { border-color:var(--blue); background:#183c5a; }
+.option[aria-pressed="true"] .mark { background:var(--blue); border-color:var(--blue); color:#101c30; }
+.option.right { border-color:var(--green); background:#153b36; }
+.option.wrong { border-color:#ffb595; background:#472d2c; }
+.option:disabled { opacity:1; }
+.primary { width:100%; margin-top:16px; min-height:54px; padding:14px 18px; border-radius:15px; background:var(--gold); color:#221807; font-weight:800; box-shadow:0 4px 0 #9a6c2b; }
+.primary:active:not(:disabled) { transform:translateY(2px); box-shadow:0 2px 0 #9a6c2b; }
+.primary:disabled { background:#2d3c54; color:#aebbd0; box-shadow:none; }
+#feedback { margin:17px 0 0; padding:14px; border-radius:13px; line-height:1.5; background:#10283b; border-left:3px solid var(--blue); font-size:.95rem; }
+#feedback:empty { display:none; }
+#feedback.good { border-color:var(--green); }
+#feedback.retry { border-color:#ffb595; }
+.boosts { text-align:center; color:var(--mid); font-size:.72rem; margin:16px 0 0; line-height:1.6; }
+#summary { text-align:center; }
+.medal { font-size:4rem; line-height:1.3; margin:5px 0 12px; }
+#summary h2 { margin-bottom:8px; }
+.summary-score { color:var(--gold); font-size:2.6rem; font-weight:900; margin:14px 0 6px; }
+#summary p { line-height:1.6; }
+#final-first,#reviewed,#best { color:var(--mid); margin:6px 0; }
+#confetti { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:5; }
+.piece { position:absolute; top:-16px; width:9px; height:14px; left:var(--x); background:var(--c); animation:fall 1.6s ease-in var(--delay) both; }
+@keyframes fall { to { transform:translate(var(--drift),105vh) rotate(450deg); opacity:0; } }
+[hidden] { display:none !important; }
+@media (min-width:600px) { main { padding-top:32px; } .card { padding:28px; } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } #confetti { display:none; } }
+</style>
+</head>
+<body>
+<main>
+  <header><div><p class="eyebrow">SOLAR SYSTEM</p><h1>Space Quest</h1></div><button id="sound" class="sound" type="button" aria-pressed="true" aria-label="Sound effects">Sound on</button></header>
+  <section class="stats" aria-label="Mission stats">
+    <div class="stat"><strong id="score">0</strong><span>Points</span></div>
+    <div class="stat"><strong id="streak">0</strong><span>Streak</span></div>
+    <div class="stat"><strong id="first">0/15</strong><span>First try correct</span></div>
+  </section>
+  <div class="flight">
+    <div class="flight-label"><span id="progress-label">0 of 15 learned</span><span aria-hidden="true">Destination: ⭐</span></div>
+    <div id="progress" class="track" role="progressbar" aria-label="Concepts learned" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><div id="fuel"></div><span id="rocket" aria-hidden="true">🚀</span></div>
+  </div>
+  <section id="play" class="card" aria-labelledby="question">
+    <div class="card-top"><span id="round">Question 1 of 15</span><span id="selection">Choose 1</span></div>
+    <h2 id="question" tabindex="-1"></h2>
+    <div id="options" role="group" aria-labelledby="question" aria-describedby="selection"></div>
+    <button id="check" class="primary" type="button" disabled>Check answer</button>
+    <p id="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+    <button id="next" class="primary" type="button" hidden>Next question →</button>
+  </section>
+  <section id="summary" class="card" aria-labelledby="finish-title" hidden>
+    <div class="medal" aria-hidden="true">🏅</div><h2 id="finish-title" tabindex="-1">Mission complete!</h2>
+    <p>All 15 space facts learned.</p><div id="final-score" class="summary-score"></div>
+    <p id="final-first"></p><p id="reviewed"></p><p id="best"></p>
+    <button id="replay" class="primary" type="button">Play again 🚀</button>
+  </section>
+  <p class="boosts">Streak boosts, once each: 3 = +5 · 5 = +10 · 7 = +15<br>Review earns +5 per fact. No points lost.</p>
+  <noscript>This game needs JavaScript turned on to play.</noscript>
+</main>
+<div id="confetti" aria-hidden="true"></div>
+<script id="engine">
+'use strict';
+const SpaceStudy = (() => {
+  const rows = [
+    ['rotation', 'What causes day and night on Earth?', ['Earth’s rotation', 'Earth’s orbit around the Sun', 'The Moon’s craters'], [0], 'Earth rotates, or spins. The side facing the Sun has day; the side facing away has night.'],
+    ['sunlight', 'What does the Sun give Earth?', ['Light', 'Heat', 'Air to breathe', 'Moon rocks'], [0, 1], 'The Sun gives Earth both light and heat.'],
+    ['seasons', 'Which TWO things work together to cause seasons?', ['The tilt of Earth’s axis', 'Earth’s orbit around the Sun', 'Changes in Earth’s distance from the Sun', 'The Moon’s craters'], [0, 1], 'Earth’s tilted axis and its orbit around the Sun cause seasons, not changes in distance from the Sun.'],
+    ['moon-observation', 'What did the first astronauts walking on the Moon observe?', ['Rocks and a thick layer of dust', 'Forests and rivers', 'Grass and clouds'], [0], 'The first astronauts walking on the Moon observed rocks and a thick layer of dust covering its surface.'],
+    ['spacesuits', 'Why do astronauts need spacesuits on the Moon?', ['Air to breathe', 'Protection from too much heat or cold', 'To grow taller', 'To make the Moon brighter'], [0, 1], 'Spacesuits provide air to breathe and protect astronauts from getting too hot or too cold.'],
+    ['astronomers', 'What are scientists who study objects in our solar system called?', ['Astronomers', 'Botanists', 'Meteorologists'], [0], 'Astronomers are scientists who study objects in space, including our solar system.'],
+    ['telescope', 'Which instrument helps us study objects in our solar system?', ['Telescope', 'Microscope', 'Thermometer'], [0], 'A telescope helps us observe distant objects in space.'],
+    ['sun', 'Which star is at the center of our solar system?', ['The Sun', 'The Moon', 'Earth'], [0], 'The Sun is the star at the center of our solar system.'],
+    ['plasma', 'What is the Sun made of?', ['Plasma', 'Liquid water', 'Solid rock'], [0], 'The Sun is made of plasma: very hot matter with electrically charged particles.'],
+    ['sunspots', 'What are the cooler areas on the Sun’s surface called?', ['Sunspots', 'Craters', 'Continents'], [0], 'Sunspots are cooler than the surrounding surface. They are still very hot, not cold.'],
+    ['axis', 'What is the imaginary line through Earth from the North Pole to the South Pole?', ['Axis', 'Orbit', 'Equator'], [0], 'Earth’s axis is an imaginary line from the North Pole to the South Pole. Earth spins around it.'],
+    ['orbit-time', 'How long does Earth take to orbit the Sun?', ['365 1/4 days', '24 hours', '30 days'], [0], 'Earth takes about 365 1/4 days (365.25 days) to orbit the Sun.'],
+    ['hemispheres', 'When it is summer in the Northern Hemisphere, what season is it in the Southern Hemisphere?', ['Winter', 'Summer', 'Spring'], [0], 'The hemispheres have opposite seasons. Northern summer happens during Southern winter.'],
+    ['near-side', 'What do we call the side of the Moon that faces Earth?', ['Near side', 'Far side', 'Inside'], [0], 'The side of the Moon facing Earth is called the near side.'],
+    ['craters', 'What are the bowl-shaped holes on the Moon’s surface called?', ['Craters', 'Sunspots', 'Clouds'], [0], 'The bowl-shaped holes on the Moon are craters. One hole is a crater.']
+  ];
+  const bank = rows.map(([id, prompt, choices, correct, explanation]) => ({
+    id, prompt, options: choices.map((text, i) => ({ id: String(i), text })),
+    answers: correct.map(String), pick: correct.length, explanation
+  }));
+  function shuffle(items, random) {
+    const out = [...items];
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+  }
+  function createGame(random = Math.random) {
+    const state = {};
+    let question;
+    function reset() {
+      Object.assign(state, { phase: 'first', queue: shuffle(bank, random), index: 0, round: 0,
+        score: 0, streak: 0, firstPassCorrect: 0, bonuses: new Set(), mastered: new Set(), selected: new Set(), locked: false });
+      prepare();
+    }
+    function prepare() {
+      const source = state.queue[state.index];
+      question = source ? { ...source, options: shuffle(source.options, random) } : null;
+      state.selected = new Set();
+      state.locked = false;
+    }
+    function select(id) {
+      if (state.locked || !question || !question.options.some(o => o.id === id)) return false;
+      if (state.selected.has(id)) state.selected.delete(id);
+      else {
+        if (question.pick === 1) state.selected.clear();
+        if (state.selected.size < question.pick) state.selected.add(id);
+      }
+      return true;
+    }
+    function check() {
+      if (state.locked || state.phase === 'done') return { status: 'locked' };
+      if (state.selected.size !== question.pick) return { status: 'incomplete' };
+      state.locked = true;
+      const correct = question.answers.every(id => state.selected.has(id));
+      let bonus = 0, points = 0;
+      if (correct) {
+        state.streak++;
+        bonus = state.phase === 'first' && !state.bonuses.has(state.streak) ? (({ 3: 5, 5: 10, 7: 15 })[state.streak] || 0) : 0;
+        if (bonus) state.bonuses.add(state.streak);
+        points = (state.phase === 'first' ? 10 : 5) + bonus;
+        state.score += points;
+        if (state.phase === 'first') state.firstPassCorrect++;
+        state.mastered.add(question.id);
+      } else state.streak = 0;
+      return { status: 'answered', correct, bonus, points };
+    }
+    function next() {
+      if (!state.locked || state.phase === 'done') return false;
+      state.index++;
+      if (state.index === state.queue.length) {
+        const remaining = bank.filter(q => !state.mastered.has(q.id));
+        state.phase = remaining.length ? 'review' : 'done';
+        state.queue = shuffle(remaining, random);
+        state.index = 0;
+        state.round++;
+        state.streak = 0;
+      }
+      prepare();
+      return true;
+    }
+    reset();
+    return { state, current: () => question, select, check, next, reset };
+  }
+  return { bank, createGame };
+})();
+globalThis.SpaceStudy = SpaceStudy;
+</script>
+<script id="ui">
+'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const game = SpaceStudy.createGame();
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const storageKey = 'space-quest-best-v1';
+  let best = 0, soundOn = true, audio = null, soundGeneration = 0, confettiTimer;
+  const voices = new Set();
+  try {
+    const saved = Number(localStorage.getItem(storageKey));
+    if (Number.isFinite(saved) && saved >= 0 && saved <= 180) best = saved;
+  } catch (_) { /* Optional storage must never stop a mission. */ }
+
+  // Only called by a click handler. Never start or resume audio on page load.
+  function unlockSound() {
+    if (!soundOn) return;
+    try {
+      if (!audio) {
+        const Context = window.AudioContext || window.webkitAudioContext;
+        if (Context) audio = new Context();
+      }
+      if (audio && audio.state === 'suspended') audio.resume().catch(() => {});
+    } catch (_) { audio = null; }
+  }
+  function hush() {
+    soundGeneration++;
+    for (const voice of voices) { try { voice.stop(); } catch (_) {} }
+    voices.clear();
+  }
+  function chime(kind) {
+    if (!soundOn || !audio) return;
+    const generation = soundGeneration;
+    const notes = kind === 'finish' ? [523,659,784,1047] : kind === 'right' ? [659,880] : [330,294];
+    // A suspended device may resume later. Do not queue stale sounds.
+    if (audio.state !== 'running' || generation !== soundGeneration) return;
+    try {
+      notes.forEach((frequency, i) => {
+        const oscillator = audio.createOscillator(), gain = audio.createGain();
+        const t = audio.currentTime + i * .11;
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(frequency, t);
+        gain.gain.setValueAtTime(.0001, t);
+        gain.gain.exponentialRampToValueAtTime(.075, t + .012);
+        gain.gain.exponentialRampToValueAtTime(.0001, t + .2);
+        oscillator.connect(gain); gain.connect(audio.destination);
+        voices.add(oscillator);
+        oscillator.onended = () => { voices.delete(oscillator); oscillator.disconnect(); gain.disconnect(); };
+        oscillator.start(t); oscillator.stop(t + .22);
+      });
+    } catch (_) { hush(); }
+  }
+  function celebrate(big = false) {
+    clearTimeout(confettiTimer);
+    $('confetti').replaceChildren();
+    if (reducedMotion.matches) return;
+    const colors = ['#ffce69','#83caff','#91ebc0','#cbb0ff'];
+    for (let i = 0; i < (big ? 38 : 14); i++) {
+      const piece = document.createElement('i');
+      piece.className = 'piece';
+      piece.style.setProperty('--x', `${Math.random() * 100}%`);
+      piece.style.setProperty('--c', colors[i % colors.length]);
+      piece.style.setProperty('--delay', `${Math.random() * .2}s`);
+      piece.style.setProperty('--drift', `${Math.random() * 100 - 50}px`);
+      $('confetti').append(piece);
+    }
+    confettiTimer = setTimeout(() => $('confetti').replaceChildren(), 2000);
+  }
+  function stats() {
+    const s = game.state;
+    $('score').textContent = String(s.score);
+    $('streak').textContent = String(s.streak);
+    $('first').textContent = `${s.firstPassCorrect}/15`;
+    $('progress-label').textContent = `${s.mastered.size} of 15 learned`;
+    $('progress').setAttribute('aria-valuenow', s.mastered.size);
+    $('fuel').style.width = `${s.mastered.size / 15 * 100}%`;
+    $('rocket').style.left = `${s.mastered.size / 15 * 100}%`;
+  }
+  function selections() {
+    const q = game.current(), s = game.state;
+    $('selection').textContent = `Choose ${q.pick} · ${s.selected.size}/${q.pick}`;
+    for (const button of $('options').children) {
+      const selected = s.selected.has(button.dataset.id);
+      button.setAttribute('aria-pressed', selected);
+      button.children[0].textContent = selected ? '✓' : '';
+    }
+    $('check').disabled = s.selected.size !== q.pick || s.locked;
+  }
+  function render(moveFocus = false) {
+    const s = game.state;
+    stats();
+    $('summary').hidden = s.phase !== 'done';
+    $('play').hidden = s.phase === 'done';
+    if (s.phase === 'done') {
+      best = Math.max(best, s.score);
+      try { localStorage.setItem(storageKey, String(best)); } catch (_) {}
+      $('final-score').textContent = `${s.score} points`;
+      $('final-first').textContent = `First try: ${s.firstPassCorrect} of 15 correct`;
+      $('reviewed').textContent = s.firstPassCorrect === 15 ? 'Perfect first pass!' : `${15 - s.firstPassCorrect} learned in review`;
+      $('best').textContent = `Best on this device: ${best}`;
+      celebrate(true); chime('finish');
+      $('finish-title').focus();
+      return;
+    }
+    const q = game.current();
+    $('round').textContent = s.phase === 'first' ? `Question ${s.index + 1} of 15` : `Review ${s.round} · ${s.index + 1} of ${s.queue.length}`;
+    $('question').textContent = q.prompt;
+    $('question').dataset.concept = q.id;
+    $('options').replaceChildren();
+    for (const option of q.options) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `option${q.pick === 2 ? ' multi' : ''}`;
+      button.dataset.id = option.id;
+      button.dataset.answer = option.text;
+      const mark = document.createElement('span');
+      mark.className = 'mark'; mark.setAttribute('aria-hidden', 'true');
+      const label = document.createElement('span'); label.textContent = option.text;
+      button.append(mark, label);
+      button.addEventListener('click', () => { unlockSound(); game.select(option.id); selections(); });
+      $('options').append(button);
+    }
+    $('feedback').textContent = '';
+    $('feedback').className = '';
+    $('check').hidden = false;
+    $('next').hidden = true;
+    selections();
+    if (moveFocus) $('question').focus();
+  }
+  $('check').addEventListener('click', () => {
+    unlockSound();
+    const result = game.check();
+    if (result.status !== 'answered') return;
+    const q = game.current();
+    for (const button of $('options').children) {
+      button.disabled = true;
+      const correct = q.answers.includes(button.dataset.id);
+      if (correct) { button.className += ' right'; button.children[0].textContent = '✓'; }
+      else if (game.state.selected.has(button.dataset.id)) { button.className += ' wrong'; button.children[0].textContent = '×'; }
+    }
+    $('check').disabled = true;
+    $('check').hidden = true;
+    $('feedback').className = result.correct ? 'good' : 'retry';
+    $('feedback').textContent = result.correct
+      ? `Correct! +${result.points}${result.bonus ? ` (${result.bonus} streak bonus)` : ''}. ${q.explanation}`
+      : `Not yet. ${q.explanation} You’ll try this again in review. No points lost.`;
+    stats();
+    chime(result.correct ? 'right' : 'retry');
+    if (result.correct) celebrate();
+    const last = game.state.index === game.state.queue.length - 1;
+    $('next').textContent = last ? (game.state.mastered.size === 15 ? 'Finish mission ⭐' : 'Review missed facts →') : 'Next question →';
+    $('next').hidden = false;
+    $('next').focus();
+  });
+  $('next').addEventListener('click', () => { unlockSound(); if (game.next()) render(true); });
+  $('replay').addEventListener('click', () => {
+    unlockSound(); hush(); clearTimeout(confettiTimer); $('confetti').replaceChildren();
+    game.reset(); render(true);
+  });
+  $('sound').addEventListener('click', () => {
+    soundOn = !soundOn;
+    $('sound').setAttribute('aria-pressed', soundOn);
+    $('sound').textContent = soundOn ? 'Sound on' : 'Sound off';
+    if (soundOn) unlockSound(); else hush();
+  });
+  render();
+})();
+</script>
+</body></html>
