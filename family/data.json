@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T14:00:29.007Z",
+  "generated_at": "2026-09-23T14:15:15.933Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -10,6 +10,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-09-24T00:00:00-04:00"
+    },
+    {
+      "date": "2026-09-23",
+      "time": "9:45a",
+      "what": "OEB Breakfast Co. - Toronto St. reservation for 6",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-23T12:15:00-04:00"
     },
     {
       "date": "2026-09-23",
@@ -964,22 +973,22 @@
       "temp": 65,
       "hi": 71,
       "lo": 61,
-      "icon": "⛅",
-      "code": 3
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
         "d": "Thu",
-        "icon": "🌦",
-        "hi": 65,
-        "lo": 57,
-        "code": 55
+        "icon": "🌧",
+        "hi": 64,
+        "lo": 56,
+        "code": 61
       },
       {
         "d": "Fri",
         "icon": "☀️",
         "hi": 74,
-        "lo": 53,
+        "lo": 52,
         "code": 0
       },
       {
@@ -2435,6 +2444,6 @@
     "creditDebt": 57178.66,
     "netLiquid": 65892.27,
     "source": "ynab",
-    "updatedAt": "2026-09-23T14:00:27.473Z"
+    "updatedAt": "2026-09-23T14:15:14.438Z"
   }
 }
