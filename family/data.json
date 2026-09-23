@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T03:45:15.427Z",
+  "generated_at": "2026-09-23T04:00:18.054Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -577,6 +577,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-12-20T09:00:00-05:00"
+    },
+    {
+      "date": "2026-12-21",
+      "time": "all day",
+      "what": "POPCS: Christmas Break - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-22T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -594,22 +603,40 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-09-22-df422a74cffa0089dab6061784c1b390bb1afd4ab7c7927b6eb87a02f116918d",
-          "label": "Spelling: Complete WB p.26",
+          "id": "sch-work-on-2026-09-23-dc0a3e58ebb388a17962b0ca3a3f546bd09889e1e3adca3f7b5795309843f11e",
+          "label": "Reading: Read 20 minutes",
           "dueDate": null,
-          "workOnDate": "2026-09-22"
+          "workOnDate": "2026-09-23"
         },
         {
-          "id": "sch-work-on-2026-09-22-03abc164ef41ad16024e9233ef2b775014035535080813f206304add34de4897",
-          "label": "Spelling: Write words 6-10 three times each",
+          "id": "sch-work-on-2026-09-23-78b4f5f6c5f1a0de81020d46a92f9459ebbcaec7d5e893b9f9a082cd23ec012c",
+          "label": "Spelling: Complete assigned WB page",
           "dueDate": null,
-          "workOnDate": "2026-09-22"
+          "workOnDate": "2026-09-23"
         },
         {
-          "id": "sch-work-on-2026-09-22-780556583669057fff41b188c39941aa858aa91f2c71d3e900c078f137b18a5c",
-          "label": "English: Complete EIE WB p.19",
+          "id": "sch-work-on-2026-09-23-9f3306e107184b7f6f3aa62e31e12e964ba997350f48e009a583eda5c1d252d6",
+          "label": "Spelling: source prints p.227, page number needs confirmation, not silently corrected",
           "dueDate": null,
-          "workOnDate": "2026-09-22"
+          "workOnDate": "2026-09-23"
+        },
+        {
+          "id": "sch-work-on-2026-09-23-ea55bf413068b5c889b52cde2b255200628bdf93d1f21493cbe79bb6234dbbc5",
+          "label": "Spelling: Write words 11-15 three times each",
+          "dueDate": null,
+          "workOnDate": "2026-09-23"
+        },
+        {
+          "id": "sch-work-on-2026-09-23-9807df0a62bb76c33abc7786e3f8f03891efe410042fdf568b03fe627963f9c3",
+          "label": "Math: Complete WB pp.49-50",
+          "dueDate": null,
+          "workOnDate": "2026-09-23"
+        },
+        {
+          "id": "sch-work-on-2026-09-23-082b5cfb7e3cf0155bba53be557559eb3f5cc73b2210f21d11285d739a5b8a57",
+          "label": "English: Complete Voyages WB p.26",
+          "dueDate": null,
+          "workOnDate": "2026-09-23"
         }
       ]
     },
@@ -625,7 +652,13 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-24-d06ab63a4b543560faac7c1cb2a7053262db3143b7ab2d6142f7f525f90c4537",
+          "label": "Prepare: Religion: Scripture recitation, Matthew 13:31-32 (parable of the mustard seed)",
+          "dueDate": "2026-09-24"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -641,14 +674,9 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-23-c7b0e5442edc5f76a6d4a802884e500ba2325c4c54b4a3466bf1de411b648411",
-          "label": "Spanish (Simon): P.165",
-          "dueDate": "2026-09-23"
-        },
-        {
-          "id": "sch-2026-09-23-281f754a884b811091d301fe9db677d22b14f20392de2dc75ac82de339df7f46",
-          "label": "Algebra (Edwards): 8.3 #16-26 evens",
-          "dueDate": "2026-09-23"
+          "id": "sch-2026-09-24-709671317cb8ff76d85bbad98d1a53efa81295dde5138c6b4ab4232b3add00d4",
+          "label": "Religion (Principal Barontini): Saints Worksheet, Chosen 1-5 at 11:59 PM",
+          "dueDate": "2026-09-24"
         }
       ]
     },
@@ -894,7 +922,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -902,8 +930,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -911,7 +939,7 @@
       "dow_short": "Thu",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -934,19 +962,12 @@
   "weather": {
     "now": {
       "temp": 69,
-      "hi": 83,
-      "lo": 70,
+      "hi": 70,
+      "lo": 60,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "🌧",
-        "hi": 70,
-        "lo": 60,
-        "code": 65
-      },
       {
         "d": "Thu",
         "icon": "🌧",
@@ -974,24 +995,31 @@
         "hi": 76,
         "lo": 59,
         "code": 3
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 81,
+        "lo": 57,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-22T07:17",
         "2026-09-23T07:18",
         "2026-09-24T07:19",
         "2026-09-25T07:19",
         "2026-09-26T07:20",
-        "2026-09-27T07:21"
+        "2026-09-27T07:21",
+        "2026-09-28T07:22"
       ],
       "sunsets": [
-        "2026-09-22T19:26",
         "2026-09-23T19:24",
         "2026-09-24T19:23",
         "2026-09-25T19:21",
         "2026-09-26T19:20",
-        "2026-09-27T19:19"
+        "2026-09-27T19:19",
+        "2026-09-28T19:17"
       ],
       "timezone": "America/New_York"
     }
@@ -2407,6 +2435,6 @@
     "creditDebt": 57178.66,
     "netLiquid": 65892.27,
     "source": "ynab",
-    "updatedAt": "2026-09-23T03:45:13.986Z"
+    "updatedAt": "2026-09-23T04:00:14.675Z"
   }
 }
