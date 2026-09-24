@@ -1,34 +1,7 @@
 {
-  "generated_at": "2026-09-24T03:45:14.457Z",
+  "generated_at": "2026-09-24T04:00:17.765Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-23",
-      "time": "all day",
-      "what": "POPCS Picture Day: individual and panoramic",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-24T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "9:45a",
-      "what": "OEB Breakfast Co. - Toronto St. reservation for 6",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-23T12:15:00-04:00"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "7:30p",
-      "what": "Board game cafe with James Tran (Toronto)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-23T20:30:00-04:00"
-    },
     {
       "date": "2026-09-24",
       "time": "all day",
@@ -595,6 +568,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-12-22T00:00:00-05:00"
+    },
+    {
+      "date": "2026-12-22",
+      "time": "all day",
+      "what": "POPCS: Christmas Break - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-23T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -612,40 +594,22 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-09-23-dc0a3e58ebb388a17962b0ca3a3f546bd09889e1e3adca3f7b5795309843f11e",
+          "id": "sch-work-on-2026-09-24-af7aa93a842870bd8c3a94a3d3dcb54cbdc8f9f929c446cc35e62c5782360aba",
           "label": "Reading: Read 20 minutes",
           "dueDate": null,
-          "workOnDate": "2026-09-23"
+          "workOnDate": "2026-09-24"
         },
         {
-          "id": "sch-work-on-2026-09-23-78b4f5f6c5f1a0de81020d46a92f9459ebbcaec7d5e893b9f9a082cd23ec012c",
-          "label": "Spelling: Complete assigned WB page",
+          "id": "sch-work-on-2026-09-24-da1b2f15a2ee1a52a298d1fa256bbfe4b7afb7aec3963d350ed2a2070fdeecd5",
+          "label": "Spelling: Complete WB p.27",
           "dueDate": null,
-          "workOnDate": "2026-09-23"
+          "workOnDate": "2026-09-24"
         },
         {
-          "id": "sch-work-on-2026-09-23-9f3306e107184b7f6f3aa62e31e12e964ba997350f48e009a583eda5c1d252d6",
-          "label": "Spelling: source prints p.227, page number needs confirmation, not silently corrected",
+          "id": "sch-work-on-2026-09-24-2ee84118938ef728e6831353685adf87eeebd29b80d7c7315b2e7d3733c8bee6",
+          "label": "Spelling: Write words 16-20 three times each",
           "dueDate": null,
-          "workOnDate": "2026-09-23"
-        },
-        {
-          "id": "sch-work-on-2026-09-23-ea55bf413068b5c889b52cde2b255200628bdf93d1f21493cbe79bb6234dbbc5",
-          "label": "Spelling: Write words 11-15 three times each",
-          "dueDate": null,
-          "workOnDate": "2026-09-23"
-        },
-        {
-          "id": "sch-work-on-2026-09-23-9807df0a62bb76c33abc7786e3f8f03891efe410042fdf568b03fe627963f9c3",
-          "label": "Math: Complete WB pp.49-50",
-          "dueDate": null,
-          "workOnDate": "2026-09-23"
-        },
-        {
-          "id": "sch-work-on-2026-09-23-082b5cfb7e3cf0155bba53be557559eb3f5cc73b2210f21d11285d739a5b8a57",
-          "label": "English: Complete Voyages WB p.26",
-          "dueDate": null,
-          "workOnDate": "2026-09-23"
+          "workOnDate": "2026-09-24"
         }
       ]
     },
@@ -661,13 +625,7 @@
         "balance_str": "$18.00"
       },
       "guineaPig": "$140.34",
-      "assignments": [
-        {
-          "id": "sch-2026-09-24-d06ab63a4b543560faac7c1cb2a7053262db3143b7ab2d6142f7f525f90c4537",
-          "label": "Prepare: Religion: Scripture recitation, Matthew 13:31-32 (parable of the mustard seed)",
-          "dueDate": "2026-09-24"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -681,18 +639,7 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-24-709671317cb8ff76d85bbad98d1a53efa81295dde5138c6b4ab4232b3add00d4",
-          "label": "Religion (Principal Barontini): Saints Worksheet, Chosen 1-5 at 11:59 PM",
-          "dueDate": "2026-09-24"
-        },
-        {
-          "id": "sch-2026-09-24-b4bba7f0a30ea9b5a9c1103571956736fbbd9cc1cee459abaf16eba8eec204cd",
-          "label": "Spanish (Simon): p.157",
-          "dueDate": "2026-09-24"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -944,7 +891,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -952,8 +899,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -961,7 +908,7 @@
       "dow_short": "Fri",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -976,19 +923,12 @@
   "weather": {
     "now": {
       "temp": 61,
-      "hi": 71,
-      "lo": 61,
+      "hi": 65,
+      "lo": 57,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "🌧",
-        "hi": 65,
-        "lo": 57,
-        "code": 61
-      },
       {
         "d": "Fri",
         "icon": "🌤",
@@ -1016,24 +956,31 @@
         "hi": 82,
         "lo": 58,
         "code": 3
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 85,
+        "lo": 60,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-23T07:18",
         "2026-09-24T07:19",
         "2026-09-25T07:19",
         "2026-09-26T07:20",
         "2026-09-27T07:21",
-        "2026-09-28T07:22"
+        "2026-09-28T07:22",
+        "2026-09-29T07:22"
       ],
       "sunsets": [
-        "2026-09-23T19:24",
         "2026-09-24T19:23",
         "2026-09-25T19:21",
         "2026-09-26T19:20",
         "2026-09-27T19:19",
-        "2026-09-28T19:17"
+        "2026-09-28T19:17",
+        "2026-09-29T19:16"
       ],
       "timezone": "America/New_York"
     }
@@ -2449,6 +2396,6 @@
     "creditDebt": 57178.66,
     "netLiquid": 65892.27,
     "source": "ynab",
-    "updatedAt": "2026-09-24T03:45:13.430Z"
+    "updatedAt": "2026-09-24T04:00:16.504Z"
   }
 }
