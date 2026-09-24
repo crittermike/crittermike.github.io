@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T21:45:15.940Z",
+  "generated_at": "2026-09-24T22:00:22.538Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -941,7 +941,7 @@
       "hi": 65,
       "lo": 57,
       "icon": "🌤",
-      "code": 2
+      "code": 1
     },
     "days": [
       {
@@ -2411,6 +2411,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65852.61,
     "source": "ynab",
-    "updatedAt": "2026-09-24T21:45:14.329Z"
+    "updatedAt": "2026-09-24T22:00:20.832Z"
   }
 }
