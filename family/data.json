@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T12:30:15.867Z",
+  "generated_at": "2026-09-25T12:45:15.596Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -921,7 +921,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 56,
+      "temp": 57,
       "hi": 77,
       "lo": 55,
       "icon": "☀️",
@@ -930,10 +930,10 @@
     "days": [
       {
         "d": "Sat",
-        "icon": "☀️",
+        "icon": "⛅",
         "hi": 83,
         "lo": 55,
-        "code": 0
+        "code": 3
       },
       {
         "d": "Sun",
@@ -2339,7 +2339,7 @@
   "finance": {
     "month": "September 2026",
     "dayPct": 83.3,
-    "totalSpend": 5195.38,
+    "totalSpend": 5225.38,
     "totalBudget": 0,
     "categories": [
       {
@@ -2362,8 +2362,8 @@
         "name": "⚡️ Utilities",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 693.21,
-        "balance": -693.21,
+        "spent": 723.21,
+        "balance": -723.21,
         "pct": 0
       },
       {
@@ -2391,10 +2391,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 8124.55,
+    "liquidCash": 8094.55,
     "creditDebt": 57728.06,
-    "netLiquid": 65852.61,
+    "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-25T12:30:14.225Z"
+    "updatedAt": "2026-09-25T12:45:14.085Z"
   }
 }
