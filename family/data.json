@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-25T03:45:16.083Z",
+  "generated_at": "2026-09-25T04:00:18.350Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-24",
-      "time": "all day",
-      "what": "POPCS: Parent/Teacher Conferences (12:15p dismissal)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-25T00:00:00-04:00"
-    },
     {
       "date": "2026-09-25",
       "time": "all day",
@@ -595,6 +586,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-12-23T00:00:00-05:00"
+    },
+    {
+      "date": "2026-12-23",
+      "time": "all day",
+      "what": "POPCS: Christmas Break - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-24T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -610,26 +610,7 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-09-24-af7aa93a842870bd8c3a94a3d3dcb54cbdc8f9f929c446cc35e62c5782360aba",
-          "label": "Reading: Read 20 minutes",
-          "dueDate": null,
-          "workOnDate": "2026-09-24"
-        },
-        {
-          "id": "sch-work-on-2026-09-24-da1b2f15a2ee1a52a298d1fa256bbfe4b7afb7aec3963d350ed2a2070fdeecd5",
-          "label": "Spelling: Complete WB p.27",
-          "dueDate": null,
-          "workOnDate": "2026-09-24"
-        },
-        {
-          "id": "sch-work-on-2026-09-24-2ee84118938ef728e6831353685adf87eeebd29b80d7c7315b2e7d3733c8bee6",
-          "label": "Spelling: Write words 16-20 three times each",
-          "dueDate": null,
-          "workOnDate": "2026-09-24"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -657,13 +638,7 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-25-9330bac554f57a48fc4b5743160bcb2eb698f7370ec8985ca349b7d3e5c29ea4",
-          "label": "Spanish (Simon): p.159",
-          "dueDate": "2026-09-25"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -923,7 +898,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -931,8 +906,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -940,26 +915,19 @@
       "dow_short": "Sat",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 59,
-      "hi": 65,
-      "lo": 57,
+      "hi": 76,
+      "lo": 53,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 76,
-        "lo": 53,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -987,24 +955,31 @@
         "hi": 84,
         "lo": 59,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 87,
+        "lo": 62,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-24T07:19",
         "2026-09-25T07:19",
         "2026-09-26T07:20",
         "2026-09-27T07:21",
         "2026-09-28T07:22",
-        "2026-09-29T07:22"
+        "2026-09-29T07:22",
+        "2026-09-30T07:23"
       ],
       "sunsets": [
-        "2026-09-24T19:23",
         "2026-09-25T19:21",
         "2026-09-26T19:20",
         "2026-09-27T19:19",
         "2026-09-28T19:17",
-        "2026-09-29T19:16"
+        "2026-09-29T19:16",
+        "2026-09-30T19:14"
       ],
       "timezone": "America/New_York"
     }
@@ -2420,6 +2395,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65852.61,
     "source": "ynab",
-    "updatedAt": "2026-09-25T03:45:14.570Z"
+    "updatedAt": "2026-09-25T04:00:17.086Z"
   }
 }
