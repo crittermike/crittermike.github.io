@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T22:30:16.108Z",
+  "generated_at": "2026-09-25T22:45:15.938Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
     {
@@ -130,24 +130,6 @@
     },
     {
       "date": "2026-09-28",
-      "time": "1p",
-      "what": "Drive Mom: driving rehab OT evaluation with Brigitte King",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-28T14:30:00-04:00"
-    },
-    {
-      "date": "2026-09-28",
-      "time": "2:30p",
-      "what": "Drive Mom: driving rehab OT treatment with Brigitte King",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-28T15:30:00-04:00"
-    },
-    {
-      "date": "2026-09-28",
       "time": "2:45p",
       "what": "Mom: Cancer screening results appointment",
       "who": "family",
@@ -163,6 +145,15 @@
       "calendar": "home",
       "all_day": false,
       "end": "2026-09-30T13:00:00-04:00"
+    },
+    {
+      "date": "2026-09-30",
+      "time": "6p",
+      "what": "Dinner with Matt and Nadia",
+      "who": "family",
+      "calendar": "home",
+      "all_day": false,
+      "end": "2026-09-30T20:00:00-04:00"
     },
     {
       "date": "2026-10-01",
@@ -921,8 +912,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 75,
-      "hi": 76,
+      "temp": 74,
+      "hi": 77,
       "lo": 55,
       "icon": "☀️",
       "code": 0
@@ -932,7 +923,7 @@
         "d": "Sat",
         "icon": "⛅",
         "hi": 82,
-        "lo": 55,
+        "lo": 56,
         "code": 3
       },
       {
@@ -2395,6 +2386,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-25T22:30:14.301Z"
+    "updatedAt": "2026-09-25T22:45:14.245Z"
   }
 }
