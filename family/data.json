@@ -1,52 +1,7 @@
 {
-  "generated_at": "2026-09-26T03:45:16.767Z",
+  "generated_at": "2026-09-26T04:00:17.624Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [
-    {
-      "date": "2026-09-25",
-      "time": "all day",
-      "what": "POPCS: Parent/Teacher Conferences (12:15p dismissal)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-26T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "all day",
-      "what": "USPS package expected by 9:00 PM (estimate; tracking 9300120818100677503739)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-26T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "all day",
-      "what": "POPCS 8th-grade Chick-fil-A fundraiser (optional)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": true,
-      "end": "2026-09-26T00:00:00-04:00"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "11:53a",
-      "what": "Flight home: Toronto to Charlotte (AA5020)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-25T14:08:00-04:00"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "2:08p",
-      "what": "Return home from CLT (estimated home 5 PM)",
-      "who": "family",
-      "calendar": "home",
-      "all_day": false,
-      "end": "2026-09-25T17:00:00-04:00"
-    },
     {
       "date": "2026-09-26",
       "time": "7:30p",
@@ -586,6 +541,15 @@
       "calendar": "home",
       "all_day": true,
       "end": "2026-12-24T00:00:00-05:00"
+    },
+    {
+      "date": "2026-12-24",
+      "time": "all day",
+      "what": "POPCS: Christmas Break - No School",
+      "who": "family",
+      "calendar": "home",
+      "all_day": true,
+      "end": "2026-12-25T00:00:00-05:00"
     }
   ],
   "kids": [
@@ -858,7 +822,7 @@
       "dow_short": "Sun",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -897,7 +861,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -905,27 +869,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 60,
-      "hi": 77,
-      "lo": 55,
+      "temp": 59,
+      "hi": 82,
+      "lo": 54,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "⛅",
-        "hi": 82,
-        "lo": 54,
-        "code": 3
-      },
       {
         "d": "Sun",
         "icon": "⛅",
@@ -953,24 +910,31 @@
         "hi": 88,
         "lo": 61,
         "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "🌤",
+        "hi": 91,
+        "lo": 64,
+        "code": 2
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-25T07:19",
         "2026-09-26T07:20",
         "2026-09-27T07:21",
         "2026-09-28T07:22",
         "2026-09-29T07:22",
-        "2026-09-30T07:23"
+        "2026-09-30T07:23",
+        "2026-10-01T07:24"
       ],
       "sunsets": [
-        "2026-09-25T19:21",
         "2026-09-26T19:20",
         "2026-09-27T19:19",
         "2026-09-28T19:17",
         "2026-09-29T19:16",
-        "2026-09-30T19:14"
+        "2026-09-30T19:14",
+        "2026-10-01T19:13"
       ],
       "timezone": "America/New_York"
     }
@@ -2386,6 +2350,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-26T03:45:14.064Z"
+    "updatedAt": "2026-09-26T04:00:15.481Z"
   }
 }
