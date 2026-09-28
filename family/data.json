@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T20:00:38.005Z",
+  "generated_at": "2026-09-28T20:15:36.782Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,13 +15,7 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-29-7a33d7a8b967b7485e77464c321f12ec80f8c9008b1db8ca139999c8fdd17459",
-          "label": "Prepare: September Prayer Recitation - After Communion Prayer",
-          "dueDate": "2026-09-29"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -356,7 +350,7 @@
         "d": "Wed",
         "icon": "⛅",
         "hi": 88,
-        "lo": 62,
+        "lo": 61,
         "code": 3
       },
       {
@@ -1887,6 +1881,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-28T20:00:36.486Z"
+    "updatedAt": "2026-09-28T20:15:35.391Z"
   }
 }
