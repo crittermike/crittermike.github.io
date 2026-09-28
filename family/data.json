@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T23:45:35.537Z",
+  "generated_at": "2026-09-28T00:00:46.905Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -265,11 +265,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Chicken fajitas with onions, zucchini and corn",
+    "protein_g": 65,
+    "cal": 604,
+    "effort": "easy",
+    "note": "Scale the saved recipe's four-serving option with 2 lb chicken and 8 tortillas by 1.5 for six people; full quantities are below. Slice vegetables ahead if useful on the conference/appointment day, and cook chicken in batches. Use pepper-free seasoning and keep components separate as needed. Mike's estimated plate: 9 oz raw-weight trimmed breast, two tortillas assumed 70 cal/2g protein each, and one-sixth of vegetables, oil and seasoning. Estimate assumes breast 120 cal/22.5g protein per 100g; each medium onion 44 cal/1.2g, zucchini 33 cal/2.4g, cup corn 143 cal/5.4g, oil 120 cal per tbsp, and 5 cal seasoning per plate. No sour cream included in this estimate. Calories rounded up and protein down; actual brands, portions and cooking losses may differ.",
     "recipe": null
   },
   "mealweek": [
@@ -330,71 +330,7 @@
       "recipe": null
     }
   ],
-  "weather": {
-    "now": {
-      "temp": 71,
-      "hi": 80,
-      "lo": 52,
-      "icon": "☀️",
-      "code": 0
-    },
-    "days": [
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 82,
-        "lo": 56,
-        "code": 0
-      },
-      {
-        "d": "Tue",
-        "icon": "☀️",
-        "hi": 84,
-        "lo": 60,
-        "code": 0
-      },
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 87,
-        "lo": 62,
-        "code": 3
-      },
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 87,
-        "lo": 66,
-        "code": 3
-      },
-      {
-        "d": "Fri",
-        "icon": "🌦",
-        "hi": 83,
-        "lo": 69,
-        "code": 51
-      }
-    ],
-    "sun": {
-      "sunrises": [
-        "2026-09-27T07:21",
-        "2026-09-28T07:22",
-        "2026-09-29T07:22",
-        "2026-09-30T07:23",
-        "2026-10-01T07:24",
-        "2026-10-02T07:25"
-      ],
-      "sunsets": [
-        "2026-09-27T19:19",
-        "2026-09-28T19:17",
-        "2026-09-29T19:16",
-        "2026-09-30T19:14",
-        "2026-10-01T19:13",
-        "2026-10-02T19:11"
-      ],
-      "timezone": "America/New_York"
-    }
-  },
+  "weather": null,
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -1749,7 +1685,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 90,
+    "dayPct": 93.3,
     "totalSpend": 5225.38,
     "totalBudget": 0,
     "categories": [
@@ -1806,6 +1742,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-27T23:45:34.281Z"
+    "updatedAt": "2026-09-28T00:00:41.353Z"
   }
 }
