@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T03:45:35.667Z",
+  "generated_at": "2026-09-28T04:00:36.885Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,13 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-09-29-7a33d7a8b967b7485e77464c321f12ec80f8c9008b1db8ca139999c8fdd17459",
+          "label": "Prepare: September Prayer Recitation - After Communion Prayer",
+          "dueDate": "2026-09-29"
+        }
+      ]
     },
     {
       "key": "william",
@@ -45,9 +51,9 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-09-28-a9091fd081d7552effbdb9ea6396d8e7ec50045cde8acc50278a7799e755e082",
-          "label": "Spanish (Simon): IXL 2Q",
-          "dueDate": "2026-09-28"
+          "id": "sch-2026-09-29-099286392a6b909961f5e63ae174ed202abf0bb2cd674c2921d5226932e94b10",
+          "label": "Spanish (Simon): Graded p.158",
+          "dueDate": "2026-09-29"
         }
       ]
     },
@@ -277,7 +283,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -285,8 +291,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken fajitas with onions, zucchini and corn",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -294,7 +300,7 @@
       "dow_short": "Tue",
       "name": "Nancy's birthday: dinner out or takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -332,20 +338,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 63,
-      "hi": 80,
-      "lo": 52,
+      "temp": 62,
+      "hi": 82,
+      "lo": 56,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 82,
-        "lo": 56,
-        "code": 0
-      },
       {
         "d": "Tue",
         "icon": "☀️",
@@ -373,24 +372,31 @@
         "hi": 83,
         "lo": 69,
         "code": 51
+      },
+      {
+        "d": "Sat",
+        "icon": "🌧",
+        "hi": 69,
+        "lo": 56,
+        "code": 61
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-27T07:21",
         "2026-09-28T07:22",
         "2026-09-29T07:22",
         "2026-09-30T07:23",
         "2026-10-01T07:24",
-        "2026-10-02T07:25"
+        "2026-10-02T07:25",
+        "2026-10-03T07:25"
       ],
       "sunsets": [
-        "2026-09-27T19:19",
         "2026-09-28T19:17",
         "2026-09-29T19:16",
         "2026-09-30T19:14",
         "2026-10-01T19:13",
-        "2026-10-02T19:11"
+        "2026-10-02T19:11",
+        "2026-10-03T19:10"
       ],
       "timezone": "America/New_York"
     }
@@ -1806,6 +1812,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-28T03:45:34.377Z"
+    "updatedAt": "2026-09-28T04:00:35.893Z"
   }
 }
