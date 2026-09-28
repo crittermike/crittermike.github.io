@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T22:15:35.042Z",
+  "generated_at": "2026-09-28T22:30:35.592Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -265,11 +265,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken enchiladas with canned red sauce",
+    "name": "Chicken enchiladas with tomato sauce",
     "protein_g": null,
     "cal": null,
     "effort": "medium",
-    "note": "Six-serving chicken enchiladas. Mike chose canned mild red enchilada sauce for simplicity. Sauce may contain chili peppers or paprika, so this is not guaranteed pepper-free. Macros are uncalculated for this version. Keep plain chicken separate before adding beans and sauce if useful.",
+    "note": "Six-serving chicken enchiladas adapted for plain tomato sauce because canned enchilada sauce is unavailable. Season and simmer the tomato sauce; no tomato paste or chili powder needed. Check labels if avoiding peppers. Macros are uncalculated. Keep plain chicken separate before adding beans and sauce if useful.",
     "recipe": null
   },
   "mealweek": [
@@ -284,7 +284,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken enchiladas with canned red sauce",
+      "name": "Chicken enchiladas with tomato sauce",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -332,7 +332,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 78,
       "hi": 81,
       "lo": 55,
       "icon": "☀️",
@@ -473,7 +473,7 @@
     },
     {
       "slug": "chicken-enchiladas",
-      "name": "Chicken enchiladas (canned sauce)",
+      "name": "Chicken enchiladas (tomato-sauce adaptation)",
       "source": "Adapted from wiki/concepts/recipe-beef-enchiladas.md",
       "hasFullRecipe": true,
       "tags": [
@@ -493,7 +493,7 @@
       "cal": null,
       "servings": 6,
       "prep_min": 20,
-      "cook_min": 50,
+      "cook_min": 60,
       "ingredient_groups": [
         {
           "heading": null,
@@ -506,8 +506,13 @@
             "1/2 tsp dried oregano",
             "1 (16 oz) can plain refried beans; check label for peppers",
             "Salt to taste",
-            "2 (10 oz) cans mild red enchilada sauce",
+            "About 2 1/2 cups plain tomato sauce; if your can is short, top up with chicken broth or water",
             "1/2 tsp ground cumin",
+            "1/2 tsp dried oregano",
+            "1/2 tsp garlic powder",
+            "1/2 tsp onion powder",
+            "Salt to taste",
+            "Optional: up to 1/4 cup reserved broth or water, if needed to thin",
             "12 flour tortillas (8 inch)",
             "3 cups shredded Mexican cheese blend",
             "Sour cream, for serving",
@@ -524,26 +529,32 @@
         "1/2 tsp dried oregano",
         "1 (16 oz) can plain refried beans; check label for peppers",
         "Salt to taste",
-        "2 (10 oz) cans mild red enchilada sauce",
+        "About 2 1/2 cups plain tomato sauce; if your can is short, top up with chicken broth or water",
         "1/2 tsp ground cumin",
+        "1/2 tsp dried oregano",
+        "1/2 tsp garlic powder",
+        "1/2 tsp onion powder",
+        "Salt to taste",
+        "Optional: up to 1/4 cup reserved broth or water, if needed to thin",
         "12 flour tortillas (8 inch)",
         "3 cups shredded Mexican cheese blend",
         "Sour cream, for serving",
         "Tortilla chips, for serving"
       ],
       "steps": [
-        "Place the chicken and 1 1/2 cups broth in a covered skillet or saucepan. Bring to a gentle simmer. Turn the chicken once if it is not fully submerged. Simmer gently until the thickest part reaches 165°F. Timing depends on thickness, usually about 15–25 minutes. Transfer to a plate, rest 5 minutes, then shred.",
+        "Place the chicken and 1 1/2 cups broth in a covered skillet or saucepan. A lidded cast-iron skillet works. Bring to a gentle simmer. Turn the chicken once if it is not fully submerged. Simmer gently until the thickest part reaches 165°F, usually about 15–25 minutes depending on thickness. Transfer to a plate, rest 5 minutes, then shred. Reserve some broth for the onion and sauce.",
+        "Stir the tomato sauce, 1/2 tsp cumin, 1/2 tsp oregano, garlic powder, onion powder, and salt together in a saucepan. Bring to a gentle simmer and cook uncovered for 8–10 minutes, stirring occasionally, to blend the flavors and reduce excess liquid. If it becomes too thick, stir in reserved broth or water a little at a time. Taste and adjust salt.",
         "Heat the oven to 375°F. Lightly grease a 9x13-inch baking dish.",
-        "Measure 1/2 cup enchilada sauce for the filling. Stir the remaining 1/2 tsp cumin into the rest of the sauce; no separate sauce cooking is needed.",
-        "In a large skillet, cook the onion over medium heat with a splash of reserved broth until soft, about 4 minutes. Add the garlic, remaining 1 tsp cumin, and 1/2 tsp oregano; cook 30 seconds.",
-        "Stir in the shredded chicken and refried beans with the reserved 1/2 cup enchilada sauce. Warm for about 2 minutes. Before adding beans and sauce, set aside a plain portion of chicken if a separate component is useful.",
+        "Measure 1/2 cup seasoned tomato sauce for the filling.",
+        "In a large skillet, cook the onion over medium heat with a splash of reserved broth until soft, about 4 minutes. Add the garlic, 1 tsp cumin, and 1/2 tsp oregano; cook 30 seconds.",
+        "Stir in the shredded chicken and refried beans with the reserved 1/2 cup sauce. Warm for about 2 minutes. Before adding the beans and sauce, set aside a plain portion of chicken if a separate component is useful.",
         "Spread about 3/4 cup sauce in the baking dish. Warm the tortillas under a damp towel in the microwave for about 20 seconds so they roll without cracking.",
         "Fill each tortilla with about 1/3 cup chicken mixture and a little cheese. Roll seam-side down; arrange 12 in two rows.",
         "Pour the remaining sauce over the tortillas and scatter the remaining cheese on top.",
         "Bake uncovered for 20–25 minutes, until hot throughout, the cheese is melted, and sauce bubbles at the edges. Rest 5 minutes. Serve with sour cream and tortilla chips."
       ],
-      "notes": "<h3>Notes</h3>\n<ul>\n<li>Macros have not been calculated for this chicken adaptation.</li>\n<li>The canned enchilada sauce may contain chili peppers or paprika; check the label if avoiding them is important.</li>\n<li>Corn tortillas can be used, but warm them carefully or they may crack.</li>\n<li>Assemble up to one day ahead, cover and refrigerate, then add about 10 minutes to the bake time.</li>\n<li>Reheat leftovers covered at 350°F for about 15 minutes. Microwaving can make the tortillas gummy.</li>\n</ul>\n",
-      "body_html": "<h1>Chicken enchiladas</h1>\n<p>Six servings. Uses mild canned red enchilada sauce for speed. Check the label if chili-pepper avoidance is still important; this is not guaranteed pepper-free.</p>\n<h2>Ingredients</h2>\n<p><strong>Chicken filling</strong></p>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 1/2 cups low-sodium chicken broth</li>\n<li>1 large yellow onion, diced</li>\n<li>3 cloves garlic, minced</li>\n<li>1 tsp ground cumin</li>\n<li>1/2 tsp dried oregano</li>\n<li>1 (16 oz) can plain refried beans; check label for peppers</li>\n<li>Salt to taste</li>\n</ul>\n<p><strong>Sauce</strong></p>\n<ul>\n<li>2 (10 oz) cans mild red enchilada sauce</li>\n<li>1/2 tsp ground cumin</li>\n</ul>\n<p><strong>Assembly</strong></p>\n<ul>\n<li>12 flour tortillas (8 inch)</li>\n<li>3 cups shredded Mexican cheese blend</li>\n<li>Sour cream, for serving</li>\n<li>Tortilla chips, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Place the chicken and 1 1/2 cups broth in a covered skillet or saucepan. Bring to a gentle simmer. Turn the chicken once if it is not fully submerged. Simmer gently until the thickest part reaches 165°F. Timing depends on thickness, usually about 15–25 minutes. Transfer to a plate, rest 5 minutes, then shred.</li>\n<li>Heat the oven to 375°F. Lightly grease a 9x13-inch baking dish.</li>\n<li>Measure 1/2 cup enchilada sauce for the filling. Stir the remaining 1/2 tsp cumin into the rest of the sauce; no separate sauce cooking is needed.</li>\n<li>In a large skillet, cook the onion over medium heat with a splash of reserved broth until soft, about 4 minutes. Add the garlic, remaining 1 tsp cumin, and 1/2 tsp oregano; cook 30 seconds.</li>\n<li>Stir in the shredded chicken and refried beans with the reserved 1/2 cup enchilada sauce. Warm for about 2 minutes. Before adding beans and sauce, set aside a plain portion of chicken if a separate component is useful.</li>\n<li>Spread about 3/4 cup sauce in the baking dish. Warm the tortillas under a damp towel in the microwave for about 20 seconds so they roll without cracking.</li>\n<li>Fill each tortilla with about 1/3 cup chicken mixture and a little cheese. Roll seam-side down; arrange 12 in two rows.</li>\n<li>Pour the remaining sauce over the tortillas and scatter the remaining cheese on top.</li>\n<li>Bake uncovered for 20–25 minutes, until hot throughout, the cheese is melted, and sauce bubbles at the edges. Rest 5 minutes. Serve with sour cream and tortilla chips.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>Macros have not been calculated for this chicken adaptation.</li>\n<li>The canned enchilada sauce may contain chili peppers or paprika; check the label if avoiding them is important.</li>\n<li>Corn tortillas can be used, but warm them carefully or they may crack.</li>\n<li>Assemble up to one day ahead, cover and refrigerate, then add about 10 minutes to the bake time.</li>\n<li>Reheat leftovers covered at 350°F for about 15 minutes. Microwaving can make the tortillas gummy.</li>\n</ul>\n",
+      "notes": "<h3>Notes</h3>\n<ul>\n<li>Macros have not been calculated for this chicken adaptation.</li>\n<li>This mild tomato-based sauce uses no chili powder or tomato paste. Check the tomato sauce and refried-bean labels if avoiding peppers is important.</li>\n<li>Corn tortillas can be used, but warm them carefully or they may crack.</li>\n<li>Assemble up to one day ahead, cover and refrigerate, then add about 10 minutes to the bake time.</li>\n<li>Reheat leftovers covered at 350°F for about 15 minutes. Microwaving can make the tortillas gummy.</li>\n</ul>\n",
+      "body_html": "<h1>Chicken enchiladas</h1>\n<p>Six servings. This version uses plain tomato sauce seasoned into a mild enchilada-style sauce. No tomato paste or chili powder is needed. Check labels if avoiding peppers is important.</p>\n<h2>Ingredients</h2>\n<p><strong>Chicken filling</strong></p>\n<ul>\n<li>2 lb boneless, skinless chicken breasts</li>\n<li>1 1/2 cups low-sodium chicken broth</li>\n<li>1 large yellow onion, diced</li>\n<li>3 cloves garlic, minced</li>\n<li>1 tsp ground cumin</li>\n<li>1/2 tsp dried oregano</li>\n<li>1 (16 oz) can plain refried beans; check label for peppers</li>\n<li>Salt to taste</li>\n</ul>\n<p><strong>Tomato sauce</strong></p>\n<ul>\n<li>About 2 1/2 cups plain tomato sauce; if your can is short, top up with chicken broth or water</li>\n<li>1/2 tsp ground cumin</li>\n<li>1/2 tsp dried oregano</li>\n<li>1/2 tsp garlic powder</li>\n<li>1/2 tsp onion powder</li>\n<li>Salt to taste</li>\n<li>Optional: up to 1/4 cup reserved broth or water, if needed to thin</li>\n</ul>\n<p><strong>Assembly</strong></p>\n<ul>\n<li>12 flour tortillas (8 inch)</li>\n<li>3 cups shredded Mexican cheese blend</li>\n<li>Sour cream, for serving</li>\n<li>Tortilla chips, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Place the chicken and 1 1/2 cups broth in a covered skillet or saucepan. A lidded cast-iron skillet works. Bring to a gentle simmer. Turn the chicken once if it is not fully submerged. Simmer gently until the thickest part reaches 165°F, usually about 15–25 minutes depending on thickness. Transfer to a plate, rest 5 minutes, then shred. Reserve some broth for the onion and sauce.</li>\n<li>Stir the tomato sauce, 1/2 tsp cumin, 1/2 tsp oregano, garlic powder, onion powder, and salt together in a saucepan. Bring to a gentle simmer and cook uncovered for 8–10 minutes, stirring occasionally, to blend the flavors and reduce excess liquid. If it becomes too thick, stir in reserved broth or water a little at a time. Taste and adjust salt.</li>\n<li>Heat the oven to 375°F. Lightly grease a 9x13-inch baking dish.</li>\n<li>Measure 1/2 cup seasoned tomato sauce for the filling.</li>\n<li>In a large skillet, cook the onion over medium heat with a splash of reserved broth until soft, about 4 minutes. Add the garlic, 1 tsp cumin, and 1/2 tsp oregano; cook 30 seconds.</li>\n<li>Stir in the shredded chicken and refried beans with the reserved 1/2 cup sauce. Warm for about 2 minutes. Before adding the beans and sauce, set aside a plain portion of chicken if a separate component is useful.</li>\n<li>Spread about 3/4 cup sauce in the baking dish. Warm the tortillas under a damp towel in the microwave for about 20 seconds so they roll without cracking.</li>\n<li>Fill each tortilla with about 1/3 cup chicken mixture and a little cheese. Roll seam-side down; arrange 12 in two rows.</li>\n<li>Pour the remaining sauce over the tortillas and scatter the remaining cheese on top.</li>\n<li>Bake uncovered for 20–25 minutes, until hot throughout, the cheese is melted, and sauce bubbles at the edges. Rest 5 minutes. Serve with sour cream and tortilla chips.</li>\n</ol>\n<h2>Notes</h2>\n<ul>\n<li>Macros have not been calculated for this chicken adaptation.</li>\n<li>This mild tomato-based sauce uses no chili powder or tomato paste. Check the tomato sauce and refried-bean labels if avoiding peppers is important.</li>\n<li>Corn tortillas can be used, but warm them carefully or they may crack.</li>\n<li>Assemble up to one day ahead, cover and refrigerate, then add about 10 minutes to the bake time.</li>\n<li>Reheat leftovers covered at 350°F for about 15 minutes. Microwaving can make the tortillas gummy.</li>\n</ul>\n",
       "last_reviewed": null
     },
     {
@@ -1881,6 +1892,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-28T22:15:34.098Z"
+    "updatedAt": "2026-09-28T22:30:34.314Z"
   }
 }
