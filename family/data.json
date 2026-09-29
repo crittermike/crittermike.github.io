@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T03:45:36.389Z",
+  "generated_at": "2026-09-29T04:00:35.281Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,20 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-09-29-663da5268e5906ea2ad0b7dba6210c5b7354ec923ccc6bde85a8ca96a093669d",
+          "label": "Math: Complete WB pp.53-54",
+          "dueDate": null,
+          "workOnDate": "2026-09-29"
+        },
+        {
+          "id": "sch-work-on-2026-09-29-fb20a28f9ba0ffbb2871ea6d875e6a9183171e897f3aa4a2eb40f6d3e661ea25",
+          "label": "English: Complete Noun Review Worksheet",
+          "dueDate": null,
+          "workOnDate": "2026-09-29"
+        }
+      ]
     },
     {
       "key": "william",
@@ -43,13 +56,7 @@
         "balance_str": "$92.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-09-29-099286392a6b909961f5e63ae174ed202abf0bb2cd674c2921d5226932e94b10",
-          "label": "Spanish (Simon): Graded p.158",
-          "dueDate": "2026-09-29"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -285,7 +292,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken enchiladas with tomato sauce",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -293,8 +300,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Nancy's birthday: dinner out or takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -302,7 +309,7 @@
       "dow_short": "Wed",
       "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -333,19 +340,12 @@
   "weather": {
     "now": {
       "temp": 62,
-      "hi": 81,
-      "lo": 55,
+      "hi": 83,
+      "lo": 59,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "☀️",
-        "hi": 83,
-        "lo": 59,
-        "code": 0
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -373,24 +373,31 @@
         "hi": 78,
         "lo": 69,
         "code": 61
+      },
+      {
+        "d": "Sun",
+        "icon": "🌦",
+        "hi": 72,
+        "lo": 69,
+        "code": 81
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-28T07:22",
         "2026-09-29T07:22",
         "2026-09-30T07:23",
         "2026-10-01T07:24",
         "2026-10-02T07:25",
-        "2026-10-03T07:25"
+        "2026-10-03T07:25",
+        "2026-10-04T07:26"
       ],
       "sunsets": [
-        "2026-09-28T19:17",
         "2026-09-29T19:16",
         "2026-09-30T19:14",
         "2026-10-01T19:13",
         "2026-10-02T19:11",
-        "2026-10-03T19:10"
+        "2026-10-03T19:10",
+        "2026-10-04T19:09"
       ],
       "timezone": "America/New_York"
     }
@@ -1892,6 +1899,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-29T03:45:35.140Z"
+    "updatedAt": "2026-09-29T04:00:34.022Z"
   }
 }
