@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T23:45:35.401Z",
+  "generated_at": "2026-09-29T00:00:41.244Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -265,11 +265,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken enchiladas with tomato sauce",
+    "name": "Nancy's birthday: dinner out or takeout",
     "protein_g": null,
     "cal": null,
-    "effort": "medium",
-    "note": "Six-serving chicken enchiladas adapted for plain tomato sauce because canned enchilada sauce is unavailable. Season and simmer the tomato sauce; no tomato paste or chili powder needed. Check labels if avoiding peppers. Macros are uncalculated. Keep plain chicken separate before adding beans and sauce if useful.",
+    "effort": "none",
+    "note": "Proposed birthday dinner for the family; Nancy's choice of restaurant. No reservation or order made. Nutrition and exact orders unknown. No home cooking assigned.",
     "recipe": null
   },
   "mealweek": [
@@ -332,7 +332,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
+      "temp": 72,
       "hi": 81,
       "lo": 55,
       "icon": "☀️",
@@ -1835,7 +1835,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 93.3,
+    "dayPct": 96.7,
     "totalSpend": 5225.38,
     "totalBudget": 0,
     "categories": [
@@ -1892,6 +1892,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 65822.61,
     "source": "ynab",
-    "updatedAt": "2026-09-28T23:45:34.031Z"
+    "updatedAt": "2026-09-29T00:00:36.779Z"
   }
 }
