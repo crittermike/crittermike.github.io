@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World War I practice</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <script>
+    (() => {
+      const theme = new URLSearchParams(location.search).get("clawpilotTheme");
+      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #ffffff;
+      --cp-bg-elevated: #f8fafc;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f1f5f9;
+      --cp-border: #cbd5e1;
+      --cp-border-strong: #64748b;
+      --cp-text: #0f172a;
+      --cp-text-muted: #475569;
+      --cp-text-soft: #64748b;
+      --cp-accent: #0057e5;
+      --cp-accent-hover: #0046ba;
+      --cp-accent-soft: rgba(0, 87, 229, 0.10);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #15803d;
+      --cp-danger: #c62828;
+      --cp-warning: #b45309;
+      --cp-link: #0057e5;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(0, 87, 229, 0.14);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #181a1f;
+      --cp-bg-elevated: #202329;
+      --cp-surface: #22262c;
+      --cp-surface-soft: #2b3139;
+      --cp-border: #485363;
+      --cp-border-strong: #91a0b4;
+      --cp-text: #f8fafc;
+      --cp-text-muted: #c0cad8;
+      --cp-text-soft: #d8e1ed;
+      --cp-accent: #1f6feb;
+      --cp-accent-hover: #185bc4;
+      --cp-accent-soft: rgba(31, 111, 235, 0.18);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #4ade80;
+      --cp-danger: #ff6347;
+      --cp-warning: #fbbf24;
+      --cp-link: #75b4ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(24, 26, 31, 0.88);
+      --cp-panel: rgba(34, 38, 44, 0.90);
+      --cp-panel-strong: rgba(34, 38, 44, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(31, 111, 235, 0.22);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 16px/1.5 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+    .page { max-width: 736px; margin: 32px auto; padding: 0 20px; }
+    header { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 24px; }
+    h1 { font-size: 1.5rem; margin: 0 0 4px; line-height: 1.3; color: var(--cp-link); }
+    h2 { font-size: 1.35rem; line-height: 1.4; margin: 0 0 20px; }
+    h3 { font-size: 1rem; margin: 20px 0 8px; }
+    p { margin: 0 0 16px; }
+    .muted, small { color: var(--cp-text-muted); }
+    small { font-size: .82rem; }
+    button, input { font: inherit; }
+    button { background: var(--cp-surface); color: var(--cp-text); border: 1px solid var(--cp-border); border-radius: .625rem; padding: 10px 16px; cursor: pointer; min-height: 44px; }
+    button:hover:not(:disabled) { border-color: var(--cp-accent); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    button.primary { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-accent-fg); font-weight: 600; }
+    button.primary:hover:not(:disabled) { background: var(--cp-accent-hover); }
+    button.text { background: none; border: 0; padding: 8px 0; color: var(--cp-link); font-size: .85rem; text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 3px; }
+    a { color: var(--cp-link); }
+    .scores { display: flex; justify-content: space-between; gap: 20px; margin: 0 0 20px; border-top: 1px solid var(--cp-border); border-bottom: 1px solid var(--cp-border); padding: 14px 0; }
+    .scores dt { font-size: .8rem; color: var(--cp-text-muted); }
+    .scores dd { margin: 2px 0 0; font-size: 1.3rem; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--cp-link); }
+    .question { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 24px; }
+    .instruction { color: var(--cp-text-muted); font-size: .88rem; margin-top: -8px; }
+    fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+    .choices { display: grid; gap: 10px; }
+    .option { display: flex; align-items: start; gap: 12px; padding: 12px 14px; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: .625rem; cursor: pointer; }
+    .option:hover { background: var(--cp-surface-soft); }
+    .option:has(input:checked) { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .option input { width: 17px; height: 17px; margin: 4px 0 0; flex-shrink: 0; accent-color: var(--cp-accent); }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fields.single { grid-template-columns: 1fr; }
+    .fields label { font-size: .9rem; font-weight: 600; }
+    input[type="text"] { display: block; width: 100%; margin-top: 6px; border: 1px solid var(--cp-border-strong); background: var(--cp-bg-elevated); color: var(--cp-text); border-radius: .625rem; min-height: 46px; padding: 10px 12px; font-weight: 400; }
+    input::placeholder { color: var(--cp-text-muted); opacity: 1; }
+    .buttons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 24px; align-items: center; }
+    .feedback { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cp-border); }
+    .feedback .result { font-weight: 650; }
+    .correct { color: var(--cp-text); }
+    .incorrect { color: var(--cp-danger); }
+    .answer-list { padding-left: 20px; margin: 0 0 16px; }
+    .answer-list li { margin: 6px 0; }
+    .round-result { font-size: 1.5rem; font-weight: 650; }
+    .review { padding: 16px 0; border-top: 1px solid var(--cp-border); }
+    .review p:last-child { margin: 0; }
+    footer { margin-top: 20px; font-size: .82rem; color: var(--cp-text-muted); }
+    footer p { margin-bottom: 8px; }
+    footer summary { cursor: pointer; padding: 8px 0; }
+    .settings { display: flex; flex-wrap: wrap; gap: 16px; }
+    #error:empty { display: none; }
+    #error { border: 1px solid var(--cp-border-strong); border-radius: .625rem; padding: 12px 16px; margin-bottom: 20px; background: var(--cp-surface); font-size: .9rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    @media (max-width: 520px) {
+      .page { margin-top: 20px; padding: 0 16px; }
+      .question { padding: 20px 16px; }
+      h2 { font-size: 1.2rem; }
+      .fields { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div><h1>World War I practice</h1><small>Chapter 13, Section 3</small></div>
+      <button class="text" id="theme" type="button">Dark mode</button>
+    </header>
+    <div id="error" role="alert"></div>
+    <dl class="scores" aria-label="Quiz scores">
+      <div><dt>Score this round</dt><dd id="score">0 / 100</dd></div>
+      <div><dt>Question</dt><dd id="count">1 / 10</dd></div>
+      <div><dt>Total points</dt><dd id="total">0</dd></div>
+    </dl>
+    <main id="main"></main>
+    <footer>
+      <p>10 points for a correct answer. Missed questions come back later.</p>
+      <p id="stats"></p>
+      <details>
+        <summary>Saved progress</summary>
+        <p>Progress saves in this browser. Download a backup to move it to another device.</p>
+        <div class="settings">
+          <button class="text" id="export" type="button">Download backup</button>
+          <button class="text" id="import" type="button">Restore backup</button>
+          <button class="text" id="reset" type="button">Reset progress</button>
+        </div>
+      </details>
+      <details>
+        <summary>Sources</summary>
+        <p><a href="https://history.state.gov/milestones/1914-1920/wwi" target="_blank" rel="noopener noreferrer">U.S. Office of the Historian</a> &middot; <a href="https://www.iwm.org.uk/history/first-world-war/key-facts" target="_blank" rel="noopener noreferrer">Imperial War Museums</a> &middot; <a href="https://encyclopedia.1914-1918-online.net/article/brest-litovsk-treaty-of/" target="_blank" rel="noopener noreferrer">Brest-Litovsk</a></p>
+      </details>
+    </footer>
+    <input type="file" id="backup-file" accept=".json,application/json" hidden>
+    <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+    <noscript>This quiz needs JavaScript. Open this file in a browser with JavaScript enabled.</noscript>
+  </div>
+
+  <script id="quiz-core">
+  const Quiz = (() => {
+    "use strict";
+    const KEY = "wwi-practice-v1";
+    const SIZE = 10;
+    const f = (label, answers) => ({ label, answers: Array.isArray(answers) ? answers : [answers] });
+    const topic = (id, source, question, choices, note, writtenQuestion, fields, groups = []) =>
+      ({ id, source, question, choices, note, writtenQuestion, fields, groups });
+    const BRITAIN = ["Great Britain", "Britain", "British Empire", "United Kingdom", "UK"];
+    const USA = ["United States", "United States of America", "US", "USA", "America"];
+    const AUSTRIA = ["Austria-Hungary", "Austro-Hungarian Empire", "Austria Hungary"];
+    const OTTOMANS = ["Ottoman Empire", "Ottomans", "Ottoman", "Ottoman Turkey", "Turkey", "Turkish Empire"];
+    const LENIN = ["Vladimir Lenin", "Lenin", "Vladimir Ilyich Lenin", "Vladimir Ilich Lenin"];
+    const GANDHI = ["Mohandas Gandhi", "Mahatma Gandhi", "Gandhi", "Mohandas Karamchand Gandhi"];
+    const WILSON = ["Woodrow Wilson", "President Wilson", "Wilson", "Thomas Woodrow Wilson"];
+    const date = (month, day, year) => {
+      const m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(month) + 1;
+      const pad = n => String(n).padStart(2, "0");
+      const suffix = day % 100 >= 11 && day % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[day % 10] || "th");
+      return [`${month} ${day}, ${year}`, `${day} ${month} ${year}`, `${month.slice(0, 3)} ${day} ${year}`, `${day} ${month.slice(0, 3)} ${year}`, `${month} ${pad(day)} ${year}`, `${month} ${day}${suffix} ${year}`, `${day}${suffix} ${month} ${year}`, `${m}/${day}/${year}`, `${pad(m)}/${pad(day)}/${year}`, `${year}-${pad(m)}-${pad(day)}`];
+    };
+    const TOPICS = [
+      topic("allies", "Q1", "Which three major powers were Allies at the start of World War I?",
+        ["Great Britain, France, and Russia", "Germany, Austria-Hungary, and Russia", "Great Britain, Germany, and Italy", "France, the Ottoman Empire, and Bulgaria"],
+        "The Allies included Britain and its empire, France, Russia, Serbia, Belgium, and Japan. Italy joined in 1915; the United States joined in 1917.",
+        "Name the major Allies and the two countries that joined later.",
+        [f("One of the original three major Allies", BRITAIN), f("Another of the original three", "France"), f("The third original major Ally", "Russia"), f("Country that joined in 1915", "Italy"), f("Country that joined in 1917", USA)], [[0, 1, 2]]),
+      topic("central", "Q2", "Which countries were the Central Powers?",
+        ["Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria", "Germany, Austria-Hungary, Italy, and Russia", "France, Britain, Russia, and Serbia", "Germany, Japan, the Ottoman Empire, and Belgium"],
+        "The Central Powers were Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria. Italy joined the Allies in 1915.",
+        "Name all four Central Powers. Any order is fine.",
+        [f("Country or empire 1", "Germany"), f("Country or empire 2", AUSTRIA), f("Country or empire 3", OTTOMANS), f("Country or empire 4", "Bulgaria")], [[0, 1, 2, 3]]),
+      topic("gallipoli-aim", "Q3", "Why did the Allies attack Gallipoli?",
+        ["To open a supply route to Russia and knock the Ottoman Empire out of the war", "To capture Germany's colonies in Africa", "To stop Mexico from attacking the United States", "To force Japan to leave the Allies"],
+        "They wanted to control the Dardanelles, open a sea supply route to Russia, capture Constantinople, and knock the Ottoman Empire out of the war.",
+        "What did the Allies hope to achieve at Gallipoli?",
+        [f("Waterway they wanted to control", "Dardanelles"), f("Ally they wanted to supply", "Russia"), f("Empire they hoped to defeat", OTTOMANS)]),
+      topic("gallipoli-result", "Q4", "What was the result of the Gallipoli Campaign?",
+        ["The Allies failed and withdrew after heavy losses", "The Allies captured Constantinople", "The Ottoman Empire immediately surrendered", "The Allies won a quick victory with few casualties"],
+        "Strong Ottoman defenses stopped the Allied advance. The Allies evacuated in December 1915 and January 1916. The Ottomans kept control of the waterway.",
+        "What happened at the end of the Gallipoli Campaign?",
+        [f("Winning side", OTTOMANS), f("Was the Allied campaign a success or failure?", ["failure", "failed", "a failure", "defeat"]), f("Final evacuation month, in 1916", ["January", "Jan"])]),
+      topic("colonies", "Q5", "What happened to Germany's colonies in Africa and Asia?",
+        ["Allied powers attacked and took over them", "Germany kept them all throughout and after the war", "All immediately became independent in 1914", "Germany traded them to Russia for peace"],
+        "Japan captured Germany's base in China and islands in the Pacific. British, French, and other Allied forces occupied German territories in Africa. Germany lost its colonies after the war.",
+        "Who took over Germany's overseas possessions?",
+        [f("Asian power that captured Germany's base in China", "Japan"), f("Coalition that attacked Germany's colonies", ["Allies", "Allied Powers", "the Allies"])]),
+      topic("india", "Q6", "Why did India fight in World War I?",
+        ["Britain ruled India; many Indian leaders hoped helping Britain would lead to self-government", "India was already independent and wanted German territory", "Germany had promised India land in the United States", "India ruled Britain and ordered it to fight"],
+        "India was under British rule, and its troops served in the British Empire's war effort. Many Indian leaders hoped this would lead to self-government, but immediate independence was not guaranteed.",
+        "Explain India's wartime position with two short answers.",
+        [f("Country that ruled India", BRITAIN), f("Political freedom many Indian leaders hoped to gain", ["self-government", "self-rule", "home rule", "independence", "autonomy", "freedom", "swaraj"])]),
+      topic("gandhi", "Q7 + important people", "Who was Mohandas Gandhi?",
+        ["An Indian independence leader known for nonviolent resistance", "The German emperor who stepped down in 1918", "The U.S. president when America entered the war", "The Bolshevik leader who took over Russia"],
+        "Gandhi was an Indian independence leader known for nonviolent resistance. During World War I he supported Britain's war effort, hoping cooperation would help Indians gain greater rights and self-government.",
+        "Name the Indian independence leader who supported Britain's war effort and his approach to resistance.",
+        [f("Leader", GANDHI), f("Method of resistance", ["nonviolent resistance", "nonviolence", "non-violence", "peaceful resistance", "nonviolent protest", "peaceful protest", "nonviolent civil disobedience", "satyagraha"])]),
+      topic("submarines", "Q8", "What was unrestricted submarine warfare?",
+        ["Sinking ships in declared war zones without warning, including neutral shipping", "Attacking only enemy warships after giving a warning", "Giving all passengers time to escape before any attack", "Banning submarines from attacking merchant ships"],
+        "Germany used U-boats, or submarines, to attack ships without warning in declared war zones. Merchant ships, passengers, and neutral shipping were at risk.",
+        "Name the German naval policy and the vessels used.",
+        [f("Policy of attacking shipping without warning", ["unrestricted submarine warfare", "unrestricted U-boat warfare", "unrestricted submarine attacks"]), f("German name for its submarines", ["U-boats", "U-boat", "U boats", "Uboats"])]),
+      topic("lusitania", "Q9", "What happened to the Lusitania?",
+        ["A German U-boat sank the British passenger liner in 1915, killing nearly 1,200 people", "It was sunk after the November 1918 armistice", "It transported Lenin to the peace negotiations", "Its sinking caused the United States to declare war the next day"],
+        "The Lusitania was sunk on May 7, 1915. Nearly 1,200 people died, including 128 Americans. Americans were outraged, but the United States did not enter the war until April 1917.",
+        "Give the details of the British passenger liner sunk by a German submarine.",
+        [f("Ship's name", "Lusitania"), f("Date it was sunk: month, day, year", date("May", 7, 1915)), f("Number of Americans killed", ["128", "one hundred twenty eight", "one hundred and twenty eight"])]),
+      topic("zimmermann", "Q10", "What did the Zimmermann Telegram propose?",
+        ["A German-Mexican alliance against the United States, with help recovering lost territory", "A treaty for Russia to leave the war", "A British offer of immediate independence for India", "An American plan to conquer Germany's colonies"],
+        "Germany proposed an alliance with Mexico against the U.S. if the U.S. entered the war. Germany offered help regaining Texas, New Mexico, and Arizona. Britain intercepted the message.",
+        "Which country did Germany approach, and which three U.S. states were named in the offer?",
+        [f("Proposed partner", "Mexico"), f("State 1", ["Texas", "TX"]), f("State 2", ["New Mexico", "NM"]), f("State 3", ["Arizona", "AZ"])], [[1, 2, 3]]),
+      topic("us-entry", "Q11", "What were the two main reasons the United States entered World War I?",
+        ["Renewed unrestricted submarine warfare and the Zimmermann Telegram", "Gallipoli and India's independence", "Russia's invasion of the U.S. and Germany's surrender", "The armistice and the Treaty of Brest-Litovsk"],
+        "German submarine attacks threatened U.S. lives and shipping. The Zimmermann Telegram proposed an alliance against the U.S. Wilson also argued for defending democracy.",
+        "Name the two main triggers for U.S. entry into the war.",
+        [f("German naval policy", ["unrestricted submarine warfare", "unrestricted U-boat warfare", "unrestricted submarine attacks"]), f("German message proposing an alliance against the U.S.", ["Zimmermann Telegram", "Zimmerman Telegram", "Zimmermann note", "Zimmerman note"])]),
+      topic("total-war", "Q12", "What was total war?",
+        ["Using a nation's whole economy and society to support the war effort", "A war fought only by professional soldiers", "Every nation fighting on the same side", "A war settled by one short battle"],
+        "Governments directed factories, workers, food, fuel, and money toward the war effort. Civilians as well as soldiers were involved and affected.",
+        "What term describes mobilizing an entire economy and society for war?",
+        [f("Term", "total war"), f("General term for people outside the armed forces who were also involved", ["civilians", "civilian population", "civilian"])]),
+      topic("rationing", "Q13", "What was rationing?",
+        ["Limiting how much of a scarce item each person could buy or use", "Using posters to shape public opinion", "Recruiting soldiers from colonies", "Borrowing money without limits"],
+        "Rationing conserved scarce supplies and helped divide them among the population. Food and fuel were examples of goods that could be rationed.",
+        "Name the policy and two broad categories of goods it limited.",
+        [f("Policy limiting purchases of scarce supplies", "rationing"), f("General category of things people eat", ["food", "foods"]), f("General category of things burned for heat or energy", ["fuel", "fuels"])]),
+      topic("propaganda", "Q14", "What was propaganda?",
+        ["Information intended to influence beliefs and actions, often one-sided", "A rule limiting food purchases", "Only information that is completely false", "A neutral list of facts with no persuasive purpose"],
+        "Governments used posters, films, and newspapers to encourage enlistment, conservation, war-bond purchases, and support for the war. Propaganda can be misleading without being entirely false.",
+        "What is the term for information designed to influence public beliefs and actions?",
+        [f("Term", "propaganda")]),
+      topic("women", "Q15", "How did women contribute to the war effort?",
+        ["Factory work, farming, transportation, nursing, ambulance driving, and work at home", "They did not take jobs outside their homes", "They made up most front-line infantry troops", "They were kept entirely outside the war effort"],
+        "Women filled jobs left by men who went to war. They worked in weapons factories, farms, offices, and transportation, and served as nurses, ambulance drivers, and volunteers.",
+        "Give three examples of women's wartime work.",
+        [f("One product made in weapons factories", ["weapons", "ammunition", "munitions", "shells", "guns", "bullets", "bombs"]), f("Medical-care job many performed", ["nurse", "nurses", "nursing"]), f("Job driving an emergency medical vehicle", ["ambulance driver", "ambulance drivers", "ambulance driving"])]),
+      topic("russia-withdrawal", "Q16", "Why did Russia withdraw from the war?",
+        ["Defeats, casualties, shortages, and revolution made continued fighting unsustainable", "Russia had conquered Germany and won the war", "The United States forced Russia to fight Mexico instead", "Russia had become an Ottoman colony"],
+        "Military defeats, huge casualties, and food and fuel shortages caused unrest and revolution. Lenin's new government wanted peace so it could deal with problems at home.",
+        "Name the two major basic-supply shortages and the new Russian leader who wanted peace.",
+        [f("One shortage", "food"), f("The other shortage", ["fuel", "coal"]), f("Leader", LENIN)], [[0, 1]]),
+      topic("russia-takeover", "Q17 + important people", "Who took power in Russia in November 1917?",
+        ["Vladimir Lenin and the Bolsheviks", "Woodrow Wilson and the U.S. Congress", "Nicholas II and a new royal army", "Kaiser Wilhelm II and the German navy"],
+        "Nicholas II abdicated in March 1917. A temporary government replaced him. In November, Lenin and the Bolsheviks, a communist group, seized power.",
+        "Who seized power in Russia after the temporary government?",
+        [f("Leader", LENIN), f("Political group", ["Bolsheviks", "Bolshevik Party", "Bolshevik", "Communists", "Communist Party"]), f("Year", "1917")]),
+      topic("brest", "Q18", "What was the Treaty of Brest-Litovsk?",
+        ["A peace treaty between Russia and the Central Powers that took Russia out of the war", "The November 1918 agreement stopping fighting on the Western Front", "The U.S. declaration of war on Germany", "A German-Mexican agreement to invade the United States"],
+        "Signed March 3, 1918, the treaty ended Russia's participation but cost it large amounts of land, population, and resources. Germany could move more troops to the Western Front.",
+        "Name the treaty that took Russia out of the war, the other side, and the year.",
+        [f("Treaty", ["Treaty of Brest-Litovsk", "Brest-Litovsk", "Brest Litovsk treaty"]), f("Coalition that signed opposite Russia", ["Central Powers", "the Central Powers"]), f("Year", "1918")]),
+      topic("collapse", "Q19", "Why did the Central Powers collapse?",
+        ["Allied advances, shortages, unrest, and exhausted armies", "They had unlimited food and strong new allies", "Russia rejoined the fighting in late 1918", "Germany had successfully invaded the United States"],
+        "Fresh U.S. troops and supplies strengthened Allied attacks. Blockades worsened shortages, morale fell, and rebellions spread. Bulgaria, the Ottoman Empire, and Austria-Hungary stopped fighting, leaving Germany isolated.",
+        "Identify three factors in Germany's position at the end of the war.",
+        [f("Country whose fresh troops strengthened the Allies", USA), f("Naval tactic that cut off imports", ["blockade", "blockades", "naval blockade", "British blockade", "Allied blockade"]), f("Agreement Germany sought to stop fighting", ["armistice", "ceasefire", "cease-fire"])]),
+      topic("armistice", "Q20 + important dates", "What happened on November 11, 1918?",
+        ["The armistice stopped fighting on the Western Front at 11 a.m.", "Wilson asked Congress for a declaration of war", "Russia signed the Treaty of Brest-Litovsk", "The United States entered World War I"],
+        "An armistice is an agreement to stop fighting. The November 11 armistice ended fighting on the Western Front; formal peace treaties came later.",
+        "When did the fighting stop on the Western Front, and what was the agreement called?",
+        [f("Date: month, day, year", date("November", 11, 1918)), f("Time of day", ["11 a.m.", "11am", "11", "11:00", "11:00 am", "eleven am", "eleven in the morning"]), f("Term for the agreement", "armistice")]),
+      topic("costs", "Q21", "What were some effects of World War I?",
+        ["Mass death and injury, destruction, debt, and lasting grief", "Only soldiers were affected", "Immediate prosperity with no rebuilding costs", "Very little long-term damage"],
+        "Millions of soldiers and civilians died, and millions more were wounded. Towns, farms, and factories were destroyed. Countries owed huge debts, while survivors faced grief, disability, and emotional trauma.",
+        "Name the effects described below.",
+        [f("Money governments owed after paying for the war", ["debt", "debts", "war debt", "national debt"]), f("Lasting psychological harm suffered by survivors", ["trauma", "emotional trauma", "psychological trauma", "shell shock", "PTSD", "post traumatic stress"]), f("Places that manufactured goods and were destroyed", ["factories", "factory", "industrial factories"])]),
+      topic("technology", "Q22", "Which technologies were associated with World War I?",
+        ["Machine guns, artillery, poison gas, tanks, airplanes, and submarines", "Nuclear bombs, satellites, and drones", "Only swords, bows, and shields", "Jet fighters and guided ballistic missiles"],
+        "Some weapons existed before the war, but their widespread use made the fighting much more destructive. Tanks, aircraft, submarines, machine guns, artillery, and chemical weapons all played important roles.",
+        "Name each type of military technology.",
+        [f("Armored land vehicles", ["tanks", "tank"]), f("Underwater warships", ["submarines", "submarine", "U-boats", "U boats"]), f("Chemical weapon", ["poison gas", "poisonous gas", "gas", "mustard gas", "chlorine gas"]), f("Rapid-fire bullet weapons", ["machine guns", "machine gun"]), f("Aircraft used for observation and combat", ["airplanes", "airplane", "planes", "aeroplanes", "aircraft"]), f("Large guns firing shells", ["artillery", "heavy artillery", "cannons", "cannon"])]),
+      topic("lasting", "Q23", "What lasting effects did the war have on Europe?",
+        ["Empires fell, borders changed, economies weakened, and tensions remained", "All the same empires and borders remained intact", "All international rivalries disappeared", "Europe avoided debt and social change"],
+        "The Russian, German, Austro-Hungarian, and Ottoman empires fell. New countries and borders appeared. Anger over peace settlements and unresolved rivalries later helped lead to World War II.",
+        "Name the four fallen empires, then the later world war that unresolved tensions helped cause.",
+        [f("Empire 1", ["Russian Empire", "Russia", "Russian"]), f("Empire 2", ["German Empire", "Germany", "German"]), f("Empire 3", AUSTRIA), f("Empire 4", OTTOMANS), f("Later world war", ["World War II", "World War 2", "WWII", "WW2", "Second World War"])], [[0, 1, 2, 3]]),
+      topic("wilson", "Important people", "Who was the U.S. president when America entered World War I?",
+        ["Woodrow Wilson", "Theodore Roosevelt", "Franklin D. Roosevelt", "Abraham Lincoln"],
+        "Woodrow Wilson asked Congress for a declaration of war in April 1917. He argued that the United States should help protect democracy.",
+        "Name the U.S. president and the system of government he said the war should help protect.",
+        [f("President", WILSON), f("System of government", ["democracy", "democratic government"])]),
+      topic("nicholas", "Important people", "Which Russian ruler stepped down during the shortages and revolution of 1917?",
+        ["Czar Nicholas II", "Vladimir Lenin", "Kaiser Wilhelm II", "Woodrow Wilson"],
+        "Czar Nicholas II abdicated in March 1917 amid wartime shortages, defeats, and revolution. A temporary government ruled before Lenin and the Bolsheviks took over.",
+        "Name Russia's ruler who stepped down and the term for giving up a throne.",
+        [f("Ruler", ["Czar Nicholas II", "Tsar Nicholas II", "Nicholas II", "Nicholas 2", "Czar Nicholas", "Tsar Nicholas", "Nicholas"]), f("Term for giving up a throne", ["abdicate", "abdication", "abdicated", "abdicating"])]),
+      topic("kaiser", "Important people", "Who was the German leader who lost his throne shortly before the armistice?",
+        ["Kaiser Wilhelm II", "Czar Nicholas II", "Vladimir Lenin", "Woodrow Wilson"],
+        "Kaiser Wilhelm II was Germany's emperor. He lost his throne in November 1918, just before the armistice.",
+        "Name the German emperor and the month he lost his throne in 1918.",
+        [f("Emperor", ["Kaiser Wilhelm II", "Wilhelm II", "Wilhelm 2", "Kaiser Wilhelm", "Wilhelm", "William II"]), f("Month", ["November", "Nov"])]),
+      topic("request-date", "Important dates", "When did Wilson ask Congress to declare war on Germany?",
+        ["April 2, 1917", "April 6, 1917", "May 7, 1915", "November 11, 1918"],
+        "On April 2, 1917, Wilson asked Congress to declare war on Germany. The United States formally declared war on April 6, 1917.",
+        "Give the date of Wilson's REQUEST to Congress, not the declaration.",
+        [f("Month, day, and year", date("April", 2, 1917))]),
+      topic("declaration-date", "Important dates", "When did the United States formally declare war on Germany?",
+        ["April 6, 1917", "April 2, 1917", "May 7, 1915", "November 11, 1918"],
+        "The U.S. formally declared war on Germany on April 6, 1917. April 2 was the date Wilson asked Congress for war.",
+        "Give the date the United States FORMALLY DECLARED WAR on Germany.",
+        [f("Month, day, and year", date("April", 6, 1917))]),
+    ];
+    const BY_ID = Object.fromEntries(TOPICS.map(t => [t.id, t]));
+    const validId = id => typeof id === "string" && Object.hasOwn(BY_ID, id);
+    const integer = (n, min = 0, max = 10000000) => Number.isInteger(n) && n >= min && n <= max;
+    const normalize = text => String(text).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim().replace(/^the\s+/, "").replace(/[^a-z0-9]/g, "");
+    function oneTypo(a, b) {
+      if (!/^[a-z]+$/.test(a) || !/^[a-z]+$/.test(b) || b.length < 7 || Math.abs(a.length - b.length) > 1) return false;
+      let i = 0, j = 0, edits = 0;
+      while (i < a.length && j < b.length) {
+        if (a[i] === b[j]) { i++; j++; continue; }
+        if (++edits > 1) return false;
+        if (a.length === b.length && a[i] === b[j + 1] && a[i + 1] === b[j]) { i += 2; j += 2; continue; }
+        if (a.length >= b.length) i++;
+        if (b.length >= a.length) j++;
+      }
+      return edits + a.length - i + b.length - j <= 1;
+    }
+    const accepts = (value, aliases) => {
+      const actual = normalize(value);
+      return actual.length > 0 && aliases.some(alias => actual === normalize(alias) || oneTypo(actual, normalize(alias)));
+    };
+    function writtenCorrect(t, values) {
+      if (!Array.isArray(values) || values.length !== t.fields.length || !values.every(v => typeof v === "string" && v.trim() && v.length <= 160)) return false;
+      const checked = t.fields.map((field, i) => accepts(values[i], field.answers));
+      for (const group of t.groups) {
+        // A country may match any slot in its group, but cannot be used twice.
+        function match(position, used) {
+          if (position === group.length) return true;
+          for (const index of group) if (!used.has(index) && accepts(values[group[position]], t.fields[index].answers)) {
+            used.add(index);
+            if (match(position + 1, used)) return true;
+            used.delete(index);
+          }
+          return false;
+        }
+        const matched = match(0, new Set());
+        group.forEach(i => { checked[i] = matched; });
+      }
+      return checked.every(Boolean);
+    }
+    const initial = () => ({
+      version: 1, turn: 0, correct: 0, best: 0, serial: 0, round: [], recent: [], pending: null, theme: null,
+      progress: Object.fromEntries(TOPICS.map(t => [t.id, { attempts: 0, correct: 0, written: 0, review: false, reviewMode: "choice", due: 0, last: -1 }])),
+    });
+    const roundScore = state => state.round.filter(r => r.correct).length * 10;
+    function validate(state) {
+      if (!state || state.version !== 1 || !state.progress || Object.keys(state.progress).length !== TOPICS.length) throw new Error("This is not a compatible quiz backup.");
+      if (!integer(state.turn) || !integer(state.correct, 0, state.turn) || !integer(state.best, 0, 100) || state.best % 10 || !integer(state.serial)) throw new Error("Invalid saved score.");
+      if (![null, "light", "dark"].includes(state.theme) || !Array.isArray(state.recent) || state.recent.length > 3 || !state.recent.every(validId)) throw new Error("Invalid saved settings.");
+      if (!Array.isArray(state.round) || state.round.length > SIZE || !state.round.every(r => r && validId(r.id) && typeof r.correct === "boolean" && ["choice", "written"].includes(r.mode))) throw new Error("Invalid saved round.");
+      let attempts = 0, correct = 0;
+      for (const t of TOPICS) {
+        const p = state.progress[t.id];
+        if (!p || !integer(p.attempts) || !integer(p.correct, 0, p.attempts) || !integer(p.written, 0, p.correct) || !integer(p.due, 0, state.turn + 3) || !integer(p.last, -1, state.turn) || typeof p.review !== "boolean" || !["choice", "written"].includes(p.reviewMode)) throw new Error("Invalid saved topic progress.");
+        attempts += p.attempts; correct += p.correct;
+      }
+      if (attempts !== state.turn || correct !== state.correct || state.round.length > state.turn) throw new Error("Saved totals do not match the answers.");
+      if (state.pending !== null) {
+        const q = state.pending;
+        if (!q || !validId(q.id) || !["choice", "written"].includes(q.mode) || !integer(q.serial, 1, state.serial) || typeof q.submitted !== "boolean") throw new Error("Invalid saved question.");
+        if (!Array.isArray(q.order) || q.order.length !== 4 || new Set(q.order).size !== 4 || !q.order.every(i => integer(i, 0, 3))) throw new Error("Invalid saved answer order.");
+        if (!q.answer || !(q.answer.choice === null || integer(q.answer.choice, 0, 3)) || !Array.isArray(q.answer.values) || q.answer.values.length !== BY_ID[q.id].fields.length || !q.answer.values.every(v => typeof v === "string" && v.length <= 160)) throw new Error("Invalid saved answer.");
+        if (q.submitted && (typeof q.right !== "boolean" || state.round.at(-1)?.id !== q.id || state.round.at(-1)?.correct !== q.right)) throw new Error("Invalid saved result.");
+        if (!q.submitted && (q.right !== null || state.round.length >= SIZE)) throw new Error("Invalid unanswered question.");
+      }
+      return state;
+    }
+    function next(state, random = Math.random) {
+      if (state.pending) return state.pending;
+      if (state.round.length >= SIZE) return null;
+      const eligible = TOPICS.filter(t => state.progress[t.id].due <= state.turn && !state.recent.includes(t.id));
+      const reviews = eligible.filter(t => state.progress[t.id].review);
+      const pool = reviews.length && state.turn % 3 === 0 ? reviews : eligible;
+      if (!pool.length) throw new Error("No question is available. Download a backup and reload.");
+      const sorted = pool.map(t => ({ t, tie: random() })).sort((a, b) =>
+        state.progress[a.t.id].attempts - state.progress[b.t.id].attempts ||
+        state.progress[a.t.id].last - state.progress[b.t.id].last || a.tie - b.tie);
+      const t = sorted[0].t, p = state.progress[t.id];
+      const mode = p.review ? p.reviewMode : p.correct === 0 ? "choice" : p.written === 0 || random() < .5 ? "written" : "choice";
+      const order = [0, 1, 2, 3];
+      for (let i = 3; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+      state.pending = { id: t.id, mode, serial: ++state.serial, order, answer: { choice: null, values: t.fields.map(() => "") }, submitted: false, right: null };
+      return state.pending;
+    }
+    const complete = q => q.mode === "choice" ? integer(q.answer.choice, 0, 3) : q.answer.values.every(v => v.trim().length > 0);
+    function submit(state, serial, skip = false) {
+      const q = state.pending;
+      if (!q || q.serial !== serial || q.submitted) throw new Error("This answer has already been counted.");
+      if (!skip && !complete(q)) throw new Error("Fill in the answer first.");
+      q.right = !skip && (q.mode === "choice" ? q.answer.choice === 0 : writtenCorrect(BY_ID[q.id], q.answer.values));
+      q.submitted = true;
+      state.turn++;
+      if (q.right) state.correct++;
+      const p = state.progress[q.id];
+      p.attempts++;
+      if (q.right) { p.correct++; if (q.mode === "written") p.written++; }
+      p.review = !q.right;
+      p.reviewMode = q.mode;
+      p.last = state.turn;
+      p.due = state.turn + 3;
+      state.recent = [...state.recent, q.id].slice(-3);
+      state.round.push({ id: q.id, mode: q.mode, correct: q.right });
+      if (state.round.length === SIZE) state.best = Math.max(state.best, roundScore(state));
+      return q.right;
+    }
+    function advance(state) {
+      if (!state.pending?.submitted) throw new Error("Answer this question before continuing.");
+      state.pending = null;
+    }
+    function newRound(state) {
+      if (state.round.length !== SIZE) throw new Error("Finish the current round first.");
+      state.round = []; state.pending = null;
+    }
+    return { KEY, SIZE, TOPICS, BY_ID, initial, validate, accepts, writtenCorrect, next, complete, submit, advance, newRound, roundScore };
+  })();
+  </script>
+  <script id="quiz-ui">
+  (() => {
+    "use strict";
+    const Q = Quiz, $ = id => document.getElementById(id);
+    const escape = value => String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    let state, storageError = "", message = "", canSave = true;
+    try {
+      const stored = localStorage.getItem(Q.KEY);
+      state = stored === null ? Q.initial() : Q.validate(JSON.parse(stored));
+    } catch (error) {
+      state = Q.initial(); canSave = false;
+      storageError = `Saved progress could not be loaded. Nothing was overwritten. ${error.message} Restore a backup or use Reset progress.`;
+    }
+    const explicit = new URLSearchParams(location.search).get("clawpilotTheme");
+    if (!["light", "dark"].includes(explicit) && state.theme) document.documentElement.dataset.theme = state.theme;
+    function showError() { $("error").textContent = [storageError, message].filter(Boolean).join(" "); }
+    function save() {
+      if (canSave) {
+        try { localStorage.setItem(Q.KEY, JSON.stringify(state)); }
+        catch (error) { canSave = false; storageError = `Autosave is unavailable: ${error.message} Use Download backup to keep your progress.`; }
+      }
+      showError();
+    }
+    function themeLabel() { $("theme").textContent = document.documentElement.dataset.theme === "dark" ? "Light mode" : "Dark mode"; }
+    function scores() {
+      $("score").textContent = `${Q.roundScore(state)} / 100`;
+      $("count").textContent = `${state.pending?.submitted || !state.pending ? state.round.length : state.round.length + 1} / 10`;
+      $("total").textContent = String(state.correct * 10);
+      $("stats").textContent = `Best round: ${state.best}/100. Topics practiced: ${Q.TOPICS.filter(t => state.progress[t.id].attempts > 0).length}/28.`;
+    }
+    function answerList(t, mode) {
+      if (mode === "choice") return `<p><b>Answer:</b> ${escape(t.choices[0])}</p>`;
+      return `<ul class="answer-list">${t.fields.map(f => `<li><b>${escape(f.label)}:</b> ${escape(f.answers[0])}</li>`).join("")}</ul>`;
+    }
+    function render(focus = false) {
+      const q = Q.next(state);
+      if (!q) {
+        const missed = [...new Set(state.round.filter(r => !r.correct).map(r => r.id))];
+        $("main").innerHTML = `<section class="question"><h2>Round finished</h2><p class="round-result">${state.round.filter(r => r.correct).length} of 10 correct</p><p>${Q.roundScore(state)} points this round. ${state.correct * 10} total points.</p><button class="primary" id="new-round" type="button">Next 10 questions</button>${missed.length ? `<h3>Answers to review</h3>${missed.map(id => `<div class="review"><p><b>${escape(Q.BY_ID[id].question)}</b></p><p>${escape(Q.BY_ID[id].note)}</p></div>`).join("")}` : ""}</section>`;
+      } else {
+        const t = Q.BY_ID[q.id];
+        const options = q.mode === "choice"
+          ? `<fieldset class="choices" aria-labelledby="question-title">${q.order.map(i => `<label class="option"><input type="radio" name="answer" value="${i}" ${q.answer.choice === i ? "checked" : ""}><span>${escape(t.choices[i])}</span></label>`).join("")}</fieldset>`
+          : `<div class="fields ${t.fields.length === 1 ? "single" : ""}">${t.fields.map((f, i) => `<label for="answer-${i}">${escape(f.label)}<input type="text" id="answer-${i}" data-field="${i}" value="${escape(q.answer.values[i])}" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Your answer"></label>`).join("")}</div>`;
+        $("main").innerHTML = `<section class="question"><h2 id="question-title">${escape(q.mode === "choice" ? t.question : t.writtenQuestion)}</h2>${q.submitted
+          ? `<div class="feedback" style="margin-top:0;padding-top:0;border:0"><p class="result ${q.right ? "correct" : "incorrect"}">${q.right ? "Correct. +10 points." : "Incorrect. No points."}</p>${answerList(t, q.mode)}<p>${escape(t.note)}</p><button class="primary" id="next" type="button">${state.round.length === 10 ? "See results" : "Next question"}</button></div>`
+          : `<p class="instruction">${q.mode === "choice" ? "Choose one answer." : `Use short answers. Capitalization and punctuation don't matter.${t.groups.length ? " The grouped lists can be in any order." : ""}`}</p><form id="answer-form">${options}<div class="buttons"><button class="primary" id="check" type="submit" ${Q.complete(q) ? "" : "disabled"}>Check answer</button><button id="skip" type="button">I don't know</button></div></form>`}</section>`;
+      }
+      scores(); themeLabel(); save();
+      if (focus) {
+        const heading = $("main").querySelector("h2");
+        heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    }
+    function check(skip = false) {
+      const right = Q.submit(state, state.pending.serial, skip);
+      save(); render(true);
+      $("status").textContent = right ? "Correct. Ten points added." : "Incorrect. The answer is shown below.";
+    }
+    function act(callback) {
+      try { message = ""; callback(); showError(); }
+      catch (error) { message = error.message; showError(); }
+    }
+    $("main").addEventListener("submit", event => {
+      event.preventDefault(); act(() => check());
+    });
+    $("main").addEventListener("input", event => {
+      const q = state.pending;
+      if (!q || q.submitted) return;
+      if (event.target.name === "answer") q.answer.choice = Number(event.target.value);
+      else if (event.target.dataset.field !== undefined) q.answer.values[Number(event.target.dataset.field)] = event.target.value;
+      else return;
+      $("check").disabled = !Q.complete(q);
+      save();
+    });
+    $("main").addEventListener("click", event => {
+      const id = event.target.closest("button")?.id;
+      if (id === "skip") act(() => check(true));
+      else if (id === "next") act(() => { Q.advance(state); render(true); });
+      else if (id === "new-round") act(() => { Q.newRound(state); render(true); });
+    });
+    $("theme").addEventListener("click", () => {
+      state.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = state.theme; themeLabel(); save();
+    });
+    $("reset").addEventListener("click", () => {
+      if (!window.confirm("Reset all quiz scores and question history? Download a backup first if you want to keep them.")) return;
+      const theme = state.theme; state = Q.initial(); state.theme = theme;
+      canSave = true; storageError = ""; message = ""; render(true);
+    });
+    $("export").addEventListener("click", () => act(() => {
+      const url = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: "application/json" }));
+      const a = document.createElement("a");
+      a.href = url; a.download = "wwi-practice-progress.json"; document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    }));
+    $("import").addEventListener("click", () => $("backup-file").click());
+    $("backup-file").addEventListener("change", async event => {
+      const file = event.target.files[0]; if (!file) return;
+      try {
+        if (file.size > 1024 * 1024) throw new Error("Choose a quiz backup smaller than 1 MB.");
+        const restored = Q.validate(JSON.parse(await file.text()));
+        if (!window.confirm("Replace the current quiz progress with this backup?")) return;
+        state = restored; canSave = true; storageError = ""; message = "";
+        if (state.theme && !["light", "dark"].includes(explicit)) document.documentElement.dataset.theme = state.theme;
+        render(true);
+      } catch (error) { message = `Backup not restored: ${error.message}`; showError(); }
+      finally { event.target.value = ""; }
+    });
+    window.addEventListener("storage", event => {
+      if (event.key !== Q.KEY) return;
+      canSave = false;
+      storageError = "Another tab changed your quiz progress. Autosave here is paused. Reload to use the other tab's progress, or download this tab's progress as a backup.";
+      showError();
+    });
+    act(() => render());
+  })();
+  </script>
+</body>
+</html>
