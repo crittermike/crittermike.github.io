@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T19:45:35.201Z",
+  "generated_at": "2026-09-29T20:00:40.381Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -57,6 +57,18 @@
       },
       "guineaPig": null,
       "assignments": [
+        {
+          "id": "sch-work-on-2026-09-29-b443f8eebb9d5b5b3eb015abd8eadce495f0ce57b928fc88bdf0f8e9b3ee5158",
+          "label": "Spanish (Simon): Read textbook p.234",
+          "dueDate": null,
+          "workOnDate": "2026-09-29"
+        },
+        {
+          "id": "sch-work-on-2026-09-29-4640d8a05ee0daa0d562a0e94256355ee82ead8b724b3551affc79c37eec71e4",
+          "label": "Spanish (Simon): answer activity 19",
+          "dueDate": null,
+          "workOnDate": "2026-09-29"
+        },
         {
           "id": "sch-2026-09-30-e9733fcb25d325af278af363590da516d87951b81463e9016135afd5be70cf80",
           "label": "Spanish (Simon): Answer textbook activity 4 on p.243 (Responde el libro act. 4 p.243)",
@@ -1905,6 +1917,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 69594.21,
     "source": "ynab",
-    "updatedAt": "2026-09-29T19:45:33.910Z"
+    "updatedAt": "2026-09-29T20:00:39.070Z"
   }
 }
