@@ -7,12 +7,13 @@ import { promisify } from 'node:util';
 import { AppError } from './jev.mjs';
 
 export const SOURCE_REPO = 'github/slack-emoji';
-export const DATA_DIR = fileURLToPath(new URL('.local/', import.meta.url));
+export const DATA_DIR = process.env.BUFO_DATA_DIR ? resolve(process.env.BUFO_DATA_DIR) : fileURLToPath(new URL('.local/', import.meta.url));
 const MAX_IMAGE_BYTES = 8_000_000;
 const TYPES = { png: 'image/png', gif: 'image/gif', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' };
 const execFileAsync = promisify(execFile);
 
 export async function githubApi(endpoint, raw = false) {
+  if (process.env.BUFO_GITHUB_TOKEN) return githubHttpApi(process.env.BUFO_GITHUB_TOKEN)(endpoint, raw);
   try {
     const { stdout } = await execFileAsync('gh', [
       'api', endpoint,
@@ -27,6 +28,46 @@ export async function githubApi(endpoint, raw = false) {
         : 'GitHub access failed. Run gh auth status and check access to the emoji source repo.',
       'GITHUB_ACCESS', limited ? 60 : 0);
   }
+}
+
+export function githubHttpApi(token, fetchImpl = fetch) {
+  return async (endpoint, raw = false) => {
+    if (!new RegExp(`^repos/${SOURCE_REPO}/git/(?:trees|blobs)/[a-zA-Z0-9]+(?:\\?recursive=1)?$`).test(endpoint)) {
+      throw new AppError(400, 'Unsupported GitHub source request.', 'INVALID_SOURCE');
+    }
+    let response;
+    try {
+      response = await fetchImpl(`https://api.github.com/${endpoint}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28'
+        },
+        signal: AbortSignal.timeout(25_000),
+        redirect: 'error'
+      });
+    } catch {
+      throw new AppError(503, 'The emoji source is unreachable. Try again shortly.', 'GITHUB_ACCESS');
+    }
+    if (!response.ok) {
+      await response.body?.cancel();
+      throw new AppError(503, 'The emoji source is unavailable. The app owner needs to check GitHub access.', 'GITHUB_ACCESS');
+    }
+    const chunks = [];
+    let size = 0;
+    try {
+      for await (const chunk of response.body) {
+        size += chunk.length;
+        if (size > 16_000_000) throw new AppError(502, 'The emoji source response is too large.', 'INVALID_SOURCE');
+        chunks.push(chunk);
+      }
+      const bytes = Buffer.concat(chunks);
+      return raw ? bytes : JSON.parse(bytes.toString('utf8'));
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      throw new AppError(502, 'The emoji source returned an invalid response.', 'INVALID_SOURCE');
+    }
+  };
 }
 
 function assertTree(tree) {
@@ -145,7 +186,8 @@ export function imageType(bytes) {
 
 function validImage(bytes, entry) {
   const sha = createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
-  return bytes.length === entry.size && sha === entry.sha && imageType(bytes) === TYPES[entry.extension];
+  // Some canonical .png filenames contain WebP images.
+  return bytes.length === entry.size && sha === entry.sha && imageType(bytes) !== null;
 }
 
 export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {}) {
@@ -200,7 +242,7 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
           console.warn('Repairing an invalid locally cached emoji image.');
           await unlink(path);
         } else {
-          return { bytes, type: TYPES[entry.extension] };
+          return { bytes, type: imageType(bytes) };
         }
       } catch (error) {
         if (error.code !== 'ENOENT') throw error;
@@ -208,7 +250,8 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
       if (!inFlight.has(entry.sha)) {
         inFlight.set(entry.sha, download(entry).finally(() => inFlight.delete(entry.sha)));
       }
-      return { bytes: await inFlight.get(entry.sha), type: TYPES[entry.extension] };
+      const bytes = await inFlight.get(entry.sha);
+      return { bytes, type: imageType(bytes) };
     }
   };
 }
@@ -216,7 +259,7 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     const catalog = await syncCatalog();
-    console.log(`Synced ${catalog.emojis.length} emoji names to bufo/.local/catalog.json. Images download on demand.`);
+    console.log(`Synced ${catalog.emojis.length} emoji names to the private cache. Images download on demand.`);
     console.log('This private catalog and its images must not be committed or publicly deployed.');
   } catch (error) {
     console.error(error instanceof AppError ? error.message : 'Could not write the local catalog. Check local file permissions.');

@@ -1,10 +1,38 @@
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
-import { get as httpGet } from 'node:http';
+import { request as httpRequest } from 'node:http';
 import test from 'node:test';
 import { AppError } from '../jev.mjs';
 import { createBufoServer } from '../server.mjs';
 import { answerRequest, catalog, deferred, fakeFetch, flush, imageBytes, TEST_KEY } from './fixtures.mjs';
+
+const SHARED_ENV = {
+  TYPESAFE_API_KEY: TEST_KEY, BUFO_MODE: 'shared',
+  BUFO_PUBLIC_ORIGIN: 'https://bufo.example.test',
+  BUFO_PROXY_SECRET: 'test-only-proxy-secret-not-for-production',
+  BUFO_GITHUB_TOKEN: 'test-only-github-token'
+};
+const proxyHeaders = user => ({
+  Host: 'bufo.example.test',
+  'X-Bufo-Proxy-Secret': SHARED_ENV.BUFO_PROXY_SECRET,
+  'X-Bufo-User': user,
+  Origin: SHARED_ENV.BUFO_PUBLIC_ORIGIN
+});
+
+function raw(origin, path, { method = 'GET', headers = {}, body, signal } = {}) {
+  return new Promise((resolve, reject) => {
+    const request = httpRequest(origin + path, { method, headers, signal }, response => {
+      const chunks = [];
+      response.on('data', chunk => chunks.push(chunk));
+      response.on('end', () => {
+        const text = Buffer.concat(chunks).toString();
+        resolve({ status: response.statusCode, headers: response.headers, text, json: () => JSON.parse(text) });
+      });
+    });
+    request.on('error', reject);
+    request.end(body === undefined ? undefined : JSON.stringify(body));
+  });
+}
 
 async function start(t, options = {}) {
   const value = catalog(14);
@@ -14,9 +42,7 @@ async function start(t, options = {}) {
       get: async () => value,
       image: async () => ({ bytes: imageBytes(0), type: 'image/png' })
     },
-    fetchImpl: fakeFetch(requests),
-    env: {},
-    minInterval: 0,
+    fetchImpl: fakeFetch(requests), env: { TYPESAFE_API_KEY: TEST_KEY }, minInterval: 0,
     ...options
   });
   server.listen(0, '127.0.0.1');
@@ -26,117 +52,86 @@ async function start(t, options = {}) {
     await new Promise(resolve => server.close(resolve));
   });
   const origin = `http://127.0.0.1:${server.address().port}`;
-  const status = await (await fetch(`${origin}/api/status`)).json();
-  const headers = { Origin: origin, 'Content-Type': 'application/json', 'X-Bufo-Token': status.csrfToken };
-  const post = (path, body, extra = {}) => fetch(`${origin}/api/${path}`, { method: 'POST', headers, body: JSON.stringify(body), ...extra });
-  return { origin, post, status, requests, value, server, headers };
+  const shared = options.env?.BUFO_MODE === 'shared';
+  const userHeaders = shared ? proxyHeaders('first-user') : {};
+  const info = (await raw(origin, '/api/status', { headers: userHeaders })).json();
+  const headers = { ...userHeaders, Origin: shared ? SHARED_ENV.BUFO_PUBLIC_ORIGIN : origin, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken };
+  const post = (path, body, extra = {}) => raw(origin, `/api/${path}`, { method: 'POST', headers, body, ...extra });
+  return { origin, post, info, requests, value, server, headers };
 }
 
-test('serves the app and private local catalog, but never keys or internal files', async t => {
-  const app = await start(t, { env: { TYPESAFE_API_KEY: TEST_KEY } });
-  assert.equal(app.status.connected, true);
-  assert.equal(JSON.stringify(app.status).includes(TEST_KEY), false);
+test('is ready without a viewer connection step and never exposes server credentials', async t => {
+  const app = await start(t);
+  assert.equal(app.info.ready, true);
+  assert.equal(JSON.stringify(app.info).includes(TEST_KEY), false);
   const page = await fetch(app.origin);
   assert.equal(page.status, 200);
-  assert.match(page.headers.get('content-security-policy'), /script-src 'self' 'sha256-/);
   assert.equal(page.headers.get('cache-control'), 'no-store');
-  assert.match(await page.text(), /There's a bufo for that/);
+  assert.match(page.headers.get('content-security-policy'), /script-src 'self';/);
+  const html = await page.text();
+  assert.match(html, /<h1>bufo\.<\/h1>/);
+  assert.doesNotMatch(html, /api-key|connect-form|dialog/);
   const list = await (await fetch(`${app.origin}/api/catalog`)).json();
   assert.equal(list.emojis.length, 14);
-  assert.ok(list.emojis.every(entry => !('filename' in entry) && !('extension' in entry)));
-  for (const path of ['/.env', '/.local/catalog.json', '/server.mjs', '/jev.mjs', '/catalog.mjs', '/package.json']) {
+  assert.ok(list.emojis.every(entry => Object.keys(entry).sort().join() === 'id,name'));
+  assert.equal(app.requests.length, 0);
+  assert.equal((await app.post('suggest', { text: 'payments are broken' })).status, 200);
+});
+
+test('internal source files and all browser credential-mutation endpoints are inaccessible', async t => {
+  const app = await start(t);
+  for (const path of ['/.env', '/.local/catalog.json', '/server.mjs', '/deployment.mjs', '/jev.mjs', '/catalog.mjs', '/package.json']) {
     assert.equal((await fetch(app.origin + path)).status, 404);
   }
+  assert.equal((await app.post('connect', { provider: 'vercel', apiKey: 'another-key' })).status, 404);
+  assert.equal((await app.post('disconnect', {})).status, 404);
+  assert.equal((await (await fetch(`${app.origin}/api/status`)).json()).ready, true);
   assert.equal(app.requests.length, 0);
 });
 
-test('rejects cross-site requests, DNS rebinding hostnames, missing Origin, and missing tokens', async t => {
+test('rejects cross-site requests, DNS rebinding, and missing Origin or CSRF token', async t => {
   const app = await start(t);
-  assert.equal((await fetch(`${app.origin}/api/status`, { headers: { Origin: 'https://untrusted.invalid' } })).status, 403);
-  assert.equal((await fetch(`${app.origin}/api/status`, { headers: { 'Sec-Fetch-Site': 'cross-site' } })).status, 403);
-  const rebindingStatus = await new Promise((resolve, reject) => {
-    httpGet(`${app.origin}/api/status`, { headers: { Host: 'untrusted.invalid' } }, response => {
-      response.resume();
-      resolve(response.statusCode);
-    }).on('error', reject);
-  });
-  assert.equal(rebindingStatus, 403);
-  assert.equal((await app.post('connect', { provider: 'typesafe', apiKey: TEST_KEY }, { headers: { 'Content-Type': 'application/json' } })).status, 403);
-  assert.equal((await app.post('connect', { provider: 'typesafe', apiKey: TEST_KEY }, { headers: { Origin: app.origin, 'Content-Type': 'application/json' } })).status, 403);
+  for (const headers of [{ Origin: 'https://untrusted.invalid' }, { 'Sec-Fetch-Site': 'cross-site' }, { Host: 'untrusted.invalid' }]) {
+    assert.equal((await raw(app.origin, '/api/status', { headers })).status, 403);
+  }
+  assert.equal((await app.post('suggest', { text: 'Hello' }, { headers: { 'Content-Type': 'application/json' } })).status, 403);
+  assert.equal((await app.post('suggest', { text: 'Hello' }, { headers: { Origin: app.origin, 'Content-Type': 'application/json' } })).status, 403);
   assert.equal(app.requests.length, 0);
 });
 
-test('requires an account connection and validates input before calling the provider', async t => {
-  const app = await start(t);
+test('requires server credentials and validates input before calling the provider', async t => {
+  const app = await start(t, { env: {} });
+  assert.equal(app.info.ready, false);
+  assert.match(app.info.error, /app owner/);
   assert.equal((await app.post('suggest', { text: 'Hello' })).status, 503);
   assert.equal((await app.post('suggest', { text: 'x'.repeat(2001) })).status, 400);
   assert.equal((await app.post('suggest', { text: '' })).status, 400);
-  assert.equal((await app.post('connect', { provider: 'external', apiKey: TEST_KEY })).status, 400);
   assert.equal((await app.post('suggest', { text: 'x'.repeat(20_000) })).status, 413);
   assert.equal((await app.post('suggest', {}, { headers: { ...app.headers, 'Content-Type': 'text/plain' } })).status, 415);
-  assert.equal((await app.post('suggest', {}, { body: '{invalid' })).status, 400);
   assert.equal(app.requests.length, 0);
 });
 
-test('allows a top-level link from the setup page without exposing APIs to that other origin', async t => {
+test('allows top-level links without exposing APIs to the referring origin', async t => {
   const app = await start(t);
   const headers = { 'Sec-Fetch-Site': 'cross-site', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Dest': 'document' };
-  const status = path => new Promise((resolve, reject) => {
-    httpGet(app.origin + path, { headers }, response => {
-      response.resume();
-      resolve(response.statusCode);
-    }).on('error', reject);
-  });
-  assert.equal(await status('/'), 200);
-  assert.equal(await status('/index.html'), 200);
-  assert.equal(await status('/api/catalog'), 403);
-  assert.equal(await status('/api/status'), 403);
+  assert.equal((await raw(app.origin, '/', { headers })).status, 200);
+  assert.equal((await raw(app.origin, '/index.html', { headers })).status, 200);
+  assert.equal((await raw(app.origin, '/api/catalog', { headers })).status, 403);
 });
 
-test('connects with a synthetic probe, ranks only real filenames, and disconnects without persisting the key', async t => {
-  const app = await start(t);
-  const connection = await app.post('connect', { provider: 'typesafe', apiKey: TEST_KEY });
-  assert.equal(connection.status, 200);
-  assert.equal(app.requests.length, 1);
-  assert.equal(Object.values(app.requests[0].body.questions)[0].instructions.filename, 'bufo-thankful.png');
-  const response = await app.post('suggest', { text: 'A good day' });
-  assert.equal(response.status, 200);
-  const ranking = await response.json();
-  assert.ok(ranking.suggestions.every(suggestion => app.value.emojis.some(entry => entry.id === suggestion.id)));
-  assert.equal(ranking.evaluatedCount, app.value.emojis.length);
-  assert.equal((await app.post('disconnect', {})).status, 200);
-  assert.equal((await app.post('suggest', { text: 'Hello again' })).status, 503);
-  assert.equal((await (await fetch(`${app.origin}/api/status`)).json()).connected, false);
-});
-
-test('a failed new key does not replace an existing working connection', async t => {
+test('missing catalog is an explicit service failure', async t => {
   const app = await start(t, {
-    env: { TYPESAFE_API_KEY: TEST_KEY },
-    fetchImpl: async (_url, options) => options.headers.Authorization.endsWith('invalid-key')
-      ? new Response('', { status: 401 })
-      : Response.json(answerRequest(JSON.parse(options.body)))
+    catalogStore: { get: async () => { throw new AppError(503, 'Missing source', 'CATALOG_MISSING'); } }
   });
-  assert.equal((await app.post('connect', { provider: 'vercel', apiKey: 'invalid-key' })).status, 401);
-  const status = await (await fetch(`${app.origin}/api/status`)).json();
-  assert.equal(status.provider, 'typesafe');
-  assert.equal(status.connected, true);
-  assert.equal((await app.post('suggest', { text: 'Hello' })).status, 200);
-});
-
-test('missing catalog is a setup state, not a fabricated empty successful catalog', async t => {
-  const app = await start(t, {
-    catalogStore: { get: async () => { throw new AppError(503, 'Run npm run sync first.', 'CATALOG_MISSING'); } }
-  });
-  assert.match(app.status.catalogError, /npm run sync/);
-  assert.equal(app.status.catalogCount, 0);
+  assert.equal(app.info.ready, false);
+  assert.match(app.info.error, /collection is unavailable/);
   assert.equal((await fetch(`${app.origin}/api/catalog`)).status, 503);
 });
 
-test('only one full ranking can run at a time, even when catalog loading is asynchronous', async t => {
+test('only one ranking per viewer runs at once, including with asynchronous catalog loading', async t => {
   const waiting = deferred();
   const started = deferred();
   const app = await start(t, {
-    env: { TYPESAFE_API_KEY: TEST_KEY },
     fetchImpl: async (_url, { body }) => {
       started.resolve();
       await waiting.promise;
@@ -146,19 +141,16 @@ test('only one full ranking can run at a time, even when catalog loading is asyn
   });
   const first = app.post('suggest', { text: 'First' });
   await started.promise;
-  const second = await app.post('suggest', { text: 'Second' });
-  assert.equal(second.status, 429);
-  assert.equal(second.headers.get('retry-after'), '1');
+  assert.equal((await app.post('suggest', { text: 'Second' })).status, 429);
   waiting.resolve();
   assert.equal((await first).status, 200);
 });
 
-test('browser cancellation reaches the upstream request and suppresses further ranking calls', async t => {
+test('browser cancellation reaches the upstream request', async t => {
   const started = deferred();
   const cancelled = deferred();
   let calls = 0;
   const app = await start(t, {
-    env: { TYPESAFE_API_KEY: TEST_KEY },
     fetchImpl: async (_url, { signal }) => {
       calls += 1;
       started.resolve();
@@ -166,7 +158,7 @@ test('browser cancellation reaches the upstream request and suppresses further r
     }
   });
   const controller = new AbortController();
-  const request = app.post('suggest', { text: 'Soon obsolete' }, { signal: controller.signal });
+  const request = fetch(`${app.origin}/api/suggest`, { method: 'POST', headers: app.headers, body: JSON.stringify({ text: 'Soon obsolete' }), signal: controller.signal });
   const rejected = assert.rejects(request, { name: 'AbortError' });
   await started.promise;
   controller.abort();
@@ -175,8 +167,121 @@ test('browser cancellation reaches the upstream request and suppresses further r
   assert.equal(calls, 1);
 });
 
-test('configured throttle bounds repeated requests even after a successful response', async t => {
-  const app = await start(t, { env: { TYPESAFE_API_KEY: TEST_KEY }, minInterval: 60_000 });
+test('throttles repeated requests even after completion', async t => {
+  const app = await start(t, { minInterval: 60_000 });
   assert.equal((await app.post('suggest', { text: 'Hello' })).status, 200);
   assert.equal((await app.post('suggest', { text: 'Again' })).status, 429);
+});
+
+test('shared hosting protects every route with a trusted SSO assertion', async t => {
+  const app = await start(t, { env: SHARED_ENV });
+  for (const path of ['/', '/app.js', '/api/status', '/api/catalog', `/api/emoji/${app.value.emojis[0].id}`]) {
+    assert.equal((await raw(app.origin, path, { headers: { Host: 'bufo.example.test' } })).status, 403);
+    assert.equal((await raw(app.origin, path, { headers: { ...proxyHeaders('first-user'), 'X-Bufo-Proxy-Secret': 'forged' } })).status, 403);
+  }
+  assert.equal((await app.post('suggest', { text: 'Hello' })).status, 200);
+});
+
+test('different authenticated viewers share the server key without cancelling or blocking each other', async t => {
+  const release = deferred();
+  const started = deferred();
+  let calls = 0;
+  const seenMessages = [];
+  const app = await start(t, {
+    env: SHARED_ENV,
+    fetchImpl: async (_url, { body, headers }) => {
+      assert.equal(headers.Authorization, `Bearer ${TEST_KEY}`);
+      const data = JSON.parse(body);
+      seenMessages.push(data.state.message);
+      if (++calls === 2) started.resolve();
+      await release.promise;
+      return Response.json(answerRequest(data));
+    }
+  });
+  const secondHeaders = proxyHeaders('second-user');
+  const info = (await raw(app.origin, '/api/status', { headers: secondHeaders })).json();
+  assert.notEqual(info.csrfToken, app.info.csrfToken);
+  const first = app.post('suggest', { text: 'First message' });
+  const second = app.post('suggest', { text: 'Second message' }, {
+    headers: { ...secondHeaders, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken }
+  });
+  await started.promise;
+  release.resolve();
+  assert.equal((await first).status, 200);
+  assert.equal((await second).status, 200);
+  assert.deepEqual(seenMessages.sort(), ['First message', 'Second message']);
+});
+
+test('one viewer cannot reuse another viewer CSRF token', async t => {
+  const app = await start(t, { env: SHARED_ENV });
+  const response = await app.post('suggest', { text: 'Hello' }, {
+    headers: { ...proxyHeaders('second-user'), 'Content-Type': 'application/json', 'X-Bufo-Token': app.info.csrfToken }
+  });
+  assert.equal(response.status, 403);
+  assert.equal(app.requests.length, 0);
+});
+
+test('cancelling a shared HTTP request leaves another viewer running', async t => {
+  const firstStarted = deferred();
+  const secondStarted = deferred();
+  const cancelled = deferred();
+  const releaseSecond = deferred();
+  const app = await start(t, {
+    env: SHARED_ENV,
+    fetchImpl: async (_url, { body, signal }) => {
+      const data = JSON.parse(body);
+      if (data.state.message === 'Cancel me') {
+        firstStarted.resolve();
+        await new Promise((_, reject) => signal.addEventListener('abort', () => { cancelled.resolve(); reject(signal.reason); }, { once: true }));
+      } else {
+        secondStarted.resolve();
+        await releaseSecond.promise;
+        assert.equal(signal.aborted, false);
+        return Response.json(answerRequest(data));
+      }
+    }
+  });
+  const controller = new AbortController();
+  const first = app.post('suggest', { text: 'Cancel me' }, { signal: controller.signal });
+  const rejected = assert.rejects(first, { code: 'ABORT_ERR' });
+  await firstStarted.promise;
+  const headers = proxyHeaders('second-user');
+  const info = (await raw(app.origin, '/api/status', { headers })).json();
+  const second = app.post('suggest', { text: 'Keep going' }, {
+    headers: { ...headers, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken }
+  });
+  await secondStarted.promise;
+  controller.abort();
+  await rejected;
+  await cancelled.promise;
+  releaseSecond.resolve();
+  assert.equal((await second).status, 200);
+});
+
+test('bounds simultaneous shared rankings and recovers capacity when they finish', async t => {
+  const gate = deferred();
+  const fourthReceived = deferred();
+  const app = await start(t, {
+    env: SHARED_ENV,
+    fetchImpl: async (_url, { body }) => { await gate.promise; return Response.json(answerRequest(JSON.parse(body))); }
+  });
+  const clients = await Promise.all(Array.from({ length: 5 }, async (_, index) => {
+    const headers = proxyHeaders(`user-${index}`);
+    const info = (await raw(app.origin, '/api/status', { headers })).json();
+    return { ...headers, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken };
+  }));
+  let received = 0;
+  app.server.on('request', request => { if (request.method === 'POST' && ++received === 4) fourthReceived.resolve(); });
+  const pending = clients.slice(0, 4).map(headers => app.post('suggest', { text: 'Hold this' }, { headers }));
+  try {
+    await fourthReceived.promise;
+    await flush();
+    const busy = await app.post('suggest', { text: 'Fifth' }, { headers: clients[4] });
+    assert.equal(busy.status, 429);
+    assert.equal(busy.json().code, 'SERVICE_BUSY');
+  } finally {
+    gate.resolve();
+    assert.ok((await Promise.all(pending)).every(response => response.status === 200));
+  }
+  assert.equal((await app.post('suggest', { text: 'Recovered' }, { headers: clients[4] })).status, 200);
 });

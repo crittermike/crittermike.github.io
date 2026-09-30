@@ -3,222 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
   <meta name="referrer" content="no-referrer">
-  <meta name="description" content="Find the right bufo for your message. A local-first emoji finder powered by Jev.">
-  <title>Bufo Finder</title>
-  <script>
-    (() => {
-      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
-  <style>
-    :root {
-      color-scheme: light;
-      --cp-bg: #f7f4ef;
-      --cp-bg-elevated: #fcfbf8;
-      --cp-surface: #ffffff;
-      --cp-surface-soft: #f5f5f5;
-      --cp-border: #dedede;
-      --cp-border-strong: #919191;
-      --cp-text: #242424;
-      --cp-text-muted: #5c5c5c;
-      --cp-text-soft: #6f6f6f;
-      --cp-accent: #b11f4b;
-      --cp-accent-hover: #9a1a41;
-      --cp-accent-soft: rgba(177, 31, 75, 0.08);
-      --cp-accent-fg: #ffffff;
-      --cp-success: #16a34a;
-      --cp-danger: #dc2626;
-      --cp-warning: #f59e0b;
-      --cp-link: #0078d4;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-      --cp-overlay: rgba(255, 255, 255, 0.8);
-      --cp-panel: rgba(255, 255, 255, 0.86);
-      --cp-panel-strong: rgba(255, 255, 255, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.55);
-      --cp-highlight: rgba(177, 31, 75, 0.12);
-    }
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --cp-bg: #3d3b3a;
-      --cp-bg-elevated: #343231;
-      --cp-surface: #292929;
-      --cp-surface-soft: #2e2e2e;
-      --cp-border: #474747;
-      --cp-border-strong: #5f5f5f;
-      --cp-text: #dedede;
-      --cp-text-muted: #919191;
-      --cp-text-soft: #b0b0b0;
-      --cp-accent: #fd8ea1;
-      --cp-accent-hover: #fb7b91;
-      --cp-accent-soft: rgba(253, 142, 161, 0.14);
-      --cp-accent-fg: #1a1a1a;
-      --cp-success: #4ade80;
-      --cp-danger: #f87171;
-      --cp-warning: #fbbf24;
-      --cp-link: #4da6ff;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-      --cp-overlay: rgba(41, 41, 41, 0.88);
-      --cp-panel: rgba(41, 41, 41, 0.72);
-      --cp-panel-strong: rgba(41, 41, 41, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.04);
-      --cp-highlight: rgba(253, 142, 161, 0.12);
-    }
-  </style>
+  <title>Bufo</title>
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./app.js"></script>
 </head>
 <body>
-  <main class="container">
-    <header class="topbar">
-      <a class="wordmark" href="./" aria-label="Bufo Finder home">
-        <svg class="frog-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <path d="M9 21a8 8 0 0 1 14-9h2a8 8 0 0 1 14 9c3 3 4 6 4 9 0 8-9 12-19 12S5 38 5 30c0-3 1-6 4-9Z" stroke="currentColor" stroke-width="2.5"/>
-          <circle cx="16" cy="18" r="2.5" fill="currentColor"/>
-          <circle cx="32" cy="18" r="2.5" fill="currentColor"/>
-          <path d="M15 30c5 5 13 5 18 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        bufo<span class="wordmark-light">finder</span>
-      </a>
-      <div class="topbar-actions">
-        <span class="local-badge">Local &amp; private</span>
-        <button id="open-settings" class="button secondary" type="button" disabled>Connect Jev</button>
-      </div>
-    </header>
-
-    <section class="intro">
-      <p class="eyebrow">Small frogs. Big feelings.</p>
-      <h1>There's a bufo for that.</h1>
-      <p class="lead">Write a thought. Find the frog. Copy it into Slack.</p>
-    </section>
-
-    <section id="setup" class="setup-panel" aria-labelledby="setup-title" hidden>
-      <div>
-        <h2 id="setup-title">Keep the private frogs private.</h2>
-        <p id="setup-message">This app needs its local server. GitHub Pages cannot run the private catalog or the Jev proxy.</p>
-        <p>From a clone of this repo, with Node 22.13+ and GitHub CLI access to the emoji source:</p>
-        <pre><code>cd bufo
-npm run sync
-npm start</code></pre>
-        <p>Then open <a href="http://127.0.0.1:4318">http://127.0.0.1:4318</a>. No npm install is needed.</p>
-      </div>
-      <button id="reload-setup" class="button secondary" type="button">Check again</button>
-    </section>
-
-    <section id="connection-notice" class="connection-notice" aria-labelledby="connection-notice-title" hidden>
-      <div>
-        <h2 id="connection-notice-title">Jev isn't connected yet.</h2>
-        <p>Add a provider API key to get suggestions. Until then, the frogs below are just a preview, not matches for your message.</p>
-      </div>
-      <button id="connect-from-notice" class="button primary" type="button">Set up Jev</button>
-    </section>
-
-    <div class="workspace">
-      <section class="composer" aria-labelledby="message-label">
-        <div class="composer-heading">
-          <label for="message" id="message-label">What's the feeling?</label>
-          <button id="clear-message" class="text-button" type="button" disabled>Clear</button>
-        </div>
-        <textarea id="message" maxlength="2000" rows="6" placeholder="The bug is fixed. The coffee is cold. I am at peace." aria-describedby="input-help privacy-note" disabled></textarea>
-        <div class="composer-meta">
-          <span id="status-line" role="status" aria-live="polite"><span id="status-text">Loading your local catalog...</span></span>
-          <span id="character-count">0 / 2,000</span>
-        </div>
-
-        <div class="examples" aria-label="Try an example">
-          <span class="small-label">Try a little mood</span>
-          <button class="example-chip" type="button" data-example="It finally works. I could cry." disabled>Small victory</button>
-          <button class="example-chip" type="button" data-example="My brain has left the meeting. My body is still here." disabled>Brain offline</button>
-          <button class="example-chip" type="button" data-example="Thank you for jumping in. You absolutely saved my day." disabled>Big thanks</button>
-        </div>
-
-        <div class="ai-control">
-          <label class="checkbox-label" for="ai-enabled">
-            <input id="ai-enabled" type="checkbox" disabled>
-            <span>Suggest with Jev after I pause</span>
-          </label>
-          <p id="input-help">Jev scores every emoji filename against your whole message. No shared words are needed.</p>
-        </div>
-        <p id="privacy-note" class="privacy-note">AI is opt-in. Your message and emoji filenames go to the selected provider. Images stay local. Only use an approved provider for this data, and don't paste confidential text.</p>
-        <div id="request-error" class="error-box" role="alert" hidden></div>
-        <button id="retry" class="button secondary" type="button" hidden>Try Jev again</button>
-      </section>
-
-      <section class="matches" aria-labelledby="results-title" aria-busy="false">
-        <div class="results-heading">
-          <div>
-            <div class="eyebrow" id="mode-label">Your frog collection</div>
-            <h2 id="results-title">Meet the bufos</h2>
-          </div>
-          <span id="catalog-count" class="count-label">Not loaded</span>
-        </div>
-        <p id="results-description">Click a frog to copy its Slack code.</p>
-        <p id="ranking-note" class="ranking-note" hidden></p>
-        <div id="results" class="emoji-grid"></div>
-        <div id="empty-state" class="empty-state" hidden>
-          <span class="empty-mark" aria-hidden="true">:?</span>
-          <h3 id="empty-title">Connect Jev to get suggestions.</h3>
-          <p id="empty-description">Add a provider API key. Your message has not been analyzed.</p>
-        </div>
-        <p id="image-notice" class="image-notice" role="status" hidden>Some previews could not load. Codes still copy. Check GitHub access, then reload the page.</p>
-      </section>
+  <main>
+    <h1>bufo.</h1>
+    <label class="visually-hidden" for="message">Your message</label>
+    <textarea id="message" rows="5" maxlength="2000" placeholder="Type a message. Find a bufo." aria-describedby="privacy-note" disabled></textarea>
+    <p id="privacy-note">Your message and emoji names are sent to Jev.</p>
+    <div class="feedback">
+      <p id="status" role="status" aria-live="polite">Loading...</p>
+      <button id="retry" type="button" hidden>Retry</button>
     </div>
-
-    <footer>
-      <span id="provider-status">Jev is not connected. No messages are being analyzed.</span>
-      <div class="footer-links">
-        <a href="https://docs.typesafe.ai/models" target="_blank" rel="noreferrer">About Jev</a>
-        <a href="https://github.com/github/slack-emoji/tree/main/emojis/_bufo" target="_blank" rel="noreferrer">Emoji source</a>
-      </div>
-    </footer>
-    <div id="copy-status" class="copy-toast" role="status" aria-live="polite" hidden></div>
-    <div id="manual-copy" class="manual-copy" hidden>
-      <label for="copy-code">Clipboard unavailable. Copy this code:</label>
+    <section id="results" aria-label="Suggested emojis" aria-busy="false"></section>
+    <div id="manual-copy" hidden>
+      <label for="copy-code">Copy this code:</label>
       <input id="copy-code" type="text" readonly>
-      <button id="close-copy" type="button" class="text-button">Close</button>
     </div>
+    <p id="copy-status" role="status" aria-live="polite"></p>
   </main>
-
-  <dialog id="connection-dialog" aria-labelledby="connection-title">
-    <div class="dialog-heading">
-      <h2 id="connection-title">Connect Jev</h2>
-      <button id="close-settings" class="text-button" type="button" aria-label="Close connection settings">Close</button>
-    </div>
-    <p>One small decision model. Two ways to connect.</p>
-    <form id="connect-form">
-      <label for="provider">Provider</label>
-      <select id="provider" name="provider">
-        <option value="typesafe">TypeSafe - direct (recommended)</option>
-        <option value="vercel">Vercel AI Gateway</option>
-      </select>
-      <p class="field-help">Both list $0.042 per million input tokens. Use Vercel if you already have Gateway credits.</p>
-      <label for="api-key">API key</label>
-      <input id="api-key" name="api-key" type="password" autocomplete="off" spellcheck="false" minlength="8" maxlength="512" required placeholder="Kept only in the local server's memory">
-      <p class="field-help"><a id="provider-key-link" href="https://console.typesafe.ai/keys" target="_blank" rel="noreferrer">Get a TypeSafe key</a>. Never paste your key into chat or commit it.</p>
-      <label class="checkbox-label consent-label" for="provider-consent">
-        <input id="provider-consent" type="checkbox" required>
-        <span>I'm allowed to share these emoji filenames and my message with this provider.</span>
-      </label>
-      <p class="field-help">Connecting makes one tiny test request, then enables suggestions after a 700 ms pause. Each suggestion scores the entire catalog in batches and can take several seconds. Your key isn't saved to disk or browser storage. Account credits or billing may be required.</p>
-      <p id="connection-error" class="error-box" role="alert" hidden></p>
-      <div class="dialog-actions">
-        <button id="connect-submit" class="button primary" type="submit">Connect Jev</button>
-        <button id="disconnect" class="button secondary" type="button" hidden>Disconnect</button>
-      </div>
-    </form>
-  </dialog>
-
-  <template id="emoji-template">
-    <button class="emoji-card" type="button">
-      <span class="card-rank" aria-hidden="true"></span>
-      <span class="emoji-preview"><span class="image-fallback" hidden>Preview unavailable</span></span>
-      <span class="emoji-name"></span>
-      <span class="match-reason"></span>
-    </button>
-  </template>
-  <noscript><p class="container">Enable JavaScript to use Bufo Finder.</p></noscript>
+  <noscript>Enable JavaScript to find bufos.</noscript>
 </body>
 </html>

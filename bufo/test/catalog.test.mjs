@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { catalogFromTree, createCatalogStore, imageType, SOURCE_REPO, syncCatalog, validateCatalog } from '../catalog.mjs';
+import { catalogFromTree, createCatalogStore, githubHttpApi, imageType, SOURCE_REPO, syncCatalog, validateCatalog } from '../catalog.mjs';
 import { catalog, emoji, imageBytes } from './fixtures.mjs';
 
 async function temporary(t) {
@@ -123,6 +124,20 @@ test('does not accept non-image bytes or a mismatched image hash', async t => {
   assert.equal(imageType(Buffer.from('<svg>')), null);
 });
 
+test('serves the verified image MIME type even when the canonical filename has a different extension', async t => {
+  const dataDir = await temporary(t);
+  const bytes = Buffer.from('RIFF1234WEBP');
+  const value = catalog(1);
+  value.emojis[0].size = bytes.length;
+  value.emojis[0].sha = createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  await writeFile(join(dataDir, 'catalog.json'), JSON.stringify(value));
+  let downloads = 0;
+  const store = createCatalogStore({ dataDir, api: async () => { downloads += 1; return bytes; } });
+  assert.equal((await store.image(value.emojis[0].id)).type, 'image/webp');
+  assert.equal((await store.image(value.emojis[0].id)).type, 'image/webp');
+  assert.equal(downloads, 1);
+});
+
 test('bounds simultaneous GitHub image downloads to four', async t => {
   const dataDir = await temporary(t);
   const value = catalog(12);
@@ -142,4 +157,39 @@ test('bounds simultaneous GitHub image downloads to four', async t => {
   });
   await Promise.all(value.emojis.map(entry => store.image(entry.id)));
   assert.equal(maximum, 4);
+});
+
+test('hosted GitHub access authenticates on the server and supports JSON and raw blobs', async () => {
+  const calls = [];
+  const api = githubHttpApi('test-github-token', async (url, options) => {
+    calls.push({ url, options });
+    return options.headers.Accept.includes('.raw') ? new Response(imageBytes()) : Response.json({ truncated: false, tree: [] });
+  });
+  const result = await api(`repos/${SOURCE_REPO}/git/trees/main`);
+  assert.deepEqual(result, { truncated: false, tree: [] });
+  const bytes = await api(`repos/${SOURCE_REPO}/git/blobs/${emoji(0).sha}`, true);
+  assert.deepEqual(bytes, imageBytes());
+  assert.equal(calls[0].url, `https://api.github.com/repos/${SOURCE_REPO}/git/trees/main`);
+  assert.equal(calls[0].options.headers.Authorization, 'Bearer test-github-token');
+  assert.equal(calls[0].options.redirect, 'error');
+  await assert.rejects(api('https://untrusted.invalid/token'), { code: 'INVALID_SOURCE' });
+  await assert.rejects(api('repos/another/repo/git/trees/main'), { code: 'INVALID_SOURCE' });
+  assert.equal(calls.length, 2);
+});
+
+test('hosted GitHub failures do not expose tokens or upstream error bodies', async () => {
+  for (const fetchImpl of [
+    async () => new Response('secret upstream data', { status: 403 }),
+    async () => { throw new Error('secret upstream data'); }
+  ]) {
+    await assert.rejects(githubHttpApi('test-secret', fetchImpl)(`repos/${SOURCE_REPO}/git/trees/main`), error => {
+      assert.equal(error.code, 'GITHUB_ACCESS');
+      assert.doesNotMatch(error.message, /secret/);
+      return true;
+    });
+  }
+  await assert.rejects(
+    githubHttpApi('test-secret', async () => new Response('invalid JSON'))(`repos/${SOURCE_REPO}/git/trees/main`),
+    { code: 'INVALID_SOURCE' }
+  );
 });

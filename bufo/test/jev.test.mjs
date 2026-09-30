@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  buildScoringQuestions, evaluateQuestions,
+  buildScoringQuestions, evaluateQuestions, limitEvaluations,
   MAX_REQUEST_BYTES, packQuestions, parseEvaluation, PROVIDERS, rankWithJev,
   validateConnection, validateText, verifyConnection
 } from '../jev.mjs';
-import { answerRequest, catalog, deferred, emoji, fakeFetch, TEST_KEY } from './fixtures.mjs';
+import { answerRequest, catalog, deferred, emoji, fakeFetch, flush, TEST_KEY } from './fixtures.mjs';
 
 const small = catalog(12).emojis;
 const question = { fit: { type: 'noul', instructions: { question: 'Does this fit?', filename: 'bufo-happy.png' } } };
@@ -210,4 +210,49 @@ test('a missing score never produces a partial success', async () => {
       return Response.json(result);
     }
   }), { code: 'INVALID_RESPONSE' });
+});
+
+test('concurrent viewers share a three-evaluation pool through response-body completion', async () => {
+  let active = 0;
+  let maximum = 0;
+  const evaluate = limitEvaluations(evaluateQuestions, 3);
+  const fetchImpl = async (_url, { body }) => {
+    active += 1;
+    maximum = Math.max(maximum, active);
+    return {
+      ok: true,
+      async json() {
+        await new Promise(resolve => setTimeout(resolve, 5));
+        active -= 1;
+        return answerRequest(JSON.parse(body));
+      }
+    };
+  };
+  const results = await Promise.all(['First viewer', 'Second viewer', 'Third viewer'].map(text =>
+    rankWithJev({ text, emojis: catalog(200).emojis, provider: 'typesafe', apiKey: TEST_KEY, evaluate, fetchImpl })
+  ));
+  assert.equal(maximum, 3);
+  assert.ok(results.every(result => result.evaluatedCount === 200));
+});
+
+test('cancelling one viewer removes its queued evaluations without affecting another', async () => {
+  const controller = new AbortController();
+  const gate = deferred();
+  const calls = [];
+  const evaluate = limitEvaluations(async ({ name }) => {
+    calls.push(name);
+    await gate.promise;
+    return name;
+  }, 1);
+  const first = evaluate({ name: 'first' });
+  const cancelled = evaluate({ name: 'cancelled', signal: controller.signal });
+  const rejected = assert.rejects(cancelled, { name: 'AbortError' });
+  const last = evaluate({ name: 'last' });
+  controller.abort();
+  await rejected;
+  gate.resolve();
+  assert.deepEqual(await Promise.all([first, last]), ['first', 'last']);
+  assert.deepEqual(calls, ['first', 'last']);
+  await flush();
+  assert.equal(await evaluate({ name: 'next' }), 'next');
 });

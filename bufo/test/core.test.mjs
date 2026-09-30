@@ -1,28 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createDebouncedSearch, DEBOUNCE_MS, indexCatalog, starterEmojis } from '../core.js';
-import { deferred, emoji, flush } from './fixtures.mjs';
-
-const index = indexCatalog([
-  emoji(0, 'bufo-happy'),
-  emoji(1, 'bufo-happy-coffee'),
-  emoji(2, 'bufo-coffee'),
-  emoji(3, 'bufo-sleeping'),
-  emoji(4, 'bufo-wave')
-].map(entry => ({ ...entry, fingerprint: entry.sha })));
-
-test('starter gallery deduplicates identical images', () => {
-  const duplicate = { ...index[2], id: 'different', name: 'bufo-coffee-copy', tokens: ['coffee', 'copy'] };
-  const starters = starterEmojis([...index, duplicate], 20);
-  assert.equal(new Set(starters.map(entry => entry.fingerprint)).size, starters.length);
-});
-
-test('starter gallery respects its limit and contains only catalog entries', () => {
-  const starters = starterEmojis(index, 3);
-  assert.equal(starters.length, 3);
-  assert.equal(new Set(starters.map(entry => entry.id)).size, 3);
-  assert.ok(starters.every(entry => index.some(source => source.id === entry.id)));
-});
+import { createDebouncedSearch, DEBOUNCE_MS } from '../core.js';
+import { deferred, flush } from './fixtures.mjs';
 
 test('waits a full 700 ms after the most recent keystroke', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });

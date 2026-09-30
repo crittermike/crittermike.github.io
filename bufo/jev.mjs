@@ -27,6 +27,38 @@ export class AppError extends Error {
   }
 }
 
+export function limitEvaluations(evaluate, maximum) {
+  let active = 0;
+  const queue = [];
+  function release() {
+    const next = queue.shift();
+    if (next) {
+      next.signal?.removeEventListener('abort', next.abort);
+      next.resolve();
+    } else active -= 1;
+  }
+  return async options => {
+    options.signal?.throwIfAborted();
+    if (active < maximum) active += 1;
+    else {
+      await new Promise((resolve, reject) => {
+        const entry = { resolve, signal: options.signal };
+        entry.abort = () => {
+          const index = queue.indexOf(entry);
+          if (index !== -1) queue.splice(index, 1);
+          reject(options.signal.reason);
+        };
+        queue.push(entry);
+        options.signal?.addEventListener('abort', entry.abort, { once: true });
+      });
+    }
+    try {
+      options.signal?.throwIfAborted();
+      return await evaluate(options);
+    } finally { release(); }
+  };
+}
+
 export function validateText(text) {
   if (typeof text !== 'string' || !text.trim() || text.length > MAX_TEXT_LENGTH) {
     throw new AppError(400, `Enter between 1 and ${MAX_TEXT_LENGTH} characters.`, 'INVALID_TEXT');
@@ -137,10 +169,10 @@ export async function evaluateQuestions({ text, questions, provider, apiKey, sig
   if (!response.ok) {
     await response.body?.cancel();
     if (response.status === 401 || response.status === 403) {
-      throw new AppError(401, 'The provider rejected this key or model access. Check your account and reconnect.', 'PROVIDER_AUTH');
+      throw new AppError(401, 'Jev access needs the app owner\'s attention. Try again after setup is fixed.', 'PROVIDER_AUTH');
     }
     if (response.status === 402) {
-      throw new AppError(402, 'Your provider needs credits or billing setup. Add them in its dashboard, then reconnect.', 'PROVIDER_BILLING');
+      throw new AppError(402, 'Jev credits are unavailable. The app owner needs to update billing.', 'PROVIDER_BILLING');
     }
     if (response.status === 429 || response.status === 529) {
       const raw = response.headers.get('retry-after');
@@ -181,7 +213,7 @@ export async function verifyConnection(options) {
   });
 }
 
-export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetchImpl = fetch }) {
+export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetchImpl = fetch, evaluate = evaluateQuestions }) {
   text = validateText(text);
   validateConnection(provider, apiKey);
   if (!Array.isArray(emojis) || !emojis.length || emojis.length > 5000) {
@@ -193,7 +225,7 @@ export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetc
   const measurements = [];
   const run = async questions => {
     try {
-      const result = await evaluateQuestions({ text, questions, provider, apiKey, signal: combined, fetchImpl });
+      const result = await evaluate({ text, questions, provider, apiKey, signal: combined, fetchImpl });
       measurements.push(result);
       return result.answers;
     } catch (error) {
