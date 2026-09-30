@@ -1,10 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { createCatalogStore, syncCatalog } from './catalog.mjs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { createCatalogStore, DATA_DIR, syncCatalog } from './catalog.mjs';
 import { createRequestAccess, deploymentConfig } from './deployment.mjs';
-import { AppError, evaluateQuestions, limitEvaluations, MAX_PARALLEL_REQUESTS, PROVIDERS, rankWithJev, validateText, verifyConnection } from './jev.mjs';
+import { AppError, buildScoringQuestions, evaluateQuestions, limitEvaluations, MAX_INPUT_TOKENS_PER_REQUEST, MAX_PARALLEL_REQUESTS, packQuestions, PROVIDERS, rankWithJev, validateText, verifyConnection } from './jev.mjs';
+import { createUsageBudget } from './usage.mjs';
 
 const STATIC_FILES = {
   '/': ['index.html', 'text/html; charset=utf-8'],
@@ -65,12 +66,25 @@ function readJson(request) {
 }
 
 export async function createBufoServer({
-  catalogStore = createCatalogStore(),
+  catalogStore,
   fetchImpl = fetch,
   env = process.env,
   minInterval = 600
 } = {}) {
   const config = deploymentConfig(env);
+  catalogStore ||= createCatalogStore({
+    dataDir: config.publicMode
+      ? env.BUFO_CATALOG_DIR || fileURLToPath(new URL('public-assets/', import.meta.url))
+      : env.BUFO_DATA_DIR || DATA_DIR,
+    readOnly: config.publicMode
+  });
+  const budget = config.publicMode ? createUsageBudget({
+    path: join(env.BUFO_DATA_DIR, 'usage.json'), tokenLimit: config.dailyTokenLimit
+  }) : null;
+  if (budget) {
+    await catalogStore.get();
+    await budget.ready();
+  }
   const authorize = createRequestAccess(config);
   const evaluate = limitEvaluations(evaluateQuestions, MAX_PARALLEL_REQUESTS);
   const active = new Map();
@@ -95,9 +109,18 @@ export async function createBufoServer({
           throw new AppError(409, 'The emoji collection changed. Retry to reload it.', 'CATALOG_CHANGED');
         }
         const now = Date.now();
-        for (const [user, timestamp] of recent) if (now - timestamp > 60_000) recent.delete(user);
-        if (active.has(identity) || now - (recent.get(identity) || 0) < minInterval) {
+        for (const [user, previous] of recent) if (now - previous.last > 60_000) recent.delete(user);
+        const previous = recent.get(identity);
+        if (active.has(identity) || now - (previous?.last || 0) < minInterval) {
           throw new AppError(429, 'Your previous request is still finishing. Try again in a second.', 'USER_RATE_LIMIT', 1);
+        }
+        const currentWindow = previous && now - previous.windowStart < 60_000;
+        if (config.publicMode && currentWindow && previous.count >= 10) {
+          const retryAfter = Math.max(1, Math.ceil((previous.windowStart + 60_000 - now) / 1000));
+          throw new AppError(429, `Too many searches from this connection. Try again in ${retryAfter} seconds.`, 'USER_RATE_LIMIT', retryAfter);
+        }
+        if (config.publicMode && !previous && recent.size >= 10_000) {
+          throw new AppError(429, 'Bufo is busy. Try again shortly.', 'SERVICE_BUSY', 60);
         }
         if (active.size >= 4) throw new AppError(429, 'Bufo is busy. Try again shortly.', 'SERVICE_BUSY', 5);
         const controller = new AbortController();
@@ -118,12 +141,24 @@ export async function createBufoServer({
         } : undefined;
         response.on('close', () => { if (!response.writableEnded) controller.abort(); });
         active.set(identity, controller);
-        recent.set(identity, now);
+        recent.set(identity, {
+          last: now, windowStart: currentWindow ? previous.windowStart : now,
+          count: currentWindow ? previous.count + 1 : 1
+        });
         try {
+          // Reserve the documented per-request token ceiling before any paid work.
+          const settle = budget ? await budget.reserve(
+            packQuestions(text, buildScoringQuestions(emojis, config.provider), config.provider).length * MAX_INPUT_TOKENS_PER_REQUEST
+          ) : null;
+          if (controller.signal.aborted) {
+            await settle?.(0);
+            throw controller.signal.reason;
+          }
           const ranking = await rankWithJev({
             text, emojis, provider: config.provider, apiKey: config.apiKey,
             signal: controller.signal, fetchImpl, evaluate, onProgress
           });
+          await settle?.(ranking.inputTokens);
           if (!controller.signal.aborted) {
             const result = { ...ranking, syncedAt };
             if (streaming) response.end(`${JSON.stringify({ type: 'result', ranking: result })}\n`);
@@ -134,6 +169,9 @@ export async function createBufoServer({
         }
       } else if (request.method !== 'GET') {
         throw new AppError(405, 'Method not allowed.', 'METHOD_NOT_ALLOWED');
+      } else if (url.pathname === '/healthz') {
+        await catalogStore.get();
+        json(response, config.apiKey ? 200 : 503, { ready: Boolean(config.apiKey) });
       } else if (url.pathname === '/api/status') {
         let catalogCount = 0;
         let error = null;
@@ -190,8 +228,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const config = deploymentConfig(process.env);
     const port = Number(process.env.PORT || 4318);
     if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('PORT must be between 1024 and 65535.');
-    if (config.shared) {
+    if (config.hosted) {
       await verifyConnection({ provider: config.provider, apiKey: config.apiKey });
+    }
+    if (config.shared) {
       await syncCatalog();
     }
     const server = await createBufoServer();
@@ -201,7 +241,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     });
     server.listen(port, config.listenHost, () => {
       console.log(`Bufo: ${config.origin || `http://127.0.0.1:${port}`}`);
-      console.log(config.shared ? 'Shared service. All routes require the authenticated company proxy.' : 'Local preview. The model key is configured on the server, not by viewers.');
+      console.log(config.publicMode ? 'Public service. Anonymous usage is rate limited and budgeted.'
+        : config.shared ? 'Shared service. All routes require the authenticated company proxy.'
+          : 'Local preview. The model key is configured on the server, not by viewers.');
     });
     const shutdown = () => {
       for (const signal of ['SIGINT', 'SIGTERM']) process.removeListener(signal, shutdown);

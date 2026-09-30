@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { request as httpRequest } from 'node:http';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 import { readSuggestionStream } from '../core.js';
-import { AppError } from '../jev.mjs';
+import { AppError, MAX_INPUT_TOKENS_PER_REQUEST } from '../jev.mjs';
 import { createBufoServer } from '../server.mjs';
 import { answerRequest, catalog, deferred, fakeFetch, flush, imageBytes, TEST_KEY } from './fixtures.mjs';
 
@@ -18,6 +21,14 @@ const proxyHeaders = user => ({
   'X-Bufo-Proxy-Secret': SHARED_ENV.BUFO_PROXY_SECRET,
   'X-Bufo-User': user,
   Origin: SHARED_ENV.BUFO_PUBLIC_ORIGIN
+});
+const PUBLIC_ENV = {
+  TYPESAFE_API_KEY: TEST_KEY, BUFO_MODE: 'public',
+  BUFO_PUBLIC_ORIGIN: 'https://bufo.example.test', BUFO_DAILY_TOKEN_LIMIT: '1000000',
+  FLY_APP_NAME: 'test-bufo'
+};
+const publicHeaders = ip => ({
+  Host: 'bufo.example.test', Origin: PUBLIC_ENV.BUFO_PUBLIC_ORIGIN, 'Fly-Client-IP': ip
 });
 
 function raw(origin, path, { method = 'GET', headers = {}, body, signal } = {}) {
@@ -38,13 +49,19 @@ function raw(origin, path, { method = 'GET', headers = {}, body, signal } = {}) 
 async function start(t, options = {}) {
   const value = catalog(14);
   const requests = [];
+  let env = options.env || { TYPESAFE_API_KEY: TEST_KEY };
+  if (env.BUFO_MODE === 'public' && !env.BUFO_DATA_DIR) {
+    const directory = await mkdtemp(join(tmpdir(), 'bufo-public-test-'));
+    t.after(() => rm(directory, { recursive: true, force: true }));
+    env = { ...env, BUFO_DATA_DIR: directory };
+  }
   const server = await createBufoServer({
     catalogStore: {
       get: async () => value,
       image: async () => ({ bytes: imageBytes(0), type: 'image/png' })
     },
-    fetchImpl: fakeFetch(requests), env: { TYPESAFE_API_KEY: TEST_KEY }, minInterval: 0,
-    ...options
+    fetchImpl: fakeFetch(requests), minInterval: 0,
+    ...options, env
   });
   server.listen(0, '127.0.0.1');
   await once(server, 'listening');
@@ -53,13 +70,123 @@ async function start(t, options = {}) {
     await new Promise(resolve => server.close(resolve));
   });
   const origin = `http://127.0.0.1:${server.address().port}`;
-  const shared = options.env?.BUFO_MODE === 'shared';
-  const userHeaders = shared ? proxyHeaders('first-user') : {};
+  const shared = env.BUFO_MODE === 'shared';
+  const publicMode = env.BUFO_MODE === 'public';
+  const userHeaders = shared ? proxyHeaders('first-user') : publicMode ? publicHeaders('192.0.2.1') : {};
   const info = (await raw(origin, '/api/status', { headers: userHeaders })).json();
-  const headers = { ...userHeaders, Origin: shared ? SHARED_ENV.BUFO_PUBLIC_ORIGIN : origin, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken };
+  const headers = { ...userHeaders, Origin: shared || publicMode ? env.BUFO_PUBLIC_ORIGIN : origin, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken };
   const post = (path, body, extra = {}) => raw(origin, `/api/${path}`, { method: 'POST', headers, body, ...extra });
-  return { origin, post, info, requests, value, server, headers };
+  return { origin, post, info, requests, value, server, headers, env };
 }
+
+test('public visitors can load the app, catalog, images, and streamed suggestions without accounts', async t => {
+  const app = await start(t, { env: PUBLIC_ENV });
+  assert.equal(app.info.ready, true);
+  for (const path of ['/', '/api/catalog', `/api/emoji/${app.value.emojis[0].id}`, '/healthz']) {
+    assert.equal((await raw(app.origin, path, { headers: publicHeaders('192.0.2.1') })).status, 200);
+  }
+  for (const path of ['/usage.json', '/usage.mjs', '/public-assets/catalog.json', '/.env']) {
+    assert.equal((await raw(app.origin, path, { headers: publicHeaders('192.0.2.1') })).status, 404);
+  }
+  const response = await app.post('suggest', { text: 'Public reaction' }, {
+    headers: { ...app.headers, Accept: 'application/x-ndjson' }
+  });
+  const updates = [];
+  const result = await readSuggestionStream(new Response(response.text).body, { onProgress: event => updates.push(event) });
+  assert.equal(result.evaluatedCount, 14);
+  assert.equal(updates.at(-1).ranking.suggestions.length, 12);
+  assert.equal(JSON.stringify(app.info).includes(TEST_KEY), false);
+  assert.equal(app.env.BUFO_GITHUB_TOKEN, undefined);
+});
+
+test('public writes still require the exact origin and that network client CSRF token', async t => {
+  const app = await start(t, { env: PUBLIC_ENV });
+  for (const overrides of [
+    { 'X-Bufo-Token': '' }, { Origin: 'https://attacker.invalid' },
+    { 'Fly-Client-IP': '192.0.2.2' }, { Host: 'attacker.invalid' }
+  ]) {
+    assert.equal((await app.post('suggest', { text: 'Hello' }, { headers: { ...app.headers, ...overrides } })).status, 403);
+  }
+  assert.equal(app.requests.length, 0);
+});
+
+test('public searches stop at ten per minute per client without blocking other clients', async t => {
+  const app = await start(t, { env: PUBLIC_ENV });
+  for (let index = 0; index < 10; index += 1) {
+    assert.equal((await app.post('suggest', { text: `Reaction ${index}` })).status, 200);
+  }
+  const limited = await app.post('suggest', { text: 'One too many' });
+  assert.equal(limited.status, 429);
+  assert.equal(limited.json().code, 'USER_RATE_LIMIT');
+  assert.ok(limited.json().retryAfter >= 1 && limited.json().retryAfter <= 60);
+  const headers = publicHeaders('192.0.2.2');
+  const info = (await raw(app.origin, '/api/status', { headers })).json();
+  assert.equal((await app.post('suggest', { text: 'Another visitor' }, {
+    headers: { ...headers, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken }
+  })).status, 200);
+  assert.equal(app.requests.length, 11);
+});
+
+test('public token budgets are reserved before inference and survive server replacement', async t => {
+  let app;
+  app = await start(t, {
+    env: { ...PUBLIC_ENV, BUFO_DAILY_TOKEN_LIMIT: String(MAX_INPUT_TOKENS_PER_REQUEST + 500) },
+    fetchImpl: async (_url, { body }) => {
+      const state = JSON.parse(await readFile(join(app.env.BUFO_DATA_DIR, 'usage.json'), 'utf8'));
+      assert.ok(state.usedTokens >= MAX_INPUT_TOKENS_PER_REQUEST);
+      return Response.json(answerRequest(JSON.parse(body)));
+    }
+  });
+  assert.equal((await app.post('suggest', { text: 'First' })).status, 200);
+  const replacement = await start(t, { env: app.env });
+  assert.equal((await replacement.post('suggest', { text: 'Second' })).status, 200);
+  const blocked = await replacement.post('suggest', { text: 'Third' });
+  assert.equal(blocked.status, 429);
+  assert.equal(blocked.json().code, 'DAILY_BUDGET');
+  assert.equal(replacement.requests.length, 1);
+  assert.equal(JSON.parse(await readFile(join(app.env.BUFO_DATA_DIR, 'usage.json'), 'utf8')).usedTokens, 1000);
+});
+
+test('failed public inference keeps its reservation rather than allowing repeated unbudgeted calls', async t => {
+  let calls = 0;
+  const app = await start(t, {
+    env: { ...PUBLIC_ENV, BUFO_DAILY_TOKEN_LIMIT: String(MAX_INPUT_TOKENS_PER_REQUEST) },
+    fetchImpl: async () => { calls += 1; return new Response('', { status: 500 }); }
+  });
+  assert.equal((await app.post('suggest', { text: 'Failure' })).status, 502);
+  const blocked = await app.post('suggest', { text: 'Try again' });
+  assert.equal(blocked.status, 429);
+  assert.equal(blocked.json().code, 'DAILY_BUDGET');
+  assert.equal(calls, 1);
+});
+
+test('simultaneous public clients cannot oversubscribe the remaining token budget', async t => {
+  const started = deferred();
+  const release = deferred();
+  let calls = 0;
+  const app = await start(t, {
+    env: { ...PUBLIC_ENV, BUFO_DAILY_TOKEN_LIMIT: String(MAX_INPUT_TOKENS_PER_REQUEST) },
+    fetchImpl: async (_url, { body }) => {
+      calls += 1;
+      started.resolve();
+      await release.promise;
+      return Response.json(answerRequest(JSON.parse(body)));
+    }
+  });
+  const first = app.post('suggest', { text: 'Hold the budget' });
+  await started.promise;
+  try {
+    const headers = publicHeaders('192.0.2.2');
+    const info = (await raw(app.origin, '/api/status', { headers })).json();
+    const second = await app.post('suggest', { text: 'Another visitor' }, {
+      headers: { ...headers, 'Content-Type': 'application/json', 'X-Bufo-Token': info.csrfToken }
+    });
+    assert.equal(second.status, 429);
+    assert.equal(second.json().code, 'DAILY_BUDGET');
+    assert.equal(calls, 1);
+  } finally { release.resolve(); }
+  assert.equal((await first).status, 200);
+});
 
 test('is ready without a viewer connection step and never exposes server credentials', async t => {
   const app = await start(t);

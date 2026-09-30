@@ -17,6 +17,7 @@ export const PROVIDERS = {
 export const MAX_REQUEST_BYTES = 60_000;
 export const MAX_QUESTIONS_PER_REQUEST = 100;
 export const MAX_PARALLEL_REQUESTS = 12;
+export const MAX_INPUT_TOKENS_PER_REQUEST = 65_536;
 export const MAX_NAME_BONUS = 0.06;
 const MIN_RELEVANT_SCORE = 0.5;
 

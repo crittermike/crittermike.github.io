@@ -1,9 +1,10 @@
 import { execFile } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { mkdir, readFile, rename, unlink, writeFile } from 'node:fs/promises';
+import { mkdir, open, readFile, rename, unlink, writeFile } from 'node:fs/promises';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
+import { setTimeout as delay } from 'node:timers/promises';
 import { AppError } from './jev.mjs';
 
 export const SOURCE_REPO = 'github/slack-emoji';
@@ -134,12 +135,20 @@ export function validateCatalog(catalog) {
   return catalog;
 }
 
-async function atomicWrite(path, data) {
+export async function atomicWrite(path, data, { durable = false } = {}) {
   await mkdir(dirname(path), { recursive: true, mode: 0o700 });
   const temporary = `${path}.${randomUUID()}.tmp`;
   try {
     await writeFile(temporary, data, { mode: 0o600, flag: 'wx' });
+    if (durable) {
+      const file = await open(temporary, 'r+');
+      try { await file.sync(); } finally { await file.close(); }
+    }
     await rename(temporary, path);
+    if (durable) {
+      const directory = await open(dirname(path), 'r');
+      try { await directory.sync(); } finally { await directory.close(); }
+    }
   } finally {
     await unlink(temporary).catch(error => {
       if (error.code !== 'ENOENT') throw error;
@@ -232,7 +241,7 @@ function validImage(bytes, entry) {
   return bytes.length === entry.size && sha === entry.sha && imageType(bytes) !== null;
 }
 
-export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {}) {
+export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi, readOnly = false } = {}) {
   let catalog;
   const inFlight = new Map();
   let active = 0;
@@ -260,7 +269,7 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
         raw = await readFile(join(dataDir, 'catalog.json'), 'utf8');
       } catch (error) {
         if (error.code === 'ENOENT') {
-          throw new AppError(503, 'Sync the private catalog first: cd bufo && npm run sync', 'CATALOG_MISSING');
+          throw new AppError(503, 'The emoji catalog is missing. The app owner needs to sync or deploy it.', 'CATALOG_MISSING');
         }
         throw error;
       }
@@ -281,6 +290,7 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
       try {
         const bytes = await readFile(path);
         if (!validImage(bytes, entry)) {
+          if (readOnly) throw new AppError(503, 'An emoji image is damaged. The app owner needs to redeploy the collection.', 'INVALID_IMAGE');
           console.warn('Repairing an invalid locally cached emoji image.');
           await unlink(path);
         } else {
@@ -289,6 +299,7 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
       } catch (error) {
         if (error.code !== 'ENOENT') throw error;
       }
+      if (readOnly) throw new AppError(503, 'An emoji image is missing. The app owner needs to redeploy the collection.', 'IMAGE_MISSING');
       if (!inFlight.has(entry.sha)) {
         inFlight.set(entry.sha, download(entry).finally(() => inFlight.delete(entry.sha)));
       }
@@ -298,11 +309,52 @@ export function createCatalogStore({ dataDir = DATA_DIR, api = githubApi } = {})
   };
 }
 
+export async function exportCatalog({
+  store = createCatalogStore(),
+  outputDir = fileURLToPath(new URL('public-assets/', import.meta.url)),
+  intervalMs = 200,
+  onProgress
+} = {}) {
+  const catalog = validateCatalog(await store.get());
+  let next = 0;
+  let completed = 0;
+  let nextStart = 0;
+  let failed = false;
+  await Promise.all(Array.from({ length: 4 }, async () => {
+    try {
+      while (next < catalog.emojis.length && !failed) {
+        const entry = catalog.emojis[next++];
+        const start = Math.max(Date.now(), nextStart);
+        nextStart = start + intervalMs;
+        await delay(Math.max(0, start - Date.now()));
+        if (failed) return;
+        const { bytes } = await store.image(entry.id);
+        if (!validImage(bytes, entry)) throw new AppError(503, 'Cannot export an invalid emoji image.', 'INVALID_IMAGE');
+        await atomicWrite(join(outputDir, 'images', `${entry.sha}.${entry.extension}`), bytes);
+        completed += 1;
+        onProgress?.(completed, catalog.emojis.length);
+      }
+    } catch (error) {
+      failed = true;
+      throw error;
+    }
+  }));
+  await atomicWrite(join(outputDir, 'catalog.json'), `${JSON.stringify(catalog)}\n`);
+  return catalog;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
-    const catalog = await syncCatalog();
-    console.log(`Synced ${catalog.emojis.length} emoji names to the private cache. Images download on demand.`);
-    console.log('This private catalog and its images must not be committed or publicly deployed.');
+    if (process.argv.includes('--export')) {
+      const catalog = await exportCatalog({
+        onProgress: (count, total) => { if (count % 100 === 0) console.log(`Prepared ${count} of ${total} images.`); }
+      });
+      console.log(`Exported ${catalog.emojis.length} verified emojis to public-assets/. Only publish assets you are authorized to share.`);
+    } else {
+      const catalog = await syncCatalog();
+      console.log(`Synced ${catalog.emojis.length} emoji names to the local cache. Images download on demand.`);
+      console.log('Catalogs and images stay out of Git. Use npm run export to prepare an authorized public deployment.');
+    }
   } catch (error) {
     console.error(error instanceof AppError ? error.message : 'Could not write the local catalog. Check local file permissions.');
     process.exitCode = 1;

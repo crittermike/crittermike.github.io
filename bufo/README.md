@@ -2,11 +2,43 @@
 
 A single-page emoji picker: type a message, pause for 700 ms, and Jev scores **every bufo filename** for semantic relevance to the entire message. Click a result to copy its `:slack-code:`.
 
-## Shared internal service
+## Public deployment on Fly
+
+Public URL: **https://bufo-picker.fly.dev**. No sign-in, viewer API key, or account setup is required. The owner has authorized public sharing of this emoji collection. The app still calls TypeSafe directly; using Fly for hosting does not require changing model providers.
+
+`fly.toml` provisions one 512 MB `shared-cpu-1x` Machine in `iad`, with HTTPS, streaming responses, and a 1 GB encrypted volume. The Machine stays running to avoid cold starts. The runtime runs as the non-root `node` user. This is a small single-instance deployment, not a highly available service: deploys or hardware failure can cause downtime.
+
+The model key is a **Fly runtime secret**, never part of the image or browser code. The public image contains a pre-exported, verified emoji snapshot, so it needs **no GitHub credential** and makes no runtime GitHub requests. Local source access can still require GitHub authentication; that is separate from permission to publish the exported emoji artwork.
+
+Anonymous inference is deliberately bounded:
+
+- Ten searches per minute per client IP, one active search per client, four active searches overall, and twelve upstream evaluations in flight.
+- A persistent **25,000,000-input-token budget per UTC day**, about **$1.05 at the current TypeSafe price**, excluding startup connection checks and hosting. This normally covers about ninety short-message rankings, with fewer possible after failures or cancellations.
+- Before paid inference, reserve 65,536 tokens for every planned provider request, conservatively covering Jev's documented 64k request ceiling. Successful requests release the difference from reported usage. Failures, cancellations, and missing usage retain the full reservation. Searches are charged to the UTC day on which they start.
+- The aggregate ledger lives at `/data/usage.json`, is serialized and synced to disk before paid work, and survives restarts. Invalid or unavailable storage fails closed. No messages or client IPs are written to this ledger.
+
+These are app-level limits, not a provider billing guarantee. Other apps using the same key, changing model prices/limits, or adding replicas can change total spending. Keep this deployment at **one Machine**, preserve its volume, and use account-level spending controls where available. Do not delete the ledger to recover from a quota error; it resets at midnight UTC. Changing `BUFO_DAILY_TOKEN_LIMIT` in `fly.toml` changes the allowance after redeploy.
+
+To refresh the snapshot and redeploy from a checkout with Fly and source access:
+
+```sh
+cd bufo
+npm run sync
+npm run export
+flyctl deploy --remote-only --depot=false --ha=false
+```
+
+`export` verifies every image's bytes, size, and Git blob hash, then writes only `catalog.json` and `images/` under ignored `public-assets/`. It paces requests to avoid hammering the source. The `public` Docker target includes that directory; `.env`, `.local`, screenshots, and benchmark data remain excluded. A failed export must not be deployed. Exported images are read-only at runtime: a damaged or missing image fails explicitly rather than trying to fetch GitHub with an operator credential.
+
+For a new Fly app, change both `app` and `BUFO_PUBLIC_ORIGIN` in `fly.toml`, allocate shared public IPv4 and public IPv6 addresses with `flyctl ips allocate-v4 --shared` and `flyctl ips allocate-v6`, and create an encrypted `bufo_data` volume in the chosen region. Initialize that volume's mount point with owner UID/GID 1000 before starting the non-root app. Stage only `TYPESAFE_API_KEY` with `flyctl secrets import --stage` through standard input; do not put its value in command arguments or import unrelated local secrets. The existing `bufo-picker` app and volume are already provisioned. `/healthz` checks service readiness without running paid inference.
+
+Public mode uses Fly Proxy's `Fly-Client-IP` when running on Fly, and the socket address elsewhere. Client-supplied `X-Forwarded-For` is not trusted. CSRF tokens are scoped to the network client; Host and Origin checks still apply. IP sharing and NAT can make several visitors share a rate limit. These checks do not identify people or make a public endpoint bot-proof; the persistent global quota is the spending safeguard.
+
+## Optional authenticated internal service
 
 The app uses **one server-managed model credential**. Viewers open the internal URL, type a message, and click an emoji. There are no viewer API keys, provider settings, account-connection dialogs, or AI toggles. The interface is light-only.
 
-Deployment needs an approved private host, a company-authenticated reverse proxy, an approved model account with credits, and narrow service access to the source repo. The public GitHub Pages site cannot run this backend. No live internal deployment or model account is included in this repo.
+Shared mode is an alternative for collections that need restricted access; it is not used by the public Fly deployment. It needs an approved private host, a company-authenticated reverse proxy, an approved model account with credits, and narrow service access to the source repo. The public GitHub Pages site cannot run this backend.
 
 Configure these once in the host's secret/config store:
 
@@ -38,7 +70,7 @@ docker run --rm --name bufo-internal \
   --publish 127.0.0.1:4318:4318 bufo-internal
 ```
 
-This example assumes the approved proxy runs on the same host. Adapt private networking and secret injection to the actual platform. The build-context allowlist excludes all local credentials, private images, catalog files, and test output. The image runs as a non-root user; mounted storage must be writable by that user (UID 1000). The service has no runtime npm dependencies.
+This example assumes the approved proxy runs on the same host. Adapt private networking and secret injection to the actual platform. The default `shared` image target contains source code only; the separate `public` target explicitly includes `public-assets/`. The build-context allowlist excludes local credentials, `.local/`, and test output. The image runs as a non-root user; mounted storage must be writable by that user (UID 1000). The service has no runtime npm dependencies.
 
 Start with one instance: the four-active-ranking limit and twelve-upstream-evaluation pool are per process. Each authenticated viewer has a separate active-request/cooldown state, and cancelling one viewer's work cannot cancel another's. Additional replicas multiply these limits; set an account-level spend cap before scaling. CSRF tokens are user-scoped and remain valid across replicas using the same proxy secret.
 
@@ -108,7 +140,7 @@ All scores were still validated and every filename evaluated. Comparing old and 
 
 ## How filename ranking works
 
-1. Startup in shared mode, or the local sync command, reads the source's Git trees and canonical emoji mapping. Hosted access uses the GitHub REST API with the server credential; local previews can use `gh`. It pins the child trees and image blobs to the same snapshot, resolves duplicate PNG/GIF versions using the canonical mapping, and writes a private index. Canonically mapped multipart bufo sets outside `_bufo/` are included too, so large sets stored in other source directories are not missed.
+1. Startup in shared mode, or the local sync command, reads the source's Git trees and canonical emoji mapping. Shared-mode source access uses the GitHub REST API with the server credential; local previews can use `gh`. It pins the child trees and image blobs to the same snapshot, resolves duplicate PNG/GIF versions using the canonical mapping, and writes a local index. Public mode serves the pre-exported snapshot instead. Canonically mapped multipart bufo sets outside `_bufo/` are included too, so large sets stored in other source directories are not missed.
 2. **Every filename gets its own Jev relevance question.** Each question asks whether that emoji would be a natural reaction to the meaning and feeling of the entire message. There is no keyword filter, local mood taxonomy, `Choice` competition, or shortlist. The 255-option `Choice` limit does not apply to these independent yes/no questions.
 3. Questions are packed into batches of at most 100, with a conservative 60 KB JSON cap and up to twelve evaluations in flight across viewers. Each batch receives the complete message as shared state. The live progress count advances only when a batch's answers have been received and validated, not when it is submitted. Best-so-far suggestions appear after each batch and reorder as more scores arrive. Every batch must finish for a completed ranking; failure clears provisional choices.
 4. The app combines tiled emojis, applies a small name-length preference, deduplicates complete image layouts, and shows up to twelve suggestions. Even an all-low-scoring result is shown with an explicit weak-match warning, not an unexplained "zero results." Scores are model judgments, not guarantees or image analysis; they are kept out of the minimal UI.
@@ -121,15 +153,17 @@ All scores were still validated and every filename evaluated. Comparing old and 
 
 Exhaustive scoring can take several seconds and cost more than shortlisting. The UI explicitly says Jev is scoring the whole catalog while it runs. Changing or clearing the message cancels pending work, aborts obsolete requests, and rejects stale results. Up to twenty rankings are cached in each browser's memory until reload; nothing is saved to localStorage or shared between viewers. The server allows one ranking per viewer and four viewers at once, and surfaces timeouts, invalid answers, rate limits, and account/credit errors. There are no automatic paid retries. Aborting a request cannot guarantee the provider stops work already accepted or refunds it.
 
-## Private assets and data flow
+## Assets, credentials, and data flow
 
-The source emoji repo is private. This app's code lives in a public site repo, so **no source images or catalog are committed or publicly deployed**. The sync output and downloaded images live in private server storage (`BUFO_DATA_DIR`, default `bufo/.local/`). Images are fetched on demand, verified against Git blob hashes, and cached with restricted file permissions. The MIME type comes from the verified image bytes because some source filenames have misleading extensions. Private deployment is mandatory even though the app code is public.
+The owner has confirmed that this Bufo collection may be publicly shared. Its exported snapshot is therefore included in the public Fly image and served without authentication. **Credentials are never public**, and no generated catalog, images, benchmark output, or screenshots are committed to the code repo. Only export artwork you are authorized to share.
 
-**Typing sends the message and emoji filenames to the selected model provider after a pause. Image bytes, GitHub credentials, image URLs, and blob hashes are not sent.** A short disclosure stays below the textarea. The operator must approve this data flow before enabling the shared service. Do not submit confidential messages or filenames to a provider that is not approved to receive them. TypeSafe says it does not train on requests; that is not a promise of zero retention. Vercel routes only to TypeSafe in this app, and no account-specific zero-retention entitlement is assumed.
+Local/shared sync output and downloaded images live in server storage (`BUFO_DATA_DIR`, default `bufo/.local/`). Those modes fetch images on demand, verify Git blob hashes, and cache with restricted file permissions. Public mode serves only its pre-exported snapshot from `BUFO_CATALOG_DIR`, while `BUFO_DATA_DIR` holds its persistent usage ledger. The MIME type comes from verified image bytes because some source filenames have misleading extensions.
 
-Local mode binds only to `127.0.0.1`, checks Host/Origin, and requires a per-process CSRF token on writes. Shared mode requires the trusted proxy assertion and per-user CSRF token. Both serve an explicit static-file allowlist and do not log request bodies, filenames, identities, or credentials. There are no browser endpoints for changing or disconnecting the central model key.
+**Typing sends the message and emoji filenames to the selected model provider after a pause. Image bytes, GitHub credentials, image URLs, and blob hashes are not sent to the model.** A short disclosure stays below the textarea. Do not submit confidential messages or filenames to a provider that is not approved to receive them. TypeSafe says it does not train on requests; that is not a promise of zero retention. Vercel routes only to TypeSafe in this app, and no account-specific zero-retention entitlement is assumed.
 
-Do not tunnel local mode, put a shared API key in client JavaScript, add private files to a container image, or expose the source collection on an anonymous URL. Authenticated private deployment is a requirement, not an optional improvement.
+Local mode binds only to `127.0.0.1`, checks Host/Origin, and requires a per-process CSRF token on writes. Shared mode requires the trusted proxy assertion and per-user CSRF token. Public mode requires HTTPS-origin configuration, central credentials, persistent budget storage, and an explicit token allowance. All modes serve an explicit static-file allowlist and do not log request bodies, filenames, identities, or credentials. There are no browser endpoints for changing or disconnecting the central model key.
+
+Do not tunnel local mode, put a model key in client JavaScript, or add unrelated private files to a container image. Public sharing is an explicit deployment mode, not a fallback when shared authentication is misconfigured.
 
 ## Verify and maintain
 
@@ -139,13 +173,15 @@ npm run check
 npm run sync
 ```
 
-Tests use synthetic filenames, images, and mocked provider responses. They cover exhaustive scoring, bounded name bonuses, mosaic grouping and multiline copying, live top-choice replacement, whole-mosaic scoring gates, image/focus preservation, out-of-order batch progress, interrupted streams, context limits, semantic results without keyword overlap, both provider protocols, debounce timing, stale responses, cancellation, provider cooldowns, private assets, canonical duplicates, server credentials, shared-user isolation, global upstream concurrency, proxy authentication, and light-only no-setup browser behavior. They do not prove live model quality, latency, or account access. Shared startup checks the configured account; assess real suggestions before rolling out to colleagues.
+Tests use synthetic filenames, images, and mocked provider responses. They cover exhaustive scoring, bounded name bonuses, mosaic grouping and multiline copying, live top-choice replacement, whole-mosaic scoring gates, image/focus preservation, out-of-order batch progress, interrupted streams, context limits, semantic results without keyword overlap, both provider protocols, debounce timing, stale responses, cancellation, provider cooldowns, asset export, read-only images, canonical duplicates, server credentials, shared-user isolation, global upstream concurrency, proxy authentication, public IP/CSRF limits, durable budget reservations, quota races/restarts, and light-only no-setup browser behavior. They do not prove live model quality, latency, or account access. Hosted startup checks the configured account; assess real suggestions before rolling out to colleagues.
 
 Separate live TypeSafe checks on September 30, 2026 confirmed full-catalog rankings for "oops" and "payments are broken", with all twelve image previews loading for each. These are smoke checks, not a comprehensive quality benchmark or proof of an internal deployment.
 
 Later checks exercised an expanded 1,884-filename snapshot, streamed scoring progress, and real 2-by-2 and 4-by-4 mosaics with visible `BIG` labels and exact multiline copying. The subsequent batch-size experiment above reduced short-message rankings from 46 requests to 19 and enabled live best-so-far choices.
 
 After tuning, two real browser runs completed server scoring in 0.5-0.7 seconds. Copyable choices appeared while scoring was still incomplete, 12-14 distinct top lists appeared, and the 16-tile mosaic still rendered and copied correctly. Desktop and mobile image loading and layout were checked without uploading private screenshots or touching the host clipboard.
+
+The public Fly image was built remotely and verified on September 30, 2026. Two public-browser rankings completed server scoring in 0.6-0.8 seconds, with live suggestions, correct image loading, and exact multiline copying. All 1,884 exported entries were validated inside the running non-root container without a GitHub key. An actual redeploy preserved the existing usage ledger. HTTPS redirection, denial of internal source/secret paths, required write tokens, and Fly's replacement of forged client-IP headers were also checked.
 
 Optional browser checks use Playwright with an installed Google Chrome and isolated test servers. They never use the private source catalog, call a real model, or overwrite the host clipboard:
 
@@ -154,4 +190,4 @@ npm ci
 npm run test:browser
 ```
 
-Re-run `npm run sync` to refresh the snapshot, then reload the app; shared startup also refreshes it. Old content-addressed image cache files remain private and can be removed from the cache's `images/` directory if no longer wanted. Rotate expiring service/model credentials in the host's secret store and restart the service. Never add `.local/` or `.env` to a commit.
+Re-run `npm run sync` to refresh a local/shared snapshot, then reload the app; shared startup also refreshes it. For Fly, follow it with `npm run export` and redeploy so the new immutable snapshot reaches the server. Old content-addressed cache files can be removed from the local cache's `images/` directory if no longer wanted. Rotate expiring service/model credentials in the host's secret store and restart the service. Never add `.local/`, `public-assets/`, or `.env` to a commit.

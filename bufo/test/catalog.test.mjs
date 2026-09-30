@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { catalogFromTree, createCatalogStore, githubHttpApi, imageType, SOURCE_REPO, syncCatalog, validateCatalog } from '../catalog.mjs';
+import { catalogFromTree, createCatalogStore, exportCatalog, githubHttpApi, imageType, SOURCE_REPO, syncCatalog, validateCatalog } from '../catalog.mjs';
 import { catalog, emoji, imageBytes } from './fixtures.mjs';
 
 async function temporary(t) {
@@ -17,6 +17,47 @@ function treeEntry(index, name = `bufo-example-${index}`) {
   const entry = emoji(index, name);
   return { type: 'blob', mode: '100644', path: entry.filename, sha: entry.sha, size: entry.size };
 }
+
+test('public exports contain only the catalog and verified image files', async t => {
+  const outputDir = await temporary(t);
+  const value = catalog(3);
+  const progress = [];
+  await exportCatalog({
+    outputDir, intervalMs: 0, onProgress: count => progress.push(count),
+    store: {
+      get: async () => value,
+      image: async id => ({ bytes: imageBytes(Number.parseInt(id, 16)) })
+    }
+  });
+  assert.deepEqual((await readdir(outputDir)).sort(), ['catalog.json', 'images']);
+  assert.deepEqual(JSON.parse(await readFile(join(outputDir, 'catalog.json'), 'utf8')), value);
+  assert.equal((await readdir(join(outputDir, 'images'))).length, 3);
+  assert.deepEqual(progress, [1, 2, 3]);
+  let calls = 0;
+  const store = createCatalogStore({ dataDir: outputDir, readOnly: true, api: async () => { calls += 1; } });
+  assert.deepEqual((await store.image(value.emojis[0].id)).bytes, imageBytes(0));
+  assert.equal(calls, 0);
+});
+
+test('failed export does not publish a new catalog and read-only images never download or self-repair', async t => {
+  const outputDir = await temporary(t);
+  const value = catalog(1);
+  await assert.rejects(exportCatalog({
+    outputDir, intervalMs: 0,
+    store: { get: async () => value, image: async () => ({ bytes: Buffer.from('invalid') }) }
+  }), { code: 'INVALID_IMAGE' });
+  await assert.rejects(readFile(join(outputDir, 'catalog.json')), { code: 'ENOENT' });
+  await writeFile(join(outputDir, 'catalog.json'), JSON.stringify(value));
+  let calls = 0;
+  const store = createCatalogStore({ dataDir: outputDir, readOnly: true, api: async () => { calls += 1; } });
+  await assert.rejects(store.image(value.emojis[0].id), { code: 'IMAGE_MISSING' });
+  const path = join(outputDir, 'images', `${value.emojis[0].sha}.${value.emojis[0].extension}`);
+  await mkdir(join(outputDir, 'images'));
+  await writeFile(path, 'damaged');
+  await assert.rejects(store.image(value.emojis[0].id), { code: 'INVALID_IMAGE' });
+  assert.equal(await readFile(path, 'utf8'), 'damaged');
+  assert.equal(calls, 0);
+});
 
 test('sync follows pinned subtrees and uses the canonical map for duplicate file extensions', async t => {
   const dataDir = await temporary(t);

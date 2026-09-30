@@ -8,9 +8,10 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env server.mjs",
     "sync": "node --env-file-if-exists=.env catalog.mjs",
+    "export": "node --env-file-if-exists=.env catalog.mjs --export",
     "test": "node --test test/*.test.mjs",
     "test:browser": "playwright test",
-    "check": "node --check app.js && node --check core.js && node --check catalog.mjs && node --check jev.mjs && node --check server.mjs && node --check deployment.mjs"
+    "check": "node --check app.js && node --check core.js && node --check catalog.mjs && node --check jev.mjs && node --check server.mjs && node --check deployment.mjs && node --check usage.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0"
