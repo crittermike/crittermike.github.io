@@ -74,7 +74,7 @@ Both are implemented using their documented HTTP APIs, without an SDK dependency
 
 Create a key at [TypeSafe](https://console.typesafe.ai/keys) or [Vercel AI Gateway](https://vercel.com/d?to=%2F%5Bteam%5D%2F~%2Fai-gateway%2Fapi-keys). Use an account/provider approved for the data you submit. Account creation, billing, and any credit purchase must be done by the account owner. Do not assume Jev is free: Vercel's current free tier is limited to a subset of models, and account-specific credit eligibility must be checked in its dashboard. The app never purchases credits or enables automatic top-ups.
 
-Pricing example, not a measured cost: 300,000 total input tokens across all scoring batches would cost $0.0126, or about $12.60 per 1,000 suggestions at the listed token price. Exhaustive scoring repeats a question for every filename, so it processes substantially more than just the message and filename list. Actual token counts depend on filenames and message length. The response includes aggregate token usage. This excludes any account/payment fees and assumes current prices.
+A live check on September 30, 2026 with TypeSafe `jev-1.13.0` and 1,867 emojis used 45 requests and 272,080-272,170 aggregate input tokens per ranking for two short messages. Server ranking time was 2.9-3.0 seconds, excluding the 700 ms pause and image loading. At the published rate, that is about $0.0114 per ranking ($11.43 per 1,000), not an invoice-confirmed charge. Exhaustive scoring repeats a question for every filename, so it processes substantially more than just the message and filename list. Longer messages, catalog changes, provider load, and plan limits can change cost and latency. The response includes aggregate token usage. These estimates exclude account/payment fees.
 
 Sources: [TypeSafe models, pricing, context and data handling](https://docs.typesafe.ai/models), [TypeSafe API](https://docs.typesafe.ai/api), [TypeSafe ranking pattern](https://docs.typesafe.ai/cookbooks/semantic_find), [Vercel Jev listing](https://vercel.com/ai-gateway/models/jev), [Vercel evaluation HTTP API](https://vercel.com/docs/ai-gateway/modalities/evaluation), [Gateway pricing and credits](https://vercel.com/docs/ai-gateway/pricing), [Gateway authentication](https://vercel.com/docs/ai-gateway/authentication-and-byok).
 
@@ -106,6 +106,8 @@ npm run sync
 ```
 
 Tests use synthetic filenames, images, and mocked provider responses. They cover exhaustive scoring, context limits, semantic results without keyword overlap, both provider protocols, debounce timing, stale responses, cancellation, private assets, canonical duplicates, server credentials, shared-user isolation, global upstream concurrency, proxy authentication, and light-only no-setup browser behavior. They do not prove live model quality, latency, or account access. Shared startup checks the configured account; assess real suggestions before rolling out to colleagues.
+
+Separate live TypeSafe checks on September 30, 2026 confirmed full-catalog rankings for "oops" and "payments are broken", with all twelve image previews loading for each. These are smoke checks, not a comprehensive quality benchmark or proof of an internal deployment.
 
 Optional browser checks use Playwright with an installed Google Chrome and isolated test servers. They never use the private source catalog, call a real model, or overwrite the host clipboard:
 
