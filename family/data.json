@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T03:45:34.983Z",
+  "generated_at": "2026-09-30T04:00:34.872Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,16 +17,16 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-09-29-663da5268e5906ea2ad0b7dba6210c5b7354ec923ccc6bde85a8ca96a093669d",
-          "label": "Math: Complete WB pp.53-54",
+          "id": "sch-work-on-2026-09-30-d5e3c361ab3204f79bb1702bc35d11ca969a0a4264e1bea8af3dc08f97f93558",
+          "label": "Math: Complete WB pp.58-59",
           "dueDate": null,
-          "workOnDate": "2026-09-29"
+          "workOnDate": "2026-09-30"
         },
         {
-          "id": "sch-work-on-2026-09-29-fb20a28f9ba0ffbb2871ea6d875e6a9183171e897f3aa4a2eb40f6d3e661ea25",
+          "id": "sch-work-on-2026-09-30-d1c168b3ad57e285a80fb468362bee5d3c679fa0bc0b5e867043b495d3bcd97c",
           "label": "English: Complete Noun Review Worksheet",
           "dueDate": null,
-          "workOnDate": "2026-09-29"
+          "workOnDate": "2026-09-30"
         }
       ]
     },
@@ -58,21 +58,14 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-09-29-b443f8eebb9d5b5b3eb015abd8eadce495f0ce57b928fc88bdf0f8e9b3ee5158",
-          "label": "Spanish (Simon): Read textbook p.234",
-          "dueDate": null,
-          "workOnDate": "2026-09-29"
+          "id": "sch-2026-10-01-fbfef685d247203c73f368f44878f6831a9ed57321849d8fd6219888f1f6d555",
+          "label": "Honors English (deMarrais): 100 points. verified in Henry’s signed-in Classroom assignment on 2026-09-28, superseding the undated email. Source: INBOX 330013",
+          "dueDate": "2026-10-01"
         },
         {
-          "id": "sch-work-on-2026-09-29-4640d8a05ee0daa0d562a0e94256355ee82ead8b724b3551affc79c37eec71e4",
-          "label": "Spanish (Simon): answer activity 19",
-          "dueDate": null,
-          "workOnDate": "2026-09-29"
-        },
-        {
-          "id": "sch-2026-09-30-e9733fcb25d325af278af363590da516d87951b81463e9016135afd5be70cf80",
-          "label": "Spanish (Simon): Answer textbook activity 4 on p.243 (Responde el libro act. 4 p.243)",
-          "dueDate": "2026-09-30"
+          "id": "sch-2026-10-01-11a9ca97ca27c643889a9d65dd341b4ee504bace8b4212433e0bc240d8634041",
+          "label": "Honors English (deMarrais): 100 points. and details verified in Henry’s signed-in Classroom assignment on 2026-09-28. Source: INBOX 330014",
+          "dueDate": "2026-10-01"
         }
       ]
     },
@@ -318,7 +311,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Nancy's birthday: dinner out or takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -326,8 +319,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -335,7 +328,7 @@
       "dow_short": "Thu",
       "name": "Korean beef and broccoli bowls",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -358,19 +351,12 @@
   "weather": {
     "now": {
       "temp": 64,
-      "hi": 82,
+      "hi": 85,
       "lo": 59,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "⛅",
-        "hi": 85,
-        "lo": 59,
-        "code": 3
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -398,24 +384,31 @@
         "hi": 70,
         "lo": 62,
         "code": 53
+      },
+      {
+        "d": "Mon",
+        "icon": "🌦",
+        "hi": 68,
+        "lo": 62,
+        "code": 55
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-29T07:22",
         "2026-09-30T07:23",
         "2026-10-01T07:24",
         "2026-10-02T07:25",
         "2026-10-03T07:25",
-        "2026-10-04T07:26"
+        "2026-10-04T07:26",
+        "2026-10-05T07:27"
       ],
       "sunsets": [
-        "2026-09-29T19:16",
         "2026-09-30T19:14",
         "2026-10-01T19:13",
         "2026-10-02T19:11",
         "2026-10-03T19:10",
-        "2026-10-04T19:09"
+        "2026-10-04T19:09",
+        "2026-10-05T19:07"
       ],
       "timezone": "America/New_York"
     }
@@ -1981,6 +1974,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 69594.21,
     "source": "ynab",
-    "updatedAt": "2026-09-30T03:45:33.891Z"
+    "updatedAt": "2026-09-30T04:00:33.921Z"
   }
 }
