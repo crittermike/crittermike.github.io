@@ -396,7 +396,14 @@
       return state;
     }
     function next(state, random = Math.random) {
-      if (state.pending) return state.pending;
+      if (state.pending) {
+        // Older saves may contain a written question; keep scores and convert it in place.
+        if (state.pending.mode === "written") {
+          state.pending.mode = "choice";
+          state.pending.answer.choice = null;
+        }
+        return state.pending;
+      }
       if (state.round.length >= SIZE) return null;
       const eligible = TOPICS.filter(t => state.progress[t.id].due <= state.turn && !state.recent.includes(t.id));
       const reviews = eligible.filter(t => state.progress[t.id].review);
@@ -405,19 +412,19 @@
       const sorted = pool.map(t => ({ t, tie: random() })).sort((a, b) =>
         state.progress[a.t.id].attempts - state.progress[b.t.id].attempts ||
         state.progress[a.t.id].last - state.progress[b.t.id].last || a.tie - b.tie);
-      const t = sorted[0].t, p = state.progress[t.id];
-      const mode = p.review ? p.reviewMode : p.correct === 0 ? "choice" : p.written === 0 || random() < .5 ? "written" : "choice";
+      const t = sorted[0].t;
+      const mode = "choice";
       const order = [0, 1, 2, 3];
       for (let i = 3; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
       state.pending = { id: t.id, mode, serial: ++state.serial, order, answer: { choice: null, values: t.fields.map(() => "") }, submitted: false, right: null };
       return state.pending;
     }
-    const complete = q => q.mode === "choice" ? integer(q.answer.choice, 0, 3) : q.answer.values.every(v => v.trim().length > 0);
+    const complete = q => integer(q.answer.choice, 0, 3);
     function submit(state, serial, skip = false) {
       const q = state.pending;
       if (!q || q.serial !== serial || q.submitted) throw new Error("This answer has already been counted.");
       if (!skip && !complete(q)) throw new Error("Fill in the answer first.");
-      q.right = !skip && (q.mode === "choice" ? q.answer.choice === 0 : writtenCorrect(BY_ID[q.id], q.answer.values));
+      q.right = !skip && q.answer.choice === 0;
       q.submitted = true;
       state.turn++;
       if (q.right) state.correct++;
@@ -485,12 +492,10 @@
         $("main").innerHTML = `<section class="question"><h2>Round finished</h2><p class="round-result">${state.round.filter(r => r.correct).length} of 10 correct</p><p>${Q.roundScore(state)} points this round. ${state.correct * 10} total points.</p><button class="primary" id="new-round" type="button">Next 10 questions</button>${missed.length ? `<h3>Answers to review</h3>${missed.map(id => `<div class="review"><p><b>${escape(Q.BY_ID[id].question)}</b></p><p>${escape(Q.BY_ID[id].note)}</p></div>`).join("")}` : ""}</section>`;
       } else {
         const t = Q.BY_ID[q.id];
-        const options = q.mode === "choice"
-          ? `<fieldset class="choices" aria-labelledby="question-title">${q.order.map(i => `<label class="option"><input type="radio" name="answer" value="${i}" ${q.answer.choice === i ? "checked" : ""}><span>${escape(t.choices[i])}</span></label>`).join("")}</fieldset>`
-          : `<div class="fields ${t.fields.length === 1 ? "single" : ""}">${t.fields.map((f, i) => `<label for="answer-${i}">${escape(f.label)}<input type="text" id="answer-${i}" data-field="${i}" value="${escape(q.answer.values[i])}" maxlength="160" autocomplete="off" spellcheck="false" placeholder="Your answer"></label>`).join("")}</div>`;
-        $("main").innerHTML = `<section class="question"><h2 id="question-title">${escape(q.mode === "choice" ? t.question : t.writtenQuestion)}</h2>${q.submitted
+        const options = `<fieldset class="choices" aria-labelledby="question-title">${q.order.map(i => `<label class="option"><input type="radio" name="answer" value="${i}" ${q.answer.choice === i ? "checked" : ""}><span>${escape(t.choices[i])}</span></label>`).join("")}</fieldset>`;
+        $("main").innerHTML = `<section class="question"><h2 id="question-title">${escape(t.question)}</h2>${q.submitted
           ? `<div class="feedback" style="margin-top:0;padding-top:0;border:0"><p class="result ${q.right ? "correct" : "incorrect"}">${q.right ? "Correct. +10 points." : "Incorrect. No points."}</p>${answerList(t, q.mode)}<p>${escape(t.note)}</p><button class="primary" id="next" type="button">${state.round.length === 10 ? "See results" : "Next question"}</button></div>`
-          : `<p class="instruction">${q.mode === "choice" ? "Choose one answer." : `Use short answers. Capitalization and punctuation don't matter.${t.groups.length ? " The grouped lists can be in any order." : ""}`}</p><form id="answer-form">${options}<div class="buttons"><button class="primary" id="check" type="submit" ${Q.complete(q) ? "" : "disabled"}>Check answer</button><button id="skip" type="button">I don't know</button></div></form>`}</section>`;
+          : `<p class="instruction">Choose one answer.</p><form id="answer-form">${options}<div class="buttons"><button class="primary" id="check" type="submit" ${Q.complete(q) ? "" : "disabled"}>Check answer</button><button id="skip" type="button">I don't know</button></div></form>`}</section>`;
       }
       scores(); themeLabel(); save();
       if (focus) {
