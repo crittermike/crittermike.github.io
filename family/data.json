@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T23:45:35.231Z",
+  "generated_at": "2026-09-30T00:00:38.470Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -290,11 +290,11 @@
     ]
   },
   "dinner": {
-    "name": "Nancy's birthday: dinner out or takeout",
+    "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Proposed birthday dinner for the family; Nancy's choice of restaurant. No reservation or order made. Nutrition and exact orders unknown. No home cooking assigned.",
+    "note": "Home calendar has Dinner with Matt and Nadia, September 30, 6:00-8:00 PM. Location, menu and which family members attend are unspecified. No hosting or home cooking assumed. Takeout is the proposed fallback for anyone not attending, not an order or a childcare arrangement. Nutrition unknown; no dependence on leftovers.",
     "recipe": null
   },
   "mealweek": [
@@ -1924,7 +1924,7 @@
   ],
   "finance": {
     "month": "September 2026",
-    "dayPct": 96.7,
+    "dayPct": 100,
     "totalSpend": 5225.38,
     "totalBudget": 0,
     "categories": [
@@ -1981,6 +1981,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 69594.21,
     "source": "ynab",
-    "updatedAt": "2026-09-29T23:45:33.936Z"
+    "updatedAt": "2026-09-30T00:00:36.108Z"
   }
 }
