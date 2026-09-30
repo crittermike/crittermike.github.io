@@ -290,7 +290,7 @@ test('bounds simultaneous shared rankings and recovers capacity when they finish
 test('streams progress before the ranking is ready while preserving ordinary JSON clients', async t => {
   const release = deferred();
   const partial = deferred();
-  const value = catalog(100);
+  const value = catalog(1200);
   const app = await start(t, {
     catalogStore: { get: async () => value },
     fetchImpl: async (_url, { body }) => {
@@ -312,13 +312,18 @@ test('streams progress before the ranking is ready while preserving ordinary JSO
   try {
     await partial.promise;
     assert.equal(events[0].scoredCount, 0);
+    assert.deepEqual(events[0].ranking.suggestions, []);
     assert.ok(events.at(-1).scoredCount < value.emojis.length);
+    assert.equal(events.at(-1).ranking.suggestions.length, 12);
+    assert.equal(events.at(-1).ranking.evaluatedCount, events.at(-1).scoredCount);
+    assert.equal(events.at(-1).ranking.syncedAt, value.syncedAt);
     assert.equal(finished, false);
   } finally { release.resolve(); }
   const result = await reading;
   assert.equal(result.evaluatedCount, value.emojis.length);
   assert.equal(result.syncedAt, value.syncedAt);
   assert.equal(events.at(-1).scoredCount, value.emojis.length);
+  assert.deepEqual(events.at(-1).ranking.suggestions, result.suggestions);
   const ordinary = await app.post('suggest', { text: 'Ordinary JSON' });
   assert.equal(ordinary.json().evaluatedCount, value.emojis.length);
 });
@@ -334,6 +339,35 @@ test('a provider failure after streaming begins is an explicit error event, not 
   const invalid = await app.post('suggest', { text: '' }, { headers: { ...app.headers, Accept: 'application/x-ndjson' } });
   assert.equal(invalid.status, 400);
   assert.equal(invalid.json().code, 'INVALID_TEXT');
+});
+
+test('the progress and final ranking retain the snapshot captured before inference', async t => {
+  const value = catalog(1200);
+  const syncedAt = value.syncedAt;
+  const partial = deferred();
+  const release = deferred();
+  const app = await start(t, {
+    catalogStore: { get: async () => value },
+    fetchImpl: async (_url, { body }) => {
+      const request = JSON.parse(body);
+      if (!Object.hasOwn(request.questions, 'e0')) await release.promise;
+      return Response.json(answerRequest(request));
+    }
+  });
+  const response = await fetch(`${app.origin}/api/suggest`, {
+    method: 'POST', headers: { ...app.headers, Accept: 'application/x-ndjson' },
+    body: JSON.stringify({ text: 'Keep this snapshot', syncedAt })
+  });
+  const events = [];
+  const reading = readSuggestionStream(response.body, {
+    onProgress: event => { events.push(event); if (event.scoredCount > 0) partial.resolve(); }
+  });
+  try {
+    await partial.promise;
+    value.syncedAt = '2026-09-30T14:00:00.000Z';
+  } finally { release.resolve(); }
+  assert.equal((await reading).syncedAt, syncedAt);
+  assert.ok(events.every(event => event.ranking.syncedAt === syncedAt));
 });
 
 test('aborting a streaming response cancels the active provider evaluation', async t => {

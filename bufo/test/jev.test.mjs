@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   buildScoringQuestions, evaluateQuestions, limitEvaluations,
-  MAX_NAME_BONUS, MAX_REQUEST_BYTES, nameLengthBonus, packQuestions, parseEvaluation, PROVIDERS, rankWithJev,
+  MAX_NAME_BONUS, MAX_PARALLEL_REQUESTS, MAX_QUESTIONS_PER_REQUEST, MAX_REQUEST_BYTES, nameLengthBonus, packQuestions, parseEvaluation, rankWithJev,
   validateConnection, validateText, verifyConnection
 } from '../jev.mjs';
 import { answerRequest, catalog, deferred, emoji, fakeFetch, flush, TEST_KEY } from './fixtures.mjs';
@@ -14,30 +14,77 @@ const options = { text: 'A nice day', provider: 'typesafe', apiKey: TEST_KEY, qu
 test('reports exact completed filename counts when parallel batches finish out of order', async () => {
   const pending = [];
   const progress = [];
+  const emojis = catalog(1200).emojis;
+  const batches = packQuestions('Hello', buildScoringQuestions(emojis, 'typesafe'), 'typesafe');
+  let hold = true;
   const ranking = rankWithJev({
-    text: 'Hello', emojis: catalog(100).emojis, provider: 'typesafe', apiKey: TEST_KEY,
+    text: 'Hello', emojis, provider: 'typesafe', apiKey: TEST_KEY,
     onProgress: event => progress.push(event),
     fetchImpl: async (_url, { body }) => {
       const request = JSON.parse(body);
       const gate = deferred();
       pending.push({ request, gate });
-      await gate.promise;
+      if (hold) await gate.promise;
       return Response.json(answerRequest(request));
     }
   });
   await flush();
-  assert.equal(pending.length, 3);
+  assert.equal(pending.length, Math.min(MAX_PARALLEL_REQUESTS, batches.length));
   assert.deepEqual(progress.map(event => event.scoredCount), [0]);
+  assert.deepEqual(progress[0].ranking.suggestions, []);
   pending[1].gate.resolve();
   await flush();
   assert.equal(progress[1].scoredCount, Object.keys(pending[1].request.questions).length);
   assert.equal(progress[1].completedBatches, 1);
-  pending[0].gate.resolve();
-  pending[2].gate.resolve();
+  assert.equal(progress[1].ranking.evaluatedCount, progress[1].scoredCount);
+  const scoredIds = new Set(Object.keys(pending[1].request.questions).map(key => emojis[Number(key.slice(1))].id));
+  assert.ok(progress[1].ranking.suggestions.length > 0);
+  assert.ok(progress[1].ranking.suggestions.every(match => scoredIds.has(match.id)));
+  hold = false;
+  for (const item of pending) item.gate.resolve();
   const result = await ranking;
-  assert.equal(progress.at(-1).scoredCount, 100);
+  assert.equal(progress.at(-1).scoredCount, emojis.length);
   assert.equal(progress.at(-1).completedBatches, result.requestCount);
-  assert.ok(progress.every(event => event.totalCount === 100 && event.totalBatches === 3));
+  assert.ok(progress.every(event => event.totalCount === emojis.length && event.totalBatches === batches.length));
+  assert.deepEqual(progress.at(-1).ranking.suggestions, result.suggestions);
+});
+
+test('later scores replace the early favorite and mosaics wait for every tile before averaging', async () => {
+  const emojis = catalog(1200).emojis;
+  emojis[0] = emoji(0, 'bufo-assembled_0_0');
+  emojis[1] = emoji(1, 'bufo-early-favorite');
+  emojis[1198] = emoji(1198, 'bufo-late-favorite');
+  emojis[1199] = emoji(1199, 'bufo-assembled_1_0');
+  const partial = deferred();
+  const release = deferred();
+  const updates = [];
+  const ranking = rankWithJev({
+    text: 'Hello', emojis, provider: 'typesafe', apiKey: TEST_KEY,
+    onProgress: progress => {
+      updates.push(progress);
+      if (progress.scoredCount > 0) partial.resolve();
+    },
+    fetchImpl: async (_url, { body }) => {
+      const request = JSON.parse(body);
+      if (!Object.hasOwn(request.questions, 'e0')) await release.promise;
+      return Response.json(answerRequest(request, filename => {
+        if (filename === emojis[0].filename || filename === emojis[1198].filename) return 0.99;
+        if (filename === emojis[1199].filename) return 0.21;
+        return filename === emojis[1].filename ? 0.8 : 0.1;
+      }));
+    }
+  });
+  try {
+    await partial.promise;
+    assert.equal(updates.at(-1).ranking.suggestions[0].id, emojis[1].id);
+    assert.ok(updates.at(-1).ranking.suggestions.every(match => match.id !== emojis[0].id));
+  } finally { release.resolve(); }
+  const result = await ranking;
+  assert.equal(result.suggestions[0].id, emojis[1198].id);
+  const mosaic = result.suggestions.find(match => match.id === emojis[0].id);
+  assert.ok(Math.abs(mosaic.score - 0.6) < 1e-10);
+  assert.equal(mosaic.nameBonus, nameLengthBonus('bufo-assembled', mosaic.score));
+  assert.deepEqual(updates.at(-1).ranking.suggestions, result.suggestions);
 });
 
 test('name bonuses grow gradually, exclude the common prefix, and stop at six points', () => {
@@ -134,17 +181,27 @@ test('every filename gets its own independent question, including catalogs large
   assert.deepEqual(filenames, emojis.map(entry => entry.filename));
 });
 
-test('bounds context size even with maximum-length names and Unicode messages', () => {
+test('packs one hundred questions per request without dropping or duplicating the remainder', () => {
+  const questions = buildScoringQuestions(catalog(MAX_QUESTIONS_PER_REQUEST + 1).emojis, 'typesafe');
+  const batches = packQuestions('Hello', questions, 'typesafe');
+  assert.deepEqual(batches.map(batch => Object.keys(batch).length), [100, 1]);
+  assert.deepEqual(Object.assign({}, ...batches), questions);
+  assert.throws(() => packQuestions('Hello', { oversized: { type: 'noul', instructions: 'x'.repeat(MAX_REQUEST_BYTES) } }, 'typesafe'), { code: 'INPUT_TOO_LARGE' });
+});
+
+test('bounds the actual serialized requests even with maximum-length names and Unicode messages', async () => {
   const emojis = Array.from({ length: 300 }, (_, index) => emoji(index, `bufo-${index}-${'x'.repeat(180)}`));
   const text = '\u4f60'.repeat(2000);
   for (const provider of ['typesafe', 'vercel']) {
     const scoring = buildScoringQuestions(emojis, provider);
     const batches = packQuestions(text, scoring, provider);
     assert.ok(batches.length > 1);
+    const requests = [];
     for (const questions of batches) {
-      const body = { model: PROVIDERS[provider].model, state: { message: text }, questions };
-      assert.ok(Buffer.byteLength(JSON.stringify(body)) < MAX_REQUEST_BYTES);
+      assert.ok(Object.keys(questions).length <= MAX_QUESTIONS_PER_REQUEST);
+      await evaluateQuestions({ text, questions, provider, apiKey: TEST_KEY, fetchImpl: fakeFetch(requests) });
     }
+    assert.ok(requests.every(request => Buffer.byteLength(request.options.body) <= MAX_REQUEST_BYTES));
     assert.equal(batches.flatMap(batch => Object.keys(batch)).length, emojis.length);
   }
 });
@@ -235,6 +292,18 @@ for (const [status, code] of [[401, 'PROVIDER_AUTH'], [403, 'PROVIDER_AUTH'], [4
   });
 }
 
+test('honors provider cooldown headers on gateway failures without retrying paid work', async () => {
+  let calls = 0;
+  await assert.rejects(evaluateQuestions({
+    ...options,
+    fetchImpl: async () => {
+      calls += 1;
+      return new Response('private upstream error', { status: 520, headers: { 'retry-after': '60' } });
+    }
+  }), error => error.code === 'PROVIDER_ERROR' && error.retryAfter === 60 && error.message.includes('60 seconds') && !error.message.includes('private'));
+  assert.equal(calls, 1);
+});
+
 test('network errors, invalid JSON, and timeouts are explicit failures', async () => {
   for (const [fetchImpl, code] of [
     [async () => { throw new TypeError('connection failed'); }, 'PROVIDER_UNREACHABLE'],
@@ -263,7 +332,7 @@ test('cancels an active provider request without starting the next stage', async
   assert.equal(calls, 1);
 });
 
-test('never runs more than three provider requests concurrently', async () => {
+test('uses the configured concurrency ceiling without exceeding it', async () => {
   let active = 0;
   let maximum = 0;
   await rankWithJev({
@@ -276,8 +345,8 @@ test('never runs more than three provider requests concurrently', async () => {
       return Response.json(answerRequest(JSON.parse(body)));
     }
   });
-  assert.ok(maximum <= 3);
-  assert.ok(maximum > 1);
+  const batches = packQuestions('Message', buildScoringQuestions(catalog(1867).emojis, 'typesafe'), 'typesafe');
+  assert.equal(maximum, Math.min(MAX_PARALLEL_REQUESTS, batches.length));
 });
 
 test('a failed batch cancels its peers and fails the whole ranking with the original error', async () => {
@@ -297,14 +366,15 @@ test('a failed batch cancels its peers and fails the whole ranking with the orig
       }, { once: true }));
     }
   }), { code: 'PROVIDER_BILLING' });
-  assert.equal(calls, 3);
-  assert.equal(aborted, 2);
+  const batches = packQuestions('oops', buildScoringQuestions(catalog(1867).emojis, 'typesafe'), 'typesafe');
+  assert.equal(calls, Math.min(MAX_PARALLEL_REQUESTS, batches.length));
+  assert.equal(aborted, calls - 1);
 });
 
 test('a missing score never produces a partial success', async () => {
   let calls = 0;
   await assert.rejects(rankWithJev({
-    text: 'payments are broken', emojis: catalog(100).emojis, provider: 'typesafe', apiKey: TEST_KEY,
+    text: 'payments are broken', emojis: catalog(1200).emojis, provider: 'typesafe', apiKey: TEST_KEY,
     fetchImpl: async (_url, { body }) => {
       const request = JSON.parse(body);
       const result = answerRequest(request);
@@ -314,10 +384,10 @@ test('a missing score never produces a partial success', async () => {
   }), { code: 'INVALID_RESPONSE' });
 });
 
-test('concurrent viewers share a three-evaluation pool through response-body completion', async () => {
+test('concurrent viewers share the configured evaluation pool through response-body completion', async () => {
   let active = 0;
   let maximum = 0;
-  const evaluate = limitEvaluations(evaluateQuestions, 3);
+  const evaluate = limitEvaluations(evaluateQuestions, MAX_PARALLEL_REQUESTS);
   const fetchImpl = async (_url, { body }) => {
     active += 1;
     maximum = Math.max(maximum, active);
@@ -331,10 +401,10 @@ test('concurrent viewers share a three-evaluation pool through response-body com
     };
   };
   const results = await Promise.all(['First viewer', 'Second viewer', 'Third viewer'].map(text =>
-    rankWithJev({ text, emojis: catalog(200).emojis, provider: 'typesafe', apiKey: TEST_KEY, evaluate, fetchImpl })
+    rankWithJev({ text, emojis: catalog(1200).emojis, provider: 'typesafe', apiKey: TEST_KEY, evaluate, fetchImpl })
   ));
-  assert.equal(maximum, 3);
-  assert.ok(results.every(result => result.evaluatedCount === 200));
+  assert.equal(maximum, MAX_PARALLEL_REQUESTS);
+  assert.ok(results.every(result => result.evaluatedCount === 1200));
 });
 
 test('cancelling one viewer removes its queued evaluations without affecting another', async () => {

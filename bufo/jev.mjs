@@ -14,8 +14,9 @@ export const PROVIDERS = {
     keyVariable: 'AI_GATEWAY_API_KEY'
   }
 };
-export const MAX_REQUEST_BYTES = 24_000;
-const MAX_PARALLEL_REQUESTS = 3;
+export const MAX_REQUEST_BYTES = 60_000;
+export const MAX_QUESTIONS_PER_REQUEST = 100;
+export const MAX_PARALLEL_REQUESTS = 12;
 export const MAX_NAME_BONUS = 0.06;
 const MIN_RELEVANT_SCORE = 0.5;
 
@@ -118,20 +119,26 @@ export function buildScoringQuestions(emojis, provider) {
 
 export function packQuestions(text, questions, provider) {
   const batches = [];
+  const baseBytes = Buffer.byteLength(JSON.stringify(requestBody(text, {}, provider)));
   let batch = {};
+  let bytes = baseBytes;
+  let count = 0;
   for (const [key, question] of Object.entries(questions)) {
-    const candidate = { ...batch, [key]: question };
-    if (Buffer.byteLength(JSON.stringify(requestBody(text, candidate, provider))) > MAX_REQUEST_BYTES) {
-      if (!Object.keys(batch).length) throw new AppError(400, 'An emoji question exceeds the model input budget.', 'INPUT_TOO_LARGE');
-      batches.push(batch);
-      batch = {};
-    }
-    batch[key] = question;
-    if (Buffer.byteLength(JSON.stringify(requestBody(text, batch, provider))) > MAX_REQUEST_BYTES) {
+    const entryBytes = Buffer.byteLength(JSON.stringify({ [key]: question })) - 2;
+    if (baseBytes + entryBytes > MAX_REQUEST_BYTES) {
       throw new AppError(400, 'An emoji question exceeds the model input budget.', 'INPUT_TOO_LARGE');
     }
+    if (count && (count === MAX_QUESTIONS_PER_REQUEST || bytes + entryBytes + 1 > MAX_REQUEST_BYTES)) {
+      batches.push(batch);
+      batch = {};
+      bytes = baseBytes;
+      count = 0;
+    }
+    batch[key] = question;
+    bytes += entryBytes + (count ? 1 : 0);
+    count += 1;
   }
-  if (Object.keys(batch).length) batches.push(batch);
+  if (count) batches.push(batch);
   return batches;
 }
 
@@ -179,6 +186,9 @@ export async function evaluateQuestions({ text, questions, provider, apiKey, sig
   }
   if (!response.ok) {
     await response.body?.cancel();
+    const raw = response.headers.get('retry-after');
+    const seconds = raw && /^\d+$/.test(raw) ? Number(raw) : Math.ceil((Date.parse(raw) - Date.now()) / 1000);
+    const retryAfter = Number.isFinite(seconds) ? Math.max(1, Math.min(seconds, 300)) : 0;
     if (response.status === 401 || response.status === 403) {
       throw new AppError(401, 'Jev access needs the app owner\'s attention. Try again after setup is fixed.', 'PROVIDER_AUTH');
     }
@@ -186,12 +196,11 @@ export async function evaluateQuestions({ text, questions, provider, apiKey, sig
       throw new AppError(402, 'Jev credits are unavailable. The app owner needs to update billing.', 'PROVIDER_BILLING');
     }
     if (response.status === 429 || response.status === 529) {
-      const raw = response.headers.get('retry-after');
-      const seconds = raw && /^\d+$/.test(raw) ? Number(raw) : Math.ceil((Date.parse(raw) - Date.now()) / 1000);
-      const retryAfter = Number.isFinite(seconds) ? Math.max(1, Math.min(seconds, 300)) : 10;
-      throw new AppError(429, `Jev is busy or rate limited. Try again in ${retryAfter} seconds.`, 'PROVIDER_BUSY', retryAfter);
+      const wait = retryAfter || 10;
+      throw new AppError(429, `Jev is busy or rate limited. Try again in ${wait} seconds.`, 'PROVIDER_BUSY', wait);
     }
-    throw new AppError(502, `The provider could not evaluate this message (HTTP ${response.status}). Try again or check model access.`, 'PROVIDER_ERROR');
+    const next = retryAfter ? `Try again in ${retryAfter} seconds.` : 'Try again or check model access.';
+    throw new AppError(502, `The provider could not evaluate this message (HTTP ${response.status}). ${next}`, 'PROVIDER_ERROR', retryAfter);
   }
   let data;
   try {
@@ -224,6 +233,24 @@ export async function verifyConnection(options) {
   });
 }
 
+function rankScoredEmojis(groups, scores) {
+  const ranked = groups.filter(emoji => emoji.tiles.every(tile => scores.has(tile.id))).map(emoji => {
+    const score = emoji.tiles.reduce((sum, tile) => sum + scores.get(tile.id), 0) / emoji.tiles.length;
+    const nameBonus = nameLengthBonus(emoji.name, score);
+    return { emoji, score, nameBonus, rankingScore: score + nameBonus };
+  }).sort((a, b) => b.rankingScore - a.rankingScore || b.score - a.score || a.emoji.name.localeCompare(b.emoji.name));
+  const seen = new Set();
+  const suggestions = ranked.filter(({ emoji }) => {
+    const fingerprint = JSON.stringify(emoji.complete
+      ? emoji.rows.map(row => row.map(tile => tile.sha))
+      : ['incomplete', emoji.name, emoji.tiles.map(tile => tile.sha)]);
+    if (seen.has(fingerprint)) return false;
+    seen.add(fingerprint);
+    return true;
+  }).slice(0, 12).map(({ emoji, score, nameBonus }) => ({ id: emoji.id, score, nameBonus }));
+  return { suggestions, weakMatch: !suggestions.length || suggestions[0].score < MIN_RELEVANT_SCORE };
+}
+
 export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetchImpl = fetch, evaluate = evaluateQuestions, onProgress }) {
   text = validateText(text);
   validateConnection(provider, apiKey);
@@ -233,16 +260,24 @@ export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetc
   const started = performance.now();
   const controller = new AbortController();
   const combined = AbortSignal.any([controller.signal, ...(signal ? [signal] : []), AbortSignal.timeout(120_000)]);
+  const groups = groupEmojis(emojis);
+  const emojiIds = new Map(emojis.map((emoji, index) => [`e${index}`, emoji.id]));
+  const scores = new Map();
   const measurements = [];
   let scoredCount = 0;
   let totalBatches = 0;
   const progress = () => onProgress?.({
-    scoredCount, totalCount: emojis.length, completedBatches: measurements.length, totalBatches
+    scoredCount, totalCount: emojis.length, completedBatches: measurements.length, totalBatches,
+    ranking: {
+      ...rankScoredEmojis(groups, scores), evaluatedCount: scoredCount,
+      elapsedMs: Math.round(performance.now() - started)
+    }
   });
   const run = async questions => {
     try {
       const result = await evaluate({ text, questions, provider, apiKey, signal: combined, fetchImpl });
       combined.throwIfAborted();
+      for (const key of Object.keys(questions)) scores.set(emojiIds.get(key), result.answers[key]);
       measurements.push(result);
       scoredCount += Object.keys(questions).length;
       progress();
@@ -257,26 +292,9 @@ export async function rankWithJev({ text, emojis, provider, apiKey, signal, fetc
     const batches = packQuestions(text, scoring, provider);
     totalBatches = batches.length;
     progress();
-    const scored = await mapConcurrent(batches, run, combined);
-    const answers = Object.assign({}, ...scored);
-    const scores = new Map(emojis.map((emoji, index) => [emoji.id, answers[`e${index}`]]));
-    const ranked = groupEmojis(emojis).map(emoji => {
-      const score = emoji.tiles.reduce((sum, tile) => sum + scores.get(tile.id), 0) / emoji.tiles.length;
-      const nameBonus = nameLengthBonus(emoji.name, score);
-      return { emoji, score, nameBonus, rankingScore: score + nameBonus };
-    }).sort((a, b) => b.rankingScore - a.rankingScore || b.score - a.score || a.emoji.name.localeCompare(b.emoji.name));
-    const seen = new Set();
-    const suggestions = ranked.filter(({ emoji }) => {
-      const fingerprint = JSON.stringify(emoji.complete
-        ? emoji.rows.map(row => row.map(tile => tile.sha))
-        : ['incomplete', emoji.name, emoji.tiles.map(tile => tile.sha)]);
-      if (seen.has(fingerprint)) return false;
-      seen.add(fingerprint);
-      return true;
-    }).slice(0, 12).map(({ emoji, score, nameBonus }) => ({ id: emoji.id, score, nameBonus }));
+    await mapConcurrent(batches, run, combined);
     return {
-      suggestions,
-      weakMatch: !suggestions.length || suggestions[0].score < MIN_RELEVANT_SCORE,
+      ...rankScoredEmojis(groups, scores),
       evaluatedCount: emojis.length,
       requestCount: measurements.length,
       model: measurements.at(-1).model,

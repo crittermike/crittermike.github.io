@@ -20,10 +20,13 @@ export async function readSuggestionStream(body, { onProgress, signal } = {}) {
           event.totalCount < 1 || event.totalCount > 5000 || event.scoredCount < 0 ||
           event.scoredCount < scoredCount || event.scoredCount > event.totalCount ||
           (totalCount !== undefined && event.totalCount !== totalCount)) throw invalid();
+      if (event.ranking !== undefined && (!event.ranking || typeof event.ranking !== 'object' ||
+          Array.isArray(event.ranking) || event.ranking.evaluatedCount !== event.scoredCount)) throw invalid();
       scoredCount = event.scoredCount;
       totalCount = event.totalCount;
       onProgress?.(event);
     } else if (event?.type === 'result' && event.ranking && typeof event.ranking === 'object' && !Array.isArray(event.ranking)) {
+      if (totalCount !== undefined && (scoredCount !== totalCount || event.ranking.evaluatedCount !== totalCount)) throw invalid();
       result = event.ranking;
     } else if (event?.type === 'error' && typeof event.error === 'string') {
       throw Object.assign(new Error(event.error), { code: event.code, retryAfter: event.retryAfter || 0 });

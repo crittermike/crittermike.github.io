@@ -31,7 +31,9 @@ const test = base.extend({
             throw error;
           }
         }
-        if (state.failStatus) return new Response('', { status: state.failStatus });
+        if (state.failStatus) return new Response('', {
+          status: state.failStatus, headers: state.retryAfter ? { 'retry-after': String(state.retryAfter) } : {}
+        });
         return Response.json(answerRequest(body, filename => {
           if (state.score) return state.score(filename);
           if (state.weak) return 0.1;
@@ -68,6 +70,7 @@ async function pauseClock(page) {
 async function suggest(page, text = 'Good day') {
   await page.locator('#message').fill(text);
   await expect(page.locator('.emoji')).toHaveCount(12);
+  await expect(page.locator('#results')).toHaveAttribute('aria-busy', 'false');
 }
 
 test('fresh viewers get automatic suggestions without keys, settings, or an opt-in step', async ({ page, app }) => {
@@ -165,6 +168,28 @@ test('retry recovers a transient provider failure without a setup step', async (
   await page.locator('#retry').click();
   await expect(page.locator('.emoji')).toHaveCount(12);
   await expect(page.locator('#retry')).toBeHidden();
+});
+
+test('gateway cooldowns prevent early retries without automatically resending paid work', async ({ page, app }) => {
+  await open(page, app);
+  await pauseClock(page);
+  app.state.failStatus = 520;
+  app.state.retryAfter = 60;
+  await page.locator('#message').fill('Good day');
+  await page.clock.runFor(700);
+  await expect(page.locator('#status')).toContainText('60 seconds');
+  const requests = app.state.requests.length;
+  app.state.failStatus = 0;
+  await page.locator('#retry').click();
+  await page.clock.runFor(59_999);
+  expect(app.state.requests.length).toBe(requests);
+  await page.clock.runFor(1);
+  expect(app.state.requests.length).toBe(requests);
+  await page.locator('#retry').click();
+  await page.clock.runFor(700);
+  await expect(page.locator('.emoji')).toHaveCount(12);
+  await expect(page.locator('#results')).toHaveAttribute('aria-busy', 'false');
+  expect(app.state.requests.length).toBe(requests + 1);
 });
 
 test('weak matches are explicit rather than an empty results screen', async ({ page, app }) => {
@@ -353,8 +378,16 @@ test('the UI favors a relevant long name without displaying adjusted scores as m
   await expect(page.locator('.emoji').first()).not.toContainText('%');
 });
 
-test('shows real partial progress and no suggestions until all batches finish', async ({ page, app }) => {
-  app.catalog.emojis.push(...Array.from({ length: 100 }, (_, index) => emoji(index + 1000)));
+test('streams copyable best-so-far choices and reorders retained cards without reloading their images', async ({ page, app }) => {
+  app.catalog.emojis.push(...Array.from({ length: 400 }, (_, index) => emoji(index + 1000)));
+  const later = emoji(1500, 'bufo-later-favorite');
+  app.catalog.emojis.push(later);
+  app.state.score = filename => filename === later.filename ? 0.99 : filename === 'bufo-happy.png' ? 0.9 : 0.1;
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: async text => { window.testCopiedText = text; } } });
+  });
+  let happyImageRequests = 0;
+  page.on('request', request => { if (request.url().endsWith(`/api/emoji/${app.catalog.emojis[0].id}`)) happyImageRequests += 1; });
   const gate = deferred();
   app.state.beforeResponse = body => Object.hasOwn(body.questions, 'e0') ? Promise.resolve() : gate.promise;
   await open(page, app);
@@ -366,25 +399,109 @@ test('shows real partial progress and no suggestions until all batches finish', 
     expect(await progress.evaluate(bar => bar.value)).toBeLessThan(app.catalog.emojis.length);
     expect(await progress.evaluate(bar => bar.max)).toBe(app.catalog.emojis.length);
     await expect(page.locator('#status')).toContainText(`of ${app.catalog.emojis.length} scored`);
-    await expect(page.locator('.emoji')).toHaveCount(0);
+    await expect(page.locator('.emoji')).toHaveCount(12);
+    await expect(page.locator('.emoji').first()).toContainText(':bufo-happy:');
+    await expect(page.locator('#status')).toContainText('Best so far');
+    const button = page.getByRole('button', { name: 'Copy :bufo-happy:', exact: true });
+    await button.evaluate(button => { window.originalCard = button; window.originalImage = button.querySelector('img'); });
+    await button.click();
+    expect(await page.evaluate(() => window.testCopiedText)).toBe(':bufo-happy:');
+    await button.focus();
   } finally { gate.resolve(); }
   await expect(page.locator('.emoji')).toHaveCount(12);
   await expect(progress).toBeHidden();
   await expect(page.locator('#status')).toContainText(`${app.catalog.emojis.length} scored in`);
+  await expect(page.locator('.emoji').first()).toContainText(`:${later.name}:`);
+  await expect(page.getByRole('button', { name: 'Copy :bufo-happy:', exact: true })).toBeFocused();
+  expect(await page.evaluate(() => window.originalCard.isConnected && window.originalCard.querySelector('img') === window.originalImage)).toBe(true);
+  expect(happyImageRequests).toBe(1);
 });
 
 test('clearing input hides progress and stale batches cannot bring it back', async ({ page, app }) => {
+  app.catalog.emojis.push(...Array.from({ length: 400 }, (_, index) => emoji(index + 1000)));
   const gate = deferred();
-  app.state.beforeResponse = () => gate.promise;
+  app.state.beforeResponse = body => Object.hasOwn(body.questions, 'e0') ? Promise.resolve() : gate.promise;
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: () => new Promise((_resolve, reject) => { window.rejectCopy = reject; }) }
+    });
+  });
   await open(page, app);
   await page.locator('#message').fill('Good day');
   try {
     await expect(page.getByRole('progressbar')).toBeVisible();
+    await expect(page.locator('.emoji')).toHaveCount(12);
+    await page.getByRole('button', { name: 'Copy :bufo-happy:', exact: true }).click();
     await page.locator('#message').fill('');
+    await page.evaluate(() => window.rejectCopy(new Error('Clipboard denied after input changed')));
     await expect(page.getByRole('progressbar')).toBeHidden();
   } finally { gate.resolve(); }
   await expect(page.locator('.emoji')).toHaveCount(0);
   await expect(page.locator('#status')).toHaveText('');
+  await expect(page.locator('#manual-copy')).toBeHidden();
+  await expect(page.locator('#copy-status')).toHaveText('');
+});
+
+test('image failures do not hide progress or turn provisional choices into completed results', async ({ page, app }) => {
+  app.catalog.emojis.push(...Array.from({ length: 400 }, (_, index) => emoji(index + 1000)));
+  const gate = deferred();
+  app.state.beforeResponse = body => Object.hasOwn(body.questions, 'e0') ? Promise.resolve() : gate.promise;
+  await page.route('**/api/emoji/*', route => route.fulfill({ status: 503, body: 'unavailable' }));
+  await open(page, app);
+  await page.locator('#message').fill('Good day');
+  try {
+    await expect(page.locator('#status')).toContainText('Some previews failed');
+    await expect(page.locator('#status')).toContainText('Best so far');
+    await expect(page.getByRole('progressbar')).toBeVisible();
+    await expect(page.locator('#results')).toHaveAttribute('aria-busy', 'true');
+  } finally { gate.resolve(); }
+  await expect(page.getByRole('progressbar')).toBeHidden();
+  await expect(page.locator('#status')).toContainText('Some previews failed');
+});
+
+test('a later failure clears provisional choices and retry does not reuse a partial cache entry', async ({ page, app }) => {
+  app.catalog.emojis.push(...Array.from({ length: 400 }, (_, index) => emoji(index + 1000)));
+  const gate = deferred();
+  app.state.beforeResponse = body => Object.hasOwn(body.questions, 'e0') ? Promise.resolve() : gate.promise;
+  await open(page, app);
+  await page.locator('#message').fill('Good day');
+  try {
+    await expect(page.locator('.emoji')).toHaveCount(12);
+    await expect(page.locator('#status')).toContainText('Best so far');
+    app.state.failStatus = 500;
+  } finally { gate.resolve(); }
+  await expect(page.locator('#retry')).toBeVisible();
+  await expect(page.locator('.emoji')).toHaveCount(0);
+  await expect(page.getByRole('progressbar')).toBeHidden();
+  const requests = app.state.requests.length;
+  app.state.failStatus = 0;
+  await page.locator('#retry').click();
+  await expect(page.locator('.emoji')).toHaveCount(12);
+  await expect(page.locator('#results')).toHaveAttribute('aria-busy', 'false');
+  expect(app.state.requests.length).toBeGreaterThan(requests);
+  await expect(page.locator('#status')).not.toContainText('Cached');
+});
+
+test('a mosaic is withheld until every tile has been scored', async ({ page, app }) => {
+  addMosaic(app);
+  const tiles = app.catalog.emojis.filter(entry => entry.name.startsWith('bufo-test-mosaic_'));
+  const singles = app.catalog.emojis.filter(entry => !entry.name.startsWith('bufo-test-mosaic_'));
+  app.catalog.emojis = [
+    ...singles, ...tiles.slice(0, 2),
+    ...Array.from({ length: 400 }, (_, index) => emoji(index + 1000)),
+    ...tiles.slice(2)
+  ];
+  const gate = deferred();
+  app.state.beforeResponse = body => Object.hasOwn(body.questions, 'e0') ? Promise.resolve() : gate.promise;
+  await open(page, app);
+  await page.locator('#message').fill('Good day');
+  try {
+    await expect(page.locator('.emoji')).toHaveCount(12);
+    await expect(page.locator('#status')).toContainText('Best so far');
+    await expect(page.locator('.emoji-mosaic')).toHaveCount(0);
+  } finally { gate.resolve(); }
+  await expect(page.locator('.emoji-mosaic')).toHaveCount(1);
+  await expect(page.locator('.emoji-mosaic img')).toHaveCount(4);
 });
 
 test('an interrupted stream shows an error instead of stopping at partial progress', async ({ page, app }) => {

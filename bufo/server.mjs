@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createCatalogStore, syncCatalog } from './catalog.mjs';
 import { createRequestAccess, deploymentConfig } from './deployment.mjs';
-import { AppError, evaluateQuestions, limitEvaluations, PROVIDERS, rankWithJev, validateText, verifyConnection } from './jev.mjs';
+import { AppError, evaluateQuestions, limitEvaluations, MAX_PARALLEL_REQUESTS, PROVIDERS, rankWithJev, validateText, verifyConnection } from './jev.mjs';
 
 const STATIC_FILES = {
   '/': ['index.html', 'text/html; charset=utf-8'],
@@ -72,7 +72,7 @@ export async function createBufoServer({
 } = {}) {
   const config = deploymentConfig(env);
   const authorize = createRequestAccess(config);
-  const evaluate = limitEvaluations(evaluateQuestions, 3);
+  const evaluate = limitEvaluations(evaluateQuestions, MAX_PARALLEL_REQUESTS);
   const active = new Map();
   const recent = new Map();
   const html = await readFile(new URL('./index.html', import.meta.url), 'utf8');
@@ -90,11 +90,10 @@ export async function createBufoServer({
         const data = await readJson(request);
         const text = validateText(data.text);
         if (!config.apiKey) throw new AppError(503, 'The app owner needs to finish the Jev connection.', 'NOT_CONFIGURED');
-        const catalog = await catalogStore.get();
-        if (data.syncedAt !== undefined && data.syncedAt !== catalog.syncedAt) {
+        const { emojis, syncedAt } = await catalogStore.get();
+        if (data.syncedAt !== undefined && data.syncedAt !== syncedAt) {
           throw new AppError(409, 'The emoji collection changed. Retry to reload it.', 'CATALOG_CHANGED');
         }
-        const emojis = catalog.emojis;
         const now = Date.now();
         for (const [user, timestamp] of recent) if (now - timestamp > 60_000) recent.delete(user);
         if (active.has(identity) || now - (recent.get(identity) || 0) < minInterval) {
@@ -112,7 +111,10 @@ export async function createBufoServer({
               'X-Accel-Buffering': 'no'
             });
           }
-          response.write(`${JSON.stringify({ type: 'progress', ...progress })}\n`);
+          response.write(`${JSON.stringify({
+            type: 'progress', ...progress,
+            ranking: { ...progress.ranking, syncedAt }
+          })}\n`);
         } : undefined;
         response.on('close', () => { if (!response.writableEnded) controller.abort(); });
         active.set(identity, controller);
@@ -123,7 +125,7 @@ export async function createBufoServer({
             signal: controller.signal, fetchImpl, evaluate, onProgress
           });
           if (!controller.signal.aborted) {
-            const result = { ...ranking, syncedAt: catalog.syncedAt };
+            const result = { ...ranking, syncedAt };
             if (streaming) response.end(`${JSON.stringify({ type: 'result', ranking: result })}\n`);
             else json(response, 200, result);
           }

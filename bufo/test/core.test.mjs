@@ -46,6 +46,35 @@ test('streamed errors preserve their actionable code and retry delay', async () 
   await assert.rejects(readSuggestionStream(body), { message: 'Jev is busy.', code: 'PROVIDER_BUSY', retryAfter: 7 });
 });
 
+test('delivers provisional rankings without treating them as a completed result', async () => {
+  const first = { evaluatedCount: 5, suggestions: [{ id: 'first', score: 0.8 }] };
+  const final = { evaluatedCount: 10, suggestions: [{ id: 'later', score: 0.9 }] };
+  const updates = [];
+  const body = [
+    { type: 'progress', scoredCount: 5, totalCount: 10, ranking: first },
+    { type: 'progress', scoredCount: 10, totalCount: 10, ranking: final },
+    { type: 'result', ranking: final }
+  ].map(event => JSON.stringify(event)).join('\n');
+  assert.deepEqual(await readSuggestionStream(new Response(body).body, {
+    onProgress: event => updates.push(event.ranking)
+  }), final);
+  assert.deepEqual(updates, [first, final]);
+  await assert.rejects(readSuggestionStream(new Response(body.split('\n')[0]).body), /ended before scoring finished/);
+});
+
+test('rejects mismatched provisional counts and premature terminal results', async () => {
+  const partial = { type: 'progress', scoredCount: 5, totalCount: 10, ranking: { evaluatedCount: 5 } };
+  for (const events of [
+    [{ ...partial, ranking: null }],
+    [{ ...partial, ranking: [] }],
+    [{ ...partial, ranking: { evaluatedCount: 6 } }],
+    [partial, { type: 'result', ranking: { evaluatedCount: 10 } }],
+    [{ ...partial, scoredCount: 10, ranking: { evaluatedCount: 10 } }, { type: 'result', ranking: { evaluatedCount: 5 } }]
+  ]) {
+    await assert.rejects(readSuggestionStream(new Response(events.map(event => JSON.stringify(event)).join('\n')).body), /invalid progress stream/);
+  }
+});
+
 test('groups numeric suffixes into one complete row-major message without losing standalone variants', () => {
   const tiles = [
     emoji(3, 'bufo-test_1_1'), emoji(2, 'bufo-test_1_0'),

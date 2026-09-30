@@ -12,9 +12,13 @@ let composing = false;
 let cooldownUntil = 0;
 let retry = load;
 let copyTimer;
+let copyRevision = 0;
+let previewFailed = false;
+let currentStatus = {};
 
 function status(text, { busy = false, error = false } = {}) {
-  $('status').textContent = text;
+  currentStatus = { text, busy, error };
+  $('status').textContent = text + (previewFailed && !error ? ' Some previews failed. You can still click a name to copy it.' : '');
   $('status').classList.toggle('error', error);
   $('results').setAttribute('aria-busy', String(busy));
   $('scoring-progress').hidden = !busy;
@@ -64,7 +68,10 @@ async function api(path, { body, signal, onProgress } = {}) {
 }
 
 function fail(error) {
+  copyRevision += 1;
   $('results').replaceChildren();
+  $('manual-copy').hidden = true;
+  $('copy-status').textContent = '';
   status(error.message, { error: true });
   if (error.retryAfter) cooldownUntil = Date.now() + error.retryAfter * 1000;
   if (['PROVIDER_AUTH', 'PROVIDER_BILLING', 'NOT_CONFIGURED', 'FORBIDDEN', 'CATALOG_CHANGED'].includes(error.code)) {
@@ -89,70 +96,101 @@ function previewImage(tile, button, composite) {
     fallback.className = 'image-fallback';
     fallback.textContent = composite ? '?' : 'No preview';
     image.replaceWith(fallback);
-    status('Some previews failed. You can still click a name to copy it.');
+    previewFailed = true;
+    status(currentStatus.text, currentStatus);
   }, { once: true });
   return image;
 }
 
-function render({ ranking, cached }) {
+function validateRanking(ranking, partial = false) {
   const invalid = () => Object.assign(new Error('The emoji collection changed. Retry to reload it.'), { code: 'CATALOG_CHANGED' });
-  if (!Array.isArray(ranking.suggestions) || ranking.evaluatedCount !== fileCount || ranking.syncedAt !== catalogSyncedAt ||
+  if (!ranking || !Array.isArray(ranking.suggestions) || ranking.suggestions.length > 12 ||
+      !Number.isSafeInteger(ranking.evaluatedCount) || ranking.evaluatedCount < 0 ||
+      (partial ? ranking.evaluatedCount > fileCount : ranking.evaluatedCount !== fileCount) ||
+      ranking.suggestions.length > ranking.evaluatedCount || ranking.syncedAt !== catalogSyncedAt ||
+      typeof ranking.weakMatch !== 'boolean' ||
       !Number.isFinite(ranking.elapsedMs) || ranking.elapsedMs < 0) {
     throw invalid();
   }
-  const results = ranking.suggestions.map(match => {
-    const emoji = catalog.get(match.id);
-    if (!emoji || !Number.isFinite(match.score) || match.score < 0 || match.score > 1) {
+  const seen = new Set();
+  return ranking.suggestions.map(match => {
+    const emoji = catalog.get(match?.id);
+    if (!emoji || seen.has(match.id) || !Number.isFinite(match.score) || match.score < 0 || match.score > 1) {
       throw invalid();
     }
+    seen.add(match.id);
     return emoji;
   });
-  $('results').replaceChildren();
-  for (const emoji of results) {
-    const label = emoji.composite ? emoji.name : emoji.copyText;
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'emoji';
-    const preview = document.createElement('span');
-    preview.className = 'emoji-preview';
-    if (!emoji.complete) {
-      button.disabled = true;
-      button.classList.add('emoji-incomplete');
-      button.setAttribute('aria-label', `${label}: incomplete tile set`);
-      const fallback = document.createElement('span');
-      fallback.className = 'image-fallback';
-      fallback.textContent = 'Missing tiles';
-      preview.append(fallback);
-    } else {
-      const dimensions = emoji.composite ? ` (${emoji.rows.length} by ${emoji.rows[0].length} tiles)` : '';
-      button.setAttribute('aria-label', `Copy ${label}${dimensions}`);
-      if (emoji.composite) {
-        const mosaic = document.createElement('span');
-        mosaic.className = 'emoji-mosaic';
-        mosaic.style.setProperty('--rows', emoji.rows.length);
-        mosaic.style.setProperty('--columns', emoji.rows[0].length);
-        mosaic.append(...emoji.tiles.map(tile => previewImage(tile, button, true)));
-        preview.append(mosaic);
-      } else {
-        preview.append(previewImage(emoji.tiles[0], button, false));
-      }
-      button.addEventListener('click', () => copy(emoji.copyText, label));
+}
+
+function render({ ranking, cached, partial = false }) {
+  const results = validateRanking(ranking, partial);
+  const container = $('results');
+  const focused = document.activeElement;
+  const existing = new Map([...container.children].map(button => [button.dataset.emojiId, button]));
+  const ids = new Set(results.map(emoji => emoji.id));
+  for (const [id, button] of existing) if (!ids.has(id)) button.remove();
+  for (const [index, emoji] of results.entries()) {
+    let button = existing.get(emoji.id);
+    if (!button) button = createEmojiButton(emoji);
+    if (container.children[index] !== button) {
+      const before = container.children[index] || null;
+      if (button.isConnected && container.moveBefore) container.moveBefore(button, before);
+      else container.insertBefore(button, before);
     }
-    const name = document.createElement('span');
-    name.className = 'emoji-name';
-    name.textContent = label;
-    button.append(preview, name);
-    if (emoji.composite && emoji.tiles.length > 1) {
-      const badge = document.createElement('span');
-      badge.className = 'emoji-size';
-      badge.textContent = `BIG: ${emoji.tiles.length} emojis`;
-      button.append(badge);
-    }
-    $('results').append(button);
   }
-  const notice = ranking.weakMatch ? 'No strong match. These are the closest fits.' : 'Click a bufo to copy.';
-  const timing = cached ? 'Cached results.' : `${fileCount.toLocaleString()} scored in ${(ranking.elapsedMs / 1000).toFixed(1)}s.`;
-  status(`${timing} ${notice}` + (results.some(emoji => !emoji.complete) ? ' Incomplete tile sets cannot be copied.' : ''));
+  if (focused?.classList.contains('emoji')) {
+    (focused.isConnected ? focused : message).focus({ preventScroll: true });
+  }
+  const notice = partial ? (results.length ? 'Best so far. Click to copy; order may change.' : 'Finding the first matches...')
+    : ranking.weakMatch ? 'No strong match. These are the closest fits.' : 'Click a bufo to copy.';
+  const timing = partial ? `${ranking.evaluatedCount.toLocaleString()} of ${fileCount.toLocaleString()} scored.`
+    : cached ? 'Cached results.' : `${fileCount.toLocaleString()} scored in ${(ranking.elapsedMs / 1000).toFixed(1)}s.`;
+  status(`${timing} ${notice}` + (results.some(emoji => !emoji.complete) ? ' Incomplete tile sets cannot be copied.' : ''), { busy: partial });
+}
+
+function createEmojiButton(emoji) {
+  const label = emoji.composite ? emoji.name : emoji.copyText;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'emoji';
+  button.dataset.emojiId = emoji.id;
+  const preview = document.createElement('span');
+  preview.className = 'emoji-preview';
+  if (!emoji.complete) {
+    button.disabled = true;
+    button.classList.add('emoji-incomplete');
+    button.setAttribute('aria-label', `${label}: incomplete tile set`);
+    const fallback = document.createElement('span');
+    fallback.className = 'image-fallback';
+    fallback.textContent = 'Missing tiles';
+    preview.append(fallback);
+  } else {
+    const dimensions = emoji.composite ? ` (${emoji.rows.length} by ${emoji.rows[0].length} tiles)` : '';
+    button.setAttribute('aria-label', `Copy ${label}${dimensions}`);
+    if (emoji.composite) {
+      const mosaic = document.createElement('span');
+      mosaic.className = 'emoji-mosaic';
+      mosaic.style.setProperty('--rows', emoji.rows.length);
+      mosaic.style.setProperty('--columns', emoji.rows[0].length);
+      mosaic.append(...emoji.tiles.map(tile => previewImage(tile, button, true)));
+      preview.append(mosaic);
+    } else {
+      preview.append(previewImage(emoji.tiles[0], button, false));
+    }
+    button.addEventListener('click', () => copy(emoji.copyText, label));
+  }
+  const name = document.createElement('span');
+  name.className = 'emoji-name';
+  name.textContent = label;
+  button.append(preview, name);
+  if (emoji.composite && emoji.tiles.length > 1) {
+    const badge = document.createElement('span');
+    badge.className = 'emoji-size';
+    badge.textContent = `BIG: ${emoji.tiles.length} emojis`;
+    button.append(badge);
+  }
+  return button;
 }
 
 const searcher = createDebouncedSearch({
@@ -163,16 +201,18 @@ const searcher = createDebouncedSearch({
     status(`0 of ${fileCount.toLocaleString()} scored`, { busy: true });
     const ranking = await api('suggest', {
       body: { text, syncedAt: catalogSyncedAt }, signal,
-      onProgress({ scoredCount, totalCount }) {
+      onProgress({ scoredCount, totalCount, ranking }) {
         if (signal.aborted) return;
         if (totalCount !== fileCount) {
           throw Object.assign(new Error('The emoji collection changed. Retry to reload it.'), { code: 'CATALOG_CHANGED' });
         }
         $('scoring-progress').value = scoredCount;
-        status(`${scoredCount.toLocaleString()} of ${totalCount.toLocaleString()} scored`, { busy: true });
+        if (ranking) render({ ranking, partial: true });
+        else status(`${scoredCount.toLocaleString()} of ${totalCount.toLocaleString()} scored`, { busy: true });
       }
     });
     if (!signal.aborted) {
+      validateRanking(ranking);
       if (cache.size >= 20) cache.delete(cache.keys().next().value);
       cache.set(text, ranking);
     }
@@ -183,8 +223,10 @@ const searcher = createDebouncedSearch({
 });
 
 function updateMessage() {
+  copyRevision += 1;
   searcher.cancel();
   $('results').replaceChildren();
+  previewFailed = false;
   $('retry').hidden = true;
   $('manual-copy').hidden = true;
   $('copy-status').textContent = '';
@@ -228,13 +270,16 @@ async function load() {
 }
 
 async function copy(code, label) {
+  const revision = ++copyRevision;
   clearTimeout(copyTimer);
   $('manual-copy').hidden = true;
   try {
     await navigator.clipboard.writeText(code);
+    if (revision !== copyRevision) return;
     $('copy-status').textContent = `Copied ${label}`;
     copyTimer = setTimeout(() => { $('copy-status').textContent = ''; }, 2400);
   } catch {
+    if (revision !== copyRevision) return;
     $('copy-status').textContent = 'Clipboard unavailable. Copy the code below.';
     $('copy-code').value = code;
     $('copy-code').rows = Math.min(12, Math.max(2, code.split('\n').length));
