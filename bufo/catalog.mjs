@@ -76,7 +76,7 @@ function assertTree(tree) {
   }
 }
 
-export function catalogFromTree(tree, canonicalPaths = {}) {
+export function catalogFromTree(tree, canonicalPaths = {}, sourcePrefix = '_bufo/') {
   assertTree(tree);
   const blobs = tree.tree.filter(entry => entry.type === 'blob' && entry.mode !== '120000' && Object.hasOwn(TYPES, extname(entry.path).slice(1).toLowerCase()));
   const pathNames = new Map(blobs.map(entry => [entry.path, entry.path.split('/').at(-1).slice(0, -extname(entry.path).length)]));
@@ -87,15 +87,17 @@ export function catalogFromTree(tree, canonicalPaths = {}) {
     const extension = extname(entry.path).slice(1).toLowerCase();
     const filename = entry.path.split('/').at(-1);
     const name = pathNames.get(entry.path);
-    if (occurrences.get(name) > 1 && canonicalPaths[name] !== `_bufo/${entry.path}`) return [];
+    if (occurrences.get(name) > 1 && canonicalPaths[name] !== `${sourcePrefix}${entry.path}`) return [];
     if (!name || name.length > 200 || /[\x00-\x1f\x7f/:\\]/.test(name) || names.has(name) ||
         !/^[a-f0-9]{40}$/.test(entry.sha) || !Number.isSafeInteger(entry.size) ||
         entry.size < 1 || entry.size > MAX_IMAGE_BYTES) {
       throw new AppError(503, 'The emoji tree contains an invalid or duplicate image entry.', 'INVALID_CATALOG');
     }
     names.add(name);
+    // Preserve existing IDs while namespacing imports from other source directories.
+    const idPath = sourcePrefix === '_bufo/' ? entry.path : `canonical\0${sourcePrefix}${entry.path}`;
     return [{
-      id: createHash('sha256').update(entry.path).digest('hex').slice(0, 20),
+      id: createHash('sha256').update(idPath).digest('hex').slice(0, 20),
       name,
       filename,
       sha: entry.sha,
@@ -148,11 +150,15 @@ async function atomicWrite(path, data) {
 export async function syncCatalog({ dataDir = DATA_DIR, api = githubApi } = {}) {
   let ref = 'main';
   let mappingSha;
+  let emojiRoot;
   for (const directory of ['emojis', '_bufo']) {
     const tree = await api(`repos/${SOURCE_REPO}/git/trees/${ref}`);
     assertTree(tree);
     const child = tree.tree.find(entry => entry.path === directory && entry.type === 'tree');
-    if (directory === '_bufo') mappingSha = tree.tree.find(entry => entry.path === 'emojis.json' && entry.type === 'blob')?.sha;
+    if (directory === '_bufo') {
+      emojiRoot = tree;
+      mappingSha = tree.tree.find(entry => entry.path === 'emojis.json' && entry.type === 'blob')?.sha;
+    }
     if (!child || !/^[a-f0-9]{40}$/.test(child.sha)) {
       throw new AppError(503, 'The bufo source directory could not be found.', 'INVALID_CATALOG');
     }
@@ -172,6 +178,42 @@ export async function syncCatalog({ dataDir = DATA_DIR, api = githubApi } = {}) 
     throw new AppError(503, 'The canonical emoji mapping is invalid.', 'INVALID_CATALOG');
   }
   const catalog = catalogFromTree(await api(`repos/${SOURCE_REPO}/git/trees/${ref}?recursive=1`), canonicalPaths);
+  const extraPaths = new Set();
+  for (const [name, path] of Object.entries(canonicalPaths)) {
+    if (!/bufo.*_\d+_\d+$/i.test(name)) continue;
+    if (typeof path !== 'string' || /[\\\x00-\x1f\x7f]/.test(path) ||
+        path.split('/').some(part => !part || part === '.' || part === '..') ||
+        path.split('/').at(-1) !== `${name}${extname(path)}`) {
+      throw new AppError(503, 'A multipart emoji has an invalid canonical path.', 'INVALID_CATALOG');
+    }
+    if (!path.startsWith('_bufo/')) extraPaths.add(path);
+  }
+  if (extraPaths.size) {
+    const directories = new Set([...extraPaths].map(path => path.includes('/') ? path.split('/')[0] : ''));
+    const blobs = [];
+    for (const directory of directories) {
+      let tree = emojiRoot;
+      if (directory) {
+        const child = emojiRoot.tree.find(entry => entry.path === directory && entry.type === 'tree');
+        if (!child || !/^[a-f0-9]{40}$/.test(child.sha)) {
+          throw new AppError(503, 'A multipart emoji source directory is missing.', 'INVALID_CATALOG');
+        }
+        tree = await api(`repos/${SOURCE_REPO}/git/trees/${child.sha}?recursive=1`);
+        assertTree(tree);
+      }
+      for (const entry of tree.tree) {
+        const path = directory ? `${directory}/${entry.path}` : entry.path;
+        if (extraPaths.has(path)) blobs.push({ ...entry, path });
+      }
+    }
+    const extra = catalogFromTree({ truncated: false, tree: blobs }, canonicalPaths, '');
+    if (extra.emojis.length !== extraPaths.size) {
+      throw new AppError(503, 'A multipart emoji is missing from its canonical source directory.', 'INVALID_CATALOG');
+    }
+    catalog.emojis = [...new Map([...catalog.emojis, ...extra.emojis].map(emoji => [emoji.name, emoji])).values()]
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+  validateCatalog(catalog);
   await atomicWrite(join(dataDir, 'catalog.json'), `${JSON.stringify(catalog)}\n`);
   return catalog;
 }

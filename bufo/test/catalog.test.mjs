@@ -49,6 +49,74 @@ test('sync follows pinned subtrees and uses the canonical map for duplicate file
   assert.equal((await stat(join(dataDir, 'catalog.json'))).mode & 0o077, 0);
 });
 
+test('sync imports canonical multipart bufos from other pinned directories without changing existing IDs', async t => {
+  const dataDir = await temporary(t);
+  const calls = [];
+  const emojisTree = 'a'.repeat(40), bufoTree = 'b'.repeat(40), mappingBlob = 'c'.repeat(40), otherTree = 'd'.repeat(40);
+  const original = treeEntry(0, 'bufo-existing');
+  const result = await syncCatalog({
+    dataDir,
+    api: async path => {
+      calls.push(path);
+      if (path.endsWith('/main')) return { truncated: false, tree: [{ type: 'tree', path: 'emojis', sha: emojisTree }] };
+      if (path.endsWith(`/${emojisTree}`)) return {
+        truncated: false,
+        tree: [
+          { type: 'tree', path: '_bufo', sha: bufoTree },
+          { type: 'tree', path: 'b', sha: otherTree },
+          { type: 'blob', path: 'emojis.json', sha: mappingBlob }
+        ]
+      };
+      if (path.endsWith(`/${mappingBlob}`)) return Buffer.from(JSON.stringify({
+        bigbufo_0_0: 'b/bigbufo_0_0.png', bigbufo_1_0: 'b/bigbufo_1_0.png',
+        unrelated_0_0: 'b/unrelated_0_0.png'
+      }));
+      if (path.endsWith(`/${bufoTree}?recursive=1`)) return {
+        truncated: false, tree: [original, treeEntry(99, 'bigbufo_0_0')]
+      };
+      if (path.endsWith(`/${otherTree}?recursive=1`)) return {
+        truncated: false, tree: [treeEntry(1, 'bigbufo_0_0'), treeEntry(2, 'bigbufo_1_0'), treeEntry(3, 'unrelated_0_0')]
+      };
+      assert.fail(`Unexpected source request ${path}`);
+    }
+  });
+  assert.equal(calls.length, 5);
+  assert.equal(result.emojis.length, 3);
+  assert.equal(result.emojis.find(entry => entry.name === 'bigbufo_0_0').sha, emoji(1).sha);
+  assert.equal(result.emojis.find(entry => entry.name === original.path.slice(0, -4)).id,
+    catalogFromTree({ truncated: false, tree: [original] }).emojis[0].id);
+  assert.ok(result.emojis.every(entry => !entry.name.startsWith('unrelated')));
+  assert.equal(new Set(result.emojis.map(entry => entry.id)).size, 3);
+});
+
+test('missing or unsafe canonical multipart paths never produce a partially updated catalog', async t => {
+  const dataDir = await temporary(t);
+  const before = JSON.stringify(catalog(1));
+  await writeFile(join(dataDir, 'catalog.json'), before);
+  const emojisTree = 'a'.repeat(40), bufoTree = 'b'.repeat(40), mappingBlob = 'c'.repeat(40), otherTree = 'd'.repeat(40);
+  for (const path of ['../b/bigbufo_1_0.png', 'b/bigbufo_1_0.png']) {
+    await assert.rejects(syncCatalog({
+      dataDir,
+      api: async endpoint => {
+        if (endpoint.endsWith('/main')) return { truncated: false, tree: [{ type: 'tree', path: 'emojis', sha: emojisTree }] };
+        if (endpoint.endsWith(`/${emojisTree}`)) return {
+          truncated: false, tree: [
+            { type: 'tree', path: '_bufo', sha: bufoTree }, { type: 'tree', path: 'b', sha: otherTree },
+            { type: 'blob', path: 'emojis.json', sha: mappingBlob }
+          ]
+        };
+        if (endpoint.endsWith(`/${mappingBlob}`)) return Buffer.from(JSON.stringify({
+          bigbufo_0_0: 'b/bigbufo_0_0.png', bigbufo_1_0: path
+        }));
+        if (endpoint.endsWith(`/${bufoTree}?recursive=1`)) return { truncated: false, tree: [treeEntry(0)] };
+        if (endpoint.endsWith(`/${otherTree}?recursive=1`)) return { truncated: false, tree: [treeEntry(1, 'bigbufo_0_0')] };
+        assert.fail(`Unexpected source request ${endpoint}`);
+      }
+    }), { code: 'INVALID_CATALOG' });
+    assert.equal(await readFile(join(dataDir, 'catalog.json'), 'utf8'), before);
+  }
+});
+
 test('rejects truncated trees, ambiguous duplicate names, and empty catalogs', () => {
   assert.throws(() => catalogFromTree({ truncated: true, tree: [treeEntry(0)] }), { code: 'INVALID_CATALOG' });
   assert.throws(() => catalogFromTree({ truncated: false, tree: [] }), { code: 'INVALID_CATALOG' });

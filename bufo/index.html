@@ -19,10 +19,11 @@
       <p id="status" role="status" aria-live="polite">Loading...</p>
       <button id="retry" type="button" hidden>Retry</button>
     </div>
+    <progress id="scoring-progress" max="1" value="0" aria-label="Emoji scoring progress" hidden></progress>
     <section id="results" aria-label="Suggested emojis" aria-busy="false"></section>
     <div id="manual-copy" hidden>
       <label for="copy-code">Copy this code:</label>
-      <input id="copy-code" type="text" readonly>
+      <textarea id="copy-code" rows="2" readonly></textarea>
     </div>
     <p id="copy-status" role="status" aria-live="polite"></p>
   </main>

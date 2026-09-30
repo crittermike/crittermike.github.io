@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { request as httpRequest } from 'node:http';
 import test from 'node:test';
+import { readSuggestionStream } from '../core.js';
 import { AppError } from '../jev.mjs';
 import { createBufoServer } from '../server.mjs';
 import { answerRequest, catalog, deferred, fakeFetch, flush, imageBytes, TEST_KEY } from './fixtures.mjs';
@@ -284,4 +285,71 @@ test('bounds simultaneous shared rankings and recovers capacity when they finish
     assert.ok((await Promise.all(pending)).every(response => response.status === 200));
   }
   assert.equal((await app.post('suggest', { text: 'Recovered' }, { headers: clients[4] })).status, 200);
+});
+
+test('streams progress before the ranking is ready while preserving ordinary JSON clients', async t => {
+  const release = deferred();
+  const partial = deferred();
+  const value = catalog(100);
+  const app = await start(t, {
+    catalogStore: { get: async () => value },
+    fetchImpl: async (_url, { body }) => {
+      const request = JSON.parse(body);
+      if (!Object.hasOwn(request.questions, 'e0')) await release.promise;
+      return Response.json(answerRequest(request));
+    }
+  });
+  const response = await fetch(`${app.origin}/api/suggest`, {
+    method: 'POST', headers: { ...app.headers, Accept: 'application/x-ndjson' }, body: JSON.stringify({ text: 'Stream this' })
+  });
+  assert.match(response.headers.get('content-type'), /application\/x-ndjson/);
+  assert.equal(response.headers.get('x-accel-buffering'), 'no');
+  const events = [];
+  let finished = false;
+  const reading = readSuggestionStream(response.body, {
+    onProgress: event => { events.push(event); if (event.scoredCount > 0) partial.resolve(); }
+  }).then(result => { finished = true; return result; });
+  try {
+    await partial.promise;
+    assert.equal(events[0].scoredCount, 0);
+    assert.ok(events.at(-1).scoredCount < value.emojis.length);
+    assert.equal(finished, false);
+  } finally { release.resolve(); }
+  const result = await reading;
+  assert.equal(result.evaluatedCount, value.emojis.length);
+  assert.equal(result.syncedAt, value.syncedAt);
+  assert.equal(events.at(-1).scoredCount, value.emojis.length);
+  const ordinary = await app.post('suggest', { text: 'Ordinary JSON' });
+  assert.equal(ordinary.json().evaluatedCount, value.emojis.length);
+});
+
+test('a provider failure after streaming begins is an explicit error event, not a partial success', async t => {
+  const app = await start(t, { fetchImpl: async () => new Response('', { status: 402 }) });
+  const response = await fetch(`${app.origin}/api/suggest`, {
+    method: 'POST', headers: { ...app.headers, Accept: 'application/x-ndjson' }, body: JSON.stringify({ text: 'Hello' })
+  });
+  const progress = [];
+  await assert.rejects(readSuggestionStream(response.body, { onProgress: event => progress.push(event) }), { code: 'PROVIDER_BILLING' });
+  assert.deepEqual(progress.map(event => event.scoredCount), [0]);
+  const invalid = await app.post('suggest', { text: '' }, { headers: { ...app.headers, Accept: 'application/x-ndjson' } });
+  assert.equal(invalid.status, 400);
+  assert.equal(invalid.json().code, 'INVALID_TEXT');
+});
+
+test('aborting a streaming response cancels the active provider evaluation', async t => {
+  const cancelled = deferred();
+  const app = await start(t, {
+    fetchImpl: async (_url, { signal }) => new Promise((_, reject) => {
+      signal.addEventListener('abort', () => { cancelled.resolve(); reject(signal.reason); }, { once: true });
+    })
+  });
+  const controller = new AbortController();
+  const response = await fetch(`${app.origin}/api/suggest`, {
+    method: 'POST', headers: { ...app.headers, Accept: 'application/x-ndjson' },
+    body: JSON.stringify({ text: 'Cancel this stream' }), signal: controller.signal
+  });
+  const reading = assert.rejects(readSuggestionStream(response.body, { signal: controller.signal }), { name: 'AbortError' });
+  controller.abort();
+  await reading;
+  await cancelled.promise;
 });

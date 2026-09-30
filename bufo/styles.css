@@ -19,7 +19,7 @@ body {
 main { max-width: 880px; margin: 0 auto; padding: 40px 24px; }
 h1 { margin: 0 0 24px; color: var(--cp-accent); font-size: 72px; font-weight: 850; line-height: 1; letter-spacing: -0.04em; }
 button, textarea, input { font: inherit; }
-textarea {
+#message {
   display: block;
   width: 100%;
   min-height: 176px;
@@ -39,6 +39,10 @@ button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px
 .feedback { display: flex; align-items: center; gap: 16px; min-height: 40px; margin-bottom: 16px; }
 #status { font-size: 14px; margin: 0; }
 #status.error { color: var(--cp-danger); font-weight: 600; }
+#scoring-progress { appearance: none; display: block; width: 100%; height: 6px; margin: 0 0 20px; border: 0; border-radius: 3px; overflow: hidden; background: var(--cp-surface); color: var(--cp-accent); }
+#scoring-progress::-webkit-progress-bar { background: var(--cp-surface); }
+#scoring-progress::-webkit-progress-value { background: var(--cp-accent); }
+#scoring-progress::-moz-progress-bar { background: var(--cp-accent); }
 button { cursor: pointer; }
 #retry { border: 0; padding: 10px 16px; border-radius: 8px; color: var(--cp-surface); background: var(--cp-accent); font-weight: 650; }
 #retry:hover { text-decoration: underline; }
@@ -58,20 +62,33 @@ button { cursor: pointer; }
 }
 .emoji:hover, .emoji:focus-visible { background: var(--cp-surface); }
 .emoji img { width: 80px; height: 80px; object-fit: contain; }
+.emoji-preview { --preview-size: 100px; display: grid; place-items: center; width: 100%; height: var(--preview-size); }
+.emoji-mosaic {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+  width: min(100%, calc(var(--preview-size) * var(--columns) / max(var(--rows), var(--columns))));
+  aspect-ratio: var(--columns) / var(--rows);
+}
+.emoji .emoji-mosaic img, .emoji-mosaic .image-fallback { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: fill; }
+.emoji:disabled { cursor: not-allowed; }
+.emoji-incomplete .image-fallback { color: var(--cp-danger); }
 .emoji-name { overflow-wrap: anywhere; max-width: 100%; font: 12px/1.5 Consolas, "Courier New", Courier, monospace; }
+.emoji-size { max-width: 100%; padding: 4px 8px; border-radius: 4px; background: var(--cp-accent); color: var(--cp-surface); font-size: 10px; line-height: 1.4; font-weight: 700; }
 .image-fallback { display: grid; place-items: center; width: 80px; height: 80px; font-size: 12px; }
 #copy-status { min-height: 24px; font-size: 14px; font-weight: 650; overflow-wrap: anywhere; }
 #manual-copy { margin-top: 24px; }
 #manual-copy label { display: block; margin-bottom: 8px; font-size: 14px; }
-#copy-code { width: 100%; border: 2px solid var(--cp-accent); border-radius: 8px; background: var(--cp-surface); color: var(--cp-text); padding: 12px; }
+#copy-code { display: block; width: 100%; resize: vertical; border: 2px solid var(--cp-accent); border-radius: 8px; background: var(--cp-surface); color: var(--cp-text); padding: 12px; font: 14px/1.6 Consolas, "Courier New", Courier, monospace; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 @media (max-width: 540px) {
   main { padding: 28px 20px; }
   h1 { font-size: 56px; margin-bottom: 20px; }
-  textarea { min-height: 160px; padding: 16px; font-size: 18px; }
+  #message { min-height: 160px; padding: 16px; font-size: 18px; }
   #results { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .emoji { padding: 12px 4px; }
   .emoji img { width: 64px; height: 64px; }
+  .emoji-preview { --preview-size: 80px; }
 }
 @media (max-width: 340px) {
   #results { grid-template-columns: repeat(2, minmax(0, 1fr)); }

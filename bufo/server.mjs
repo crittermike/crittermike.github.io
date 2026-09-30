@@ -19,6 +19,15 @@ function json(response, status, body) {
   response.end(JSON.stringify(body));
 }
 
+function sendError(response, status, body) {
+  if (response.headersSent) {
+    response.end(`${JSON.stringify({ type: 'error', ...body })}\n`);
+  } else {
+    if (body.retryAfter) response.setHeader('Retry-After', body.retryAfter);
+    json(response, status, body);
+  }
+}
+
 function readJson(request) {
   if (request.headers['content-type']?.split(';')[0].trim() !== 'application/json') {
     throw new AppError(415, 'Send application/json.', 'INVALID_CONTENT_TYPE');
@@ -81,7 +90,11 @@ export async function createBufoServer({
         const data = await readJson(request);
         const text = validateText(data.text);
         if (!config.apiKey) throw new AppError(503, 'The app owner needs to finish the Jev connection.', 'NOT_CONFIGURED');
-        const emojis = (await catalogStore.get()).emojis;
+        const catalog = await catalogStore.get();
+        if (data.syncedAt !== undefined && data.syncedAt !== catalog.syncedAt) {
+          throw new AppError(409, 'The emoji collection changed. Retry to reload it.', 'CATALOG_CHANGED');
+        }
+        const emojis = catalog.emojis;
         const now = Date.now();
         for (const [user, timestamp] of recent) if (now - timestamp > 60_000) recent.delete(user);
         if (active.has(identity) || now - (recent.get(identity) || 0) < minInterval) {
@@ -89,15 +102,31 @@ export async function createBufoServer({
         }
         if (active.size >= 4) throw new AppError(429, 'Bufo is busy. Try again shortly.', 'SERVICE_BUSY', 5);
         const controller = new AbortController();
+        const streaming = request.headers.accept === 'application/x-ndjson';
+        const onProgress = streaming ? progress => {
+          if (controller.signal.aborted || response.destroyed) return;
+          if (!response.headersSent) {
+            response.writeHead(200, {
+              'Content-Type': 'application/x-ndjson; charset=utf-8',
+              'Cache-Control': 'no-store, no-transform',
+              'X-Accel-Buffering': 'no'
+            });
+          }
+          response.write(`${JSON.stringify({ type: 'progress', ...progress })}\n`);
+        } : undefined;
         response.on('close', () => { if (!response.writableEnded) controller.abort(); });
         active.set(identity, controller);
         recent.set(identity, now);
         try {
           const ranking = await rankWithJev({
             text, emojis, provider: config.provider, apiKey: config.apiKey,
-            signal: controller.signal, fetchImpl, evaluate
+            signal: controller.signal, fetchImpl, evaluate, onProgress
           });
-          if (!controller.signal.aborted) json(response, 200, ranking);
+          if (!controller.signal.aborted) {
+            const result = { ...ranking, syncedAt: catalog.syncedAt };
+            if (streaming) response.end(`${JSON.stringify({ type: 'result', ranking: result })}\n`);
+            else json(response, 200, result);
+          }
         } finally {
           active.delete(identity);
         }
@@ -139,13 +168,12 @@ export async function createBufoServer({
     } catch (error) {
       if (response.destroyed || response.writableEnded) return;
       if (error.name === 'AbortError') {
-        json(response, 499, { error: 'Request cancelled.', code: 'CANCELLED' });
+        sendError(response, 499, { error: 'Request cancelled.', code: 'CANCELLED' });
       } else if (error instanceof AppError) {
-        if (error.retryAfter) response.setHeader('Retry-After', error.retryAfter);
-        json(response, error.status, { error: error.message, code: error.code, retryAfter: error.retryAfter });
+        sendError(response, error.status, { error: error.message, code: error.code, retryAfter: error.retryAfter });
       } else {
         console.error('Server failure:', error.code || error.name);
-        json(response, 500, { error: 'Bufo is unavailable. Try again shortly.', code: 'SERVER_ERROR' });
+        sendError(response, 500, { error: 'Bufo is unavailable. Try again shortly.', code: 'SERVER_ERROR' });
       }
     }
   });

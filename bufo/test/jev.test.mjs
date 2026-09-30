@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   buildScoringQuestions, evaluateQuestions, limitEvaluations,
-  MAX_REQUEST_BYTES, packQuestions, parseEvaluation, PROVIDERS, rankWithJev,
+  MAX_NAME_BONUS, MAX_REQUEST_BYTES, nameLengthBonus, packQuestions, parseEvaluation, PROVIDERS, rankWithJev,
   validateConnection, validateText, verifyConnection
 } from '../jev.mjs';
 import { answerRequest, catalog, deferred, emoji, fakeFetch, flush, TEST_KEY } from './fixtures.mjs';
@@ -10,6 +10,108 @@ import { answerRequest, catalog, deferred, emoji, fakeFetch, flush, TEST_KEY } f
 const small = catalog(12).emojis;
 const question = { fit: { type: 'noul', instructions: { question: 'Does this fit?', filename: 'bufo-happy.png' } } };
 const options = { text: 'A nice day', provider: 'typesafe', apiKey: TEST_KEY, questions: question };
+
+test('reports exact completed filename counts when parallel batches finish out of order', async () => {
+  const pending = [];
+  const progress = [];
+  const ranking = rankWithJev({
+    text: 'Hello', emojis: catalog(100).emojis, provider: 'typesafe', apiKey: TEST_KEY,
+    onProgress: event => progress.push(event),
+    fetchImpl: async (_url, { body }) => {
+      const request = JSON.parse(body);
+      const gate = deferred();
+      pending.push({ request, gate });
+      await gate.promise;
+      return Response.json(answerRequest(request));
+    }
+  });
+  await flush();
+  assert.equal(pending.length, 3);
+  assert.deepEqual(progress.map(event => event.scoredCount), [0]);
+  pending[1].gate.resolve();
+  await flush();
+  assert.equal(progress[1].scoredCount, Object.keys(pending[1].request.questions).length);
+  assert.equal(progress[1].completedBatches, 1);
+  pending[0].gate.resolve();
+  pending[2].gate.resolve();
+  const result = await ranking;
+  assert.equal(progress.at(-1).scoredCount, 100);
+  assert.equal(progress.at(-1).completedBatches, result.requestCount);
+  assert.ok(progress.every(event => event.totalCount === 100 && event.totalBatches === 3));
+});
+
+test('name bonuses grow gradually, exclude the common prefix, and stop at six points', () => {
+  assert.equal(nameLengthBonus('bufo-facepalm', 0.9), 0);
+  assert.equal(nameLengthBonus(`bufo-${'a'.repeat(24)}`, 0.9), MAX_NAME_BONUS / 2);
+  assert.equal(nameLengthBonus(`frog-${'a'.repeat(40)}`, 0.9), MAX_NAME_BONUS);
+  assert.equal(nameLengthBonus(`bufo-${'a'.repeat(200)}`, 0.9), MAX_NAME_BONUS);
+  assert.equal(nameLengthBonus(`bufo-${'a'.repeat(200)}`, 0.49), 0);
+  assert.equal(nameLengthBonus(`bufo-${'a'.repeat(200)}`, 0.5), MAX_NAME_BONUS);
+});
+
+test('long names win close relevant matches but cannot override stronger relevance or rescue weak matches', async () => {
+  const entries = [
+    emoji(0, 'bufo-happy'), emoji(1, `bufo-${'interesting-'.repeat(6)}`),
+    emoji(2, `bufo-${'unrelated-'.repeat(8)}`), emoji(3, 'bufo-wave')
+  ];
+  for (const scores of [[0.83, 0.8, 0.1, 0.5], [0.9, 0.8, 0.1, 0.5], [0.5, 0.49, 0.1, 0.3]]) {
+    const result = await rankWithJev({
+      text: 'Good news', emojis: entries, provider: 'typesafe', apiKey: TEST_KEY,
+      fetchImpl: fakeFetch([], filename => scores[entries.findIndex(entry => entry.filename === filename)])
+    });
+    const expected = scores[0] === 0.83 ? entries[1] : entries[0];
+    assert.equal(result.suggestions[0].id, expected.id);
+    assert.equal(result.suggestions.at(-1).id, entries[2].id);
+    const long = result.suggestions.find(match => match.id === entries[1].id);
+    assert.equal(long.score, scores[1]);
+    assert.equal(long.nameBonus, scores[1] >= 0.5 ? MAX_NAME_BONUS : 0);
+  }
+});
+
+test('groups all tiles before the result limit and uses mean relevance with a bonus for the base name only', async () => {
+  const tiles = Array.from({ length: 12 }, (_, index) => emoji(index, `bufo-composite_${Math.floor(index / 4)}_${index % 4}`));
+  const singles = Array.from({ length: 15 }, (_, index) => emoji(index + 20, `bufo-other-${index}`));
+  const entries = [...tiles.toReversed(), ...singles];
+  const requests = [];
+  const result = await rankWithJev({
+    text: 'That is my reaction', emojis: entries, provider: 'typesafe', apiKey: TEST_KEY,
+    fetchImpl: fakeFetch(requests, filename => filename.startsWith('bufo-composite_') ? 0.9 : 0.7)
+  });
+  assert.equal(result.suggestions.length, 12);
+  assert.equal(result.evaluatedCount, entries.length);
+  assert.equal(result.suggestions[0].id, tiles[0].id);
+  assert.equal(result.suggestions.filter(match => tiles.some(tile => tile.id === match.id)).length, 1);
+  assert.ok(Math.abs(result.suggestions[0].score - 0.9) < 1e-10);
+  assert.equal(result.suggestions[0].nameBonus, nameLengthBonus('bufo-composite', 0.9));
+  const questions = requests.flatMap(request => Object.values(request.body.questions));
+  assert.equal(questions.length, entries.length);
+  assert.ok(questions.filter(question => question.instructions.composite).every(question =>
+    question.instructions.composite.name === 'bufo-composite'));
+  const outlier = await rankWithJev({
+    text: 'A different reaction', emojis: tiles, provider: 'typesafe', apiKey: TEST_KEY,
+    fetchImpl: fakeFetch([], filename => filename === tiles[0].filename ? 0.99 : 0.1)
+  });
+  assert.ok(outlier.suggestions[0].score < 0.2);
+  assert.equal(outlier.suggestions[0].nameBonus, 0);
+  assert.equal(outlier.weakMatch, true);
+});
+
+test('deduplication compares entire mosaic layouts rather than individual tile hashes', async () => {
+  const entries = [
+    emoji(0, 'bufo-horizontal_0_0'), emoji(1, 'bufo-horizontal_1_0'),
+    emoji(2, 'bufo-vertical_0_0'), emoji(3, 'bufo-vertical_0_1'),
+    emoji(4, 'bufo-duplicate_1_1'), emoji(5, 'bufo-duplicate_2_1'),
+    emoji(6, 'bufo-solo')
+  ];
+  entries[2].sha = entries[4].sha = entries[6].sha = entries[0].sha;
+  entries[3].sha = entries[5].sha = entries[1].sha;
+  const result = await rankWithJev({
+    text: 'Hello', emojis: entries, provider: 'typesafe', apiKey: TEST_KEY, fetchImpl: fakeFetch()
+  });
+  assert.equal(result.suggestions.length, 3);
+  assert.ok(result.suggestions.some(match => match.id === entries[2].id));
+  assert.ok(result.suggestions.some(match => match.id === entries[6].id));
+});
 
 test('validates message length, provider allowlist, and key shape before requests', () => {
   for (const input of ['', '  ', null, {}, 'a'.repeat(2001)]) assert.throws(() => validateText(input));
