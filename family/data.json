@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T23:45:37.843Z",
+  "generated_at": "2026-10-01T00:00:41.300Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -283,11 +283,11 @@
     ]
   },
   "dinner": {
-    "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Home calendar has Dinner with Matt and Nadia, September 30, 6:00-8:00 PM. Location, menu and which family members attend are unspecified. No hosting or home cooking assumed. Takeout is the proposed fallback for anyone not attending, not an order or a childcare arrangement. Nutrition unknown; no dependence on leftovers.",
+    "name": "Korean beef and broccoli bowls",
+    "protein_g": 61,
+    "cal": 634,
+    "effort": "medium",
+    "note": "Saved six-person recipe, choosing 96% lean ground beef rather than the suggested 93% for Nancy's lean-meat preference and Mike's portion target. Cook beef and broccoli in separate pans; reserve plain components before adding sauce. Use cooked rice volume as the serving measure and the rice package for water/yield. Mike's estimate: 9 oz raw-weight beef at 140 cal/24g protein per 4 oz, 1 cup cooked broccoli at 55 cal/3.7g, 1/3 cup cooked rice at 68 cal/1.4g, one-quarter of sauce at 119 cal/2g, one-quarter of the two cooking-oil tablespoons at 60 cal, and 1 tsp sesame seeds at 17 cal/0.5g. Sauce estimate assumes soy sauce 64 cal/8g for 1/2 cup, brown sugar 256 cal for 1/3 cup, vinegar 6 cal, sesame oil 120 cal and cornstarch 30 cal. These are generic assumptions, not verified labels; calories rounded up and protein down. Optional pickled carrots omitted.",
     "recipe": null
   },
   "mealweek": [
@@ -350,7 +350,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 73,
       "hi": 84,
       "lo": 59,
       "icon": "☀️",
@@ -1916,64 +1916,15 @@
     }
   ],
   "finance": {
-    "month": "September 2026",
-    "dayPct": 100,
-    "totalSpend": 5225.38,
+    "month": "October 2026",
+    "dayPct": 3.2,
+    "totalSpend": 0,
     "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2310.09,
-        "balance": -1010.79,
-        "pct": 0
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 1728.46,
-        "balance": -1728.46,
-        "pct": 0
-      },
-      {
-        "name": "⚡️ Utilities",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 723.21,
-        "balance": -723.21,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 194.01,
-        "balance": -194.01,
-        "pct": 0
-      },
-      {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 180.95,
-        "balance": -110.8,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 88.66,
-        "balance": 310.26,
-        "pct": 0
-      }
-    ],
+    "categories": [],
     "liquidCash": 11866.15,
     "creditDebt": 57728.06,
     "netLiquid": 69594.21,
     "source": "ynab",
-    "updatedAt": "2026-09-30T23:45:36.544Z"
+    "updatedAt": "2026-10-01T00:00:38.776Z"
   }
 }
