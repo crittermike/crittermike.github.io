@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T03:45:37.242Z",
+  "generated_at": "2026-10-01T04:00:38.107Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,20 +15,7 @@
         "balance_str": "$96.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-09-30-d5e3c361ab3204f79bb1702bc35d11ca969a0a4264e1bea8af3dc08f97f93558",
-          "label": "Math: Complete WB pp.58-59",
-          "dueDate": null,
-          "workOnDate": "2026-09-30"
-        },
-        {
-          "id": "sch-work-on-2026-09-30-d1c168b3ad57e285a80fb468362bee5d3c679fa0bc0b5e867043b495d3bcd97c",
-          "label": "English: Complete Noun Review Worksheet",
-          "dueDate": null,
-          "workOnDate": "2026-09-30"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -58,14 +45,9 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-2026-10-01-fbfef685d247203c73f368f44878f6831a9ed57321849d8fd6219888f1f6d555",
-          "label": "Honors English (deMarrais): 100 points. verified in Henry’s signed-in Classroom assignment on 2026-09-28, superseding the undated email. Source: INBOX 330013",
-          "dueDate": "2026-10-01"
-        },
-        {
-          "id": "sch-2026-10-01-11a9ca97ca27c643889a9d65dd341b4ee504bace8b4212433e0bc240d8634041",
-          "label": "Honors English (deMarrais): 100 points. and details verified in Henry’s signed-in Classroom assignment on 2026-09-28. Source: INBOX 330014",
-          "dueDate": "2026-10-01"
+          "id": "sch-2026-10-02-7e5652c01c23621f80a301eae9d3be30b187965eaf93f7eccea87eccae1e6a96",
+          "label": "Prepare: Religion (Principal Barontini): Romans 1:20-21 Recitation",
+          "dueDate": "2026-10-02"
         }
       ]
     },
@@ -319,7 +301,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -327,8 +309,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Korean beef and broccoli bowls",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -336,7 +318,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -351,19 +333,12 @@
   "weather": {
     "now": {
       "temp": 66,
-      "hi": 84,
-      "lo": 59,
+      "hi": 86,
+      "lo": 62,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 86,
-        "lo": 62,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "🌦",
@@ -391,24 +366,31 @@
         "hi": 81,
         "lo": 62,
         "code": 3
+      },
+      {
+        "d": "Tue",
+        "icon": "☀️",
+        "hi": 69,
+        "lo": 57,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-09-30T07:23",
         "2026-10-01T07:24",
         "2026-10-02T07:25",
         "2026-10-03T07:25",
         "2026-10-04T07:26",
-        "2026-10-05T07:27"
+        "2026-10-05T07:27",
+        "2026-10-06T07:28"
       ],
       "sunsets": [
-        "2026-09-30T19:14",
         "2026-10-01T19:13",
         "2026-10-02T19:11",
         "2026-10-03T19:10",
         "2026-10-04T19:09",
-        "2026-10-05T19:07"
+        "2026-10-05T19:07",
+        "2026-10-06T19:06"
       ],
       "timezone": "America/New_York"
     }
@@ -1925,6 +1907,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 69594.21,
     "source": "ynab",
-    "updatedAt": "2026-10-01T03:45:36.259Z"
+    "updatedAt": "2026-10-01T04:00:36.794Z"
   }
 }
