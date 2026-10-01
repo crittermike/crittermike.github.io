@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T12:45:37.728Z",
+  "generated_at": "2026-10-01T13:00:40.153Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -12,7 +12,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$96.09"
+        "balance_str": "$108.09"
       },
       "guineaPig": null,
       "assignments": []
@@ -26,9 +26,9 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$18.00"
+        "balance_str": "$22.80"
       },
-      "guineaPig": "$140.34",
+      "guineaPig": "$147.54",
       "assignments": []
     },
     {
@@ -40,7 +40,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$92.63"
+        "balance_str": "$104.63"
       },
       "guineaPig": null,
       "assignments": [
@@ -60,7 +60,7 @@
         "refill": 60
       },
       "allowance": {
-        "balance_str": "$299.77"
+        "balance_str": "$311.77"
       },
       "guineaPig": null,
       "assignments": []
@@ -332,7 +332,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 67,
       "hi": 87,
       "lo": 61,
       "icon": "☀️",
@@ -1907,6 +1907,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 69594.56,
     "source": "ynab",
-    "updatedAt": "2026-10-01T12:45:36.436Z"
+    "updatedAt": "2026-10-01T13:00:38.448Z"
   }
 }
