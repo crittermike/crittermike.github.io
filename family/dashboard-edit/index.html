@@ -1934,7 +1934,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">69°</span>
+        <span class="dh-temp">70°</span>
         <span class="dh-hilo">H 88° · L 69°</span>
       </div>
       <div class="dh-days">
@@ -2028,7 +2028,7 @@
           
             
             
-            <div class="v">303g</div>
+            <div class="v">363g</div>
           
           
             
@@ -2039,7 +2039,7 @@
           
             
             
-            <div class="v">52g</div>
+            <div class="v">112g</div>
           
           
             
@@ -2050,7 +2050,7 @@
           
             
             
-            <div class="v">62g</div>
+            <div class="v">122g</div>
           
           
             
@@ -2061,7 +2061,7 @@
           
             
             
-            <div class="v">496g</div>
+            <div class="v">556g</div>
           
           
             
@@ -2087,7 +2087,7 @@
           
             
             
-            <span class="v">303g</span>
+            <span class="v">363g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2125,7 +2125,7 @@
           
             
             
-            <span class="v">52g</span>
+            <span class="v">112g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2168,7 +2168,7 @@
           
             
             
-            <span class="v">62g</span>
+            <span class="v">122g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2206,7 +2206,7 @@
           
             
             
-            <span class="v">496g</span>
+            <span class="v">556g</span>
           
         </div>
         <div class="kidtile-stat">
@@ -2983,7 +2983,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":303,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":52,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":62,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":496,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":112,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":122,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3449,7 +3449,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":303,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":52,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":62,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":496,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":112,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":122,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
