@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T23:45:56.705Z",
+  "generated_at": "2026-10-03T00:00:56.921Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout or dinner out",
+    "name": "Pizza",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Flexible Friday default. Restaurant and orders undecided; nutrition unknown. Choose options consistent with Nancy's dislikes and lean-meat preference.",
+    "note": "Proposed takeout or delivery pizza for six, with cheese as the default and no disliked toppings. No order placed. Brand, size and portions unknown, so nutrition is not estimated.",
     "recipe": null
   },
   "mealweek": [
@@ -1893,7 +1893,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 6.5,
+    "dayPct": 9.7,
     "totalSpend": 2200.09,
     "totalBudget": 0,
     "categories": [
@@ -1910,6 +1910,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 68391.31,
     "source": "ynab",
-    "updatedAt": "2026-10-02T23:45:55.452Z"
+    "updatedAt": "2026-10-03T00:00:55.696Z"
   }
 }
