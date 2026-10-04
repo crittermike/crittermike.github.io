@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T17:01:26.376Z",
+  "generated_at": "2026-10-04T17:16:12.623Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -284,15 +284,79 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken enchiladas with tomato sauce",
+      "name": "Gluten-free homemade Hamburger Helper",
       "isToday": false,
       "isTomorrow": true,
-      "recipe": null
+      "recipe": {
+        "slug": "homemade-hamburger-helper",
+        "name": "Homemade Hamburger Helper",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [],
+        "in_rotation": false,
+        "effort": null,
+        "kid_friendly": true,
+        "protein_g": null,
+        "cal": null,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "1 onion, diced",
+              "Olive oil",
+              "Garlic, minced",
+              "1 package ground beef",
+              "Salt, pepper, paprika, garlic powder",
+              "1 tbsp tomato paste",
+              "1 can Italian-seasoned diced tomatoes, drained",
+              "2 cups beef broth",
+              "1 cup heavy cream",
+              "2 cups uncooked noodles",
+              "Shredded cheddar"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "1 onion, diced",
+          "Olive oil",
+          "Garlic, minced",
+          "1 package ground beef",
+          "Salt, pepper, paprika, garlic powder",
+          "1 tbsp tomato paste",
+          "1 can Italian-seasoned diced tomatoes, drained",
+          "2 cups beef broth",
+          "1 cup heavy cream",
+          "2 cups uncooked noodles",
+          "Shredded cheddar"
+        ],
+        "steps": [
+          "Cook onion in olive oil.",
+          "Add garlic, cook a minute or so.",
+          "Add ground beef, brown.",
+          "Season with salt, pepper, paprika, garlic powder.",
+          "Stir in tomato paste + drained diced tomatoes.",
+          "Add beef broth + heavy cream.",
+          "Add uncooked noodles.",
+          "Cover, cook 15 min.",
+          "Uncover, cook 2 more min.",
+          "Off heat, top with cheddar, stir."
+        ],
+        "notes": "",
+        "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>For the October 5 dinner, use the complete dated adaptation below, not the original version. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n<h2>2026-10-05 gluten-free adaptation</h2>\n<p>Assistant-drafted six-person adaptation of Nancy's recipe, not a tested or externally sourced recipe. About 35-45 minutes. This does not change the standing recipe or extend the temporary October 3-16 home-cooking restriction.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain 96% lean ground beef: 2.5 lb, no added seasoning.</li>\n<li>Labeled gluten-free rice/corn elbow pasta: 12 oz dry, not ordinary egg noodles.</li>\n<li>Yellow onion: 1 large, diced.</li>\n<li>Garlic: 3 cloves, minced.</li>\n<li>Olive oil: 1 tbsp.</li>\n<li>Plain tomato paste: 1 tbsp, check gluten-free label.</li>\n<li>Plain diced tomatoes: one 14.5 oz can, drained, gluten-free and no peppers.</li>\n<li>Low-sodium beef broth: 2 cups, labeled gluten-free, no pepper ingredients.</li>\n<li>Plain 1% milk: 1.5 cups, check label.</li>\n<li>Plain cheddar: 6 oz, grated from a block, check gluten-free label.</li>\n<li>Dried oregano: 1 tsp, gluten-free single ingredient.</li>\n<li>Garlic powder: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt and black pepper to taste; check seasoning labels for gluten-containing additives.</li>\n<li>Water for boiling pasta.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual package labels before starting. Do not use wheat pasta, paprika, chili, flour, an unverified seasoning packet or ordinary broth. Use clean cookware and a clean colander, not pasta water or utensils carrying wheat residue.</li>\n<li>For Mike's estimated portion, separate 9 oz raw beef and 40 g dry pasta before cooking. Cook that beef separately or keep track of its cooked portion. Brown all beef in a large skillet or batches until it reaches 160°F. Remove to a bowl, keeping Mike's portion identifiable.</li>\n<li>Add the tablespoon of oil and onion to the skillet; soften about 5 minutes. Add garlic for 1 minute. Add tomato paste, tomatoes, oregano, garlic powder and broth. Simmer uncovered 10-15 minutes to reduce. Stir in milk over low heat; heat gently without a hard boil. Season to taste.</li>\n<li>Meanwhile cook gluten-free pasta separately in clean water for its package time. Test early, then drain; do not apply the original covered 15-minute noodle method. Keep Mike's 40 g dry-equivalent portion separate.</li>\n<li>Portion one-sixth of the sauce for Mike, then combine it with his beef, pasta and 1/2 oz cheddar off heat. Combine remaining beef, pasta, sauce and cheese for the family, or keep components separate. The sauce is intentionally lighter than the original cream version; reduce before adding milk instead of thickening with flour.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>9 oz raw beef, 40 g dry pasta, 1/2 oz cheese and one-sixth of sauce. Generic assumptions: beef 140 cal/24g protein per 4 oz; pasta 200 cal/4g per 56g; cheese 55 cal/3.5g; milk 30 cal/2g; remaining sauce vegetables/broth 35 cal/1g; oil 20 cal. Tool-calculated 597.86 cal/63.36g protein, stored as 598 cal/63g. This is an estimate, not label-verified nutrition or an intake record. Other family portions are flexible.</p>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Nancy's birthday: dinner out or takeout",
+      "name": "Slow-cooker pot roast with carrots and potatoes",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -300,7 +364,7 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Dinner with Matt and Nadia; takeout for anyone eating at home",
+      "name": "Chicken fajitas with corn tortillas, zucchini and corn",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -308,7 +372,7 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Korean beef and broccoli bowls",
+      "name": "Takeout for PTO Pop-In night",
       "isToday": false,
       "isTomorrow": false,
       "recipe": null
@@ -332,7 +396,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 67,
       "hi": 72,
       "lo": 61,
       "icon": "⛅",
@@ -614,8 +678,8 @@
         "**Serve:** Pile into tortillas, or plate components separately. Sour cream is optional."
       ],
       "notes": "<h3>Pitfalls</h3>\n<ul>\n<li>Don't crowd the pan or chicken steams instead of searing.</li>\n<li>Zucchini turns to mush fast — keep it moving and pull it before it looks done.</li>\n<li>Cast iron stays scorching after you turn it off, so move stuff off the heat once chicken is back in.</li>\n</ul>\n",
-      "body_html": "<h1>Chicken Fajitas (Cast Iron, with Zucchini + Corn)</h1>\n<p>Serves 4–5. ~600 cal / 48–62g protein per serving (2 tortillas + filling).</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1.5–2 lb chicken breasts, sliced into 1/4&quot; strips</li>\n<li>2 tbsp pepper-free fajita seasoning (or to taste; no chili, paprika, or other peppers)</li>\n<li>2 medium onions, sliced into half-moons</li>\n<li>2 medium zucchini, halved lengthwise then sliced 1/4&quot; thick</li>\n<li>1.5 cups corn (frozen or fresh kernels off the cob)</li>\n<li>2 tbsp olive oil, divided</li>\n<li>8–10 tortillas</li>\n<li>Salt + pepper</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li><strong>Marinate:</strong> Toss sliced chicken with 1 tbsp olive oil and 1.5 tbsp fajita seasoning. Let it sit 15+ min while you prep veg.</li>\n<li><strong>Heat the cast iron:</strong> Crank a 12&quot; cast iron over medium-high until it's smoking lightly (~3 min).</li>\n<li><strong>Sear chicken:</strong> Add chicken in a single layer, don't crowd. Cook untouched 2–3 min until charred, flip and cook another 2 min. Pull to a plate. Work in two batches if needed.</li>\n<li><strong>Cook onions:</strong> Add remaining 1 tbsp oil and onions to the same pan. 3–4 min until they get color.</li>\n<li><strong>Add zucchini + corn:</strong> Toss in zucchini and corn with the rest of the fajita seasoning + pinch of salt. Cook 4–5 min, stirring once or twice. You want char on the zucchini, not mush. Don't stir constantly.</li>\n<li><strong>Combine:</strong> Reserve any plain chicken and vegetables before combining. Return remaining chicken (and any juices) to the pan, toss everything together 1 min to reheat.</li>\n<li><strong>Warm tortillas:</strong> Wrap in foil and stick in a 300°F oven for 5 min, or char them one at a time over an open gas flame for 10 sec/side.</li>\n<li><strong>Serve:</strong> Pile into tortillas, or plate components separately. Sour cream is optional.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Don't crowd the pan or chicken steams instead of searing.</li>\n<li>Zucchini turns to mush fast — keep it moving and pull it before it looks done.</li>\n<li>Cast iron stays scorching after you turn it off, so move stuff off the heat once chicken is back in.</li>\n</ul>\n",
-      "last_reviewed": "2026-09-13T00:00:00.000Z"
+      "body_html": "<h1>Chicken Fajitas (Cast Iron, with Zucchini + Corn)</h1>\n<p>For the October 7 dinner, use the complete dated six-person adaptation below. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Serves 4–5. ~600 cal / 48–62g protein per serving (2 tortillas + filling).</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1.5–2 lb chicken breasts, sliced into 1/4&quot; strips</li>\n<li>2 tbsp pepper-free fajita seasoning (or to taste; no chili, paprika, or other peppers)</li>\n<li>2 medium onions, sliced into half-moons</li>\n<li>2 medium zucchini, halved lengthwise then sliced 1/4&quot; thick</li>\n<li>1.5 cups corn (frozen or fresh kernels off the cob)</li>\n<li>2 tbsp olive oil, divided</li>\n<li>8–10 tortillas</li>\n<li>Salt + pepper</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li><strong>Marinate:</strong> Toss sliced chicken with 1 tbsp olive oil and 1.5 tbsp fajita seasoning. Let it sit 15+ min while you prep veg.</li>\n<li><strong>Heat the cast iron:</strong> Crank a 12&quot; cast iron over medium-high until it's smoking lightly (~3 min).</li>\n<li><strong>Sear chicken:</strong> Add chicken in a single layer, don't crowd. Cook untouched 2–3 min until charred, flip and cook another 2 min. Pull to a plate. Work in two batches if needed.</li>\n<li><strong>Cook onions:</strong> Add remaining 1 tbsp oil and onions to the same pan. 3–4 min until they get color.</li>\n<li><strong>Add zucchini + corn:</strong> Toss in zucchini and corn with the rest of the fajita seasoning + pinch of salt. Cook 4–5 min, stirring once or twice. You want char on the zucchini, not mush. Don't stir constantly.</li>\n<li><strong>Combine:</strong> Reserve any plain chicken and vegetables before combining. Return remaining chicken (and any juices) to the pan, toss everything together 1 min to reheat.</li>\n<li><strong>Warm tortillas:</strong> Wrap in foil and stick in a 300°F oven for 5 min, or char them one at a time over an open gas flame for 10 sec/side.</li>\n<li><strong>Serve:</strong> Pile into tortillas, or plate components separately. Sour cream is optional.</li>\n</ol>\n<h2>Pitfalls</h2>\n<ul>\n<li>Don't crowd the pan or chicken steams instead of searing.</li>\n<li>Zucchini turns to mush fast — keep it moving and pull it before it looks done.</li>\n<li>Cast iron stays scorching after you turn it off, so move stuff off the heat once chicken is back in.</li>\n</ul>\n<h2>2026-10-07 gluten-free adaptation</h2>\n<p>Six-person planning adaptation of the saved recipe, about 35-45 minutes with batch cooking. This does not extend the temporary October 3-16 home-cooking restriction. Exact quantities below are a draft, not a record of a tested meal.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain boneless skinless chicken breasts: 3 lb, trimmed and cut into thin strips.</li>\n<li>Yellow onions: 3 medium, sliced.</li>\n<li>Zucchini: 3 medium, sliced.</li>\n<li>Plain corn kernels: 2 cups, fresh or frozen without sauce; check package.</li>\n<li>Olive oil: 3 tbsp, divided.</li>\n<li>Gluten-free corn tortillas: 18 small; explicitly labeled gluten-free, no wheat/corn blend.</li>\n<li>Ground cumin: 2 tsp, gluten-free single ingredient.</li>\n<li>Garlic powder: 2 tsp, gluten-free single ingredient.</li>\n<li>Onion powder: 2 tsp, gluten-free single ingredient.</li>\n<li>Dried oregano: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt and black pepper to taste; check seasoning labels for gluten-containing additives.</li>\n<li>Plain sour cream: 1/2 cup, optional, labeled gluten-free.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual package labels. Use the individual seasonings listed, not an unverified fajita packet. No peppers, paprika, chili, salsa or cilantro. Clean the skillet, utensils and tortilla-warming surface to avoid wheat residue.</li>\n<li>Mix cumin, garlic powder, onion powder and oregano. Toss chicken with half the seasoning and half the oil. Reserve any unseasoned chicken before this step if desired.</li>\n<li>Heat a large skillet over medium-high. Cook chicken in uncrowded batches, turning until every batch reaches 165°F. Thin strips may take about 5-7 minutes per batch, but use temperature rather than time alone. Transfer to a clean plate, not the raw-chicken plate.</li>\n<li>Add remaining oil; cook onions about 4-5 minutes. Add zucchini, corn and remaining seasoning, cooking in batches if needed for another 5-7 minutes until tender with some browning. Season with salt and black pepper.</li>\n<li>Keep components separate for serving, or return cooked chicken and juices to the pan to heat through. Warm labeled gluten-free tortillas in foil at 300°F for about 5 minutes or per package directions. Do not substitute flour tortillas.</li>\n<li>Serve with optional labeled gluten-free sour cream. For Mike's estimate, set aside 10 oz raw chicken before cooking, 2 small tortillas, about 1 cup onion/zucchini and 1/3 cup corn. Allocate 2 tsp of the total recipe oil to his portion and 1 tbsp sour cream; do not add that oil on top of the recipe total.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>Generic assumptions for that portion: chicken 110 cal/23g protein per 4 oz raw; tortillas 100 cal/2g; vegetables/corn 126 cal/4g; oil 80 cal; sour cream 30 cal/0.5g. Tool-calculated 611 cal/64g protein. Actual tortillas, labels, produce sizes, yield and oil distribution vary; this is planning nutrition, not recorded intake. Other family portions are flexible.</p>\n",
+      "last_reviewed": "2026-10-04T00:00:00.000Z"
     },
     {
       "slug": "chicken-thigh-and-veggie-soup-with-french-bread",
@@ -1580,7 +1644,7 @@
         "Skim visible fat from the cooking juices, taste, and add salt only if needed. Serve the meat and vegetables with juices spooned over or on the side."
       ],
       "notes": "",
-      "body_html": "<h1>Slow-cooker sirloin tip roast</h1>\n<p>Serves 6. No searing, no added butter or oil. Adapted from iFoodReal; butter and paprika omitted, lower-sodium broth and soy sauce preferred, and salt adjusted at the end.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>3 lb sirloin tip roast, fully thawed, visible exterior fat and tough silverskin trimmed</li>\n<li>1.5 lb baby potatoes, larger ones halved</li>\n<li>2 cups baby carrots or thick carrot chunks</li>\n<li>1 large yellow onion, thickly sliced</li>\n<li>1 cup low-sodium beef broth</li>\n<li>3 tbsp apple cider vinegar</li>\n<li>3 tbsp reduced-sodium soy sauce</li>\n<li>2 tbsp Worcestershire sauce</li>\n<li>2 tsp garlic powder</li>\n<li>2 tsp onion powder</li>\n<li>1 tsp dried parsley</li>\n<li>1 tsp black pepper</li>\n<li>Salt to taste after cooking</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put potatoes, carrots, and onion in a large slow cooker. Place the trimmed, thawed roast on top. No searing needed.</li>\n<li>Mix broth, vinegar, soy sauce, Worcestershire, garlic powder, onion powder, parsley, and black pepper. Pour over the roast. The meat does not need to be submerged.</li>\n<li>Cover and cook on LOW for about 8-10 hours. Check at 8 hours; it is ready when a fork slides in easily and the vegetables are tender. Timing varies with roast thickness and slow cooker. Do not keep cooking solely to force chuck-like shredding.</li>\n<li>Transfer the roast to a cutting board and rest for 10 minutes. Slice thinly against the grain, or separate into pieces if it is already falling apart.</li>\n<li>Skim visible fat from the cooking juices, taste, and add salt only if needed. Serve the meat and vegetables with juices spooned over or on the side.</li>\n</ol>\n<h2>Optional gravy</h2>\n<p>Transfer 2 cups cooking liquid to a saucepan. Mix 2 tbsp cornstarch with 2 tbsp cold water, whisk into the simmering liquid, and simmer until thickened.</p>\n",
+      "body_html": "<h1>Slow-cooker sirloin tip roast</h1>\n<p>For the October 6 dinner, use the complete dated adaptation below, not the ordinary soy-sauce/Worcestershire version. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Serves 6. No searing, no added butter or oil. Adapted from iFoodReal; butter and paprika omitted, lower-sodium broth and soy sauce preferred, and salt adjusted at the end.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>3 lb sirloin tip roast, fully thawed, visible exterior fat and tough silverskin trimmed</li>\n<li>1.5 lb baby potatoes, larger ones halved</li>\n<li>2 cups baby carrots or thick carrot chunks</li>\n<li>1 large yellow onion, thickly sliced</li>\n<li>1 cup low-sodium beef broth</li>\n<li>3 tbsp apple cider vinegar</li>\n<li>3 tbsp reduced-sodium soy sauce</li>\n<li>2 tbsp Worcestershire sauce</li>\n<li>2 tsp garlic powder</li>\n<li>2 tsp onion powder</li>\n<li>1 tsp dried parsley</li>\n<li>1 tsp black pepper</li>\n<li>Salt to taste after cooking</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put potatoes, carrots, and onion in a large slow cooker. Place the trimmed, thawed roast on top. No searing needed.</li>\n<li>Mix broth, vinegar, soy sauce, Worcestershire, garlic powder, onion powder, parsley, and black pepper. Pour over the roast. The meat does not need to be submerged.</li>\n<li>Cover and cook on LOW for about 8-10 hours. Check at 8 hours; it is ready when a fork slides in easily and the vegetables are tender. Timing varies with roast thickness and slow cooker. Do not keep cooking solely to force chuck-like shredding.</li>\n<li>Transfer the roast to a cutting board and rest for 10 minutes. Slice thinly against the grain, or separate into pieces if it is already falling apart.</li>\n<li>Skim visible fat from the cooking juices, taste, and add salt only if needed. Serve the meat and vegetables with juices spooned over or on the side.</li>\n</ol>\n<h2>Optional gravy</h2>\n<p>Transfer 2 cups cooking liquid to a saucepan. Mix 2 tbsp cornstarch with 2 tbsp cold water, whisk into the simmering liquid, and simmer until thickened.</p>\n<h2>2026-10-06 gluten-free adaptation</h2>\n<p>Six-person planning adaptation of the saved recipe. About 15 minutes preparation and 8-10 hours on LOW; timing depends on the roast and cooker. The exact adaptation has not been kitchen-tested. This does not extend the temporary October 3-16 home-cooking restriction.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain sirloin tip roast: 3 lb, fully thawed, visible exterior fat and tough silverskin trimmed.</li>\n<li>Baby potatoes: 2 lb, larger ones halved.</li>\n<li>Carrots: 3 cups thick chunks.</li>\n<li>Yellow onion: 1 large, thickly sliced.</li>\n<li>Low-sodium beef broth: 1 cup, labeled gluten-free, no pepper ingredients.</li>\n<li>Apple cider vinegar: 3 tbsp, check gluten-free label; not malt vinegar.</li>\n<li>Reduced-sodium gluten-free tamari: 3 tbsp, explicitly labeled gluten-free; not ordinary soy sauce.</li>\n<li>Garlic powder: 2 tsp, gluten-free single ingredient.</li>\n<li>Onion powder: 2 tsp, gluten-free single ingredient.</li>\n<li>Dried parsley: 1 tsp, gluten-free single ingredient.</li>\n<li>Black pepper: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt to taste after cooking.</li>\n<li>Optional gravy: 2 tbsp labeled gluten-free cornstarch and 2 tbsp cold water.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual packaged ingredient labels and use clean cookware. Omit Worcestershire entirely rather than assume it is gluten-free or fish-free. No flour coating, gravy packet, butter or additional oil.</li>\n<li>Put potatoes, carrots and onion in a sufficiently large slow cooker. Put the trimmed, thawed roast on top. Respect the cooker's maximum fill line.</li>\n<li>Mix broth, vinegar, gluten-free tamari, garlic powder, onion powder, parsley and black pepper. Pour over the roast; it need not be submerged.</li>\n<li>Cover and cook on LOW for about 8-10 hours. Check at 8 hours for tender vegetables and meat that yields to a fork. Do not cook solely to force chuck-like shredding. Start in the morning for dinner rather than waiting for an evening recipe reminder.</li>\n<li>Rest the roast on a board for 10 minutes. Slice thinly against the grain. Skim fat from the juices; adjust salt only after tasting. Serve meat and vegetables separately with juices on the side if preferred.</li>\n<li>Optional gravy: remove 2 cups cooking liquid to a saucepan. Mix the labeled gluten-free cornstarch with cold water; whisk into simmering liquid and cook until thickened. Do not substitute wheat flour or gravy mix.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>Meat from 9.5 oz raw trimmed roast, 8 oz potatoes, carrots/onion and 2 tbsp unthickened juices. To estimate a raw-equivalent share after cooking, allocate 9.5/48 of the cooked meat if the trimmed starting weight is 3 lb; adjust for the actual trimmed weight. Generic assumptions: beef 160 cal/24g protein per 4 oz raw; potatoes 180 cal/4g; vegetables 50 cal/1g; juices 15 cal. Tool-calculated 625 cal/62g protein. Optional thickened gravy is not included. Actual cut, labels, trimming and cooking loss vary; these are not weighed intake values.</p>\n",
       "last_reviewed": null
     },
     {
@@ -1839,7 +1903,10 @@
       "name": "Homemade Hamburger Helper",
       "source": "markdown",
       "hasFullRecipe": true,
-      "tags": [],
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
       "aliases": [],
       "in_rotation": false,
       "effort": null,
@@ -1893,7 +1960,7 @@
         "Off heat, top with cheddar, stir."
       ],
       "notes": "",
-      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n",
+      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>For the October 5 dinner, use the complete dated adaptation below, not the original version. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n<h2>2026-10-05 gluten-free adaptation</h2>\n<p>Assistant-drafted six-person adaptation of Nancy's recipe, not a tested or externally sourced recipe. About 35-45 minutes. This does not change the standing recipe or extend the temporary October 3-16 home-cooking restriction.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain 96% lean ground beef: 2.5 lb, no added seasoning.</li>\n<li>Labeled gluten-free rice/corn elbow pasta: 12 oz dry, not ordinary egg noodles.</li>\n<li>Yellow onion: 1 large, diced.</li>\n<li>Garlic: 3 cloves, minced.</li>\n<li>Olive oil: 1 tbsp.</li>\n<li>Plain tomato paste: 1 tbsp, check gluten-free label.</li>\n<li>Plain diced tomatoes: one 14.5 oz can, drained, gluten-free and no peppers.</li>\n<li>Low-sodium beef broth: 2 cups, labeled gluten-free, no pepper ingredients.</li>\n<li>Plain 1% milk: 1.5 cups, check label.</li>\n<li>Plain cheddar: 6 oz, grated from a block, check gluten-free label.</li>\n<li>Dried oregano: 1 tsp, gluten-free single ingredient.</li>\n<li>Garlic powder: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt and black pepper to taste; check seasoning labels for gluten-containing additives.</li>\n<li>Water for boiling pasta.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual package labels before starting. Do not use wheat pasta, paprika, chili, flour, an unverified seasoning packet or ordinary broth. Use clean cookware and a clean colander, not pasta water or utensils carrying wheat residue.</li>\n<li>For Mike's estimated portion, separate 9 oz raw beef and 40 g dry pasta before cooking. Cook that beef separately or keep track of its cooked portion. Brown all beef in a large skillet or batches until it reaches 160°F. Remove to a bowl, keeping Mike's portion identifiable.</li>\n<li>Add the tablespoon of oil and onion to the skillet; soften about 5 minutes. Add garlic for 1 minute. Add tomato paste, tomatoes, oregano, garlic powder and broth. Simmer uncovered 10-15 minutes to reduce. Stir in milk over low heat; heat gently without a hard boil. Season to taste.</li>\n<li>Meanwhile cook gluten-free pasta separately in clean water for its package time. Test early, then drain; do not apply the original covered 15-minute noodle method. Keep Mike's 40 g dry-equivalent portion separate.</li>\n<li>Portion one-sixth of the sauce for Mike, then combine it with his beef, pasta and 1/2 oz cheddar off heat. Combine remaining beef, pasta, sauce and cheese for the family, or keep components separate. The sauce is intentionally lighter than the original cream version; reduce before adding milk instead of thickening with flour.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>9 oz raw beef, 40 g dry pasta, 1/2 oz cheese and one-sixth of sauce. Generic assumptions: beef 140 cal/24g protein per 4 oz; pasta 200 cal/4g per 56g; cheese 55 cal/3.5g; milk 30 cal/2g; remaining sauce vegetables/broth 35 cal/1g; oil 20 cal. Tool-calculated 597.86 cal/63.36g protein, stored as 598 cal/63g. This is an estimate, not label-verified nutrition or an intake record. Other family portions are flexible.</p>\n",
       "last_reviewed": null
     }
   ],
@@ -1924,6 +1991,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-04T17:01:24.176Z"
+    "updatedAt": "2026-10-04T17:16:11.491Z"
   }
 }
