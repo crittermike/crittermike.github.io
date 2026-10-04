@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T23:45:28.521Z",
+  "generated_at": "2026-10-04T00:00:33.383Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza",
+    "name": "Leftovers or whatever you can scrounge up",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "Proposed takeout or delivery pizza for six, with cheese as the default and no disliked toppings. No order placed. Brand, size and portions unknown, so nutrition is not estimated.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -1893,7 +1893,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 9.7,
+    "dayPct": 12.9,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -1918,6 +1918,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-03T23:45:27.364Z"
+    "updatedAt": "2026-10-04T00:00:31.342Z"
   }
 }
