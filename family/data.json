@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T03:45:27.900Z",
+  "generated_at": "2026-10-04T04:00:30.145Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -43,7 +43,13 @@
         "balance_str": "$104.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-05-2530cae4be6975646fa3fb76f74815ebdf29bb4d83395523f9d7e68bf1ced05d",
+          "label": "Spanish (Simon): IXL 5T",
+          "dueDate": "2026-10-05"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -271,8 +277,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -280,7 +286,7 @@
       "dow_short": "Mon",
       "name": "Chicken enchiladas with tomato sauce",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -319,7 +325,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -327,19 +333,12 @@
   "weather": {
     "now": {
       "temp": 69,
-      "hi": 82,
-      "lo": 69,
+      "hi": 77,
+      "lo": 62,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌦",
-        "hi": 77,
-        "lo": 62,
-        "code": 51
-      },
       {
         "d": "Mon",
         "icon": "🌧",
@@ -367,24 +366,31 @@
         "hi": 88,
         "lo": 62,
         "code": 2
+      },
+      {
+        "d": "Fri",
+        "icon": "⛅",
+        "hi": 87,
+        "lo": 64,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-03T07:25",
         "2026-10-04T07:26",
         "2026-10-05T07:27",
         "2026-10-06T07:28",
         "2026-10-07T07:28",
-        "2026-10-08T07:29"
+        "2026-10-08T07:29",
+        "2026-10-09T07:30"
       ],
       "sunsets": [
-        "2026-10-03T19:10",
         "2026-10-04T19:09",
         "2026-10-05T19:07",
         "2026-10-06T19:06",
         "2026-10-07T19:05",
-        "2026-10-08T19:03"
+        "2026-10-08T19:03",
+        "2026-10-09T19:02"
       ],
       "timezone": "America/New_York"
     }
@@ -1918,6 +1924,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-04T03:45:26.708Z"
+    "updatedAt": "2026-10-04T04:00:28.910Z"
   }
 }
