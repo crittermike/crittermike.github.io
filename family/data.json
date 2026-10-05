@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T12:01:22.096Z",
+  "generated_at": "2026-10-05T12:16:12.764Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -271,57 +271,12 @@
     ]
   },
   "dinner": {
-    "name": "Slow-cooker chicken poppyseed salad with mixed greens",
-    "protein_g": null,
-    "cal": null,
-    "effort": "easy-slow",
-    "note": "October 5: use the complete dated gluten-free checks in the linked recipe. Chicken breast is on hand; broth, dressing, greens, and toppings are not confirmed. Nutrition is not calculated.",
-    "recipe": {
-      "slug": "crockpot-chicken-poppyseed-salad",
-      "name": "Slow-cooker chicken poppyseed salad with mixed greens",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [],
-      "in_rotation": false,
-      "effort": "easy-slow",
-      "kid_friendly": true,
-      "protein_g": null,
-      "cal": null,
-      "servings": 6,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "10–12 oz mixed greens, washed and thoroughly dried",
-            "2 crisp apples, thinly sliced",
-            "1 English cucumber, diced",
-            "2 cups shredded carrots",
-            "1 cup dried cranberries",
-            "1 cup chopped pecans, optional",
-            "Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "10–12 oz mixed greens, washed and thoroughly dried",
-        "2 crisp apples, thinly sliced",
-        "1 English cucumber, diced",
-        "2 cups shredded carrots",
-        "1 cup dried cranberries",
-        "1 cup chopped pecans, optional",
-        "Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste"
-      ],
-      "steps": [],
-      "notes": "<h3>Meal-prep assembly</h3>\n<ol>\n<li>Divide dry mixed greens, cucumber, and carrots among six containers. Keep the greens dry.</li>\n<li>Portion shredded chicken, apples, cranberries, and pecans into separate sealed containers or compartments. Add the apples shortly before eating to limit browning.</li>\n<li>Portion dressing into small cups. Do not dress the salads until serving. Add chicken cold, or reheat it separately and serve warm over the salad.</li>\n<li>Refrigerate cooked chicken within 2 hours in shallow containers. Use refrigerated leftovers within 3–4 days, or freeze portions for later.</li>\n</ol>\n",
-      "body_html": "<h1>Slow-cooker chicken poppyseed salad with mixed greens</h1>\n<p>Six meal-prep salads. Keep the chicken, greens, toppings, and dressing separate until serving so the greens stay crisp. This dinner is intended to be gluten-free; check the actual packaged labels.</p>\n<h2>Slow-cooker chicken</h2>\n<h3>Ingredients</h3>\n<ul>\n<li>3 lb plain boneless skinless chicken breasts, fully thawed</li>\n<li>1 cup low-sodium chicken broth explicitly labeled gluten-free</li>\n<li>1 tsp garlic powder, single ingredient and labeled gluten-free</li>\n<li>1 tsp dried oregano, single ingredient and labeled gluten-free</li>\n<li>1/2 tsp salt</li>\n<li>Black pepper to taste</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Put the thawed chicken in the slow cooker in an even layer. Pour the broth over it and season with garlic powder, oregano, salt, and pepper.</li>\n<li>Cover and cook on LOW, checking after 3 hours. Continue until the thickest breasts reach 165°F on a food thermometer; time varies with the cooker and chicken thickness. Do not use frozen chicken in the slow cooker.</li>\n<li>Transfer the chicken to a clean dish, shred with two forks, and toss with enough cooking liquid to keep it moist. Cool promptly in shallow containers before refrigerating.</li>\n</ol>\n<h2>Salad ingredients</h2>\n<ul>\n<li>10–12 oz mixed greens, washed and thoroughly dried</li>\n<li>2 crisp apples, thinly sliced</li>\n<li>1 English cucumber, diced</li>\n<li>2 cups shredded carrots</li>\n<li>1 cup dried cranberries</li>\n<li>1 cup chopped pecans, optional</li>\n<li>Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste</li>\n</ul>\n<h2>Meal-prep assembly</h2>\n<ol>\n<li>Divide dry mixed greens, cucumber, and carrots among six containers. Keep the greens dry.</li>\n<li>Portion shredded chicken, apples, cranberries, and pecans into separate sealed containers or compartments. Add the apples shortly before eating to limit browning.</li>\n<li>Portion dressing into small cups. Do not dress the salads until serving. Add chicken cold, or reheat it separately and serve warm over the salad.</li>\n<li>Refrigerate cooked chicken within 2 hours in shallow containers. Use refrigerated leftovers within 3–4 days, or freeze portions for later.</li>\n</ol>\n<h2>October 5, 2026 gluten-free check</h2>\n<p>Use explicitly labeled gluten-free chicken broth, garlic powder, oregano, and poppyseed dressing. Check packaged dried cranberries and pecans as well. Use clean utensils, containers, and preparation surfaces; omit croutons. This adaptation applies within the existing October 3–16 home-cooked dinner restriction.</p>\n<h2>Nutrition</h2>\n<p>Not calculated. Actual labels, portions, and cooked yield are unknown.</p>\n",
-      "last_reviewed": null
-    }
+    "name": "Meatloaf with mashed potatoes and cabbage",
+    "protein_g": 45,
+    "cal": 700,
+    "effort": "medium",
+    "note": "October 5: use explicitly labeled gluten-free breadcrumbs and check ketchup and all packaged ingredients for gluten; prevent cross-contact. The saved recipe currently lists ingredients only, with no quantities or method. Nutrition is the saved estimate, not verified for an actual portion.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -335,55 +290,10 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Slow-cooker chicken poppyseed salad with mixed greens",
+      "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": {
-        "slug": "crockpot-chicken-poppyseed-salad",
-        "name": "Slow-cooker chicken poppyseed salad with mixed greens",
-        "source": "markdown",
-        "hasFullRecipe": true,
-        "tags": [
-          "recipe",
-          "dinner"
-        ],
-        "aliases": [],
-        "in_rotation": false,
-        "effort": "easy-slow",
-        "kid_friendly": true,
-        "protein_g": null,
-        "cal": null,
-        "servings": 6,
-        "prep_min": null,
-        "cook_min": null,
-        "ingredient_groups": [
-          {
-            "heading": null,
-            "items": [
-              "10–12 oz mixed greens, washed and thoroughly dried",
-              "2 crisp apples, thinly sliced",
-              "1 English cucumber, diced",
-              "2 cups shredded carrots",
-              "1 cup dried cranberries",
-              "1 cup chopped pecans, optional",
-              "Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste"
-            ]
-          }
-        ],
-        "all_ingredients": [
-          "10–12 oz mixed greens, washed and thoroughly dried",
-          "2 crisp apples, thinly sliced",
-          "1 English cucumber, diced",
-          "2 cups shredded carrots",
-          "1 cup dried cranberries",
-          "1 cup chopped pecans, optional",
-          "Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste"
-        ],
-        "steps": [],
-        "notes": "<h3>Meal-prep assembly</h3>\n<ol>\n<li>Divide dry mixed greens, cucumber, and carrots among six containers. Keep the greens dry.</li>\n<li>Portion shredded chicken, apples, cranberries, and pecans into separate sealed containers or compartments. Add the apples shortly before eating to limit browning.</li>\n<li>Portion dressing into small cups. Do not dress the salads until serving. Add chicken cold, or reheat it separately and serve warm over the salad.</li>\n<li>Refrigerate cooked chicken within 2 hours in shallow containers. Use refrigerated leftovers within 3–4 days, or freeze portions for later.</li>\n</ol>\n",
-        "body_html": "<h1>Slow-cooker chicken poppyseed salad with mixed greens</h1>\n<p>Six meal-prep salads. Keep the chicken, greens, toppings, and dressing separate until serving so the greens stay crisp. This dinner is intended to be gluten-free; check the actual packaged labels.</p>\n<h2>Slow-cooker chicken</h2>\n<h3>Ingredients</h3>\n<ul>\n<li>3 lb plain boneless skinless chicken breasts, fully thawed</li>\n<li>1 cup low-sodium chicken broth explicitly labeled gluten-free</li>\n<li>1 tsp garlic powder, single ingredient and labeled gluten-free</li>\n<li>1 tsp dried oregano, single ingredient and labeled gluten-free</li>\n<li>1/2 tsp salt</li>\n<li>Black pepper to taste</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Put the thawed chicken in the slow cooker in an even layer. Pour the broth over it and season with garlic powder, oregano, salt, and pepper.</li>\n<li>Cover and cook on LOW, checking after 3 hours. Continue until the thickest breasts reach 165°F on a food thermometer; time varies with the cooker and chicken thickness. Do not use frozen chicken in the slow cooker.</li>\n<li>Transfer the chicken to a clean dish, shred with two forks, and toss with enough cooking liquid to keep it moist. Cool promptly in shallow containers before refrigerating.</li>\n</ol>\n<h2>Salad ingredients</h2>\n<ul>\n<li>10–12 oz mixed greens, washed and thoroughly dried</li>\n<li>2 crisp apples, thinly sliced</li>\n<li>1 English cucumber, diced</li>\n<li>2 cups shredded carrots</li>\n<li>1 cup dried cranberries</li>\n<li>1 cup chopped pecans, optional</li>\n<li>Gluten-free poppyseed dressing, about 2 tbsp per salad or to taste</li>\n</ul>\n<h2>Meal-prep assembly</h2>\n<ol>\n<li>Divide dry mixed greens, cucumber, and carrots among six containers. Keep the greens dry.</li>\n<li>Portion shredded chicken, apples, cranberries, and pecans into separate sealed containers or compartments. Add the apples shortly before eating to limit browning.</li>\n<li>Portion dressing into small cups. Do not dress the salads until serving. Add chicken cold, or reheat it separately and serve warm over the salad.</li>\n<li>Refrigerate cooked chicken within 2 hours in shallow containers. Use refrigerated leftovers within 3–4 days, or freeze portions for later.</li>\n</ol>\n<h2>October 5, 2026 gluten-free check</h2>\n<p>Use explicitly labeled gluten-free chicken broth, garlic powder, oregano, and poppyseed dressing. Check packaged dried cranberries and pecans as well. Use clean utensils, containers, and preparation surfaces; omit croutons. This adaptation applies within the existing October 3–16 home-cooked dinner restriction.</p>\n<h2>Nutrition</h2>\n<p>Not calculated. Actual labels, portions, and cooked yield are unknown.</p>\n",
-        "last_reviewed": null
-      }
+      "recipe": null
     },
     {
       "dow": "Tuesday",
@@ -491,7 +401,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 64,
+      "temp": 65,
       "hi": 80,
       "lo": 64,
       "icon": "⛅",
@@ -1369,7 +1279,7 @@
       ],
       "steps": [],
       "notes": "",
-      "body_html": "<h1>Meatloaf + mashed potatoes + cabbage</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>breadcrumbs</li>\n<li>eggs</li>\n<li>ketchup</li>\n<li>potatoes</li>\n<li>butter</li>\n<li>milk</li>\n<li>cabbage</li>\n</ul>\n",
+      "body_html": "<h1>Meatloaf + mashed potatoes + cabbage</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>ground beef</li>\n<li>breadcrumbs</li>\n<li>eggs</li>\n<li>ketchup</li>\n<li>potatoes</li>\n<li>butter</li>\n<li>milk</li>\n<li>cabbage</li>\n</ul>\n<h2>October 5, 2026 gluten-free adaptation</h2>\n<ul>\n<li>Use explicitly labeled gluten-free breadcrumbs in place of ordinary breadcrumbs.</li>\n<li>Check ketchup and all other packaged ingredients for gluten-free labeling.</li>\n<li>Use clean pans, utensils, and preparation surfaces to prevent cross-contact.</li>\n<li>The saved recipe contains ingredient names only. Quantities, yield, and cooking method were not recorded; do not treat this page as complete cooking instructions.</li>\n</ul>\n<p>This dated adaptation applies only to the October 5 dinner under the current October 3–16 gluten-free home-cooking restriction.</p>\n",
       "last_reviewed": null
     },
     {
@@ -2132,6 +2042,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-05T12:01:20.106Z"
+    "updatedAt": "2026-10-05T12:16:11.930Z"
   }
 }
