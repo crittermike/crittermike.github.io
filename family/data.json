@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T20:00:45.548Z",
+  "generated_at": "2026-10-05T20:15:22.776Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -82,6 +82,11 @@
         {
           "id": "sch-2026-10-06-5f5f834d7d4683e7e14c95cb4afed8148973c1afc3b8e87d88a7c9706cb9b84b",
           "label": "Spanish (Simon): Complete p.175 . Part of Classroom assignment \"P.176 & 175\"",
+          "dueDate": "2026-10-06"
+        },
+        {
+          "id": "sch-2026-10-06-4fe0fe38b7dc22b8f0f224caaa98320d40b870eff7e29f20cd91798512b3a71d",
+          "label": "Algebra (Edwards): Complete 4.1 #20-35 odds",
           "dueDate": "2026-10-06"
         }
       ]
@@ -442,13 +447,13 @@
         "icon": "🌤",
         "hi": 73,
         "lo": 57,
-        "code": 2
+        "code": 1
       },
       {
         "d": "Wed",
         "icon": "⛅",
         "hi": 82,
-        "lo": 56,
+        "lo": 55,
         "code": 3
       },
       {
@@ -2071,6 +2076,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-05T20:00:41.798Z"
+    "updatedAt": "2026-10-05T20:15:21.423Z"
   }
 }
