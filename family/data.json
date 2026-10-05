@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T03:46:09.695Z",
+  "generated_at": "2026-10-05T04:01:09.798Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,13 @@
         "balance_str": "$108.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-06-c6d055aec9c152b088ac8371bb71c55182546c282f65d1fe211dbf1233b5d6d5",
+          "label": "Prepare: Bible Verse Recitation - John 1:1-2",
+          "dueDate": "2026-10-06"
+        }
+      ]
     },
     {
       "key": "william",
@@ -29,7 +35,13 @@
         "balance_str": "$29.60"
       },
       "guineaPig": "$157.74",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-06-494a74b7537c3d2cfe9e0e21a2bd0c1836f92d53292c1976d6790a020e7893d5",
+          "label": "Prepare: Reading: September poem recitation",
+          "dueDate": "2026-10-06"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -43,13 +55,7 @@
         "balance_str": "$104.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-05-2530cae4be6975646fa3fb76f74815ebdf29bb4d83395523f9d7e68bf1ced05d",
-          "label": "Spanish (Simon): IXL 5T",
-          "dueDate": "2026-10-05"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -341,7 +347,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -349,8 +355,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Gluten-free homemade Hamburger Helper",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
         "name": "Homemade Hamburger Helper",
@@ -422,7 +428,7 @@
       "dow_short": "Tue",
       "name": "Slow-cooker pot roast with carrots and potatoes",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -523,20 +529,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 68,
-      "hi": 71,
-      "lo": 61,
+      "temp": 67,
+      "hi": 80,
+      "lo": 63,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 80,
-        "lo": 63,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "☀️",
@@ -564,24 +563,31 @@
         "hi": 81,
         "lo": 64,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 75,
+        "lo": 62,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-04T07:26",
         "2026-10-05T07:27",
         "2026-10-06T07:28",
         "2026-10-07T07:28",
         "2026-10-08T07:29",
-        "2026-10-09T07:30"
+        "2026-10-09T07:30",
+        "2026-10-10T07:31"
       ],
       "sunsets": [
-        "2026-10-04T19:09",
         "2026-10-05T19:07",
         "2026-10-06T19:06",
         "2026-10-07T19:05",
         "2026-10-08T19:03",
-        "2026-10-09T19:02"
+        "2026-10-09T19:02",
+        "2026-10-10T19:01"
       ],
       "timezone": "America/New_York"
     }
@@ -2118,6 +2124,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-05T03:46:08.443Z"
+    "updatedAt": "2026-10-05T04:01:08.635Z"
   }
 }
