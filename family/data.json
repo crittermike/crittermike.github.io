@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T23:46:09.662Z",
+  "generated_at": "2026-10-05T00:01:19.846Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -265,12 +265,76 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
-    "recipe": null
+    "name": "Gluten-free homemade Hamburger Helper",
+    "protein_g": 63,
+    "cal": 598,
+    "effort": "medium",
+    "note": "October 5: follow the complete dated gluten-free six-person adaptation in the linked recipe, not the original one-pot version. Cook gluten-free noodles separately per package. Mike's portion: 9 oz raw-weight beef, 40 g dry gluten-free pasta, 1/2 oz cheddar and one-sixth of the milk/tomato/broth/onion/oil sauce. Generic macro assumptions and calculation are recorded in the recipe. Actual purchased labels and cooked yield are unknown.",
+    "recipe": {
+      "slug": "homemade-hamburger-helper",
+      "name": "Homemade Hamburger Helper",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [],
+      "in_rotation": false,
+      "effort": null,
+      "kid_friendly": true,
+      "protein_g": null,
+      "cal": null,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "1 onion, diced",
+            "Olive oil",
+            "Garlic, minced",
+            "1 package ground beef",
+            "Salt, pepper, paprika, garlic powder",
+            "1 tbsp tomato paste",
+            "1 can Italian-seasoned diced tomatoes, drained",
+            "2 cups beef broth",
+            "1 cup heavy cream",
+            "2 cups uncooked noodles",
+            "Shredded cheddar"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "1 onion, diced",
+        "Olive oil",
+        "Garlic, minced",
+        "1 package ground beef",
+        "Salt, pepper, paprika, garlic powder",
+        "1 tbsp tomato paste",
+        "1 can Italian-seasoned diced tomatoes, drained",
+        "2 cups beef broth",
+        "1 cup heavy cream",
+        "2 cups uncooked noodles",
+        "Shredded cheddar"
+      ],
+      "steps": [
+        "Cook onion in olive oil.",
+        "Add garlic, cook a minute or so.",
+        "Add ground beef, brown.",
+        "Season with salt, pepper, paprika, garlic powder.",
+        "Stir in tomato paste + drained diced tomatoes.",
+        "Add beef broth + heavy cream.",
+        "Add uncooked noodles.",
+        "Cover, cook 15 min.",
+        "Uncover, cook 2 more min.",
+        "Off heat, top with cheddar, stir."
+      ],
+      "notes": "",
+      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>For the October 5 dinner, use the complete dated adaptation below, not the original version. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n<h2>2026-10-05 gluten-free adaptation</h2>\n<p>Assistant-drafted six-person adaptation of Nancy's recipe, not a tested or externally sourced recipe. About 35-45 minutes. This does not change the standing recipe or extend the temporary October 3-16 home-cooking restriction.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain 96% lean ground beef: 2.5 lb, no added seasoning.</li>\n<li>Labeled gluten-free rice/corn elbow pasta: 12 oz dry, not ordinary egg noodles.</li>\n<li>Yellow onion: 1 large, diced.</li>\n<li>Garlic: 3 cloves, minced.</li>\n<li>Olive oil: 1 tbsp.</li>\n<li>Plain tomato paste: 1 tbsp, check gluten-free label.</li>\n<li>Plain diced tomatoes: one 14.5 oz can, drained, gluten-free and no peppers.</li>\n<li>Low-sodium beef broth: 2 cups, labeled gluten-free, no pepper ingredients.</li>\n<li>Plain 1% milk: 1.5 cups, check label.</li>\n<li>Plain cheddar: 6 oz, grated from a block, check gluten-free label.</li>\n<li>Dried oregano: 1 tsp, gluten-free single ingredient.</li>\n<li>Garlic powder: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt and black pepper to taste; check seasoning labels for gluten-containing additives.</li>\n<li>Water for boiling pasta.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual package labels before starting. Do not use wheat pasta, paprika, chili, flour, an unverified seasoning packet or ordinary broth. Use clean cookware and a clean colander, not pasta water or utensils carrying wheat residue.</li>\n<li>For Mike's estimated portion, separate 9 oz raw beef and 40 g dry pasta before cooking. Cook that beef separately or keep track of its cooked portion. Brown all beef in a large skillet or batches until it reaches 160°F. Remove to a bowl, keeping Mike's portion identifiable.</li>\n<li>Add the tablespoon of oil and onion to the skillet; soften about 5 minutes. Add garlic for 1 minute. Add tomato paste, tomatoes, oregano, garlic powder and broth. Simmer uncovered 10-15 minutes to reduce. Stir in milk over low heat; heat gently without a hard boil. Season to taste.</li>\n<li>Meanwhile cook gluten-free pasta separately in clean water for its package time. Test early, then drain; do not apply the original covered 15-minute noodle method. Keep Mike's 40 g dry-equivalent portion separate.</li>\n<li>Portion one-sixth of the sauce for Mike, then combine it with his beef, pasta and 1/2 oz cheddar off heat. Combine remaining beef, pasta, sauce and cheese for the family, or keep components separate. The sauce is intentionally lighter than the original cream version; reduce before adding milk instead of thickening with flour.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>9 oz raw beef, 40 g dry pasta, 1/2 oz cheese and one-sixth of sauce. Generic assumptions: beef 140 cal/24g protein per 4 oz; pasta 200 cal/4g per 56g; cheese 55 cal/3.5g; milk 30 cal/2g; remaining sauce vegetables/broth 35 cal/1g; oil 20 cal. Tool-calculated 597.86 cal/63.36g protein, stored as 598 cal/63g. This is an estimate, not label-verified nutrition or an intake record. Other family portions are flexible.</p>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -2029,7 +2093,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 12.9,
+    "dayPct": 16.1,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2054,6 +2118,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-04T23:46:08.440Z"
+    "updatedAt": "2026-10-05T00:01:17.603Z"
   }
 }
