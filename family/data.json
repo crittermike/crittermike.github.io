@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T20:15:22.776Z",
+  "generated_at": "2026-10-05T20:30:22.518Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -75,6 +75,18 @@
       "guineaPig": null,
       "assignments": [
         {
+          "id": "sch-work-on-2026-10-05-ecb8e75e0a716ad3c04c6b6657185a2fd2688716473ec67e63c673f25f61b112",
+          "label": "Honors English: Read",
+          "dueDate": null,
+          "workOnDate": "2026-10-05"
+        },
+        {
+          "id": "sch-work-on-2026-10-05-1fe9ad9e20283e94961f73bc8161f8590731557fc905b367a3b0ac40cc347678",
+          "label": "Honors English: annotate Chapter 19",
+          "dueDate": null,
+          "workOnDate": "2026-10-05"
+        },
+        {
           "id": "sch-2026-10-06-0a3eb1f71af5be1c0bd188e961c04f123cfa591ca74affd18f98944f6aab1246",
           "label": "Spanish (Simon): Complete p.176 . Part of Classroom assignment \"P.176 & 175\"",
           "dueDate": "2026-10-06"
@@ -87,6 +99,11 @@
         {
           "id": "sch-2026-10-06-4fe0fe38b7dc22b8f0f224caaa98320d40b870eff7e29f20cd91798512b3a71d",
           "label": "Algebra (Edwards): Complete 4.1 #20-35 odds",
+          "dueDate": "2026-10-06"
+        },
+        {
+          "id": "sch-2026-10-06-031d39dfc118d4d9d7b85ac82f7f1cbb92e90e0db36a475b89091526aa30b71f",
+          "label": "Prepare: Religion: Romans 1:20-21 Recitation, 100 points, minus 2 points per missed word. shown as tomorrow in Classroom screenshot supplied 2026-10-05",
           "dueDate": "2026-10-06"
         }
       ]
@@ -2076,6 +2093,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-05T20:15:21.423Z"
+    "updatedAt": "2026-10-05T20:30:21.205Z"
   }
 }
