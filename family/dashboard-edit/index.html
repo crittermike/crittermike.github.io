@@ -1934,7 +1934,7 @@
     <div class="dh-top">
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">76°</span>
+        <span class="dh-temp">77°</span>
         <span class="dh-hilo">H 80° · L 65°</span>
       </div>
       <div class="dh-days">
@@ -2224,7 +2224,23 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-06-0a3eb1f71af5be1c0bd188e961c04f123cfa591ca74affd18f98944f6aab1246" data-due-date="2026-10-06" data-work-on-date="">
+                  <span class="todo-label">Spanish (Simon): Complete p.176 . Part of Classroom assignment &quot;P.176 &amp; 175&quot;</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-06-5f5f834d7d4683e7e14c95cb4afed8148973c1afc3b8e87d88a7c9706cb9b84b" data-due-date="2026-10-06" data-work-on-date="">
+                  <span class="todo-label">Spanish (Simon): Complete p.175 . Part of Classroom assignment &quot;P.176 &amp; 175&quot;</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2506,6 +2522,28 @@
             </div>
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-06-0a3eb1f71af5be1c0bd188e961c04f123cfa591ca74affd18f98944f6aab1246" data-due-date="2026-10-06" data-work-on-date="">
+                      <span class="todo-label">Spanish (Simon): Complete p.176 . Part of Classroom assignment &quot;P.176 &amp; 175&quot;</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-06-5f5f834d7d4683e7e14c95cb4afed8148973c1afc3b8e87d88a7c9706cb9b84b" data-due-date="2026-10-06" data-work-on-date="">
+                      <span class="todo-label">Spanish (Simon): Complete p.175 . Part of Classroom assignment &quot;P.176 &amp; 175&quot;</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3071,7 +3109,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-05-259a8d4a444cced4b571c99fa16a981f141136d00d125c679896771d47298261","label":"Spelling: Complete Workbook p. 30","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-e049e4f61f14f243249fd552b49056fc48c460bc9b9218d0ab1bcc154c8b8a06","label":"English: Complete EIE p. 20","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-62560f9cd0f81612378ab38c4c7a26874dcd2374b5877f197ecadb4318b918e4","label":"Math: Complete Workbook pp. 60-61","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-2026-10-06-c6d055aec9c152b088ac8371bb71c55182546c282f65d1fe211dbf1233b5d6d5","label":"Prepare: Bible Verse Recitation - John 1:1-2","dueDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-10-06-494a74b7537c3d2cfe9e0e21a2bd0c1836f92d53292c1976d6790a020e7893d5","label":"Prepare: Reading: September poem recitation","dueDate":"2026-10-06"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-05-259a8d4a444cced4b571c99fa16a981f141136d00d125c679896771d47298261","label":"Spelling: Complete Workbook p. 30","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-e049e4f61f14f243249fd552b49056fc48c460bc9b9218d0ab1bcc154c8b8a06","label":"English: Complete EIE p. 20","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-62560f9cd0f81612378ab38c4c7a26874dcd2374b5877f197ecadb4318b918e4","label":"Math: Complete Workbook pp. 60-61","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-2026-10-06-c6d055aec9c152b088ac8371bb71c55182546c282f65d1fe211dbf1233b5d6d5","label":"Prepare: Bible Verse Recitation - John 1:1-2","dueDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-10-06-494a74b7537c3d2cfe9e0e21a2bd0c1836f92d53292c1976d6790a020e7893d5","label":"Prepare: Reading: September poem recitation","dueDate":"2026-10-06"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-06-0a3eb1f71af5be1c0bd188e961c04f123cfa591ca74affd18f98944f6aab1246","label":"Spanish (Simon): Complete p.176 . Part of Classroom assignment \"P.176 & 175\"","dueDate":"2026-10-06"},{"id":"sch-2026-10-06-5f5f834d7d4683e7e14c95cb4afed8148973c1afc3b8e87d88a7c9706cb9b84b","label":"Spanish (Simon): Complete p.175 . Part of Classroom assignment \"P.176 & 175\"","dueDate":"2026-10-06"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3537,7 +3575,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-05-259a8d4a444cced4b571c99fa16a981f141136d00d125c679896771d47298261","label":"Spelling: Complete Workbook p. 30","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-e049e4f61f14f243249fd552b49056fc48c460bc9b9218d0ab1bcc154c8b8a06","label":"English: Complete EIE p. 20","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-62560f9cd0f81612378ab38c4c7a26874dcd2374b5877f197ecadb4318b918e4","label":"Math: Complete Workbook pp. 60-61","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-2026-10-06-c6d055aec9c152b088ac8371bb71c55182546c282f65d1fe211dbf1233b5d6d5","label":"Prepare: Bible Verse Recitation - John 1:1-2","dueDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-10-06-494a74b7537c3d2cfe9e0e21a2bd0c1836f92d53292c1976d6790a020e7893d5","label":"Prepare: Reading: September poem recitation","dueDate":"2026-10-06"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-05-259a8d4a444cced4b571c99fa16a981f141136d00d125c679896771d47298261","label":"Spelling: Complete Workbook p. 30","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-e049e4f61f14f243249fd552b49056fc48c460bc9b9218d0ab1bcc154c8b8a06","label":"English: Complete EIE p. 20","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-work-on-2026-10-05-62560f9cd0f81612378ab38c4c7a26874dcd2374b5877f197ecadb4318b918e4","label":"Math: Complete Workbook pp. 60-61","dueDate":null,"workOnDate":"2026-10-05"},{"id":"sch-2026-10-06-c6d055aec9c152b088ac8371bb71c55182546c282f65d1fe211dbf1233b5d6d5","label":"Prepare: Bible Verse Recitation - John 1:1-2","dueDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-10-06-494a74b7537c3d2cfe9e0e21a2bd0c1836f92d53292c1976d6790a020e7893d5","label":"Prepare: Reading: September poem recitation","dueDate":"2026-10-06"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-06-0a3eb1f71af5be1c0bd188e961c04f123cfa591ca74affd18f98944f6aab1246","label":"Spanish (Simon): Complete p.176 . Part of Classroom assignment \"P.176 & 175\"","dueDate":"2026-10-06"},{"id":"sch-2026-10-06-5f5f834d7d4683e7e14c95cb4afed8148973c1afc3b8e87d88a7c9706cb9b84b","label":"Spanish (Simon): Complete p.175 . Part of Classroom assignment \"P.176 & 175\"","dueDate":"2026-10-06"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
