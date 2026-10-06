@@ -2208,7 +2208,16 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-07-916665349d7a848c50a55350c75d9a23f56cae358970dc6861d3074921be5360" data-due-date="2026-10-07" data-work-on-date="">
+                  <span class="todo-label">Spanish (Simon): Complete &quot;Did you get it?&quot;</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2468,6 +2477,21 @@
         
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-07-916665349d7a848c50a55350c75d9a23f56cae358970dc6861d3074921be5360" data-due-date="2026-10-07" data-work-on-date="">
+                      <span class="todo-label">Spanish (Simon): Complete &quot;Did you get it?&quot;</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3033,7 +3057,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-06-7699532110adf57693fb74bf9d268d7bee5560dc6ffc330a4d727dc2f7abc008","label":"Spelling: Complete Workbook p. 31","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-66c6a98936bcc53f295e25e5cf7cce0a9332c28348b7d336328eb7caf85d3b3a","label":"Math: Complete Workbook pp. 62-63","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-c8ebf075cb507e71eeda35892f7747c11d25346094969e449bda3b9ec3cf0da9","label":"English: Complete EIE p. 21","dueDate":null,"workOnDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-06-7699532110adf57693fb74bf9d268d7bee5560dc6ffc330a4d727dc2f7abc008","label":"Spelling: Complete Workbook p. 31","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-66c6a98936bcc53f295e25e5cf7cce0a9332c28348b7d336328eb7caf85d3b3a","label":"Math: Complete Workbook pp. 62-63","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-c8ebf075cb507e71eeda35892f7747c11d25346094969e449bda3b9ec3cf0da9","label":"English: Complete EIE p. 21","dueDate":null,"workOnDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-07-916665349d7a848c50a55350c75d9a23f56cae358970dc6861d3074921be5360","label":"Spanish (Simon): Complete \"Did you get it?\"","dueDate":"2026-10-07"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3499,7 +3523,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-06-7699532110adf57693fb74bf9d268d7bee5560dc6ffc330a4d727dc2f7abc008","label":"Spelling: Complete Workbook p. 31","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-66c6a98936bcc53f295e25e5cf7cce0a9332c28348b7d336328eb7caf85d3b3a","label":"Math: Complete Workbook pp. 62-63","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-c8ebf075cb507e71eeda35892f7747c11d25346094969e449bda3b9ec3cf0da9","label":"English: Complete EIE p. 21","dueDate":null,"workOnDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-06-7699532110adf57693fb74bf9d268d7bee5560dc6ffc330a4d727dc2f7abc008","label":"Spelling: Complete Workbook p. 31","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-66c6a98936bcc53f295e25e5cf7cce0a9332c28348b7d336328eb7caf85d3b3a","label":"Math: Complete Workbook pp. 62-63","dueDate":null,"workOnDate":"2026-10-06"},{"id":"sch-work-on-2026-10-06-c8ebf075cb507e71eeda35892f7747c11d25346094969e449bda3b9ec3cf0da9","label":"English: Complete EIE p. 21","dueDate":null,"workOnDate":"2026-10-06"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-07-916665349d7a848c50a55350c75d9a23f56cae358970dc6861d3074921be5360","label":"Spanish (Simon): Complete \"Did you get it?\"","dueDate":"2026-10-07"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
