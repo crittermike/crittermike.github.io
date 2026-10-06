@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T23:45:22.250Z",
+  "generated_at": "2026-10-06T00:00:32.190Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -322,11 +322,11 @@
     ]
   },
   "dinner": {
-    "name": "Meatloaf with mashed potatoes and cabbage",
-    "protein_g": 45,
-    "cal": 700,
-    "effort": "medium",
-    "note": "October 5: use explicitly labeled gluten-free breadcrumbs and check ketchup and all packaged ingredients for gluten; prevent cross-contact. The saved recipe currently lists ingredients only, with no quantities or method. Nutrition is the saved estimate, not verified for an actual portion.",
+    "name": "Slow-cooker pot roast with carrots and potatoes",
+    "protein_g": 62,
+    "cal": 625,
+    "effort": "easy-slow",
+    "note": "October 6: follow the complete dated gluten-free adaptation with trimmed sirloin tip, gluten-free tamari and gluten-free broth. Omit Worcestershire rather than assume gluten-free or fish-free. Start in the morning; allow 8-10 hours on LOW, depending on tenderness. Charlie's 6:00 PM induction is conditional on invitation, end unknown; eat before departure if attending. Mike's portion: meat from 9.5 oz raw roast, 8 oz potatoes, carrots/onion and 2 tbsp juices. Generic macro assumptions are in the recipe; cooked yield and labels vary.",
     "recipe": null
   },
   "mealweek": [
@@ -2068,7 +2068,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 16.1,
+    "dayPct": 19.4,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2093,6 +2093,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-05T23:45:20.900Z"
+    "updatedAt": "2026-10-06T00:00:29.203Z"
   }
 }
