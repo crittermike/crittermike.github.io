@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T23:45:41.402Z",
+  "generated_at": "2026-10-07T00:00:47.850Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -284,11 +284,11 @@
     ]
   },
   "dinner": {
-    "name": "Slow-cooker pot roast with carrots and potatoes",
-    "protein_g": 62,
-    "cal": 625,
-    "effort": "easy-slow",
-    "note": "October 6: follow the complete dated gluten-free adaptation with trimmed sirloin tip, gluten-free tamari and gluten-free broth. Omit Worcestershire rather than assume gluten-free or fish-free. Start in the morning; allow 8-10 hours on LOW, depending on tenderness. Charlie's 6:00 PM induction is conditional on invitation, end unknown; eat before departure if attending. Mike's portion: meat from 9.5 oz raw roast, 8 oz potatoes, carrots/onion and 2 tbsp juices. Generic macro assumptions are in the recipe; cooked yield and labels vary.",
+    "name": "Chicken fajitas with corn tortillas, zucchini and corn",
+    "protein_g": 64,
+    "cal": 611,
+    "effort": "easy",
+    "note": "October 7: use the complete dated six-person gluten-free adaptation in the linked recipe. Only labeled gluten-free corn tortillas, no wheat blend; individual seasonings, no paprika/chili/cilantro. Mike's portion: 10 oz raw-weight chicken, 2 small corn tortillas, about 1 cup onion/zucchini plus 1/3 cup corn, 2 tsp of the recipe oil and 1 tbsp sour cream. Generic macro assumptions are in the recipe; actual labels, size and yield vary. Reserve plain components where useful.",
     "recipe": null
   },
   "mealweek": [
@@ -414,7 +414,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
+      "temp": 65,
       "hi": 74,
       "lo": 56,
       "icon": "☀️",
@@ -2030,7 +2030,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 19.4,
+    "dayPct": 22.6,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2055,6 +2055,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-06T23:45:40.298Z"
+    "updatedAt": "2026-10-07T00:00:44.992Z"
   }
 }
