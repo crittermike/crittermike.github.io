@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text emoji generator</title>
+    <script>
+        document.documentElement.setAttribute("data-theme", "light");
+    </script>
+    <style>
+        :root {
+            color-scheme: light;
+            --cp-bg: #f4f7ff;
+            --cp-bg-elevated: #ffffff;
+            --cp-surface: #ffffff;
+            --cp-surface-soft: #eef3ff;
+            --cp-border: #dce3f0;
+            --cp-border-strong: #9aa9c2;
+            --cp-text: #152342;
+            --cp-text-muted: #53617b;
+            --cp-accent: #165dff;
+            --cp-accent-hover: #0648d9;
+            --cp-accent-fg: #ffffff;
+            --cp-danger: #dc2626;
+            --cp-highlight: #e4edff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--cp-bg);
+            color: var(--cp-text);
+            font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+        }
+        main { max-width: 1040px; margin: auto; padding: 40px 24px; }
+        header { margin: 0 0 28px; }
+        h1 { font-size: clamp(28px, 5vw, 36px); letter-spacing: -1px; margin: 0; }
+        h2 { font-size: 18px; margin: 0 0 16px; }
+        p { margin: 0; color: var(--cp-text-muted); }
+        .workspace { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: start; }
+        .card { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 24px; }
+        .preview-card { position: sticky; top: 24px; }
+        .field { margin-bottom: 16px; }
+        label, legend { font-size: 14px; font-weight: 600; }
+        .field > label { display: block; margin-bottom: 8px; }
+        textarea, select, button, input { font: inherit; }
+        textarea, select {
+            width: 100%; padding: 12px; border: 1px solid var(--cp-border-strong);
+            border-radius: 10px; background: var(--cp-bg-elevated); color: var(--cp-text);
+        }
+        textarea { resize: vertical; min-height: 88px; font-size: 24px; line-height: 1.3; }
+        .two-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+        .color-field { display: flex; align-items: center; gap: 8px; }
+        .color-field output { font-size: 13px; color: var(--cp-text-muted); }
+        input[type="color"] {
+            width: 48px; height: 40px; padding: 4px; flex-shrink: 0;
+            border: 1px solid var(--cp-border); border-radius: 10px; background: var(--cp-surface);
+        }
+        input[type="range"] { width: 100%; accent-color: var(--cp-accent); margin: 12px 0 0; }
+        input[type="checkbox"] { accent-color: var(--cp-accent); width: 16px; height: 16px; }
+        .check { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-weight: 400; }
+        fieldset { padding: 0; border: 0; margin: 0 0 20px; }
+        legend { margin-bottom: 8px; }
+        .presets { display: grid; grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); gap: 8px; }
+        .preset { padding: 4px; background: var(--cp-surface); border: 2px solid var(--cp-border); min-width: 0; }
+        .preset[aria-pressed="true"] { border-color: var(--cp-accent); background: var(--cp-highlight); }
+        .preset canvas { aspect-ratio: 1; height: auto; border-radius: 4px; }
+        button {
+            cursor: pointer; padding: 10px 16px; border: 1px solid var(--cp-border);
+            border-radius: 10px; color: var(--cp-text); background: var(--cp-surface-soft); font-weight: 600;
+        }
+        button:hover { background: var(--cp-highlight); border-color: var(--cp-accent); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 3px; }
+        .download {
+            width: 100%; margin-top: 24px; background: var(--cp-accent);
+            border-color: var(--cp-accent); color: var(--cp-accent-fg);
+        }
+        .download:hover { background: var(--cp-accent-hover); }
+        details { margin-top: 16px; border-top: 1px solid var(--cp-border); }
+        summary { cursor: pointer; font-size: 14px; font-weight: 600; padding: 16px 0 0; color: var(--cp-accent); }
+        .advanced { padding-top: 16px; }
+        .toggles { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 16px; }
+        .checker {
+            background-color: var(--cp-surface);
+            background-image: conic-gradient(var(--cp-border) 25%, var(--cp-surface) 0 50%, var(--cp-border) 0 75%, var(--cp-surface) 0);
+            background-size: 16px 16px;
+        }
+        .large-preview { width: 256px; max-width: 100%; aspect-ratio: 1; margin: 24px auto; border-radius: 10px; }
+        canvas { display: block; width: 100%; height: 100%; }
+        .actual-size { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 24px; }
+        .tiny-preview { width: 32px; height: 32px; flex-shrink: 0; }
+        .native-preview { width: 128px; height: 128px; flex-shrink: 0; }
+        .caption { text-align: center; font-size: 12px; color: var(--cp-text-muted); margin-top: 8px; }
+        .preview-heading { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+        .preview-heading span { color: var(--cp-text-muted); font-size: 13px; }
+        #status:empty { display: none; }
+        #status { font-size: 13px; margin-bottom: 16px; }
+        #status[data-error="true"] { color: var(--cp-danger); }
+        @media (max-width: 720px) {
+            main { padding: 24px 16px; }
+            .workspace { grid-template-columns: 1fr; }
+            .preview-card { position: static; }
+            .card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>Text emoji generator</h1>
+    </header>
+    <div class="workspace">
+        <section class="card" aria-label="Emoji editor">
+            <div class="field">
+                <label for="text">Your text</label>
+                <textarea id="text" maxlength="120" spellcheck="false">OH
+NO</textarea>
+            </div>
+            <fieldset aria-label="Emoji styles">
+                <div class="presets" id="presets"></div>
+            </fieldset>
+            <div class="two-columns">
+                <div class="field">
+                    <label for="text-color">Text color</label>
+                    <div class="color-field"><input type="color" id="text-color" value="#ffffff"><output id="text-color-value" for="text-color">#ffffff</output></div>
+                </div>
+                <div class="field">
+                    <label for="background-color">Background</label>
+                    <div class="color-field"><input type="color" id="background-color" value="#c52233"><output id="background-color-value" for="background-color">#c52233</output></div>
+                </div>
+            </div>
+            <label class="check"><input type="checkbox" id="transparent"> Transparent background</label>
+            <details>
+                <summary>More options</summary>
+                <div class="advanced">
+                    <div class="field">
+                        <label for="font">Font</label>
+                        <select id="font">
+                            <option value="heavy">Heavy sans</option>
+                            <option value="condensed">Impact / condensed</option>
+                            <option value="sans">Classic sans</option>
+                            <option value="handwritten">Handwritten</option>
+                            <option value="serif">Serif</option>
+                            <option value="mono">Monospace</option>
+                        </select>
+                    </div>
+                    <div class="toggles">
+                        <label class="check"><input type="checkbox" id="bold" checked> Bold</label>
+                        <label class="check"><input type="checkbox" id="italic"> Italic</label>
+                        <label class="check"><input type="checkbox" id="uppercase" checked> Uppercase</label>
+                        <label class="check"><input type="checkbox" id="shadow"> Shadow</label>
+                    </div>
+                    <div class="two-columns">
+                        <div class="field">
+                            <label for="padding">Padding <output id="padding-value" for="padding">6 px</output></label>
+                            <input type="range" id="padding" min="2" max="24" value="6">
+                        </div>
+                        <div class="field">
+                            <label for="radius">Corners <output id="radius-value" for="radius">0 px</output></label>
+                            <input type="range" id="radius" min="0" max="64" value="0">
+                        </div>
+                        <div class="field">
+                            <label for="line-gap">Line gap <output id="line-gap-value" for="line-gap">8%</output></label>
+                            <input type="range" id="line-gap" min="0" max="40" value="8">
+                        </div>
+                        <div class="field">
+                            <label for="outline">Outline <output id="outline-value" for="outline">0 px</output></label>
+                            <input type="range" id="outline" min="0" max="10" value="0">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="outline-color">Outline / shadow color</label>
+                        <div class="color-field"><input type="color" id="outline-color" value="#000000"><output id="outline-color-value" for="outline-color">#000000</output></div>
+                    </div>
+                </div>
+            </details>
+        </section>
+        <section class="card preview-card" aria-label="Emoji preview">
+            <div class="preview-heading"><h2>Live preview</h2><span>128 &times; 128 PNG</span></div>
+            <div class="large-preview checker"><canvas id="emoji" width="128" height="128" aria-label="Generated text emoji"></canvas></div>
+            <div class="actual-size">
+                <div><div class="native-preview checker"><canvas id="native" width="128" height="128" aria-label="Preview at original size"></canvas></div><p class="caption">Original size</p></div>
+                <div><div class="tiny-preview checker"><canvas id="tiny" width="128" height="128" aria-label="Preview at Slack chat size"></canvas></div><p class="caption">In a message</p></div>
+            </div>
+            <p id="status" role="status" aria-live="polite"></p>
+            <button type="button" class="download" id="download">Download PNG</button>
+        </section>
+    </div>
+</main>
+<script>
+    const SIZE = 128;
+    const MAX_BYTES = 128 * 1024;
+    const canvas = document.getElementById("emoji");
+    const editor = document.querySelector('[aria-label="Emoji editor"]');
+    const download = document.getElementById("download");
+    const status = document.getElementById("status");
+    const fields = Object.fromEntries([...editor.querySelectorAll("input, textarea, select")].map(field => [field.id, field]));
+    const fonts = {
+        heavy: '"Arial Black", "Arial", sans-serif',
+        condensed: 'Impact, "Arial Narrow", "Helvetica Neue", sans-serif',
+        sans: 'Arial, Helvetica, sans-serif',
+        handwritten: '"Comic Sans MS", "Chalkboard SE", cursive',
+        serif: 'Georgia, "Times New Roman", serif',
+        mono: 'Consolas, "Courier New", monospace'
+    };
+    const defaults = {
+        font: "heavy", "text-color": "#ffffff", "background-color": "#c52233",
+        bold: true, italic: false, uppercase: true, transparent: false,
+        padding: 6, radius: 0, "line-gap": 8, outline: 0, "outline-color": "#000000", shadow: false
+    };
+    const presets = {
+        ohno: { label: "Red", text: "OH\nNO", settings: {} },
+        idk: { label: "Ink", text: "idk", settings: { font: "handwritten", "text-color": "#7600ff", italic: true, uppercase: false, transparent: true } },
+        maybe: { label: "Yellow", text: "MAYBE", settings: { font: "condensed", "text-color": "#000000", "background-color": "#ffda00", padding: 8, radius: 16 } },
+        blue: { label: "Blue", text: "YES", settings: { "background-color": "#165dff", radius: 16 } },
+        mint: { label: "Mint", text: "NICE", settings: { font: "sans", "text-color": "#063c32", "background-color": "#6cf5b5", radius: 24 } },
+        peach: { label: "Peach", text: "OK", settings: { font: "serif", "text-color": "#802417", "background-color": "#ffb08c", italic: true, radius: 16 } },
+        sticker: { label: "Sticker", text: "WOW", settings: { font: "condensed", "text-color": "#ffed53", transparent: true, italic: true, outline: 3, shadow: true } },
+        terminal: { label: "Terminal", text: "BRB", settings: { font: "mono", "text-color": "#75ff75", "background-color": "#10251a", radius: 8 } },
+        outline: { label: "Outline", text: "NOPE", settings: { font: "condensed", transparent: true, outline: 2, "outline-color": "#165dff" } },
+        neon: { label: "Neon", text: "HYPE", settings: { font: "condensed", "text-color": "#f8ff00", "background-color": "#6124ec", italic: true, radius: 16, shadow: true, "outline-color": "#351087" } },
+        paper: { label: "Paper", text: "well\nthen", settings: { font: "serif", "text-color": "#172b60", "background-color": "#fff2c4", bold: false, uppercase: false, radius: 4 } },
+        pop: { label: "Pop", text: "LET'S\nGO", settings: { font: "condensed", "background-color": "#ff3c81", radius: 16, outline: 2, "outline-color": "#641134", shadow: true } },
+        night: { label: "Night", text: "BIG\nMOOD", settings: { font: "sans", "text-color": "#8ce6ff", "background-color": "#14265a", radius: 32 } },
+        orange: { label: "Orange", text: "SEND\nIT", settings: { font: "condensed", "background-color": "#ff6b00", radius: 12, italic: true, shadow: true, "outline-color": "#943100" } },
+        ice: { label: "Ice", text: "COOL", settings: { font: "sans", "text-color": "#06466b", "background-color": "#b9f1ff", radius: 24 } },
+        royal: { label: "Royal", text: "FANCY", settings: { font: "serif", "text-color": "#ffe49c", "background-color": "#48206e", radius: 8 } },
+        lime: { label: "Lime", text: "GO", settings: { font: "condensed", "text-color": "#19310a", "background-color": "#c1ff3d", radius: 16, italic: true } },
+        bubblegum: { label: "Bubble", text: "yay", settings: { font: "handwritten", "text-color": "#9a1455", "background-color": "#ffbce0", uppercase: false, radius: 32 } },
+        chalk: { label: "Chalk", text: "hmm", settings: { font: "handwritten", "background-color": "#24453e", bold: false, uppercase: false, radius: 4 } },
+        stamp: { label: "Stamp", text: "DONE", settings: { font: "condensed", "text-color": "#cf203b", transparent: true, outline: 1, "outline-color": "#cf203b", italic: true } },
+        electric: { label: "Electric", text: "ZAP", settings: { font: "heavy", "text-color": "#00f5ff", transparent: true, outline: 3, "outline-color": "#2e187a", shadow: true, italic: true } },
+        candy: { label: "Candy", text: "SWEET", settings: { font: "sans", "text-color": "#ff4d96", "background-color": "#fff0f6", outline: 1, "outline-color": "#c52d6c", radius: 24 } },
+        sunset: { label: "Sunset", text: "VIBES", settings: { font: "serif", "text-color": "#fff1ac", "background-color": "#dd4c38", italic: true, radius: 16 } },
+        blueprint: { label: "Blueprint", text: "WIP", settings: { font: "mono", "background-color": "#1745a3", outline: 1, "outline-color": "#94baff", bold: false, radius: 4 } },
+        gold: { label: "Gold", text: "WIN", settings: { font: "condensed", "text-color": "#ffce54", "background-color": "#24201a", radius: 16, shadow: true, "outline-color": "#886019" } },
+        lavender: { label: "Lavender", text: "soft", settings: { font: "serif", "text-color": "#4c258c", "background-color": "#e4d2ff", bold: false, italic: true, uppercase: false, radius: 32 } },
+        circleRed: { label: "Red circle", text: "YES", settings: { "background-color": "#e5233f", radius: 64, padding: 22 } },
+        circleBlue: { label: "Blue circle", text: "GO", settings: { font: "condensed", "text-color": "#fff24a", "background-color": "#165dff", radius: 64, padding: 22 } },
+        circleGreen: { label: "Green circle", text: "OK", settings: { font: "sans", "background-color": "#087f58", radius: 64, padding: 24 } },
+        circlePurple: { label: "Purple circle", text: "yay", settings: { font: "serif", "background-color": "#7528df", uppercase: false, italic: true, radius: 64, padding: 22 } }
+    };
+    let activePreset = "ohno";
+    let exporting = false;
+
+    function setStatus(message, error = false) {
+        status.textContent = message;
+        status.dataset.error = String(error);
+    }
+
+    function measure(ctx, text, size) {
+        const metrics = ctx.measureText(text);
+        return {
+            text,
+            width: metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight,
+            left: metrics.actualBoundingBoxLeft,
+            ascent: text ? metrics.actualBoundingBoxAscent : size * 0.7,
+            descent: text ? metrics.actualBoundingBoxDescent : size * 0.2
+        };
+    }
+
+    function wrap(ctx, text, width, size) {
+        const lines = [];
+        for (const paragraph of text.split("\n")) {
+            if (!paragraph.trim()) {
+                lines.push("");
+                continue;
+            }
+            let line = "";
+            for (const word of paragraph.trim().split(/\s+/u)) {
+                const candidate = line ? `${line} ${word}` : word;
+                if (measure(ctx, candidate, size).width <= width) {
+                    line = candidate;
+                    continue;
+                }
+                if (line) lines.push(line);
+                line = word;
+            }
+            lines.push(line);
+        }
+        return lines;
+    }
+
+    function layout(ctx, text, size, available, settings) {
+        ctx.font = `${settings.italic ? "italic" : "normal"} ${settings.bold ? "900" : "400"} ${size}px ${fonts[settings.font]}`;
+        const lines = wrap(ctx, text, available, size).map(line => measure(ctx, line, size));
+        const gap = size * Number(settings["line-gap"]) / 100;
+        const height = lines.reduce((total, line) => total + line.ascent + line.descent, 0) + gap * (lines.length - 1);
+        return { lines, gap, height, fits: height <= available && lines.every(line => line.width <= available) };
+    }
+
+    function drawEmoji(target, settings) {
+        const ctx = target.getContext("2d");
+        ctx.clearRect(0, 0, SIZE, SIZE);
+        if (!settings.transparent) {
+            ctx.fillStyle = settings["background-color"];
+            ctx.beginPath();
+            ctx.roundRect(0, 0, SIZE, SIZE, Number(settings.radius));
+            ctx.fill();
+        }
+        const text = settings.uppercase ? settings.text.trim().toUpperCase() : settings.text.trim();
+        let fitted;
+        if (text) {
+            const outline = Number(settings.outline);
+            const inset = Number(settings.padding) + outline / 2 + (settings.shadow ? 6 : 0);
+            const available = SIZE - inset * 2;
+            let low = 0.1;
+            let high = 256;
+            for (let i = 0; i < 24; i++) {
+                const middle = (low + high) / 2;
+                if (layout(ctx, text, middle, available, settings).fits) low = middle;
+                else high = middle;
+            }
+            fitted = layout(ctx, text, low, available, settings);
+            ctx.save();
+            ctx.fillStyle = settings["text-color"];
+            ctx.strokeStyle = settings["outline-color"];
+            ctx.lineWidth = outline;
+            ctx.lineJoin = "round";
+            ctx.textBaseline = "alphabetic";
+            let top = (SIZE - fitted.height) / 2;
+            for (const line of fitted.lines) {
+                const x = (SIZE - line.width) / 2 + line.left;
+                const y = top + line.ascent;
+                if (settings.shadow) {
+                    ctx.save();
+                    ctx.translate(2, 2);
+                    ctx.fillStyle = settings["outline-color"];
+                    if (outline) ctx.strokeText(line.text, x, y);
+                    ctx.fillText(line.text, x, y);
+                    ctx.restore();
+                }
+                if (outline) ctx.strokeText(line.text, x, y);
+                ctx.fillText(line.text, x, y);
+                top += line.ascent + line.descent + fitted.gap;
+            }
+            ctx.restore();
+        }
+        target.setAttribute("aria-label", text ? `Generated emoji: ${text}` : "Empty emoji preview");
+        return fitted;
+    }
+
+    function getSettings() {
+        return Object.fromEntries(Object.entries(fields).map(([id, field]) => [id, field.type === "checkbox" ? field.checked : field.value]));
+    }
+
+    function render() {
+        const settings = getSettings();
+        for (const id of ["text-color", "background-color", "outline-color"]) {
+            document.getElementById(`${id}-value`).textContent = settings[id];
+        }
+        for (const id of ["padding", "radius", "outline", "line-gap"]) {
+            document.getElementById(`${id}-value`).textContent = settings[id] + (id === "line-gap" ? "%" : " px");
+        }
+        fields["background-color"].disabled = settings.transparent;
+        fields.radius.disabled = settings.transparent;
+        download.disabled = !settings.text.trim() || exporting;
+        drawEmoji(canvas, settings);
+        for (const id of ["native", "tiny"]) {
+            const preview = document.getElementById(id).getContext("2d");
+            preview.clearRect(0, 0, SIZE, SIZE);
+            preview.drawImage(canvas, 0, 0);
+        }
+        for (const button of document.querySelectorAll("[data-preset]")) {
+            const preset = presets[button.dataset.preset];
+            const thumbnail = button.querySelector("canvas");
+            const text = settings.text.trim() || preset.text;
+            if (thumbnail.dataset.text !== text) {
+                drawEmoji(thumbnail, { ...defaults, ...preset.settings, text });
+                thumbnail.dataset.text = text;
+            }
+            button.setAttribute("aria-pressed", String(button.dataset.preset === activePreset));
+        }
+        setStatus("");
+    }
+
+    editor.addEventListener("input", event => {
+        if (event.target.id !== "text") activePreset = null;
+        render();
+    });
+    for (const [id, preset] of Object.entries(presets)) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "preset";
+        button.dataset.preset = id;
+        button.setAttribute("aria-label", `${preset.label} style`);
+        const thumbnail = document.createElement("canvas");
+        thumbnail.width = SIZE;
+        thumbnail.height = SIZE;
+        thumbnail.className = "checker";
+        thumbnail.setAttribute("aria-hidden", "true");
+        button.append(thumbnail);
+        button.addEventListener("click", () => {
+            for (const [key, value] of Object.entries({ ...defaults, ...preset.settings })) {
+                if (fields[key].type === "checkbox") fields[key].checked = value;
+                else fields[key].value = value;
+            }
+            activePreset = id;
+            render();
+        });
+        document.getElementById("presets").append(button);
+    }
+
+    download.addEventListener("click", async () => {
+        if (download.disabled) return;
+        exporting = true;
+        download.disabled = true;
+        const name = fields.text.value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "text-emoji";
+        let url;
+        try {
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+            if (!blob) throw new Error("Your browser could not create the PNG. Try downloading again.");
+            if (blob.size > MAX_BYTES) throw new Error("This image exceeds Slack's 128 KB limit. Try a simpler style.");
+            url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${name}.png`;
+            document.body.append(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error("Emoji download failed", error);
+            setStatus(error instanceof Error ? error.message : "Download failed. Please try again.", true);
+        } finally {
+            if (url) setTimeout(() => URL.revokeObjectURL(url), 60000);
+            exporting = false;
+            download.disabled = !fields.text.value.trim();
+        }
+    });
+
+    render();
+</script>
+</body>
+</html>
