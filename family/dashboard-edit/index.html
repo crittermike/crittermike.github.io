@@ -2208,7 +2208,30 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-a0d7365468b74f0d27568207dd2d903aa362a48994b1c47a39bbc5935fa13888" data-due-date="2026-10-09" data-work-on-date="">
+                  <span class="todo-label">Spanish (Simon): Complete p.177</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-ba4a9bfe824aa1e6e28ea6c399b412d750f5999c92584961427698bc37fdf4e9" data-due-date="2026-10-09" data-work-on-date="">
+                  <span class="todo-label">Honors English (deMarrais): Read</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-4e71e1317db3f57cceb6acad07361724c6db9c8d220ca2be106ce0b96c1aa787" data-due-date="2026-10-09" data-work-on-date="">
+                  <span class="todo-label">Honors English (deMarrais): annotate Chapter 21</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2468,6 +2491,35 @@
         
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-a0d7365468b74f0d27568207dd2d903aa362a48994b1c47a39bbc5935fa13888" data-due-date="2026-10-09" data-work-on-date="">
+                      <span class="todo-label">Spanish (Simon): Complete p.177</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-ba4a9bfe824aa1e6e28ea6c399b412d750f5999c92584961427698bc37fdf4e9" data-due-date="2026-10-09" data-work-on-date="">
+                      <span class="todo-label">Honors English (deMarrais): Read</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-09-4e71e1317db3f57cceb6acad07361724c6db9c8d220ca2be106ce0b96c1aa787" data-due-date="2026-10-09" data-work-on-date="">
+                      <span class="todo-label">Honors English (deMarrais): annotate Chapter 21</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3033,7 +3085,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-08-b2a639089ee59736d1cdcb85748c08f492a88a830e9d60640a09d2336f886548","label":"Spelling: Complete Choice Board - Writing Tools","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-cc3cb2e5b5d783669c1fcded037445b668a914216540022c81e98c0cbd312b73","label":"Math: Complete Workbook pp. 69-71","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-e81f23be00835b15c392f7864bb804dc18510108c033ffe001475e91aab8d5ea","label":"English: Complete EIE p. 24","dueDate":null,"workOnDate":"2026-10-08"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-08-b2a639089ee59736d1cdcb85748c08f492a88a830e9d60640a09d2336f886548","label":"Spelling: Complete Choice Board - Writing Tools","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-cc3cb2e5b5d783669c1fcded037445b668a914216540022c81e98c0cbd312b73","label":"Math: Complete Workbook pp. 69-71","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-e81f23be00835b15c392f7864bb804dc18510108c033ffe001475e91aab8d5ea","label":"English: Complete EIE p. 24","dueDate":null,"workOnDate":"2026-10-08"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-09-a0d7365468b74f0d27568207dd2d903aa362a48994b1c47a39bbc5935fa13888","label":"Spanish (Simon): Complete p.177","dueDate":"2026-10-09"},{"id":"sch-2026-10-09-ba4a9bfe824aa1e6e28ea6c399b412d750f5999c92584961427698bc37fdf4e9","label":"Honors English (deMarrais): Read","dueDate":"2026-10-09"},{"id":"sch-2026-10-09-4e71e1317db3f57cceb6acad07361724c6db9c8d220ca2be106ce0b96c1aa787","label":"Honors English (deMarrais): annotate Chapter 21","dueDate":"2026-10-09"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3499,7 +3551,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-08-b2a639089ee59736d1cdcb85748c08f492a88a830e9d60640a09d2336f886548","label":"Spelling: Complete Choice Board - Writing Tools","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-cc3cb2e5b5d783669c1fcded037445b668a914216540022c81e98c0cbd312b73","label":"Math: Complete Workbook pp. 69-71","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-e81f23be00835b15c392f7864bb804dc18510108c033ffe001475e91aab8d5ea","label":"English: Complete EIE p. 24","dueDate":null,"workOnDate":"2026-10-08"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-08-b2a639089ee59736d1cdcb85748c08f492a88a830e9d60640a09d2336f886548","label":"Spelling: Complete Choice Board - Writing Tools","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-cc3cb2e5b5d783669c1fcded037445b668a914216540022c81e98c0cbd312b73","label":"Math: Complete Workbook pp. 69-71","dueDate":null,"workOnDate":"2026-10-08"},{"id":"sch-work-on-2026-10-08-e81f23be00835b15c392f7864bb804dc18510108c033ffe001475e91aab8d5ea","label":"English: Complete EIE p. 24","dueDate":null,"workOnDate":"2026-10-08"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":77,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":47,"refill":60},"allowance":{"balance_str":"$104.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-09-a0d7365468b74f0d27568207dd2d903aa362a48994b1c47a39bbc5935fa13888","label":"Spanish (Simon): Complete p.177","dueDate":"2026-10-09"},{"id":"sch-2026-10-09-ba4a9bfe824aa1e6e28ea6c399b412d750f5999c92584961427698bc37fdf4e9","label":"Honors English (deMarrais): Read","dueDate":"2026-10-09"},{"id":"sch-2026-10-09-4e71e1317db3f57cceb6acad07361724c6db9c8d220ca2be106ce0b96c1aa787","label":"Honors English (deMarrais): annotate Chapter 21","dueDate":"2026-10-09"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":556,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');

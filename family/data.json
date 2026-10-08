@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T17:00:49.237Z",
+  "generated_at": "2026-10-08T17:15:44.014Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -62,7 +62,23 @@
         "balance_str": "$104.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-09-a0d7365468b74f0d27568207dd2d903aa362a48994b1c47a39bbc5935fa13888",
+          "label": "Spanish (Simon): Complete p.177",
+          "dueDate": "2026-10-09"
+        },
+        {
+          "id": "sch-2026-10-09-ba4a9bfe824aa1e6e28ea6c399b412d750f5999c92584961427698bc37fdf4e9",
+          "label": "Honors English (deMarrais): Read",
+          "dueDate": "2026-10-09"
+        },
+        {
+          "id": "sch-2026-10-09-4e71e1317db3f57cceb6acad07361724c6db9c8d220ca2be106ce0b96c1aa787",
+          "label": "Honors English (deMarrais): annotate Chapter 21",
+          "dueDate": "2026-10-09"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -1986,6 +2002,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-08T17:00:47.369Z"
+    "updatedAt": "2026-10-08T17:15:43.058Z"
   }
 }
