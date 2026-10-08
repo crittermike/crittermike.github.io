@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T03:45:40.483Z",
+  "generated_at": "2026-10-08T04:00:42.605Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,22 +17,22 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-07-8d7409b292487cd3c6c0740ec0f228a894111082af0dc9e6fe51b9190c62941b",
-          "label": "Spelling: Complete Workbook p. 32",
+          "id": "sch-work-on-2026-10-08-b2a639089ee59736d1cdcb85748c08f492a88a830e9d60640a09d2336f886548",
+          "label": "Spelling: Complete Choice Board - Writing Tools",
           "dueDate": null,
-          "workOnDate": "2026-10-07"
+          "workOnDate": "2026-10-08"
         },
         {
-          "id": "sch-work-on-2026-10-07-f97f21999b8d7c6e0a69d65dfab0ee27af650d3f21bdf71979b19dcb1adc15d8",
-          "label": "Math: Complete Workbook pp. 65-67",
+          "id": "sch-work-on-2026-10-08-cc3cb2e5b5d783669c1fcded037445b668a914216540022c81e98c0cbd312b73",
+          "label": "Math: Complete Workbook pp. 69-71",
           "dueDate": null,
-          "workOnDate": "2026-10-07"
+          "workOnDate": "2026-10-08"
         },
         {
-          "id": "sch-work-on-2026-10-07-f95a1bd2bc8e110b94f4a52ad3933f8bcf68b64433134cefea09980a7d53ce89",
-          "label": "English: Complete EIE p. 22",
+          "id": "sch-work-on-2026-10-08-e81f23be00835b15c392f7864bb804dc18510108c033ffe001475e91aab8d5ea",
+          "label": "English: Complete EIE p. 24",
           "dueDate": null,
-          "workOnDate": "2026-10-07"
+          "workOnDate": "2026-10-08"
         }
       ]
     },
@@ -62,13 +62,7 @@
         "balance_str": "$104.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-08-f92cdafd9da944c1803b90cfd16d88fd40b970905e9bcabf33fc56435a6d2aae",
-          "label": "Algebra (Edwards): Complete 4.2 9-30 even",
-          "dueDate": "2026-10-08"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -383,7 +377,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Chicken fajitas with corn tortillas, zucchini and corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -391,8 +385,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Mild slow-cooker carnitas with gluten-free corn tortillas",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "carnitas",
         "name": "Mild slow-cooker carnitas",
@@ -463,7 +457,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -478,19 +472,12 @@
   "weather": {
     "now": {
       "temp": 60,
-      "hi": 79,
-      "lo": 54,
+      "hi": 86,
+      "lo": 53,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "🌫",
-        "hi": 86,
-        "lo": 53,
-        "code": 45
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -518,24 +505,31 @@
         "hi": 81,
         "lo": 59,
         "code": 0
+      },
+      {
+        "d": "Tue",
+        "icon": "☀️",
+        "hi": 87,
+        "lo": 61,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-07T07:28",
         "2026-10-08T07:29",
         "2026-10-09T07:30",
         "2026-10-10T07:31",
         "2026-10-11T07:32",
-        "2026-10-12T07:32"
+        "2026-10-12T07:32",
+        "2026-10-13T07:33"
       ],
       "sunsets": [
-        "2026-10-07T19:05",
         "2026-10-08T19:03",
         "2026-10-09T19:02",
         "2026-10-10T19:01",
         "2026-10-11T18:59",
-        "2026-10-12T18:58"
+        "2026-10-12T18:58",
+        "2026-10-13T18:57"
       ],
       "timezone": "America/New_York"
     }
@@ -2118,6 +2112,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-08T03:45:39.067Z"
+    "updatedAt": "2026-10-08T04:00:40.270Z"
   }
 }
