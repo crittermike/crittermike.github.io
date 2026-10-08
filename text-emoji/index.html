@@ -57,7 +57,16 @@
             border: 1px solid var(--cp-border); border-radius: 10px; background: var(--cp-surface);
         }
         input[type="range"] { width: 100%; accent-color: var(--cp-accent); margin: 12px 0 0; }
-        input[type="checkbox"] { accent-color: var(--cp-accent); width: 16px; height: 16px; }
+        input[type="checkbox"] {
+            appearance: none; width: 40px; height: 24px; margin: 0; position: relative;
+            border-radius: 12px; background: var(--cp-border-strong); cursor: pointer; flex-shrink: 0;
+        }
+        input[type="checkbox"]::before {
+            content: ""; position: absolute; width: 16px; height: 16px; top: 4px; left: 4px;
+            border-radius: 50%; background: var(--cp-surface);
+        }
+        input[type="checkbox"]:checked { background: var(--cp-accent); }
+        input[type="checkbox"]:checked::before { transform: translateX(16px); }
         .check { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-weight: 400; }
         fieldset { padding: 0; border: 0; margin: 0 0 20px; }
         legend { margin-bottom: 8px; }
@@ -94,9 +103,89 @@
         .caption { text-align: center; font-size: 12px; color: var(--cp-text-muted); margin-top: 8px; }
         .preview-heading { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
         .preview-heading span { color: var(--cp-text-muted); font-size: 13px; }
+        .preview-actions { display: flex; align-items: center; gap: 8px; }
+        .preview-actions button { padding: 4px 8px; font-size: 12px; }
+        [hidden] { display: none !important; }
         #status:empty { display: none; }
         #status { font-size: 13px; margin-bottom: 16px; }
         #status[data-error="true"] { color: var(--cp-danger); }
+        /* Settings polish */
+        .section { padding: 20px 0; border-top: 1px solid var(--cp-border); }
+        .section:first-child { padding-top: 0; border-top: 0; }
+        .section-title {
+            display: block; margin: 0 0 12px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase; color: var(--cp-text-soft);
+        }
+        .section > :last-child, .section .field:last-child { margin-bottom: 0; }
+        textarea { background: var(--cp-surface-soft); border-color: var(--cp-border); font-weight: 700; }
+        textarea:focus, select:focus { outline: none; border-color: var(--cp-accent); box-shadow: 0 0 0 3px var(--cp-highlight); }
+        select {
+            appearance: none; height: 44px; padding: 0 40px 0 14px; cursor: pointer;
+            background: var(--cp-surface-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23555' stroke-width='2'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center;
+            border-color: var(--cp-border); font-weight: 600;
+        }
+        .swatches { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .swatch {
+            display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; cursor: pointer;
+            border: 1px solid var(--cp-border); border-radius: 12px; background: var(--cp-surface-soft);
+        }
+        .swatch:hover { border-color: var(--cp-accent); }
+        .swatch input[type="color"] {
+            width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; overflow: hidden;
+            cursor: pointer; background: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+        }
+        .swatch input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        .swatch input[type="color"]::-webkit-color-swatch { border: 0; border-radius: 50%; }
+        .swatch input[type="color"]::-moz-color-swatch { border: 0; border-radius: 50%; }
+        .swatch span { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+        .swatch strong { font-size: 14px; }
+        .swatch output { font-size: 12px; color: var(--cp-text-muted); font-family: Consolas, "Courier New", monospace; text-transform: uppercase; }
+        .check {
+            flex-direction: row-reverse; justify-content: space-between; margin: 0;
+            padding: 10px 0; font-size: 14px; font-weight: 600; cursor: pointer;
+        }
+        .check + .check { border-top: 1px solid var(--cp-border); }
+        .toggles {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px;
+        }
+        .toggles .check {
+            flex-direction: column-reverse; gap: 6px; padding: 10px 4px; border: 1px solid var(--cp-border);
+            border-radius: 12px; background: var(--cp-surface-soft); font-size: 13px; text-align: center;
+        }
+        .toggles .check + .check { border-top: 1px solid var(--cp-border); }
+        input[type="checkbox"] { transition: background .15s; }
+        input[type="checkbox"]::before { transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+        .slider { margin-bottom: 16px; }
+        .slider-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .slider-head label { margin: 0; }
+        .slider-head output {
+            font-size: 12px; font-weight: 700; color: var(--cp-accent); background: var(--cp-highlight);
+            padding: 2px 8px; border-radius: 999px; min-width: 44px; text-align: center;
+        }
+        input[type="range"] { margin: 4px 0 0; height: 20px; cursor: pointer; }
+        .panel {
+            margin-top: 8px; padding: 16px; border-radius: 12px; background: var(--cp-bg);
+            border: 1px solid var(--cp-border);
+        }
+        .panel[hidden] { display: none; }
+        .panel .two-columns .field { margin-bottom: 0; }
+        details { margin: 0; border-top: 1px solid var(--cp-border); }
+        summary {
+            list-style: none; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0 0; color: var(--cp-text); font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: "+"; font-size: 20px; line-height: 1; color: var(--cp-accent); font-weight: 400; }
+        details[open] summary::after { content: "\2212"; }
+        summary:hover { color: var(--cp-accent); }
+        .presets { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); }
+        .preset { border-radius: 10px; transition: transform .1s, border-color .1s; }
+        .preset:hover { transform: translateY(-2px); }
+        @media (max-width: 480px) {
+            .swatches { grid-template-columns: 1fr; }
+            .toggles { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 720px) {
             main { padding: 24px 16px; }
             .workspace { grid-template-columns: 1fr; }
@@ -112,25 +201,44 @@
     </header>
     <div class="workspace">
         <section class="card" aria-label="Emoji editor">
-            <div class="field">
-                <label for="text">Your text</label>
+            <div class="section">
+                <label class="section-title" for="text">Text</label>
                 <textarea id="text" maxlength="120" spellcheck="false">OH
 NO</textarea>
             </div>
-            <fieldset aria-label="Emoji styles">
+            <fieldset class="section" aria-label="Emoji styles">
+                <span class="section-title">Style</span>
                 <div class="presets" id="presets"></div>
             </fieldset>
-            <div class="two-columns">
-                <div class="field">
-                    <label for="text-color">Text color</label>
-                    <div class="color-field"><input type="color" id="text-color" value="#ffffff"><output id="text-color-value" for="text-color">#ffffff</output></div>
+            <div class="section">
+                <span class="section-title">Colors</span>
+                <div class="swatches">
+                    <label class="swatch"><input type="color" id="text-color" value="#ffffff"><span><strong>Text</strong><output id="text-color-value" for="text-color">#ffffff</output></span></label>
+                    <label class="swatch"><input type="color" id="background-color" value="#c52233"><span><strong>Background</strong><output id="background-color-value" for="background-color">#c52233</output></span></label>
                 </div>
-                <div class="field">
-                    <label for="background-color">Background</label>
-                    <div class="color-field"><input type="color" id="background-color" value="#c52233"><output id="background-color-value" for="background-color">#c52233</output></div>
+                <label class="check" style="margin-top:8px"><input type="checkbox" role="switch" id="transparent"> Transparent background</label>
+            </div>
+            <div class="section">
+                <label class="check" style="padding-top:0"><input type="checkbox" role="switch" id="animated" aria-controls="animation-options animation-controls"> <span class="section-title" style="margin:0">Animation</span></label>
+                <div class="panel" id="animation-options" hidden>
+                    <div class="field">
+                        <select id="animation" disabled aria-label="Animation">
+                            <option value="scroll-horizontal">Horizontal scroll</option>
+                            <option value="scroll">Vertical scroll</option>
+                            <option value="bounce">Bounce</option>
+                            <option value="pulse">Pulse</option>
+                            <option value="shake">Shake</option>
+                            <option value="wiggle">Wiggle</option>
+                            <option value="spin">Spin</option>
+                            <option value="rainbow">Rainbow</option>
+                        </select>
+                    </div>
+                    <div class="two-columns" id="animation-controls" hidden>
+                        <div class="slider"><div class="slider-head"><label for="speed">Speed</label><output id="speed-value" for="speed">1x</output></div><input type="range" id="speed" min="25" max="500" step="25" value="100"></div>
+                        <div class="slider"><div class="slider-head"><label for="zoom">Zoom</label><output id="zoom-value" for="zoom">100%</output></div><input type="range" id="zoom" min="50" max="200" step="5" value="100"></div>
+                    </div>
                 </div>
             </div>
-            <label class="check"><input type="checkbox" id="transparent"> Transparent background</label>
             <details>
                 <summary>More options</summary>
                 <div class="advanced">
@@ -146,38 +254,29 @@ NO</textarea>
                         </select>
                     </div>
                     <div class="toggles">
-                        <label class="check"><input type="checkbox" id="bold" checked> Bold</label>
-                        <label class="check"><input type="checkbox" id="italic"> Italic</label>
-                        <label class="check"><input type="checkbox" id="uppercase" checked> Uppercase</label>
-                        <label class="check"><input type="checkbox" id="shadow"> Shadow</label>
+                        <label class="check"><input type="checkbox" role="switch" id="bold" checked> Bold</label>
+                        <label class="check"><input type="checkbox" role="switch" id="italic"> Italic</label>
+                        <label class="check"><input type="checkbox" role="switch" id="uppercase" checked> Uppercase</label>
+                        <label class="check"><input type="checkbox" role="switch" id="shadow"> Shadow</label>
                     </div>
                     <div class="two-columns">
-                        <div class="field">
-                            <label for="padding">Padding <output id="padding-value" for="padding">6 px</output></label>
-                            <input type="range" id="padding" min="2" max="24" value="6">
-                        </div>
-                        <div class="field">
-                            <label for="radius">Corners <output id="radius-value" for="radius">0 px</output></label>
-                            <input type="range" id="radius" min="0" max="64" value="0">
-                        </div>
-                        <div class="field">
-                            <label for="line-gap">Line gap <output id="line-gap-value" for="line-gap">8%</output></label>
-                            <input type="range" id="line-gap" min="0" max="40" value="8">
-                        </div>
-                        <div class="field">
-                            <label for="outline">Outline <output id="outline-value" for="outline">0 px</output></label>
-                            <input type="range" id="outline" min="0" max="10" value="0">
-                        </div>
+                        <div class="slider"><div class="slider-head"><label for="padding">Padding</label><output id="padding-value" for="padding">6 px</output></div><input type="range" id="padding" min="2" max="24" value="6"></div>
+                        <div class="slider"><div class="slider-head"><label for="radius">Corners</label><output id="radius-value" for="radius">0 px</output></div><input type="range" id="radius" min="0" max="64" value="0"></div>
+                        <div class="slider"><div class="slider-head"><label for="line-gap">Line gap</label><output id="line-gap-value" for="line-gap">8%</output></div><input type="range" id="line-gap" min="0" max="40" value="8"></div>
+                        <div class="slider"><div class="slider-head"><label for="outline">Outline</label><output id="outline-value" for="outline">0 px</output></div><input type="range" id="outline" min="0" max="10" value="0"></div>
                     </div>
-                    <div class="field">
-                        <label for="outline-color">Outline / shadow color</label>
-                        <div class="color-field"><input type="color" id="outline-color" value="#000000"><output id="outline-color-value" for="outline-color">#000000</output></div>
-                    </div>
+                    <div class="swatches"><label class="swatch"><input type="color" id="outline-color" value="#000000"><span><strong>Outline / shadow</strong><output id="outline-color-value" for="outline-color">#000000</output></span></label></div>
                 </div>
             </details>
         </section>
         <section class="card preview-card" aria-label="Emoji preview">
-            <div class="preview-heading"><h2>Live preview</h2><span>128 &times; 128 PNG</span></div>
+            <div class="preview-heading">
+                <h2>Live preview</h2>
+                <div class="preview-actions">
+                    <span id="format">128 &times; 128 PNG</span>
+                    <button type="button" id="toggle-preview" hidden>Pause</button>
+                </div>
+            </div>
             <div class="large-preview checker"><canvas id="emoji" width="128" height="128" aria-label="Generated text emoji"></canvas></div>
             <div class="actual-size">
                 <div><div class="native-preview checker"><canvas id="native" width="128" height="128" aria-label="Preview at original size"></canvas></div><p class="caption">Original size</p></div>
@@ -243,6 +342,17 @@ NO</textarea>
     };
     let activePreset = "ohno";
     let exporting = false;
+    const FRAME_COUNT = 24;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const togglePreview = document.getElementById("toggle-preview");
+    let previewPaused = reducedMotion.matches;
+    let animationFrames = [];
+    let previewRequest = null;
+    let previewStart = 0;
+    let previewIndex = -1;
+    let previewElapsed = 0;
+    let thumbnailKey = "";
+    let thumbnailAnimations = [];
 
     function setStatus(message, error = false) {
         status.textContent = message;
@@ -282,15 +392,19 @@ NO</textarea>
         return lines;
     }
 
-    function layout(ctx, text, size, available, settings) {
+    function setFont(ctx, size, settings) {
         ctx.font = `${settings.italic ? "italic" : "normal"} ${settings.bold ? "900" : "400"} ${size}px ${fonts[settings.font]}`;
+    }
+
+    function layout(ctx, text, size, available, settings) {
+        setFont(ctx, size, settings);
         const lines = wrap(ctx, text, available, size).map(line => measure(ctx, line, size));
         const gap = size * Number(settings["line-gap"]) / 100;
         const height = lines.reduce((total, line) => total + line.ascent + line.descent, 0) + gap * (lines.length - 1);
         return { lines, gap, height, fits: height <= available && lines.every(line => line.width <= available) };
     }
 
-    function drawEmoji(target, settings) {
+    function drawEmoji(target, settings, cachedLayout) {
         const ctx = target.getContext("2d");
         ctx.clearRect(0, 0, SIZE, SIZE);
         if (!settings.transparent) {
@@ -300,52 +414,265 @@ NO</textarea>
             ctx.fill();
         }
         const text = settings.uppercase ? settings.text.trim().toUpperCase() : settings.text.trim();
-        let fitted;
+        let fitted = cachedLayout;
         if (text) {
-            const outline = Number(settings.outline);
-            const inset = Number(settings.padding) + outline / 2 + (settings.shadow ? 6 : 0);
-            const available = SIZE - inset * 2;
-            let low = 0.1;
-            let high = 256;
-            for (let i = 0; i < 24; i++) {
-                const middle = (low + high) / 2;
-                if (layout(ctx, text, middle, available, settings).fits) low = middle;
-                else high = middle;
-            }
-            fitted = layout(ctx, text, low, available, settings);
-            ctx.save();
-            ctx.fillStyle = settings["text-color"];
-            ctx.strokeStyle = settings["outline-color"];
-            ctx.lineWidth = outline;
-            ctx.lineJoin = "round";
-            ctx.textBaseline = "alphabetic";
-            let top = (SIZE - fitted.height) / 2;
-            for (const line of fitted.lines) {
-                const x = (SIZE - line.width) / 2 + line.left;
-                const y = top + line.ascent;
-                if (settings.shadow) {
-                    ctx.save();
-                    ctx.translate(2, 2);
-                    ctx.fillStyle = settings["outline-color"];
-                    if (outline) ctx.strokeText(line.text, x, y);
-                    ctx.fillText(line.text, x, y);
-                    ctx.restore();
+            if (!fitted) {
+                const outline = Number(settings.outline);
+                const inset = Number(settings.padding) + outline / 2 + (settings.shadow ? 6 : 0);
+                const available = SIZE - inset * 2;
+                let low = 0.1;
+                let high = 256;
+                for (let i = 0; i < 24; i++) {
+                    const middle = (low + high) / 2;
+                    if (layout(ctx, text, middle, available, settings).fits) low = middle;
+                    else high = middle;
                 }
-                if (outline) ctx.strokeText(line.text, x, y);
-                ctx.fillText(line.text, x, y);
-                top += line.ascent + line.descent + fitted.gap;
+                fitted = layout(ctx, text, low, available, settings);
+                fitted.font = ctx.font;
             }
-            ctx.restore();
+            ctx.font = fitted.font;
+            paintText(ctx, fitted, settings, SIZE);
         }
         target.setAttribute("aria-label", text ? `Generated emoji: ${text}` : "Empty emoji preview");
         return fitted;
     }
 
+    function paintText(ctx, fitted, settings, width) {
+        const outline = Number(settings.outline);
+        ctx.save();
+        ctx.fillStyle = settings["text-color"];
+        ctx.strokeStyle = settings["outline-color"];
+        ctx.lineWidth = outline;
+        ctx.lineJoin = "round";
+        ctx.textBaseline = "alphabetic";
+        let top = (SIZE - fitted.height) / 2;
+        for (const line of fitted.lines) {
+            const x = (width - line.width) / 2 + line.left;
+            const y = top + line.ascent;
+            if (settings.shadow) {
+                ctx.save();
+                ctx.translate(2, 2);
+                ctx.fillStyle = settings["outline-color"];
+                if (outline) ctx.strokeText(line.text, x, y);
+                ctx.fillText(line.text, x, y);
+                ctx.restore();
+            }
+            if (outline) ctx.strokeText(line.text, x, y);
+            ctx.fillText(line.text, x, y);
+            top += line.ascent + line.descent + fitted.gap;
+        }
+        ctx.restore();
+    }
+
     function getSettings() {
-        return Object.fromEntries(Object.entries(fields).map(([id, field]) => [id, field.type === "checkbox" ? field.checked : field.value]));
+        const settings = Object.fromEntries(Object.entries(fields).map(([id, field]) => [id, field.type === "checkbox" ? field.checked : field.value]));
+        if (!settings.animated) settings.animation = "none";
+        return settings;
+    }
+
+    function newCanvas(width = SIZE) {
+        const target = document.createElement("canvas");
+        target.width = width;
+        target.height = SIZE;
+        return target;
+    }
+
+    function createHorizontalSource(settings) {
+        const text = settings.text.trim().replace(/\s+/gu, " ");
+        const displayText = settings.uppercase ? text.toUpperCase() : text;
+        const inset = Number(settings.padding) + Number(settings.outline) / 2 + (settings.shadow ? 6 : 0);
+        const measuring = newCanvas().getContext("2d");
+        let low = 0.1;
+        let high = 256;
+        // A marquee fits the text height only; the rest travels through the viewport.
+        for (let i = 0; i < 24; i++) {
+            const middle = (low + high) / 2;
+            setFont(measuring, middle, settings);
+            const line = measure(measuring, displayText, middle);
+            if (line.ascent + line.descent <= SIZE - inset * 2) low = middle;
+            else high = middle;
+        }
+        setFont(measuring, low, settings);
+        const line = measure(measuring, displayText, low);
+        const source = newCanvas(Math.max(1, Math.ceil(line.width + inset * 2)));
+        const ctx = source.getContext("2d");
+        setFont(ctx, low, settings);
+        paintText(ctx, { lines: [line], height: line.ascent + line.descent, gap: 0 }, settings, source.width);
+        return source;
+    }
+
+    function frameDelay(settings) {
+        return Math.max(20, Math.ceil(40 / (Number(settings.speed) / 100) / 10) * 10);
+    }
+
+    function animationCount(settings, baseCount) {
+        if (settings.animation === "none") return 1;
+        // Shorten fast loops instead of using GIF delays that browsers slow down.
+        const duration = baseCount * 40 / (Number(settings.speed) / 100);
+        return Math.max(2, Math.round(duration / frameDelay(settings)));
+    }
+
+    function prepareAnimation(settings) {
+        const source = newCanvas();
+        const fitted = drawEmoji(source, settings);
+        const zoom = Number(settings.zoom) / 100;
+        let scrollSource;
+        let scrollBounds;
+        let scrollDistance;
+        if (settings.animation === "scroll") {
+            scrollSource = newCanvas();
+            const fitted = drawEmoji(scrollSource, { ...settings, transparent: true });
+            const extra = Number(settings.outline) / 2 + (settings.shadow ? 4 : 1);
+            scrollBounds = { y: (SIZE - fitted.height) / 2 - extra, height: fitted.height + extra * 2 };
+            scrollDistance = scrollBounds.height + Math.max(4, Number(settings.padding));
+        } else if (settings.animation === "scroll-horizontal") {
+            scrollSource = createHorizontalSource(settings);
+            scrollDistance = scrollSource.width + Math.max(12, Number(settings.padding) * 2);
+        }
+        const baseCount = scrollDistance ? Math.min(96, Math.max(FRAME_COUNT, Math.ceil(scrollDistance * zoom / 8))) : FRAME_COUNT;
+        return { settings, source, fitted, zoom, scrollSource, scrollBounds, scrollDistance, baseCount,
+            colored: settings.animation === "rainbow" ? newCanvas() : null };
+    }
+
+    function drawAnimationFrame(target, animation, phase) {
+        const { settings, source, fitted, zoom, scrollSource, scrollBounds, scrollDistance, colored } = animation;
+        const ctx = target.getContext("2d");
+        ctx.clearRect(0, 0, SIZE, SIZE);
+        ctx.save();
+        const angle = phase * Math.PI * 2;
+        if (settings.animation === "none") {
+            ctx.drawImage(source, 0, 0);
+        } else if (scrollSource) {
+            ctx.beginPath();
+            ctx.roundRect(0, 0, SIZE, SIZE, settings.transparent ? 0 : Number(settings.radius));
+            ctx.clip();
+            if (!settings.transparent) {
+                ctx.fillStyle = settings["background-color"];
+                ctx.fillRect(0, 0, SIZE, SIZE);
+            }
+            ctx.translate(SIZE / 2, SIZE / 2);
+            ctx.scale(zoom, zoom);
+            ctx.translate(-SIZE / 2, -SIZE / 2);
+            const viewport = SIZE / zoom;
+            const repeats = Math.ceil(viewport / scrollDistance) + 2;
+            for (let repeat = -1; repeat < repeats; repeat++) {
+                const offset = (repeat - phase) * scrollDistance;
+                if (settings.animation === "scroll") {
+                    ctx.drawImage(scrollSource, 0, scrollBounds.y, SIZE, scrollBounds.height,
+                        0, (SIZE - viewport) / 2 + offset, SIZE, scrollBounds.height);
+                } else {
+                    ctx.drawImage(scrollSource, (SIZE - viewport) / 2 + offset, 0);
+                }
+            }
+        } else {
+            ctx.translate(SIZE / 2, SIZE / 2);
+            ctx.scale(zoom, zoom);
+            if (settings.animation === "bounce") {
+                ctx.translate(0, Math.sin(angle) * 10);
+            } else if (settings.animation === "pulse") {
+                const scale = 1 + Math.sin(angle) * 0.1;
+                ctx.scale(scale, scale);
+            } else if (settings.animation === "shake") {
+                ctx.translate(Math.sin(angle * 3) * 6, 0);
+            } else if (settings.animation === "wiggle") {
+                ctx.rotate(Math.sin(angle * 2) * 0.12);
+            } else if (settings.animation === "spin") {
+                ctx.rotate(angle);
+            } else if (settings.animation === "rainbow") {
+                drawEmoji(colored, { ...settings, "text-color": `hsl(${phase * 360}, 85%, 48%)` }, fitted);
+            }
+            ctx.drawImage(colored || source, -SIZE / 2, -SIZE / 2);
+        }
+        ctx.restore();
+    }
+
+    function createFrames(settings) {
+        const animation = prepareAnimation(settings);
+        const count = animationCount(settings, animation.baseCount);
+        return Array.from({ length: count }, (_, index) => {
+            const target = newCanvas();
+            drawAnimationFrame(target, animation, index / count);
+            return target;
+        });
+    }
+
+    function updateThumbnails(settings) {
+        const key = JSON.stringify([settings.text.trim(), settings.animation, settings.zoom]);
+        if (key !== thumbnailKey) {
+            thumbnailKey = key;
+            thumbnailAnimations = [...document.querySelectorAll("[data-preset]")].map(button => {
+                const preset = presets[button.dataset.preset];
+                const thumbnailSettings = { ...defaults, ...preset.settings,
+                    text: settings.text.trim() || preset.text, animation: settings.animation, zoom: settings.zoom };
+                return { button, target: button.querySelector("canvas"), animation: prepareAnimation(thumbnailSettings), index: -1 };
+            });
+        }
+        for (const thumbnail of thumbnailAnimations) {
+            thumbnail.index = -1;
+            thumbnail.button.setAttribute("aria-pressed", String(thumbnail.button.dataset.preset === activePreset));
+        }
+        showThumbnails(0, settings);
+    }
+
+    function showThumbnails(elapsed, settings) {
+        const delay = frameDelay(settings);
+        for (const thumbnail of thumbnailAnimations) {
+            const count = animationCount(settings, thumbnail.animation.baseCount);
+            const index = Math.floor(elapsed / delay) % count;
+            if (index === thumbnail.index) continue;
+            thumbnail.index = index;
+            drawAnimationFrame(thumbnail.target, thumbnail.animation, index / count);
+        }
+    }
+
+    function showFrame(index) {
+        if (index === previewIndex) return;
+        previewIndex = index;
+        for (const target of [canvas, document.getElementById("native"), document.getElementById("tiny")]) {
+            const ctx = target.getContext("2d");
+            ctx.clearRect(0, 0, SIZE, SIZE);
+            ctx.drawImage(animationFrames[index], 0, 0);
+        }
+    }
+
+    function stopPreview() {
+        if (previewRequest !== null) cancelAnimationFrame(previewRequest);
+        previewRequest = null;
+    }
+
+    function startPreview() {
+        stopPreview();
+        togglePreview.textContent = previewPaused ? "Play" : "Pause";
+        togglePreview.setAttribute("aria-label", `${previewPaused ? "Play" : "Pause"} animation preview`);
+        if (animationFrames.length < 2 || previewPaused || document.hidden) return;
+        const settings = getSettings();
+        const delay = frameDelay(settings);
+        previewStart = performance.now() - previewElapsed;
+        function tick(now) {
+            previewElapsed = Math.max(0, now - previewStart);
+            const index = Math.floor(previewElapsed / delay) % animationFrames.length;
+            showFrame(index);
+            showThumbnails(previewElapsed, settings);
+            previewRequest = requestAnimationFrame(tick);
+        }
+        previewRequest = requestAnimationFrame(tick);
+    }
+
+    function updateDownload() {
+        const animated = fields.animated.checked;
+        download.disabled = !fields.text.value.trim() || exporting;
+        download.textContent = exporting ? "Creating image..." : `Download ${animated ? "GIF" : "PNG"}`;
+        document.getElementById("format").textContent = `128 \u00d7 128 ${animated ? "GIF" : "PNG"}`;
+        togglePreview.hidden = !animated || !fields.text.value.trim();
+        fields.speed.disabled = !animated;
+        fields.zoom.disabled = !animated;
+        fields.animation.disabled = !animated;
+        document.getElementById("animation-options").hidden = !animated;
+        document.getElementById("animation-controls").hidden = !animated;
     }
 
     function render() {
+        stopPreview();
         const settings = getSettings();
         for (const id of ["text-color", "background-color", "outline-color"]) {
             document.getElementById(`${id}-value`).textContent = settings[id];
@@ -353,32 +680,34 @@ NO</textarea>
         for (const id of ["padding", "radius", "outline", "line-gap"]) {
             document.getElementById(`${id}-value`).textContent = settings[id] + (id === "line-gap" ? "%" : " px");
         }
+        document.getElementById("speed-value").textContent = `${Number(settings.speed) / 100}x`;
+        document.getElementById("zoom-value").textContent = `${settings.zoom}%`;
         fields["background-color"].disabled = settings.transparent;
         fields.radius.disabled = settings.transparent;
-        download.disabled = !settings.text.trim() || exporting;
-        drawEmoji(canvas, settings);
-        for (const id of ["native", "tiny"]) {
-            const preview = document.getElementById(id).getContext("2d");
-            preview.clearRect(0, 0, SIZE, SIZE);
-            preview.drawImage(canvas, 0, 0);
-        }
-        for (const button of document.querySelectorAll("[data-preset]")) {
-            const preset = presets[button.dataset.preset];
-            const thumbnail = button.querySelector("canvas");
-            const text = settings.text.trim() || preset.text;
-            if (thumbnail.dataset.text !== text) {
-                drawEmoji(thumbnail, { ...defaults, ...preset.settings, text });
-                thumbnail.dataset.text = text;
-            }
-            button.setAttribute("aria-pressed", String(button.dataset.preset === activePreset));
-        }
-        setStatus("");
+        animationFrames = settings.text.trim() ? createFrames(settings) : [newCanvas()];
+        previewIndex = -1;
+        previewElapsed = 0;
+        showFrame(0);
+        canvas.setAttribute("aria-label", settings.text.trim() ? `Generated emoji: ${settings.text.trim()}` : "Empty emoji preview");
+        updateDownload();
+        updateThumbnails(settings);
+        startPreview();
+        if (!exporting) setStatus("");
     }
 
     editor.addEventListener("input", event => {
-        if (event.target.id !== "text") activePreset = null;
+        if (!["text", "animated", "animation", "speed", "zoom"].includes(event.target.id)) activePreset = null;
         render();
     });
+    togglePreview.addEventListener("click", () => {
+        previewPaused = !previewPaused;
+        startPreview();
+    });
+    reducedMotion.addEventListener("change", event => {
+        if (event.matches) previewPaused = true;
+        startPreview();
+    });
+    document.addEventListener("visibilitychange", startPreview);
     for (const [id, preset] of Object.entries(presets)) {
         const button = document.createElement("button");
         button.type = "button";
@@ -404,28 +733,39 @@ NO</textarea>
 
     download.addEventListener("click", async () => {
         if (download.disabled) return;
+        const settings = getSettings();
+        const frames = animationFrames;
+        const animated = settings.animation !== "none";
         exporting = true;
-        download.disabled = true;
-        const name = fields.text.value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "text-emoji";
+        updateDownload();
+        setStatus(animated ? "Creating GIF..." : "");
+        const name = settings.text.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "text-emoji";
         let url;
         try {
-            const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+            let blob;
+            if (animated) {
+                const { encodeGif } = await import("./gif-export.js");
+                blob = await encodeGif(frames, frameDelay(settings), MAX_BYTES);
+            } else {
+                blob = await new Promise(resolve => frames[0].toBlob(resolve, "image/png"));
+            }
             if (!blob) throw new Error("Your browser could not create the PNG. Try downloading again.");
             if (blob.size > MAX_BYTES) throw new Error("This image exceeds Slack's 128 KB limit. Try a simpler style.");
             url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
-            link.download = `${name}.png`;
+            link.download = `${name}.${animated ? "gif" : "png"}`;
             document.body.append(link);
             link.click();
             link.remove();
+            setStatus("");
         } catch (error) {
             console.error("Emoji download failed", error);
             setStatus(error instanceof Error ? error.message : "Download failed. Please try again.", true);
         } finally {
             if (url) setTimeout(() => URL.revokeObjectURL(url), 60000);
             exporting = false;
-            download.disabled = !fields.text.value.trim();
+            updateDownload();
         }
     });
 
