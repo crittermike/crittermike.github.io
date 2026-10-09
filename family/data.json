@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T23:45:43.105Z",
+  "generated_at": "2026-10-09T00:00:57.074Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -294,11 +294,11 @@
     ]
   },
   "dinner": {
-    "name": "Slow-cooker pesto chicken with cream sauce, noodles and roasted Brussels sprouts with balsamic glaze",
-    "protein_g": 62,
-    "cal": 701,
-    "effort": "easy-slow",
-    "note": "October 8: use fully thawed chicken in the slow cooker with gluten-free broth and pesto; cook to 165°F. Make the cream sauce separately near serving time. Check gluten-free labels and use clean cookware and a clean pasta colander. Mike's planning portion assumes 9 oz raw chicken, 1.5 oz dry pasta, 1 cup Brussels sprouts, 1 tbsp pesto, 1 tsp oil, 1 tsp glaze, 1 tbsp Parmesan, and about 1/6 of the cream sauce. Generic estimate 701 cal/62g protein, not verified labels or recorded intake; other family portions are flexible.",
+    "name": "Takeout or dinner out",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "October 9: flexible Friday default. Restaurant, orders and nutrition unknown. Outside Lent. No home cooking assigned; no order placed.",
     "recipe": null
   },
   "mealweek": [
@@ -361,7 +361,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 73,
+      "temp": 72,
       "hi": 85,
       "lo": 57,
       "icon": "⛅",
@@ -1977,7 +1977,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 25.8,
+    "dayPct": 29,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2002,6 +2002,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 67766.31,
     "source": "ynab",
-    "updatedAt": "2026-10-08T23:45:41.646Z"
+    "updatedAt": "2026-10-09T00:00:52.469Z"
   }
 }
