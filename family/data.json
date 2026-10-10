@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T23:45:47.670Z",
+  "generated_at": "2026-10-10T00:01:03.520Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout or dinner out",
+    "name": "Pizza",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "October 9: flexible Friday default. Restaurant, orders and nutrition unknown. Outside Lent. No home cooking assigned; no order placed.",
+    "note": "October 10: takeout or delivery pizza for six, not frozen pizza cooked by Mike. Cheese is the default with no disliked toppings. Brand, size and portions undecided. The temporary home-cooking gluten-free rule is not imposed on this takeout. No order placed.",
     "recipe": null
   },
   "mealweek": [
@@ -324,7 +324,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 65,
+      "hi": 75,
+      "lo": 63,
+      "icon": "⛅",
+      "code": 3
+    },
+    "days": [
+      {
+        "d": "Sat",
+        "icon": "🌧",
+        "hi": 71,
+        "lo": 55,
+        "code": 65
+      },
+      {
+        "d": "Sun",
+        "icon": "🌧",
+        "hi": 72,
+        "lo": 63,
+        "code": 65
+      },
+      {
+        "d": "Mon",
+        "icon": "🌤",
+        "hi": 85,
+        "lo": 60,
+        "code": 1
+      },
+      {
+        "d": "Tue",
+        "icon": "☀️",
+        "hi": 87,
+        "lo": 63,
+        "code": 0
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 87,
+        "lo": 67,
+        "code": 3
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-10-09T07:30",
+        "2026-10-10T07:31",
+        "2026-10-11T07:32",
+        "2026-10-12T07:32",
+        "2026-10-13T07:33",
+        "2026-10-14T07:34"
+      ],
+      "sunsets": [
+        "2026-10-09T19:02",
+        "2026-10-10T19:01",
+        "2026-10-11T18:59",
+        "2026-10-12T18:58",
+        "2026-10-13T18:57",
+        "2026-10-14T18:55"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -1878,7 +1942,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 29,
+    "dayPct": 32.3,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -1903,6 +1967,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 68286.78,
     "source": "ynab",
-    "updatedAt": "2026-10-09T23:45:42.740Z"
+    "updatedAt": "2026-10-10T00:00:58.748Z"
   }
 }
