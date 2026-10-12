@@ -1933,8 +1933,8 @@
   <div class="dh-weather">
     <div class="dh-top">
       <div class="dh-now">
-        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3.3" class="wx-s"/><g class="wx-ray"><line x1="8" y1="1.9" x2="8" y2="3.4"/><line x1="1.9" y1="8" x2="3.4" y2="8"/><line x1="3.5" y1="3.5" x2="4.6" y2="4.6"/><line x1="12.5" y1="3.5" x2="11.4" y2="4.6"/><line x1="3.5" y1="12.5" x2="4.6" y2="11.4"/></g><g transform="translate(4.8,5.2) scale(0.62)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
-        <span class="dh-temp">76°</span>
+        <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
+        <span class="dh-temp">75°</span>
         <span class="dh-hilo">H 86° · L 60°</span>
       </div>
       <div class="dh-days">
@@ -2201,7 +2201,16 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-2026-10-13-d13f35d09cd09a34127121756eaddec3a02dfd9d01e32d357bc47ddc3d5b20fe" data-due-date="2026-10-13" data-work-on-date="">
+                  <span class="todo-label">Chemistry (Edwards): Finish textbook pages 94 and 95</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2454,6 +2463,21 @@
         
           
         
+          
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-2026-10-13-d13f35d09cd09a34127121756eaddec3a02dfd9d01e32d357bc47ddc3d5b20fe" data-due-date="2026-10-13" data-work-on-date="">
+                      <span class="todo-label">Chemistry (Edwards): Finish textbook pages 94 and 95</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
@@ -3019,7 +3043,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-12-dfa488813b3a87552c8995fe8946e81b025e6535e7a2c9ad48edea51decbd532","label":"Spelling: Complete WB p. 34","dueDate":null,"workOnDate":"2026-10-12"},{"id":"sch-work-on-2026-10-12-fe0d6aa424495e6ffc4a1113e00015b53570ae48b202e8eeb612e48fff9f8d49","label":"Math: Complete WB pp. 69-71","dueDate":null,"workOnDate":"2026-10-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-33,"refill":60},"allowance":{"balance_str":"$109.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":616,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-12-dfa488813b3a87552c8995fe8946e81b025e6535e7a2c9ad48edea51decbd532","label":"Spelling: Complete WB p. 34","dueDate":null,"workOnDate":"2026-10-12"},{"id":"sch-work-on-2026-10-12-fe0d6aa424495e6ffc4a1113e00015b53570ae48b202e8eeb612e48fff9f8d49","label":"Math: Complete WB pp. 69-71","dueDate":null,"workOnDate":"2026-10-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-33,"refill":60},"allowance":{"balance_str":"$109.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-13-d13f35d09cd09a34127121756eaddec3a02dfd9d01e32d357bc47ddc3d5b20fe","label":"Chemistry (Edwards): Finish textbook pages 94 and 95","dueDate":"2026-10-13"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":616,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3485,7 +3509,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-12-dfa488813b3a87552c8995fe8946e81b025e6535e7a2c9ad48edea51decbd532","label":"Spelling: Complete WB p. 34","dueDate":null,"workOnDate":"2026-10-12"},{"id":"sch-work-on-2026-10-12-fe0d6aa424495e6ffc4a1113e00015b53570ae48b202e8eeb612e48fff9f8d49","label":"Math: Complete WB pp. 69-71","dueDate":null,"workOnDate":"2026-10-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-33,"refill":60},"allowance":{"balance_str":"$109.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":616,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":363,"refill":60},"allowance":{"balance_str":"$108.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-12-dfa488813b3a87552c8995fe8946e81b025e6535e7a2c9ad48edea51decbd532","label":"Spelling: Complete WB p. 34","dueDate":null,"workOnDate":"2026-10-12"},{"id":"sch-work-on-2026-10-12-fe0d6aa424495e6ffc4a1113e00015b53570ae48b202e8eeb612e48fff9f8d49","label":"Math: Complete WB pp. 69-71","dueDate":null,"workOnDate":"2026-10-12"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$29.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-33,"refill":60},"allowance":{"balance_str":"$109.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-10-13-d13f35d09cd09a34127121756eaddec3a02dfd9d01e32d357bc47ddc3d5b20fe","label":"Chemistry (Edwards): Finish textbook pages 94 and 95","dueDate":"2026-10-13"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":616,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
