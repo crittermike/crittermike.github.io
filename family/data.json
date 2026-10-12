@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T14:01:37.913Z",
+  "generated_at": "2026-10-12T14:16:16.264Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,20 @@
         "balance_str": "$108.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-10-12-dfa488813b3a87552c8995fe8946e81b025e6535e7a2c9ad48edea51decbd532",
+          "label": "Spelling: Complete WB p. 34",
+          "dueDate": null,
+          "workOnDate": "2026-10-12"
+        },
+        {
+          "id": "sch-work-on-2026-10-12-fe0d6aa424495e6ffc4a1113e00015b53570ae48b202e8eeb612e48fff9f8d49",
+          "label": "Math: Complete WB pp. 69-71",
+          "dueDate": null,
+          "workOnDate": "2026-10-12"
+        }
+      ]
     },
     {
       "key": "william",
@@ -516,7 +529,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 70,
+      "temp": 71,
       "hi": 80,
       "lo": 60,
       "icon": "☀️",
@@ -2157,6 +2170,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-12T14:01:35.798Z"
+    "updatedAt": "2026-10-12T14:16:14.719Z"
   }
 }
