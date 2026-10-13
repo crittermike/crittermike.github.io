@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T23:46:12.700Z",
+  "generated_at": "2026-10-13T00:01:13.977Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -278,73 +278,74 @@
     ]
   },
   "dinner": {
-    "name": "Mild slow-cooker carnitas with corn tortillas and shredded cabbage",
+    "name": "Gluten-free homemade Hamburger Helper",
     "protein_g": 63,
-    "cal": 639,
-    "effort": "easy-slow",
-    "note": "October 12: follow the complete October 12 gluten-free adaptation in the linked recipe. Carnitas was replaced by pesto chicken October 8; this reuses the bumped option without assuming pork was purchased. Start in the morning for LOW 8-9 hours, then skim fat and briefly broil before serving. Monday has a 3:30PM-4:30PM appointment. Mike's estimate uses 22.5% of the cooked, de-fatted pork and braising aromatics, one small corn tortilla and one cup shredded cabbage. It scales the recipe's existing lean-only pork estimate; actual fat and cooked yield can change nutrition substantially. No unlisted toppings or sauces.",
+    "cal": 598,
+    "effort": "medium",
+    "note": "October 13: use the complete gluten-free adaptation originally drafted October 5 and explicitly reused October 13 in the linked recipe. Hamburger Helper was replaced in last week's plan, not confirmed cooked. Allow about 35-45 minutes after the 4:00PM-4:30PM appointment. Mike's portion: 9 oz raw-weight beef, 40 g dry pasta, 1/2 oz cheddar and one-sixth of the sauce. Cook gluten-free pasta separately, not by the ordinary covered 15-minute method. No paprika, chili, ordinary egg noodles or heavy cream in this adaptation. Nutrition is a generic estimate, not verified package data.",
     "recipe": {
-      "slug": "carnitas",
-      "name": "Mild slow-cooker carnitas",
-      "source": "Original mild family adaptation; nutrition estimate based on USDA FoodData Central-derived values for lean braised Boston-butt pork.",
+      "slug": "homemade-hamburger-helper",
+      "name": "Homemade Hamburger Helper",
+      "source": "markdown",
       "hasFullRecipe": true,
       "tags": [
         "recipe",
-        "dinner",
-        "pork",
-        "Mexican"
+        "dinner"
       ],
-      "aliases": [
-        "carnitas",
-        "slow-cooker-carnitas"
-      ],
-      "in_rotation": true,
-      "effort": "easy-slow",
+      "aliases": [],
+      "in_rotation": false,
+      "effort": null,
       "kid_friendly": true,
-      "protein_g": 45,
-      "cal": 420,
-      "servings": 6,
-      "prep_min": 20,
-      "cook_min": 510,
+      "protein_g": null,
+      "cal": null,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
       "ingredient_groups": [
         {
           "heading": null,
           "items": [
-            "3 1/2 lb boneless pork shoulder (Boston butt), fully thawed and trimmed of visible exterior fat; cut into 4 large chunks",
-            "1 large yellow onion, thickly sliced",
-            "4 garlic cloves, lightly crushed",
-            "Juice of 1 medium orange (about 1/3 cup)",
-            "1 cup low-sodium chicken broth",
-            "2 tsp ground cumin",
-            "1 tsp dried oregano",
-            "1 1/2 tsp fine salt",
-            "2 bay leaves",
-            "12 small tortillas, for serving"
+            "1 onion, diced",
+            "Olive oil",
+            "Garlic, minced",
+            "1 package ground beef",
+            "Salt, pepper, paprika, garlic powder",
+            "1 tbsp tomato paste",
+            "1 can Italian-seasoned diced tomatoes, drained",
+            "2 cups beef broth",
+            "1 cup heavy cream",
+            "2 cups uncooked noodles",
+            "Shredded cheddar"
           ]
         }
       ],
       "all_ingredients": [
-        "3 1/2 lb boneless pork shoulder (Boston butt), fully thawed and trimmed of visible exterior fat; cut into 4 large chunks",
-        "1 large yellow onion, thickly sliced",
-        "4 garlic cloves, lightly crushed",
-        "Juice of 1 medium orange (about 1/3 cup)",
-        "1 cup low-sodium chicken broth",
-        "2 tsp ground cumin",
-        "1 tsp dried oregano",
-        "1 1/2 tsp fine salt",
-        "2 bay leaves",
-        "12 small tortillas, for serving"
+        "1 onion, diced",
+        "Olive oil",
+        "Garlic, minced",
+        "1 package ground beef",
+        "Salt, pepper, paprika, garlic powder",
+        "1 tbsp tomato paste",
+        "1 can Italian-seasoned diced tomatoes, drained",
+        "2 cups beef broth",
+        "1 cup heavy cream",
+        "2 cups uncooked noodles",
+        "Shredded cheddar"
       ],
       "steps": [
-        "Put the onion and garlic in the slow cooker. Set the pork on top. Sprinkle with cumin, oregano, and salt. Pour in the orange juice and broth; add the bay leaves.",
-        "Cover and cook on LOW for 8–9 hours or HIGH for 4 1/2–5 1/2 hours, until the pork is fork-tender and easy to pull apart. If checking with a thermometer, 195–205°F is a useful shredding-tenderness range. Timing varies by cooker and chunk size.",
-        "Transfer the pork to a tray. Discard the bay leaves and large pieces of fat. Skim visible fat from the cooking liquid. Shred the pork with two forks.",
-        "For a dry, separate portion, set aside some shredded pork before adding any cooking liquid. Keep toppings and juices on the side.",
-        "Heat the broiler to HIGH and position a rack about 6 inches from the element. Spread the remaining pork in a single layer on a rimmed sheet pan. Spoon a little skimmed cooking liquid over it, then broil for 3–4 minutes until the edges brown. Toss and broil another 2–3 minutes, watching closely. Work in batches if needed; add a little liquid if the meat looks dry.",
-        "Warm the tortillas and serve the carnitas with toppings separately, if desired."
+        "Cook onion in olive oil.",
+        "Add garlic, cook a minute or so.",
+        "Add ground beef, brown.",
+        "Season with salt, pepper, paprika, garlic powder.",
+        "Stir in tomato paste + drained diced tomatoes.",
+        "Add beef broth + heavy cream.",
+        "Add uncooked noodles.",
+        "Cover, cook 15 min.",
+        "Uncover, cook 2 more min.",
+        "Off heat, top with cheddar, stir."
       ],
       "notes": "",
-      "body_html": "<h1>Mild slow-cooker carnitas</h1>\n<p>For the October 12 dinner, use the complete dated adaptation below. Current restrictions are in [[mike-preferences]] and dislikes in [[nancy]]. The ordinary recipe and the superseded October 8 adaptation are historical references, not instructions for that dinner.</p>\n<p>Makes 6 servings. Mild, with no chili, peppers, cilantro, or added oil. Orange and cumin season the pork without a hot sauce. Trim and skim visible fat for a leaner result.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>3 1/2 lb boneless pork shoulder (Boston butt), fully thawed and trimmed of visible exterior fat; cut into 4 large chunks</li>\n<li>1 large yellow onion, thickly sliced</li>\n<li>4 garlic cloves, lightly crushed</li>\n<li>Juice of 1 medium orange (about 1/3 cup)</li>\n<li>1 cup low-sodium chicken broth</li>\n<li>2 tsp ground cumin</li>\n<li>1 tsp dried oregano</li>\n<li>1 1/2 tsp fine salt</li>\n<li>2 bay leaves</li>\n<li>12 small tortillas, for serving</li>\n</ul>\n<h2>Method</h2>\n<ol>\n<li>Put the onion and garlic in the slow cooker. Set the pork on top. Sprinkle with cumin, oregano, and salt. Pour in the orange juice and broth; add the bay leaves.</li>\n<li>Cover and cook on LOW for 8–9 hours or HIGH for 4 1/2–5 1/2 hours, until the pork is fork-tender and easy to pull apart. If checking with a thermometer, 195–205°F is a useful shredding-tenderness range. Timing varies by cooker and chunk size.</li>\n<li>Transfer the pork to a tray. Discard the bay leaves and large pieces of fat. Skim visible fat from the cooking liquid. Shred the pork with two forks.</li>\n<li>For a dry, separate portion, set aside some shredded pork before adding any cooking liquid. Keep toppings and juices on the side.</li>\n<li>Heat the broiler to HIGH and position a rack about 6 inches from the element. Spread the remaining pork in a single layer on a rimmed sheet pan. Spoon a little skimmed cooking liquid over it, then broil for 3–4 minutes until the edges brown. Toss and broil another 2–3 minutes, watching closely. Work in batches if needed; add a little liquid if the meat looks dry.</li>\n<li>Warm the tortillas and serve the carnitas with toppings separately, if desired.</li>\n</ol>\n<h2>Superseded adaptation: October 8, 2026</h2>\n<p>This adaptation was prepared for the October 8 dinner, then replaced before cooking by pesto chicken. It is retained as a reference only and is not tonight's plan.</p>\n<p>If making this recipe during the active gluten-free period, keep it mild and gluten-free:</p>\n<ul>\n<li>Use 1 cup low-sodium chicken broth explicitly labeled gluten-free.</li>\n<li>Serve with 12 small corn tortillas explicitly labeled gluten-free, not flour tortillas or a wheat/corn blend.</li>\n<li>Check packaged seasonings, broth, tortillas, and any toppings for gluten-containing ingredients and cross-contact labeling; use single-ingredient spices.</li>\n<li>Use clean cookware and keep toppings and sauces separate.</li>\n</ul>\n<h2>Nutrition estimate</h2>\n<p>Per serving of pork and braising aromatics: about 420 calories and 45 g protein. Tortillas and toppings are not included. Estimate assumes 6 equal portions and varies with the pork cut, trimming, cooked yield, and fat removed.</p>\n<h2>2026-10-12 gluten-free adaptation</h2>\n<p>Six-person planning adaptation of the saved recipe, not kitchen-tested. This does not extend the temporary home-cooking restriction beyond October 16.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Boneless pork shoulder/Boston butt: 3.5 lb, plain, fully thawed, trimmed of visible exterior fat; cut into 4 large chunks.</li>\n<li>Yellow onion: 1 large, thickly sliced.</li>\n<li>Garlic: 4 cloves, lightly crushed.</li>\n<li>Orange: 1 medium, about 1/3 cup freshly squeezed juice.</li>\n<li>Low-sodium chicken broth: 1 cup, explicitly labeled gluten-free, no pepper ingredients.</li>\n<li>Ground cumin: 2 tsp, single ingredient; check gluten-free suitability.</li>\n<li>Dried oregano: 1 tsp, single ingredient; check gluten-free suitability.</li>\n<li>Fine salt: 1.5 tsp.</li>\n<li>Bay leaves: 2, plain.</li>\n<li>Small corn tortillas: 12, explicitly labeled gluten-free, not flour or wheat/corn blend.</li>\n<li>Green cabbage: 6 cups finely shredded, plain; serve separately without dressing.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual labels, including any pork enhancement solution, broth, tortillas and spices. Do not use unverified seasoning packets, wheat tortillas, flour thickeners or extra sauces. Use clean cookware and utensils to avoid wheat cross-contact. Refrigerate raw meat until starting; use fully thawed pork.</li>\n<li>Put onion and garlic in the slow cooker. Add pork, cumin, oregano, salt, orange juice, broth and bay leaves. Use a cooker large enough for the batch and follow its fill limits.</li>\n<li>Cover and cook on LOW about 8-9 hours or HIGH about 4.5-5.5 hours, until easily shredded. Start in the morning for the scheduled Monday dinner. The saved recipe's 195-205°F range is a tenderness guide, not a published safety minimum. FDA's minimum for whole-cut pork is 145°F with a three-minute rest; check with a food thermometer rather than relying on time alone.</li>\n<li>Transfer pork to a tray. Remove bay leaves and visible fat. Skim fat from the cooking liquid. Shred the meat; keep a dry portion separate if preferred. Distribute the cooked onion/garlic and a little skimmed liquid with the pork as desired.</li>\n<li>For Mike's estimate, allocate 22.5% of the cooked edible, de-fatted pork and the same share of braising aromatics before dividing the rest among the family. This is 1.35 times the original recipe's one-sixth serving, not a claim about actual cooked weight.</li>\n<li>Spread pork on a rimmed pan, add a little skimmed liquid, and broil about 6 inches from the element for 3-4 minutes, then toss and broil another 2-3 minutes, watching closely. Add no oil. Keep any plain portion separate.</li>\n<li>Warm tortillas in a clean dry skillet. Serve cabbage plain and separately. Mike's planning portion includes one small tortilla and one cup cabbage; family portions are flexible. No additional toppings are included in the ingredients or nutrition estimate.</li>\n<li>Refrigerate leftovers promptly in shallow containers within two hours of cooking, or within one hour above 90°F. Reheat leftovers to 165°F.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>The existing recipe estimate for pork and aromatics is 420 cal/45g protein per one-sixth batch, assuming lean-only pork after trimming and fat removal. Scaling by 1.35 gives 567 cal/60.75g protein. Add a generic small corn tortilla at 50 cal/1g and one cup raw shredded cabbage at 22 cal/1g: tool-calculated 639 cal/62.75g protein, stored as 639 cal/63g. Pork shoulder is not intrinsically lean; residual fat, cooked yield and actual labels can change this substantially. Not verified nutrition or recorded intake.</p>\n<p>Labeling and safety references checked October 11: <a href=\"https://www.fda.gov/food/nutrition-education-resources-materials/gluten-and-food-labeling\">FDA gluten and food labeling</a> and <a href=\"https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling\">FDA safe food handling</a>. Actual purchased packages have not been inspected.</p>\n",
+      "body_html": "<h1>Homemade Hamburger Helper</h1>\n<p>For the October 13 dinner, reuse the complete gluten-free adaptation originally drafted October 5 below, not the original version. That earlier dinner was replaced; this is a new planned use, not confirmation it was cooked. Current restrictions are in [[mike-preferences]]; food dislikes are in [[nancy]].</p>\n<p>Nancy's. One-pot stovetop, beef + cheesy noodles.</p>\n<h2>Ingredients</h2>\n<ul>\n<li>1 onion, diced</li>\n<li>Olive oil</li>\n<li>Garlic, minced</li>\n<li>1 package ground beef</li>\n<li>Salt, pepper, paprika, garlic powder</li>\n<li>1 tbsp tomato paste</li>\n<li>1 can Italian-seasoned diced tomatoes, drained</li>\n<li>2 cups beef broth</li>\n<li>1 cup heavy cream</li>\n<li>2 cups uncooked noodles</li>\n<li>Shredded cheddar</li>\n</ul>\n<h2>Steps</h2>\n<ol>\n<li>Cook onion in olive oil.</li>\n<li>Add garlic, cook a minute or so.</li>\n<li>Add ground beef, brown.</li>\n<li>Season with salt, pepper, paprika, garlic powder.</li>\n<li>Stir in tomato paste + drained diced tomatoes.</li>\n<li>Add beef broth + heavy cream.</li>\n<li>Add uncooked noodles.</li>\n<li>Cover, cook 15 min.</li>\n<li>Uncover, cook 2 more min.</li>\n<li>Off heat, top with cheddar, stir.</li>\n</ol>\n<h2>Shopping list</h2>\n<ul>\n<li>Ground beef</li>\n<li>Onion</li>\n<li>Garlic</li>\n<li>Beef broth</li>\n<li>Heavy cream</li>\n<li>Egg noodles (or similar)</li>\n<li>Shredded cheddar</li>\n<li>Tomato paste</li>\n<li>Italian-seasoned diced tomatoes</li>\n</ul>\n<h2>Gluten-free adaptation: drafted 2026-10-05, reused for 2026-10-13</h2>\n<p>Assistant-drafted six-person adaptation of Nancy's recipe, not a tested or externally sourced recipe. About 35-45 minutes. This does not change the standing recipe or extend the temporary October 3-16 home-cooking restriction.</p>\n<h3>Ingredients</h3>\n<ul>\n<li>Plain 96% lean ground beef: 2.5 lb, no added seasoning.</li>\n<li>Labeled gluten-free rice/corn elbow pasta: 12 oz dry, not ordinary egg noodles.</li>\n<li>Yellow onion: 1 large, diced.</li>\n<li>Garlic: 3 cloves, minced.</li>\n<li>Olive oil: 1 tbsp.</li>\n<li>Plain tomato paste: 1 tbsp, check gluten-free label.</li>\n<li>Plain diced tomatoes: one 14.5 oz can, drained, gluten-free and no peppers.</li>\n<li>Low-sodium beef broth: 2 cups, labeled gluten-free, no pepper ingredients.</li>\n<li>Plain 1% milk: 1.5 cups, check label.</li>\n<li>Plain cheddar: 6 oz, grated from a block, check gluten-free label.</li>\n<li>Dried oregano: 1 tsp, gluten-free single ingredient.</li>\n<li>Garlic powder: 1 tsp, gluten-free single ingredient.</li>\n<li>Salt and black pepper to taste; check seasoning labels for gluten-containing additives.</li>\n<li>Water for boiling pasta.</li>\n</ul>\n<h3>Method</h3>\n<ol>\n<li>Check actual package labels before starting. Do not use wheat pasta, paprika, chili, flour, an unverified seasoning packet or ordinary broth. Use clean cookware and a clean colander, not pasta water or utensils carrying wheat residue.</li>\n<li>For Mike's estimated portion, separate 9 oz raw beef and 40 g dry pasta before cooking. Cook that beef separately or keep track of its cooked portion. Brown all beef in a large skillet or batches until it reaches 160°F. Remove to a bowl, keeping Mike's portion identifiable.</li>\n<li>Add the tablespoon of oil and onion to the skillet; soften about 5 minutes. Add garlic for 1 minute. Add tomato paste, tomatoes, oregano, garlic powder and broth. Simmer uncovered 10-15 minutes to reduce. Stir in milk over low heat; heat gently without a hard boil. Season to taste.</li>\n<li>Meanwhile cook gluten-free pasta separately in clean water for its package time. Test early, then drain; do not apply the original covered 15-minute noodle method. Keep Mike's 40 g dry-equivalent portion separate.</li>\n<li>Portion one-sixth of the sauce for Mike, then combine it with his beef, pasta and 1/2 oz cheddar off heat. Combine remaining beef, pasta, sauce and cheese for the family, or keep components separate. The sauce is intentionally lighter than the original cream version; reduce before adding milk instead of thickening with flour.</li>\n</ol>\n<h3>Mike's planning estimate</h3>\n<p>9 oz raw beef, 40 g dry pasta, 1/2 oz cheese and one-sixth of sauce. Generic assumptions: beef 140 cal/24g protein per 4 oz; pasta 200 cal/4g per 56g; cheese 55 cal/3.5g; milk 30 cal/2g; remaining sauce vegetables/broth 35 cal/1g; oil 20 cal. Tool-calculated 597.86 cal/63.36g protein, stored as 598 cal/63g. This is an estimate, not label-verified nutrition or an intake record. Other family portions are flexible.</p>\n<p>Labels and the 160°F ground-meat safety minimum were rechecked against <a href=\"https://www.fda.gov/food/nutrition-education-resources-materials/gluten-and-food-labeling\">FDA gluten and food labeling</a> and <a href=\"https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling\">FDA safe food handling</a> on October 11. This is a requirements check, not inspection of actual pantry packages. Refrigerate leftovers within two hours, or within one hour above 90°F; reheat to 165°F.</p>\n",
       "last_reviewed": null
     }
   },
@@ -535,7 +536,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 74,
+      "temp": 73,
       "hi": 86,
       "lo": 60,
       "icon": "⛅",
@@ -2151,7 +2152,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 38.7,
+    "dayPct": 41.9,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2176,6 +2177,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-12T23:46:11.415Z"
+    "updatedAt": "2026-10-13T00:01:12.950Z"
   }
 }
