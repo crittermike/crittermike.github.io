@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T15:00:33.834Z",
+  "generated_at": "2026-10-13T15:15:25.414Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -23,8 +23,8 @@
           "workOnDate": "2026-10-13"
         },
         {
-          "id": "sch-work-on-2026-10-13-22df39c66e65283a51c980482ac36bec34bc3c180c86d778317dfac0b2671e3f",
-          "label": "Math: Finish study guide if not completed in class",
+          "id": "sch-work-on-2026-10-13-7e301b520f07d4378524fe1842a6317793d5a7e6dd486c7a52bc97fe5c2a8cf3",
+          "label": "Math: Complete study-guide problems 11-18. For comparisons using more than, less than, fewer than, or greater than, draw a bar model representing the difference. Specific problems clarified by Cannon email \"Math Homework for tonight\", 2026-10-13, INBOX 330502",
           "dueDate": null,
           "workOnDate": "2026-10-13"
         }
@@ -408,7 +408,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 71,
+      "temp": 72,
       "hi": 82,
       "lo": 55,
       "icon": "☀️",
@@ -424,16 +424,16 @@
       },
       {
         "d": "Thu",
-        "icon": "🌤",
+        "icon": "☀️",
         "hi": 86,
         "lo": 65,
-        "code": 2
+        "code": 0
       },
       {
         "d": "Fri",
         "icon": "⛅",
         "hi": 88,
-        "lo": 56,
+        "lo": 58,
         "code": 3
       },
       {
@@ -2049,6 +2049,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-13T15:00:30.157Z"
+    "updatedAt": "2026-10-13T15:15:24.336Z"
   }
 }
