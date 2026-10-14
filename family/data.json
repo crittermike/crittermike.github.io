@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T03:45:23.486Z",
+  "generated_at": "2026-10-14T04:00:25.637Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,16 +17,10 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-13-9bf4ba5fb96efc53b1ad53c9f551252e5c5fd674b849673f247ecd38d262ad23",
-          "label": "Spelling: Complete WB p. 35",
+          "id": "sch-work-on-2026-10-14-62a20c645d60ef389a7db36f334f4d6cf6e4d399a0bbc5ad84b0294e2fd9a960",
+          "label": "Spelling: Complete WB p. 36",
           "dueDate": null,
-          "workOnDate": "2026-10-13"
-        },
-        {
-          "id": "sch-work-on-2026-10-13-7e301b520f07d4378524fe1842a6317793d5a7e6dd486c7a52bc97fe5c2a8cf3",
-          "label": "Math: Complete study-guide problems 11-18. For comparisons using more than, less than, fewer than, or greater than, draw a bar model representing the difference. Specific problems clarified by Cannon email \"Math Homework for tonight\", 2026-10-13, INBOX 330502",
-          "dueDate": null,
-          "workOnDate": "2026-10-13"
+          "workOnDate": "2026-10-14"
         }
       ]
     },
@@ -56,18 +50,7 @@
         "balance_str": "$109.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-14-883f4055d6b8164585cccfd3c4fe6d843dd3dbda2e6d501c7026a53b3d94136c",
-          "label": "Honors English (deMarrais): Lepanto . Assignment requirements not specified in notification",
-          "dueDate": "2026-10-14"
-        },
-        {
-          "id": "sch-2026-10-14-26ceb86c5577981f9bdba813d18957ffd7b386960e293180f21072e490a27fb6",
-          "label": "Spanish (Simon): Complete P.180",
-          "dueDate": "2026-10-14"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -374,7 +357,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Korean beef, broccoli, and jasmine rice bowls (gluten-free)",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -382,8 +365,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Gluten-free crispy baked chicken with mac and cheese and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -391,7 +374,7 @@
       "dow_short": "Thu",
       "name": "Takeout",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -413,20 +396,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 66,
-      "hi": 86,
-      "lo": 55,
+      "temp": 65,
+      "hi": 88,
+      "lo": 62,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "☀️",
-        "hi": 89,
-        "lo": 62,
-        "code": 0
-      },
       {
         "d": "Thu",
         "icon": "🌤",
@@ -454,24 +430,31 @@
         "hi": 65,
         "lo": 45,
         "code": 0
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 68,
+        "lo": 48,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-13T07:33",
         "2026-10-14T07:34",
         "2026-10-15T07:35",
         "2026-10-16T07:36",
         "2026-10-17T07:37",
-        "2026-10-18T07:37"
+        "2026-10-18T07:37",
+        "2026-10-19T07:38"
       ],
       "sunsets": [
-        "2026-10-13T18:57",
         "2026-10-14T18:55",
         "2026-10-15T18:54",
         "2026-10-16T18:53",
         "2026-10-17T18:52",
-        "2026-10-18T18:50"
+        "2026-10-18T18:50",
+        "2026-10-19T18:49"
       ],
       "timezone": "America/New_York"
     }
@@ -2054,6 +2037,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-14T03:45:22.159Z"
+    "updatedAt": "2026-10-14T04:00:22.787Z"
   }
 }
