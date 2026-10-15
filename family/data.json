@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T03:45:27.076Z",
+  "generated_at": "2026-10-15T04:00:29.460Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,10 +17,25 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-14-62a20c645d60ef389a7db36f334f4d6cf6e4d399a0bbc5ad84b0294e2fd9a960",
-          "label": "Spelling: Complete WB p. 36",
+          "id": "sch-work-on-2026-10-15-db36c140a11d3566fd4b784ef787d0e28b14cfad5ff0cd5f04e7e9b780d968db",
+          "label": "Spelling: Complete Choice Board - Call it Out",
           "dueDate": null,
-          "workOnDate": "2026-10-14"
+          "workOnDate": "2026-10-15"
+        },
+        {
+          "id": "sch-2026-10-16-cb19d6b81088246b6173dbeb7266b1984be3631bc32431b061cb408f5122ee72",
+          "label": "Prepare: October Prayer Recitation: St. Michael Prayer",
+          "dueDate": "2026-10-16"
+        },
+        {
+          "id": "sch-2026-10-16-11460e6f0cbdac41915159b0bb0ffdb3b78a2a0d00a64b0e99aae122d2b9e199",
+          "label": "Cursive Handwriting: Complete pp.21-41 no later than October 16",
+          "dueDate": "2026-10-16"
+        },
+        {
+          "id": "sch-2026-10-16-93270003b866691f9e9abc26715dc619de8b202f326f0d24e241482c72acddcb",
+          "label": "Writing: Final draft of \"God is Good\" paragraph",
+          "dueDate": "2026-10-16"
         }
       ]
     },
@@ -365,7 +380,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Gluten-free crispy baked chicken with mac and cheese and cabbage",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -373,8 +388,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Takeout",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -382,7 +397,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -396,20 +411,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 68,
-      "hi": 89,
-      "lo": 60,
+      "temp": 67,
+      "hi": 88,
+      "lo": 62,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "☀️",
-        "hi": 88,
-        "lo": 62,
-        "code": 0
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -437,24 +445,31 @@
         "hi": 70,
         "lo": 47,
         "code": 3
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 74,
+        "lo": 57,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-14T07:34",
         "2026-10-15T07:35",
         "2026-10-16T07:36",
         "2026-10-17T07:37",
         "2026-10-18T07:37",
-        "2026-10-19T07:38"
+        "2026-10-19T07:38",
+        "2026-10-20T07:39"
       ],
       "sunsets": [
-        "2026-10-14T18:55",
         "2026-10-15T18:54",
         "2026-10-16T18:53",
         "2026-10-17T18:52",
         "2026-10-18T18:50",
-        "2026-10-19T18:49"
+        "2026-10-19T18:49",
+        "2026-10-20T18:48"
       ],
       "timezone": "America/New_York"
     }
@@ -2037,6 +2052,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-15T03:45:25.815Z"
+    "updatedAt": "2026-10-15T04:00:26.065Z"
   }
 }
