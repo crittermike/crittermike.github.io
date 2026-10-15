@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T23:45:27.078Z",
+  "generated_at": "2026-10-15T00:00:35.069Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -266,11 +266,11 @@
     ]
   },
   "dinner": {
-    "name": "Gluten-free crispy baked chicken with mac and cheese and cabbage",
-    "protein_g": 64,
-    "cal": 607,
-    "effort": "medium",
-    "note": "October 14: follow the complete dated gluten-free adaptation, not original Shake n Bake or ordinary boxed mac and cheese. Use plain chicken breast, gluten-free breadcrumbs and gluten-free elbow pasta; make the sauce with cornstarch, not flour. Mike's portion: 8 oz raw chicken, 15 g breadcrumbs, an estimated one-third egg, 30 g dry pasta, 1/2 oz cheddar, one-sixth of the milk/butter/cornstarch sauce, one cup cooked cabbage and one tsp total oil. Estimate assumes that coating allocation is eaten; actual adhesion and labels vary. Family portions are flexible. Keep chicken, pasta and cabbage separate.",
+    "name": "Takeout",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "October 15: flexible takeout around the optional Salva Dut book signing and school presentation, 5:30PM-7:00PM. Attendance is not confirmed. Restaurant and orders undecided; respect Nancy's dislikes. No cooking assigned and no order placed. The temporary gluten-free rule is not imposed on this restaurant meal; any swap to a dinner Mike cooks on this date must be gluten-free.",
     "recipe": null
   },
   "mealweek": [
@@ -414,7 +414,7 @@
         "d": "Fri",
         "icon": "⛅",
         "hi": 86,
-        "lo": 59,
+        "lo": 60,
         "code": 3
       },
       {
@@ -427,16 +427,16 @@
       {
         "d": "Sun",
         "icon": "☀️",
-        "hi": 63,
+        "hi": 62,
         "lo": 44,
         "code": 0
       },
       {
         "d": "Mon",
-        "icon": "🌤",
+        "icon": "⛅",
         "hi": 70,
         "lo": 47,
-        "code": 2
+        "code": 3
       }
     ],
     "sun": {
@@ -2012,7 +2012,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 45.2,
+    "dayPct": 48.4,
     "totalSpend": 2325.09,
     "totalBudget": 0,
     "categories": [
@@ -2037,6 +2037,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 76584.64,
     "source": "ynab",
-    "updatedAt": "2026-10-14T23:45:25.774Z"
+    "updatedAt": "2026-10-15T00:00:30.233Z"
   }
 }
