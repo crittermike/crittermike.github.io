@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T03:45:25.753Z",
+  "generated_at": "2026-10-16T04:00:26.610Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,29 +15,7 @@
         "balance_str": "$108.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-10-15-db36c140a11d3566fd4b784ef787d0e28b14cfad5ff0cd5f04e7e9b780d968db",
-          "label": "Spelling: Complete Choice Board - Call it Out",
-          "dueDate": null,
-          "workOnDate": "2026-10-15"
-        },
-        {
-          "id": "sch-2026-10-16-cb19d6b81088246b6173dbeb7266b1984be3631bc32431b061cb408f5122ee72",
-          "label": "Prepare: October Prayer Recitation: St. Michael Prayer",
-          "dueDate": "2026-10-16"
-        },
-        {
-          "id": "sch-2026-10-16-11460e6f0cbdac41915159b0bb0ffdb3b78a2a0d00a64b0e99aae122d2b9e199",
-          "label": "Cursive Handwriting: Complete pp.21-41 no later than October 16",
-          "dueDate": "2026-10-16"
-        },
-        {
-          "id": "sch-2026-10-16-93270003b866691f9e9abc26715dc619de8b202f326f0d24e241482c72acddcb",
-          "label": "Writing: Final draft of \"God is Good\" paragraph",
-          "dueDate": "2026-10-16"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -388,7 +366,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Takeout",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -396,8 +374,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -405,26 +383,19 @@
       "dow_short": "Sat",
       "name": "Pizza",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 70,
-      "hi": 90,
-      "lo": 61,
+      "hi": 85,
+      "lo": 64,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 85,
-        "lo": 64,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -452,24 +423,31 @@
         "hi": 75,
         "lo": 49,
         "code": 0
+      },
+      {
+        "d": "Wed",
+        "icon": "☀️",
+        "hi": 74,
+        "lo": 50,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-15T07:35",
         "2026-10-16T07:36",
         "2026-10-17T07:37",
         "2026-10-18T07:37",
         "2026-10-19T07:38",
-        "2026-10-20T07:39"
+        "2026-10-20T07:39",
+        "2026-10-21T07:40"
       ],
       "sunsets": [
-        "2026-10-15T18:54",
         "2026-10-16T18:53",
         "2026-10-17T18:52",
         "2026-10-18T18:50",
         "2026-10-19T18:49",
-        "2026-10-20T18:48"
+        "2026-10-20T18:48",
+        "2026-10-21T18:47"
       ],
       "timezone": "America/New_York"
     }
@@ -2060,6 +2038,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 87507.78,
     "source": "ynab",
-    "updatedAt": "2026-10-16T03:45:24.850Z"
+    "updatedAt": "2026-10-16T04:00:25.688Z"
   }
 }
