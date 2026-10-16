@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T23:45:26.354Z",
+  "generated_at": "2026-10-16T00:00:36.908Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -281,11 +281,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout",
+    "name": "Takeout or dinner out",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "October 15: flexible takeout around the optional Salva Dut book signing and school presentation, 5:30PM-7:00PM. Attendance is not confirmed. Restaurant and orders undecided; respect Nancy's dislikes. No cooking assigned and no order placed. The temporary gluten-free rule is not imposed on this restaurant meal; any swap to a dinner Mike cooks on this date must be gluten-free.",
+    "note": "October 16: usual flexible Friday default. Restaurant, orders and nutrition unknown; respect Nancy's dislikes. Outside Lent. No order placed. Any swap to Mike's home cooking remains gluten-free through this dinner date; restaurant meals are not covered by that temporary rule.",
     "recipe": null
   },
   "mealweek": [
@@ -411,7 +411,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 79,
+      "temp": 78,
       "hi": 90,
       "lo": 61,
       "icon": "☀️",
@@ -2027,7 +2027,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 48.4,
+    "dayPct": 51.6,
     "totalSpend": 2413.75,
     "totalBudget": 0,
     "categories": [
@@ -2060,6 +2060,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 87507.78,
     "source": "ynab",
-    "updatedAt": "2026-10-15T23:45:25.130Z"
+    "updatedAt": "2026-10-16T00:00:32.392Z"
   }
 }
