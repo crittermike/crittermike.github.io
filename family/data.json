@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T11:00:38.936Z",
+  "generated_at": "2026-10-16T11:15:28.410Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -2006,7 +2006,7 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 51.6,
-    "totalSpend": 2413.75,
+    "totalSpend": 4155.21,
     "totalBudget": 0,
     "categories": [
       {
@@ -2015,6 +2015,14 @@
         "budgeted": 0,
         "spent": 2200.09,
         "balance": -2200.09,
+        "pct": 0
+      },
+      {
+        "name": "📚 School",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 1741.46,
+        "balance": -1741.46,
         "pct": 0
       },
       {
@@ -2034,10 +2042,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 44779.72,
+    "liquidCash": 44200.59,
     "creditDebt": 57728.06,
-    "netLiquid": 102507.78,
+    "netLiquid": 101928.65,
     "source": "ynab",
-    "updatedAt": "2026-10-16T11:00:34.758Z"
+    "updatedAt": "2026-10-16T11:15:27.218Z"
   }
 }
