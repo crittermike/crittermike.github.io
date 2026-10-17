@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T16:45:27.145Z",
+  "generated_at": "2026-10-17T17:00:45.700Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -22,7 +22,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 30,
+        "balance": 0,
         "refill": 60
       },
       "allowance": {
@@ -2086,6 +2086,6 @@
     "creditDebt": 54274.63,
     "netLiquid": 83062.21,
     "source": "ynab",
-    "updatedAt": "2026-10-17T16:45:25.916Z"
+    "updatedAt": "2026-10-17T17:00:43.135Z"
   }
 }
