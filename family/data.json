@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T23:45:26.292Z",
+  "generated_at": "2026-10-17T00:00:40.085Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Takeout or dinner out",
+    "name": "Pizza",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "October 16: usual flexible Friday default. Restaurant, orders and nutrition unknown; respect Nancy's dislikes. Outside Lent. No order placed. Any swap to Mike's home cooking remains gluten-free through this dinner date; restaurant meals are not covered by that temporary rule.",
+    "note": "October 17: takeout or delivery pizza, with timing flexible around the Home calendar's 5:30PM-9:30PM Ed Sheeran concert in Charlotte. Who is attending and whether the household will eat separately are unknown. Cheese is the default with no disliked toppings. No cooking assigned, no order placed and no babysitting arrangements inferred. The temporary home-cooking gluten-free restriction has expired for this date unless renewed.",
     "recipe": null
   },
   "mealweek": [
@@ -387,71 +387,7 @@
       "recipe": null
     }
   ],
-  "weather": {
-    "now": {
-      "temp": 77,
-      "hi": 85,
-      "lo": 63,
-      "icon": "⛅",
-      "code": 3
-    },
-    "days": [
-      {
-        "d": "Sat",
-        "icon": "🌦",
-        "hi": 64,
-        "lo": 49,
-        "code": 51
-      },
-      {
-        "d": "Sun",
-        "icon": "☀️",
-        "hi": 64,
-        "lo": 41,
-        "code": 0
-      },
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 69,
-        "lo": 44,
-        "code": 0
-      },
-      {
-        "d": "Tue",
-        "icon": "☀️",
-        "hi": 75,
-        "lo": 50,
-        "code": 0
-      },
-      {
-        "d": "Wed",
-        "icon": "☀️",
-        "hi": 74,
-        "lo": 50,
-        "code": 0
-      }
-    ],
-    "sun": {
-      "sunrises": [
-        "2026-10-16T07:36",
-        "2026-10-17T07:37",
-        "2026-10-18T07:37",
-        "2026-10-19T07:38",
-        "2026-10-20T07:39",
-        "2026-10-21T07:40"
-      ],
-      "sunsets": [
-        "2026-10-16T18:53",
-        "2026-10-17T18:52",
-        "2026-10-18T18:50",
-        "2026-10-19T18:49",
-        "2026-10-20T18:48",
-        "2026-10-21T18:47"
-      ],
-      "timezone": "America/New_York"
-    }
-  },
+  "weather": null,
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2005,7 +1941,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 51.6,
+    "dayPct": 54.8,
     "totalSpend": 4155.21,
     "totalBudget": 0,
     "categories": [
@@ -2046,6 +1982,6 @@
     "creditDebt": 57728.06,
     "netLiquid": 101928.65,
     "source": "ynab",
-    "updatedAt": "2026-10-16T23:45:25.288Z"
+    "updatedAt": "2026-10-17T00:00:34.144Z"
   }
 }
