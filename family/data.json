@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T12:00:54.106Z",
+  "generated_at": "2026-10-17T12:15:28.838Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -8,7 +8,7 @@
       "name": "Thomas",
       "grade": "3rd",
       "sugar": {
-        "balance": 363,
+        "balance": 423,
         "refill": 60
       },
       "allowance": {
@@ -22,7 +22,7 @@
       "name": "William",
       "grade": "5th",
       "sugar": {
-        "balance": 0,
+        "balance": 60,
         "refill": 60
       },
       "allowance": {
@@ -36,7 +36,7 @@
       "name": "Henry",
       "grade": "8th",
       "sugar": {
-        "balance": -33,
+        "balance": 27,
         "refill": 60
       },
       "allowance": {
@@ -50,7 +50,7 @@
       "name": "Charlie",
       "grade": "11th",
       "sugar": {
-        "balance": 616,
+        "balance": 676,
         "refill": 60
       },
       "allowance": {
@@ -387,7 +387,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 52,
+      "hi": 66,
+      "lo": 49,
+      "icon": "⛅",
+      "code": 3
+    },
+    "days": [
+      {
+        "d": "Sun",
+        "icon": "☀️",
+        "hi": 60,
+        "lo": 43,
+        "code": 0
+      },
+      {
+        "d": "Mon",
+        "icon": "☀️",
+        "hi": 69,
+        "lo": 44,
+        "code": 0
+      },
+      {
+        "d": "Tue",
+        "icon": "🌤",
+        "hi": 75,
+        "lo": 50,
+        "code": 2
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 73,
+        "lo": 51,
+        "code": 3
+      },
+      {
+        "d": "Thu",
+        "icon": "☀️",
+        "hi": 75,
+        "lo": 51,
+        "code": 0
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-10-17T07:37",
+        "2026-10-18T07:37",
+        "2026-10-19T07:38",
+        "2026-10-20T07:39",
+        "2026-10-21T07:40",
+        "2026-10-22T07:41"
+      ],
+      "sunsets": [
+        "2026-10-17T18:52",
+        "2026-10-18T18:50",
+        "2026-10-19T18:49",
+        "2026-10-20T18:48",
+        "2026-10-21T18:47",
+        "2026-10-22T18:45"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -1942,7 +2006,7 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 54.8,
-    "totalSpend": 4818.22,
+    "totalSpend": 9574.31,
     "totalBudget": 0,
     "categories": [
       {
@@ -1954,11 +2018,35 @@
         "pct": 0
       },
       {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 2051.28,
+        "balance": -2051.28,
+        "pct": 0
+      },
+      {
         "name": "📚 School",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1741.46,
-        "balance": -1741.46,
+        "spent": 1840.46,
+        "balance": -1840.46,
+        "pct": 0
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 1145.16,
+        "balance": -1145.16,
+        "pct": 0
+      },
+      {
+        "name": "🍽️ Dining out",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 1108.67,
+        "balance": -1108.67,
         "pct": 0
       },
       {
@@ -1970,26 +2058,34 @@
         "pct": 0
       },
       {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 125,
-        "balance": -125,
-        "pct": 0
-      },
-      {
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 88.66,
-        "balance": 221.6,
+        "spent": 244.9,
+        "balance": -117.76,
+        "pct": 0
+      },
+      {
+        "name": "🍿 Entertainment",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 217.88,
+        "balance": 1210.02,
+        "pct": 0
+      },
+      {
+        "name": "📺 Subscriptions",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 102.86,
+        "balance": -102.86,
         "pct": 0
       }
     ],
     "liquidCash": 28787.58,
-    "creditDebt": 57728.06,
-    "netLiquid": 86515.64,
+    "creditDebt": 54274.63,
+    "netLiquid": 83062.21,
     "source": "ynab",
-    "updatedAt": "2026-10-17T12:00:52.061Z"
+    "updatedAt": "2026-10-17T12:15:27.573Z"
   }
 }
