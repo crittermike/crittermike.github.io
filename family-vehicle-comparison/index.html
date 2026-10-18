@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121313">
+<meta name="description" content="Six three-row family vehicles compared: minivans, hybrids and EVs, with EPA efficiency, listed MSRP and your own annual energy cost.">
+<title>Family Vehicle Comparison</title>
+<style>
+:root{color-scheme:dark;--bg:#121313;--panel:#1b1c1c;--panel2:#232525;--line:#333535;--text:#f4f0e9;--muted:#a8aaa7;--accent:#d97757;--accent-dim:rgba(217,119,87,.14);--gold:#f4cb7e;--radius:14px;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.5}
+a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.skip-link{position:fixed;top:-100px;left:16px;z-index:10;padding:12px;background:var(--gold);color:#000}
+.skip-link:focus{top:12px}
+.wrap{max-width:1160px;margin:0 auto;padding:max(20px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.eyebrow,.label{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700;color:var(--muted);margin:0}
+.eyebrow{color:var(--accent)}
+h1{font-size:clamp(2rem,8vw,3.4rem);line-height:1.05;margin:.3em 0 .3em;letter-spacing:-.02em}
+h2{font-size:1.35rem;margin:0 0 .2em}
+.deck{color:var(--muted);max-width:62ch;margin:0 0 1rem;font-size:1.05rem}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;color:var(--muted);font-size:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.7rem 0}
+section{margin-top:2.2rem}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:.5rem;border-bottom:1px solid var(--line);padding-bottom:.6rem;margin-bottom:1rem}
+.controls{display:grid;gap:1rem;grid-template-columns:1fr}
+fieldset{border:1px solid var(--line);border-radius:var(--radius);padding:.8rem 1rem 1rem;margin:0;min-width:0}
+legend{padding:0 .4rem}
+.seg{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:600;background:var(--panel2)}
+.seg input:checked+span{background:var(--accent);border-color:var(--accent);color:#24110c}
+.seg input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+.inputs{display:grid;gap:.8rem;grid-template-columns:1fr}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:.25rem}
+.field input{width:100%;min-height:44px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:16px}
+.field input[aria-invalid=true]{border-color:#f06372}
+.hint{font-size:12px;color:var(--muted);margin:.25rem 0 0}
+.status{color:var(--muted);font-size:14px;margin:.4rem 0 0}
+.cards{display:grid;gap:1rem;grid-template-columns:1fr;list-style:none;padding:0;margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.card.selected{border-color:var(--accent)}
+.card figure{margin:0;aspect-ratio:16/10;background:var(--panel2)}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card .credit{font-size:11px;color:var(--muted);padding:.35rem 1rem 0;margin:0}
+.card-body{padding:.8rem 1rem 1rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.card h3{margin:0;font-size:1.15rem;line-height:1.25}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--muted)}
+.chip.pw{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-dim)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:0}
+.stats div{border-top:1px solid var(--line);padding-top:.45rem}
+.stats dt{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.stats dd{margin:0;font-size:1.15rem;font-weight:700;font-variant-numeric:tabular-nums}
+.stats dd small{font-size:12px;font-weight:500;color:var(--muted)}
+.daily{margin:0;padding-left:1.1rem;font-size:14px;color:#dcd8d0}
+.daily li{margin:.15rem 0}
+.src{font-size:12px;color:var(--muted);margin:0}
+.btn{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);min-height:44px;padding:0 16px;border-radius:999px;font:inherit;font-size:14px;font-weight:650;margin-top:auto}
+.btn:hover{border-color:#646661}
+.btn[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#24110c}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.quiet{background:transparent;margin:0}
+.empty{color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);padding:1.2rem;margin:0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+caption{text-align:left;padding:.8rem 1rem;color:var(--muted);font-size:13px}
+th,td{padding:.6rem .8rem;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--panel)}
+tbody th{font-weight:600;color:var(--muted);white-space:nowrap}
+td{font-variant-numeric:tabular-nums}
+.best{color:var(--gold);font-weight:700}
+.notes{color:var(--muted);font-size:14px;max-width:75ch}
+.notes li{margin:.3rem 0}
+.credits{font-size:13px;color:var(--muted);padding-left:1.1rem}
+footer{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;color:var(--muted);font-size:13px}
+@media (min-width:640px){.cards{grid-template-columns:repeat(2,1fr)}.inputs{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:960px){.cards{grid-template-columns:repeat(3,1fr)}.controls{grid-template-columns:1fr 1fr}.controls .wide{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#vehicles">Skip to vehicles</a>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Family garage research</p>
+  <h1>Six three-row haulers, side by side.</h1>
+  <p class="deck">Three minivans and three SUVs: one gas, three hybrids, two EVs. EPA efficiency, listed MSRP, and an annual energy cost you can tune to your own driving and local prices.</p>
+  <div class="meta">
+    <span>Data checked: <strong>Oct 18, 2026</strong></span>
+    <span>Efficiency: <a href="https://www.fueleconomy.gov/">fueleconomy.gov</a> (EPA)</span>
+    <span>Prices: linked per vehicle</span>
+  </div>
+</header>
+
+<main>
+<section aria-labelledby="ctl-h">
+  <div class="section-head"><h2 id="ctl-h">Filter and assumptions</h2></div>
+  <form class="controls" id="controls" onsubmit="return false">
+    <fieldset>
+      <legend class="label">Body type</legend>
+      <div class="seg">
+        <label><input type="radio" name="type" value="all" checked><span>All</span></label>
+        <label><input type="radio" name="type" value="van"><span>Minivans</span></label>
+        <label><input type="radio" name="type" value="suv"><span>SUVs</span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend class="label">Powertrain</legend>
+      <div class="seg">
+        <label><input type="radio" name="power" value="all" checked><span>All</span></label>
+        <label><input type="radio" name="power" value="gas"><span>Gas</span></label>
+        <label><input type="radio" name="power" value="hybrid"><span>Hybrid</span></label>
+        <label><input type="radio" name="power" value="ev"><span>EV</span></label>
+      </div>
+    </fieldset>
+    <fieldset class="wide">
+      <legend class="label">Your numbers (estimate inputs)</legend>
+      <div class="inputs">
+        <div class="field"><label for="miles">Annual miles</label><input id="miles" type="number" inputmode="numeric" min="0" step="500" value="12000" aria-describedby="inputs-hint"></div>
+        <div class="field"><label for="gas">Gas price, $ per gallon</label><input id="gas" type="number" inputmode="decimal" min="0" step="0.01" value="3.25" aria-describedby="inputs-hint"></div>
+        <div class="field"><label for="elec">Electricity, $ per kWh</label><input id="elec" type="number" inputmode="decimal" min="0" step="0.01" value="0.15" aria-describedby="inputs-hint"></div>
+      </div>
+      <p class="hint" id="inputs-hint">Defaults are placeholders, not sourced figures. Replace them with your own mileage, pump price and utility rate. Use your full electric rate including fees; public fast charging usually costs more than home power.</p>
+    </fieldset>
+  </form>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+</section>
+
+<section aria-labelledby="veh-h" id="vehicles">
+  <div class="section-head"><h2 id="veh-h">Vehicles</h2><span class="src" id="cmp-count"></span></div>
+  <ul class="cards" id="cards"></ul>
+</section>
+
+<section aria-labelledby="cmp-h" id="compare">
+  <div class="section-head"><h2 id="cmp-h">Compare</h2><button type="button" class="btn quiet" id="clear-cmp">Clear selection</button></div>
+  <div id="compare-out"></div>
+</section>
+
+<section aria-labelledby="notes-h">
+  <div class="section-head"><h2 id="notes-h">How to read this</h2></div>
+  <ul class="notes">
+    <li>Annual energy cost is an <strong>estimate</strong>. Gas and hybrid: miles &divide; EPA combined MPG &times; gas price. EV: miles &times; EPA kWh per 100 miles &divide; 100 &times; electricity rate. Real costs move with weather, speed, tires and charging losses.</li>
+    <li>MPG, kWh per 100 miles and range are EPA combined figures from fueleconomy.gov for the matching model year and drivetrain. The EX90 figure is the EPA listing for the Twin Motor on 20 and 22 inch wheels.</li>
+    <li>Price is the listed MSRP for that model year and trim from the source linked on each card, checked Oct 18, 2026. Destination is called out where the source states it. Prices are not transaction or used prices. The 2024 models are prior model years and now sell at different prices.</li>
+    <li>Kia EV9 Wind: Kia's <a href="https://www.kiamedia.com/us/en/models/ev9/2024/features" target="_blank" rel="noopener">2024 features chart</a> lists the exterior V2L (vehicle to load) outlet on Land and GT-Line, not Wind.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="cred-h">
+  <div class="section-head"><h2 id="cred-h">Photo credits</h2></div>
+  <ul class="credits" id="credits"></ul>
+</section>
+</main>
+<footer>Built for one family's minivan versus SUV debate. No tracking, no external scripts. Figures checked Oct 18, 2026.</footer>
+</div>
+
+<script id="vc-core">
+const VC = (() => {
+  const MAX_COMPARE = 3;
+  const FE = (id) => ({ label: 'fueleconomy.gov (EPA)', url: 'https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=' + id });
+  const VEHICLES = [
+    {
+      id: 'odyssey', year: 2025, make: 'Honda', model: 'Odyssey', trim: 'EX-L', type: 'van', power: 'gas', seats: 8,
+      mpg: 22, kwhPer100: null, range: null, efficiencySource: FE(48254),
+      drivetrain: 'FWD, 3.5L V6, 10 speed automatic',
+      price: { typical: 42220, note: 'EX-L MSRP excludes $1,450 destination. $43,670 with destination, before tax, license, registration and options.', asOf: '2026-10-18',
+        sources: [{ label: 'Honda 2025 pricing and EPA ratings', url: 'https://www.hondanews.com/en-US/releases/release-d73d9911716c8277bb60a27897025927-2025-honda-odyssey-pricing-and-epa-ratings-2025' }, { label: 'Honda build and price', url: 'https://automobiles.honda.com/tools/build-and-price-trimwalk?modelseries=odyssey' }, FE(48254)] },
+      daily: ['Seats 8, with sliding side doors for tight parking spots', 'Only gas engine in this group, so the highest fuel bill at any gas price', 'Leather trimmed seats, power tailgate and one touch power moonroof listed by Honda for EX-L'],
+      photo: { src: 'images/odyssey.jpg', alt: 'Honda Odyssey minivan of the RL6 generation photographed in the Washington DC area', credit: 'OWS Photography', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0', page: 'https://commons.wikimedia.org/wiki/File:Honda_Odyssey_(RL6)_Washington_DC_Metro_Area,_USA.jpg', note: 'Same generation; trim and year may differ.' }
+    },
+    {
+      id: 'sienna', year: 2025, make: 'Toyota', model: 'Sienna', trim: 'Limited FWD', type: 'van', power: 'hybrid', seats: 7,
+      mpg: 36, kwhPer100: null, range: null, efficiencySource: FE(48904),
+      drivetrain: 'FWD, 2.5L hybrid, CVT',
+      price: { typical: 50500, note: 'Cars.com listed MSRP for Limited FWD 7-passenger. Destination treatment is not stated on that trim listing.', asOf: '2026-10-18',
+        sources: [{ label: 'Cars.com 2025 Sienna Limited FWD specs', url: 'https://www.cars.com/research/toyota-sienna-2025/specs/461558' }, { label: 'Toyota 2025 Sienna announcement', url: 'https://pressroom.toyota.com/toyota-sienna-adds-new-seat-reminder-tech-and-interior-updates-for-2025/' }] },
+      daily: ['Hybrid is standard on every Sienna; best MPG of the minivans here', 'Limited gets the 12.3 inch touchscreen and 12.3 inch digital gauge cluster per Toyota', 'Fridge and vacuum console available on Limited per Toyota'],
+      photo: { src: 'images/sienna.jpg', alt: 'Toyota Sienna minivan of the current XL40 generation parked in Stuttgart-Vaihingen', credit: 'Alexander Migl', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Toyota_Sienna_(XL40)_DSC_2921.jpg', note: 'Same generation; trim may differ.' }
+    },
+    {
+      id: 'carnival', year: 2025, make: 'Kia', model: 'Carnival Hybrid', trim: 'EX FWD', type: 'van', power: 'hybrid', seats: 8,
+      mpg: 33, kwhPer100: null, range: null, efficiencySource: FE(48054),
+      drivetrain: 'FWD, 1.6L turbo hybrid, 6 speed automatic',
+      price: { typical: 43000, note: 'EX MSRP excludes $1,435 destination.', asOf: '2026-10-18',
+        sources: [{ label: 'Kia 2025 Carnival pricing and powertrain', url: 'https://www.kiamedia.com/us/en/media/pressreleases/22264/kia-adds-hybrid-powertrain-to-the-carnival-mpv-lineup-and-announces-2025-pricing' }, { label: 'Kia Media 2025 Carnival HEV pricing', url: 'https://www.kiamedia.com/us/en/models/carnival-hev/2025/pricing' }] },
+      daily: ['Seats 8 like the Odyssey, with hybrid fuel economy', 'Sliding side doors', 'Lowest listed price of the three hybrids here'],
+      photo: { src: 'images/carnival.jpg', alt: 'Kia Carnival Hybrid minivan, facelifted KA4 generation with the 1.6 hybrid powertrain', credit: 'Avante2025', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0', page: 'https://commons.wikimedia.org/wiki/File:Kia_Carnival_Hybrid_KA4_PE_1.6_HEV.jpg', note: 'May be a non US market version.' }
+    },
+    {
+      id: 'grand-highlander', year: 2024, make: 'Toyota', model: 'Grand Highlander Hybrid', trim: 'Limited AWD', type: 'suv', power: 'hybrid', seats: 7,
+      mpg: 34, kwhPer100: null, range: null, efficiencySource: FE(46753),
+      drivetrain: 'AWD, 2.5L hybrid, CVT',
+      price: { typical: 51410, note: 'Base MSRP; Toyota lists delivery, processing and handling separately.', asOf: '2026-10-18',
+        sources: [{ label: 'Toyota 2024 Grand Highlander Hybrid', url: 'https://www.buyatoyota.com/home/vehicles/grandhighlanderhybrid/2024/' }, { label: 'Toyota 2024 Grand Highlander brochure', url: 'https://www.toyota.com/content/dam/toyota/brochures/pdf/2024/grand_highlander_ebrochure.pdf' }] },
+      daily: ['AWD hybrid SUV with an adult sized third row per Toyota', '1,500 watt power outlets on Hybrid Limited per Toyota, useful for camping or outages', 'Conventional hinged rear doors instead of sliders'],
+      photo: { src: 'images/grand-highlander.jpg', alt: 'Toyota Grand Highlander Limited SUV at a dealership in Mesa, Arizona', credit: 'HJUdall', license: 'CC0', licenseUrl: 'http://creativecommons.org/publicdomain/zero/1.0/deed.en', page: 'https://commons.wikimedia.org/wiki/File:24_Toyota_Grand_Highlander_Limited.jpg', note: 'A 2024 Limited; powertrain not confirmed.' }
+    },
+    {
+      id: 'ev9', year: 2024, make: 'Kia', model: 'EV9', trim: 'Wind AWD', type: 'suv', power: 'ev', seats: 7,
+      mpg: null, kwhPer100: 41, range: 280, efficiencySource: FE(47452),
+      drivetrain: 'AWD, dual motor, long range battery',
+      price: { typical: 63900, note: 'Wind AWD MSRP excludes $1,495 destination.', asOf: '2026-10-18',
+        sources: [{ label: 'Kia Media 2024 EV9 pricing', url: 'https://www.kiamedia.com/us/en/models/ev9/2024/pricing' }] },
+      daily: ['EPA range 280 miles; home Level 2 charging makes daily use easy', 'Exterior V2L outlet is not on Wind; Kia offers it on higher trims (Land, GT-Line)', 'Lowest energy cost in this group at typical home electricity rates'],
+      photo: { src: 'images/ev9.jpg', alt: 'Kia EV9 electric SUV with boxy styling photographed in Stuttgart', credit: 'Alexander-93', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Kia_EV9_1X7A2472.jpg', note: 'May be a non US trim.' }
+    },
+    {
+      id: 'ex90', year: 2025, make: 'Volvo', model: 'EX90', trim: 'Plus Twin Motor AWD', type: 'suv', power: 'ev', seats: 7,
+      mpg: null, kwhPer100: 42, range: 300, efficiencySource: FE(48777),
+      drivetrain: 'AWD, twin motor',
+      price: { typical: 81290, note: 'Starting MSRP as listed by Volvo for EX90 Plus; J.D. Power reports it includes the $1,295 destination charge', asOf: '2026-10-18',
+        sources: [{ label: 'Volvo EX90', url: 'https://www.volvocars.com/us/cars/ex90-electric/' }, { label: 'J.D. Power EX90 review', url: 'https://www.jdpower.com/cars/expert-reviews/2025-volvo-ex90-review-first-drive' }] },
+      daily: ['Longest EPA range here at 300 miles', 'Bose audio, head up display and Park Pilot Assist included on Plus per Volvo', 'Highest price in the group by a wide margin'],
+      photo: { src: 'images/ex90.jpg', alt: 'Volvo EX90 electric SUV photographed in Stuttgart-Vaihingen', credit: 'Alexander Migl', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Volvo_EX90_DSC_7810.jpg', note: 'May be a non US trim.' }
+    }
+  ];
+
+  function valid(n) { return typeof n === 'number' && Number.isFinite(n) && n >= 0; }
+
+  function annualEnergyCost(v, a) {
+    if (!v || !a || !valid(a.miles)) return NaN;
+    if (v.power === 'ev') {
+      if (!valid(a.elec) || !(v.kwhPer100 > 0)) return NaN;
+      return a.miles * v.kwhPer100 / 100 * a.elec;
+    }
+    if (!valid(a.gas) || !(v.mpg > 0)) return NaN;
+    return a.miles / v.mpg * a.gas;
+  }
+
+  function filterVehicles(list, f) {
+    const type = (f && f.type) || 'all', power = (f && f.power) || 'all';
+    return list.filter(v => (type === 'all' || v.type === type) && (power === 'all' || v.power === power));
+  }
+
+  function toggleCompare(sel, id) {
+    if (sel.includes(id)) return sel.filter(x => x !== id);
+    if (sel.length >= MAX_COMPARE) return sel.slice();
+    return sel.concat(id);
+  }
+
+  return { VEHICLES, MAX_COMPARE, annualEnergyCost, filterVehicles, toggleCompare };
+})();
+</script>
+
+<script>
+(() => {
+  const { VEHICLES, MAX_COMPARE, annualEnergyCost, filterVehicles, toggleCompare } = VC;
+  const $ = (s) => document.querySelector(s);
+  const money = (n) => Number.isFinite(n) ? '$' + Math.round(n).toLocaleString('en-US') : 'n/a';
+  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const POWER = { gas: 'Gas', hybrid: 'Hybrid', ev: 'Electric' };
+  const TYPE = { van: 'Minivan', suv: 'SUV' };
+  const name = (v) => `${v.year} ${v.make} ${v.model} ${v.trim}`;
+  let selected = [];
+
+  function readNum(id) {
+    const el = $('#' + id);
+    const raw = el.value.trim();
+    const n = raw === '' ? NaN : Number(raw);
+    const ok = Number.isFinite(n) && n >= 0;
+    el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    return ok ? n : NaN;
+  }
+  function assumptions() { return { miles: readNum('miles'), gas: readNum('gas'), elec: readNum('elec') }; }
+  function filters() {
+    return { type: document.querySelector('input[name=type]:checked').value, power: document.querySelector('input[name=power]:checked').value };
+  }
+  function eff(v) { return v.power === 'ev' ? `${v.kwhPer100} <small>kWh/100 mi</small>` : `${v.mpg} <small>MPG</small>`; }
+  function srcLinks(list) { return list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(', '); }
+
+  function renderCards() {
+    const a = assumptions();
+    const list = filterVehicles(VEHICLES, filters());
+    const full = selected.length >= MAX_COMPARE;
+    $('#cards').innerHTML = list.length ? list.map(v => {
+      const on = selected.includes(v.id);
+      return `<li class="card${on ? ' selected' : ''}">
+        <figure><img src="${esc(v.photo.src)}" alt="${esc(v.photo.alt)}" loading="lazy" width="640" height="400"></figure>
+        <p class="credit">Photo: <a href="${esc(v.photo.page)}" target="_blank" rel="noopener">${esc(v.photo.credit)}</a>, <a href="${esc(v.photo.licenseUrl)}" target="_blank" rel="noopener">${esc(v.photo.license)}</a>. ${esc(v.photo.note)}</p>
+        <div class="card-body">
+          <div class="chips"><span class="chip">${TYPE[v.type]}</span><span class="chip pw">${POWER[v.power]}</span><span class="chip">${v.seats} seats</span></div>
+          <h3>${esc(name(v))}</h3>
+          <dl class="stats">
+            <div><dt>Listed MSRP (est.)</dt><dd>${money(v.price.typical)}</dd></div>
+            <div><dt>EPA combined</dt><dd>${eff(v)}</dd></div>
+            <div><dt>Energy per year (est.)</dt><dd>${money(annualEnergyCost(v, a))}</dd></div>
+            <div><dt>EPA range</dt><dd>${v.range ? v.range + ' <small>mi</small>' : '<small>n/a, gas refuel</small>'}</dd></div>
+          </dl>
+          <ul class="daily">${v.daily.map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+          <p class="src">Price estimate: ${esc(v.price.note)}. As of Oct 18, 2026. ${srcLinks(v.price.sources)}.<br>Efficiency: ${srcLinks([v.efficiencySource])}.</p>
+          <button type="button" class="btn" data-id="${v.id}" aria-pressed="${on}" ${!on && full ? 'disabled' : ''}>${on ? 'Remove from compare' : (full ? `Compare full (${MAX_COMPARE} max)` : 'Add to compare')}</button>
+        </div></li>`;
+    }).join('') : '<li class="empty">No vehicle matches that combination. There is no electric minivan in this set.</li>';
+    const bad = [a.miles, a.gas, a.elec].some(Number.isNaN);
+    $('#status').textContent = `Showing ${list.length} of ${VEHICLES.length} vehicles.` + (bad ? ' Enter valid non negative numbers to calculate energy cost.' : '');
+    $('#cmp-count').textContent = `${selected.length} of ${MAX_COMPARE} selected to compare`;
+  }
+
+  function renderCompare() {
+    const a = assumptions();
+    const vs = selected.map(id => VEHICLES.find(v => v.id === id)).filter(Boolean);
+    $('#clear-cmp').hidden = !vs.length;
+    if (vs.length < 2) {
+      $('#compare-out').innerHTML = `<p class="empty">Pick ${vs.length ? 'one more vehicle' : 'two or three vehicles'} with "Add to compare" to see them side by side. Selected: ${vs.length ? esc(vs.map(name).join(', ')) : 'none'}.</p>`;
+      return;
+    }
+    const costs = vs.map(v => annualEnergyCost(v, a));
+    const minCost = Math.min(...costs.filter(Number.isFinite));
+    const minPrice = Math.min(...vs.map(v => v.price.typical));
+    const row = (label, cells) => `<tr><th scope="row">${label}</th>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+    $('#compare-out').innerHTML = `<div class="table-wrap" tabindex="0" role="region" aria-labelledby="cmp-cap"><table>
+      <caption id="cmp-cap">Lowest listed price and lowest estimated energy cost highlighted. Based on ${Number.isFinite(a.miles) ? a.miles.toLocaleString('en-US') : '?'} miles a year.</caption>
+      <thead><tr><th scope="col">Spec</th>${vs.map(v => `<th scope="col">${esc(name(v))}</th>`).join('')}</tr></thead>
+      <tbody>
+        ${row('Body', vs.map(v => TYPE[v.type]))}
+        ${row('Powertrain', vs.map(v => POWER[v.power] + ': ' + esc(v.drivetrain)))}
+        ${row('Seats', vs.map(v => v.seats))}
+        ${row('Listed MSRP (est.)', vs.map(v => `<span class="${v.price.typical === minPrice ? 'best' : ''}">${money(v.price.typical)}</span>`))}
+        ${row('EPA combined', vs.map(eff))}
+        ${row('EPA range', vs.map(v => v.range ? v.range + ' mi' : 'n/a (gas)'))}
+        ${row('Energy per year (est.)', costs.map(c => `<span class="${c === minCost ? 'best' : ''}">${money(c)}</span>`))}
+        ${row('Energy over 5 years (est.)', costs.map(c => money(c * 5)))}
+        ${row('Daily life', vs.map(v => `<ul class="daily">${v.daily.map(d => `<li>${esc(d)}</li>`).join('')}</ul>`))}
+      </tbody></table></div>`;
+  }
+
+  function renderCredits() {
+    $('#credits').innerHTML = VEHICLES.map(v => `<li>${esc(v.make + ' ' + v.model)}: <a href="${esc(v.photo.page)}" target="_blank" rel="noopener">photo</a> by ${esc(v.photo.credit)}, licensed <a href="${esc(v.photo.licenseUrl)}" target="_blank" rel="noopener">${esc(v.photo.license)}</a>, via Wikimedia Commons.</li>`).join('');
+  }
+
+  function render() { renderCards(); renderCompare(); }
+
+  $('#controls').addEventListener('input', render);
+  $('#controls').addEventListener('change', render);
+  $('#cards').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-id]');
+    if (!b) return;
+    const id = b.dataset.id;
+    selected = toggleCompare(selected, id);
+    render();
+    const again = document.querySelector(`button[data-id="${id}"]`);
+    if (again) again.focus();
+  });
+  $('#clear-cmp').addEventListener('click', () => { selected = []; render(); });
+  renderCredits();
+  render();
+})();
+</script>
+</body>
+</html>
