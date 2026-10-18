@@ -1,18 +1,18 @@
 // Unit tests for the comparison page's data and pure logic.
-// Run: node --test family-vehicle-comparison/tests/
+// Run: node --test family-vehicle-comparison/tests/*.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const read = (f) => readFileSync(new URL('../' + f, import.meta.url), 'utf8');
+const html = read('index.html');
+const dataJs = read('data.js');
 
 function loadCore() {
-  const m = html.match(/<script id="vc-core">([\s\S]*?)<\/script>/);
-  assert.ok(m, 'index.html must contain <script id="vc-core">');
   const ctx = { console };
   vm.createContext(ctx);
-  vm.runInContext(m[1] + '\n;globalThis.VC = VC;', ctx);
+  vm.runInContext(dataJs, ctx);
   return ctx.VC;
 }
 
@@ -34,7 +34,8 @@ test('six vehicle records with unique ids and the exact years and trims', () => 
     assert.ok(v, `missing ${id}`);
     assert.deepEqual([v.year, v.make, v.model, v.trim, v.type, v.power, v.seats],
       [year, make, model, trim, type, power, seats], id);
-    assert.ok(v.daily.length >= 2, `${id} needs daily-life differences`);
+    assert.ok(v.pros.length >= 2 && v.cons.length >= 2, `${id} needs pros and cons`);
+    assert.ok(v.interior.length >= 1 && v.interior.some(p => /dash/.test(p.src)), `${id} needs a dashboard photo`);
     assert.ok(v.price && v.price.typical > 0 && v.price.sources.length >= 1, `${id} needs a sourced price`);
     assert.ok(v.photo && v.photo.src && v.photo.alt.length > 20 && v.photo.credit && v.photo.page, `${id} photo + credit`);
   }
@@ -98,7 +99,7 @@ test('toggleCompare adds, removes and caps selection', () => {
 });
 
 test('no em-dash or en-dash characters anywhere in the page', () => {
-  assert.equal((html.match(/[\u2013\u2014]/g) || []).length, 0);
+  for (const f of ['index.html', 'styles.css', 'data.js', 'app.js']) assert.equal((read(f).match(/[\u2013\u2014\u2212]/g) || []).length, 0, f);
   assert.equal((html.match(/ - /g) || []).length, 0, 'no spaced-hyphen dash substitutes');
 });
 
@@ -107,4 +108,30 @@ test('EV9 Wind is not credited with the exterior V2L outlet', () => {
   const ev9 = VEHICLES.find(v => v.id === 'ev9');
   const text = JSON.stringify(ev9).toLowerCase();
   assert.ok(!/exterior v2l/.test(text) || /not on wind|higher trims/.test(text));
+});
+
+test('ownershipCost adds destination and energy over the years', () => {
+  const { VEHICLES, ownershipCost, annualEnergyCost } = loadCore();
+  const a = { miles: 12000, gas: 3.25, elec: 0.15 };
+  const ody = VEHICLES.find(v => v.id === 'odyssey');
+  assert.equal(ownershipCost(ody, a, 8), 42220 + 1450 + annualEnergyCost(ody, a) * 8);
+  assert.ok(Number.isNaN(ownershipCost(ody, { miles: -1, gas: 3 }, 8)));
+});
+
+test('scoreVehicles follows the weights', () => {
+  const { VEHICLES, scoreVehicles } = loadCore();
+  const a = { miles: 12000, gas: 3.25, elec: 0.15, years: 8 };
+  const only = (k) => scoreVehicles(VEHICLES, a, { price: 0, energy: 0, space: 0, features: 0, safety: 0, [k]: 1 });
+  assert.equal(only('price')[0].id, 'odyssey');
+  assert.equal(only('energy')[0].id, 'ev9');
+  assert.equal(only('safety')[0].id, 'ex90');
+  assert.equal(only('price')[0].score, 100);
+});
+
+test('feature table flags single-vehicle features', () => {
+  const { VEHICLES, uniqueFeatures } = loadCore();
+  const u = uniqueFeatures(VEHICLES);
+  assert.equal(u.fridge, 'sienna');
+  assert.equal(u.cabinCam, 'carnival');
+  assert.equal(u.booster, 'ex90');
 });
