@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T00:00:43.912Z",
+  "generated_at": "2026-10-18T00:15:30.983Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -387,71 +387,7 @@
       "recipe": null
     }
   ],
-  "weather": {
-    "now": {
-      "temp": 55,
-      "hi": 66,
-      "lo": 50,
-      "icon": "☀️",
-      "code": 0
-    },
-    "days": [
-      {
-        "d": "Sun",
-        "icon": "☀️",
-        "hi": 61,
-        "lo": 44,
-        "code": 0
-      },
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 70,
-        "lo": 43,
-        "code": 0
-      },
-      {
-        "d": "Tue",
-        "icon": "☀️",
-        "hi": 75,
-        "lo": 50,
-        "code": 0
-      },
-      {
-        "d": "Wed",
-        "icon": "☀️",
-        "hi": 73,
-        "lo": 51,
-        "code": 0
-      },
-      {
-        "d": "Thu",
-        "icon": "☀️",
-        "hi": 75,
-        "lo": 50,
-        "code": 0
-      }
-    ],
-    "sun": {
-      "sunrises": [
-        "2026-10-17T07:37",
-        "2026-10-18T07:37",
-        "2026-10-19T07:38",
-        "2026-10-20T07:39",
-        "2026-10-21T07:40",
-        "2026-10-22T07:41"
-      ],
-      "sunsets": [
-        "2026-10-17T18:52",
-        "2026-10-18T18:50",
-        "2026-10-19T18:49",
-        "2026-10-20T18:48",
-        "2026-10-21T18:47",
-        "2026-10-22T18:45"
-      ],
-      "timezone": "America/New_York"
-    }
-  },
+  "weather": null,
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2083,9 +2019,9 @@
       }
     ],
     "liquidCash": 28787.58,
-    "creditDebt": 54274.63,
-    "netLiquid": 83062.21,
+    "creditDebt": 54767.13,
+    "netLiquid": 83554.71,
     "source": "ynab",
-    "updatedAt": "2026-10-18T00:00:39.006Z"
+    "updatedAt": "2026-10-18T00:15:25.764Z"
   }
 }
