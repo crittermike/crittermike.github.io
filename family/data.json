@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T23:45:26.861Z",
+  "generated_at": "2026-10-18T00:00:43.912Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza",
+    "name": "Leftovers or whatever you can scrounge up",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "October 17: takeout or delivery pizza, with timing flexible around the Home calendar's 5:30PM-9:30PM Ed Sheeran concert in Charlotte. Who is attending and whether the household will eat separately are unknown. Cheese is the default with no disliked toppings. No cooking assigned, no order placed and no babysitting arrangements inferred. The temporary home-cooking gluten-free restriction has expired for this date unless renewed.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -389,7 +389,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 56,
+      "temp": 55,
       "hi": 66,
       "lo": 50,
       "icon": "☀️",
@@ -2005,7 +2005,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 54.8,
+    "dayPct": 58.1,
     "totalSpend": 9574.31,
     "totalBudget": 0,
     "categories": [
@@ -2086,6 +2086,6 @@
     "creditDebt": 54274.63,
     "netLiquid": 83062.21,
     "source": "ynab",
-    "updatedAt": "2026-10-17T23:45:25.676Z"
+    "updatedAt": "2026-10-18T00:00:39.006Z"
   }
 }
