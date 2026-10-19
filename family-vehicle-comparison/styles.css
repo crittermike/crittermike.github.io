@@ -185,3 +185,7 @@ footer{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;color
 .big tbody th,.big thead tr.cols th:first-child,.big thead tr.grp th:first-child{box-shadow:inset -1px 0 0 var(--line)}
 .big tbody th{white-space:normal;min-width:5.6rem;max-width:7rem;line-height:1.25}
 .bar .track,.bar .fill{display:block}
+#matrix-wrap{max-height:80vh;overflow:auto;overscroll-behavior:contain}
+.matrix thead th{z-index:2}
+.matrix thead th:first-child{left:0;z-index:3}
+.matrix tr.grp th span{position:sticky;left:.75rem;display:inline-block}

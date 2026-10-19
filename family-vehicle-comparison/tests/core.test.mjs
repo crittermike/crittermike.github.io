@@ -16,18 +16,24 @@ function loadCore() {
   return ctx.VC;
 }
 
-test('six vehicle records with unique ids and the exact years and trims', () => {
+test('vehicle records: unique ids, all 2025, exact trims', () => {
   const { VEHICLES } = loadCore();
-  assert.equal(VEHICLES.length, 6);
+  assert.equal(VEHICLES.length, 11);
   const ids = VEHICLES.map(v => v.id);
-  assert.equal(new Set(ids).size, 6);
+  assert.equal(new Set(ids).size, 11);
+  for (const v of VEHICLES) assert.equal(v.year, 2025, v.id);
   const expect = {
     odyssey: [2025, 'Honda', 'Odyssey', 'EX-L', 'van', 'gas', 8],
     sienna: [2025, 'Toyota', 'Sienna', 'Limited FWD', 'van', 'hybrid', 7],
     carnival: [2025, 'Kia', 'Carnival Hybrid', 'EX FWD', 'van', 'hybrid', 8],
-    'grand-highlander': [2024, 'Toyota', 'Grand Highlander Hybrid', 'Limited AWD', 'suv', 'hybrid', 7],
-    ev9: [2024, 'Kia', 'EV9', 'Wind AWD', 'suv', 'ev', 7],
+    'grand-highlander': [2025, 'Toyota', 'Grand Highlander Hybrid', 'Limited AWD', 'suv', 'hybrid', 7],
+    ev9: [2025, 'Kia', 'EV9', 'Wind AWD', 'suv', 'ev', 7],
     ex90: [2025, 'Volvo', 'EX90', 'Plus Twin Motor AWD', 'suv', 'ev', 7],
+    xc90: [2025, 'Volvo', 'XC90', 'B5 AWD Plus', 'suv', 'gas', 7],
+    telluride: [2025, 'Kia', 'Telluride', 'SX AWD', 'suv', 'gas', 8],
+    palisade: [2025, 'Hyundai', 'Palisade', 'SEL Premium AWD', 'suv', 'gas', 7],
+    pilot: [2025, 'Honda', 'Pilot', 'EX-L AWD', 'suv', 'gas', 8],
+    cx90: [2025, 'Mazda', 'CX-90', '3.3 Turbo Premium Plus', 'suv', 'gas', 7],
   };
   for (const [id, [year, make, model, trim, type, power, seats]] of Object.entries(expect)) {
     const v = VEHICLES.find(x => x.id === id);
@@ -79,7 +85,7 @@ test('filterVehicles by type and powertrain', () => {
   // Spread into a test-realm array: vm-context arrays fail deepStrictEqual on prototype identity.
   // Normalize vm-created arrays into this test module's realm before strict comparison.
   const ids = (f) => Array.from(filterVehicles(VEHICLES, f), v => v.id);
-  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 6);
+  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 11);
   assert.deepEqual(ids({ type: 'van', power: 'all' }), ['odyssey', 'sienna', 'carnival']);
   assert.deepEqual(ids({ type: 'suv', power: 'ev' }), ['ev9', 'ex90']);
   assert.deepEqual(ids({ type: 'all', power: 'hybrid' }), ['sienna', 'carnival', 'grand-highlander']);
@@ -124,7 +130,7 @@ test('scoreVehicles follows the weights', () => {
   const only = (k) => scoreVehicles(VEHICLES, a, { price: 0, energy: 0, space: 0, features: 0, safety: 0, [k]: 1 });
   assert.equal(only('price')[0].id, 'odyssey');
   assert.equal(only('energy')[0].id, 'ev9');
-  assert.equal(only('safety')[0].id, 'ex90');
+  assert.equal(VEHICLES.find(v => v.id === only('safety')[0].id).iihs, 'TSP+');
   assert.equal(only('price')[0].score, 100);
 });
 

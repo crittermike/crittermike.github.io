@@ -191,7 +191,7 @@
     FEATURE_GROUPS.forEach(g => {
       const rows = g.rows.map(([key, label, kind]) => ({ key, label, kind })).filter(r => !st.diffOnly || differs(r));
       if (!rows.length) return;
-      html += `<tr class="grp"><th scope="rowgroup" colspan="${list.length + 1}">${esc(g.name)}</th></tr>`;
+      html += `<tr class="grp"><th scope="rowgroup" colspan="${list.length + 1}"><span>${esc(g.name)}</span></th></tr>`;
       rows.forEach(r => {
         html += `<tr><th scope="row">${esc(r.label)}</th>${list.map(v => {
           const c = VC.feature(v, r.key);
