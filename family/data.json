@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T11:45:34.466Z",
+  "generated_at": "2026-10-19T12:00:42.653Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -2071,23 +2071,23 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 61.3,
-    "totalSpend": 9574.31,
+    "totalSpend": 10087.24,
     "totalBudget": 0,
     "categories": [
+      {
+        "name": "🛍️ Shopping",
+        "group": "Wants",
+        "budgeted": 0,
+        "spent": 2343.6,
+        "balance": -2343.6,
+        "pct": 0
+      },
       {
         "name": "🏠 Home",
         "group": "Needs",
         "budgeted": 0,
         "spent": 2200.09,
         "balance": -2200.09,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 2051.28,
-        "balance": -2051.28,
         "pct": 0
       },
       {
@@ -2099,19 +2099,19 @@
         "pct": 0
       },
       {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 1145.16,
-        "balance": -1145.16,
-        "pct": 0
-      },
-      {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1108.67,
-        "balance": -1108.67,
+        "spent": 1205.31,
+        "balance": -1205.31,
+        "pct": 0
+      },
+      {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 1160.83,
+        "balance": -1160.83,
         "pct": 0
       },
       {
@@ -2126,31 +2126,31 @@
         "name": "🚗 Cars",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 244.9,
-        "balance": -117.76,
+        "spent": 329.21,
+        "balance": -202.07,
         "pct": 0
       },
       {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 217.88,
-        "balance": 1210.02,
+        "spent": 226.88,
+        "balance": 1201.02,
         "pct": 0
       },
       {
         "name": "📺 Subscriptions",
         "group": "Bills",
         "budgeted": 0,
-        "spent": 102.86,
-        "balance": -102.86,
+        "spent": 117.85,
+        "balance": -117.85,
         "pct": 0
       }
     ],
     "liquidCash": 28787.58,
-    "creditDebt": 54767.13,
-    "netLiquid": 83554.71,
+    "creditDebt": 54163.21,
+    "netLiquid": 82950.79,
     "source": "ynab",
-    "updatedAt": "2026-10-19T11:45:32.870Z"
+    "updatedAt": "2026-10-19T12:00:39.239Z"
   }
 }
