@@ -2,11 +2,12 @@
   const { VEHICLES, FEATURE_GROUPS, FACTORS } = VC;
   const $ = (s, r = document) => r.querySelector(s);
   const KEY = 'vc-state-v2';
-  const DEFAULTS = { type: 'all', power: 'all', miles: 12000, gas: 3.25, elec: 0.15, years: 8, curmpg: null,
+  const DEFAULTS = { type: 'all', power: 'all', iihs: 'any', flat: false, num: {}, feat: {}, miles: 12000, gas: 3.25, elec: 0.15, years: 8, curmpg: null,
     weights: { price: 3, energy: 2, space: 3, features: 2, safety: 2 }, selected: [], view: 'cards', diffOnly: false, checks: {}, sort: { key: 'rank', dir: -1 } };
   let st;
   try { st = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch { st = Object.assign({}, DEFAULTS); }
   st.weights = Object.assign({}, DEFAULTS.weights, st.weights);
+  st.num = Object.assign({}, st.num); st.feat = Object.assign({}, st.feat);
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} };
 
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -16,7 +17,7 @@
   const name = (v) => `${v.year} ${v.make} ${v.model}`;
   const assumptions = () => ({ miles: st.miles, gas: st.gas, elec: st.elec, years: st.years });
   const total = (v) => v.price.typical + (v.price.dest || 0);
-  const visible = () => VC.filterVehicles(VEHICLES, st);
+  const visible = () => VC.filterVehicles(VEHICLES, st, assumptions());
   const POWER = { gas: 'Gas', hybrid: 'Hybrid', ev: 'Electric' };
   const ICON = { s: '✓', o: '+', u: '↑', n: '✕', q: '?' };
   const STATUS = { s: 'Standard', o: 'Optional', u: 'Higher trim only', n: 'Not available', q: 'Unverified' };
@@ -31,11 +32,13 @@
   /* ---------- controls ---------- */
   const form = $('#controls');
   function syncControls() {
-    form.querySelectorAll('input[type=radio]').forEach(r => { r.checked = st[r.name] === r.value; });
+    fl.querySelectorAll('input[type=radio]').forEach(r => { r.checked = st[r.name] === r.value; });
+    $('#flat').checked = st.flat;
+    fl.querySelectorAll('[data-num]').forEach(el => { const n = st.num[el.dataset.num]; el.value = Number.isFinite(n) ? n : ''; el.removeAttribute('aria-invalid'); });
+    fl.querySelectorAll('[data-feat]').forEach(el => { el.value = st.feat[el.dataset.feat] || 'any'; });
     ['miles', 'gas', 'elec', 'years', 'curmpg'].forEach(k => { const el = $('#' + k); el.value = st[k] ?? ''; el.removeAttribute('aria-invalid'); });
     $('#diff-only').checked = st.diffOnly;
   }
-  form.addEventListener('change', (e) => { if (e.target.type === 'radio') { st[e.target.name] = e.target.value; render(); } });
   form.addEventListener('input', (e) => {
     const el = e.target; if (el.type !== 'number') return;
     if (el.id === 'curmpg' && el.value === '') { st.curmpg = null; el.removeAttribute('aria-invalid'); render(); return; }
@@ -45,8 +48,50 @@
     if (ok) { st[el.id] = n; render(); }
   });
   $('#reset').addEventListener('click', () => {
-    Object.assign(st, { type: 'all', power: 'all', miles: 12000, gas: 3.25, elec: 0.15, years: 8, curmpg: null, weights: Object.assign({}, DEFAULTS.weights) });
+    Object.assign(st, { miles: 12000, gas: 3.25, elec: 0.15, years: 8, curmpg: null, weights: Object.assign({}, DEFAULTS.weights) });
     syncControls(); buildWeights(); render();
+  });
+
+  /* ---------- filters ---------- */
+  const fl = $('#flt');
+  const FEAT_OPTS = [['any', 'Any'], ['trim', 'Any trim'], ['avail', 'This trim'], ['std', 'Standard']];
+  function buildFilters() {
+    $('#num-flt').innerHTML = VC.NUM_FILTERS.map(d => `<div class="field"><label for="n-${d.key}">${esc(d.label)} ${d.dir === 'max' ? '≤' : '≥'}</label><input id="n-${d.key}" data-num="${d.key}" type="number" inputmode="decimal" min="0" step="${d.step}" placeholder="Any"></div>`).join('');
+    $('#feat-flt').innerHTML = FEATURE_GROUPS.map(g => {
+      const rows = g.rows.filter(([, , kind]) => kind !== 'text');
+      return `<details class="ffg" data-g="${esc(g.name)}"><summary>${esc(g.name)} <small class="count"></small></summary><div class="ffrows">${rows.map(([key, label]) =>
+        `<label class="ffrow"><span>${esc(label)}</span><select data-feat="${key}">${FEAT_OPTS.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></label>`).join('')}</div></details>`;
+    }).join('');
+  }
+  function activeFilters() {
+    return (st.type !== 'all') + (st.power !== 'all') + (st.iihs !== 'any') + !!st.flat + Object.keys(st.num).length + Object.keys(st.feat).length;
+  }
+  function syncFilterMarks() {
+    fl.querySelectorAll('.ffg').forEach(d => {
+      const n = [...d.querySelectorAll('select')].filter(s => s.value !== 'any').length;
+      d.querySelector('.count').textContent = n ? `(${n})` : '';
+    });
+    fl.querySelectorAll('select[data-feat]').forEach(s => s.classList.toggle('on', s.value !== 'any'));
+  }
+  fl.addEventListener('change', (e) => {
+    const el = e.target;
+    if (el.type === 'radio') st[el.name] = el.value;
+    else if (el.id === 'flat') st.flat = el.checked;
+    else if (el.dataset.feat) { if (el.value === 'any') delete st.feat[el.dataset.feat]; else st.feat[el.dataset.feat] = el.value; syncFilterMarks(); }
+    else return;
+    render();
+  });
+  fl.addEventListener('input', (e) => {
+    const el = e.target; if (!el.dataset.num) return;
+    const k = el.dataset.num;
+    if (el.value === '') { delete st.num[k]; el.removeAttribute('aria-invalid'); render(); return; }
+    const n = Number(el.value), ok = Number.isFinite(n) && n >= 0;
+    el.setAttribute('aria-invalid', String(!ok));
+    if (ok) { st.num[k] = n; render(); }
+  });
+  $('#clear-flt').addEventListener('click', () => {
+    Object.assign(st, { type: 'all', power: 'all', iihs: 'any', flat: false, num: {}, feat: {} });
+    syncControls(); syncFilterMarks(); render();
   });
 
   /* ---------- ranking ---------- */
@@ -299,6 +344,10 @@
   /* ---------- render ---------- */
   function render() {
     const list = visible();
+    const n = activeFilters();
+    $('#flt-count').textContent = n ? `${n} on` : '';
+    $('#flt-go').textContent = list.length === 1 ? 'Show 1 vehicle' : `Show ${list.length} vehicles`;
+    $('#veh-count').textContent = list.length < VEHICLES.length ? `${list.length} of ${VEHICLES.length}` : '';
     rankInfo = renderRanking(list);
     const table = st.view === 'table';
     document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === st.view)));
@@ -308,5 +357,5 @@
     save();
   }
 
-  syncControls(); buildWeights(); buildChecklist(); render();
+  buildFilters(); syncControls(); syncFilterMarks(); buildWeights(); buildChecklist(); render();
 })();

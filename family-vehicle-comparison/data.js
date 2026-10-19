@@ -23,7 +23,33 @@ const VC = (() => {
         "page": "https://hondanews.com/en-US/honda-automobiles/releases/release-410d07897fdd63d8043cb72750000f73-the-odyssey-continues-2025-honda-odyssey-gets-enhanced-styling-and-technology-upgrades-for-the-whole-family/photos/15"
       }
     ],
-    "carnival": [
+    "sienna": [
+    {
+      "src": "images/interior/sienna-dash.jpg",
+      "caption": "2025 Sienna dashboard with 12.3-inch touchscreen and 12.3-inch digital gauge cluster (Platinum shown; Limited has the same screens)",
+      "credit": "Toyota Motor North America (press photo, via pressroom.toyota.com)",
+      "page": "https://toyota-cms-media.s3.amazonaws.com/wp-content/uploads/2024/09/Toyota_2025-Sienna_Platinum_0006-1500x1029.jpg"
+    },
+    {
+      "src": "images/interior/sienna-rear.jpg",
+      "caption": "2nd-row leather captain's chairs with ottomans and super-long slide (Platinum shown; ottomans are also standard on Limited)",
+      "credit": "Toyota Motor North America (press photo)",
+      "page": "https://toyota-cms-media.s3.amazonaws.com/wp-content/uploads/2024/09/Toyota_2025-Sienna_Platinum_0004-1500x1000.jpg"
+    },
+    {
+      "src": "images/interior/sienna-feature-fridgebox.jpg",
+      "caption": "FridgeBox built into the front center console (optional on Limited, standard on Platinum)",
+      "credit": "Toyota Motor North America (press photo)",
+      "page": "https://toyota-cms-media.s3.amazonaws.com/wp-content/uploads/2024/09/Toyota_2025-Sienna_Platinum_0008-1500x1000.jpg"
+    },
+    {
+      "src": "images/interior/sienna-feature-vacuum.jpg",
+      "caption": "Built-in cabin vacuum, sold with the FridgeBox (optional on Limited, standard on Platinum)",
+      "credit": "Toyota Motor North America (press photo)",
+      "page": "https://toyota-cms-media.s3.amazonaws.com/wp-content/uploads/2024/09/Toyota_2025-Sienna_Platinum_0009-1500x1000.jpg"
+    }
+  ],
+  "carnival": [
       {
         "src": "images/interior/carnival-dash.jpg",
         "caption": "2025 Carnival Hybrid dashboard: 12.3\" center touchscreen with the cabin-camera view on screen. The panoramic dual-12.3\" layout shown may be the SX/SX Prestige setup; EX cluster spec is conflicting (see features).",
@@ -379,6 +405,30 @@ const VC = (() => {
         outlet: ['u', '150W, Touring/Elite'], v2l: 'n'
       },
       photo: { src: 'images/odyssey.jpg', alt: 'Honda Odyssey minivan of the RL6 generation photographed in the Washington DC area', credit: 'OWS Photography', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0', page: 'https://commons.wikimedia.org/wiki/File:Honda_Odyssey_(RL6)_Washington_DC_Metro_Area,_USA.jpg', note: 'Same generation; trim and year may differ.' }
+    },
+    {
+      id: 'sienna', short: 'Sienna', year: 2025, make: 'Toyota', model: 'Sienna', trim: 'Limited FWD', type: 'van', power: 'hybrid', seats: 7,
+      mpg: 36, kwhPer100: null, range: null, tank: 18, efficiencySource: FE(48904),
+      drivetrain: 'FWD, 2.5L hybrid, CVT',
+      price: { typical: 50500, dest: 1450, note: 'Cars.com MSRP for Limited FWD. Toyota’s 3/28/2025 sheet lists $50,200 + $1,450 destination.', asOf: '2026-10-18',
+        sources: [{ label: 'Cars.com 2025 Sienna Limited FWD specs', url: 'https://www.cars.com/research/toyota-sienna-2025/specs/461558' }, { label: 'Toyota 2025 Sienna announcement', url: 'https://pressroom.toyota.com/toyota-sienna-adds-new-seat-reminder-tech-and-interior-updates-for-2025/' }] },
+      space: { leg2: 39.9, leg3: 38.7, head3: 37.4, cargo3: 33.5, cargo2: 75.2, cargo1: 101.0, length: 203.7, tow: 3500, weight: 4725 },
+      iihs: 'TSP', charging: null,
+      pros: ['Only one with a fridge; vacuum in the same package (Limited)', 'Best mpg of the gas and hybrid models (36), about 650 miles per tank', "Captain's chairs with ottomans and a very long slide", 'Radar rear-seat reminder honks and alerts your phone', 'Hands-free sliding doors, 4-zone climate, JBL audio, 2nd- and 3rd-row shades'],
+      cons: ['2nd-row seats don’t come out: max cargo 101 cu ft vs 141 to 145 in the other vans', 'Engine drones under hard acceleration', 'Heated wheel, heated 2nd row, HUD and 360 camera are Platinum-only', 'IIHS updated moderate overlap: Marginal'],
+      f: {
+        heatFront: 's', ventFront: 's', heatWheel: ['u', 'Platinum'], heat2: ['u', 'Platinum'], vent2: 'n',
+        slide2: ['s', 'Super-long slide'], captains: ['s', '7-seat'], ottoman: ['s', 'Ottomans'], remove2: ['n', 'Fixed; seats slide but do not come out'],
+        flat2: ['n', 'Does not fold flat or come out'], flat3: ['s', 'Folds into floor well, manual 60/40'],
+        power3: ['n', 'Manual, folds into floor'], moonroof: ['s', 'Single'], climate: '4-zone',
+        fridge: ['o', 'FridgeBox package'], vacuum: ['o', 'Same package as fridge'], cabinCam: 'n', intercom: ['q', 'Not listed for 2025'],
+        seatReminder: ['s', 'Radar; honks + app alert'], slidingDoors: ['s', 'Hands-free'], liftgate: 'o',
+        rse: ['o', '11.6 in package'], shades: ['s', '2nd and 3rd row'], booster: 'n',
+        screens: '12.3 in touch + 12.3 in gauges', wirelessCP: 's', phoneKey: ['q', 'Not listed'], remoteStart: ['s', 'App, subscription'], audio: ['s', 'JBL, 12 speakers'], usbc: '6 charge + 1 media',
+        assist: 'Full-speed adaptive cruise + lane centering', hud: ['u', 'Platinum'], cam360: ['u', 'Platinum'], bsCam: 'n', digitalMirror: 'o', parkSensors: ['s', 'With auto braking'], onePedal: 'n',
+        outlet: ['o', '1500W'], v2l: 'n'
+      },
+      photo: { src: 'images/sienna.jpg', alt: 'Toyota Sienna minivan of the current XL40 generation parked in Stuttgart-Vaihingen', credit: 'Alexander Migl', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Toyota_Sienna_(XL40)_DSC_2921.jpg', note: 'Same generation; trim may differ.' }
     },
     {
       id: 'carnival', short: 'Carnival', year: 2025, make: 'Kia', model: 'Carnival Hybrid', trim: 'EX FWD', type: 'van', power: 'hybrid', seats: 8,
@@ -873,9 +923,47 @@ const VC = (() => {
     }).sort((x, y) => y.score - x.score);
   }
 
-  function filterVehicles(list, f) {
-    const type = (f && f.type) || 'all', power = (f && f.power) || 'all';
-    return list.filter(v => (type === 'all' || v.type === type) && (power === 'all' || v.power === power));
+  // Numeric filters: `max` keeps vehicles at or below the limit, `min` at or above.
+  const NUM_FILTERS = [
+    { key: 'price', label: 'Price', dir: 'max', unit: '$', step: 1000, get: v => v.price.typical + (v.price.dest || 0) },
+    { key: 'energy', label: 'Energy $/yr', dir: 'max', unit: '$', step: 100, get: (v, a) => annualEnergyCost(v, a) },
+    { key: 'own', label: 'Total cost', dir: 'max', unit: '$', step: 1000, get: (v, a) => ownershipCost(v, a, a && a.years) },
+    { key: 'seats', label: 'Seats', dir: 'min', step: 1, get: v => v.seats },
+    { key: 'cargo1', label: 'Max cargo, cu ft', dir: 'min', step: 5, get: v => v.space.cargo1 },
+    { key: 'cargo3', label: 'Cargo behind 3rd, cu ft', dir: 'min', step: 1, get: v => v.space.cargo3 },
+    { key: 'leg2', label: '2nd-row legroom, in', dir: 'min', step: 0.5, get: v => v.space.leg2 },
+    { key: 'leg3', label: '3rd-row legroom, in', dir: 'min', step: 0.5, get: v => v.space.leg3 },
+    { key: 'tow', label: 'Towing, lb', dir: 'min', step: 500, get: v => v.space.tow },
+    { key: 'range', label: 'Range, mi', dir: 'min', step: 25, get: v => rangeMiles(v) },
+    { key: 'length', label: 'Length, in', dir: 'max', step: 1, get: v => v.space.length }
+  ];
+  // Feature filter levels: which status codes pass.
+  const FEAT_LEVELS = { any: null, trim: ['s', 'o', 'u'], avail: ['s', 'o'], std: ['s'] };
+  const IIHS_LEVELS = { any: null, tsp: ['TSP', 'TSP+'], tspplus: ['TSP+'] };
+  const flatFloor = v => (feature(v, 'remove2').s === 's' || feature(v, 'flat2').s === 's') && feature(v, 'flat3').s === 's';
+
+  function filterVehicles(list, f, a) {
+    f = f || {};
+    const type = f.type || 'all', power = f.power || 'all';
+    const num = f.num || {}, feat = f.feat || {};
+    const iihs = IIHS_LEVELS[f.iihs || 'any'];
+    return list.filter(v => {
+      if (type !== 'all' && v.type !== type) return false;
+      if (power !== 'all' && v.power !== power) return false;
+      if (iihs && !iihs.includes(v.iihs)) return false;
+      if (f.flat && !flatFloor(v)) return false;
+      for (const d of NUM_FILTERS) {
+        const lim = num[d.key];
+        if (typeof lim !== 'number' || !Number.isFinite(lim)) continue;
+        const x = d.get(v, a);
+        if (!Number.isFinite(x) || (d.dir === 'max' ? x > lim : x < lim)) return false;
+      }
+      for (const k in feat) {
+        const ok = FEAT_LEVELS[feat[k]];
+        if (ok && !ok.includes(feature(v, k).s)) return false;
+      }
+      return true;
+    });
   }
 
   function toggleCompare(sel, id) {
@@ -884,6 +972,6 @@ const VC = (() => {
     return sel.concat(id);
   }
 
-  return { VEHICLES, FEATURE_GROUPS, FACTORS, MAX_COMPARE, annualEnergyCost, rangeMiles, ownershipCost, feature, featureScore, uniqueFeatures, scoreVehicles, filterVehicles, toggleCompare };
+  return { VEHICLES, FEATURE_GROUPS, FACTORS, MAX_COMPARE, annualEnergyCost, rangeMiles, ownershipCost, feature, featureScore, uniqueFeatures, scoreVehicles, filterVehicles, toggleCompare, NUM_FILTERS, FEAT_LEVELS, flatFloor };
 })();
 if (typeof globalThis !== 'undefined') globalThis.VC = VC;
