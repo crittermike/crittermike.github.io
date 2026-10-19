@@ -2104,7 +2104,30 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="thomas">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b" data-due-date="" data-work-on-date="2026-10-19">
+                  <span class="todo-label">Spelling: Complete WB p. 38</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985" data-due-date="" data-work-on-date="2026-10-19">
+                  <span class="todo-label">English: Complete worksheet</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b" data-due-date="" data-work-on-date="2026-10-19">
+                  <span class="todo-label">Math: Complete WB pp. 77-78</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2185,7 +2208,23 @@
         <div class="kidtile-sec-lbl">✏️ Tonight’s homework</div>
         <div class="assn-list">
           
-            <div class="placeholder">No homework listed for tonight.</div>
+            <ul class="todo-list" data-kid="henry">
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401" data-due-date="" data-work-on-date="2026-10-19">
+                  <span class="todo-label">Honors English (deMarrais): Read</span>
+                </label>
+              </li>
+              
+              <li>
+                <label class="todo">
+                  <input type="checkbox" data-kid="henry" data-id="sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a" data-due-date="" data-work-on-date="2026-10-19">
+                  <span class="todo-label">Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24</span>
+                </label>
+              </li>
+              
+            </ul>
           
         </div>
       </div>
@@ -2413,15 +2452,64 @@
         
         
           
-        
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Thomas</div>
+              <ul class="todo-list" data-kid="thomas">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b" data-due-date="" data-work-on-date="2026-10-19">
+                      <span class="todo-label">Spelling: Complete WB p. 38</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985" data-due-date="" data-work-on-date="2026-10-19">
+                      <span class="todo-label">English: Complete worksheet</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="thomas" data-id="sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b" data-due-date="" data-work-on-date="2026-10-19">
+                      <span class="todo-label">Math: Complete WB pp. 77-78</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
           
         
           
         
           
+            
+            <div class="assn-kid">
+              <div class="assn-kid-h">Henry</div>
+              <ul class="todo-list" data-kid="henry">
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401" data-due-date="" data-work-on-date="2026-10-19">
+                      <span class="todo-label">Honors English (deMarrais): Read</span>
+                    </label>
+                  </li>
+                
+                  <li>
+                    <label class="todo">
+                      <input type="checkbox" data-kid="henry" data-id="sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a" data-due-date="" data-work-on-date="2026-10-19">
+                      <span class="todo-label">Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24</span>
+                    </label>
+                  </li>
+                
+              </ul>
+            </div>
+          
         
+          
         
-          <div class="placeholder">No homework listed for tonight.</div>
         
       </div>
     </div>
@@ -2983,7 +3071,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":15,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$25.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-18,"refill":60},"allowance":{"balance_str":"$88.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":676,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":15,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b","label":"Spelling: Complete WB p. 38","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985","label":"English: Complete worksheet","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b","label":"Math: Complete WB pp. 77-78","dueDate":null,"workOnDate":"2026-10-19"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$25.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-18,"refill":60},"allowance":{"balance_str":"$88.63"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401","label":"Honors English (deMarrais): Read","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a","label":"Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24","dueDate":null,"workOnDate":"2026-10-19"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":676,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3449,7 +3537,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":15,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$25.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-18,"refill":60},"allowance":{"balance_str":"$88.63"},"guineaPig":null,"assignments":[]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":676,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":15,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b","label":"Spelling: Complete WB p. 38","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985","label":"English: Complete worksheet","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b","label":"Math: Complete WB pp. 77-78","dueDate":null,"workOnDate":"2026-10-19"}]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":0,"refill":60},"allowance":{"balance_str":"$25.60"},"guineaPig":"$157.74","assignments":[]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":-18,"refill":60},"allowance":{"balance_str":"$88.63"},"guineaPig":null,"assignments":[{"id":"sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401","label":"Honors English (deMarrais): Read","dueDate":null,"workOnDate":"2026-10-19"},{"id":"sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a","label":"Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24","dueDate":null,"workOnDate":"2026-10-19"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":676,"refill":60},"allowance":{"balance_str":"$311.77"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');

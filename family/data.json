@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T17:00:42.995Z",
+  "generated_at": "2026-10-19T17:15:25.280Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,26 @@
         "balance_str": "$104.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b",
+          "label": "Spelling: Complete WB p. 38",
+          "dueDate": null,
+          "workOnDate": "2026-10-19"
+        },
+        {
+          "id": "sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985",
+          "label": "English: Complete worksheet",
+          "dueDate": null,
+          "workOnDate": "2026-10-19"
+        },
+        {
+          "id": "sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b",
+          "label": "Math: Complete WB pp. 77-78",
+          "dueDate": null,
+          "workOnDate": "2026-10-19"
+        }
+      ]
     },
     {
       "key": "william",
@@ -43,7 +62,20 @@
         "balance_str": "$88.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401",
+          "label": "Honors English (deMarrais): Read",
+          "dueDate": null,
+          "workOnDate": "2026-10-19"
+        },
+        {
+          "id": "sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a",
+          "label": "Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24",
+          "dueDate": null,
+          "workOnDate": "2026-10-19"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -2151,6 +2183,6 @@
     "creditDebt": 54163.21,
     "netLiquid": 82950.79,
     "source": "ynab",
-    "updatedAt": "2026-10-19T17:00:40.702Z"
+    "updatedAt": "2026-10-19T17:15:23.629Z"
   }
 }
