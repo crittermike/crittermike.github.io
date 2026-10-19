@@ -65,7 +65,7 @@
     $('#ranking').innerHTML = ranked.map((r, i) => {
       const segs = FACTORS.map(k => `<span style="width:${r.parts[k]}%;background:${FCOLORS[k]}" title="${FLABEL[k]}: ${r.parts[k].toFixed(0)}"></span>`).join('');
       return `<li><span class="pos">${i + 1}</span><a class="nm" href="#card-${r.id}">${esc(byId[r.id].short)}</a><span class="stack" role="img" aria-label="Score breakdown">${segs}</span><span class="sc">${r.score.toFixed(0)}</span></li>`;
-    }).join('') || '<li>No vehicles match the filters.</li>';
+    }).join('') || '<li>No matches.</li>';
     $('#rank-legend').innerHTML = FACTORS.map(k => `<span><i style="background:${FCOLORS[k]}"></i>${FLABEL[k]}</span>`).join('');
     return Object.fromEntries(ranked.map((r, i) => [r.id, { pos: i + 1, score: r.score }]));
   }
@@ -73,7 +73,7 @@
   /* ---------- cards ---------- */
   function renderCards(list) {
     const ul = $('#cards');
-    if (!list.length) { ul.innerHTML = '<li class="empty">No vehicles match. Change the filters above.</li>'; return; }
+    if (!list.length) { ul.innerHTML = '<li class="empty">No matches.</li>'; return; }
     ul.innerHTML = list.map(v => {
       const ph = photos(v);
       const e = VC.annualEnergyCost(v, assumptions());
@@ -81,7 +81,7 @@
       const full = st.selected.length >= VC.MAX_COMPARE && !sel;
       return `<li class="card${sel ? ' selected' : ''}" id="card-${v.id}">
         <div class="gallery" data-id="${v.id}">
-          <figure><button type="button" data-open="0" aria-label="Enlarge photo"><img src="${ph[0].src}" alt="${esc(ph[0].alt)}" loading="lazy" width="960" height="600"></button><figcaption>${esc(ph[0].caption)}</figcaption></figure>
+          <figure><button type="button" data-open="0" aria-label="Enlarge photo"><img src="${ph[0].src}" alt="${esc(ph[0].alt)}" loading="lazy" width="960" height="600"></button></figure>
           <div class="thumbs">${ph.map((p, i) => `<button type="button" data-i="${i}" aria-current="${i === 0}" aria-label="Photo ${i + 1} of ${ph.length}"><img src="${p.src}" alt="" loading="lazy"></button>`).join('')}</div>
         </div>
         <div class="card-body">
@@ -98,8 +98,8 @@
           <div><p class="label" style="margin-bottom:.2rem">Stands out</p><ul class="pros">${v.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
           <div><p class="label" style="margin-bottom:.2rem">Watch out</p><ul class="cons">${v.cons.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
           ${v.charging ? `<p class="src"><strong style="color:var(--text)">Charging:</strong> ${esc(v.charging)}</p>` : ''}
-          <details><summary>Price notes and sources</summary><p class="src">${esc(v.drivetrain)}. ${esc(v.price.note)}</p><p class="src">${v.price.sources.concat(v.efficiencySource).filter((s, i, a) => a.findIndex(x => x.url === s.url) === i).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(' · ')}</p></details>
-          <button type="button" class="btn" data-cmp="${v.id}" aria-pressed="${sel}" ${full ? 'disabled' : ''}>${sel ? 'Comparing' : full ? 'Compare full (3)' : 'Add to compare'}</button>
+          <details><summary>Sources</summary><p class="src">${esc(v.drivetrain)}. ${esc(v.price.note)}</p><p class="src">${v.price.sources.concat(v.efficiencySource).filter((s, i, a) => a.findIndex(x => x.url === s.url) === i).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(' · ')}</p></details>
+          <button type="button" class="btn" data-cmp="${v.id}" aria-pressed="${sel}" ${full ? 'disabled' : ''}>${sel ? 'Comparing' : 'Compare'}</button>
         </div>
       </li>`;
     }).join('');
@@ -112,7 +112,6 @@
     if (t.dataset.i != null) {
       const i = Number(t.dataset.i);
       const img = $('figure img', g); img.src = ph[i].src; img.alt = ph[i].alt;
-      $('figcaption', g).textContent = ph[i].caption;
       $('figure button', g).dataset.open = i;
       g.querySelectorAll('.thumbs button').forEach(b => b.setAttribute('aria-current', String(b === t)));
     } else if (t.dataset.open != null) openLightbox(v, Number(t.dataset.open));
@@ -170,7 +169,7 @@
       const isBest = bests[c.key] != null && c.val(v) === bests[c.key];
       return `<td class="${isBest ? 'best' : ''}${gs}">${c.fmt(v)}</td>`;
     }).join('')}</tr>`).join('');
-    $('#big-wrap').innerHTML = list.length ? `<table class="big">${head}<tbody>${body}</tbody></table>` : '<p class="empty">No vehicles match.</p>';
+    $('#big-wrap').innerHTML = list.length ? `<table class="big">${head}<tbody>${body}</tbody></table>` : '<p class="empty">No matches.</p>';
     const g = $('#big-wrap .grp'); if (g) $('#big-wrap table').style.setProperty('--grp-h', g.getBoundingClientRect().height + 'px');
   }
   $('#big-wrap').addEventListener('click', (e) => {
@@ -185,7 +184,7 @@
   /* ---------- feature matrix ---------- */
   function renderMatrix(list) {
     $('#feat-key').innerHTML = Object.keys(ICON).map(k => `<span>${icon({ s: k, note: '' })} ${STATUS[k]}</span>`).join('');
-    if (!list.length) { $('#matrix-wrap').innerHTML = '<p class="empty">No vehicles match.</p>'; return; }
+    if (!list.length) { $('#matrix-wrap').innerHTML = '<p class="empty">No matches.</p>'; return; }
     const only = VC.uniqueFeatures(list);
     const differs = (r) => { const vals = list.map(v => { const c = VC.feature(v, r.key); return c.text ?? c.s; }); return new Set(vals).size > 1; };
     let html = `<table class="matrix"><thead><tr><th scope="col">Feature</th>${list.map(v => `<th scope="col">${esc(v.short)}<br><span style="text-transform:none;letter-spacing:0;font-weight:500">${esc(v.trim)}</span></th>`).join('')}</tr></thead><tbody>`;
@@ -223,17 +222,16 @@
       barGroup('Cargo behind 3rd row', 'cu ft', list, s('cargo3'), x => x.toFixed(1)),
       barGroup('Cargo behind 2nd row', 'cu ft', list, s('cargo2'), x => x.toFixed(1)),
       barGroup('Max cargo', 'cu ft', list, s('cargo1'), x => x.toFixed(1)),
-      barGroup('Length (garage fit)', 'in, shorter first', list, s('length'), x => x.toFixed(1), 'min'),
+      barGroup('Length', 'in', list, s('length'), x => x.toFixed(1), 'min'),
       barGroup('Towing', 'lb', list, s('tow'), x => num(x)),
       barGroup('Range', 'mi', list, VC.rangeMiles, x => num(x))
     ].join('');
   }
   function renderCost(list) {
     const a = assumptions();
-    $('#cost-sub').textContent = `${num(st.miles)} mi/yr · ${st.years} yrs · gas $${st.gas} · power $${st.elec}/kWh`;
     if (!list.length) { $('#cost-bars').innerHTML = ''; return; }
     const groups = [
-      barGroup(`${st.years}-year cost`, 'price + energy', list, v => VC.ownershipCost(v, a, st.years), kmoney, 'min'),
+      barGroup(`${st.years}-year cost`, '', list, v => VC.ownershipCost(v, a, st.years), kmoney, 'min'),
       barGroup('Energy per year', '', list, v => VC.annualEnergyCost(v, a), money, 'min'),
       barGroup('Energy per month', '', list, v => VC.annualEnergyCost(v, a) / 12, money, 'min')
     ];
@@ -247,9 +245,8 @@
   /* ---------- compare ---------- */
   function renderCompare() {
     const sel = st.selected.map(id => VEHICLES.find(v => v.id === id)).filter(Boolean);
-    $('#cmp-count').textContent = sel.length ? `Comparing ${sel.length} of ${VC.MAX_COMPARE}` : `Pick up to ${VC.MAX_COMPARE} to compare`;
     $('#clear-cmp').hidden = !sel.length;
-    if (sel.length < 2) { $('#compare-out').innerHTML = `<p class="empty">Add ${sel.length ? 'one more vehicle' : 'two or three vehicles'} from the cards to compare them here.</p>`; return; }
+    if (sel.length < 2) { $('#compare-out').innerHTML = `<p class="empty">Pick 2 or 3 vehicles.</p>`; return; }
     const a = assumptions();
     const rows = [
       ['Price w/ destination', total, money, 'min'],
@@ -302,19 +299,9 @@
   $('#chk').addEventListener('change', (e) => { st.checks[e.target.dataset.c] = e.target.checked; save(); });
   $('#clear-chk').addEventListener('click', () => { st.checks = {}; buildChecklist(); save(); });
 
-  /* ---------- credits ---------- */
-  function buildCredits() {
-    $('#credits').innerHTML = VEHICLES.map(v => {
-      const ext = `<a href="${esc(v.photo.page)}" target="_blank" rel="noopener">Exterior</a>: ${esc(v.photo.credit)}, ${esc(v.photo.license)}`;
-      const int = v.interior.map((p, i) => `<a href="${esc(p.page)}" target="_blank" rel="noopener">Interior ${i + 1}</a>: ${esc(p.credit)}${p.license ? ', ' + esc(p.license) : ''}`).join('; ');
-      return `<li><strong>${esc(v.short)}.</strong> ${ext}; ${int}</li>`;
-    }).join('');
-  }
-
   /* ---------- render ---------- */
   function render() {
     const list = visible();
-    $('#status').textContent = `Showing ${list.length} of ${VEHICLES.length}.`;
     rankInfo = renderRanking(list);
     const table = st.view === 'table';
     document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === st.view)));
@@ -324,5 +311,5 @@
     save();
   }
 
-  syncControls(); buildWeights(); buildChecklist(); buildCredits(); render();
+  syncControls(); buildWeights(); buildChecklist(); render();
 })();

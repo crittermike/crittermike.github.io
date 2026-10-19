@@ -12,16 +12,6 @@
 <body>
 <a class="skip-link" href="#vehicles">Skip to vehicles</a>
 <div class="wrap">
-<header>
-  <p class="eyebrow">Family garage research</p>
-  <h1>Six three-row haulers, side by side.</h1>
-  <p class="deck">Three minivans and three SUVs: one gas, three hybrids, two EVs. Price, space, energy cost, and the features that make daily life easier.</p>
-  <div class="meta">
-    <span>Data checked: <strong>Oct 18, 2026</strong></span>
-    <span>Efficiency: <a href="https://www.fueleconomy.gov/">fueleconomy.gov</a> (EPA)</span>
-    <span>Specs and features: manufacturer sheets, linked per vehicle</span>
-  </div>
-</header>
 <nav class="toc" aria-label="Sections">
   <a href="#ctl-h">Your numbers</a><a href="#rank">Ranking</a><a href="#vehicles">Vehicles</a><a href="#features">Features</a><a href="#space">Space</a><a href="#cost">Cost</a><a href="#compare">Compare</a><a href="#checklist">Test drive</a>
 </nav>
@@ -31,7 +21,6 @@
   <div class="section-head"><h2 id="ctl-h">Your numbers</h2><button type="button" class="btn quiet" id="reset">Reset</button></div>
   <form class="controls" id="controls" onsubmit="return false">
     <fieldset>
-      <legend class="label">Body type</legend>
       <div class="seg">
         <label><input type="radio" name="type" value="all" checked><span>All</span></label>
         <label><input type="radio" name="type" value="van"><span>Minivans</span></label>
@@ -39,7 +28,6 @@
       </div>
     </fieldset>
     <fieldset>
-      <legend class="label">Powertrain</legend>
       <div class="seg">
         <label><input type="radio" name="power" value="all" checked><span>All</span></label>
         <label><input type="radio" name="power" value="gas"><span>Gas</span></label>
@@ -48,22 +36,19 @@
       </div>
     </fieldset>
     <fieldset class="wide">
-      <legend class="label">Driving and prices</legend>
       <div class="inputs">
         <div class="field"><label for="miles">Annual miles</label><input id="miles" type="number" inputmode="numeric" min="0" step="500" value="12000"></div>
         <div class="field"><label for="gas">Gas, $/gal</label><input id="gas" type="number" inputmode="decimal" min="0" step="0.01" value="3.25"></div>
         <div class="field"><label for="elec">Electricity, $/kWh</label><input id="elec" type="number" inputmode="decimal" min="0" step="0.01" value="0.15"></div>
-        <div class="field"><label for="years">Years you'll keep it</label><input id="years" type="number" inputmode="numeric" min="1" max="20" step="1" value="8"></div>
-        <div class="field"><label for="curmpg">Current car MPG</label><input id="curmpg" type="number" inputmode="decimal" min="0" step="1" placeholder="optional"></div>
+        <div class="field"><label for="years">Years</label><input id="years" type="number" inputmode="numeric" min="1" max="20" step="1" value="8"></div>
+        <div class="field"><label for="curmpg">Your MPG</label><input id="curmpg" type="number" inputmode="decimal" min="0" step="1"></div>
       </div>
-      <p class="hint">Defaults are placeholders. Use your full electric rate including fees. Saved in this browser.</p>
     </fieldset>
   </form>
-  <p class="status" id="status" role="status" aria-live="polite"></p>
 </section>
 
 <section aria-labelledby="rank-h" id="rank">
-  <div class="section-head"><h2 id="rank-h">Ranking by your priorities</h2></div>
+  <div class="section-head"><h2 id="rank-h">Ranking</h2></div>
   <div class="rank-grid">
     <form class="weights" id="weights" onsubmit="return false" aria-label="Priority weights"></form>
     <div><ol class="ranking" id="ranking"></ol><p class="legend" id="rank-legend"></p></div>
@@ -72,58 +57,40 @@
 
 <section aria-labelledby="veh-h" id="vehicles">
   <div class="section-head"><h2 id="veh-h">Vehicles</h2><div class="view-toggle" role="group" aria-label="View"><button type="button" data-view="cards" aria-pressed="true">Cards</button><button type="button" data-view="table" aria-pressed="false">Table</button></div></div>
-  <p class="src" id="cmp-count"></p>
   <ul class="cards" id="cards"></ul>
-  <div id="big" hidden><div class="big-wrap" tabindex="0" role="region" aria-label="All vehicles and features table" id="big-wrap"></div><p class="swipe-hint">Swipe sideways for all features. Tap a column to sort.</p></div>
+  <div id="big" hidden><div class="big-wrap" tabindex="0" role="region" aria-label="All vehicles and features table" id="big-wrap"></div></div>
 </section>
 
 <section aria-labelledby="feat-h" id="features">
-  <div class="section-head"><h2 id="feat-h">Quality-of-life features</h2><span class="src">For the trim listed on each card</span></div>
+  <div class="section-head"><h2 id="feat-h">Features</h2></div>
   <div class="tools">
-    <label><input type="checkbox" id="diff-only"> Only rows that differ</label>
+    <label><input type="checkbox" id="diff-only"> Differences only</label>
     <span class="keyrow" id="feat-key"></span>
   </div>
   <div class="table-wrap" id="matrix-wrap" tabindex="0" role="region" aria-label="Feature matrix"></div>
 </section>
 
 <section aria-labelledby="space-h" id="space">
-  <div class="section-head"><h2 id="space-h">Cabin and cargo space</h2><span class="src">Manufacturer figures. Gold is best.</span></div>
+  <div class="section-head"><h2 id="space-h">Space</h2></div>
   <div class="bars" id="space-bars"></div>
 </section>
 
 <section aria-labelledby="cost-h" id="cost">
-  <div class="section-head"><h2 id="cost-h">Cost to own</h2><span class="src" id="cost-sub"></span></div>
+  <div class="section-head"><h2 id="cost-h">Cost</h2></div>
   <div class="bars" id="cost-bars"></div>
 </section>
 
 <section aria-labelledby="cmp-h" id="compare">
-  <div class="section-head"><h2 id="cmp-h">Compare</h2><button type="button" class="btn quiet" id="clear-cmp">Clear selection</button></div>
+  <div class="section-head"><h2 id="cmp-h">Compare</h2><button type="button" class="btn quiet" id="clear-cmp">Clear</button></div>
   <div id="compare-out"></div>
 </section>
 
 <section aria-labelledby="chk-h" id="checklist">
-  <div class="section-head"><h2 id="chk-h">Test-drive checklist</h2><button type="button" class="btn quiet" id="clear-chk">Uncheck all</button></div>
+  <div class="section-head"><h2 id="chk-h">Test-drive checklist</h2><button type="button" class="btn quiet" id="clear-chk">Clear</button></div>
   <ul class="checklist" id="chk"></ul>
 </section>
 
-<section aria-labelledby="notes-h">
-  <div class="section-head"><h2 id="notes-h">How to read this</h2></div>
-  <ul class="notes">
-    <li>Energy cost is an estimate. Gas and hybrid: miles &divide; EPA combined MPG &times; gas price. EV: miles &times; EPA kWh/100 mi &divide; 100 &times; electricity rate. Weather, speed and charging losses move real costs.</li>
-    <li>Cost to own = listed MSRP + destination + energy over the years you set. It leaves out tax, insurance, maintenance, depreciation and discounts. The 2024 models are prior model years and now sell for different prices.</li>
-    <li>Gas and hybrid range = tank size &times; EPA combined MPG. EV range is the EPA figure.</li>
-    <li>Ranking scores each vehicle 0&ndash;1 against the others on each factor, then weights them. Space averages 2nd-row legroom, 3rd-row legroom, cargo behind the 3rd row and max cargo. Features counts standard items in the feature table (options count 0.3). Safety uses the IIHS award for that model year.</li>
-    <li>Federal EV tax credits ended for vehicles acquired after Sept 30, 2025. The 2024 EV9 (Korea-built) and EX90 Plus (over the $80k SUV cap) did not qualify for the purchase credit anyway.</li>
-    <li>Interior photos are often a higher trim or a non-US model. Captions say so.</li>
-  </ul>
-</section>
-
-<section aria-labelledby="cred-h">
-  <div class="section-head"><h2 id="cred-h">Photo credits</h2></div>
-  <ul class="credits" id="credits"></ul>
-</section>
 </main>
-<footer>Built for one family's minivan versus SUV debate. No tracking, no external scripts. Figures checked Oct 18, 2026.</footer>
 </div>
 
 <dialog id="lb" aria-label="Photo viewer">
