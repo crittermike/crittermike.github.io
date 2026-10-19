@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T03:45:19.487Z",
+  "generated_at": "2026-10-19T04:00:21.902Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -43,13 +43,7 @@
         "balance_str": "$88.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-19-ffe9e3c6273a2e3c9e41cfb9c95967600b4efeecdb7c906a518baacd6f7c0491",
-          "label": "Spanish (Simon): Complete IXL 7D only . Teacher's October 12 announcement removes 7B from the earlier schedule",
-          "dueDate": "2026-10-19"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -341,7 +335,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -349,8 +343,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Homemade Hamburger Helper",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
         "name": "Homemade Hamburger Helper",
@@ -422,7 +416,7 @@
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -461,19 +455,12 @@
   "weather": {
     "now": {
       "temp": 48,
-      "hi": 63,
-      "lo": 42,
+      "hi": 69,
+      "lo": 43,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 69,
-        "lo": 43,
-        "code": 0
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -501,24 +488,31 @@
         "hi": 72,
         "lo": 50,
         "code": 0
+      },
+      {
+        "d": "Sat",
+        "icon": "☀️",
+        "hi": 66,
+        "lo": 49,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-18T07:37",
         "2026-10-19T07:38",
         "2026-10-20T07:39",
         "2026-10-21T07:40",
         "2026-10-22T07:41",
-        "2026-10-23T07:42"
+        "2026-10-23T07:42",
+        "2026-10-24T07:43"
       ],
       "sunsets": [
-        "2026-10-18T18:50",
         "2026-10-19T18:49",
         "2026-10-20T18:48",
         "2026-10-21T18:47",
         "2026-10-22T18:45",
-        "2026-10-23T18:44"
+        "2026-10-23T18:44",
+        "2026-10-24T18:43"
       ],
       "timezone": "America/New_York"
     }
@@ -2157,6 +2151,6 @@
     "creditDebt": 54767.13,
     "netLiquid": 83554.71,
     "source": "ynab",
-    "updatedAt": "2026-10-19T03:45:18.021Z"
+    "updatedAt": "2026-10-19T04:00:18.864Z"
   }
 }
