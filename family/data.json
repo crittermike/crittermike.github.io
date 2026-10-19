@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T20:00:37.252Z",
+  "generated_at": "2026-10-19T20:15:19.824Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -74,6 +74,16 @@
           "label": "Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24",
           "dueDate": null,
           "workOnDate": "2026-10-19"
+        },
+        {
+          "id": "sch-2026-10-20-2393588e1be4222e038c0cd9f4da12dd9d35797b639f39a3987061f5d65a1b63",
+          "label": "Chemistry (Edwards): Finish your goal setting worksheet",
+          "dueDate": "2026-10-20"
+        },
+        {
+          "id": "sch-2026-10-20-71d982ea4323f438cb3900f8fa5ab39448741a2d26a0324cec101200ff4cd90f",
+          "label": "Algebra (Edwards): Complete 4.7 #14-28 evens",
+          "dueDate": "2026-10-20"
         }
       ]
     },
@@ -497,7 +507,7 @@
         "d": "Tue",
         "icon": "⛅",
         "hi": 74,
-        "lo": 49,
+        "lo": 48,
         "code": 3
       },
       {
@@ -2183,6 +2193,6 @@
     "creditDebt": 54163.21,
     "netLiquid": 82950.79,
     "source": "ynab",
-    "updatedAt": "2026-10-19T20:00:35.750Z"
+    "updatedAt": "2026-10-19T20:15:18.807Z"
   }
 }
