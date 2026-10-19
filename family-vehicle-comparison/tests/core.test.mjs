@@ -18,13 +18,12 @@ function loadCore() {
 
 test('vehicle records: unique ids, all 2025, exact trims', () => {
   const { VEHICLES } = loadCore();
-  assert.equal(VEHICLES.length, 11);
+  assert.equal(VEHICLES.length, 18);
   const ids = VEHICLES.map(v => v.id);
-  assert.equal(new Set(ids).size, 11);
+  assert.equal(new Set(ids).size, 18);
   for (const v of VEHICLES) assert.equal(v.year, 2025, v.id);
   const expect = {
     odyssey: [2025, 'Honda', 'Odyssey', 'EX-L', 'van', 'gas', 8],
-    sienna: [2025, 'Toyota', 'Sienna', 'Limited FWD', 'van', 'hybrid', 7],
     carnival: [2025, 'Kia', 'Carnival Hybrid', 'EX FWD', 'van', 'hybrid', 8],
     'grand-highlander': [2025, 'Toyota', 'Grand Highlander Hybrid', 'Limited AWD', 'suv', 'hybrid', 7],
     ev9: [2025, 'Kia', 'EV9', 'Wind AWD', 'suv', 'ev', 7],
@@ -51,7 +50,6 @@ test('EPA efficiency figures match fueleconomy.gov', () => {
   const { VEHICLES } = loadCore();
   const by = Object.fromEntries(VEHICLES.map(v => [v.id, v]));
   assert.equal(by.odyssey.mpg, 22);
-  assert.equal(by.sienna.mpg, 36);
   assert.equal(by.carnival.mpg, 33);
   assert.equal(by['grand-highlander'].mpg, 34);
   assert.equal(by.ev9.kwhPer100, 41);
@@ -85,11 +83,11 @@ test('filterVehicles by type and powertrain', () => {
   // Spread into a test-realm array: vm-context arrays fail deepStrictEqual on prototype identity.
   // Normalize vm-created arrays into this test module's realm before strict comparison.
   const ids = (f) => Array.from(filterVehicles(VEHICLES, f), v => v.id);
-  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 11);
-  assert.deepEqual(ids({ type: 'van', power: 'all' }), ['odyssey', 'sienna', 'carnival']);
-  assert.deepEqual(ids({ type: 'suv', power: 'ev' }), ['ev9', 'ex90']);
-  assert.deepEqual(ids({ type: 'all', power: 'hybrid' }), ['sienna', 'carnival', 'grand-highlander']);
-  assert.deepEqual(ids({ type: 'van', power: 'ev' }), []);
+  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 18);
+  assert.deepEqual(ids({ type: 'van', power: 'all' }), ['odyssey', 'carnival', 'pacifica', 'pacifica-hybrid', 'voyager', 'idbuzz']);
+  assert.deepEqual(ids({ type: 'suv', power: 'ev' }), ['ev9', 'ex90', 'r1s']);
+  assert.deepEqual(ids({ type: 'all', power: 'hybrid' }), ['carnival', 'pacifica-hybrid', 'grand-highlander']);
+  assert.deepEqual(ids({ type: 'van', power: 'ev' }), ['idbuzz']);
 });
 
 test('toggleCompare adds, removes and caps selection', () => {
@@ -128,8 +126,8 @@ test('scoreVehicles follows the weights', () => {
   const { VEHICLES, scoreVehicles } = loadCore();
   const a = { miles: 12000, gas: 3.25, elec: 0.15, years: 8 };
   const only = (k) => scoreVehicles(VEHICLES, a, { price: 0, energy: 0, space: 0, features: 0, safety: 0, [k]: 1 });
-  assert.equal(only('price')[0].id, 'odyssey');
-  assert.equal(only('energy')[0].id, 'ev9');
+  assert.equal(only('price')[0].id, 'voyager');
+  assert.ok(['ev9', 'idbuzz'].includes(only('energy')[0].id));
   assert.equal(VEHICLES.find(v => v.id === only('safety')[0].id).iihs, 'TSP+');
   assert.equal(only('price')[0].score, 100);
 });
@@ -137,7 +135,16 @@ test('scoreVehicles follows the weights', () => {
 test('feature table flags single-vehicle features', () => {
   const { VEHICLES, uniqueFeatures } = loadCore();
   const u = uniqueFeatures(VEHICLES);
-  assert.equal(u.fridge, 'sienna');
-  assert.equal(u.cabinCam, 'carnival');
+  assert.equal(u.fridge, undefined);
+  assert.equal(u.cabinCam, undefined);
+  assert.equal(u.vacuum, 'pacifica');
   assert.equal(u.booster, 'ex90');
+});
+
+test('every vehicle can clear the 2nd row and fold the 3rd row flat', () => {
+  const { VEHICLES, feature } = loadCore();
+  for (const v of VEHICLES) {
+    assert.ok(feature(v, 'remove2').s === 's' || feature(v, 'flat2').s === 's', `${v.id} 2nd row`);
+    assert.equal(feature(v, 'flat3').s, 's', `${v.id} 3rd row`);
+  }
 });

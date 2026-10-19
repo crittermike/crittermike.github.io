@@ -92,7 +92,7 @@
             <div><dt>Energy / yr</dt><dd>${money(e)}</dd></div>
             <div><dt>Efficiency</dt><dd>${efficiency(v)}</dd></div>
             <div><dt>Range</dt><dd>${num(VC.rangeMiles(v))} <small>mi</small></dd></div>
-            <div><dt>3rd-row legroom</dt><dd>${v.space.leg3} <small>in</small></dd></div>
+            <div><dt>Max cargo</dt><dd>${v.space.cargo1} <small>cu ft</small></dd></div>
             <div><dt>Cargo behind 3rd</dt><dd>${v.space.cargo3} <small>cu ft</small></dd></div>
           </dl>
           <div><p class="label" style="margin-bottom:.2rem">Stands out</p><ul class="pros">${v.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
@@ -143,9 +143,8 @@
       { g: 'Basics', key: 'seats', label: 'Seats', val: v => v.seats, fmt: v => v.seats },
       { g: 'Basics', key: 'iihs', label: 'IIHS', val: v => ({ 'TSP+': 2, TSP: 1 }[v.iihs] || 0), fmt: v => v.iihs || 'n/a', best: 'max' },
       { g: 'Space', key: 'leg2', label: '2nd-row leg in', val: v => v.space.leg2, fmt: v => v.space.leg2, best: 'max' },
-      { g: 'Space', key: 'leg3', label: '3rd-row leg in', val: v => v.space.leg3, fmt: v => v.space.leg3, best: 'max' },
-      { g: 'Space', key: 'cargo3', label: 'Cargo behind 3rd', val: v => v.space.cargo3, fmt: v => v.space.cargo3, best: 'max' },
       { g: 'Space', key: 'cargo1', label: 'Max cargo', val: v => v.space.cargo1, fmt: v => v.space.cargo1, best: 'max' },
+      { g: 'Space', key: 'cargo3', label: 'Cargo behind 3rd', val: v => v.space.cargo3, fmt: v => v.space.cargo3, best: 'max' },
       { g: 'Space', key: 'tow', label: 'Tow lb', val: v => v.space.tow, fmt: v => num(v.space.tow), best: 'max' }
     ];
     featRows.filter(r => r.kind !== 'text').forEach(r => cols.push({ g: r.group, key: 'f:' + r.key, label: r.label, feat: r.key, val: v => RANK[VC.feature(v, r.key).s] }));
@@ -216,12 +215,11 @@
     if (!list.length) { $('#space-bars').innerHTML = ''; return; }
     const s = (k) => (v) => v.space[k];
     $('#space-bars').innerHTML = [
+      barGroup('Max cargo', 'cu ft', list, s('cargo1'), x => x.toFixed(1)),
       barGroup('2nd-row legroom', 'in', list, s('leg2'), x => x.toFixed(1)),
-      barGroup('3rd-row legroom', 'in', list, s('leg3'), x => x.toFixed(1)),
       barGroup('3rd-row headroom', 'in', list, s('head3'), x => x.toFixed(1)),
       barGroup('Cargo behind 3rd row', 'cu ft', list, s('cargo3'), x => x.toFixed(1)),
       barGroup('Cargo behind 2nd row', 'cu ft', list, s('cargo2'), x => x.toFixed(1)),
-      barGroup('Max cargo', 'cu ft', list, s('cargo1'), x => x.toFixed(1)),
       barGroup('Length', 'in', list, s('length'), x => x.toFixed(1), 'min'),
       barGroup('Towing', 'lb', list, s('tow'), x => num(x)),
       barGroup('Range', 'mi', list, VC.rangeMiles, x => num(x))
@@ -255,10 +253,9 @@
       ['Efficiency', null, efficiency],
       ['Range', VC.rangeMiles, x => num(x) + ' mi', 'max'],
       ['Seats', v => v.seats, x => x, 'max'],
-      ['2nd-row legroom', v => v.space.leg2, x => x + ' in', 'max'],
-      ['3rd-row legroom', v => v.space.leg3, x => x + ' in', 'max'],
-      ['Cargo behind 3rd', v => v.space.cargo3, x => x + ' cu ft', 'max'],
       ['Max cargo', v => v.space.cargo1, x => x + ' cu ft', 'max'],
+      ['Cargo behind 3rd', v => v.space.cargo3, x => x + ' cu ft', 'max'],
+      ['2nd-row legroom', v => v.space.leg2, x => x + ' in', 'max'],
       ['Towing', v => v.space.tow, x => num(x) + ' lb', 'max'],
       ['IIHS', null, v => v.iihs || 'No award'],
       ['Drivetrain', null, v => v.drivetrain]
