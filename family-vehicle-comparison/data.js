@@ -925,18 +925,19 @@ const VC = (() => {
 
   // Numeric filters: `max` keeps vehicles at or below the limit, `min` at or above.
   const NUM_FILTERS = [
-    { key: 'price', label: 'Price', dir: 'max', unit: '$', step: 1000, get: v => v.price.typical + (v.price.dest || 0) },
-    { key: 'energy', label: 'Energy $/yr', dir: 'max', unit: '$', step: 100, get: (v, a) => annualEnergyCost(v, a) },
-    { key: 'own', label: 'Total cost', dir: 'max', unit: '$', step: 1000, get: (v, a) => ownershipCost(v, a, a && a.years) },
+    { key: 'price', label: 'Price', dir: 'max', pre: '$', step: 1000, get: v => v.price.typical + (v.price.dest || 0) },
+    { key: 'energy', label: 'Energy per year', dir: 'max', pre: '$', step: 100, get: (v, a) => annualEnergyCost(v, a) },
+    { key: 'own', label: 'Total cost', dir: 'max', pre: '$', step: 1000, get: (v, a) => ownershipCost(v, a, a && a.years) },
     { key: 'seats', label: 'Seats', dir: 'min', step: 1, get: v => v.seats },
-    { key: 'cargo1', label: 'Max cargo, cu ft', dir: 'min', step: 5, get: v => v.space.cargo1 },
-    { key: 'cargo3', label: 'Cargo behind 3rd, cu ft', dir: 'min', step: 1, get: v => v.space.cargo3 },
-    { key: 'leg2', label: '2nd-row legroom, in', dir: 'min', step: 0.5, get: v => v.space.leg2 },
-    { key: 'leg3', label: '3rd-row legroom, in', dir: 'min', step: 0.5, get: v => v.space.leg3 },
-    { key: 'tow', label: 'Towing, lb', dir: 'min', step: 500, get: v => v.space.tow },
-    { key: 'range', label: 'Range, mi', dir: 'min', step: 25, get: v => rangeMiles(v) },
-    { key: 'length', label: 'Length, in', dir: 'max', step: 1, get: v => v.space.length }
+    { key: 'cargo1', label: 'Max cargo', dir: 'min', unit: 'cu ft', step: 5, get: v => v.space.cargo1 },
+    { key: 'cargo3', label: 'Cargo behind 3rd row', dir: 'min', unit: 'cu ft', step: 1, get: v => v.space.cargo3 },
+    { key: 'leg2', label: '2nd-row legroom', dir: 'min', unit: 'in', step: 0.5, get: v => v.space.leg2 },
+    { key: 'leg3', label: '3rd-row legroom', dir: 'min', unit: 'in', step: 0.5, get: v => v.space.leg3 },
+    { key: 'length', label: 'Length', dir: 'max', unit: 'in', step: 1, get: v => v.space.length },
+    { key: 'tow', label: 'Towing', dir: 'min', unit: 'lb', step: 500, get: v => v.space.tow },
+    { key: 'range', label: 'Range', dir: 'min', unit: 'mi', step: 25, get: v => rangeMiles(v) }
   ];
+
   // Feature filter levels: which status codes pass.
   const FEAT_LEVELS = { any: null, trim: ['s', 'o', 'u'], avail: ['s', 'o'], std: ['s'] };
   const IIHS_LEVELS = { any: null, tsp: ['TSP', 'TSP+'], tspplus: ['TSP+'] };

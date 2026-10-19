@@ -32,10 +32,6 @@
   /* ---------- controls ---------- */
   const form = $('#controls');
   function syncControls() {
-    fl.querySelectorAll('input[type=radio]').forEach(r => { r.checked = st[r.name] === r.value; });
-    $('#flat').checked = st.flat;
-    fl.querySelectorAll('[data-num]').forEach(el => { const n = st.num[el.dataset.num]; el.value = Number.isFinite(n) ? n : ''; el.removeAttribute('aria-invalid'); });
-    fl.querySelectorAll('[data-feat]').forEach(el => { el.value = st.feat[el.dataset.feat] || 'any'; });
     ['miles', 'gas', 'elec', 'years', 'curmpg'].forEach(k => { const el = $('#' + k); el.value = st[k] ?? ''; el.removeAttribute('aria-invalid'); });
     $('#diff-only').checked = st.diffOnly;
   }
@@ -53,45 +49,82 @@
   });
 
   /* ---------- filters ---------- */
-  const fl = $('#flt');
-  const FEAT_OPTS = [['any', 'Any'], ['trim', 'Any trim'], ['avail', 'This trim'], ['std', 'Standard']];
+  const fl = $('#flt'), fd = $('#fd');
+  const FEAT_OPTS = [['any', 'Any'], ['trim', 'On some trim'], ['avail', 'On listed trim'], ['std', 'Standard']];
+  const AWARD = { 'TSP+': 'Top Safety Pick+', TSP: 'Top Safety Pick' };
+  const SELECTS = {
+    type: { label: 'Body', opts: [['all', 'Any'], ['van', 'Minivan'], ['suv', 'SUV']] },
+    power: { label: 'Powertrain', opts: [['all', 'Any'], ['gas', 'Gas'], ['hybrid', 'Hybrid'], ['ev', 'Electric']] },
+    iihs: { label: 'Crash-test award', opts: [['any', 'Any'], ['tsp', 'Top Safety Pick'], ['tspplus', 'Top Safety Pick+']] },
+    flat: { label: 'Flat load floor', opts: [['any', 'Any'], ['yes', 'Required']] }
+  };
+  const NUMS = Object.fromEntries(VC.NUM_FILTERS.map(d => [d.key, d]));
+  const numLabel = (d) => d.key === 'own' ? `${st.years}-year cost` : d.label;
+  const selRow = (k) => { const d = SELECTS[k]; return `<label class="fr"><span>${esc(d.label)}</span><select data-sel="${k}">${d.opts.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></label>`; };
+  const numRow = (k) => { const d = NUMS[k]; return `<label class="fr"><span data-nl="${k}">${esc(numLabel(d))}</span><span class="nb"><em>${d.dir === 'max' ? 'under' : 'at least'}${d.pre ? ' ' + d.pre : ''}</em><input data-num="${k}" type="number" inputmode="decimal" min="0" step="${d.step}" placeholder="Any">${d.unit ? `<em>${d.unit}</em>` : ''}</span></label>`; };
+  const featRow = (key, label) => `<label class="fr"><span>${esc(label)}</span><select data-feat="${key}">${FEAT_OPTS.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></label>`;
+  const GROUPS = [
+    { name: 'Basics', open: true, rows: () => ['type', 'power', 'iihs'].map(selRow).join('') + numRow('seats') },
+    { name: 'Cost', open: true, rows: () => ['price', 'energy', 'own'].map(numRow).join('') },
+    { name: 'Space', rows: () => ['cargo1', 'cargo3', 'leg2', 'leg3', 'length', 'tow', 'range'].map(numRow).join('') }
+  ].concat(FEATURE_GROUPS.map(g => ({ name: g.name, rows: () => g.rows.filter(r => r[2] !== 'text').map(([k, l]) => featRow(k, l) + (k === 'flat3' ? selRow('flat') : '')).join('') })));
   function buildFilters() {
-    $('#num-flt').innerHTML = VC.NUM_FILTERS.map(d => `<div class="field"><label for="n-${d.key}">${esc(d.label)} ${d.dir === 'max' ? '≤' : '≥'}</label><input id="n-${d.key}" data-num="${d.key}" type="number" inputmode="decimal" min="0" step="${d.step}" placeholder="Any"></div>`).join('');
-    $('#feat-flt').innerHTML = FEATURE_GROUPS.map(g => {
-      const rows = g.rows.filter(([, , kind]) => kind !== 'text');
-      return `<details class="ffg" data-g="${esc(g.name)}"><summary>${esc(g.name)} <small class="count"></small></summary><div class="ffrows">${rows.map(([key, label]) =>
-        `<label class="ffrow"><span>${esc(label)}</span><select data-feat="${key}">${FEAT_OPTS.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></label>`).join('')}</div></details>`;
-    }).join('');
+    fl.innerHTML = GROUPS.map(g => `<details class="fg"${g.open ? ' open' : ''}><summary>${esc(g.name)}<b></b></summary><div class="frows">${g.rows()}</div></details>`).join('');
   }
-  function activeFilters() {
-    return (st.type !== 'all') + (st.power !== 'all') + (st.iihs !== 'any') + !!st.flat + Object.keys(st.num).length + Object.keys(st.feat).length;
+  const selVal = (k) => k === 'flat' ? (st.flat ? 'yes' : 'any') : st[k];
+  function syncFilters() {
+    fl.querySelectorAll('[data-sel]').forEach(el => { el.value = selVal(el.dataset.sel); });
+    fl.querySelectorAll('[data-feat]').forEach(el => { el.value = st.feat[el.dataset.feat] || 'any'; });
+    fl.querySelectorAll('[data-num]').forEach(el => { if (document.activeElement !== el) { const n = st.num[el.dataset.num]; el.value = Number.isFinite(n) ? n : ''; } });
+    fl.querySelectorAll('[data-nl]').forEach(el => { el.textContent = numLabel(NUMS[el.dataset.nl]); });
+    fl.querySelectorAll('.fr').forEach(r => { const c = r.querySelector('select,input'); r.classList.toggle('on', c.tagName === 'SELECT' ? !['any', 'all'].includes(c.value) : c.value !== ''); });
+    fl.querySelectorAll('.fg').forEach(g => { const n = g.querySelectorAll('.fr.on').length; g.querySelector('summary b').textContent = n || ''; });
   }
-  function syncFilterMarks() {
-    fl.querySelectorAll('.ffg').forEach(d => {
-      const n = [...d.querySelectorAll('select')].filter(s => s.value !== 'any').length;
-      d.querySelector('.count').textContent = n ? `(${n})` : '';
-    });
-    fl.querySelectorAll('select[data-feat]').forEach(s => s.classList.toggle('on', s.value !== 'any'));
+  function activeChips() {
+    const out = [];
+    ['type', 'power', 'iihs', 'flat'].forEach(k => { const v = selVal(k); if (!['any', 'all'].includes(v)) out.push({ id: 's:' + k, text: k === 'flat' ? 'Flat load floor' : SELECTS[k].opts.find(o => o[0] === v)[1] }); });
+    VC.NUM_FILTERS.forEach(d => { const n = st.num[d.key]; if (Number.isFinite(n)) out.push({ id: 'n:' + d.key, text: `${numLabel(d)} ${d.dir === 'max' ? '≤' : '≥'} ${d.pre || ''}${n.toLocaleString('en-US')}${d.unit ? ' ' + d.unit : ''}` }); });
+    featRows.forEach(r => { const v = st.feat[r.key]; if (v) out.push({ id: 'f:' + r.key, text: `${r.label}${v === 'std' ? ' (std)' : v === 'trim' ? ' (any trim)' : ''}` }); });
+    return out;
   }
+  function renderFilterBar(list) {
+    const chips = activeChips();
+    $('#flt-count').textContent = chips.length || '';
+    $('#fchips').innerHTML = chips.map(c => `<button type="button" class="fchip" data-rm="${c.id}" aria-label="Remove ${esc(c.text)}">${esc(c.text)}<i>&times;</i></button>`).join('')
+      + `<span class="fres">${list.length} of ${VEHICLES.length}</span>`;
+    $('#fd-go').textContent = list.length === 1 ? 'Show 1 vehicle' : `Show ${list.length} vehicles`;
+    syncFilters();
+  }
+  $('#fchips').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-rm]'); if (!b) return;
+    const [t, k] = b.dataset.rm.split(':');
+    if (t === 's') { if (k === 'flat') st.flat = false; else st[k] = SELECTS[k].opts[0][0]; }
+    else if (t === 'n') delete st.num[k]; else delete st.feat[k];
+    render();
+  });
+  $('#open-flt').addEventListener('click', () => fd.showModal());
+  $('#fd-close').addEventListener('click', () => fd.close());
+  $('#fd-go').addEventListener('click', () => { fd.close(); $('#vehicles').scrollIntoView(); });
+  fd.addEventListener('click', (e) => { if (e.target === fd) fd.close(); });
   fl.addEventListener('change', (e) => {
     const el = e.target;
-    if (el.type === 'radio') st[el.name] = el.value;
-    else if (el.id === 'flat') st.flat = el.checked;
-    else if (el.dataset.feat) { if (el.value === 'any') delete st.feat[el.dataset.feat]; else st.feat[el.dataset.feat] = el.value; syncFilterMarks(); }
+    if (el.dataset.sel) { const k = el.dataset.sel; if (k === 'flat') st.flat = el.value === 'yes'; else st[k] = el.value; }
+    else if (el.dataset.feat) { if (el.value === 'any') delete st.feat[el.dataset.feat]; else st.feat[el.dataset.feat] = el.value; }
     else return;
     render();
   });
   fl.addEventListener('input', (e) => {
     const el = e.target; if (!el.dataset.num) return;
-    const k = el.dataset.num;
-    if (el.value === '') { delete st.num[k]; el.removeAttribute('aria-invalid'); render(); return; }
-    const n = Number(el.value), ok = Number.isFinite(n) && n >= 0;
-    el.setAttribute('aria-invalid', String(!ok));
-    if (ok) { st.num[k] = n; render(); }
+    const k = el.dataset.num, n = Number(el.value);
+    if (el.value === '') delete st.num[k];
+    else if (Number.isFinite(n) && n >= 0) st.num[k] = n;
+    else return;
+    render();
   });
   $('#clear-flt').addEventListener('click', () => {
     Object.assign(st, { type: 'all', power: 'all', iihs: 'any', flat: false, num: {}, feat: {} });
-    syncControls(); syncFilterMarks(); render();
+    fl.querySelectorAll('[data-num]').forEach(el => { el.value = ''; });
+    render();
   });
 
   /* ---------- ranking ---------- */
@@ -130,7 +163,7 @@
           <div class="thumbs">${ph.map((p, i) => `<button type="button" data-i="${i}" aria-current="${i === 0}" aria-label="Photo ${i + 1} of ${ph.length}"><img src="${p.src}" alt="" loading="lazy"></button>`).join('')}</div>
         </div>
         <div class="card-body">
-          <div class="chips"><span class="chip pw">${POWER[v.power]}</span><span class="chip">${v.type === 'van' ? 'Minivan' : 'SUV'}</span><span class="chip">${v.seats} seats</span>${v.iihs ? `<span class="chip safe">IIHS ${v.iihs}</span>` : ''}</div>
+          <div class="chips"><span class="chip pw">${POWER[v.power]}</span><span class="chip">${v.type === 'van' ? 'Minivan' : 'SUV'}</span><span class="chip">${v.seats} seats</span>${v.iihs ? `<span class="chip safe">${AWARD[v.iihs]}</span>` : ''}</div>
           <h3>${esc(name(v))} <small style="color:var(--muted);font-weight:500">${esc(v.trim)}</small></h3>
           <dl class="stats">
             <div><dt>Price</dt><dd>${money(total(v))} <small>w/ dest.</small></dd></div>
@@ -186,7 +219,7 @@
       { g: 'Basics', key: 'eff', label: 'MPG / kWh', val: v => v.mpg ?? -v.kwhPer100, fmt: v => v.mpg ? v.mpg + ' mpg' : v.kwhPer100 + ' kWh' },
       { g: 'Basics', key: 'range', label: 'Range mi', val: VC.rangeMiles, fmt: v => num(VC.rangeMiles(v)), best: 'max' },
       { g: 'Basics', key: 'seats', label: 'Seats', val: v => v.seats, fmt: v => v.seats },
-      { g: 'Basics', key: 'iihs', label: 'IIHS', val: v => ({ 'TSP+': 2, TSP: 1 }[v.iihs] || 0), fmt: v => v.iihs || 'n/a', best: 'max' },
+      { g: 'Basics', key: 'iihs', label: 'Crash-test award', val: v => ({ 'TSP+': 2, TSP: 1 }[v.iihs] || 0), fmt: v => AWARD[v.iihs] || 'None', best: 'max' },
       { g: 'Space', key: 'leg2', label: '2nd-row leg in', val: v => v.space.leg2, fmt: v => v.space.leg2, best: 'max' },
       { g: 'Space', key: 'cargo1', label: 'Max cargo', val: v => v.space.cargo1, fmt: v => v.space.cargo1, best: 'max' },
       { g: 'Space', key: 'cargo3', label: 'Cargo behind 3rd', val: v => v.space.cargo3, fmt: v => v.space.cargo3, best: 'max' },
@@ -302,7 +335,7 @@
       ['Cargo behind 3rd', v => v.space.cargo3, x => x + ' cu ft', 'max'],
       ['2nd-row legroom', v => v.space.leg2, x => x + ' in', 'max'],
       ['Towing', v => v.space.tow, x => num(x) + ' lb', 'max'],
-      ['IIHS', null, v => v.iihs || 'No award'],
+      ['Crash-test award', null, v => AWARD[v.iihs] || 'None'],
       ['Drivetrain', null, v => v.drivetrain]
     ];
     let html = `<div class="table-wrap"><table><thead><tr><th scope="col"></th>${sel.map(v => `<th scope="col">${esc(v.short)}</th>`).join('')}</tr></thead><tbody>`;
@@ -344,9 +377,7 @@
   /* ---------- render ---------- */
   function render() {
     const list = visible();
-    const n = activeFilters();
-    $('#flt-count').textContent = n ? `${n} on` : '';
-    $('#flt-go').textContent = list.length === 1 ? 'Show 1 vehicle' : `Show ${list.length} vehicles`;
+    renderFilterBar(list);
     $('#veh-count').textContent = list.length < VEHICLES.length ? `${list.length} of ${VEHICLES.length}` : '';
     rankInfo = renderRanking(list);
     const table = st.view === 'table';
@@ -357,5 +388,5 @@
     save();
   }
 
-  buildFilters(); syncControls(); syncFilterMarks(); buildWeights(); buildChecklist(); render();
+  buildFilters(); syncControls(); buildWeights(); buildChecklist(); render();
 })();
