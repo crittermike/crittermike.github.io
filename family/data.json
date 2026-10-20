@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T12:00:36.245Z",
+  "generated_at": "2026-10-20T12:15:19.775Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -284,12 +284,63 @@
     ]
   },
   "dinner": {
-    "name": "Chicken and vegetable soup with French bread",
-    "protein_g": 63,
-    "cal": 600,
-    "effort": "medium",
-    "note": "October 20: saved family soup; assistant-drafted six-person quantities because recipe lists ingredients only. Soften chopped onion, carrots and celery in oil, add broth and trimmed chicken, simmer until chicken fully cooked, then shred and return. Bread separately. Mike: 10 oz raw trimmed thigh meat, 50 g bread, one-sixth of vegetables/broth, 1 tsp oil. Generic cal/protein assumptions: chicken 350/55, bread 135/4.5, vegetables 60/1.5, broth 15/2, oil 40/0. Tool-calculated 600 cal/63g. Actual thigh fat and labels can materially change estimate. Planning notes, not tested complete instructions.",
-    "recipe": null
+    "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+    "protein_g": 35,
+    "cal": 650,
+    "effort": "easy",
+    "note": "October 20: Mike swapped out chicken and vegetable soup for this saved sheet-pan meal. Omit paprika and pepper per this week's plan note. The saved card has no quantities or steps; use the simple roasting method already given in chat.",
+    "recipe": {
+      "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
+      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 35,
+      "cal": 650,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "smoked sausage (kielbasa)",
+            "baby potatoes",
+            "broccoli",
+            "olive oil",
+            "garlic",
+            "Italian seasoning",
+            "paprika",
+            "salt",
+            "pepper"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "smoked sausage (kielbasa)",
+        "baby potatoes",
+        "broccoli",
+        "olive oil",
+        "garlic",
+        "Italian seasoning",
+        "paprika",
+        "salt",
+        "pepper"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -375,10 +426,61 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Chicken and vegetable soup with French bread",
+      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
+        "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
+        ],
+        "in_rotation": true,
+        "effort": "easy",
+        "kid_friendly": true,
+        "protein_g": 35,
+        "cal": 650,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "smoked sausage (kielbasa)",
+              "baby potatoes",
+              "broccoli",
+              "olive oil",
+              "garlic",
+              "Italian seasoning",
+              "paprika",
+              "salt",
+              "pepper"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "smoked sausage (kielbasa)",
+          "baby potatoes",
+          "broccoli",
+          "olive oil",
+          "garlic",
+          "Italian seasoning",
+          "paprika",
+          "salt",
+          "pepper"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Wednesday",
@@ -415,7 +517,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 46,
+      "temp": 47,
       "hi": 74,
       "lo": 44,
       "icon": "☀️",
@@ -2112,6 +2214,6 @@
     "creditDebt": 54163.21,
     "netLiquid": 80950.79,
     "source": "ynab",
-    "updatedAt": "2026-10-20T12:00:34.488Z"
+    "updatedAt": "2026-10-20T12:15:18.926Z"
   }
 }
