@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T12:30:18.865Z",
+  "generated_at": "2026-10-20T12:45:18.851Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -517,9 +517,9 @@
   ],
   "weather": {
     "now": {
-      "temp": 48,
+      "temp": 49,
       "hi": 74,
-      "lo": 44,
+      "lo": 43,
       "icon": "☀️",
       "code": 0
     },
@@ -542,7 +542,7 @@
         "d": "Fri",
         "icon": "☀️",
         "hi": 71,
-        "lo": 51,
+        "lo": 50,
         "code": 0
       },
       {
@@ -2134,15 +2134,15 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 64.5,
-    "totalSpend": 10087.24,
+    "totalSpend": 10421.17,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2343.6,
-        "balance": -2343.6,
+        "spent": 2490.81,
+        "balance": -2490.81,
         "pct": 0
       },
       {
@@ -2165,8 +2165,8 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1205.31,
-        "balance": -1205.31,
+        "spent": 1284.44,
+        "balance": -1284.44,
         "pct": 0
       },
       {
@@ -2197,8 +2197,8 @@
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 226.88,
-        "balance": 1201.02,
+        "spent": 237.47,
+        "balance": 1190.43,
         "pct": 0
       },
       {
@@ -2208,12 +2208,20 @@
         "spent": 117.85,
         "balance": -117.85,
         "pct": 0
+      },
+      {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 97,
+        "balance": -97,
+        "pct": 0
       }
     ],
     "liquidCash": 26787.58,
-    "creditDebt": 54163.21,
-    "netLiquid": 80950.79,
+    "creditDebt": 53342.86,
+    "netLiquid": 80130.44,
     "source": "ynab",
-    "updatedAt": "2026-10-20T12:30:17.812Z"
+    "updatedAt": "2026-10-20T12:45:17.417Z"
   }
 }
