@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T03:45:17.720Z",
+  "generated_at": "2026-10-20T04:00:20.215Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,22 +17,28 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-19-d2ca69616d4a376768b5387ce343370dbcd06310002dcb277cfa8a1dade0064b",
-          "label": "Spelling: Complete WB p. 38",
+          "id": "sch-work-on-2026-10-20-cffa1f80d729cdfd28b1e78c54580b734438ee494451cf1e2c45d67b039a39fa",
+          "label": "Reading: Read for 20 minutes",
           "dueDate": null,
-          "workOnDate": "2026-10-19"
+          "workOnDate": "2026-10-20"
         },
         {
-          "id": "sch-work-on-2026-10-19-fc2d214d307c01225f4cfb251b73c3ad0749347dc42491cc7d537c5261972985",
-          "label": "English: Complete worksheet",
+          "id": "sch-work-on-2026-10-20-c984ad566dcbaccdaa8612b0d9075561d610116af8b062055ae86d29b038b94f",
+          "label": "Spelling: Complete WB p. 39",
           "dueDate": null,
-          "workOnDate": "2026-10-19"
+          "workOnDate": "2026-10-20"
         },
         {
-          "id": "sch-work-on-2026-10-19-04ae3384623444951ad4c913be1fe88845e7af5e1c0ff9c39601d34d24f81f2b",
-          "label": "Math: Complete WB pp. 77-78",
+          "id": "sch-work-on-2026-10-20-a3db7ad080ac9dc563221514658b84795469ceee15def3ffc84114441d2cefe5",
+          "label": "Math: Complete WB pp. 80-81",
           "dueDate": null,
-          "workOnDate": "2026-10-19"
+          "workOnDate": "2026-10-20"
+        },
+        {
+          "id": "sch-work-on-2026-10-20-53b33bf3a4556d47b1376fceacdf18b1b874d3f6e59ddc24dcd43bb745650e68",
+          "label": "English: Complete EIE p. 24",
+          "dueDate": null,
+          "workOnDate": "2026-10-20"
         }
       ]
     },
@@ -62,30 +68,7 @@
         "balance_str": "$88.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-10-19-2a7b4e9256bbfabcb0af3ec2775d8c917bbcca073eb66e9703257771f480e401",
-          "label": "Honors English (deMarrais): Read",
-          "dueDate": null,
-          "workOnDate": "2026-10-19"
-        },
-        {
-          "id": "sch-work-on-2026-10-19-245e40e26bf44d3d1c9dbe7e212797279a24eba105df6cd416ca62c5bdc7455a",
-          "label": "Honors English (deMarrais): annotate To Kill a Mockingbird Chapter 24",
-          "dueDate": null,
-          "workOnDate": "2026-10-19"
-        },
-        {
-          "id": "sch-2026-10-20-2393588e1be4222e038c0cd9f4da12dd9d35797b639f39a3987061f5d65a1b63",
-          "label": "Chemistry (Edwards): Finish your goal setting worksheet",
-          "dueDate": "2026-10-20"
-        },
-        {
-          "id": "sch-2026-10-20-71d982ea4323f438cb3900f8fa5ab39448741a2d26a0324cec101200ff4cd90f",
-          "label": "Algebra (Edwards): Complete 4.7 #14-28 evens",
-          "dueDate": "2026-10-20"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -321,7 +304,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Homemade Hamburger Helper",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "homemade-hamburger-helper",
@@ -393,8 +376,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -402,7 +385,7 @@
       "dow_short": "Wed",
       "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -432,20 +415,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 51,
-      "hi": 69,
-      "lo": 42,
+      "temp": 50,
+      "hi": 73,
+      "lo": 48,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 73,
-        "lo": 48,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "⛅",
@@ -473,24 +449,31 @@
         "hi": 67,
         "lo": 49,
         "code": 0
+      },
+      {
+        "d": "Sun",
+        "icon": "🌤",
+        "hi": 69,
+        "lo": 46,
+        "code": 2
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-19T07:38",
         "2026-10-20T07:39",
         "2026-10-21T07:40",
         "2026-10-22T07:41",
         "2026-10-23T07:42",
-        "2026-10-24T07:43"
+        "2026-10-24T07:43",
+        "2026-10-25T07:44"
       ],
       "sunsets": [
-        "2026-10-19T18:49",
         "2026-10-20T18:48",
         "2026-10-21T18:47",
         "2026-10-22T18:45",
         "2026-10-23T18:44",
-        "2026-10-24T18:43"
+        "2026-10-24T18:43",
+        "2026-10-25T18:42"
       ],
       "timezone": "America/New_York"
     }
@@ -2129,6 +2112,6 @@
     "creditDebt": 54163.21,
     "netLiquid": 82950.79,
     "source": "ynab",
-    "updatedAt": "2026-10-20T03:45:16.420Z"
+    "updatedAt": "2026-10-20T04:00:16.960Z"
   }
 }
