@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T03:45:18.467Z",
+  "generated_at": "2026-10-21T04:00:22.324Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,28 +17,22 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-20-cffa1f80d729cdfd28b1e78c54580b734438ee494451cf1e2c45d67b039a39fa",
-          "label": "Reading: Read for 20 minutes",
+          "id": "sch-work-on-2026-10-21-2622b39cf9598df1b90ff87b6227e6b58d5579b7875727c115a5e7a5b81afe79",
+          "label": "Spelling: Complete WB p. 40",
           "dueDate": null,
-          "workOnDate": "2026-10-20"
+          "workOnDate": "2026-10-21"
         },
         {
-          "id": "sch-work-on-2026-10-20-c984ad566dcbaccdaa8612b0d9075561d610116af8b062055ae86d29b038b94f",
-          "label": "Spelling: Complete WB p. 39",
+          "id": "sch-work-on-2026-10-21-383a60d416012a0d0f0e115d3541d19a94bb1149e5b5a0714e47a2c53e38c1de",
+          "label": "Math: Complete WB pp. 83-84",
           "dueDate": null,
-          "workOnDate": "2026-10-20"
+          "workOnDate": "2026-10-21"
         },
         {
-          "id": "sch-work-on-2026-10-20-a3db7ad080ac9dc563221514658b84795469ceee15def3ffc84114441d2cefe5",
-          "label": "Math: Complete WB pp. 80-81",
+          "id": "sch-work-on-2026-10-21-4892c8970818ce40fa560c1310e8c75ca735ef01d2b81e0687798e7fa8f91dab",
+          "label": "English: Complete EIE p. 25",
           "dueDate": null,
-          "workOnDate": "2026-10-20"
-        },
-        {
-          "id": "sch-work-on-2026-10-20-53b33bf3a4556d47b1376fceacdf18b1b874d3f6e59ddc24dcd43bb745650e68",
-          "label": "English: Complete EIE p. 24",
-          "dueDate": null,
-          "workOnDate": "2026-10-20"
+          "workOnDate": "2026-10-21"
         }
       ]
     },
@@ -54,7 +48,13 @@
         "balance_str": "$25.60"
       },
       "guineaPig": "$157.74",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-22-37b348bdbe53eaeea05b94eedca1f223fc305a5b7acb7441d32f0f66fd0a890e",
+          "label": "Prepare: Religion: Recite Hail, Holy Queen, including Pray for us, O holy Mother of God / That we may be made worthy of the promises of Christ",
+          "dueDate": "2026-10-22"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -68,7 +68,13 @@
         "balance_str": "$88.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-10-22-956810fa7539c13b828d3d3fa9b67a2587c206386efbd5c8d8d0ad3a773f75d0",
+          "label": "Spanish (Simon): Complete \"Did you get? P.1\"",
+          "dueDate": "2026-10-22"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -376,7 +382,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
@@ -435,8 +441,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -444,7 +450,7 @@
       "dow_short": "Thu",
       "name": "Garlic-herb chicken with roasted potatoes and broccoli",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -467,19 +473,12 @@
   "weather": {
     "now": {
       "temp": 53,
-      "hi": 75,
-      "lo": 42,
+      "hi": 74,
+      "lo": 50,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "☀️",
-        "hi": 74,
-        "lo": 50,
-        "code": 0
-      },
       {
         "d": "Thu",
         "icon": "☀️",
@@ -490,41 +489,48 @@
       {
         "d": "Fri",
         "icon": "☀️",
-        "hi": 71,
-        "lo": 50,
+        "hi": 70,
+        "lo": 51,
         "code": 0
       },
       {
         "d": "Sat",
         "icon": "☀️",
         "hi": 68,
-        "lo": 48,
+        "lo": 49,
         "code": 0
       },
       {
         "d": "Sun",
         "icon": "☀️",
         "hi": 68,
-        "lo": 47,
+        "lo": 48,
         "code": 0
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 72,
+        "lo": 48,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-20T07:39",
         "2026-10-21T07:40",
         "2026-10-22T07:41",
         "2026-10-23T07:42",
         "2026-10-24T07:43",
-        "2026-10-25T07:44"
+        "2026-10-25T07:44",
+        "2026-10-26T07:44"
       ],
       "sunsets": [
-        "2026-10-20T18:48",
         "2026-10-21T18:47",
         "2026-10-22T18:45",
         "2026-10-23T18:44",
         "2026-10-24T18:43",
-        "2026-10-25T18:42"
+        "2026-10-25T18:42",
+        "2026-10-26T18:41"
       ],
       "timezone": "America/New_York"
     }
@@ -2171,6 +2177,6 @@
     "creditDebt": 53342.86,
     "netLiquid": 80130.44,
     "source": "ynab",
-    "updatedAt": "2026-10-21T03:45:17.094Z"
+    "updatedAt": "2026-10-21T04:00:21.237Z"
   }
 }
