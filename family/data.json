@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T11:45:29.765Z",
+  "generated_at": "2026-10-21T12:00:40.767Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -290,12 +290,63 @@
     ]
   },
   "dinner": {
-    "name": "Meatloaf with mashed potatoes and cabbage",
-    "protein_g": 60,
-    "cal": 610,
-    "effort": "medium",
-    "note": "October 21: assistant-drafted quantities for saved ingredient-only recipe. Include Mike's requested seasoning and ketchup-brown-sugar topping. Mix beef, breadcrumbs, egg, garlic/onion powder, parsley and salt; shape and bake with ketchup/brown-sugar glaze. Boil potatoes, mash with milk/butter, steam cabbage separately. Planning notes, not tested complete instructions. Mike: 22.5% meatloaf/glaze, corresponding to 9 oz raw beef and about 8g crumbs; 240g raw potato equivalent, 2 tbsp milk, 1/2 tsp butter and one cup cooked cabbage. Generic cal/protein estimates: beef 315/54, crumbs 28/1, egg 12/1, ketchup 10/0, sugar 8/0, potatoes 185/2, milk 10/0.7, butter 17/0, cabbage 25/1.3. Ordinary breadcrumbs permitted by current dated policy; October 5 gluten-free note does not apply.",
-    "recipe": null
+    "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+    "protein_g": 35,
+    "cal": 650,
+    "effort": "easy",
+    "note": "October 21: Mike requested this saved sheet-pan meal for tonight. The recipe card lists ingredients only; quantities and method are not recorded.",
+    "recipe": {
+      "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
+      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+      "source": "markdown",
+      "hasFullRecipe": true,
+      "tags": [
+        "recipe",
+        "dinner"
+      ],
+      "aliases": [
+        "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
+      ],
+      "in_rotation": true,
+      "effort": "easy",
+      "kid_friendly": true,
+      "protein_g": 35,
+      "cal": 650,
+      "servings": null,
+      "prep_min": null,
+      "cook_min": null,
+      "ingredient_groups": [
+        {
+          "heading": null,
+          "items": [
+            "smoked sausage (kielbasa)",
+            "baby potatoes",
+            "broccoli",
+            "olive oil",
+            "garlic",
+            "Italian seasoning",
+            "paprika",
+            "salt",
+            "pepper"
+          ]
+        }
+      ],
+      "all_ingredients": [
+        "smoked sausage (kielbasa)",
+        "baby potatoes",
+        "broccoli",
+        "olive oil",
+        "garlic",
+        "Italian seasoning",
+        "paprika",
+        "salt",
+        "pepper"
+      ],
+      "steps": [],
+      "notes": "",
+      "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
+      "last_reviewed": null
+    }
   },
   "mealweek": [
     {
@@ -440,15 +491,66 @@
     {
       "dow": "Wednesday",
       "dow_short": "Wed",
-      "name": "Meatloaf with mashed potatoes and cabbage",
+      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
       "isToday": true,
       "isTomorrow": false,
-      "recipe": null
+      "recipe": {
+        "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
+        "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
+        "source": "markdown",
+        "hasFullRecipe": true,
+        "tags": [
+          "recipe",
+          "dinner"
+        ],
+        "aliases": [
+          "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
+        ],
+        "in_rotation": true,
+        "effort": "easy",
+        "kid_friendly": true,
+        "protein_g": 35,
+        "cal": 650,
+        "servings": null,
+        "prep_min": null,
+        "cook_min": null,
+        "ingredient_groups": [
+          {
+            "heading": null,
+            "items": [
+              "smoked sausage (kielbasa)",
+              "baby potatoes",
+              "broccoli",
+              "olive oil",
+              "garlic",
+              "Italian seasoning",
+              "paprika",
+              "salt",
+              "pepper"
+            ]
+          }
+        ],
+        "all_ingredients": [
+          "smoked sausage (kielbasa)",
+          "baby potatoes",
+          "broccoli",
+          "olive oil",
+          "garlic",
+          "Italian seasoning",
+          "paprika",
+          "salt",
+          "pepper"
+        ],
+        "steps": [],
+        "notes": "",
+        "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
+        "last_reviewed": null
+      }
     },
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Garlic-herb chicken with roasted potatoes and broccoli",
+      "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -472,8 +574,8 @@
   ],
   "weather": {
     "now": {
-      "temp": 49,
-      "hi": 72,
+      "temp": 48,
+      "hi": 73,
       "lo": 48,
       "icon": "☀️",
       "code": 0
@@ -2177,6 +2279,6 @@
     "creditDebt": 53342.86,
     "netLiquid": 79630.44,
     "source": "ynab",
-    "updatedAt": "2026-10-21T11:45:28.561Z"
+    "updatedAt": "2026-10-21T12:00:36.390Z"
   }
 }
