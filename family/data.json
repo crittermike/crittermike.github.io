@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T23:45:16.878Z",
+  "generated_at": "2026-10-21T00:00:36.941Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -284,63 +284,12 @@
     ]
   },
   "dinner": {
-    "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-    "protein_g": 35,
-    "cal": 650,
-    "effort": "easy",
-    "note": "October 20: Mike swapped out chicken and vegetable soup for this saved sheet-pan meal. Omit paprika and pepper per this week's plan note. The saved card has no quantities or steps; use the simple roasting method already given in chat.",
-    "recipe": {
-      "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
-      "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-      "source": "markdown",
-      "hasFullRecipe": true,
-      "tags": [
-        "recipe",
-        "dinner"
-      ],
-      "aliases": [
-        "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli"
-      ],
-      "in_rotation": true,
-      "effort": "easy",
-      "kid_friendly": true,
-      "protein_g": 35,
-      "cal": 650,
-      "servings": null,
-      "prep_min": null,
-      "cook_min": null,
-      "ingredient_groups": [
-        {
-          "heading": null,
-          "items": [
-            "smoked sausage (kielbasa)",
-            "baby potatoes",
-            "broccoli",
-            "olive oil",
-            "garlic",
-            "Italian seasoning",
-            "paprika",
-            "salt",
-            "pepper"
-          ]
-        }
-      ],
-      "all_ingredients": [
-        "smoked sausage (kielbasa)",
-        "baby potatoes",
-        "broccoli",
-        "olive oil",
-        "garlic",
-        "Italian seasoning",
-        "paprika",
-        "salt",
-        "pepper"
-      ],
-      "steps": [],
-      "notes": "",
-      "body_html": "<h1>Sheet-pan smoked sausage &amp; baby potatoes + broccoli</h1>\n<h2>Ingredients</h2>\n<ul>\n<li>smoked sausage (kielbasa)</li>\n<li>baby potatoes</li>\n<li>broccoli</li>\n<li>olive oil</li>\n<li>garlic</li>\n<li>Italian seasoning</li>\n<li>paprika</li>\n<li>salt</li>\n<li>pepper</li>\n</ul>\n",
-      "last_reviewed": null
-    }
+    "name": "Meatloaf with mashed potatoes and cabbage",
+    "protein_g": 60,
+    "cal": 610,
+    "effort": "medium",
+    "note": "October 21: assistant-drafted quantities for saved ingredient-only recipe. Include Mike's requested seasoning and ketchup-brown-sugar topping. Mix beef, breadcrumbs, egg, garlic/onion powder, parsley and salt; shape and bake with ketchup/brown-sugar glaze. Boil potatoes, mash with milk/butter, steam cabbage separately. Planning notes, not tested complete instructions. Mike: 22.5% meatloaf/glaze, corresponding to 9 oz raw beef and about 8g crumbs; 240g raw potato equivalent, 2 tbsp milk, 1/2 tsp butter and one cup cooked cabbage. Generic cal/protein estimates: beef 315/54, crumbs 28/1, egg 12/1, ketchup 10/0, sugar 8/0, potatoes 185/2, milk 10/0.7, butter 17/0, cabbage 25/1.3. Ordinary breadcrumbs permitted by current dated policy; October 5 gluten-free note does not apply.",
+    "recipe": null
   },
   "mealweek": [
     {
@@ -515,7 +464,71 @@
       "recipe": null
     }
   ],
-  "weather": null,
+  "weather": {
+    "now": {
+      "temp": 62,
+      "hi": 75,
+      "lo": 43,
+      "icon": "🌤",
+      "code": 2
+    },
+    "days": [
+      {
+        "d": "Wed",
+        "icon": "☀️",
+        "hi": 74,
+        "lo": 52,
+        "code": 0
+      },
+      {
+        "d": "Thu",
+        "icon": "☀️",
+        "hi": 76,
+        "lo": 51,
+        "code": 0
+      },
+      {
+        "d": "Fri",
+        "icon": "☀️",
+        "hi": 70,
+        "lo": 51,
+        "code": 0
+      },
+      {
+        "d": "Sat",
+        "icon": "☀️",
+        "hi": 68,
+        "lo": 49,
+        "code": 0
+      },
+      {
+        "d": "Sun",
+        "icon": "☀️",
+        "hi": 68,
+        "lo": 48,
+        "code": 0
+      }
+    ],
+    "sun": {
+      "sunrises": [
+        "2026-10-20T07:39",
+        "2026-10-21T07:40",
+        "2026-10-22T07:41",
+        "2026-10-23T07:42",
+        "2026-10-24T07:43",
+        "2026-10-25T07:44"
+      ],
+      "sunsets": [
+        "2026-10-20T18:48",
+        "2026-10-21T18:47",
+        "2026-10-22T18:45",
+        "2026-10-23T18:44",
+        "2026-10-24T18:43",
+        "2026-10-25T18:42"
+      ],
+      "timezone": "America/New_York"
+    }
+  },
   "recipes": [
     {
       "slug": "beef-enchiladas",
@@ -2069,7 +2082,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 64.5,
+    "dayPct": 67.7,
     "totalSpend": 10421.17,
     "totalBudget": 0,
     "categories": [
@@ -2158,6 +2171,6 @@
     "creditDebt": 53342.86,
     "netLiquid": 80130.44,
     "source": "ynab",
-    "updatedAt": "2026-10-20T23:45:15.958Z"
+    "updatedAt": "2026-10-21T00:00:34.809Z"
   }
 }
