@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T13:30:21.569Z",
+  "generated_at": "2026-10-22T13:45:21.006Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -511,9 +511,9 @@
   ],
   "weather": {
     "now": {
-      "temp": 60,
+      "temp": 61,
       "hi": 75,
-      "lo": 50,
+      "lo": 49,
       "icon": "☀️",
       "code": 0
     },
@@ -522,14 +522,14 @@
         "d": "Fri",
         "icon": "☀️",
         "hi": 68,
-        "lo": 50,
+        "lo": 49,
         "code": 0
       },
       {
         "d": "Sat",
         "icon": "☀️",
         "hi": 67,
-        "lo": 50,
+        "lo": 49,
         "code": 0
       },
       {
@@ -2128,15 +2128,15 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 71,
-    "totalSpend": 10880.45,
+    "totalSpend": 11095.3,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 2516.02,
-        "balance": -2516.02,
+        "spent": 2612.31,
+        "balance": -2612.31,
         "pct": 0
       },
       {
@@ -2159,16 +2159,16 @@
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 1362.43,
-        "balance": -1362.43,
+        "spent": 1381.19,
+        "balance": -1381.19,
         "pct": 0
       },
       {
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 1236.37,
-        "balance": -1236.37,
+        "spent": 1336.17,
+        "balance": -1336.17,
         "pct": 0
       },
       {
@@ -2213,9 +2213,9 @@
       }
     ],
     "liquidCash": 26106.49,
-    "creditDebt": 52906.71,
-    "netLiquid": 79013.2,
+    "creditDebt": 50837.86,
+    "netLiquid": 76944.35,
     "source": "ynab",
-    "updatedAt": "2026-10-22T13:30:20.565Z"
+    "updatedAt": "2026-10-22T13:45:19.585Z"
   }
 }
