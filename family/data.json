@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T11:45:33.508Z",
+  "generated_at": "2026-10-22T12:00:38.965Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -278,11 +278,11 @@
     ]
   },
   "dinner": {
-    "name": "Meatloaf with mashed potatoes and cabbage",
-    "protein_g": 60,
-    "cal": 610,
-    "effort": "medium",
-    "note": "October 22: assistant-drafted quantities for saved ingredient-only recipe. Include Mike's requested seasoning and ketchup-brown-sugar topping. Mix beef, breadcrumbs, egg, garlic/onion powder, parsley and salt; shape and bake with ketchup/brown-sugar glaze. Boil potatoes, mash with milk/butter, steam cabbage separately. Planning notes, not tested complete instructions. Mike: 22.5% meatloaf/glaze, corresponding to 9 oz raw beef and about 8g crumbs; 240g raw potato equivalent, 2 tbsp milk, 1/2 tsp butter and one cup cooked cabbage. Generic cal/protein estimates: beef 315/54, crumbs 28/1, egg 12/1, ketchup 10/0, sugar 8/0, potatoes 185/2, milk 10/0.7, butter 17/0, cabbage 25/1.3. Ordinary breadcrumbs permitted by current dated policy; October 5 gluten-free note does not apply.",
+    "name": "Takeout or dinner out",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "October 22: Mike requested takeout tonight instead of the planned meatloaf. Restaurant, order and nutrition are undecided; no order placed.",
     "recipe": null
   },
   "mealweek": [
@@ -487,7 +487,7 @@
     {
       "dow": "Thursday",
       "dow_short": "Thu",
-      "name": "Meatloaf with mashed potatoes and cabbage",
+      "name": "Takeout or dinner out",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -495,7 +495,7 @@
     {
       "dow": "Friday",
       "dow_short": "Fri",
-      "name": "Takeout or dinner out",
+      "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -522,14 +522,14 @@
         "d": "Fri",
         "icon": "☀️",
         "hi": 68,
-        "lo": 49,
+        "lo": 50,
         "code": 0
       },
       {
         "d": "Sat",
         "icon": "☀️",
         "hi": 67,
-        "lo": 49,
+        "lo": 50,
         "code": 0
       },
       {
@@ -549,7 +549,7 @@
       {
         "d": "Tue",
         "icon": "⛅",
-        "hi": 74,
+        "hi": 73,
         "lo": 51,
         "code": 3
       }
@@ -2216,6 +2216,6 @@
     "creditDebt": 52906.71,
     "netLiquid": 79013.2,
     "source": "ynab",
-    "updatedAt": "2026-10-22T11:45:31.123Z"
+    "updatedAt": "2026-10-22T12:00:37.121Z"
   }
 }
