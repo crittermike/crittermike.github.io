@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T06:00:33.848Z",
+  "generated_at": "2026-10-22T06:15:31.426Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -511,7 +511,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 50,
+      "temp": 49,
       "hi": 75,
       "lo": 48,
       "icon": "☀️",
@@ -529,7 +529,7 @@
         "d": "Sat",
         "icon": "☀️",
         "hi": 67,
-        "lo": 50,
+        "lo": 49,
         "code": 0
       },
       {
@@ -543,7 +543,7 @@
         "d": "Mon",
         "icon": "🌤",
         "hi": 71,
-        "lo": 49,
+        "lo": 48,
         "code": 2
       },
       {
@@ -2128,7 +2128,7 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 71,
-    "totalSpend": 10699.36,
+    "totalSpend": 10880.45,
     "totalBudget": 0,
     "categories": [
       {
@@ -2188,6 +2188,14 @@
         "pct": 0
       },
       {
+        "name": "📱 Phone & Internet",
+        "group": "Bills",
+        "budgeted": 0,
+        "spent": 278.09,
+        "balance": -278.09,
+        "pct": 0
+      },
+      {
         "name": "🍿 Entertainment",
         "group": "Wants",
         "budgeted": 0,
@@ -2202,20 +2210,12 @@
         "spent": 117.85,
         "balance": -117.85,
         "pct": 0
-      },
-      {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 97,
-        "balance": -97,
-        "pct": 0
       }
     ],
-    "liquidCash": 26287.58,
+    "liquidCash": 26106.49,
     "creditDebt": 52906.71,
-    "netLiquid": 79194.29,
+    "netLiquid": 79013.2,
     "source": "ynab",
-    "updatedAt": "2026-10-22T06:00:32.150Z"
+    "updatedAt": "2026-10-22T06:15:29.820Z"
   }
 }
