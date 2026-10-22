@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T03:45:17.628Z",
+  "generated_at": "2026-10-22T04:00:21.844Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,22 +17,22 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-21-2622b39cf9598df1b90ff87b6227e6b58d5579b7875727c115a5e7a5b81afe79",
-          "label": "Spelling: Complete WB p. 40",
+          "id": "sch-work-on-2026-10-22-ade3b7bcffe27525cb1061cb199c17680372e74987d8118930f51ada5255ac83",
+          "label": "Spelling: Complete Choice Board - Style Time",
           "dueDate": null,
-          "workOnDate": "2026-10-21"
+          "workOnDate": "2026-10-22"
         },
         {
-          "id": "sch-work-on-2026-10-21-383a60d416012a0d0f0e115d3541d19a94bb1149e5b5a0714e47a2c53e38c1de",
-          "label": "Math: Complete WB pp. 83-84",
+          "id": "sch-work-on-2026-10-22-1cc933f0f56fb12c539745274bf30b68714fdb797f34cabe6384142540a114af",
+          "label": "Math: Complete pp. 85-86",
           "dueDate": null,
-          "workOnDate": "2026-10-21"
+          "workOnDate": "2026-10-22"
         },
         {
-          "id": "sch-work-on-2026-10-21-4892c8970818ce40fa560c1310e8c75ca735ef01d2b81e0687798e7fa8f91dab",
-          "label": "English: Complete EIE p. 25",
+          "id": "sch-work-on-2026-10-22-a1c51d1a2c24e406c5cf9bba0901798de295a4d07eb54247de4fa6a21f789da2",
+          "label": "English: Complete EIE p. 27",
           "dueDate": null,
-          "workOnDate": "2026-10-21"
+          "workOnDate": "2026-10-22"
         }
       ]
     },
@@ -48,13 +48,7 @@
         "balance_str": "$25.60"
       },
       "guineaPig": "$157.74",
-      "assignments": [
-        {
-          "id": "sch-2026-10-22-37b348bdbe53eaeea05b94eedca1f223fc305a5b7acb7441d32f0f66fd0a890e",
-          "label": "Prepare: Religion: Recite Hail, Holy Queen, including Pray for us, O holy Mother of God / That we may be made worthy of the promises of Christ",
-          "dueDate": "2026-10-22"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -68,13 +62,7 @@
         "balance_str": "$88.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-22-956810fa7539c13b828d3d3fa9b67a2587c206386efbd5c8d8d0ad3a773f75d0",
-          "label": "Spanish (Simon): Complete \"Did you get? P.1\"",
-          "dueDate": "2026-10-22"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -441,7 +429,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Sheet-pan smoked sausage & baby potatoes + broccoli",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": {
         "slug": "sheet-pan-smoked-sausage-and-baby-potatoes-broccoli",
@@ -500,8 +488,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -509,7 +497,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -523,20 +511,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 54,
-      "hi": 74,
+      "temp": 53,
+      "hi": 75,
       "lo": 49,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "☀️",
-        "hi": 75,
-        "lo": 49,
-        "code": 0
-      },
       {
         "d": "Fri",
         "icon": "☀️",
@@ -564,24 +545,31 @@
         "hi": 71,
         "lo": 49,
         "code": 3
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 73,
+        "lo": 51,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-21T07:40",
         "2026-10-22T07:41",
         "2026-10-23T07:42",
         "2026-10-24T07:43",
         "2026-10-25T07:44",
-        "2026-10-26T07:44"
+        "2026-10-26T07:44",
+        "2026-10-27T07:45"
       ],
       "sunsets": [
-        "2026-10-21T18:47",
         "2026-10-22T18:45",
         "2026-10-23T18:44",
         "2026-10-24T18:43",
         "2026-10-25T18:42",
-        "2026-10-26T18:41"
+        "2026-10-26T18:41",
+        "2026-10-27T18:40"
       ],
       "timezone": "America/New_York"
     }
@@ -2228,6 +2216,6 @@
     "creditDebt": 52906.71,
     "netLiquid": 79194.29,
     "source": "ynab",
-    "updatedAt": "2026-10-22T03:45:16.297Z"
+    "updatedAt": "2026-10-22T04:00:19.402Z"
   }
 }
