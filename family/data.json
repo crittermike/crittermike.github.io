@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T14:45:20.486Z",
+  "generated_at": "2026-10-23T15:00:22.087Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -492,7 +492,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 61,
+      "temp": 62,
       "hi": 69,
       "lo": 50,
       "icon": "☀️",
@@ -2109,7 +2109,7 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 74.2,
-    "totalSpend": 11095.3,
+    "totalSpend": 11207.53,
     "totalBudget": 0,
     "categories": [
       {
@@ -2137,19 +2137,19 @@
         "pct": 0
       },
       {
+        "name": "🛒 Groceries",
+        "group": "Needs",
+        "budgeted": 0,
+        "spent": 1448.4,
+        "balance": -1448.4,
+        "pct": 0
+      },
+      {
         "name": "🍽️ Dining out",
         "group": "Wants",
         "budgeted": 0,
         "spent": 1381.19,
         "balance": -1381.19,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 1336.17,
-        "balance": -1336.17,
         "pct": 0
       },
       {
@@ -2194,9 +2194,9 @@
       }
     ],
     "liquidCash": 26106.49,
-    "creditDebt": 50837.86,
-    "netLiquid": 76944.35,
+    "creditDebt": 50725.63,
+    "netLiquid": 76832.12,
     "source": "ynab",
-    "updatedAt": "2026-10-23T14:45:19.127Z"
+    "updatedAt": "2026-10-23T15:00:19.200Z"
   }
 }
