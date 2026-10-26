@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T23:45:53.786Z",
+  "generated_at": "2026-10-26T00:01:02.272Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -285,11 +285,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
-    "protein_g": null,
-    "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "name": "Chicken and vegetable soup with French bread",
+    "protein_g": 65,
+    "cal": 595,
+    "effort": "easy",
+    "note": "October 26: prioritize soup bumped October 20. Saved recipe is ingredient-only; this is an assistant-drafted lean breast adaptation for six, not kitchen-tested. Chop vegetables ahead if convenient for the 4:00PM-5:00PM dentist appointment, refrigerating until cooking. Soften onion, carrots and celery in oil, add broth and chicken, simmer gently until vegetables are tender and every chicken piece reaches 165 F; shred chicken into soup. Serve bread separately. Mike: meat from 9.5 oz raw breast, 70 g bread and about one-sixth of vegetables, broth and oil. Generic cal/protein assumptions: chicken 285/54.625, bread 180/6, vegetables 80/2, oil 20/0, broth 30/2. Rounded estimate 595 cal/65 g protein; actual brands and portions vary.",
     "recipe": null
   },
   "mealweek": [
@@ -352,7 +352,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 59,
+      "temp": 58,
       "hi": 68,
       "lo": 49,
       "icon": "☀️",
@@ -1968,7 +1968,7 @@
   ],
   "finance": {
     "month": "October 2026",
-    "dayPct": 80.6,
+    "dayPct": 83.9,
     "totalSpend": 11470.1,
     "totalBudget": 0,
     "categories": [
@@ -2065,6 +2065,6 @@
     "creditDebt": 50494.06,
     "netLiquid": 76569.55,
     "source": "ynab",
-    "updatedAt": "2026-10-25T23:45:52.811Z"
+    "updatedAt": "2026-10-26T00:01:00.749Z"
   }
 }
