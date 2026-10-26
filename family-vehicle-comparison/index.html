@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="description" content="Find a replacement for a 2019 Honda Odyssey. Explore minivans and three-row SUVs, then compare your finalists.">
+<meta name="description" content="Compare used minivans and three-row SUVs as a replacement for a 2019 Honda Odyssey.">
 <title>Family Vehicle Comparison</title>
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 <a class="skip-link" href="#vehicles">Skip to vehicles</a>
@@ -39,7 +39,7 @@
       </div>
     </fieldset>
   </form>
-  <details class="assumptions"><summary>Cost assumptions</summary><p class="hint">One gas price for all engines, including premium. Plug-in hybrids use gas-only estimates. Purchase + energy excludes tax, financing, maintenance, insurance and resale.</p></details>
+  <details class="assumptions"><summary>Cost assumptions</summary><p class="hint">One gas price for all engines, including premium. Plug-in hybrids assume nightly charging and EPA’s electric share of miles. Purchase + energy excludes tax, financing, maintenance, insurance and resale.</p></details>
 </section>
 
 <section aria-labelledby="rank-h" id="rank">
@@ -71,7 +71,7 @@
     <label class="search"><span class="sr-only">Search all vehicles</span><input id="search" type="search" placeholder="Search all vehicles" autocomplete="off"></label>
     <button type="button" class="fbtn" id="open-flt">Filters <b id="flt-count"></b></button>
   </div>
-  <div class="result-meta"><div class="fchips" id="fchips" aria-live="polite"></div><span class="hint">2025 &middot; Prices estimated</span></div>
+  <div class="result-meta"><div class="fchips" id="fchips" aria-live="polite"></div><span class="hint">Used only · model-level estimates</span></div>
   <ul class="cards" id="cards"></ul>
   <div id="big" hidden><div class="big-wrap" tabindex="0" role="region" aria-label="All vehicles and features table" id="big-wrap"></div></div>
 </section>
@@ -83,7 +83,7 @@
   <div id="compare-out"></div>
 </section>
 <div id="comparison-details" hidden>
-<details class="assumptions"><summary>Cost assumptions</summary><p class="hint">Purchase + energy excludes tax, financing, maintenance, insurance and resale. Plug-in hybrids use gas-only estimates. One gas price for all engines, including premium.</p></details>
+<details class="assumptions"><summary>Cost assumptions</summary><p class="hint">Purchase + energy excludes tax, financing, maintenance, insurance and resale. Plug-in hybrids assume nightly charging and EPA’s electric share of miles. One gas price for all engines, including premium.</p></details>
 <section aria-labelledby="feat-h" id="features">
   <div class="section-head"><h2 id="feat-h">Features</h2></div>
   <div class="tools">
@@ -121,7 +121,7 @@
 </div>
 
 <dialog id="lb" aria-label="Photo viewer">
-  <img id="lb-img" alt="">
+  <img id="lb-img" src="images/odyssey.jpg" alt="">
   <div class="lb-bar"><button type="button" class="btn quiet" id="lb-prev" aria-label="Previous photo">&larr;</button><p id="lb-cap"></p><button type="button" class="btn quiet" id="lb-next" aria-label="Next photo">&rarr;</button><button type="button" class="btn quiet" id="lb-close">Close</button></div>
 </dialog>
 <dialog id="fd" class="sheet" aria-labelledby="fd-h">
@@ -129,7 +129,7 @@
   <form class="sheet-body" id="flt" onsubmit="return false"></form>
   <div class="sheet-foot"><button type="button" class="btn quiet" id="clear-flt">Clear all</button><button type="button" class="btn go" id="fd-go"></button></div>
 </dialog>
-<script src="data.js?v=8"></script>
-<script src="app.js?v=8"></script>
+<script src="data.js?v=9"></script>
+<script src="app.js?v=9"></script>
 </body>
 </html>
