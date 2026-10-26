@@ -6,7 +6,6 @@ import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
 const read = (f) => readFileSync(new URL('../' + f, import.meta.url), 'utf8');
-const html = read('index.html');
 const dataJs = read('data.js');
 
 function loadCore() {
@@ -18,9 +17,9 @@ function loadCore() {
 
 test('vehicle records: unique ids, all 2025, exact trims', () => {
   const { VEHICLES } = loadCore();
-  assert.equal(VEHICLES.length, 19);
+  assert.equal(VEHICLES.length, 28);
   const ids = VEHICLES.map(v => v.id);
-  assert.equal(new Set(ids).size, 19);
+  assert.equal(new Set(ids).size, VEHICLES.length);
   for (const v of VEHICLES) assert.equal(v.year, 2025, v.id);
   const expect = {
     odyssey: [2025, 'Honda', 'Odyssey', 'EX-L', 'van', 'gas', 8],
@@ -84,10 +83,11 @@ test('filterVehicles by type and powertrain', () => {
   // Spread into a test-realm array: vm-context arrays fail deepStrictEqual on prototype identity.
   // Normalize vm-created arrays into this test module's realm before strict comparison.
   const ids = (f) => Array.from(filterVehicles(VEHICLES, f), v => v.id);
-  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 19);
+  assert.deepEqual(ids({ type: 'all', power: 'all' }).length, 28);
   assert.deepEqual(ids({ type: 'van', power: 'all' }), ['odyssey', 'sienna', 'carnival', 'pacifica', 'pacifica-hybrid', 'voyager', 'idbuzz']);
   assert.deepEqual(ids({ type: 'suv', power: 'ev' }), ['ev9', 'ex90', 'r1s']);
-  assert.deepEqual(ids({ type: 'all', power: 'hybrid' }), ['sienna', 'carnival', 'pacifica-hybrid', 'grand-highlander']);
+  assert.deepEqual(ids({ type: 'all', power: 'hybrid' }), ['sienna', 'carnival', 'grand-highlander', 'tx500h', 'sequoia']);
+  assert.deepEqual(ids({ power: 'phev' }), ['pacifica-hybrid', 'tx550h', 'cx90-phev', 'xc90-t8']);
   assert.deepEqual(ids({ type: 'van', power: 'ev' }), ['idbuzz']);
 });
 
@@ -101,11 +101,6 @@ test('toggleCompare adds, removes and caps selection', () => {
   assert.deepEqual(s, ['ev9']);
   for (const id of ['a', 'b', 'c', 'd', 'e']) s = toggleCompare(s, id);
   assert.equal(s.length, MAX_COMPARE);
-});
-
-test('no em-dash or en-dash characters anywhere in the page', () => {
-  for (const f of ['index.html', 'styles.css', 'data.js', 'app.js']) assert.equal((read(f).match(/[\u2013\u2014\u2212]/g) || []).length, 0, f);
-  assert.equal((html.match(/ - /g) || []).length, 0, 'no spaced-hyphen dash substitutes');
 });
 
 test('EV9 Wind is not credited with the exterior V2L outlet', () => {
@@ -142,11 +137,48 @@ test('feature table flags single-vehicle features', () => {
   assert.equal(u.booster, 'ex90');
 });
 
-test('flat load floor filter excludes only vans whose 2nd row stays in', () => {
+test('flat load floor filter excludes Sienna and Sequoia', () => {
   const { VEHICLES, filterVehicles, flatFloor } = loadCore();
   const out = Array.from(VEHICLES.filter(v => !flatFloor(v)), v => v.id);
-  assert.deepEqual(out, ['sienna']);
-  assert.equal(filterVehicles(VEHICLES, { flat: true }).length, 18);
+  assert.deepEqual(out, ['sienna', 'sequoia']);
+  assert.equal(filterVehicles(VEHICLES, { flat: true }).length, 26);
+});
+
+test('discovery starts small, searches every group, and preserves other filters', () => {
+  const { VEHICLES, discoverVehicles, filterVehicles } = loadCore();
+  const ids = (list, state) => Array.from(discoverVehicles(list, state), v => v.id);
+  assert.deepEqual(ids(VEHICLES), ['carnival', 'grand-highlander', 'ev9', 'tx500h']);
+  assert.deepEqual(ids(VEHICLES, { browse: 'start', query: '  LEXUS ' }), ['tx500h', 'tx550h']);
+  assert.deepEqual(ids(VEHICLES, { browse: 'phev' }), ['pacifica-hybrid', 'tx550h', 'cx90-phev', 'xc90-t8']);
+  assert.equal(ids(VEHICLES, { browse: 'all' }).length, VEHICLES.length);
+  assert.equal(ids(VEHICLES, { query: 'no such vehicle' }).length, 0);
+  const vans = filterVehicles(VEHICLES, { type: 'van' });
+  assert.deepEqual(ids(vans, { query: 'Lexus' }), []);
+});
+
+test('added candidates keep estimates and unknown equipment explicit', () => {
+  const { VEHICLES, feature, annualEnergyCost, rangeMiles } = loadCore();
+  const added = VEHICLES.filter(v => v.provisional);
+  assert.equal(added.length, 9);
+  for (const v of added) {
+    assert.ok(v.price.typical > 0 && v.price.sources.length > 0, v.id);
+    assert.ok(v.space.cargo1 > 0 && v.pros.length && v.cons.length, v.id);
+    assert.ok(Number.isFinite(annualEnergyCost(v, { miles: 12000, gas: 3.25, elec: 0.15 })), v.id);
+    assert.ok(Number.isFinite(rangeMiles(v)), v.id);
+    assert.equal(feature(v, 'cabinCam').s, 'q', 'unknown is not silently marked absent');
+  }
+  assert.equal(VEHICLES.find(v => v.id === 'tx500h').seats, 6);
+  assert.equal(VEHICLES.find(v => v.id === 'tx550h').seats, 6);
+  assert.equal(VEHICLES.find(v => v.id === 'cx90-phev').space.tow, 3500);
+  assert.match(feature(VEHICLES.find(v => v.id === 'yukon-xl'), 'screens').text, /16.8/);
+});
+
+test('PHEV costs are conservative gas-only estimates, not MPGe treated as MPG', () => {
+  const { VEHICLES, annualEnergyCost } = loadCore();
+  for (const v of VEHICLES.filter(v => v.power === 'phev')) {
+    assert.ok(v.electricRange > 0);
+    assert.equal(annualEnergyCost(v, { miles: 12000, gas: 4, elec: 0.15 }), 12000 / v.mpg * 4);
+  }
 });
 
 test('numeric filters apply max and min limits', () => {

@@ -3,21 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#121313">
 <meta name="robots" content="noindex">
-<meta name="description" content="Six three-row family vehicles compared: price, cabin space, energy cost, quality-of-life features and interiors.">
+<meta name="description" content="Find a replacement for a 2019 Honda Odyssey. Explore minivans and three-row SUVs, then compare your finalists.">
 <title>Family Vehicle Comparison</title>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 <a class="skip-link" href="#vehicles">Skip to vehicles</a>
 <div class="wrap">
+<h1 class="sr-only">Family vehicle comparison</h1>
 <nav class="toc" aria-label="Sections">
-  <a href="#filters">Filters</a><a href="#ctl-h">Your numbers</a><a href="#rank">Ranking</a><a href="#vehicles">Vehicles</a><a href="#features">Features</a><a href="#space">Space</a><a href="#cost">Cost</a><a href="#compare">Compare</a><a href="#checklist">Test drive</a>
+  <a href="#vehicles" data-page="explore" aria-current="page">Explore</a>
+  <a href="#compare" data-page="compare">Compare <span id="nav-count">0</span></a>
+  <a href="#ctl-h" data-page="priorities">Numbers</a>
+  <a href="#checklist" data-page="checklist">Test drive</a>
 </nav>
+<details class="baseline">
+  <summary>2019 Odyssey <span>22 mpg &middot; 144.9 cu ft max cargo</span></summary>
+  <p>EX-L reference: 32.8 cu ft behind the 3rd row, 144.9 cu ft with the 2nd row removed, 203.2 inches long. Cargo volume alone does not prove a 4&times;8 sheet fits.</p>
+  <a href="https://www.caranddriver.com/honda/odyssey-2019" target="_blank" rel="noopener">Source</a>
+</details>
 
 <main>
-<section aria-labelledby="ctl-h">
+<div data-panel="priorities" hidden>
+<section aria-labelledby="ctl-h" tabindex="-1">
   <div class="section-head"><h2 id="ctl-h">Your numbers</h2><button type="button" class="btn quiet" id="reset">Reset</button></div>
   <form class="controls" id="controls" onsubmit="return false">
     <fieldset class="wide">
@@ -30,29 +39,51 @@
       </div>
     </fieldset>
   </form>
-</section>
-
-<section aria-label="Filters" id="filters">
-  <div class="fbar">
-    <button type="button" class="fbtn" id="open-flt">Filters<b id="flt-count"></b></button>
-    <div class="fchips" id="fchips"></div>
-  </div>
+  <details class="assumptions"><summary>Cost assumptions</summary><p class="hint">One gas price for all engines, including premium. Plug-in hybrids use gas-only estimates. Purchase + energy excludes tax, financing, maintenance, insurance and resale.</p></details>
 </section>
 
 <section aria-labelledby="rank-h" id="rank">
-  <div class="section-head"><h2 id="rank-h">Ranking</h2></div>
+  <div class="section-head"><h2 id="rank-h">Top five</h2></div>
+  <p class="hint">Unknown specs can lower scores.</p>
   <div class="rank-grid">
     <form class="weights" id="weights" onsubmit="return false" aria-label="Priority weights"></form>
     <div><ol class="ranking" id="ranking"></ol><p class="legend" id="rank-legend"></p></div>
   </div>
 </section>
+</div>
 
+<div data-panel="explore">
 <section aria-labelledby="veh-h" id="vehicles">
-  <div class="section-head"><h2 id="veh-h">Vehicles <small class="count" id="veh-count"></small></h2><div class="view-toggle" role="group" aria-label="View"><button type="button" data-view="cards" aria-pressed="true">Cards</button><button type="button" data-view="table" aria-pressed="false">Table</button></div></div>
+  <h2 id="veh-h" class="sr-only">Vehicles</h2>
+  <div class="browse-row">
+  <div class="browse" role="group" aria-label="Browse vehicles">
+    <button type="button" data-browse="start" aria-pressed="true">Start here</button>
+    <button type="button" data-browse="van" aria-pressed="false">Minivans</button>
+    <button type="button" data-browse="suv" aria-pressed="false">SUVs</button>
+    <button type="button" data-browse="hybrid" aria-pressed="false">Hybrids</button>
+    <button type="button" data-browse="phev" aria-pressed="false">Plug-in hybrids</button>
+    <button type="button" data-browse="ev" aria-pressed="false">Electric</button>
+    <button type="button" data-browse="all" aria-pressed="false">All vehicles</button>
+  </div>
+  <div class="view-toggle" role="group" aria-label="View"><button type="button" data-view="cards" aria-pressed="true">Cards</button><button type="button" data-view="table" aria-pressed="false">Table</button></div>
+  </div>
+  <div class="fbar" id="filters">
+    <label class="search"><span class="sr-only">Search all vehicles</span><input id="search" type="search" placeholder="Search all vehicles" autocomplete="off"></label>
+    <button type="button" class="fbtn" id="open-flt">Filters <b id="flt-count"></b></button>
+  </div>
+  <div class="result-meta"><div class="fchips" id="fchips" aria-live="polite"></div><span class="hint">2025 &middot; Prices estimated</span></div>
   <ul class="cards" id="cards"></ul>
   <div id="big" hidden><div class="big-wrap" tabindex="0" role="region" aria-label="All vehicles and features table" id="big-wrap"></div></div>
 </section>
+</div>
 
+<div data-panel="compare" hidden>
+<section aria-labelledby="cmp-h" id="compare">
+  <div class="section-head"><h2 id="cmp-h">Compare</h2><button type="button" class="btn quiet" id="clear-cmp">Clear</button></div>
+  <div id="compare-out"></div>
+</section>
+<div id="comparison-details" hidden>
+<details class="assumptions"><summary>Cost assumptions</summary><p class="hint">Purchase + energy excludes tax, financing, maintenance, insurance and resale. Plug-in hybrids use gas-only estimates. One gas price for all engines, including premium.</p></details>
 <section aria-labelledby="feat-h" id="features">
   <div class="section-head"><h2 id="feat-h">Features</h2></div>
   <div class="tools">
@@ -72,17 +103,21 @@
   <div class="bars" id="cost-bars"></div>
 </section>
 
-<section aria-labelledby="cmp-h" id="compare">
-  <div class="section-head"><h2 id="cmp-h">Compare</h2><button type="button" class="btn quiet" id="clear-cmp">Clear</button></div>
-  <div id="compare-out"></div>
-</section>
+</div>
+</div>
 
+<div data-panel="checklist" hidden>
 <section aria-labelledby="chk-h" id="checklist">
   <div class="section-head"><h2 id="chk-h">Test-drive checklist</h2><button type="button" class="btn quiet" id="clear-chk">Clear</button></div>
   <ul class="checklist" id="chk"></ul>
 </section>
+</div>
 
 </main>
+<aside class="compare-tray" id="compare-tray" aria-label="Selected vehicles" hidden>
+  <div id="selected-names"></div>
+  <a class="btn go" href="#compare" id="compare-link">Compare</a>
+</aside>
 </div>
 
 <dialog id="lb" aria-label="Photo viewer">
@@ -94,7 +129,7 @@
   <form class="sheet-body" id="flt" onsubmit="return false"></form>
   <div class="sheet-foot"><button type="button" class="btn quiet" id="clear-flt">Clear all</button><button type="button" class="btn go" id="fd-go"></button></div>
 </dialog>
-<script src="data.js?v=6"></script>
-<script src="app.js?v=6"></script>
+<script src="data.js?v=8"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>

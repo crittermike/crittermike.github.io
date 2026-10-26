@@ -479,7 +479,7 @@ const VC = (() => {
       photo: { src: 'images/pacifica.jpg', alt: 'White 2024 Chrysler Pacifica Touring L RoadTripper minivan, front left view', credit: 'Mr.choppers', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:2024_Chrysler_Pacifica_Touring_L_RoadTripper_in_Bright_White,_front_left.jpg', note: 'Same generation and styling; 2024 Touring L trim shown.' }
     },
     {
-      id: 'pacifica-hybrid', short: 'Pacifica Hybrid', year: 2025, make: 'Chrysler', model: 'Pacifica Plug-in Hybrid', trim: 'Select', type: 'van', power: 'hybrid', seats: 7,
+      id: 'pacifica-hybrid', short: 'Pacifica Hybrid', year: 2025, make: 'Chrysler', model: 'Pacifica Plug-in Hybrid', trim: 'Select', type: 'van', power: 'phev', seats: 7, electricRange: 32,
       mpg: 30, kwhPer100: null, range: null, tank: 16.5, efficiencySource: FE(48656),
       drivetrain: 'FWD, 3.6L V6 plug-in hybrid, eFlite EVT',
       price: { typical: 51055, dest: 1995, note: "Hybrid Select MSRP excludes $1,995 destination. No Stow 'n Go 2nd row (battery is under the floor): the captain's chairs are removable, so 140.5 cu ft max cargo assumes you lift them out. FWD only.", asOf: '2026-10-18',
@@ -839,7 +839,125 @@ const VC = (() => {
       photo: { src: 'images/r1s.jpg', alt: 'Black Rivian R1S electric SUV parked in a lot, side profile view', credit: 'Sarah Stierch (Missvain)', license: 'CC0', licenseUrl: 'http://creativecommons.org/publicdomain/zero/1.0/deed.en', page: 'https://commons.wikimedia.org/wiki/File:Rivian_R1S_-_June_2025_-_Sarah_Stierch_01.jpg', note: 'Gen 2 R1S photographed June 2025; trim not identified.' }
     }
   ];
+  // New candidates are a first-pass screen, not trim-level equipment verification.
+  VEHICLES.push(
+    {
+      id: 'tx500h', short: 'TX 500h', year: 2025, make: 'Lexus', model: 'TX 500h', trim: 'F Sport Performance Premium AWD', type: 'suv', power: 'hybrid', seats: 6,
+      mpg: 27, tank: 17.2, provisional: true,
+      drivetrain: 'AWD, 2.4L turbo full hybrid, 366 hp',
+      price: { typical: 70810, dest: 1350, note: 'Planning estimate for MSRP and destination; confirm model-year pricing and equipment with the dealer.', sources: [{ label: '2025 TX Hybrid overview and specifications', url: 'https://www.caranddriver.com/lexus/tx-hybrid-2025' }] },
+      efficiencySource: { label: 'Lexus TX', url: 'https://www.lexus.com/models/TX' },
+      space: { cargo1: 97, cargo2: 57.4, cargo3: 20.2, leg2: null, leg3: null, head3: null, length: 203.5, tow: 5000 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', captains: 's', screens: '14 in touchscreen + 12.3 in gauges', heatFront: 's', ventFront: 's', wirelessCP: 's' },
+      pros: ['Luxury cabin with a 14-inch screen', 'Hybrid without charging; folding rear rows'],
+      cons: ['Only 6 seats, not 7 or 8', 'About one-third less maximum cargo than your Odyssey; no sliding doors']
+    },
+    {
+      id: 'tx550h', short: 'TX 550h+', year: 2025, make: 'Lexus', model: 'TX 550h+', trim: 'Luxury AWD', type: 'suv', power: 'phev', seats: 6,
+      mpg: 29, tank: 14.5, electricRange: 33, provisional: true,
+      drivetrain: 'AWD, 3.5L V6 plug-in hybrid, 404 hp',
+      price: { typical: 78160, dest: 1350, note: 'Planning estimate for MSRP and destination; confirm model-year pricing and equipment with the dealer.', sources: [{ label: '2025 TX Hybrid overview and specifications', url: 'https://www.caranddriver.com/lexus/tx-hybrid-2025' }] },
+      efficiencySource: { label: 'Lexus TX', url: 'https://www.lexus.com/models/TX' },
+      space: { cargo1: 97, cargo2: 57.4, cargo3: 20.2, leg2: null, leg3: null, head3: null, length: 203.2, tow: 5000 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', captains: 's', screens: '14 in touchscreen + 12.3 in gauges', heatFront: 's', ventFront: 's', wirelessCP: 's' },
+      charging: 'About 33 miles of electric range. Level 2 home charging is useful; costs below assume gas-only driving, not charged driving.',
+      pros: ['Luxury SUV with electric errands and gas road trips', 'Same large cabin and folding rows as the TX 500h'],
+      cons: ['Only 6 seats; expensive step up from the regular hybrid', 'Still much less cargo than a van; charging needed for the PHEV benefit']
+    },
+    {
+      id: 'cx90-phev', short: 'CX-90 PHEV', year: 2025, make: 'Mazda', model: 'CX-90 PHEV', trim: 'Premium Plus AWD', type: 'suv', power: 'phev', seats: 7,
+      mpg: 25, tank: 18.5, electricRange: 26, provisional: true,
+      drivetrain: 'AWD, 2.5L plug-in hybrid, 323 hp on premium fuel',
+      price: { typical: 56650, dest: 1455, note: 'Manufacturer launch MSRP; destination and current quote need confirmation. PHEV towing is 3,500 lb, not the gas model’s 5,000 lb.', sources: [{ label: 'Mazda 2025 pricing and packaging', url: 'https://news.mazdausa.com/2024-07-30-2025-Mazda-CX-90-Pricing-and-Packaging' }] },
+      efficiencySource: { label: '2025 CX-90 PHEV specifications', url: 'https://www.caranddriver.com/mazda/cx-90-hybrid-2025' },
+      space: { cargo1: 74.2, cargo2: 40, cargo3: 14.9, leg2: 39.4, leg3: 30.4, head3: 36.8, length: 200.8, tow: 3500 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '12.3 in center + 12.3 in gauges', wirelessCP: 's', parkSensors: 's' },
+      charging: 'About 26 miles electric. Energy estimates use 25 mpg on gas only; they do not model charging.',
+      pros: ['Upscale cabin and 12.3-inch center display', 'Plug-in option at a lower price than the Lexus'],
+      cons: ['Only about half your Odyssey’s maximum cargo', 'Small 3rd row and just 14.9 cu ft behind it']
+    },
+    {
+      id: 'xc90-t8', short: 'XC90 T8', year: 2025, make: 'Volvo', model: 'XC90 T8', trim: 'Plus AWD (2025.5)', type: 'suv', power: 'phev', seats: 7,
+      mpg: 27, tank: 18.8, electricRange: 33, provisional: true,
+      drivetrain: 'AWD, 2.0L plug-in hybrid, 455 hp',
+      price: { typical: 76900, dest: 1295, note: 'Planning estimate for refreshed 2025.5 Plus. Early 2025 cars have a different dashboard; verify the actual car.', sources: [{ label: '2025 XC90 plug-in hybrid overview', url: 'https://www.caranddriver.com/volvo/xc90-hybrid-2025' }] },
+      efficiencySource: { label: 'Volvo XC90 plug-in hybrid', url: 'https://www.volvocars.com/us/cars/xc90-hybrid/' },
+      space: { cargo1: 85.7, cargo2: 35.6, cargo3: 12.6, leg2: 37, leg3: 31.9, head3: 36.3, length: 195, tow: 5000 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '11.2 in touch on refreshed 2025.5; early 2025 has 9 in' },
+      charging: 'About 33 miles electric. Energy estimates use 27 mpg on gas only; they do not model charging.',
+      pros: ['Quiet luxury cabin in a shorter body', 'Plug-in power and folding rear seats'],
+      cons: ['Very little cargo with all rows up', 'A substantial cargo downgrade from the Odyssey']
+    },
+    {
+      id: 'x7', short: 'BMW X7', year: 2025, make: 'BMW', model: 'X7', trim: 'xDrive40i AWD', type: 'suv', power: 'gas', seats: 7,
+      mpg: 22, tank: 21.9, provisional: true,
+      drivetrain: 'AWD, 3.0L turbo inline-6, 48V mild hybrid (not a full hybrid or plug-in)',
+      price: { typical: 83900, dest: 1175, note: 'Planning estimate before options. Verify a bench-seat build: captain’s-chair configuration changes seat count and cargo folding.', sources: [{ label: '2025 BMW X7 overview and specifications', url: 'https://www.caranddriver.com/bmw/x7-2025' }] },
+      efficiencySource: { label: 'BMW X7', url: 'https://www.bmwusa.com/vehicles/x-models/x7/sports-activity-vehicle/overview.html' },
+      space: { cargo1: 90.4, cargo2: 48.6, cargo3: 12.8, leg2: null, leg3: null, head3: null, length: 203.6, tow: 7500 },
+      f: { flat2: ['s', 'Bench configuration; verify actual seat layout'], flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '14.9 in touch + 12.3 in gauges', heatFront: 's', moonroof: 's' },
+      pros: ['Refined inline-6 and standard air suspension', '14.9-inch curved touchscreen'],
+      cons: ['Mild hybrid: no meaningful electric-only driving', 'Pricey, with a small 3rd row and less cargo than a van']
+    },
+    {
+      id: 'gls', short: 'Mercedes GLS', year: 2025, make: 'Mercedes-Benz', model: 'GLS 450', trim: '4MATIC', type: 'suv', power: 'gas', seats: 7,
+      mpg: 21, tank: 23.8, provisional: true,
+      drivetrain: 'AWD, 3.0L turbo inline-6, 48V mild hybrid (not a full hybrid or plug-in)',
+      price: { typical: 89950, dest: 1150, note: 'Planning estimate before options; confirm destination and actual build.', sources: [{ label: '2025 GLS overview and specifications', url: 'https://www.caranddriver.com/mercedes-benz/gls-class-2025' }] },
+      efficiencySource: { label: 'Mercedes-Benz GLS', url: 'https://www.mbusa.com/en/vehicles/class/gls/suv' },
+      space: { cargo1: 84.7, cargo2: null, cargo3: 17.4, leg2: null, leg3: null, head3: null, length: 205, tow: 7700 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '12.3 in touch + 12.3 in gauges', audio: ['s', 'Burmester'], moonroof: 's' },
+      pros: ['Comfort-focused luxury with standard air suspension', 'Adult-usable 3rd row for occasional trips'],
+      cons: ['21 mpg despite the mild-hybrid badge', 'High price and less maximum cargo than the Odyssey']
+    },
+    {
+      id: 'suburban', short: 'Suburban', year: 2025, make: 'Chevrolet', model: 'Suburban', trim: 'LT 5.3L 2WD', type: 'suv', power: 'gas', seats: 8,
+      mpg: 17, tank: 28, provisional: true,
+      drivetrain: 'RWD, 5.3L V8, 10-speed automatic',
+      price: { typical: 65300, dest: 1995, note: 'Planning estimate for LT 2WD. Towing figure requires Max Trailering equipment; verify the actual vehicle.', sources: [{ label: '2025 Suburban overview and specifications', url: 'https://www.caranddriver.com/chevrolet/suburban-2025' }] },
+      efficiencySource: { label: 'Chevrolet Suburban', url: 'https://www.chevrolet.com/suvs/suburban' },
+      space: { cargo1: 144.5, cargo2: 93.8, cargo3: 41.5, leg2: null, leg3: null, head3: null, length: 226.3, tow: 8300 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '17.7 in touch + 11 in gauges', wirelessCP: 's' },
+      pros: ['Van-sized cargo without removing seats', '17.7-inch screen and real space behind the 3rd row'],
+      cons: ['About 23 inches longer than your Odyssey: check the garage', '17 mpg; no hybrid and no sliding doors']
+    },
+    {
+      id: 'yukon-xl', short: 'Yukon XL', year: 2025, make: 'GMC', model: 'Yukon XL', trim: 'Elevation 5.3L 2WD', type: 'suv', power: 'gas', seats: 8,
+      mpg: 17, tank: 28, provisional: true,
+      drivetrain: 'RWD, 5.3L V8, 10-speed automatic',
+      price: { typical: 70300, dest: 1995, note: 'Planning estimate for XL Elevation 2WD. Towing depends on equipment; confirm the VIN-specific rating.', sources: [{ label: '2025 Yukon / Yukon XL overview', url: 'https://www.caranddriver.com/gmc/yukon-yukon-xl-2025' }] },
+      efficiencySource: { label: 'GMC Yukon', url: 'https://www.gmc.com/suvs/yukon' },
+      space: { cargo1: 144.7, cargo2: 93.6, cargo3: 41.5, leg2: null, leg3: null, head3: null, length: 225.2, tow: 8200 },
+      f: { flat2: 's', flat3: 's', remove2: 'n', slidingDoors: 'n', screens: '16.8 in portrait touchscreen', wirelessCP: 's' },
+      pros: ['Van-sized cargo with all rear seats folded', '16.8-inch screen, not the Suburban’s 17.7-inch unit'],
+      cons: ['Large truck footprint and 17 mpg', 'More expensive than its closely related Suburban']
+    },
+    {
+      id: 'sequoia', short: 'Sequoia', year: 2025, make: 'Toyota', model: 'Sequoia', trim: 'SR5 2WD', type: 'suv', power: 'hybrid', seats: 8,
+      mpg: 22, tank: 22.5, provisional: true,
+      drivetrain: 'RWD, 3.4L twin-turbo V6 full hybrid, 437 hp',
+      price: { typical: 62325, dest: 1945, note: 'Planning estimate for SR5 2WD; confirm current quote. Cargo floor is compromised by the battery and raised 3rd row.', sources: [{ label: '2025 Sequoia overview and specifications', url: 'https://www.caranddriver.com/toyota/sequoia-2025' }] },
+      efficiencySource: { label: 'Toyota Sequoia', url: 'https://www.toyota.com/sequoia/' },
+      space: { cargo1: 86.9, cargo2: 49, cargo3: 11.5, leg2: null, leg3: null, head3: null, length: 208.1, tow: 9520 },
+      f: { flat2: ['q', 'Verify in person; rear load area is not a continuous flat floor'], flat3: ['n', 'Raised folded 3rd row; adjustable cargo shelf does not make it a van-like floor'], remove2: 'n', slidingDoors: 'n', screens: '8 in standard on SR5; 14 in available' },
+      pros: ['Standard full hybrid and strong towing capacity', 'Worth knowing about if truck capability matters'],
+      cons: ['Does not meet a continuous flat-load-floor requirement', 'Hybrid badge does not mean Sienna-like economy: 22 mpg']
+    }
+  );
   VEHICLES.forEach(v => { v.interior = INTERIOR[v.id] || []; });
+
+  const START_IDS = ['carnival', 'grand-highlander', 'tx500h', 'ev9'];
+  function discoverVehicles(list, { browse = 'start', query = '' } = {}) {
+    const q = query.trim().toLowerCase();
+    return list.filter(v => {
+      if (q && !`${v.year} ${v.make} ${v.model} ${v.trim}`.toLowerCase().includes(q)) return false;
+      if (q) return true;
+      if (browse === 'start') return START_IDS.includes(v.id);
+      if (['van', 'suv'].includes(browse)) return v.type === browse;
+      if (['hybrid', 'phev', 'ev'].includes(browse)) return v.power === browse;
+      return true;
+    });
+  }
 
   function valid(n) { return typeof n === 'number' && Number.isFinite(n) && n >= 0; }
 
@@ -853,7 +971,7 @@ const VC = (() => {
     return a.miles / v.mpg * a.gas;
   }
 
-  function rangeMiles(v) { return v.power === 'ev' ? v.range : Math.round(v.tank * v.mpg); }
+  function rangeMiles(v) { return v.power === 'ev' ? v.range : Math.round(v.tank * v.mpg) + (v.electricRange || 0); }
 
   function ownershipCost(v, a, years) {
     const e = annualEnergyCost(v, a);
@@ -973,6 +1091,6 @@ const VC = (() => {
     return sel.concat(id);
   }
 
-  return { VEHICLES, FEATURE_GROUPS, FACTORS, MAX_COMPARE, annualEnergyCost, rangeMiles, ownershipCost, feature, featureScore, uniqueFeatures, scoreVehicles, filterVehicles, toggleCompare, NUM_FILTERS, FEAT_LEVELS, flatFloor };
+  return { VEHICLES, FEATURE_GROUPS, FACTORS, MAX_COMPARE, annualEnergyCost, rangeMiles, ownershipCost, feature, featureScore, uniqueFeatures, scoreVehicles, filterVehicles, toggleCompare, NUM_FILTERS, FEAT_LEVELS, flatFloor, discoverVehicles };
 })();
 if (typeof globalThis !== 'undefined') globalThis.VC = VC;
