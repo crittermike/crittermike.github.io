@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T03:45:54.198Z",
+  "generated_at": "2026-10-26T04:00:54.972Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,26 @@
         "balance_str": "$104.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-work-on-2026-10-26-8bd4152f157ea98e18e47f119f2592c76a0c1c5bf27afc221617ccc52ef755eb",
+          "label": "Reading: Read 20 minutes",
+          "dueDate": null,
+          "workOnDate": "2026-10-26"
+        },
+        {
+          "id": "sch-work-on-2026-10-26-2d0d3f7affa87ead0d6046516892177d2d2dd88761bb962c80ec82a1df8e9aac",
+          "label": "Spelling: Complete WB p. 42",
+          "dueDate": null,
+          "workOnDate": "2026-10-26"
+        },
+        {
+          "id": "sch-work-on-2026-10-26-450e8359cc14425197276bccae8da1fcdd566cdf0a2f2fd20fecd3731cdf27a8",
+          "label": "Math: Complete WB pp. 88-90",
+          "dueDate": null,
+          "workOnDate": "2026-10-26"
+        }
+      ]
     },
     {
       "key": "william",
@@ -43,33 +62,7 @@
         "balance_str": "$64.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-10-26-cccd4c735fc602eda577d44cd494c3f19b926926a2deb3b2e513e1d804ec4a9e",
-          "label": "Spanish (Simon): IXL 7F",
-          "dueDate": "2026-10-26"
-        },
-        {
-          "id": "sch-2026-10-26-2dc9f658fa371d8de9e84c0dbbc1a0cd3d829eff399983124e4f16dbba467693",
-          "label": "Spanish (Simon): IXL 6M",
-          "dueDate": "2026-10-26"
-        },
-        {
-          "id": "sch-2026-10-26-ebf076dc031e4748c3a34035b81346b8ecae6cfa63dff3c940110b79eb737435",
-          "label": "Spanish (Simon): Complete p.3",
-          "dueDate": "2026-10-26"
-        },
-        {
-          "id": "sch-2026-10-26-ba32e23d1d0ef77326da2d5892e36e0e8d81e909f6dd43ffb193724979b48f59",
-          "label": "Honors English (deMarrais): Read",
-          "dueDate": "2026-10-26"
-        },
-        {
-          "id": "sch-2026-10-26-52643a30ae10801abbd4128e25f2fe04d190b4943ea324c121b564a45c5ac94f",
-          "label": "Honors English (deMarrais): annotate Chapter 25 for homework",
-          "dueDate": "2026-10-26"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -297,7 +290,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -305,8 +298,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Chicken and vegetable soup with French bread",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -314,7 +307,7 @@
       "dow_short": "Tue",
       "name": "Roast pork tenderloin with rice and green beans",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -353,19 +346,12 @@
   "weather": {
     "now": {
       "temp": 53,
-      "hi": 68,
+      "hi": 72,
       "lo": 49,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 72,
-        "lo": 49,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -393,24 +379,31 @@
         "hi": 77,
         "lo": 54,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 73,
+        "lo": 59,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-25T07:44",
         "2026-10-26T07:44",
         "2026-10-27T07:45",
         "2026-10-28T07:46",
         "2026-10-29T07:47",
-        "2026-10-30T07:48"
+        "2026-10-30T07:48",
+        "2026-10-31T07:49"
       ],
       "sunsets": [
-        "2026-10-25T18:42",
         "2026-10-26T18:41",
         "2026-10-27T18:40",
         "2026-10-28T18:39",
         "2026-10-29T18:38",
-        "2026-10-30T18:37"
+        "2026-10-30T18:37",
+        "2026-10-31T18:36"
       ],
       "timezone": "America/New_York"
     }
@@ -2065,6 +2058,6 @@
     "creditDebt": 50494.06,
     "netLiquid": 76569.55,
     "source": "ynab",
-    "updatedAt": "2026-10-26T03:45:52.934Z"
+    "updatedAt": "2026-10-26T04:00:53.337Z"
   }
 }
