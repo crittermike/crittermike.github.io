@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T11:45:59.234Z",
+  "generated_at": "2026-10-26T12:01:04.181Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -278,11 +278,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken and vegetable soup with French bread",
-    "protein_g": 65,
-    "cal": 595,
-    "effort": "easy",
-    "note": "October 26: prioritize soup bumped October 20. Saved recipe is ingredient-only; this is an assistant-drafted lean breast adaptation for six, not kitchen-tested. Chop vegetables ahead if convenient for the 4:00PM-5:00PM dentist appointment, refrigerating until cooking. Soften onion, carrots and celery in oil, add broth and chicken, simmer gently until vegetables are tender and every chicken piece reaches 165 F; shred chicken into soup. Serve bread separately. Mike: meat from 9.5 oz raw breast, 70 g bread and about one-sixth of vegetables, broth and oil. Generic cal/protein assumptions: chicken 285/54.625, bread 180/6, vegetables 80/2, oil 20/0, broth 30/2. Rounded estimate 595 cal/65 g protein; actual brands and portions vary.",
+    "name": "Meatloaf with mashed potatoes and cabbage",
+    "protein_g": null,
+    "cal": null,
+    "effort": "medium",
+    "note": "October 26: moved from October 23 to Monday per Mike. Saved recipe is the reference; nutrition not estimated. Mike requested this swap.",
     "recipe": null
   },
   "mealweek": [
@@ -297,7 +297,7 @@
     {
       "dow": "Monday",
       "dow_short": "Mon",
-      "name": "Chicken and vegetable soup with French bread",
+      "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": true,
       "isTomorrow": false,
       "recipe": null
@@ -305,7 +305,7 @@
     {
       "dow": "Tuesday",
       "dow_short": "Tue",
-      "name": "Roast pork tenderloin with rice and green beans",
+      "name": "Chicken and vegetable soup with French bread",
       "isToday": false,
       "isTomorrow": true,
       "recipe": null
@@ -345,7 +345,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 50,
+      "temp": 49,
       "hi": 72,
       "lo": 49,
       "icon": "☀️",
@@ -2058,6 +2058,6 @@
     "creditDebt": 50494.06,
     "netLiquid": 76569.55,
     "source": "ynab",
-    "updatedAt": "2026-10-26T11:45:57.874Z"
+    "updatedAt": "2026-10-26T12:01:00.394Z"
   }
 }
