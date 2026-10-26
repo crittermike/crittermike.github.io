@@ -42,6 +42,9 @@ test('vehicle records: unique ids, all 2025, exact trims', () => {
     assert.ok(v.pros.length >= 2 && v.cons.length >= 2, `${id} needs pros and cons`);
     assert.ok(v.interior.length >= 1 && v.interior.some(p => /dash/.test(p.src)), `${id} needs a dashboard photo`);
     assert.ok(v.price && v.price.typical > 0 && v.price.sources.length >= 1, `${id} needs a sourced price`);
+    assert.ok(v.used && v.used.low > 0 && v.used.low <= v.used.high && v.used.source.url, `${id} needs a used-price estimate`);
+    assert.equal(v.price.typical, Math.round((v.used.low + v.used.high) / 2), `${id} ranks by the used-price midpoint`);
+    assert.equal(v.price.dest, 0, `${id} has no new-car destination charge`);
     assert.ok(v.photo && v.photo.src && v.photo.alt.length > 20 && v.photo.credit && v.photo.page, `${id} photo + credit`);
   }
 });
@@ -110,11 +113,11 @@ test('EV9 Wind is not credited with the exterior V2L outlet', () => {
   assert.ok(!/exterior v2l/.test(text) || /not on wind|higher trims/.test(text));
 });
 
-test('ownershipCost adds destination and energy over the years', () => {
+test('ownershipCost adds used purchase estimate and energy over the years', () => {
   const { VEHICLES, ownershipCost, annualEnergyCost } = loadCore();
   const a = { miles: 12000, gas: 3.25, elec: 0.15 };
   const ody = VEHICLES.find(v => v.id === 'odyssey');
-  assert.equal(ownershipCost(ody, a, 8), 42220 + 1450 + annualEnergyCost(ody, a) * 8);
+  assert.equal(ownershipCost(ody, a, 8), ody.price.typical + annualEnergyCost(ody, a) * 8);
   assert.ok(Number.isNaN(ownershipCost(ody, { miles: -1, gas: 3 }, 8)));
 });
 
@@ -158,8 +161,10 @@ test('discovery starts small, searches every group, and preserves other filters'
 
 test('added candidates keep estimates and unknown equipment explicit', () => {
   const { VEHICLES, feature, annualEnergyCost, rangeMiles } = loadCore();
-  const added = VEHICLES.filter(v => v.provisional);
+  const addedIds = ['tx500h', 'tx550h', 'cx90-phev', 'xc90-t8', 'x7', 'gls', 'suburban', 'yukon-xl', 'sequoia'];
+  const added = VEHICLES.filter(v => addedIds.includes(v.id));
   assert.equal(added.length, 9);
+  assert.equal(VEHICLES.filter(v => v.provisional).map(v => v.id).join(), 'xc90-t8,x7,yukon-xl,sequoia');
   for (const v of added) {
     assert.ok(v.price.typical > 0 && v.price.sources.length > 0, v.id);
     assert.ok(v.space.cargo1 > 0 && v.pros.length && v.cons.length, v.id);
@@ -173,23 +178,26 @@ test('added candidates keep estimates and unknown equipment explicit', () => {
   assert.match(feature(VEHICLES.find(v => v.id === 'yukon-xl'), 'screens').text, /16.8/);
 });
 
-test('PHEV costs are conservative gas-only estimates, not MPGe treated as MPG', () => {
+test('PHEV costs split miles between electricity and gas using the EPA utility factor', () => {
   const { VEHICLES, annualEnergyCost } = loadCore();
   for (const v of VEHICLES.filter(v => v.power === 'phev')) {
-    assert.ok(v.electricRange > 0);
-    assert.equal(annualEnergyCost(v, { miles: 12000, gas: 4, elec: 0.15 }), 12000 / v.mpg * 4);
+    assert.ok(v.electricShare > 0 && v.electricShare < 1 && v.kwhPer100 > 0, v.id);
   }
+  const pac = VEHICLES.find(v => v.id === 'pacifica-hybrid');
+  // 39.1% of 12,000 mi at 30 mpg and $4 + 60.9% at 41 kWh/100 mi and $0.15
+  assert.equal(Math.round(annualEnergyCost(pac, { miles: 12000, gas: 4, elec: 0.15 })), 1075);
+  assert.ok(Number.isNaN(annualEnergyCost(pac, { miles: 12000, gas: 4, elec: NaN })));
 });
 
 test('numeric filters apply max and min limits', () => {
-  const { VEHICLES, filterVehicles } = loadCore();
+  const { VEHICLES, filterVehicles, annualEnergyCost } = loadCore();
   const a = { miles: 12000, gas: 3.25, elec: 0.15, years: 8 };
   const total = (v) => v.price.typical + (v.price.dest || 0);
   const under60 = filterVehicles(VEHICLES, { num: { price: 60000 } }, a);
   assert.ok(under60.length > 0 && under60.every(v => total(v) <= 60000));
   assert.ok(VEHICLES.filter(v => total(v) <= 60000).length === under60.length);
   const cheapRun = filterVehicles(VEHICLES, { num: { energy: 1500 } }, a);
-  assert.ok(cheapRun.length > 0 && cheapRun.every(v => v.mpg >= 26 || v.power === 'ev'));
+  assert.ok(cheapRun.length > 0 && cheapRun.every(v => annualEnergyCost(v, a) <= 1500));
   assert.ok(filterVehicles(VEHICLES, { num: { cargo1: 140 } }, a).every(v => v.space.cargo1 >= 140));
   assert.equal(filterVehicles(VEHICLES, { num: { price: NaN } }, a).length, VEHICLES.length);
 });

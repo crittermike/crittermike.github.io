@@ -17,7 +17,12 @@
   const kmoney = (n) => Number.isFinite(n) ? '$' + (n / 1000).toFixed(n >= 100000 ? 0 : 1) + 'k' : 'n/a';
   const num = (n, d = 0) => Number.isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d }) : 'n/a';
   const assumptions = () => ({ miles: st.miles, gas: st.gas, elec: st.elec, years: st.years });
-  const total = (v) => v.price.typical + (v.price.dest || 0);
+  const total = (v) => v.price.typical;
+  const years = (v) => v.used.year === v.year ? v.year : `${v.used.year}–${String(v.year).slice(2)}`;
+  const usedRange = (v) => {
+    const low = Math.round(v.used.low / 1000), high = Math.round(v.used.high / 1000);
+    return low === high ? `$${low}k` : `$${low}–${high}k`;
+  };
   const filtered = () => VC.filterVehicles(VEHICLES, st, assumptions());
   const visible = () => VC.discoverVehicles(filtered(), st);
   const POWER = { gas: 'Gas / mild hybrid', hybrid: 'Full hybrid', phev: 'Plug-in hybrid', ev: 'Electric' };
@@ -184,23 +189,21 @@
       return `<li class="card${sel ? ' selected' : ''}" id="card-${v.id}">
         <div class="card-body">
           <h3>${esc(v.make)} ${esc(v.model)}</h3>
-          <p class="trim">${v.year} &middot; ${esc(v.trim)}</p>
+          <p class="trim">${years(v)} &middot; ${esc(v.trim)}</p>
           <div class="chips"><span class="chip pw">${v.power === 'gas' ? (/mild hybrid/i.test(v.drivetrain) ? 'Mild hybrid' : 'Gas') : POWER[v.power]}</span><span class="chip">${v.seats} seats</span>${v.provisional ? '<span class="chip verify">Verify specs</span>' : ''}</div>
           <dl class="stats">
-            <div><dt>${v.provisional ? 'Est. price' : 'Price + dest.'}</dt><dd>${kmoney(total(v))}</dd></div>
+            <div><dt>Used price</dt><dd>${usedRange(v)}</dd></div>
             <div><dt>Max cargo</dt><dd>${v.space.cargo1} <small>cu ft</small></dd></div>
             <div><dt>${v.power === 'ev' ? 'Electric range' : 'Combined MPG'}</dt><dd>${v.power === 'ev' ? `${v.range} <small>mi</small>` : `${v.mpg}${v.power === 'phev' ? ' <small>on gas</small>' : ''}`}</dd></div>
           </dl>
           <p class="cargo-note">${Math.abs(cargoDelta) <= 2 ? 'Cargo \u2248 Odyssey' : `${Math.abs(cargoDelta)}% ${cargoDelta < 0 ? 'less' : 'more'} cargo vs. Odyssey`}</p>
           <p class="floor-note">${VC.flatFloor(v) ? (VC.feature(v, 'remove2').s === 's' && VC.feature(v, 'flat2').s !== 's' ? 'Flat floor: remove 2nd row' : 'Rear rows fold flat') : 'Flat floor: no / unverified'}</p>
           <details data-details="${v.id}"${expanded.has(v.id) ? ' open' : ''}><summary>Details</summary>
-          ${v.provisional ? '<p class="src">Price and trim specs need confirmation.</p>' : ''}
           ${ph.length ? `<div class="gallery" data-id="${v.id}">
           <figure><button type="button" data-open="0" aria-label="Enlarge photo"><img src="${ph[0].src}" alt="${esc(ph[0].alt)}" loading="lazy" width="960" height="600"></button></figure>
           <div class="thumbs">${ph.map((p, i) => `<button type="button" data-i="${i}" aria-current="${i === 0}" aria-label="Photo ${i + 1} of ${ph.length}"><img src="${p.src}" alt="" loading="lazy"></button>`).join('')}</div>
           </div>` : ''}
           <dl class="stats">
-            <div><dt>Price</dt><dd>${money(total(v))} <small>w/ dest.</small></dd></div>
             <div><dt>Energy / yr</dt><dd>${money(e)}</dd></div>
             <div><dt>Efficiency</dt><dd>${efficiency(v)}</dd></div>
             <div><dt>Range</dt><dd>${num(VC.rangeMiles(v))} <small>mi</small></dd></div>
@@ -209,7 +212,7 @@
           </dl>
           <ul class="cons">${v.cons.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
           ${v.charging ? `<p class="src"><strong>Charging:</strong> ${esc(v.charging)}</p>` : ''}
-          <p class="src">${esc(v.drivetrain)}. ${esc(v.price.note)}</p><p class="src">${v.price.sources.concat(v.efficiencySource).filter((s, i, a) => a.findIndex(x => x.url === s.url) === i).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(' · ')}</p>
+          <p class="src">${esc(v.drivetrain)}.</p><p class="src">${esc(v.used.note)}</p><p class="src">${v.price.sources.concat(v.efficiencySource).filter((s, i, a) => a.findIndex(x => x.url === s.url) === i).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(' · ')}</p>
           </details>
           <button type="button" class="btn" data-cmp="${v.id}" aria-label="${sel ? 'Remove' : 'Compare'} ${esc(v.short)}" aria-pressed="${sel}" ${full ? 'disabled' : ''}>${sel ? 'Selected \u2713' : full ? '3 selected (limit)' : '+ Compare'}</button>
         </div>
@@ -253,7 +256,7 @@
   function bigColumns() {
     const a = assumptions();
     const cols = [
-      { g: 'Cost', key: 'price', label: 'Price', val: total, fmt: v => kmoney(total(v)), best: 'min' },
+      { g: 'Cost', key: 'price', label: 'Used price', val: total, fmt: v => kmoney(total(v)), best: 'min' },
       { g: 'Cost', key: 'energy', label: 'Energy / yr', val: v => VC.annualEnergyCost(v, a), fmt: v => money(VC.annualEnergyCost(v, a)), best: 'min' },
       { g: 'Cost', key: 'own', label: `${st.years}-yr purchase + energy`, val: v => VC.ownershipCost(v, a, st.years), fmt: v => kmoney(VC.ownershipCost(v, a, st.years)), best: 'min' },
       { g: 'Basics', key: 'rank', label: 'Rank', val: v => -(rankInfo[v.id]?.pos ?? 99), fmt: v => rankInfo[v.id] ? '#' + rankInfo[v.id].pos : 'n/a', best: 'max' },
@@ -372,7 +375,8 @@
     if (sel.length < 2) { $('#compare-out').innerHTML = `<p class="empty">${sel.length ? 'Select one more.' : 'Select 2 or 3 vehicles.'} <a href="#vehicles">Explore</a></p>`; return; }
     const a = assumptions();
     const rows = [
-      ['Price w/ destination', total, money, 'min'],
+      ['Used price (midpoint)', total, kmoney, 'min'],
+      ['Model years', null, years],
       ['Energy per year', v => VC.annualEnergyCost(v, a), money, 'min'],
       [`${st.years}-year purchase + energy`, v => VC.ownershipCost(v, a, st.years), money, 'min'],
       ['Efficiency', null, efficiency],
@@ -388,7 +392,7 @@
       ['Crash-test award', null, v => AWARD[v.iihs] || 'Not verified'],
       ['Drivetrain', null, v => v.drivetrain]
     ];
-    let html = `<div class="table-wrap"><table><thead><tr><th scope="col">2025 models</th>${sel.map(v => `<th scope="col">${esc(v.short)}${v.provisional ? '<br>Verify specs' : ''}</th>`).join('')}</tr></thead><tbody>`;
+    let html = `<div class="table-wrap"><table><thead><tr><th scope="col"></th>${sel.map(v => `<th scope="col">${esc(v.short)}${v.provisional ? '<br>Verify specs' : ''}</th>`).join('')}</tr></thead><tbody>`;
     rows.forEach(([label, val, fmt, best]) => {
       let target = null;
       if (val && best) { const xs = sel.map(val).filter(Number.isFinite); target = best === 'min' ? Math.min(...xs) : Math.max(...xs); }
@@ -421,8 +425,9 @@
     'EVs: check public chargers on your usual trips and get a home charger install quote',
     'Run the VIN at nhtsa.gov/recalls (Grand Highlander airbag, EV9 ICCU, EX90 computer upgrade)',
     'Get insurance quotes for your top two',
-    'Ask about dealer markups, add-ons and current incentives in writing',
-    'Fold or remove both rear rows yourself; measure the narrowest width and usable length for a 4x8 sheet'
+    'Get the out-the-door price, dealer add-ons and remaining warranty in writing',
+    'Fold or remove both rear rows yourself; measure the narrowest width and usable length for a 4x8 sheet',
+    'Get a vehicle history report and an independent pre-purchase inspection; for plug-ins and EVs, a battery health report'
   ];
   function buildChecklist() {
     $('#chk').innerHTML = CHECKS.map((c, i) => `<li><label><input type="checkbox" data-c="${i}" ${st.checks[i] ? 'checked' : ''}><span>${esc(c)}</span></label></li>`).join('');
