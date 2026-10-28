@@ -2,206 +2,450 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Religion Unit 2 Part 1: Study Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thomas: Kingdom Words! (Religion Unit 2)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E👑%3C/text%3E%3C/svg%3E">
 <style>
-  body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 16px; color: #222; }
-  h1 { font-size: 1.4em; text-align: center; margin: 8px 0 16px; }
-  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
-  button { font-size: 1em; padding: 10px 14px; border: none; border-radius: 6px; background: #2f6fbd; color: #fff; cursor: pointer; }
-  button.secondary { background: #6b7785; }
-  button:disabled { background: #b8c0ca; cursor: default; }
-  .card { background: #fff; border-radius: 10px; padding: 20px; max-width: 560px; margin: 0 auto; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
-  .term { font-size: 1.5em; font-weight: bold; text-align: center; min-height: 2em; }
-  .def { font-size: 1.1em; text-align: center; min-height: 3em; margin-top: 12px; line-height: 1.4; }
-  .row { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 700px; margin: 0 auto; }
-  .tile { background: #fff; border: 2px solid #cfd6df; border-radius: 8px; padding: 12px; min-height: 52px; display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; font-size: .95em; }
-  .tile.sel { border-color: #2f6fbd; background: #e7f0fb; }
-  .tile.ok { border-color: #2e8b57; background: #e4f5ea; cursor: default; }
-  .tile.bad { border-color: #c0392b; background: #fbeaea; }
-  .status { text-align: center; margin: 12px 0; font-weight: bold; min-height: 1.4em; }
-  .opt { display: block; width: 100%; margin: 6px 0; background: #fff; color: #222; border: 2px solid #cfd6df; text-align: left; }
-  .opt.right { background: #e4f5ea; border-color: #2e8b57; }
-  .opt.wrong { background: #fbeaea; border-color: #c0392b; }
-  .hidden { display: none; }
-  .note { font-size: .85em; color: #555; text-align: center; margin-top: 18px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif;
+    background: linear-gradient(135deg, #fff1c1 0%, #d8c8ff 100%);
+    min-height: 100vh;
+    padding: 16px 16px max(24px, env(safe-area-inset-bottom));
+    color: #1a1a2e;
+  }
+  h1 {
+    text-align: center;
+    font-size: clamp(28px, 6vw, 48px);
+    color: #6a2c91;
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+  }
+  .subtitle { text-align: center; font-size: 18px; margin-bottom: 12px; color: #555; }
+  .stats-bar {
+    max-width: 800px; margin: 0 auto 14px; display: flex; justify-content: space-around;
+    background: #1a1a2e; color: #fff; padding: 10px; border-radius: 16px;
+    font-size: 16px; font-weight: bold; flex-wrap: wrap; gap: 8px;
+  }
+  .stat { display: flex; align-items: center; gap: 4px; }
+  .mode-picker { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .mode-btn, .nav-btn, .big-btn, .quiz-choice {
+    font-family: inherit; color: #1a1a2e; border: 4px solid #1a1a2e; border-radius: 16px;
+    cursor: pointer; font-weight: bold; box-shadow: 4px 4px 0 #1a1a2e; touch-action: manipulation;
+    transition: transform 0.1s, background 0.15s;
+  }
+  .mode-btn { font-size: clamp(15px, 2.8vw, 20px); padding: 14px 22px; background: #fff; }
+  @media (hover: hover) {
+    .mode-btn:hover, .nav-btn:hover, .big-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1a1a2e; }
+  }
+  .mode-btn:active, .nav-btn:active, .big-btn:active, .quiz-choice:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .mode-btn.active { background: #ffd166; }
+  button:focus-visible, .match-item:focus-visible { outline: 4px solid #118ab2; outline-offset: 3px; }
+  .panel {
+    max-width: 800px; margin: 0 auto; background: #fff; border: 5px solid #1a1a2e;
+    border-radius: 24px; padding: 24px; box-shadow: 8px 8px 0 #1a1a2e; min-height: 400px;
+  }
+  .hidden { display: none !important; }
+  .instructions {
+    text-align: center; font-size: clamp(16px, 3.6vw, 20px); background: #eef6ff;
+    border: 3px dashed #118ab2; border-radius: 12px; padding: 10px 12px; margin-bottom: 18px; line-height: 1.4;
+  }
+
+  /* LEARN */
+  .card { text-align: center; padding: 10px; cursor: pointer; user-select: none; }
+  .card-num { font-size: 16px; color: #6a2c91; font-weight: bold; margin-bottom: 4px; }
+  .card-emoji { font-size: clamp(70px, 16vw, 120px); line-height: 1; margin: 6px 0 14px; }
+  .card-name { font-size: clamp(28px, 6vw, 44px); color: #6a2c91; margin-bottom: 14px; font-weight: bold; }
+  .card-def { font-size: clamp(18px, 4vw, 24px); line-height: 1.5; margin-bottom: 12px; }
+  .card-hint { font-size: 18px; color: #777; margin-top: 18px; }
+  .card-examples {
+    font-size: clamp(16px, 3.5vw, 20px); background: #fff3cd; border: 3px dashed #ffa500;
+    border-radius: 12px; padding: 14px; margin-top: 12px; line-height: 1.45;
+  }
+  .card-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 12px; }
+  .nav-btn { font-size: 22px; padding: 14px 22px; background: #ffd166; }
+  .card-count { font-size: 18px; color: #555; text-align: center; }
+  .big-ideas { margin-top: 22px; background: #f3ecff; border: 3px solid #6a2c91; border-radius: 16px; padding: 14px 16px; }
+  .big-ideas h3 { color: #6a2c91; margin-bottom: 8px; font-size: 20px; }
+  .big-ideas li { margin: 6px 0 6px 22px; font-size: 17px; line-height: 1.4; }
+
+  /* MATCH */
+  .match-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 14px; margin-bottom: 16px; }
+  .match-col h3 { text-align: center; font-size: 20px; margin-bottom: 10px; color: #6a2c91; }
+  .match-item {
+    padding: 12px; margin-bottom: 10px; background: #fff3cd; border: 3px solid #1a1a2e;
+    border-radius: 12px; cursor: pointer; font-size: 16px; text-align: center; transition: all 0.15s;
+    user-select: none; line-height: 1.3; min-height: 54px; display: flex; align-items: center; justify-content: center;
+  }
+  .match-col.terms .match-item { font-weight: bold; font-size: 17px; }
+  @media (hover: hover) { .match-item:hover { background: #ffe08a; } }
+  .match-item.selected { background: #118ab2; color: #fff; border-color: #118ab2; transform: scale(1.04); }
+  .match-item.correct { background: #06d6a0; color: #fff; border-color: #06d6a0; pointer-events: none; animation: pop 0.4s; opacity: .85; }
+  .match-item.wrong { background: #ef476f; color: #fff; animation: shake 0.4s; }
+  .match-status { text-align: center; font-size: 20px; margin-top: 8px; font-weight: bold; min-height: 28px; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+  @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+  /* QUIZ */
+  .quiz-progress { text-align: center; font-size: 17px; margin-bottom: 10px; color: #555; }
+  .quiz-bar { height: 14px; background: #eee; border: 2px solid #1a1a2e; border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .quiz-bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, #06d6a0, #6a2c91); transition: width 0.3s; }
+  .quiz-type { text-align: center; font-size: 15px; font-weight: bold; color: #6a2c91; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .quiz-question { font-size: clamp(19px, 4.4vw, 26px); text-align: center; margin-bottom: 18px; font-weight: bold; line-height: 1.4; }
+  .quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .quiz-choice { font-size: clamp(15px, 3.2vw, 19px); padding: 14px; background: #fff; text-align: center; min-height: 64px; line-height: 1.3; }
+  .quiz-choice.correct { background: #06d6a0; color: #fff; animation: pop 0.4s; }
+  .quiz-choice.wrong { background: #ef476f; color: #fff; }
+  .quiz-choice:disabled { cursor: default; }
+  .quiz-feedback { text-align: center; font-size: 19px; margin: 14px 0 6px; min-height: 30px; font-weight: bold; line-height: 1.4; border-radius: 12px; padding: 0 8px; }
+  .quiz-feedback.good { background: #dff7e8; color: #126d36; padding: 10px; }
+  .quiz-feedback.bad { background: #fde4e4; color: #a12525; padding: 10px; }
+  .quiz-streak { text-align: center; font-size: 18px; margin-bottom: 8px; color: #ff6b35; font-weight: bold; min-height: 24px; }
+  .center { text-align: center; }
+  .big-btn { font-size: 22px; padding: 14px 26px; background: #06d6a0; color: #fff; margin-top: 12px; }
+  .big-btn.yellow { background: #ffd166; color: #1a1a2e; }
+  .final { text-align: center; padding: 20px 10px; }
+  .final .trophy { font-size: 100px; animation: pop 0.6s; }
+  .final h2 { font-size: clamp(26px, 5vw, 36px); color: #6a2c91; margin: 14px 0; }
+  .final p { font-size: 20px; margin-bottom: 12px; }
+  .final .stars { font-size: 46px; margin: 8px 0; letter-spacing: 8px; }
+  .review { text-align: left; background: #fff3cd; border: 3px dashed #ffa500; border-radius: 12px; padding: 12px 16px; margin: 14px auto; max-width: 560px; font-size: 16px; line-height: 1.45; }
+  .review li { margin: 6px 0 6px 18px; }
+  .new-best { font-size: 22px; color: #06a86a; margin: 10px 0; animation: pop 0.6s; font-weight: bold; }
+  .confetti { position: fixed; top: -20px; width: 12px; height: 18px; animation: fall 1.4s linear forwards; z-index: 10; pointer-events: none; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+  footer { max-width: 800px; margin: 22px auto 0; text-align: center; font-size: 14px; color: #555; line-height: 1.5; }
+  footer a { color: #6a2c91; }
+
+  @media (max-width: 560px) {
+    body { padding: 10px 8px max(20px, env(safe-area-inset-bottom)); }
+    .panel { padding: 16px 12px; border-width: 4px; box-shadow: 5px 5px 0 #1a1a2e; border-radius: 18px; }
+    .mode-btn { padding: 12px 14px; }
+    .stats-bar { font-size: 14px; }
+    .quiz-choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1.5fr; gap: 8px; }
+    .match-item { font-size: 14px; padding: 8px; }
+    .match-col.terms .match-item { font-size: 15px; }
+    .nav-btn { font-size: 18px; padding: 12px 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<h1>Religion Unit 2 Part 1 Study Game</h1>
-<div class="tabs">
-  <button id="tabFlash">Flashcards</button>
-  <button id="tabMatch" class="secondary">Match</button>
-  <button id="tabQuiz" class="secondary">Quiz</button>
+
+<h1>👑 Kingdom Words! ✝️</h1>
+<p class="subtitle">For Thomas — Religion, Unit 2 Part 1 (Lessons 6–8)</p>
+
+<div class="stats-bar">
+  <span class="stat">⭐ <span id="stat-xp">0</span> XP</span>
+  <span class="stat">🔥 Streak <span id="stat-streak">0</span></span>
+  <span class="stat">🥇 Quiz Best: <span id="stat-best">0</span>/11</span>
+  <span class="stat">⏱️ Match Best: <span id="stat-match">—</span></span>
 </div>
 
-<!-- Flashcards -->
-<div id="flashView" class="card">
-  <div class="term" id="fTerm"></div>
-  <div class="def hidden" id="fDef"></div>
-  <div class="row">
-    <button id="fFlip" class="secondary">Show definition</button>
-    <button id="fPrev" class="secondary">Previous</button>
-    <button id="fNext">Next</button>
-  </div>
-  <div class="status" id="fCount"></div>
+<div class="mode-picker">
+  <button class="mode-btn active" data-mode="learn">📖 Learn</button>
+  <button class="mode-btn" data-mode="match">🎯 Match Game</button>
+  <button class="mode-btn" data-mode="quiz">⭐ Quiz Me!</button>
 </div>
 
-<!-- Matching -->
-<div id="matchView" class="hidden">
-  <div class="status" id="mStatus">Tap a term, then its definition.</div>
-  <div class="grid" id="mGrid"></div>
-  <div class="row"><button id="mReset">New round</button></div>
-</div>
+<div class="panel" id="panel" aria-live="polite"></div>
 
-<!-- Quiz -->
-<div id="quizView" class="card hidden">
-  <div class="status" id="qCount"></div>
-  <div class="term" id="qPrompt" style="font-size:1.2em"></div>
-  <div id="qOpts"></div>
-  <div class="row"><button id="qNext" disabled>Next</button></div>
-  <div class="status" id="qScore"></div>
-</div>
-
-<p class="note">Definitions are general dictionary and Bible-study meanings for the terms on the Unit 2 Part 1 guide, which has no definitions printed on it. Check against the class notes.</p>
+<footer>
+  These 11 words come from Thomas's Religion study guide (Unit 2 Part 1, Lessons 6–8).
+  The study guide did not include definitions, so these are simple kid-friendly definitions —
+  please check them against Thomas's class notes and textbook.<br>
+  <a href="../">← Back to all games</a>
+</footer>
 
 <script>
+// The 11 study-guide terms, in study-guide order.
 const TERMS = [
-  { t: "Kingdom of Heaven (Kingdom of God)", d: "God's rule and reign; the Kingdom Jesus founded on earth, present in the hearts of those who follow Him." },
-  { t: "Dominion", d: "Authority or rule over something." },
-  { t: "Repent", d: "To turn away from sin and turn back to God." },
-  { t: "Gospel", d: "The Good News of Jesus Christ: His life, death, and Resurrection for our salvation." },
-  { t: "Reign", d: "To rule as a king; the time or act of ruling." },
-  { t: "Kingdom", d: "A land or community ruled by a king." },
-  { t: "Ambassador", d: "A person sent to represent a king or ruler to others." },
-  { t: "Custom", d: "A usual or accepted way of doing something." },
-  { t: "Parable", d: "A short story Jesus told to teach a spiritual lesson." },
-  { t: "Sower", d: "A person who scatters seed to plant it." },
-  { t: "Merchant", d: "A person who buys and sells goods for profit." }
+  { term: 'Kingdom of Heaven', alt: 'Kingdom of God', emoji: '👑',
+    def: "God's kingdom, where God reigns as King. Jesus came to start it on earth, and it is already here in the hearts of people who believe in Him and follow Him.",
+    ex: 'Jesus told many parables about the Kingdom of Heaven. It is also called the Kingdom of God.',
+    clue: 'Jesus often taught about this in parables. It is also called the Kingdom of God.' },
+  { term: 'Dominion', emoji: '🌍',
+    def: 'The power to rule over something, or the area that someone rules over.',
+    ex: 'God has dominion over all of creation.',
+    clue: 'The power to rule, or the land someone rules over.' },
+  { term: 'Repent', emoji: '🙏',
+    def: 'To be truly sorry for your sins, turn away from them, and turn back to God.',
+    ex: 'When we repent, we tell God we are sorry and try to do better.',
+    clue: 'To be sorry for sin and turn back to God.' },
+  { term: 'Gospel', emoji: '📖',
+    def: 'The Good News of Jesus: God loves us and sent His Son to save us. The first four books of the New Testament are also called the Gospels.',
+    ex: 'Ambassadors of the Kingdom share the Gospel with others.',
+    clue: 'A word that means "Good News" about Jesus.' },
+  { term: 'Reign', emoji: '🏰',
+    def: 'To rule as a king or queen. It can also mean the time when a king rules.',
+    ex: 'Jesus is the King who reigns over the Kingdom of God.',
+    clue: 'To rule as a king.' },
+  { term: 'Kingdom', emoji: '🗺️',
+    def: 'A land or a people ruled by a king.',
+    ex: 'A kingdom has a king, people, and rules to follow.',
+    clue: 'A land or people ruled by a king.' },
+  { term: 'Ambassador', emoji: '🕊️',
+    def: 'A person sent to represent a king or a country. Believers are ambassadors of God\'s Kingdom: they follow its rules and share the Good News.',
+    ex: 'When you show kindness and tell others about Jesus, you act as an ambassador of the Kingdom.',
+    clue: 'A person sent to represent a king. Believers are this for God\'s Kingdom.' },
+  { term: 'Custom', emoji: '🎉',
+    def: 'A usual way of doing things that a group of people follows, often passed down over time.',
+    ex: 'Shaking hands when you meet someone is a custom. God\'s Kingdom has its own ways, too, like loving others.',
+    clue: 'A usual way of doing things that a group of people follows.' },
+  { term: 'Parable', emoji: '💬',
+    def: 'A short story Jesus told, using everyday things, to teach a lesson about God that is hard to understand.',
+    ex: 'The Parable of the Sower is a story about a farmer planting seeds.',
+    clue: 'A short story Jesus used to teach a hard-to-understand lesson.' },
+  { term: 'Sower', emoji: '🌱',
+    def: 'A person who plants (sows) seeds by scattering them on the ground.',
+    ex: 'In the Parable of the Sower, the seeds fall on different kinds of ground.',
+    clue: 'A person who scatters seeds to plant them.' },
+  { term: 'Merchant', emoji: '💰',
+    def: 'A person who buys and sells things to earn a living.',
+    ex: 'Jesus told a parable about a merchant looking for fine pearls, one of the Parables of the Kingdom.',
+    clue: 'A person who buys and sells things.' }
 ];
 
-const $ = id => document.getElementById(id);
-const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+// Extra "big idea" true/false style questions (from the study guide's main ideas).
+const IDEAS = [
+  { q: 'Who came to earth to begin God\'s Kingdom on earth?', a: 'Jesus, the King', wrong: ['A merchant', 'A sower', 'An ambassador'] },
+  { q: 'Why did Jesus teach with parables?', a: 'To teach things that are hard to understand', wrong: ['To tell jokes', 'To list the rules of a game', 'To sell things'] },
+  { q: 'Where is the Kingdom of God already found today?', a: 'In the hearts of people who believe in and follow Jesus', wrong: ['Only in a faraway castle', 'Only in books', 'Nowhere yet'] },
+  { q: 'What did Jesus found that is the seed of the Kingdom?', a: 'The Church', wrong: ['A market', 'A farm', 'An army'] }
+];
 
-// Tabs
-function show(which) {
-  ["flash", "match", "quiz"].forEach(n => {
-    $(n + "View").classList.toggle("hidden", n !== which);
-    $("tab" + n[0].toUpperCase() + n.slice(1)).className = n === which ? "" : "secondary";
+const STORE_KEY = 'thomas-religion-unit2-kingdom-v1';
+let stats = { xp: 0, best: 0, matchBest: null };
+try { Object.assign(stats, JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); } catch (_) {}
+function saveStats() { try { localStorage.setItem(STORE_KEY, JSON.stringify(stats)); } catch (_) {} }
+let streak = 0;
+
+const $ = (id) => document.getElementById(id);
+const panel = $('panel');
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function fullName(t) { return t.alt ? t.term + ' (' + t.alt + ')' : t.term; }
+function renderStats() {
+  $('stat-xp').textContent = stats.xp;
+  $('stat-streak').textContent = streak;
+  $('stat-best').textContent = stats.best;
+  $('stat-match').textContent = stats.matchBest == null ? '—' : stats.matchBest + ' miss' + (stats.matchBest === 1 ? '' : 'es');
+}
+function addXP(n) { stats.xp += n; saveStats(); renderStats(); }
+function confetti() {
+  const colors = ['#ffd166', '#06d6a0', '#ef476f', '#118ab2', '#6a2c91'];
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[i % colors.length];
+    c.style.animationDelay = Math.random() * 0.5 + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2200);
+  }
+}
+
+/* ---------- LEARN (flashcards) ---------- */
+let cardIdx = 0, cardFlipped = false;
+function renderLearn() {
+  const t = TERMS[cardIdx];
+  panel.innerHTML = `
+    <div class="instructions">Read the word, try to say what it means, then <b>tap the card</b> to check! Use the arrows to go through all 11 words.</div>
+    <div class="card" id="card" role="button" tabindex="0" aria-label="Flip card">
+      <div class="card-num">Word ${cardIdx + 1} of ${TERMS.length}</div>
+      <div class="card-emoji">${t.emoji}</div>
+      <div class="card-name">${esc(fullName(t))}</div>
+      ${cardFlipped
+        ? `<div class="card-def">${esc(t.def)}</div><div class="card-examples">💡 ${esc(t.ex)}</div>`
+        : `<div class="card-hint">👆 Tap to see what it means</div>`}
+    </div>
+    <div class="card-nav">
+      <button class="nav-btn" id="prev" aria-label="Previous word">⬅️</button>
+      <span class="card-count">${cardIdx + 1} / ${TERMS.length}</span>
+      <button class="nav-btn" id="next" aria-label="Next word">➡️</button>
+    </div>
+    <div class="big-ideas">
+      <h3>🌟 Big Ideas to Remember</h3>
+      <ul>
+        <li>Jesus, the King, came to earth to found God's Kingdom on earth.</li>
+        <li>Jesus founded the Church. The Church is the seed of the Kingdom.</li>
+        <li>Believers are ambassadors of the Kingdom: they follow its rules and share the Good News.</li>
+        <li>Jesus used parables to teach things that are hard to understand. Many are about the Kingdom of Heaven.</li>
+        <li>The Kingdom is already here in the hearts of those who believe in Jesus and follow Him.</li>
+        <li>Remember the Parable of the Sower and the Parables of the Kingdom!</li>
+      </ul>
+    </div>`;
+  const flip = () => { if (!cardFlipped) addXP(1); cardFlipped = !cardFlipped; renderLearn(); };
+  $('card').onclick = flip;
+  $('card').onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } };
+  $('prev').onclick = () => { cardIdx = (cardIdx - 1 + TERMS.length) % TERMS.length; cardFlipped = false; renderLearn(); };
+  $('next').onclick = () => { cardIdx = (cardIdx + 1) % TERMS.length; cardFlipped = false; renderLearn(); };
+}
+
+/* ---------- MATCH ---------- */
+let match = null;
+function startMatch() {
+  match = { terms: shuffle(TERMS.map((t, i) => i)), defs: shuffle(TERMS.map((t, i) => i)), sel: null, done: new Set(), misses: 0, msg: '' };
+  renderMatch();
+}
+function renderMatch() {
+  if (match.done.size === TERMS.length) return renderMatchEnd();
+  const item = (side, i) => {
+    const t = TERMS[i];
+    const cls = ['match-item'];
+    if (match.done.has(i)) cls.push('correct');
+    if (match.sel && match.sel.side === side && match.sel.i === i) cls.push('selected');
+    const label = side === 't' ? esc(t.emoji + ' ' + fullName(t)) : esc(t.clue);
+    return `<div class="${cls.join(' ')}" tabindex="0" role="button" data-side="${side}" data-i="${i}">${label}</div>`;
+  };
+  panel.innerHTML = `
+    <div class="instructions">Tap a <b>word</b>, then tap the <b>meaning</b> that goes with it. Match all 11 with as few misses as you can!</div>
+    <div class="match-grid">
+      <div class="match-col terms"><h3>Words</h3>${match.terms.map(i => item('t', i)).join('')}</div>
+      <div class="match-col"><h3>Meanings</h3>${match.defs.map(i => item('d', i)).join('')}</div>
+    </div>
+    <div class="match-status" id="mstatus">${match.msg || `Matched ${match.done.size} / ${TERMS.length} · Misses: ${match.misses}`}</div>`;
+  panel.querySelectorAll('.match-item').forEach(el => {
+    const go = () => pickMatch(el, el.dataset.side, +el.dataset.i);
+    el.onclick = go;
+    el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } };
   });
 }
-$("tabFlash").onclick = () => { show("flash"); }; 
-$("tabMatch").onclick = () => { show("match"); newMatch(); };
-$("tabQuiz").onclick = () => { show("quiz"); newQuiz(); };
-
-// Flashcards
-let fi = 0, fOrder = TERMS.map((_, i) => i);
-function renderFlash() {
-  const item = TERMS[fOrder[fi]];
-  $("fTerm").textContent = item.t;
-  $("fDef").textContent = item.d;
-  $("fDef").classList.add("hidden");
-  $("fFlip").textContent = "Show definition";
-  $("fCount").textContent = (fi + 1) + " of " + TERMS.length;
-}
-$("fFlip").onclick = () => {
-  const hidden = $("fDef").classList.toggle("hidden");
-  $("fFlip").textContent = hidden ? "Show definition" : "Hide definition";
-};
-$("fNext").onclick = () => { fi = (fi + 1) % TERMS.length; renderFlash(); };
-$("fPrev").onclick = () => { fi = (fi - 1 + TERMS.length) % TERMS.length; renderFlash(); };
-renderFlash();
-
-// Matching
-let sel = null, matched = 0;
-function newMatch() {
-  sel = null; matched = 0;
-  const items = shuffle([...TERMS.map((x, i) => ({ k: i, s: "t", txt: x.t })), ...TERMS.map((x, i) => ({ k: i, s: "d", txt: x.d }))]);
-  $("mGrid").innerHTML = "";
-  $("mStatus").textContent = "Tap a term, then its definition.";
-  items.forEach(it => {
-    const el = document.createElement("div");
-    el.className = "tile";
-    el.textContent = it.txt;
-    el.onclick = () => tap(el, it);
-    el.dataset.k = it.k;
-    $("mGrid").appendChild(el);
-  });
-}
-function tap(el, it) {
-  if (el.classList.contains("ok")) return;
-  if (!sel) { sel = { el, it }; el.classList.add("sel"); return; }
-  if (sel.el === el) { el.classList.remove("sel"); sel = null; return; }
-  const a = sel; sel = null;
-  if (a.it.k === it.k && a.it.s !== it.s) {
-    a.el.classList.remove("sel"); a.el.classList.add("ok");
-    el.classList.add("ok");
-    matched++;
-    $("mStatus").textContent = matched + " of " + TERMS.length + " matched" + (matched === TERMS.length ? ". Round complete." : "");
+function pickMatch(el, side, i) {
+  if (match.done.has(i)) return;
+  if (!match.sel || match.sel.side === side) { match.sel = { side, i }; match.msg = ''; renderMatch(); return; }
+  const other = match.sel.i;
+  match.sel = null;
+  if (other === i) {
+    match.done.add(i); streak++; addXP(5);
+    match.msg = `✅ Yes! ${TERMS[i].term} — ${TERMS[i].clue}`;
+    renderMatch();
   } else {
-    a.el.classList.remove("sel"); a.el.classList.add("bad");
-    el.classList.add("bad");
-    setTimeout(() => { a.el.classList.remove("bad"); el.classList.remove("bad"); }, 700);
-    $("mStatus").textContent = "Not a match. Try again.";
+    match.misses++; streak = 0; renderStats();
+    match.msg = '❌ Not a match — try again!';
+    renderMatch();
+    const a = panel.querySelector(`[data-side="${side}"][data-i="${i}"]`);
+    const b = panel.querySelector(`[data-side="${side === 't' ? 'd' : 't'}"][data-i="${other}"]`);
+    [a, b].forEach(x => x && x.classList.add('wrong'));
+    setTimeout(() => [a, b].forEach(x => x && x.classList.remove('wrong')), 500);
   }
 }
-$("mReset").onclick = newMatch;
+function renderMatchEnd() {
+  const m = match.misses;
+  const isBest = stats.matchBest == null || m < stats.matchBest;
+  if (isBest) { stats.matchBest = m; saveStats(); }
+  addXP(10);
+  renderStats();
+  const stars = m === 0 ? '⭐⭐⭐' : m <= 3 ? '⭐⭐' : '⭐';
+  panel.innerHTML = `
+    <div class="final">
+      <div class="trophy">🏆</div>
+      <h2>All 11 matched!</h2>
+      <div class="stars">${stars}</div>
+      <p>You had <b>${m}</b> miss${m === 1 ? '' : 'es'}.</p>
+      ${isBest ? '<div class="new-best">🎉 New best match score!</div>' : ''}
+      <button class="big-btn" id="again">🔁 Play Again</button>
+    </div>`;
+  confetti();
+  $('again').onclick = startMatch;
+}
 
-// Quiz
-let qOrder, qi, qScoreN, qAnswered;
-function newQuiz() {
-  qOrder = shuffle(TERMS.map((_, i) => i));
-  qi = 0; qScoreN = 0;
-  renderQ();
-}
-function renderQ() {
-  qAnswered = false;
-  const idx = qOrder[qi];
-  const correct = TERMS[idx];
-  const distractors = shuffle(TERMS.filter((_, i) => i !== idx)).slice(0, 3);
-  const opts = shuffle([correct, ...distractors]);
-  $("qCount").textContent = "Question " + (qi + 1) + " of " + TERMS.length;
-  $("qPrompt").textContent = "Which definition matches: " + correct.t + "?";
-  $("qScore").textContent = "Score: " + qScoreN;
-  $("qNext").disabled = true;
-  $("qNext").textContent = qi === TERMS.length - 1 ? "Finish" : "Next";
-  const box = $("qOpts");
-  box.innerHTML = "";
-  opts.forEach(o => {
-    const b = document.createElement("button");
-    b.className = "opt";
-    b.textContent = o.d;
-    b.onclick = () => {
-      if (qAnswered) return;
-      qAnswered = true;
-      if (o === correct) { b.classList.add("right"); qScoreN++; }
-      else {
-        b.classList.add("wrong");
-        [...box.children].forEach(c => { if (c.textContent === correct.d) c.classList.add("right"); });
-      }
-      $("qScore").textContent = "Score: " + qScoreN;
-      $("qNext").disabled = false;
-    };
-    box.appendChild(b);
+/* ---------- QUIZ ---------- */
+let quiz = null;
+function buildQuestions() {
+  // One question per term (all 11), mixing two styles, plus 4 big-idea bonus questions.
+  const qs = shuffle(TERMS.map((t, i) => i)).map((i, n) => {
+    const t = TERMS[i];
+    const others = shuffle(TERMS.filter((_, j) => j !== i)).slice(0, 3);
+    if (n % 2 === 0) {
+      return { type: 'Which word means…', q: t.def, a: fullName(t), choices: shuffle([fullName(t), ...others.map(fullName)]), term: t };
+    }
+    return { type: 'What does it mean?', q: `${t.emoji} What does "${fullName(t)}" mean?`, a: t.clue, choices: shuffle([t.clue, ...others.map(o => o.clue)]), term: t };
   });
+  const bonus = shuffle(IDEAS).slice(0, 2).map(b => ({ type: 'Bonus: Big Idea', q: b.q, a: b.a, choices: shuffle([b.a, ...b.wrong]), bonus: true }));
+  return [...qs, ...bonus];
 }
-$("qNext").onclick = () => {
-  if (qi === TERMS.length - 1) {
-    $("qPrompt").textContent = "Done. You scored " + qScoreN + " of " + TERMS.length + ".";
-    $("qOpts").innerHTML = "";
-    $("qCount").textContent = "";
-    $("qNext").disabled = true;
-    $("qNext").textContent = "Next";
-    $("qScore").textContent = "";
-    const again = document.createElement("button");
-    again.textContent = "Play again";
-    again.onclick = newQuiz;
-    $("qOpts").appendChild(again);
-    return;
+function startQuiz() {
+  quiz = { qs: buildQuestions(), idx: 0, score: 0, bonus: 0, answered: false, missed: [] };
+  renderQuiz();
+}
+function renderQuiz() {
+  if (quiz.idx >= quiz.qs.length) return renderQuizEnd();
+  const q = quiz.qs[quiz.idx];
+  panel.innerHTML = `
+    <div class="instructions">Pick the best answer. You get one try per question!</div>
+    <div class="quiz-progress">Question ${quiz.idx + 1} of ${quiz.qs.length} · Score: ${quiz.score}/11${quiz.bonus ? ' + ' + quiz.bonus + ' bonus' : ''}</div>
+    <div class="quiz-bar"><div class="quiz-bar-fill" style="width:${(quiz.idx / quiz.qs.length) * 100}%"></div></div>
+    <div class="quiz-streak">${streak >= 2 ? '🔥 ' + streak + ' in a row!' : ''}</div>
+    <div class="quiz-type">${esc(q.type)}</div>
+    <div class="quiz-question">${esc(q.q)}</div>
+    <div class="quiz-choices">${q.choices.map((c, k) => `<button class="quiz-choice" data-k="${k}">${esc(c)}</button>`).join('')}</div>
+    <div class="quiz-feedback" id="qfb"></div>
+    <div class="center"><button class="big-btn hidden" id="qnext">Next ➡️</button></div>`;
+  panel.querySelectorAll('.quiz-choice').forEach(b => b.onclick = () => answerQuiz(b, q));
+}
+function answerQuiz(btn, q) {
+  if (quiz.answered) return;
+  quiz.answered = true;
+  const picked = q.choices[+btn.dataset.k];
+  const right = picked === q.a;
+  panel.querySelectorAll('.quiz-choice').forEach(b => {
+    b.disabled = true;
+    if (q.choices[+b.dataset.k] === q.a) b.classList.add('correct');
+  });
+  const fb = $('qfb');
+  if (right) {
+    streak++; addXP(q.bonus ? 5 : 10);
+    if (q.bonus) quiz.bonus++; else quiz.score++;
+    fb.className = 'quiz-feedback good';
+    fb.innerHTML = '✅ Correct! ' + (q.term ? `<b>${esc(q.term.term)}</b>: ${esc(q.term.def)}` : 'Great job!');
+  } else {
+    btn.classList.add('wrong');
+    streak = 0; renderStats();
+    if (q.term) quiz.missed.push(q.term);
+    fb.className = 'quiz-feedback bad';
+    fb.innerHTML = `❌ Not quite. The answer is <b>${esc(q.a)}</b>.` + (q.term ? `<br>${esc(q.term.def)}` : '');
   }
-  qi++; renderQ();
-};
+  const nx = $('qnext');
+  nx.classList.remove('hidden');
+  nx.textContent = quiz.idx + 1 >= quiz.qs.length ? 'See My Score 🏁' : 'Next ➡️';
+  nx.onclick = () => { quiz.idx++; quiz.answered = false; renderQuiz(); };
+  nx.focus();
+}
+function renderQuizEnd() {
+  const s = quiz.score;
+  const isBest = s > stats.best;
+  if (isBest) { stats.best = s; saveStats(); }
+  renderStats();
+  const stars = s === 11 ? '⭐⭐⭐' : s >= 8 ? '⭐⭐' : '⭐';
+  const msg = s === 11 ? 'PERFECT! You know all 11 Kingdom words! 👑' : s >= 8 ? 'Great work! Almost there!' : 'Good try! Practice the cards and try again!';
+  panel.innerHTML = `
+    <div class="final">
+      <div class="trophy">${s === 11 ? '🏆' : s >= 8 ? '🥈' : '📖'}</div>
+      <h2>${msg}</h2>
+      <div class="stars">${stars}</div>
+      <p>You got <b>${s} out of 11</b> words right${quiz.bonus ? ` and <b>${quiz.bonus}</b> bonus question${quiz.bonus === 1 ? '' : 's'}` : ''}.</p>
+      ${isBest ? '<div class="new-best">🎉 New best quiz score!</div>' : ''}
+      ${quiz.missed.length ? `<div class="review"><b>Words to practice:</b><ul>${quiz.missed.map(t => `<li><b>${esc(fullName(t))}</b> — ${esc(t.def)}</li>`).join('')}</ul></div>` : ''}
+      <button class="big-btn" id="again">🔁 Play Again</button>
+      <button class="big-btn yellow" id="study">📖 Study Cards</button>
+    </div>`;
+  if (s >= 8) confetti();
+  $('again').onclick = startQuiz;
+  $('study').onclick = () => setMode('learn');
+}
+
+/* ---------- MODES ---------- */
+function setMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  if (mode === 'learn') { cardFlipped = false; renderLearn(); }
+  else if (mode === 'match') startMatch();
+  else startQuiz();
+}
+document.querySelectorAll('.mode-btn').forEach(b => b.onclick = () => setMode(b.dataset.mode));
+renderStats();
+setMode('learn');
 </script>
 </body>
 </html>
