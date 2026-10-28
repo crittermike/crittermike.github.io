@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Religion Unit 2 Part 1: Study Game</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 16px; color: #222; }
+  h1 { font-size: 1.4em; text-align: center; margin: 8px 0 16px; }
+  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+  button { font-size: 1em; padding: 10px 14px; border: none; border-radius: 6px; background: #2f6fbd; color: #fff; cursor: pointer; }
+  button.secondary { background: #6b7785; }
+  button:disabled { background: #b8c0ca; cursor: default; }
+  .card { background: #fff; border-radius: 10px; padding: 20px; max-width: 560px; margin: 0 auto; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+  .term { font-size: 1.5em; font-weight: bold; text-align: center; min-height: 2em; }
+  .def { font-size: 1.1em; text-align: center; min-height: 3em; margin-top: 12px; line-height: 1.4; }
+  .row { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 700px; margin: 0 auto; }
+  .tile { background: #fff; border: 2px solid #cfd6df; border-radius: 8px; padding: 12px; min-height: 52px; display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; font-size: .95em; }
+  .tile.sel { border-color: #2f6fbd; background: #e7f0fb; }
+  .tile.ok { border-color: #2e8b57; background: #e4f5ea; cursor: default; }
+  .tile.bad { border-color: #c0392b; background: #fbeaea; }
+  .status { text-align: center; margin: 12px 0; font-weight: bold; min-height: 1.4em; }
+  .opt { display: block; width: 100%; margin: 6px 0; background: #fff; color: #222; border: 2px solid #cfd6df; text-align: left; }
+  .opt.right { background: #e4f5ea; border-color: #2e8b57; }
+  .opt.wrong { background: #fbeaea; border-color: #c0392b; }
+  .hidden { display: none; }
+  .note { font-size: .85em; color: #555; text-align: center; margin-top: 18px; max-width: 560px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+<h1>Religion Unit 2 Part 1 Study Game</h1>
+<div class="tabs">
+  <button id="tabFlash">Flashcards</button>
+  <button id="tabMatch" class="secondary">Match</button>
+  <button id="tabQuiz" class="secondary">Quiz</button>
+</div>
+
+<!-- Flashcards -->
+<div id="flashView" class="card">
+  <div class="term" id="fTerm"></div>
+  <div class="def hidden" id="fDef"></div>
+  <div class="row">
+    <button id="fFlip" class="secondary">Show definition</button>
+    <button id="fPrev" class="secondary">Previous</button>
+    <button id="fNext">Next</button>
+  </div>
+  <div class="status" id="fCount"></div>
+</div>
+
+<!-- Matching -->
+<div id="matchView" class="hidden">
+  <div class="status" id="mStatus">Tap a term, then its definition.</div>
+  <div class="grid" id="mGrid"></div>
+  <div class="row"><button id="mReset">New round</button></div>
+</div>
+
+<!-- Quiz -->
+<div id="quizView" class="card hidden">
+  <div class="status" id="qCount"></div>
+  <div class="term" id="qPrompt" style="font-size:1.2em"></div>
+  <div id="qOpts"></div>
+  <div class="row"><button id="qNext" disabled>Next</button></div>
+  <div class="status" id="qScore"></div>
+</div>
+
+<p class="note">Definitions are general dictionary and Bible-study meanings for the terms on the Unit 2 Part 1 guide, which has no definitions printed on it. Check against the class notes.</p>
+
+<script>
+const TERMS = [
+  { t: "Kingdom of Heaven (Kingdom of God)", d: "God's rule and reign; the Kingdom Jesus founded on earth, present in the hearts of those who follow Him." },
+  { t: "Dominion", d: "Authority or rule over something." },
+  { t: "Repent", d: "To turn away from sin and turn back to God." },
+  { t: "Gospel", d: "The Good News of Jesus Christ: His life, death, and Resurrection for our salvation." },
+  { t: "Reign", d: "To rule as a king; the time or act of ruling." },
+  { t: "Kingdom", d: "A land or community ruled by a king." },
+  { t: "Ambassador", d: "A person sent to represent a king or ruler to others." },
+  { t: "Custom", d: "A usual or accepted way of doing something." },
+  { t: "Parable", d: "A short story Jesus told to teach a spiritual lesson." },
+  { t: "Sower", d: "A person who scatters seed to plant it." },
+  { t: "Merchant", d: "A person who buys and sells goods for profit." }
+];
+
+const $ = id => document.getElementById(id);
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+// Tabs
+function show(which) {
+  ["flash", "match", "quiz"].forEach(n => {
+    $(n + "View").classList.toggle("hidden", n !== which);
+    $("tab" + n[0].toUpperCase() + n.slice(1)).className = n === which ? "" : "secondary";
+  });
+}
+$("tabFlash").onclick = () => { show("flash"); }; 
+$("tabMatch").onclick = () => { show("match"); newMatch(); };
+$("tabQuiz").onclick = () => { show("quiz"); newQuiz(); };
+
+// Flashcards
+let fi = 0, fOrder = TERMS.map((_, i) => i);
+function renderFlash() {
+  const item = TERMS[fOrder[fi]];
+  $("fTerm").textContent = item.t;
+  $("fDef").textContent = item.d;
+  $("fDef").classList.add("hidden");
+  $("fFlip").textContent = "Show definition";
+  $("fCount").textContent = (fi + 1) + " of " + TERMS.length;
+}
+$("fFlip").onclick = () => {
+  const hidden = $("fDef").classList.toggle("hidden");
+  $("fFlip").textContent = hidden ? "Show definition" : "Hide definition";
+};
+$("fNext").onclick = () => { fi = (fi + 1) % TERMS.length; renderFlash(); };
+$("fPrev").onclick = () => { fi = (fi - 1 + TERMS.length) % TERMS.length; renderFlash(); };
+renderFlash();
+
+// Matching
+let sel = null, matched = 0;
+function newMatch() {
+  sel = null; matched = 0;
+  const items = shuffle([...TERMS.map((x, i) => ({ k: i, s: "t", txt: x.t })), ...TERMS.map((x, i) => ({ k: i, s: "d", txt: x.d }))]);
+  $("mGrid").innerHTML = "";
+  $("mStatus").textContent = "Tap a term, then its definition.";
+  items.forEach(it => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.textContent = it.txt;
+    el.onclick = () => tap(el, it);
+    el.dataset.k = it.k;
+    $("mGrid").appendChild(el);
+  });
+}
+function tap(el, it) {
+  if (el.classList.contains("ok")) return;
+  if (!sel) { sel = { el, it }; el.classList.add("sel"); return; }
+  if (sel.el === el) { el.classList.remove("sel"); sel = null; return; }
+  const a = sel; sel = null;
+  if (a.it.k === it.k && a.it.s !== it.s) {
+    a.el.classList.remove("sel"); a.el.classList.add("ok");
+    el.classList.add("ok");
+    matched++;
+    $("mStatus").textContent = matched + " of " + TERMS.length + " matched" + (matched === TERMS.length ? ". Round complete." : "");
+  } else {
+    a.el.classList.remove("sel"); a.el.classList.add("bad");
+    el.classList.add("bad");
+    setTimeout(() => { a.el.classList.remove("bad"); el.classList.remove("bad"); }, 700);
+    $("mStatus").textContent = "Not a match. Try again.";
+  }
+}
+$("mReset").onclick = newMatch;
+
+// Quiz
+let qOrder, qi, qScoreN, qAnswered;
+function newQuiz() {
+  qOrder = shuffle(TERMS.map((_, i) => i));
+  qi = 0; qScoreN = 0;
+  renderQ();
+}
+function renderQ() {
+  qAnswered = false;
+  const idx = qOrder[qi];
+  const correct = TERMS[idx];
+  const distractors = shuffle(TERMS.filter((_, i) => i !== idx)).slice(0, 3);
+  const opts = shuffle([correct, ...distractors]);
+  $("qCount").textContent = "Question " + (qi + 1) + " of " + TERMS.length;
+  $("qPrompt").textContent = "Which definition matches: " + correct.t + "?";
+  $("qScore").textContent = "Score: " + qScoreN;
+  $("qNext").disabled = true;
+  $("qNext").textContent = qi === TERMS.length - 1 ? "Finish" : "Next";
+  const box = $("qOpts");
+  box.innerHTML = "";
+  opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = o.d;
+    b.onclick = () => {
+      if (qAnswered) return;
+      qAnswered = true;
+      if (o === correct) { b.classList.add("right"); qScoreN++; }
+      else {
+        b.classList.add("wrong");
+        [...box.children].forEach(c => { if (c.textContent === correct.d) c.classList.add("right"); });
+      }
+      $("qScore").textContent = "Score: " + qScoreN;
+      $("qNext").disabled = false;
+    };
+    box.appendChild(b);
+  });
+}
+$("qNext").onclick = () => {
+  if (qi === TERMS.length - 1) {
+    $("qPrompt").textContent = "Done. You scored " + qScoreN + " of " + TERMS.length + ".";
+    $("qOpts").innerHTML = "";
+    $("qCount").textContent = "";
+    $("qNext").disabled = true;
+    $("qNext").textContent = "Next";
+    $("qScore").textContent = "";
+    const again = document.createElement("button");
+    again.textContent = "Play again";
+    again.onclick = newQuiz;
+    $("qOpts").appendChild(again);
+    return;
+  }
+  qi++; renderQ();
+};
+</script>
+</body>
+</html>
