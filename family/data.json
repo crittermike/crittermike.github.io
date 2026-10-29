@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T03:46:10.249Z",
+  "generated_at": "2026-10-29T04:01:11.001Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -17,22 +17,10 @@
       "guineaPig": null,
       "assignments": [
         {
-          "id": "sch-work-on-2026-10-28-5637bb678ae0a3cd0f6323f9eb75bc2cbdbbed81fa3aa9e5f9c0a0ca3e5f9d77",
-          "label": "Reading: Read Charlotte's Web Ch. 17",
+          "id": "sch-work-on-2026-10-29-0c5e67727153f5fd9551f463ac303936b421c1c5a84b4e8636c8bf8640e515ba",
+          "label": "Spelling: Complete Choice Board - Color Coding",
           "dueDate": null,
-          "workOnDate": "2026-10-28"
-        },
-        {
-          "id": "sch-work-on-2026-10-28-508454604982c1ccd47f7e82948fd584fa038b59ef96fef5249fd24556ab93e0",
-          "label": "Spelling: Complete WB p. 44",
-          "dueDate": null,
-          "workOnDate": "2026-10-28"
-        },
-        {
-          "id": "sch-work-on-2026-10-28-75b82731ffca2d9495c9bb3fc31ca86ae05c48c4cc9437e8b806f916a4231a09",
-          "label": "English: Complete EIE p. 28",
-          "dueDate": null,
-          "workOnDate": "2026-10-28"
+          "workOnDate": "2026-10-29"
         }
       ]
     },
@@ -48,13 +36,7 @@
         "balance_str": "$-1.40"
       },
       "guineaPig": "$157.74",
-      "assignments": [
-        {
-          "id": "sch-2026-10-29-e3fe5a03d819a6955eb10493633ba32b2a8c7da7965af99af75465218cfda7d5",
-          "label": "Prepare: Reading: Poem Recitation",
-          "dueDate": "2026-10-29"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -320,7 +302,7 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Garlic-herb chicken with roasted potatoes and broccoli",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -328,8 +310,8 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -337,7 +319,7 @@
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -352,19 +334,12 @@
   "weather": {
     "now": {
       "temp": 57,
-      "hi": 72,
-      "lo": 50,
+      "hi": 74,
+      "lo": 55,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Thu",
-        "icon": "⛅",
-        "hi": 74,
-        "lo": 55,
-        "code": 3
-      },
       {
         "d": "Fri",
         "icon": "⛅",
@@ -392,24 +367,31 @@
         "hi": 67,
         "lo": 56,
         "code": 55
+      },
+      {
+        "d": "Tue",
+        "icon": "⛅",
+        "hi": 72,
+        "lo": 54,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-28T07:46",
         "2026-10-29T07:47",
         "2026-10-30T07:48",
         "2026-10-31T07:49",
         "2026-11-01T07:50",
-        "2026-11-02T07:51"
+        "2026-11-02T07:51",
+        "2026-11-03T07:52"
       ],
       "sunsets": [
-        "2026-10-28T18:39",
         "2026-10-29T18:38",
         "2026-10-30T18:37",
         "2026-10-31T18:36",
         "2026-11-01T18:35",
-        "2026-11-02T18:34"
+        "2026-11-02T18:34",
+        "2026-11-03T18:33"
       ],
       "timezone": "America/New_York"
     }
@@ -2064,6 +2046,6 @@
     "creditDebt": 49529.36,
     "netLiquid": 74017,
     "source": "ynab",
-    "updatedAt": "2026-10-29T03:46:09.002Z"
+    "updatedAt": "2026-10-29T04:01:09.418Z"
   }
 }
