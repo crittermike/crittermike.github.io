@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T17:31:10.489Z",
+  "generated_at": "2026-10-29T17:46:10.869Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -1950,15 +1950,15 @@
   "finance": {
     "month": "October 2026",
     "dayPct": 93.5,
-    "totalSpend": 13490.31,
+    "totalSpend": 13517.14,
     "totalBudget": 0,
     "categories": [
       {
         "name": "🛍️ Shopping",
         "group": "Wants",
         "budgeted": 0,
-        "spent": 3533.16,
-        "balance": -3533.16,
+        "spent": 3543.16,
+        "balance": -3543.16,
         "pct": 0
       },
       {
@@ -1973,8 +1973,8 @@
         "name": "🛒 Groceries",
         "group": "Needs",
         "budgeted": 0,
-        "spent": 2014.77,
-        "balance": -2014.77,
+        "spent": 2031.6,
+        "balance": -2031.6,
         "pct": 0
       },
       {
@@ -2043,9 +2043,9 @@
       }
     ],
     "liquidCash": 30029.16,
-    "creditDebt": 49529.36,
-    "netLiquid": 79558.52,
+    "creditDebt": 48408.34,
+    "netLiquid": 78437.5,
     "source": "ynab",
-    "updatedAt": "2026-10-29T17:31:09.490Z"
+    "updatedAt": "2026-10-29T17:46:09.500Z"
   }
 }
