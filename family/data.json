@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T03:46:10.278Z",
+  "generated_at": "2026-10-30T04:01:11.012Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,14 +15,7 @@
         "balance_str": "$104.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-work-on-2026-10-29-0c5e67727153f5fd9551f463ac303936b421c1c5a84b4e8636c8bf8640e515ba",
-          "label": "Spelling: Complete Choice Board - Color Coding",
-          "dueDate": null,
-          "workOnDate": "2026-10-29"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -310,7 +303,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -318,8 +311,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -327,26 +320,19 @@
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
-      "temp": 58,
-      "hi": 76,
-      "lo": 57,
+      "temp": 57,
+      "hi": 80,
+      "lo": 55,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 80,
-        "lo": 55,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -374,24 +360,31 @@
         "hi": 59,
         "lo": 56,
         "code": 53
+      },
+      {
+        "d": "Wed",
+        "icon": "🌦",
+        "hi": 65,
+        "lo": 59,
+        "code": 53
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-29T07:47",
         "2026-10-30T07:48",
         "2026-10-31T07:49",
         "2026-11-01T07:50",
         "2026-11-02T07:51",
-        "2026-11-03T07:52"
+        "2026-11-03T07:52",
+        "2026-11-04T07:53"
       ],
       "sunsets": [
-        "2026-10-29T18:38",
         "2026-10-30T18:37",
         "2026-10-31T18:36",
         "2026-11-01T18:35",
         "2026-11-02T18:34",
-        "2026-11-03T18:33"
+        "2026-11-03T18:33",
+        "2026-11-04T18:32"
       ],
       "timezone": "America/New_York"
     }
@@ -2046,6 +2039,6 @@
     "creditDebt": 48408.34,
     "netLiquid": 78437.5,
     "source": "ynab",
-    "updatedAt": "2026-10-30T03:46:09.010Z"
+    "updatedAt": "2026-10-30T04:01:09.689Z"
   }
 }
