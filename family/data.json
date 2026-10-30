@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T22:01:11.084Z",
+  "generated_at": "2026-10-30T22:16:10.337Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -326,7 +326,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 77,
+      "temp": 76,
       "hi": 82,
       "lo": 50,
       "icon": "☀️",
@@ -2035,10 +2035,10 @@
         "pct": 0
       }
     ],
-    "liquidCash": 30029.16,
+    "liquidCash": 31191.48,
     "creditDebt": 58429.46,
-    "netLiquid": 88458.62,
+    "netLiquid": 89620.94,
     "source": "ynab",
-    "updatedAt": "2026-10-30T22:01:09.627Z"
+    "updatedAt": "2026-10-30T22:16:09.337Z"
   }
 }
