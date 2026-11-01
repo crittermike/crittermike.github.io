@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T03:46:10.292Z",
+  "generated_at": "2026-11-01T04:01:10.652Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -29,7 +29,13 @@
         "balance_str": "$-1.40"
       },
       "guineaPig": "$157.74",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-11-02-8b43d329a290949cc15487a7f9a803486644f1516319e103cbf392fd507d856a",
+          "label": "Reading: The Cay research project , postponed from October 26. Follow the written project guidelines already supplied",
+          "dueDate": "2026-11-02"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -43,7 +49,13 @@
         "balance_str": "$64.63"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-11-02-661913c39a6eebd395338ea7c4a3f5e2d105690464e6d11003d5c60a8b9875f4",
+          "label": "Spanish (Simon): IXL 3Q",
+          "dueDate": "2026-11-02"
+        }
+      ]
     },
     {
       "key": "charlie",
@@ -271,8 +283,8 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -280,7 +292,7 @@
       "dow_short": "Mon",
       "name": "Meatloaf with mashed potatoes and cabbage",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -319,7 +331,7 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     }
@@ -327,19 +339,12 @@
   "weather": {
     "now": {
       "temp": 57,
-      "hi": 68,
-      "lo": 57,
+      "hi": 61,
+      "lo": 53,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Sun",
-        "icon": "🌦",
-        "hi": 61,
-        "lo": 53,
-        "code": 51
-      },
       {
         "d": "Mon",
         "icon": "⛅",
@@ -367,24 +372,31 @@
         "hi": 70,
         "lo": 61,
         "code": 95
+      },
+      {
+        "d": "Fri",
+        "icon": "🌦",
+        "hi": 74,
+        "lo": 58,
+        "code": 51
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-10-31T07:49",
         "2026-11-01T07:50",
         "2026-11-02T07:51",
         "2026-11-03T07:52",
         "2026-11-04T07:53",
-        "2026-11-05T07:54"
+        "2026-11-05T07:54",
+        "2026-11-06T07:55"
       ],
       "sunsets": [
-        "2026-10-31T18:36",
         "2026-11-01T18:35",
         "2026-11-02T18:34",
         "2026-11-03T18:33",
         "2026-11-04T18:32",
-        "2026-11-05T18:31"
+        "2026-11-05T18:31",
+        "2026-11-06T18:30"
       ],
       "timezone": "America/New_York"
     }
@@ -1950,6 +1962,6 @@
     "creditDebt": 67709.86,
     "netLiquid": 88780.84,
     "source": "ynab",
-    "updatedAt": "2026-11-01T03:46:09.045Z"
+    "updatedAt": "2026-11-01T04:01:09.411Z"
   }
 }
