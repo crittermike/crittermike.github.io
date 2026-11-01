@@ -2032,7 +2032,7 @@
           
           
             
-            <div class="v">$104.09</div>
+            <div class="v">$116.09</div>
           
         
           <div class="nm">William</div>
@@ -2043,7 +2043,7 @@
           
           
             
-            <div class="v danger">$-1.40</div>
+            <div class="v">$3.40</div>
           
         
           <div class="nm">Henry</div>
@@ -2054,7 +2054,7 @@
           
           
             
-            <div class="v">$64.63</div>
+            <div class="v">$76.63</div>
           
         
           <div class="nm">Charlie</div>
@@ -2065,7 +2065,7 @@
           
           
             
-            <div class="v">$233.79</div>
+            <div class="v">$245.79</div>
           
         
       </div>
@@ -2094,7 +2094,7 @@
           <span class="lbl">💵</span>
           
             
-            <span class="v">$104.09</span>
+            <span class="v">$116.09</span>
           
         </div>
       </div>
@@ -2132,14 +2132,14 @@
           <span class="lbl">💵</span>
           
             
-            <span class="v danger">$-1.40</span>
+            <span class="v">$3.40</span>
           
         </div>
       </div>
       
       <div class="kidtile-gpfund">
         <span class="lbl">🐹 Guinea Pig Fund</span>
-        <span class="v">$157.74</span>
+        <span class="v">$164.94</span>
       </div>
       
 
@@ -2184,7 +2184,7 @@
           <span class="lbl">💵</span>
           
             
-            <span class="v">$64.63</span>
+            <span class="v">$76.63</span>
           
         </div>
       </div>
@@ -2231,7 +2231,7 @@
           <span class="lbl">💵</span>
           
             
-            <span class="v">$233.79</span>
+            <span class="v">$245.79</span>
           
         </div>
       </div>
@@ -3029,7 +3029,7 @@
   }
 
   // === TODAY'S ASSIGNMENTS (per-day localStorage, ET) ===
-  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":135,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":120,"refill":60},"allowance":{"balance_str":"$-1.40"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-11-02-8b43d329a290949cc15487a7f9a803486644f1516319e103cbf392fd507d856a","label":"Reading: The Cay research project , postponed from October 26. Follow the written project guidelines already supplied","dueDate":"2026-11-02"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":102,"refill":60},"allowance":{"balance_str":"$64.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-11-02-661913c39a6eebd395338ea7c4a3f5e2d105690464e6d11003d5c60a8b9875f4","label":"Spanish (Simon): IXL 3Q","dueDate":"2026-11-02"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":796,"refill":60},"allowance":{"balance_str":"$233.79"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
+  const ASSIGNMENT_KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":135,"refill":60},"allowance":{"balance_str":"$116.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":120,"refill":60},"allowance":{"balance_str":"$3.40"},"guineaPig":"$164.94","assignments":[{"id":"sch-2026-11-02-8b43d329a290949cc15487a7f9a803486644f1516319e103cbf392fd507d856a","label":"Reading: The Cay research project , postponed from October 26. Follow the written project guidelines already supplied","dueDate":"2026-11-02"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":102,"refill":60},"allowance":{"balance_str":"$76.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-11-02-661913c39a6eebd395338ea7c4a3f5e2d105690464e6d11003d5c60a8b9875f4","label":"Spanish (Simon): IXL 3Q","dueDate":"2026-11-02"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":796,"refill":60},"allowance":{"balance_str":"$245.79"},"guineaPig":null,"assignments":[]}].reduce(function (names, kid) {
     names[kid.key] = kid.name;
     return names;
   }, {});
@@ -3495,7 +3495,7 @@
   // real box (celebration fires). Snooze hides it for 30 min. Re-evaluated on a
   // 60s timer, on visibility regain, and after every assignment toggle.
   (function nagInit() {
-    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":135,"refill":60},"allowance":{"balance_str":"$104.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":120,"refill":60},"allowance":{"balance_str":"$-1.40"},"guineaPig":"$157.74","assignments":[{"id":"sch-2026-11-02-8b43d329a290949cc15487a7f9a803486644f1516319e103cbf392fd507d856a","label":"Reading: The Cay research project , postponed from October 26. Follow the written project guidelines already supplied","dueDate":"2026-11-02"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":102,"refill":60},"allowance":{"balance_str":"$64.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-11-02-661913c39a6eebd395338ea7c4a3f5e2d105690464e6d11003d5c60a8b9875f4","label":"Spanish (Simon): IXL 3Q","dueDate":"2026-11-02"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":796,"refill":60},"allowance":{"balance_str":"$233.79"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
+    const KID_NAMES = [{"key":"thomas","name":"Thomas","grade":"3rd","sugar":{"balance":135,"refill":60},"allowance":{"balance_str":"$116.09"},"guineaPig":null,"assignments":[]},{"key":"william","name":"William","grade":"5th","sugar":{"balance":120,"refill":60},"allowance":{"balance_str":"$3.40"},"guineaPig":"$164.94","assignments":[{"id":"sch-2026-11-02-8b43d329a290949cc15487a7f9a803486644f1516319e103cbf392fd507d856a","label":"Reading: The Cay research project , postponed from October 26. Follow the written project guidelines already supplied","dueDate":"2026-11-02"}]},{"key":"henry","name":"Henry","grade":"8th","sugar":{"balance":102,"refill":60},"allowance":{"balance_str":"$76.63"},"guineaPig":null,"assignments":[{"id":"sch-2026-11-02-661913c39a6eebd395338ea7c4a3f5e2d105690464e6d11003d5c60a8b9875f4","label":"Spanish (Simon): IXL 3Q","dueDate":"2026-11-02"}]},{"key":"charlie","name":"Charlie","grade":"11th","sugar":{"balance":796,"refill":60},"allowance":{"balance_str":"$245.79"},"guineaPig":null,"assignments":[]}].reduce(function (m, k) { m[k.key] = k.name; return m; }, {});
     const overlay = document.getElementById('nagOverlay');
     const listEl = document.getElementById('nagList');
     const dismissBtn = document.getElementById('nagDismiss');
