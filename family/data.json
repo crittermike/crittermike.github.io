@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T23:46:09.853Z",
+  "generated_at": "2026-11-01T00:01:13.188Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Pizza, flexible for Halloween",
+    "name": "Leftovers or whatever you can scrounge up",
     "protein_g": null,
     "cal": null,
     "effort": "none",
-    "note": "October 31: takeout or delivery pizza; cheese is the default without disliked toppings. Keep timing flexible for Halloween, but no specific Halloween activity is confirmed by the calendar. No home cooking assigned. Order, portions and nutrition undecided; no order placed.",
+    "note": "Mike never cooks Sunday. Standing rule.",
     "recipe": null
   },
   "mealweek": [
@@ -326,7 +326,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 60,
+      "temp": 59,
       "hi": 68,
       "lo": 56,
       "icon": "⛅",
@@ -1941,104 +1941,15 @@
     }
   ],
   "finance": {
-    "month": "October 2026",
-    "dayPct": 100,
-    "totalSpend": 14226.98,
+    "month": "November 2026",
+    "dayPct": 3.3,
+    "totalSpend": 0,
     "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 3938.64,
-        "balance": -3938.64,
-        "pct": 0
-      },
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2255.09,
-        "balance": -2255.09,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2088.7,
-        "balance": -2088.7,
-        "pct": 0
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 1960.96,
-        "balance": -1960.96,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 1746.02,
-        "balance": -1746.02,
-        "pct": 0
-      },
-      {
-        "name": "⚡️ Utilities",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 793.46,
-        "balance": -793.46,
-        "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 520.47,
-        "balance": 907.43,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 390.73,
-        "balance": -263.59,
-        "pct": 0
-      },
-      {
-        "name": "📱 Phone & Internet",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 278.09,
-        "balance": -278.09,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 194.82,
-        "balance": -194.82,
-        "pct": 0
-      },
-      {
-        "name": "🎁 Charity",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 60,
-        "balance": -60,
-        "pct": 0
-      }
-    ],
+    "categories": [],
     "liquidCash": 21070.98,
     "creditDebt": 67709.86,
     "netLiquid": 88780.84,
     "source": "ynab",
-    "updatedAt": "2026-10-31T23:46:09.002Z"
+    "updatedAt": "2026-11-01T00:01:10.261Z"
   }
 }
