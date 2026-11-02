@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T23:46:00.499Z",
+  "generated_at": "2026-11-02T00:01:07.974Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -271,11 +271,11 @@
     ]
   },
   "dinner": {
-    "name": "Leftovers or whatever you can scrounge up",
+    "name": "Meatloaf with mashed potatoes and cabbage",
     "protein_g": null,
     "cal": null,
-    "effort": "none",
-    "note": "Mike never cooks Sunday. Standing rule.",
+    "effort": "medium",
+    "note": "October 26: moved from October 23 to Monday per Mike. Saved recipe is the reference; nutrition not estimated. Mike requested this swap.",
     "recipe": null
   },
   "mealweek": [
@@ -1954,7 +1954,7 @@
   ],
   "finance": {
     "month": "November 2026",
-    "dayPct": 3.3,
+    "dayPct": 6.7,
     "totalSpend": 0,
     "totalBudget": 0,
     "categories": [],
@@ -1962,6 +1962,6 @@
     "creditDebt": 67709.86,
     "netLiquid": 88780.84,
     "source": "ynab",
-    "updatedAt": "2026-11-01T23:45:59.424Z"
+    "updatedAt": "2026-11-02T00:01:03.035Z"
   }
 }
