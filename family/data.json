@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:46:00.192Z",
+  "generated_at": "2026-11-04T00:01:05.337Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Chicken and vegetable soup with French bread",
-    "protein_g": 65,
-    "cal": 595,
+    "name": "Garlic-herb chicken with roasted potatoes and broccoli",
+    "protein_g": 64,
+    "cal": 602,
     "effort": "easy",
-    "note": "October 27: chicken and vegetable soup moved here from Monday per Mike. Same ingredients and method as the saved draft; not kitchen-tested.",
+    "note": "October 28: recover garlic-herb chicken displaced from the original October 19 draft. Optional school information night starts 6:45PM; serve before it if attending. Assistant-drafted plan for six. Heat oven to 425 F; cut potatoes small, toss with part of the oil and salt, and start roasting about 15 minutes ahead. Season chicken with garlic, thyme, remaining oil, salt and black pepper; use a separate rimmed pan and roast until every piece reaches 165 F. Continue potatoes until tender; steam broccoli separately. Mike: 9.5 oz raw breast, 250 g raw potato equivalent, 1 cup cooked broccoli, 1.5 tsp oil and garlic/herbs. Generic cal/protein assumptions: chicken 285/54.625, potato 192.5/5, broccoli 55/3.7, oil 60/0, garlic/herbs 10/0.2. Rounded estimate 602 cal/64 g protein.",
     "recipe": null
   },
   "mealweek": [
@@ -1942,7 +1942,7 @@
   ],
   "finance": {
     "month": "November 2026",
-    "dayPct": 10,
+    "dayPct": 13.3,
     "totalSpend": 3173.29,
     "totalBudget": 0,
     "categories": [
@@ -1999,6 +1999,6 @@
     "creditDebt": 66384.47,
     "netLiquid": 85278.39,
     "source": "ynab",
-    "updatedAt": "2026-11-03T23:45:59.216Z"
+    "updatedAt": "2026-11-04T00:01:03.313Z"
   }
 }
