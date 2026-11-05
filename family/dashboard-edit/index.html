@@ -1935,11 +1935,9 @@
       <div class="dh-now">
         <span class="dh-ic"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span>
         <span class="dh-temp">67°</span>
-        <span class="dh-hilo">H 68° · L 61°</span>
+        <span class="dh-hilo">H 75° · L 66°</span>
       </div>
       <div class="dh-days">
-        
-          <div class="dh-day"><span class="d">Thu</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="8.6" y1="17.6" x2="7.6" y2="21"/><line x1="12.6" y1="17.6" x2="11.6" y2="21"/><line x1="16.6" y1="17.6" x2="15.6" y2="21"/></g></svg></span><span class="hl">75/66</span></div>
         
           <div class="dh-day"><span class="d">Fri</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(1.2,1.6) scale(0.86)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g></svg></span><span class="hl">74/57</span></div>
         
@@ -1949,13 +1947,15 @@
         
           <div class="dh-day"><span class="d">Mon</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">56/50</span></div>
         
+          <div class="dh-day"><span class="d">Tue</span><span class="i"><svg viewBox="0 0 24 24" class="wx-i" fill="none" aria-hidden="true"><g transform="translate(2.6,-0.6) scale(0.8)"><path class="wx-c" d="M19.35 10.04A7.49 7.49 0 0 0 12 4 7.48 7.48 0 0 0 5.35 8.04 5.994 5.994 0 0 0 6 20h13a4.5 4.5 0 0 0 .35-9.96z"/></g><g class="wx-r"><line x1="10" y1="17.6" x2="9.2" y2="19.9"/><line x1="14.6" y1="17.6" x2="13.8" y2="19.9"/></g></svg></span><span class="hl">55/49</span></div>
+        
       </div>
     </div>
     
     <div class="dh-sun">
       <div class="sun-bar" id="sunBar"
-           data-sunrise="2026-11-04T06:53"
-           data-sunset="2026-11-04T17:32"></div>
+           data-sunrise="2026-11-05T06:54"
+           data-sunset="2026-11-05T17:31"></div>
     </div>
     
   </div>
@@ -2382,12 +2382,12 @@
             <span class="nm">Chicken and vegetable soup with French bread</span>
           </div>
         
-          <div class="row today">
+          <div class="row">
             <span class="dow">Wed</span>
             <span class="nm">Garlic-herb chicken with roasted potatoes and broccoli</span>
           </div>
         
-          <div class="row">
+          <div class="row today">
             <span class="dow">Thu</span>
             <span class="nm">Grilled hamburgers and hotdogs with corn</span>
           </div>
@@ -2455,12 +2455,12 @@
     <div class="tile-body">
       <div class="recipe-day recipe-day-today">
         <div class="recipe-daylbl">Tonight</div>
-        <div class="recipe-name">Garlic-herb chicken with roasted potatoes and broccoli</div>
+        <div class="recipe-name">Grilled hamburgers and hotdogs with corn</div>
       </div>
       <div class="recipe-tomorrow no-recipe"
            >
         <span class="rt-lbl">Tomorrow</span>
-        <span class="rt-name">Grilled hamburgers and hotdogs with corn</span>
+        <span class="rt-name">Takeout or dinner out</span>
       </div>
     </div>
   </div>
@@ -2483,8 +2483,8 @@
       
         <div class="quote-card bible">
           <div class="quote-mark">“</div>
-          <div class="bible-text">But if any of you lacks wisdom, he should ask God who gives to all generously and ungrudgingly, and he will be given it.</div>
-          <div class="quote-ref">James 1:5</div>
+          <div class="bible-text">We love because he first loved us.</div>
+          <div class="quote-ref">1 John 4:19</div>
         </div>
       
     </div>
@@ -3697,7 +3697,7 @@
 
   // === DAY/NIGHT THEME (sunrise → light, sunset → dark, mirrors /dashboard/) ===
   (function themeInit() {
-    const SUN = {"sunrises":["2026-11-04T06:53","2026-11-05T06:54","2026-11-06T06:55","2026-11-07T06:56","2026-11-08T06:57","2026-11-09T06:58"],"sunsets":["2026-11-04T17:32","2026-11-05T17:31","2026-11-06T17:30","2026-11-07T17:29","2026-11-08T17:29","2026-11-09T17:28"],"timezone":"America/New_York"};
+    const SUN = {"sunrises":["2026-11-05T06:54","2026-11-06T06:55","2026-11-07T06:56","2026-11-08T06:57","2026-11-09T06:58","2026-11-10T06:59"],"sunsets":["2026-11-05T17:31","2026-11-06T17:30","2026-11-07T17:29","2026-11-08T17:29","2026-11-09T17:28","2026-11-10T17:27"],"timezone":"America/New_York"};
     const sunrises = (SUN.sunrises || []).map(s => new Date(s)).filter(d => !isNaN(d));
     const sunsets  = (SUN.sunsets  || []).map(s => new Date(s)).filter(d => !isNaN(d));
 
