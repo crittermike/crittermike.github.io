@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T04:46:00.232Z",
+  "generated_at": "2026-11-06T05:01:01.154Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -303,7 +303,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -311,8 +311,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -320,26 +320,19 @@
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 68,
-      "hi": 74,
-      "lo": 67,
-      "icon": "🌦",
-      "code": 53
+      "hi": 75,
+      "lo": 57,
+      "icon": "⛅",
+      "code": 3
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "🌦",
-        "hi": 75,
-        "lo": 57,
-        "code": 51
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -367,24 +360,31 @@
         "hi": 69,
         "lo": 51,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "⛅",
+        "hi": 72,
+        "lo": 51,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-05T06:54",
         "2026-11-06T06:55",
         "2026-11-07T06:56",
         "2026-11-08T06:57",
         "2026-11-09T06:58",
-        "2026-11-10T06:59"
+        "2026-11-10T06:59",
+        "2026-11-11T06:59"
       ],
       "sunsets": [
-        "2026-11-05T17:31",
         "2026-11-06T17:30",
         "2026-11-07T17:29",
         "2026-11-08T17:29",
         "2026-11-09T17:28",
-        "2026-11-10T17:27"
+        "2026-11-10T17:27",
+        "2026-11-11T17:26"
       ],
       "timezone": "America/New_York"
     }
@@ -2007,6 +2007,6 @@
     "creditDebt": 65980.97,
     "netLiquid": 84499.89,
     "source": "ynab",
-    "updatedAt": "2026-11-06T04:45:59.328Z"
+    "updatedAt": "2026-11-06T05:01:00.132Z"
   }
 }
