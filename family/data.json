@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T04:45:14.840Z",
+  "generated_at": "2026-11-09T05:00:15.082Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,7 +15,13 @@
         "balance_str": "$116.09"
       },
       "guineaPig": null,
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-11-10-7668a94e040b03903ae39aecb5b0e7f2a8a568e53579b41b260a3d677dcd046e",
+          "label": "Prepare: Religion: Bible Verse Recitation, Matthew 22:37-39",
+          "dueDate": "2026-11-10"
+        }
+      ]
     },
     {
       "key": "william",
@@ -43,18 +49,7 @@
         "balance_str": "$76.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-11-09-e14a56da3966b10640ad30712ffb30787f0b06bb65fecec56eff742f00b77bd0",
-          "label": "Spanish (Simon): IXL 4N",
-          "dueDate": "2026-11-09"
-        },
-        {
-          "id": "sch-2026-11-09-1adc05b281e0b6a2c95455b03021b1ea306d113c3551fab9502d421c5f7d37ce",
-          "label": "Spanish (Simon): IXL 4G",
-          "dueDate": "2026-11-09"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -282,7 +277,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -290,8 +285,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -299,7 +294,7 @@
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -337,20 +332,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 52,
-      "hi": 70,
-      "lo": 44,
+      "temp": 51,
+      "hi": 74,
+      "lo": 45,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "☀️",
-        "hi": 74,
-        "lo": 45,
-        "code": 0
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -378,24 +366,31 @@
         "hi": 51,
         "lo": 40,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌤",
+        "hi": 55,
+        "lo": 36,
+        "code": 1
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-08T06:57",
         "2026-11-09T06:58",
         "2026-11-10T06:59",
         "2026-11-11T06:59",
         "2026-11-12T07:00",
-        "2026-11-13T07:01"
+        "2026-11-13T07:01",
+        "2026-11-14T07:02"
       ],
       "sunsets": [
-        "2026-11-08T17:29",
         "2026-11-09T17:28",
         "2026-11-10T17:27",
         "2026-11-11T17:26",
         "2026-11-12T17:26",
-        "2026-11-13T17:25"
+        "2026-11-13T17:25",
+        "2026-11-14T17:24"
       ],
       "timezone": "America/New_York"
     }
@@ -2018,6 +2013,6 @@
     "creditDebt": 65642.24,
     "netLiquid": 84161.16,
     "source": "ynab",
-    "updatedAt": "2026-11-09T04:45:13.432Z"
+    "updatedAt": "2026-11-09T05:00:13.677Z"
   }
 }
