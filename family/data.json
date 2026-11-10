@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T23:45:13.878Z",
+  "generated_at": "2026-11-10T00:00:22.119Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -265,11 +265,11 @@
     ]
   },
   "dinner": {
-    "name": "Meatloaf with mashed potatoes and cabbage",
-    "protein_g": null,
-    "cal": null,
-    "effort": "medium",
-    "note": "October 26: moved from October 23 to Monday per Mike. Saved recipe is the reference; nutrition not estimated. Mike requested this swap.",
+    "name": "Chicken and vegetable soup with French bread",
+    "protein_g": 65,
+    "cal": 595,
+    "effort": "easy",
+    "note": "October 27: chicken and vegetable soup moved here from Monday per Mike. Same ingredients and method as the saved draft; not kitchen-tested.",
     "recipe": null
   },
   "mealweek": [
@@ -1948,7 +1948,7 @@
   ],
   "finance": {
     "month": "November 2026",
-    "dayPct": 30,
+    "dayPct": 33.3,
     "totalSpend": 3737.34,
     "totalBudget": 0,
     "categories": [
@@ -2013,6 +2013,6 @@
     "creditDebt": 65642.24,
     "netLiquid": 84161.16,
     "source": "ynab",
-    "updatedAt": "2026-11-09T23:45:12.814Z"
+    "updatedAt": "2026-11-10T00:00:20.160Z"
   }
 }
