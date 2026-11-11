@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Study Quest</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', ui-rounded, system-ui, sans-serif;
+    background: linear-gradient(135deg, #ffe5b4 0%, #b4e5ff 100%);
+    min-height: 100vh; padding: 14px; color: #1a1a2e;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .hidden { display: none !important; }
+  .topbar {
+    width: 100%; max-width: 640px; display: flex; justify-content: space-between; align-items: center;
+    background: #1a1a2e; color: #fff; border-radius: 18px; padding: 10px 16px;
+    font-size: clamp(20px, 5vw, 28px); font-weight: bold;
+  }
+  .panel {
+    width: 100%; max-width: 640px; margin-top: 14px; background: #fff;
+    border: 5px solid #1a1a2e; border-radius: 26px; padding: 22px 18px;
+    box-shadow: 8px 8px 0 #1a1a2e; text-align: center; position: relative; overflow: hidden;
+  }
+  .buddy { font-size: clamp(90px, 26vw, 150px); line-height: 1.15; }
+  .big-title { font-size: clamp(34px, 9vw, 54px); color: #d62828; font-weight: bold; margin: 4px 0; }
+  .pack-name { font-size: clamp(22px, 6vw, 32px); font-weight: bold; margin-bottom: 14px; }
+  .stars-total { font-size: clamp(24px, 6vw, 34px); font-weight: bold; margin: 8px 0 18px; }
+  .play-btn {
+    font-family: inherit; font-size: clamp(30px, 8vw, 44px); font-weight: bold;
+    background: #2ea043; color: #fff; border: 5px solid #1a1a2e; border-radius: 22px;
+    padding: 16px 54px; cursor: pointer; box-shadow: 5px 5px 0 #1a1a2e;
+  }
+  .play-btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .q-emoji { font-size: clamp(70px, 20vw, 120px); line-height: 1.1; }
+  .q-text { font-size: clamp(26px, 6.5vw, 38px); font-weight: bold; line-height: 1.25; margin: 8px 0 4px; }
+  .speak-btn {
+    font-size: 34px; background: #ffd166; border: 4px solid #1a1a2e; border-radius: 50%;
+    width: 64px; height: 64px; cursor: pointer; margin: 6px 0 14px;
+  }
+  .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ans-btn {
+    font-family: inherit; font-weight: bold; font-size: clamp(20px, 5.4vw, 28px);
+    background: #fff; border: 4px solid #1a1a2e; border-radius: 18px; padding: 18px 8px;
+    cursor: pointer; box-shadow: 4px 4px 0 #1a1a2e; line-height: 1.15;
+  }
+  .ans-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 #1a1a2e; }
+  .ans-btn.right { background: #7be495; }
+  .ans-btn.wrong { background: #ff8fa3; animation: shake .3s; }
+  .ans-btn.dim { opacity: .45; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+  .fact {
+    margin-top: 16px; font-size: clamp(20px, 5.5vw, 28px); font-weight: bold;
+    background: #fff3cd; border: 3px dashed #ffa500; border-radius: 14px; padding: 12px;
+  }
+  .next-btn {
+    font-family: inherit; margin-top: 14px; font-size: clamp(24px, 6vw, 32px); font-weight: bold;
+    background: #ffd166; border: 4px solid #1a1a2e; border-radius: 18px; padding: 12px 40px;
+    cursor: pointer; box-shadow: 4px 4px 0 #1a1a2e;
+  }
+  .progress { display: flex; gap: 5px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .pip { width: 20px; height: 20px; border-radius: 50%; border: 3px solid #1a1a2e; background: #fff; }
+  .pip.done { background: #2ea043; }
+  .pip.now { background: #ffd166; }
+  .boss-face { font-size: clamp(90px, 26vw, 150px); line-height: 1.1; }
+  .boss-face.hit { animation: shake .35s; }
+  .burst { position: absolute; font-size: 34px; pointer-events: none; animation: fly 1s ease-out forwards; }
+  @keyframes fly { to { transform: translate(var(--dx), var(--dy)) scale(.4); opacity: 0; } }
+  .earned { font-size: clamp(30px, 8vw, 46px); font-weight: bold; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div id="hearts">❤️❤️❤️</div>
+  <div id="streak">🔥 0</div>
+  <div id="score">⭐ 0</div>
+</div>
+
+<!-- HOME -->
+<div class="panel" id="home">
+  <div class="buddy" id="buddy">🥚</div>
+  <div class="big-title">Study Quest!</div>
+  <div class="pack-name">🛠️ Simple Machines</div>
+  <div class="stars-total" id="stars-total">⭐ 0</div>
+  <button class="play-btn" id="play">▶️ PLAY</button>
+</div>
+
+<!-- QUESTION -->
+<div class="panel hidden" id="game">
+  <div class="progress" id="progress"></div>
+  <div class="boss-face hidden" id="boss-face">👾</div>
+  <div class="q-emoji" id="q-emoji"></div>
+  <div class="q-text" id="q-text"></div>
+  <button class="speak-btn" id="speak" title="Listen">🔊</button>
+  <div class="answers" id="answers"></div>
+  <div class="fact hidden" id="fact"></div>
+  <button class="next-btn hidden" id="next">➡️ GO</button>
+</div>
+
+<!-- END -->
+<div class="panel hidden" id="end">
+  <div class="buddy" id="end-face">🏆</div>
+  <div class="big-title" id="end-title">You did it!</div>
+  <div class="earned" id="earned">⭐ +0</div>
+  <button class="play-btn" id="again">🔁 AGAIN!</button>
+</div>
+
+<script>
+/* ================= CONTENT PACKS =================
+   A pack is pure data. New test = new pack. No new code. */
+const PACKS = [{
+  id: "simple-machines",
+  name: "Simple Machines",
+  icon: "🛠️",
+  machines: [
+    { name: "Inclined Plane", emoji: "🛝", def: "A flat surface that is sloped.", say: "A ramp!", ex: "Ramp" },
+    { name: "Wedge",          emoji: "🪓", def: "It splits things apart.",      say: "It splits wood!", ex: "Ax head" },
+    { name: "Screw",          emoji: "🔩", def: "It twists into things.",       say: "Twist it in!", ex: "Drill bit" },
+    { name: "Lever",          emoji: "🏋️", def: "It helps you lift heavy things.", say: "It lifts!", ex: "Hand truck" },
+    { name: "Wheel and Axle", emoji: "🎡", def: "A wheel on a rod. It spins.",  say: "It spins!", ex: "Steering wheel" },
+    { name: "Pulley",         emoji: "🚩", def: "A wheel with a rope. It lifts.", say: "Pull the rope!", ex: "Flagpole rope" }
+  ],
+  words: [
+    { name: "Fulcrum", emoji: "🔺", def: "The middle part a lever turns on.", say: "The seesaw middle!" },
+    { name: "Load",    emoji: "📦", def: "The thing you are lifting.",        say: "The heavy thing!" },
+    { name: "Effort",  emoji: "💪", def: "Your push or pull.",                say: "Your push!" }
+  ],
+  examples: [
+    { ex: "Ramp", a: "Inclined Plane" }, { ex: "Slide", a: "Inclined Plane" },
+    { ex: "Ax head", a: "Wedge" }, { ex: "Knife", a: "Wedge" },
+    { ex: "Drill bit", a: "Screw" }, { ex: "Jar lid", a: "Screw" },
+    { ex: "Hand truck", a: "Lever" }, { ex: "Seesaw", a: "Lever" },
+    { ex: "Steering wheel", a: "Wheel and Axle" }, { ex: "Doorknob", a: "Wheel and Axle" },
+    { ex: "Flagpole rope", a: "Pulley" }
+  ]
+}];
+
+/* Build the question pool from pack data. Question types:
+   ex   = "What is a Ramp?"      -> tap the machine name
+   tap  = "Tap the Lever!"       -> tap the emoji tile
+   def  = "It splits things apart." -> tap the machine name
+   word = vocab (fulcrum, load, effort)                          */
+function buildPool(pack) {
+  const pool = [];
+  const names = pack.machines.map(m => m.name);
+  for (const e of pack.examples) {
+    pool.push({ kind: "ex", q: "What is a " + e.ex.toLowerCase() + "?", speak: "What is a " + e.ex + "?",
+      choices: names, answer: e.a, emoji: "❓",
+      fact: e.ex + " = " + e.a + "!" });
+  }
+  for (const m of pack.machines) {
+    pool.push({ kind: "tap", q: "Tap the " + m.name + "!", speak: "Tap the " + m.name + "!",
+      choices: pack.machines.map(x => x.emoji), answer: m.emoji, emoji: "",
+      fact: m.say });
+    pool.push({ kind: "def", q: m.def, speak: m.def + " What is it?",
+      choices: names, answer: m.name, emoji: "🤔",
+      fact: m.name + "! " + m.say });
+  }
+  const allWords = pack.machines.concat(pack.words);
+  for (const w of pack.words) {
+    pool.push({ kind: "word", q: w.def, speak: w.def + " What is it?",
+      choices: allWords.map(x => x.name), answer: w.name, emoji: "🤔",
+      fact: w.name + "! " + w.say });
+  }
+  return pool;
+}
+
+/* ================= SAVE DATA ================= */
+const SAVE_KEY = "study-quest-v1";
+let save = { stars: 0, grudge: {} };
+try { save = Object.assign(save, JSON.parse(localStorage.getItem(SAVE_KEY) || "{}")); } catch (e) {}
+function persist() { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }
+const BUDDIES = [[0,"🥚"],[50,"🐣"],[120,"🐤"],[250,"🦉"],[450,"🦅"],[700,"🐉"]];
+function buddyFor(stars) { let b = "🥚"; for (const [n, e] of BUDDIES) if (stars >= n) b = e; return b; }
+
+/* ================= GAME STATE ================= */
+const RUN_LEN = 10;
+let pack, pool, runQs, qi, hearts, streak, runStars, bossMode, bossHits, locked;
+const $ = id => document.getElementById(id);
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function pick4(choices, answer) {
+  const others = shuffle(choices.filter(c => c !== answer)).slice(0, 3);
+  return shuffle([answer].concat(others));
+}
+function qid(q) { return q.q + "|" + q.answer; }
+function speak(text) {
+  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.rate = 0.95; speechSynthesis.speak(u); } catch (e) {}
+}
+function updateBar() {
+  $("hearts").textContent = hearts > 0 ? "❤️".repeat(hearts) : "💔";
+  $("streak").textContent = "🔥 " + streak + (mult() > 1 ? "  x" + mult() : "");
+  $("score").textContent = "⭐ " + runStars;
+}
+function mult() { return streak >= 6 ? 3 : streak >= 3 ? 2 : 1; }
+function showHome() {
+  $("home").classList.remove("hidden"); $("game").classList.add("hidden"); $("end").classList.add("hidden");
+  $("buddy").textContent = buddyFor(save.stars);
+  $("stars-total").textContent = "⭐ " + save.stars;
+  hearts = 3; streak = 0; runStars = 0; updateBar();
+}
+function startRun() {
+  pack = PACKS[0]; pool = buildPool(pack);
+  runQs = shuffle(pool).slice(0, RUN_LEN);
+  qi = 0; hearts = 3; streak = 0; runStars = 0; bossMode = false; bossHits = 0;
+  $("home").classList.add("hidden"); $("end").classList.add("hidden"); $("game").classList.remove("hidden");
+  nextQ();
+}
+function drawProgress() {
+  const total = bossMode ? RUN_LEN + 3 : RUN_LEN;
+  let h = "";
+  for (let i = 0; i < total; i++) h += '<div class="pip' + (i < qi ? " done" : i === qi ? " now" : "") + '"></div>';
+  $("progress").innerHTML = h;
+}
+function nextQ() {
+  locked = false;
+  if (!bossMode && qi >= RUN_LEN) return startBoss();
+  if (bossMode && qi >= RUN_LEN + 3) return endRun(true);
+  const q = bossMode ? runQs[qi] : runQs[qi];
+  drawProgress();
+  $("boss-face").classList.toggle("hidden", !bossMode);
+  $("q-emoji").textContent = bossMode ? "" : (q.emoji || "");
+  $("q-text").textContent = bossMode ? "👾 " + q.q : q.q;
+  $("fact").classList.add("hidden"); $("next").classList.add("hidden");
+  const box = $("answers"); box.innerHTML = "";
+  for (const c of pick4(q.choices, q.answer)) {
+    const b = document.createElement("button");
+    b.className = "ans-btn"; b.textContent = c;
+    b.onclick = () => answer(b, c, q);
+    box.appendChild(b);
+  }
+  updateBar();
+}
+function answer(btn, choice, q) {
+  if (locked) return; locked = true;
+  const right = choice === q.answer;
+  const id = qid(q);
+  for (const b of $("answers").children) {
+    if (b.textContent === q.answer) b.classList.add("right");
+    else if (b === btn) b.classList.add("wrong");
+    else b.classList.add("dim");
+  }
+  if (right) {
+    streak++;
+    const pts = 5 * mult(); runStars += pts;
+    if (bossMode) { bossHits++; $("boss-face").classList.add("hit"); setTimeout(() => $("boss-face").classList.remove("hit"), 380); }
+    if ((save.grudge[id] || 0) > 0) { save.grudge[id]++; if (save.grudge[id] >= 2) delete save.grudge[id]; persist(); }
+    burst(btn);
+  } else {
+    streak = 0; hearts--;
+    save.grudge[id] = 0; persist();
+    $("fact").textContent = "➡️ " + q.fact;
+    $("fact").classList.remove("hidden");
+  }
+  updateBar();
+  if (hearts <= 0) { setTimeout(() => endRun(false), right ? 500 : 1600); return; }
+  qi++;
+  if (right) setTimeout(nextQ, 650);
+  else $("next").classList.remove("hidden");
+}
+function startBoss() {
+  bossMode = true;
+  const grudgeQs = pool.filter(q => save.grudge[qid(q)] !== undefined);
+  const bossQs = shuffle(grudgeQs).slice(0, 3);
+  while (bossQs.length < 3) { const r = pool[Math.floor(Math.random() * pool.length)]; if (!bossQs.includes(r)) bossQs.push(r); }
+  runQs = runQs.concat(bossQs);
+  $("q-text").textContent = "👾 BOSS TIME!";
+  setTimeout(nextQ, 400);
+}
+function endRun(won) {
+  if (won && bossHits >= 2) runStars += 20;
+  if (!won) runStars = Math.floor(runStars / 2);
+  save.stars += runStars; persist();
+  $("game").classList.add("hidden"); $("end").classList.remove("hidden");
+  $("end-face").textContent = won && bossHits >= 2 ? "🏆" : won ? "🎉" : buddyFor(save.stars);
+  $("end-title").textContent = won && bossHits >= 2 ? "BOSS BEAT!" : won ? "You did it!" : "Good try!";
+  $("earned").textContent = "⭐ +" + runStars;
+  runStars = 0;
+}
+function burst(el) {
+  const panel = $("game"), r = el.getBoundingClientRect(), p = panel.getBoundingClientRect();
+  for (let i = 0; i < 7; i++) {
+    const s = document.createElement("div");
+    s.className = "burst"; s.textContent = ["⭐","✨","🎉"][Math.floor(Math.random() * 3)];
+    s.style.left = (r.left - p.left + r.width / 2) + "px"; s.style.top = (r.top - p.top) + "px";
+    s.style.setProperty("--dx", (Math.random() * 160 - 80) + "px");
+    s.style.setProperty("--dy", (-40 - Math.random() * 90) + "px");
+    panel.appendChild(s); setTimeout(() => s.remove(), 1000);
+  }
+}
+$("speak").onclick = () => { const q = runQs[qi]; if (q) speak(q.speak); };
+$("next").onclick = () => nextQ();
+$("play").onclick = startRun;
+$("again").onclick = () => showHome();
+showHome();
+</script>
+</body>
+</html>
