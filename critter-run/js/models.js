@@ -26,7 +26,8 @@ const CHASERS = {
   boar: { len: 2.6, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.95 },
   gator: { len: 4.6, clips: { run: 'run', idle: 'idle', attack: 'bite', roar: 'bite' }, rate: 1.2, rim: 0.2 },
   shark: { len: 4.4, clips: { run: 'swim', idle: 'swim', attack: 'bite', roar: 'bite' }, rate: 1.3, rim: 0.2, y: -0.55, wake: true },
-  hurricane: { height: 6.5, clips: { run: 'Spin', idle: 'Spin', attack: 'Attack', roar: 'Attack' }, rate: 1.0, keepMaterials: true },
+  // The run camera ends up inside the hurricane's see-through funnel, so it fades out while the camera is behind the runner.
+  hurricane: { height: 6.5, clips: { run: 'Spin', idle: 'Spin', attack: 'Attack', roar: 'Attack' }, rate: 1.0, keepMaterials: true, fades: true },
 };
 // Recolors a chaser's texture in its shader: sat below 1 pulls colors toward grey, and tint multiplies.
 function grade(mat, { sat = 1, tint = '#ffffff' }) {
@@ -35,6 +36,17 @@ function grade(mat, { sat = 1, tint = '#ffffff' }) {
     prev(sh, r);
     sh.fragmentShader = sh.fragmentShader.replace('#include <map_fragment>', `#include <map_fragment>
       diffuseColor.rgb = mix(vec3(dot(diffuseColor.rgb, vec3(0.2126, 0.7152, 0.0722))), diffuseColor.rgb, ${sat.toFixed(3)}) * vec3(${t.r.toFixed(3)}, ${t.g.toFixed(3)}, ${t.b.toFixed(3)});`);
+  };
+}
+// Screen-door fade: discards a growing share of pixels as uFade drops to 0. Works for solid and see-through parts
+// alike, with no change to blending or draw order.
+function dither(mat, uFade) {
+  const prev = mat.onBeforeCompile;
+  mat.onBeforeCompile = (sh, r) => {
+    prev(sh, r);
+    sh.uniforms.uFade = uFade;
+    sh.fragmentShader = 'uniform float uFade;\n' + sh.fragmentShader.replace('#include <clipping_planes_fragment>', `#include <clipping_planes_fragment>
+      if (uFade < 0.999 && fract(sin(dot(floor(gl_FragCoord.xy), vec2(12.9898, 78.233))) * 43758.5453) >= uFade) discard;`);
   };
 }
 const LOOP_ONCE = new Set();
@@ -48,14 +60,16 @@ export function loadChaser(type) {
 function buildChaser(type, gltf) {
   const def = CHASERS[type];
   const model = cloneSkinned(gltf.scene);
+  const uFade = { value: 1 };
   model.traverse(o => {
     if (!o.isMesh) return;
     const mats = [].concat(o.material).map(m => {
       const c = m.clone();
       if (def.tint && def.tint[c.name]) c.color.set(def.tint[c.name]);
       if (!def.keepMaterials) { c.metalness = 0; c.roughness = Math.max(0.55, c.roughness); }
-      bend(c, { rim: def.rim ?? 0.45, key: def.grade ? `chaser-${type}` : 'chaser' });
+      bend(c, { rim: def.rim ?? 0.45, key: def.grade || def.fades ? `chaser-${type}` : 'chaser' });
       if (def.grade) grade(c, def.grade);
+      if (def.fades) dither(c, uFade);
       return c;
     });
     o.material = Array.isArray(o.material) ? mats : mats[0];
@@ -106,6 +120,12 @@ function buildChaser(type, gltf) {
       play(mode);
       if (cur) cur.timeScale = mode === 'run' ? def.rate * 1.15 : 1;
       mixer.update(dt);
+    },
+    // k: 1 shows the chaser, 0 hides it. Only chasers marked fades respond.
+    fade(k) {
+      if (!def.fades) return;
+      uFade.value = k;
+      root.visible = k > 0.01;
     },
   };
 }

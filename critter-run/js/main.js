@@ -1462,6 +1462,10 @@ function frame(now) {
     const front = G.mode === 'start' || G.mode === 'question' || G.mode === 'feedback' || G.mode === 'caught';
     G.coinHide = damp(G.coinHide, front ? 1 : 0, 8, dt);
     world.coinGap = G.coinHide > 0.01 ? [G.h.dist - 1, G.h.dist + 9, G.coinHide] : null;
+    // While the camera trails the runner it would sit inside the hurricane's funnel, so the hurricane fades away.
+    const behind = G.mode === 'run' || (G.mode === 'start' && G.t > 0.9);
+    G.c.fadeK = damp(G.c.fadeK ?? 1, behind ? 0 : 1, 10, dt);
+    G.c.model?.fade(G.c.fadeK);
     world.update(sdt, G.h.dist, camera, G.h.x);
     fx.update(sdt);
   }
