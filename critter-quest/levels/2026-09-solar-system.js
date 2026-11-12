@@ -7,7 +7,7 @@ CritterQuest.addLevel({
   emoji: '🪐',
   color: '#7c83ff',
   decor: ['⭐', '🌙', '✨'],
-  boss: '🐙',
+  boss: '🐲',
   stages: [
     { monster: '👽', questions: [
       { q: 'What is the center of our solar system?', a: 'The Sun', wrong: ['The Moon', 'Earth', 'Mars'], why: 'The Sun is the center.', pic: '☀️' },
@@ -29,7 +29,7 @@ CritterQuest.addLevel({
       { q: 'What covers the Moon?', a: 'Rocks and dust', wrong: ['Grass and trees', 'Water', 'Snow'], why: 'Moon has rocks and dust.', pic: '🌑' },
       { q: 'Why do astronauts wear spacesuits?', a: 'Air and protection', wrong: ['To grow taller', 'To fly faster', 'To look cool'], why: 'Suits give air and safety.', pic: '🧑‍🚀' },
     ] },
-    { monster: '🌚', questions: [
+    { monster: '☄️', questions: [
       { q: 'Who studies space?', a: 'Astronomers', wrong: ['Botanists', 'Meteorologists', 'Doctors'], why: 'Astronomers study space.', pic: '🔭' },
       { q: 'What tool helps us see planets?', a: 'Telescope', wrong: ['Microscope', 'Thermometer', 'Magnet'], why: 'Telescopes see far away.', pic: '🪐' },
       { q: 'North has summer. South has…?', a: 'Winter', wrong: ['Summer', 'Spring', 'Fall'], why: 'Hemispheres have opposite seasons.', pic: '🌎' },

@@ -20,7 +20,7 @@ CritterQuest.addLevel({
       { q: 'Table Rock and Paris Mountain are…?', a: 'Monadnocks', wrong: ['Barrier islands', 'Marshes', 'Fall lines', 'Beaches'], why: 'Monadnocks are great for hiking.', pic: '🥾' },
     ] },
     // Piedmont
-    { monster: '🦌', questions: [
+    { monster: '🐗', questions: [
       { q: 'Which region is the largest?', a: 'Piedmont', wrong: ['Blue Ridge', 'Sandhills', 'Coastal Zone', 'Outer Coastal Plain'], why: 'Piedmont is the biggest.', pic: '🐘' },
       { q: 'What does Piedmont mean?', a: 'Foothills', wrong: ['Mountains', 'Sandy hills', 'Beaches', 'Swamps'], why: 'Piedmont means foothills.' },
       { q: 'Which region do we live in?', a: 'Piedmont', wrong: ['Blue Ridge', 'Sandhills', 'Coastal Zone', 'Inner Coastal Plain'], why: 'We live in the Piedmont.', pic: '🏡' },
@@ -29,7 +29,7 @@ CritterQuest.addLevel({
       { show: '🍑 Peaches 💦 Waterfalls 🦶 Foothills', q: 'Which region is this?', a: 'Piedmont', wrong: ['Sandhills', 'Coastal Zone', 'Inner Coastal Plain', 'Outer Coastal Plain'], why: 'That is the Piedmont.' },
     ] },
     // Sandhills
-    { monster: '🦎', questions: [
+    { monster: '🦂', questions: [
       { q: 'What do the Sandhills have lots of?', a: 'Sandy hills', wrong: ['Tall mountains', 'Swamps', 'Beaches'], why: 'Sandhills means sandy hills.' },
       { q: 'What is the fall line?', a: 'Where the land drops', wrong: ['A row of mountains', 'Where the ocean ends', 'A line of beaches'], why: 'The land drops down there.', pic: '📉' },
       { q: 'Which region has the fall line?', a: 'Sandhills', wrong: ['Blue Ridge', 'Coastal Zone', 'Outer Coastal Plain'], why: 'Fall line is in Sandhills.' },
@@ -38,7 +38,7 @@ CritterQuest.addLevel({
       { q: 'Why is farming hard in the Sandhills?', a: 'Dry, sandy soil', wrong: ['Too many mountains', 'Too much rain', 'Salty ocean water'], why: 'Sandy soil is too dry.', pic: '🌱' },
     ] },
     // Inner Coastal Plain
-    { monster: '🐛', questions: [
+    { monster: '🕷️', questions: [
       { q: 'Which region is best for farming?', a: 'Inner Coastal Plain', wrong: ['Sandhills', 'Blue Ridge', 'Coastal Zone', 'Outer Coastal Plain'], why: 'It is the farming heart.', pic: '🚜' },
       { show: 'Inner Coastal Plain', q: 'What is the land like?', a: 'Mostly flat', wrong: ['Tall mountains', 'Sandy hills', 'Swamps and marshes'], why: 'The land is mostly flat.' },
       { show: 'Inner Coastal Plain', q: 'Why do crops grow well there?', a: 'Rich, dark soil', wrong: ['Dry, sandy soil', 'Salty ocean water', 'Rocky mountain soil'], why: 'Rich soil that drains well.' },
@@ -47,7 +47,7 @@ CritterQuest.addLevel({
       { q: 'What does agriculture mean?', a: 'Farming', wrong: ['Fishing', 'Logging', 'Building'], why: 'Agriculture means farming.' },
     ] },
     // Outer Coastal Plain
-    { monster: '🦟', questions: [
+    { monster: '🐍', questions: [
       { q: 'Which region has swamps and marshes?', a: 'Outer Coastal Plain', wrong: ['Blue Ridge', 'Sandhills', 'Piedmont', 'Inner Coastal Plain'], why: 'Outer Coastal Plain is swampy.', pic: '🐊' },
       { show: 'Outer Coastal Plain', q: 'What is the soil like?', a: 'Does not drain well', wrong: ['Dry and sandy', 'Drains really well', 'Hard and rocky'], why: 'Water stays in the soil.' },
       { show: 'Outer Coastal Plain', q: 'Which crops can grow there?', a: 'Rice and indigo', wrong: ['Peanuts and soybeans', 'Peaches and apples', 'Bananas and coconuts'], why: 'Rice likes wet soil.' },
@@ -56,7 +56,7 @@ CritterQuest.addLevel({
       { q: 'Water and timber are natural…?', a: 'Resources', wrong: ['Landforms', 'Regions', 'Economies'], why: 'Nature gives us resources.', pic: '💧' },
     ] },
     // Coastal Zone
-    { monster: '🦐', questions: [
+    { monster: '🐊', questions: [
       { q: 'Which region has beaches and barrier islands?', a: 'Coastal Zone', wrong: ['Sandhills', 'Piedmont', 'Blue Ridge', 'Inner Coastal Plain'], why: 'They line the coast.', pic: '🏖️' },
       { q: 'Which ocean does SC touch?', a: 'Atlantic Ocean', wrong: ['Pacific Ocean', 'Indian Ocean', 'Arctic Ocean'], why: 'SC touches the Atlantic.', pic: '🌊' },
       { q: 'How wide is the Coastal Zone?', a: 'About 10 miles', wrong: ['About 1 mile', 'About 100 miles', 'About 500 miles'], why: 'It is 10 miles wide.', pic: '📏' },

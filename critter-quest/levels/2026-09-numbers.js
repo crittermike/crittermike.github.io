@@ -9,7 +9,7 @@ CritterQuest.addLevel({
   decor: ['🏔️', '🪨', '🌲'],
   boss: '🧌',
   stages: [
-    { monster: '🐐', questions: [
+    { monster: '🦁', questions: [
       { q: 'What is the value of 5 in 5,164?', a: '5,000', wrong: ['500', '50', '5'], why: 'The 5 means 5,000.' },
       { show: '6,912', q: 'Which digit is in the hundreds place?', a: '9', wrong: ['6', '1', '2'], why: '9 means 9 hundreds.' },
       { q: 'What is the value of 4 in 7,543?', a: '40', wrong: ['4', '400', '4,000'], why: 'The 4 means 4 tens.' },

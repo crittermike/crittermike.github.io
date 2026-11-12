@@ -9,7 +9,7 @@ CritterQuest.addLevel({
   decor: ['🌷', '🌳', '🏰'],
   boss: '🐉',
   stages: [
-    { monster: '🐀', questions: [
+    { monster: '🐅', questions: [
       { q: 'A land ruled by a king is a…?', a: 'Kingdom', wrong: ['Custom', 'Parable', 'Gospel'], why: 'A king rules a kingdom.', pic: '🗺️' },
       { q: 'What does reign mean?', a: 'To rule as king', wrong: ['To rain', 'To plant seeds', 'To say sorry'], why: 'Reign means to rule.', pic: '🏰' },
       { q: 'Power to rule is called…?', a: 'Dominion', wrong: ['Custom', 'Merchant', 'Sower'], why: 'Dominion means power to rule.', pic: '🌍' },
