@@ -307,6 +307,12 @@ export const BIOME = {
 };
 export const BIOME_ORDER = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach'];
 
+// Ground covering x from x0 to x1 for one chunk. Ground stops at the track edge rather than running under it,
+// so the two never fight over the same pixels.
+function groundStrip(b, color, x0, x1, z0) {
+  b.plane(color, [(x0 + x1) / 2, 0, z0 - CHUNK / 2], [x1 - x0, CHUNK]);
+}
+
 // ---------- animated textures ----------
 function stripeTexture() {
   const c = document.createElement('canvas');
@@ -586,22 +592,24 @@ export class World {
 
     // ground and track
     if (bi.style === 'boardwalk') {
-      w.plane(bi.water, [0, -0.08, z0 - CHUNK / 2], [260, CHUNK]);
+      w.plane(bi.water, [0, -0.1, z0 - CHUNK / 2], [260, CHUNK]);
       b.plane('#2f3f2a', [0, -0.5, z0 - CHUNK / 2], [260, CHUNK]);
       for (let i = 0; i < CHUNK / 0.6; i++) b.box(i % 2 ? '#8a6a48' : '#7c5e3f', [0, 0.0, z0 - i * 0.6 - 0.3], [7.8, 0.12, 0.56], null, 0.03);
       for (let i = 0; i < CHUNK / 3; i++) for (const s of [-1, 1]) b.box('#6a5038', [s * 4.0, 0.35, z0 - i * 3], [0.22, 1.3, 0.22]);
       for (const s of [-1, 1]) b.box('#7c5e3f', [s * 4.0, 0.9, z0 - CHUNK / 2], [0.14, 0.12, CHUNK]);
       chunk.emitters.push({ type: 'firefly', x: (r() < 0.5 ? -1 : 1) * 8, z: z0 - 15, t: r() });
     } else if (bi.style === 'surf') {
-      b.plane(bi.ground, [-70, 0, z0 - CHUNK / 2], [140, CHUNK]);
+      groundStrip(b, bi.ground, -140, -4.1, z0);
       b.plane(bi.track, [0, 0.01, z0 - CHUNK / 2], [8.2, CHUNK]);
-      w.plane('#7fd6e6', [0, 0.1, z0 - CHUNK / 2], [8.2, CHUNK]);
+      // Surf wash over the sand path, high enough that its wave troughs (-0.14) never uncover the sand.
+      w.plane('#7fd6e6', [0, 0.2, z0 - CHUNK / 2], [8.2, CHUNK]);
       w.plane(bi.water, [154, 0.05, z0 - CHUNK / 2], [300, CHUNK]);
       b.plane('#1d6f9a', [154, -0.6, z0 - CHUNK / 2], [300, CHUNK]);
       for (let i = 0; i < 10; i++) b.box('#ffffff', [4.4 + r() * 0.6, 0.12, z0 - r() * CHUNK], [0.5 + r(), 0.06, 0.8 + r() * 2]);
       for (let i = 0; i < 8; i++) b.box('#fff6dc', [(r() - 0.5) * 7, 0.03, z0 - r() * CHUNK], [0.3, 0.04, 0.3]);
     } else {
-      b.plane(bi.ground, [0, 0, z0 - CHUNK / 2], [260, CHUNK]);
+      groundStrip(b, bi.ground, -130, -3.7, z0);
+      groundStrip(b, bi.ground, 3.7, 130, z0);
       b.plane(bi.track, [0, 0.015, z0 - CHUNK / 2], [7.4, CHUNK]);
       for (const s of [-1, 1]) b.box(bi.edge, [s * 3.8, 0.06, z0 - CHUNK / 2], [0.35, 0.12, CHUNK]);
       for (let i = 0; i < 26; i++) b.box(bi.speck, [(r() - 0.5) * 6.8, 0.04, z0 - r() * CHUNK], [0.15 + r() * 0.3, 0.05, 0.15 + r() * 0.3]);
@@ -688,7 +696,7 @@ export class World {
     b.box('#7d838c', [ex.x + s * 3, h / 2, ex.z - 1], [10, h, 4], null, 0.04);
     b.box('#5d9a4c', [ex.x + s * 3, h + 0.3, ex.z - 1], [10.4, 0.6, 4.4]);
     b.ico('#8e939b', [ex.x - s * 2.5, 0.8, ex.z + 1.5], [2.4, 1.8, 2], null, 0.05);
-    w.plane('#5fb7e6', [ex.x, 0.08, ex.z + 2.5], [6, 5]);
+    w.plane('#5fb7e6', [ex.x, 0.18, ex.z + 2.5], [6, 5]);
     this.addFall(chunk, ex.x, h, ex.z + 1.05, 2.6, h);
     chunk.emitters.push({ type: 'mist', x: ex.x, z: ex.z + 1.5, w: 2.6, t: 0 });
   }

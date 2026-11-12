@@ -53,7 +53,7 @@ const shapes = {
   cyl: (seg, top) => base(`cyl${seg}:${top}`, () => new THREE.CylinderGeometry(0.5 * top, 0.5, 1, seg)),
   ico: detail => base('ico' + detail, () => new THREE.IcosahedronGeometry(0.5, detail)),
   oct: () => base('oct', () => new THREE.OctahedronGeometry(0.5, 0)),
-  plane: () => base('plane', () => new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2)),
+  plane: segX => base('plane' + segX, () => new THREE.PlaneGeometry(1, 1, segX, 1).rotateX(-Math.PI / 2)),
 };
 
 const _p = new THREE.Vector3(), _s = new THREE.Vector3(), _q = new THREE.Quaternion(), _e = new THREE.Euler();
@@ -78,7 +78,9 @@ export class Builder {
   cyl(color, pos, r, h, seg = 8, rot, top = 1, jitter) { return this.add(shapes.cyl(seg, top), color, pos, [r * 2, h, r * 2], rot, jitter); }
   ico(color, pos, size, rot, jitter, detail = 0) { return this.add(shapes.ico(detail), color, pos, size, rot, jitter); }
   oct(color, pos, size, rot) { return this.add(shapes.oct(), color, pos, size, rot); }
-  plane(color, pos, size, rot) { return this.add(shapes.plane(), color, pos, [size[0], 1, size[1]], rot); }
+  // Wide planes get a vertex every ~3 m across. The bend is per-vertex and depends on view depth, so when the
+  // camera turns, a single 260 m quad would bend only at its far corners and tilt through nearby surfaces.
+  plane(color, pos, size, rot) { return this.add(shapes.plane(Math.max(1, Math.ceil(size[0] / 3))), color, pos, [size[0], 1, size[1]], rot); }
   get empty() { return this.parts.length === 0; }
   build() {
     let n = 0;
