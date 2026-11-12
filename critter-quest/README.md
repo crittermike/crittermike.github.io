@@ -2,7 +2,7 @@
 
 One continuous study game for Thomas (3rd grade). Every test becomes a new **island** on the map. Each island has 2–8 monster battles and a boss. Coins, heroes, pets, the monster book, and the review arena carry over from island to island.
 
-Play it at `/critter-quest/`.
+Play it at `/critter-quest/` (short link: `/quest`).
 
 To share one test without the other islands, add its `id`, for example `/critter-quest/?island=sc-landforms`. The map, monster book, and arena then show only that island.
 
