@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Critter Run</title>
+<meta name="theme-color" content="#1b2340">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏃</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --font: Fredoka, "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif; --pad: max(12px, env(safe-area-inset-top)); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1b2340; }
+  body { font-family: var(--font); color: #fff; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  canvas#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  [hidden] { display: none !important; }
+  button { font-family: inherit; cursor: pointer; border: 0; color: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  button:active { transform: translateY(3px) scale(.97); }
+  .screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--pad) 16px max(16px, env(safe-area-inset-bottom)); }
+  .outline { text-shadow: 0 3px 0 rgba(0,0,0,.35), 0 0 12px rgba(0,0,0,.25); }
+
+  .big { width: 132px; height: 132px; border-radius: 50%; font-size: 64px; display: grid; place-items: center; box-shadow: 0 9px 0 rgba(0,0,0,.28), inset 0 -8px 0 rgba(0,0,0,.15); }
+  .go { background: radial-gradient(circle at 35% 30%, #7dff8a, #1fbf3a 65%); color: #fff; animation: pulse 1.4s ease-in-out infinite; }
+  .chip { min-width: 72px; height: 72px; padding: 0 16px; border-radius: 24px; font-size: 38px; background: #fff; color: #222; box-shadow: 0 6px 0 rgba(0,0,0,.25); display: inline-grid; place-items: center; }
+  .chip.small { min-width: 58px; height: 58px; font-size: 30px; border-radius: 18px; padding: 0 10px; }
+  .chip.off { opacity: .4; position: relative; }
+  .chip.off::after { content: ''; position: absolute; left: 12%; right: 12%; top: 50%; height: 5px; background: #ff3b30; border-radius: 3px; transform: rotate(-35deg); }
+  .row { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+  @keyframes pop { 0% { transform: scale(.4); opacity: 0; } 70% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-14px); } 40% { transform: translateX(12px); } 60% { transform: translateX(-9px); } 80% { transform: translateX(6px); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* title */
+  #s-title { justify-content: space-between; padding-top: max(7vh, var(--pad)); padding-bottom: max(8vh, env(safe-area-inset-bottom)); }
+  .logo { margin: 0; font-size: clamp(56px, 15vw, 120px); line-height: .9; font-weight: 700; text-align: center; letter-spacing: 2px; color: #ffd23f;
+    -webkit-text-stroke: 3px #3a1d00; text-shadow: 0 7px 0 #ff5a36, 0 12px 0 #3a1d00, 0 18px 24px rgba(0,0,0,.4); transform: rotate(-4deg); animation: bob 2.4s ease-in-out infinite; }
+  .logo span { color: #7ff3ff; display: block; }
+
+  /* map */
+  #s-map { justify-content: flex-start; padding: 0; background: linear-gradient(180deg, rgba(20,30,70,.82), rgba(20,30,70,.55) 40%, rgba(10,40,60,.78)); }
+  .m-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: var(--pad) 12px 10px; }
+  .m-head .row { gap: 8px; flex-wrap: nowrap; }
+  .coins-pill { background: rgba(0,0,0,.35); border-radius: 40px; padding: 6px 18px 6px 12px; font-size: 30px; font-weight: 700; white-space: nowrap; }
+  #map-list { flex: 1; width: 100%; overflow-y: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch; padding: 4px 0 60px; }
+  .m-level h2 { margin: 6px 0 4px; text-align: center; font-size: clamp(30px, 8vw, 44px); color: #ffd23f; text-shadow: 0 4px 0 rgba(0,0,0,.4); }
+  .m-path { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 20px; }
+  .m-path::before { content: ''; position: absolute; top: 40px; bottom: 60px; left: 50%; width: 10px; margin-left: -5px; border-radius: 6px; background: repeating-linear-gradient(180deg, rgba(255,255,255,.55) 0 14px, transparent 14px 26px); }
+  .stop { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; padding: 4px; transform: translateX(calc(var(--off) * min(22vw, 120px))); }
+  .stop .s-emoji { width: 104px; height: 104px; border-radius: 50%; display: grid; place-items: center; font-size: 58px; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c) 55%, #fff), var(--c) 70%);
+    border: 6px solid #fff; box-shadow: 0 8px 0 rgba(0,0,0,.3); }
+  .stop.final .s-emoji { width: 128px; height: 128px; font-size: 72px; border-color: #ffd23f; }
+  .stop .s-name { font-size: 22px; font-weight: 700; text-shadow: 0 2px 0 rgba(0,0,0,.6), 0 0 8px rgba(0,0,0,.6); max-width: 46vw; text-align: center; line-height: 1.05; }
+  .stop .s-stars { font-size: 26px; letter-spacing: 2px; color: rgba(255,255,255,.35); text-shadow: 0 2px 0 rgba(0,0,0,.4); }
+  .stop .s-stars i { font-style: normal; }
+  .stop .s-stars i.on { color: #ffd23f; }
+  .stop.locked .s-emoji { background: #8a93a6; filter: saturate(.3); font-size: 44px; }
+  .stop.locked .s-name { opacity: .7; }
+  .stop.next .s-emoji { animation: pulse 1.1s ease-in-out infinite; box-shadow: 0 8px 0 rgba(0,0,0,.3), 0 0 0 10px rgba(255,210,63,.45); }
+  .stop.nope { animation: shake .4s; }
+
+  /* cards */
+  .card { --c: #ff4081; background: #fff; color: #222; border-radius: 32px; border: 8px solid var(--c); padding: 22px 26px 26px; text-align: center; min-width: min(360px, 90vw); max-width: 92vw;
+    box-shadow: 0 12px 0 rgba(0,0,0,.25), 0 20px 40px rgba(0,0,0,.35); animation: pop .45s ease-out; }
+  .card .huge { font-size: 96px; line-height: 1.1; }
+  .card h3 { margin: 4px 0; font-size: clamp(30px, 8vw, 46px); line-height: 1.05; color: var(--c); filter: brightness(.85); }
+  .card .icons { font-size: 40px; margin: 4px 0 10px; letter-spacing: 2px; white-space: nowrap; }
+  .card .row { margin-top: 14px; }
+  .dim-bg { background: rgba(10,15,35,.35); }
+  #s-intro { justify-content: flex-start; padding-top: max(5vh, var(--pad)); }
+  #s-intro .card { display: flex; align-items: center; gap: 18px; padding: 14px 20px; text-align: left; }
+  #s-intro .huge { font-size: 76px; }
+  #s-intro .bottom { position: fixed; bottom: max(28px, env(safe-area-inset-bottom)); left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 22px; }
+  #k-title { font-size: clamp(40px, 11vw, 64px); color: #ff3b30; margin: 0; }
+  .stars-big { font-size: 78px; letter-spacing: 6px; color: #ddd; text-shadow: 0 4px 0 rgba(0,0,0,.15); }
+  .stars-big i { font-style: normal; display: inline-block; }
+  .stars-big i.on { color: #ffc61a; animation: pop .5s ease-out; }
+  .coin-line { font-size: 40px; font-weight: 700; color: #c98a00; }
+
+  /* HUD */
+  #hud { position: fixed; inset: 0; pointer-events: none; }
+  .hud-top { position: absolute; top: var(--pad); left: 10px; right: 10px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  #hearts { font-size: clamp(22px, 5.6vw, 32px); line-height: 1; background: rgba(0,0,0,.25); border-radius: 30px; padding: 6px 10px; white-space: nowrap; }
+  #hearts .gone { opacity: .5; }
+  #hearts.hurt { animation: shake .4s; }
+  #coins { font-size: clamp(22px, 5.6vw, 32px); font-weight: 700; background: rgba(0,0,0,.25); border-radius: 30px; padding: 4px 14px; white-space: nowrap; }
+  #coins.bump { animation: pop .25s; }
+  #b-pause { pointer-events: auto; width: 54px; height: 54px; border-radius: 50%; background: rgba(0,0,0,.3); font-size: 26px; }
+  .hud-right { display: flex; gap: 8px; align-items: center; }
+  #chase { position: absolute; top: calc(var(--pad) + 60px); left: 0; right: 0; margin: 0 auto; width: min(300px, 62vw); height: 34px; background: rgba(0,0,0,.28); border-radius: 20px; --k: 0; }
+  #chase::before { content: ''; position: absolute; inset: 13px 40px 13px 14px; border-radius: 4px; background: linear-gradient(90deg, rgba(255,255,255,.25), #ff3b30); opacity: calc(.3 + var(--k) * .7); }
+  #chase .c-hero, #chase #c-mon { position: absolute; top: 50%; font-size: 28px; line-height: 1; transform: translate(-50%, -50%); }
+  #chase .c-hero { left: calc(100% - 22px); }
+  #chase #c-mon { left: calc(16px + var(--k) * (100% - 68px)); transition: left .15s linear; }
+  #chase.danger { animation: shake .5s infinite; }
+  #dots { position: absolute; top: calc(var(--pad) + 102px); left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+  #dots i { width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,.35); border: 2px solid rgba(0,0,0,.2); }
+  #dots i.on { background: #ffd23f; box-shadow: 0 0 8px #ffd23f; }
+  #toast { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%) scale(.5); opacity: 0; font-size: clamp(38px, 10vw, 72px); font-weight: 700; white-space: nowrap; color: #fff;
+    -webkit-text-stroke: 2px var(--c, #333); text-shadow: 0 5px 0 var(--c, #333), 0 10px 18px rgba(0,0,0,.35); transition: transform .25s cubic-bezier(.3,1.6,.6,1), opacity .25s; }
+  #toast.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  #hint { position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%); text-align: center; font-size: 46px; background: rgba(0,0,0,.35); border-radius: 30px; padding: 10px 22px; white-space: nowrap; }
+  #hint .hand { display: inline-block; animation: swipe 1.2s ease-in-out infinite; }
+  @keyframes swipe { 0%, 100% { transform: translateX(-30px); } 50% { transform: translateX(30px); } }
+
+  /* question */
+  #s-q { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: var(--pad) 12px max(14px, env(safe-area-inset-bottom)); pointer-events: none; }
+  #s-q > * { pointer-events: auto; }
+  #q-card { --c: #ff4081; width: min(720px, 100%); background: #fff; color: #222; border-radius: 26px; border: 6px solid var(--c); padding: 10px 12px 12px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 12px;
+    box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+  #s-q.in #q-card { animation: drop .4s cubic-bezier(.3,1.5,.6,1); }
+  #s-q.in #answers { animation: rise .4s cubic-bezier(.3,1.5,.6,1); }
+  @keyframes drop { from { transform: translateY(-140%); } to { transform: none; } }
+  @keyframes rise { from { transform: translateY(140%); } to { transform: none; } }
+  #b-speak { grid-row: span 3; width: 72px; height: 72px; border-radius: 22px; font-size: 40px; background: #ffd23f; box-shadow: 0 5px 0 #c99a00; }
+  #b-speak.talking { animation: pulse .6s ease-in-out infinite; background: #7ff3ff; box-shadow: 0 5px 0 #2aa9c4; }
+  #q-pic { font-size: 40px; line-height: 1; }
+  #q-show { font-size: clamp(22px, 5.6vw, 32px); font-weight: 700; color: var(--c); filter: brightness(.8); line-height: 1.1; }
+  #q-text { font-size: clamp(22px, 5.6vw, 34px); font-weight: 700; line-height: 1.1; }
+  #answers { width: min(720px, 100%); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ans { min-height: clamp(70px, 13vh, 104px); border-radius: 22px; padding: 8px 10px; font-size: clamp(20px, 5vw, 30px); font-weight: 700; line-height: 1.05; color: #fff;
+    box-shadow: 0 7px 0 rgba(0,0,0,.28), inset 0 -6px 0 rgba(0,0,0,.12); text-shadow: 0 2px 0 rgba(0,0,0,.25); transition: opacity .2s, background .2s, transform .2s; }
+  .ans:nth-child(1) { background: #2f7fe0; } .ans:nth-child(2) { background: #9b3fd0; } .ans:nth-child(3) { background: #ff7a1a; } .ans:nth-child(4) { background: #0fa3a3; }
+  .ans.reading { outline: 6px solid #ffd23f; outline-offset: 2px; }
+  .ans.dim { opacity: .35; }
+  .ans.right { background: #22c03a !important; opacity: 1; transform: scale(1.05); animation: pop .35s; box-shadow: 0 7px 0 #138a26, 0 0 0 6px #fff; }
+  .ans.wrong { background: #ff3b30 !important; animation: shake .45s; }
+  #tip { position: fixed; left: 0; right: 0; margin: 0 auto; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 2 * clamp(70px, 13vh, 104px) + 40px); width: min(560px, 94vw);
+    display: flex; align-items: center; gap: 10px; background: #fff; color: #222; border-radius: 24px; border: 5px solid #ff3b30; padding: 8px 8px 8px 12px; box-shadow: 0 8px 0 rgba(0,0,0,.25); animation: pop .35s; }
+  #tip-text { flex: 1; font-size: clamp(22px, 5.4vw, 30px); font-weight: 700; line-height: 1.1; }
+  #b-tip-speak { width: 54px; height: 54px; border-radius: 16px; font-size: 28px; background: #ffd23f; flex: none; }
+  #b-next { width: 92px; height: 72px; border-radius: 20px; font-size: 44px; background: #22c03a; box-shadow: 0 6px 0 #138a26; flex: none; animation: pulse 1s infinite; }
+
+  body[data-mode="question"] #chase, body[data-mode="question"] #dots, body[data-mode="feedback"] #chase, body[data-mode="feedback"] #dots { visibility: hidden; }
+  #flash { position: fixed; inset: 0; pointer-events: none; opacity: 0; }
+  #flash.red { background: radial-gradient(circle, rgba(255,0,0,0) 30%, rgba(255,0,0,.55)); animation: flash .5s ease-out; }
+  @keyframes flash { from { opacity: 1; } to { opacity: 0; } }
+
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; background: #1b2340; font-size: 80px; z-index: 10; }
+  #loading .runner { animation: bob .5s ease-in-out infinite; }
+  .nogl { font-size: 28px; text-align: center; line-height: 1.4; }
+
+  @media (max-height: 520px) {
+    .big { width: 100px; height: 100px; font-size: 50px; }
+    .card .huge { font-size: 64px; }
+    .stars-big { font-size: 56px; }
+    #chase { top: calc(var(--pad) + 4px); width: min(260px, 38vw); }
+    #dots { top: calc(var(--pad) + 44px); }
+    .ans { min-height: 58px; }
+    #tip { bottom: calc(max(14px, env(safe-area-inset-bottom)) + 2 * 58px + 34px); }
+  }
+</style>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body data-mode="title">
+<canvas id="game"></canvas>
+
+<div id="hud" hidden>
+  <div class="hud-top">
+    <div id="hearts"></div>
+    <div class="hud-right">
+      <div id="coins">🪙 <b id="coin-n">0</b></div>
+      <button id="b-pause" aria-label="Pause">⏸️</button>
+    </div>
+  </div>
+  <div id="chase" aria-hidden="true"><span id="c-mon">🐻</span><span class="c-hero">🏃</span></div>
+  <div id="dots"></div>
+  <div id="toast"></div>
+  <div id="hint" hidden><span class="hand">👆</span><br>⬅️ ⬆️ ➡️</div>
+</div>
+
+<section id="s-title" class="screen">
+  <h1 class="logo">CRITTER<span>RUN</span></h1>
+  <button id="b-play" class="big go" aria-label="Play">▶</button>
+</section>
+
+<section id="s-map" class="screen" hidden>
+  <div class="m-head">
+    <button id="b-m-home" class="chip small" aria-label="Home">🏠</button>
+    <div class="coins-pill">🪙 <span id="m-coins">0</span></div>
+    <div class="row">
+      <button class="chip small" data-toggle="music" aria-label="Music">🎵</button>
+      <button class="chip small" data-toggle="sfx" aria-label="Sounds">🔔</button>
+      <button class="chip small" data-toggle="autoRead" aria-label="Read questions out loud">🗣️</button>
+    </div>
+  </div>
+  <div id="map-list"></div>
+</section>
+
+<section id="s-intro" class="screen" hidden>
+  <div class="card">
+    <div class="huge" id="i-emoji">🐻</div>
+    <div>
+      <h3 id="i-name"></h3>
+      <div class="icons" id="i-icons"></div>
+    </div>
+  </div>
+  <div class="bottom">
+    <button id="b-i-back" class="chip" aria-label="Map">🗺️</button>
+    <button id="b-go" class="big go" aria-label="Go">▶</button>
+  </div>
+</section>
+
+<section id="s-q" hidden>
+  <div id="q-card">
+    <button id="b-speak" aria-label="Read it to me">🔊</button>
+    <div id="q-pic"></div>
+    <div id="q-show"></div>
+    <div id="q-text"></div>
+  </div>
+  <div id="tip" hidden>
+    <button id="b-tip-speak" aria-label="Read it to me">🔊</button>
+    <span id="tip-text"></span>
+    <button id="b-next" aria-label="Keep running">➡️</button>
+  </div>
+  <div id="answers"></div>
+</section>
+
+<section id="s-caught" class="screen dim-bg" hidden>
+  <div class="card" style="--c:#ff3b30">
+    <div class="huge" id="k-emoji">🐻</div>
+    <h3 id="k-title">CAUGHT!</h3>
+    <div class="coin-line">🪙 <span id="k-coins">+0</span></div>
+    <div class="row">
+      <button id="b-k-map" class="chip" aria-label="Map">🗺️</button>
+      <button id="b-k-retry" class="big go" aria-label="Try again">🔁</button>
+    </div>
+  </div>
+</section>
+
+<section id="s-clear" class="screen dim-bg" hidden>
+  <div class="card" style="--c:#ffc61a">
+    <div class="huge" id="w-trophy">🏆</div>
+    <div class="stars-big" id="w-stars"></div>
+    <div class="coin-line">🪙 <span id="w-coins">+0</span></div>
+    <div class="coin-line" id="w-unlock" hidden></div>
+    <div class="row">
+      <button id="b-w-map" class="chip" aria-label="Map">🗺️</button>
+      <button id="b-w-retry" class="chip" aria-label="Play again">🔁</button>
+      <button id="b-w-next" class="big go" aria-label="Next">▶</button>
+    </div>
+  </div>
+</section>
+
+<section id="s-pause" class="screen dim-bg" hidden>
+  <div class="card" style="--c:#2f7fe0">
+    <div class="huge">⏸️</div>
+    <div class="row">
+      <button class="chip" data-toggle="music" aria-label="Music">🎵</button>
+      <button class="chip" data-toggle="sfx" aria-label="Sounds">🔔</button>
+      <button class="chip" data-toggle="autoRead" aria-label="Read questions out loud">🗣️</button>
+    </div>
+    <div class="row">
+      <button id="b-p-map" class="chip" aria-label="Map">🗺️</button>
+      <button id="b-resume" class="big go" aria-label="Keep playing">▶</button>
+    </div>
+  </div>
+</section>
+
+<div id="flash"></div>
+<div id="loading"><span class="runner">🏃</span></div>
+
+<script>window.CritterRun = { levels: [], addLevel(level) { this.levels.push(level); } };</script>
+<!-- Levels: one file per test, oldest first. -->
+<script src="levels/2026-11-sc-landforms.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
