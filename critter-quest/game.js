@@ -36,11 +36,12 @@ const levelById = id => LEVELS.find(lv => lv.id === id);
 const KEY = 'critter-quest-v1';
 const fresh = () => ({
   coins: 0, xp: 0, owned: ['hero:🧒', 'atk:⚡', 'pet:'], hero: '🧒', atk: '⚡', pet: '',
-  clears: {}, stats: {}, arenaBest: 0, sfx: true, read: true,
+  clears: {}, stats: {}, arenaBest: 0, sfx: true, autoRead: false,
 });
 let S;
 function load() {
   try { S = Object.assign(fresh(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch { S = fresh(); }
+  delete S.read; // old auto-read flag that defaulted to on; replaced by autoRead (off by default)
 }
 function save() {
   try { localStorage.setItem(KEY, JSON.stringify(S)); } catch { /* private mode: play without saving */ }
@@ -281,9 +282,9 @@ function renderHud() {
   $('#hud-coins').textContent = S.coins;
   $('#b-coins').textContent = S.coins;
   const read = $('#tog-read'), sfx = $('#tog-sfx');
-  read.textContent = S.read ? '🗣️' : '🤐';
-  read.classList.toggle('off', !S.read);
-  read.setAttribute('aria-pressed', S.read);
+  read.textContent = S.autoRead ? '🗣️' : '🤐';
+  read.classList.toggle('off', !S.autoRead);
+  read.setAttribute('aria-pressed', S.autoRead);
   sfx.textContent = S.sfx ? '🔔' : '🔕';
   sfx.classList.toggle('off', !S.sfx);
   sfx.setAttribute('aria-pressed', S.sfx);
@@ -493,7 +494,7 @@ async function intro(run) {
   await banner(B.mode === 'boss' ? 'BOSS!' : B.mode === 'arena' ? 'ARENA!' : 'GO!');
   if (!alive(run)) return;
   B.busy = false;
-  if (S.read) readQuestion();
+  if (S.autoRead) readQuestion();
 }
 
 function showQuestion(start = true) {
@@ -516,7 +517,7 @@ function showQuestion(start = true) {
   $('#b-why').classList.add('hidden');
   if (start) {
     B.busy = false;
-    if (S.read) readQuestion();
+    if (S.autoRead) readQuestion();
   }
 }
 function readQuestion() {
@@ -596,7 +597,7 @@ async function answer(i) {
     anim($('#b-why'), [{ scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.3,1.5,.5,1)' });
     B.waiting = true;
     B.busy = false;
-    if (S.read) sayParts([{ text: q.why }]);
+    if (S.autoRead) sayParts([{ text: q.why }]);
   }
 }
 function next() {
@@ -661,7 +662,7 @@ async function foeDefeated(run) {
   await banner('🏆 ' + B.beaten, 750);
   if (!alive(run)) return;
   B.busy = false;
-  if (S.read) readQuestion();
+  if (S.autoRead) readQuestion();
 }
 
 function battleOver(win) {
@@ -822,7 +823,7 @@ function openArena() {
   if (!arenaPool().length) {
     SFX.bonk();
     shakeEl($('#nav-arena'));
-    if (S.read) sayParts([{ text: 'Win a battle first!' }]);
+    if (S.autoRead) sayParts([{ text: 'Win a battle first!' }]);
     return;
   }
   SFX.tap();
@@ -866,8 +867,8 @@ function act(a) {
 
 // ---------- wiring ----------
 $('#tog-read').addEventListener('click', () => {
-  S.read = !S.read;
-  if (!S.read) stopSpeech();
+  S.autoRead = !S.autoRead;
+  if (!S.autoRead) stopSpeech();
   save(); renderHud(); SFX.tap();
 });
 $('#tog-sfx').addEventListener('click', () => {

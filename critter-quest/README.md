@@ -13,7 +13,7 @@ To share one test without the other islands, add its `id`, for example `/critter
 - **Boss:** opens after all of an island's battles are won. It mixes 8 questions from the whole island and favors the ones Thomas has missed.
 - **Arena (🏟️):** endless review of every battle already won, across all islands. It also favors missed questions.
 - **Coins:** buy heroes, attacks (💨 is a fart), and pets in the shop. Combos multiply coins.
-- **Reading support:** the 🔊 button reads the question and each answer aloud. 🗣️ turns auto-read on or off; 🔔 toggles sound effects.
+- **Reading support:** the 🔊 button reads the question and each answer aloud. 🤐/🗣️ turns auto-read on or off (off by default); 🔔 toggles sound effects.
 - **Saving:** progress is saved in the browser (`localStorage` key `critter-quest-v1`). Adding a new island keeps all old progress.
 
 ## Adding a new test (new island)
