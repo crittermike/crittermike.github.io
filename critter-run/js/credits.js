@@ -19,7 +19,8 @@ export const CREDITS = [
   { title: 'Characters', items: [
     { text: 'Runners, wolf and shark by Quaternius (quaternius.com)', license: 'CC0', url: CC0 },
     { text: 'Robot by Tomas Laulhe, modified by Don McCurdy', license: 'CC0', url: CC0 },
-    { text: 'Bear, boar and scorpion from the Pixor library by Frakassets', license: 'CC0', url: CC0 },
+    { text: '"Bear" by Nyilonelycompany (modified: new animations)', link: 'https://sketchfab.com/3d-models/bear-ce0d5eb86cf5459bb6bd20244cb44b27', license: 'CC BY 4.0', url: CCBY4 },
+    { text: 'Boar and scorpion from the Pixor library by Frakassets', license: 'CC0', url: CC0 },
     { text: 'Blasters from the Blaster Kit by Kenney (kenney.nl)', license: 'CC0', url: CC0 },
   ] },
   { title: 'World', items: [

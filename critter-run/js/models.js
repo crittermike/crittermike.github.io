@@ -19,7 +19,7 @@ export function blobShadow(r = 0.55) {
 // len/height: target size in meters (they're drawn a little bigger than life, for drama).
 // clips: game mode -> clip name. rate: run-cycle speed at the base running speed.
 const CHASERS = {
-  bear: { len: 2.8, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 1.05, tint: { 'Brown fur': '#2e241e', 'Tan fur': '#b48c63' } },
+  bear: { len: 2.8, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'roar' }, rate: 1.0, rim: 0.2 },
   wolf: { len: 2.7, clips: { run: 'Gallop', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 1.0, tint: { Main: '#6d6a66', Main_Light: '#c9c2b6' } },
   scorpion: { len: 2.9, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.9 },
   boar: { len: 2.6, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.95 },
@@ -44,7 +44,7 @@ function buildChaser(type, gltf) {
       const c = m.clone();
       if (def.tint && def.tint[c.name]) c.color.set(def.tint[c.name]);
       if (!def.keepMaterials) { c.metalness = 0; c.roughness = Math.max(0.55, c.roughness); }
-      return bend(c, { rim: 0.45, key: 'chaser' });
+      return bend(c, { rim: def.rim ?? 0.45, key: 'chaser' });
     });
     o.material = Array.isArray(o.material) ? mats : mats[0];
     o.castShadow = true;

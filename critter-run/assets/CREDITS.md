@@ -34,9 +34,17 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 | `runners/robot.glb` | RobotExpressive (from the three.js examples) | Tomás Laulhé ([Quaternius](https://quaternius.com)), modified by Don McCurdy |
 | `chasers/wolf.glb` | Ultimate Animated Animal Pack | [Quaternius](https://quaternius.com) |
 | `chasers/shark.glb` | Pirate Kit | [Quaternius](https://quaternius.com) |
-| `chasers/bear.glb`, `boar.glb`, `scorpion.glb` | Pixor library ([pixor.art/library](https://pixor.art/library/)), with extra run and attack animations added for this game | Frakassets |
+| `chasers/boar.glb`, `scorpion.glb` | Pixor library ([pixor.art/library](https://pixor.art/library/)), with extra run and attack animations added for this game | Frakassets |
 | `chasers/gator.glb`, `hurricane.glb` | Made for this game | Critter Run |
 | `blasters.glb` | Blaster Kit | [Kenney](https://kenney.nl) |
+
+**CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/):
+
+| File | Model | Author | Source |
+|---|---|---|---|
+| `chasers/bear.glb` | "Bear" | Nyilonelycompany | https://sketchfab.com/3d-models/bear-ce0d5eb86cf5459bb6bd20244cb44b27 |
+
+The bear was modified: new run, attack, roar, hit and death animations, and compressed.
 
 The runner files were trimmed (unused animations removed, meshes quantized) and the seven blasters merged into one file with each weapon as a node named after its id in `js/items.js`. The chasers were compressed.
 
