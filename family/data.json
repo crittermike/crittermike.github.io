@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T23:45:14.214Z",
+  "generated_at": "2026-11-12T00:00:20.429Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Garlic-herb chicken with roasted potatoes and broccoli",
+    "name": "Grilled hamburgers and hotdogs with corn",
     "protein_g": 64,
-    "cal": 602,
+    "cal": 600,
     "effort": "easy",
-    "note": "October 28: recover garlic-herb chicken displaced from the original October 19 draft. Optional school information night starts 6:45PM; serve before it if attending. Assistant-drafted plan for six. Heat oven to 425 F; cut potatoes small, toss with part of the oil and salt, and start roasting about 15 minutes ahead. Season chicken with garlic, thyme, remaining oil, salt and black pepper; use a separate rimmed pan and roast until every piece reaches 165 F. Continue potatoes until tender; steam broccoli separately. Mike: 9.5 oz raw breast, 250 g raw potato equivalent, 1 cup cooked broccoli, 1.5 tsp oil and garlic/herbs. Generic cal/protein assumptions: chicken 285/54.625, potato 192.5/5, broccoli 55/3.7, oil 60/0, garlic/herbs 10/0.2. Rounded estimate 602 cal/64 g protein.",
+    "note": "October 29: saved ingredient-only favorite with assistant-drafted quantities and a lean Mike portion. Shape beef into patties and grill or skillet-cook to 160 F. Heat hotdogs according to package instructions. Cook corn and serve buns, cheese and condiments separately. Mike: two patties totaling 9 oz raw 96% lean beef, one hamburger bun, 1/2 oz cheddar, one medium ear corn and modest ketchup/mustard; no hotdog or added butter in his estimate. Generic cal/protein assumptions: beef 315/54, bun 130/4, corn 80/3, cheese 55/3.5, condiments 20/0. Rounded estimate 600 cal/64 g protein. Other family members can choose burgers or hotdogs; quantities need not all be eaten.",
     "recipe": null
   },
   "mealweek": [
@@ -329,8 +329,8 @@
       "temp": 61,
       "hi": 73,
       "lo": 49,
-      "icon": "🌤",
-      "code": 1
+      "icon": "☀️",
+      "code": 0
     },
     "days": [
       {
@@ -343,16 +343,16 @@
       {
         "d": "Fri",
         "icon": "⛅",
-        "hi": 56,
+        "hi": 57,
         "lo": 36,
         "code": 3
       },
       {
         "d": "Sat",
-        "icon": "☀️",
+        "icon": "🌤",
         "hi": 54,
         "lo": 39,
-        "code": 0
+        "code": 2
       },
       {
         "d": "Sun",
@@ -365,7 +365,7 @@
         "d": "Mon",
         "icon": "⛅",
         "hi": 54,
-        "lo": 39,
+        "lo": 40,
         "code": 3
       }
     ],
@@ -1942,7 +1942,7 @@
   ],
   "finance": {
     "month": "November 2026",
-    "dayPct": 36.7,
+    "dayPct": 40,
     "totalSpend": 4161.5,
     "totalBudget": 0,
     "categories": [
@@ -2015,6 +2015,6 @@
     "creditDebt": 66582.5,
     "netLiquid": 85101.42,
     "source": "ynab",
-    "updatedAt": "2026-11-11T23:45:12.906Z"
+    "updatedAt": "2026-11-12T00:00:19.000Z"
   }
 }
