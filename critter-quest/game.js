@@ -18,7 +18,10 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isEmojiOnly = s => /\p{Extended_Pictographic}/u.test(s) && !/[\p{L}\p{N}]/u.test(s);
 
 // ---------- levels ----------
-const LEVELS = CQ.levels.slice().sort((a, b) => a.date.localeCompare(b.date));
+const ALL_LEVELS = CQ.levels.slice().sort((a, b) => a.date.localeCompare(b.date));
+// ?island=<id> shows just that island (for sharing one test); unknown ids show everything.
+const onlyId = new URLSearchParams(location.search).get('island');
+const LEVELS = ALL_LEVELS.some(lv => lv.id === onlyId) ? ALL_LEVELS.filter(lv => lv.id === onlyId) : ALL_LEVELS;
 LEVELS.forEach(lv => {
   lv.stages.forEach((st, si) => st.questions.forEach(q => {
     q.level = lv;
