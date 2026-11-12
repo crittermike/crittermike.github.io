@@ -101,6 +101,15 @@ export class Sound {
       this.noise = c.createBuffer(1, len, c.sampleRate);
       const d = this.noise.getChannelData(0);
       for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      // A shared room reverb gives the little synth band and the effects some space.
+      this.reverb = c.createConvolver();
+      this.reverb.buffer = this.impulse(2.4, 2.8);
+      const wet = c.createGain(); wet.gain.value = 0.5;
+      this.reverb.connect(wet); wet.connect(this.comp);
+      for (const [src, amt] of [[this.musicGain, 0.28], [this.sfxGain, 0.18]]) {
+        const send = c.createGain(); send.gain.value = amt;
+        src.connect(send); send.connect(this.reverb);
+      }
       document.addEventListener('visibilitychange', () => (document.hidden ? c.suspend() : c.resume()));
       this.timer = setInterval(() => this.tick(), 25);
     }
@@ -108,6 +117,16 @@ export class Sound {
     // iOS only allows speech after a tap has spoken once.
     if (synth && !synth.speaking) { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; synth.speak(u); }
     this.play(this.wantSong, true);
+  }
+
+  impulse(sec, decay) {
+    const c = this.ctx, n = Math.floor(c.sampleRate * sec);
+    const b = c.createBuffer(2, n, c.sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const d = b.getChannelData(ch);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay);
+    }
+    return b;
   }
 
   applySettings() {
@@ -155,7 +174,13 @@ export class Sound {
     if (g.snare.includes(s16)) this.snare(t, out, s.groove === 'chill' ? 0.5 : 1);
     if (g.hat.includes(s16)) this.hat(t, out, s16 % 4 === 2 ? 1 : 0.6);
     if (g.bass[s16] !== undefined) this.tone(t, hz(s.root - 24 + cr + (g.bass[s16] === 4 && cq === 'm' ? 3 : g.bass[s16])), sd * 1.7, { type: 'triangle', gain: 0.5, release: 0.05, dest: out });
-    if (s16 === 0) for (const n of chord) this.tone(t, hz(n - 12), sd * 15, { type: 'sine', gain: 0.07, attack: 0.08, release: 0.3, dest: out });
+    if (s16 === 0) {
+      // Soft pad: two slightly detuned saws per chord note through a gentle filter.
+      for (const n of chord) {
+        this.tone(t, hz(n - 12), sd * 15, { type: 'sine', gain: 0.06, attack: 0.08, release: 0.3, dest: out });
+        this.tone(t, hz(n - 12) * 1.004, sd * 15, { type: 'sawtooth', gain: 0.018, attack: 0.25, release: 0.4, filter: 1100, dest: out });
+      }
+    }
     if (s.arp && s16 % 2 === 1) this.tone(t, hz(chord[(s16 >> 1) % 3] + 12), sd * 0.9, { type: 'square', gain: 0.025, release: 0.03, filter: 2500, dest: out });
     const note = s.parts[Math.floor(bar / 4)][(bar % 4) * 16 + s16];
     if (note) this.lead(t, hz(note.n + 12), note.len * sd, s.lead, out);
@@ -211,7 +236,10 @@ export class Sound {
     src.start(t, Math.random() * 0.5); src.stop(t + dur + 0.02);
   }
 
-  kick(t, out) { this.tone(t, 150, 0.12, { type: 'sine', gain: 0.9, slide: 42, release: 0.12, dest: out }); }
+  kick(t, out) {
+    this.tone(t, 150, 0.12, { type: 'sine', gain: 0.9, slide: 42, release: 0.12, dest: out });
+    this.noiseHit(t, 0.02, { gain: 0.15, type: 'highpass', freq: 3000, dest: out });
+  }
   snare(t, out, v = 1) { this.noiseHit(t, 0.16, { gain: 0.32 * v, freq: 1500, dest: out }); this.tone(t, 190, 0.05, { type: 'triangle', gain: 0.25 * v, release: 0.05, dest: out }); }
   hat(t, out, v = 1) { this.noiseHit(t, 0.045, { gain: 0.11 * v, freq: 7500, dest: out }); }
 
@@ -258,6 +286,53 @@ export class Sound {
       case 'star': T(t, 1568, 0.08, { type: 'sine', gain: 0.25 }); T(t + 0.07, 2093, 0.25, { type: 'sine', gain: 0.2 }); break;
       case 'click': T(t, 660, 0.04, { type: 'triangle', gain: 0.2 }); break;
       case 'go': T(t, 523, 0.12, { gain: 0.15 }); T(t + 0.14, 784, 0.3, { gain: 0.15 }); break;
+      case 'crate':
+        [659, 880, 1175, 1568, 2093].forEach((f, i) => T(t + i * 0.045, f, 0.1, { type: 'triangle', gain: 0.2 }));
+        this.noiseHit(t, 0.3, { gain: 0.15, type: 'bandpass', freq: 6000, sweep: 1500, q: 3 });
+        break;
+      case 'powerOn':
+        [392, 523, 659, 784, 1047, 1319].forEach((f, i) => T(t + i * 0.055, f, 0.16, { type: 'square', gain: 0.11, filter: 5000 }));
+        T(t, 200, 0.6, { type: 'sawtooth', gain: 0.12, slide: 1600, filter: 3000 });
+        break;
+      case 'powerOff': [784, 659, 523, 392].forEach((f, i) => T(t + i * 0.07, f, 0.1, { type: 'triangle', gain: 0.18 })); break;
+      case 'shieldHit':
+        T(t, 900, 0.3, { type: 'sine', gain: 0.3, slide: 300 });
+        T(t, 1350, 0.25, { type: 'sine', gain: 0.15, slide: 500 });
+        this.noiseHit(t, 0.25, { gain: 0.3, type: 'bandpass', freq: 2500, sweep: 600, q: 2 });
+        break;
+      case 'jet': this.noiseHit(t, 1.2, { gain: 0.4, type: 'bandpass', freq: 300, sweep: 2500, q: 1 }); T(t, 80, 1, { type: 'sawtooth', gain: 0.12, slide: 300, filter: 600 }); break;
+      case 'slide': this.noiseHit(t, 0.35, { gain: 0.28, type: 'bandpass', freq: 1800, sweep: 500, q: 1.5 }); break;
+      case 'splash': this.noiseHit(t, 0.3, { gain: 0.3, type: 'bandpass', freq: 1200, sweep: 3000, q: 1 }); T(t, 600, 0.15, { type: 'sine', gain: 0.2, slide: 1400 }); break;
+      case 'splat': this.noiseHit(t, 0.25, { gain: 0.35, type: 'lowpass', freq: 2500, sweep: 400 }); T(t, 300, 0.12, { type: 'sine', gain: 0.25, slide: 120 }); break;
+      case 'fire':
+        this.noiseHit(t, 0.7, { gain: 0.5, type: 'lowpass', freq: 600, sweep: 2400, q: 2 });
+        this.noiseHit(t + 0.1, 0.5, { gain: 0.2, type: 'highpass', freq: 3000 });
+        break;
+      case 'freeze':
+        [2093, 2637, 3136, 2637, 3520].forEach((f, i) => T(t + i * 0.05, f, 0.2, { type: 'sine', gain: 0.1 }));
+        this.noiseHit(t, 0.6, { gain: 0.2, type: 'highpass', freq: 6000 });
+        break;
+      case 'shatter':
+        this.noiseHit(t, 0.5, { gain: 0.5, type: 'highpass', freq: 3500 });
+        for (let i = 0; i < 8; i++) T(t + Math.random() * 0.2, 2000 + Math.random() * 3000, 0.06, { type: 'sine', gain: 0.1 });
+        break;
+      case 'rocket': this.noiseHit(t, 0.8, { gain: 0.35, type: 'bandpass', freq: 500, sweep: 4000, q: 2 }); T(t, 300, 0.7, { type: 'sine', gain: 0.1, slide: 1800 }); break;
+      case 'boom':
+        T(t, 120, 0.5, { type: 'sine', gain: 0.8, slide: 30, release: 0.3 });
+        this.noiseHit(t, 0.8, { gain: 0.6, type: 'lowpass', freq: 2000, sweep: 100 });
+        break;
+      case 'rainbow':
+        [523, 659, 784, 988, 1175, 1319, 1568, 2093].forEach((f, i) => T(t + i * 0.04, f, 0.3, { type: 'triangle', gain: 0.12 }));
+        T(t, 300, 0.8, { type: 'sawtooth', gain: 0.1, slide: 2000, filter: 3000, vibrato: true });
+        break;
+      case 'meteor': T(t, 2400, 0.75, { type: 'sine', gain: 0.18, slide: 300 }); this.noiseHit(t, 0.75, { gain: 0.3, type: 'bandpass', freq: 3000, sweep: 300, q: 2 }); break;
+      case 'buy':
+        T(t, 1319, 0.06, { type: 'square', gain: 0.12, filter: 5000 }); T(t + 0.06, 1760, 0.08, { type: 'square', gain: 0.12, filter: 5000 });
+        this.noiseHit(t + 0.12, 0.4, { gain: 0.25, type: 'highpass', freq: 5000 });
+        [1047, 1319, 1568, 2093].forEach((f, i) => T(t + 0.15 + i * 0.07, f, 0.18, { type: 'triangle', gain: 0.16 }));
+        break;
+      case 'equip': T(t, 784, 0.06, { type: 'triangle', gain: 0.22 }); T(t + 0.07, 1175, 0.12, { type: 'triangle', gain: 0.22 }); break;
+      case 'nope': T(t, 200, 0.12, { type: 'square', gain: 0.12, filter: 900 }); T(t + 0.13, 160, 0.18, { type: 'square', gain: 0.12, filter: 800 }); break;
       default: break;
     }
   }

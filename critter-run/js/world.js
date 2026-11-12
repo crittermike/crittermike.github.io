@@ -197,6 +197,43 @@ const OB = {
   sandcastle: { low: true, w: 1.5, d: 1.1, h: 0.85, draw: b => { b.box('#e8cf8a', [0, 0.3, 0], [1.4, 0.6, 1.0]); for (const x of [-0.5, 0.5]) { b.box('#e8cf8a', [x, 0.7, 0], [0.4, 0.3, 0.4]); b.cone('#ddc17a', [x, 0.98, 0], 0.25, 0.3, 4, [0, Math.PI / 4, 0]); } b.box('#ff5c8a', [0.5, 1.25, 0], [0.04, 0.3, 0.04]); b.box('#ff5c8a', [0.6, 1.33, 0], [0.18, 0.12, 0.02]); } },
   cooler: { low: true, w: 1.3, d: 0.9, h: 0.8, draw: b => { b.box('#2e86de', [0, 0.32, 0], [1.2, 0.64, 0.8]); b.box('#ffffff', [0, 0.7, 0], [1.24, 0.14, 0.84]); b.box('#dddddd', [0, 0.82, 0], [0.6, 0.06, 0.12]); } },
   lifeguard: { low: false, w: 1.9, d: 1.6, h: 3, draw: b => { for (const x of [-0.7, 0.7]) for (const z of [-0.5, 0.5]) b.box('#ffffff', [x, 1.0, z], [0.14, 2.0, 0.14]); b.box('#e74c3c', [0, 2.1, 0], [1.8, 0.2, 1.3]); b.box('#e74c3c', [0, 2.7, 0.55], [1.8, 1.1, 0.12]); b.box('#ffffff', [0, 2.8, 0.48], [0.5, 0.5, 0.02]); b.box('#e74c3c', [0, 2.8, 0.46], [0.36, 0.1, 0.02]); b.box('#e74c3c', [0, 2.8, 0.46], [0.1, 0.36, 0.02]); } },
+  // Overhead bars: slide under them. y0 is the clearance underneath.
+  fallenTree: { over: true, w: 2.1, d: 0.8, h: 2.3, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) { b.ico('#8e939b', [s * 1.15, 0.6, 0], [0.9, 1.3, 0.9], [0, s, 0]); b.box('#6b4a2b', [s * 1.05, 1.2, 0], [0.3, 1.2, 0.3]); }
+    b.cyl('#6b4a2b', [0, 1.62, 0], 0.36, 2.9, 10, [0.05, 0, Math.PI / 2], 1, 0.04);
+    for (const s of [-1, 1]) b.cyl('#e3c08a', [s * 1.45, 1.62, 0], 0.3, 0.04, 10, [0, 0, Math.PI / 2]);
+    for (let i = 0; i < 4; i++) b.box('#5aa04a', [-0.9 + i * 0.6, 2.0, 0.05], [0.35, 0.08, 0.25]);
+  } },
+  banner: { over: true, w: 2.1, d: 0.6, h: 2.4, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) b.box('#8a6c48', [s * 1.15, 1.2, 0], [0.18, 2.4, 0.18]);
+    b.box('#8a6c48', [0, 2.35, 0], [2.6, 0.16, 0.16]);
+    const cs = ['#e74c3c', '#f1c40f', '#3498db', '#2ecc71', '#9b59b6'];
+    for (let i = 0; i < 5; i++) b.box(cs[i], [-0.88 + i * 0.44, 1.78, 0], [0.42, 0.95, 0.05]);
+  } },
+  pipe: { over: true, w: 2.1, d: 0.9, h: 2.3, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) { b.box('#9aa3ad', [s * 1.15, 0.85, 0], [0.3, 1.7, 0.5]); b.box('#7d8590', [s * 1.15, 0.1, 0], [0.6, 0.2, 0.8]); }
+    b.cyl('#c0c7cf', [0, 1.72, 0], 0.42, 3.0, 12, [0, 0, Math.PI / 2]);
+    for (const x of [-0.8, 0, 0.8]) b.cyl('#ff8c1a', [x, 1.72, 0], 0.45, 0.12, 12, [0, 0, Math.PI / 2]);
+  } },
+  boom: { over: true, w: 2.1, d: 0.6, h: 2.3, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) { b.box('#d9dde2', [s * 1.15, 1.0, 0], [0.16, 2.0, 0.16]); b.cyl('#333333', [s * 1.15, 0.3, 0], 0.3, 0.2, 8, [0, 0, Math.PI / 2]); }
+    b.box('#d9dde2', [0, 1.85, 0], [2.9, 0.2, 0.2]);
+    b.box('#d9dde2', [0, 2.15, 0], [2.9, 0.1, 0.1]);
+    for (let i = 0; i < 6; i++) b.box('#d9dde2', [-1.25 + i * 0.5, 2.0, 0], [0.06, 0.3, 0.06], [0, 0, i % 2 ? 0.6 : -0.6]);
+    for (const x of [-0.75, 0, 0.75]) b.box('#2e86de', [x, 1.68, 0], [0.12, 0.16, 0.12]);
+  } },
+  moss: { over: true, w: 2.1, d: 0.7, h: 2.4, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) b.cyl('#5a4a3a', [s * 1.2, 1.2, 0], 0.22, 2.4, 7);
+    b.cyl('#5a4a3a', [0, 2.2, 0], 0.22, 2.8, 7, [0, 0, Math.PI / 2 + 0.06]);
+    for (let i = 0; i < 9; i++) b.box(i % 2 ? '#a7b89d' : '#93a689', [-1.0 + i * 0.25, 1.82, (i % 3 - 1) * 0.08], [0.16, 0.72 + (i % 3) * 0.12, 0.06]);
+  } },
+  net: { over: true, w: 2.1, d: 0.5, h: 2.3, y0: 1.2, draw: b => {
+    for (const s of [-1, 1]) b.box('#ffffff', [s * 1.2, 1.15, 0], [0.12, 2.3, 0.12]);
+    b.box('#ffffff', [0, 2.2, 0], [2.4, 0.12, 0.04]);
+    b.box('#ffffff', [0, 1.3, 0], [2.4, 0.06, 0.04]);
+    for (let i = 0; i < 9; i++) b.box('#333333', [-1.0 + i * 0.25, 1.75, 0], [0.03, 0.85, 0.03]);
+    for (let j = 0; j < 4; j++) b.box('#333333', [0, 1.4 + j * 0.22, 0], [2.3, 0.03, 0.03]);
+  } },
 };
 const obGeo = new Map();
 function obstacleMesh(type) {
@@ -204,6 +241,7 @@ function obstacleMesh(type) {
   if (!g) { const b = new Builder(); OB[type].draw(b); g = b.build(); obGeo.set(type, g); }
   const m = new THREE.Mesh(g, M.solid);
   m.frustumCulled = false;
+  m.castShadow = m.receiveShadow = true;
   return m;
 }
 
@@ -212,7 +250,7 @@ export const BIOME = {
   mountains: {
     sky: ['#4a9cff', '#d3e8ff'], hemi: ['#cfe6ff', '#3f6b35'], ground: '#4f9a40', track: '#a27c55', speck: '#8a6644', edge: '#6e5236', dust: '#b8946a',
     backdrop: { style: 'peaks', colors: ['#5f86c4', '#7b9fd3', '#9cb8e1'], amp: [70, 58, 48] },
-    obstacles: { low: ['rock', 'log'], tall: ['boulder'] },
+    obstacles: { low: ['rock', 'log'], tall: ['boulder'], over: ['fallenTree'] },
     decor(b, z0, r, x) {
       for (let i = 0; i < 5; i++) { const s = r() < 0.5 ? -1 : 1; P.mountain(b, s * (24 + r() * 26), z0 - r() * CHUNK, 18 + r() * 22, 9 + r() * 7, r() < 0.5 ? '#4f8f45' : '#5d9a4c', '#9aa0a8', r); }
       for (let i = 0; i < 16; i++) { const s = r() < 0.5 ? -1 : 1; P.pine(b, s * (5.5 + r() * 16), z0 - r() * CHUNK, 0.8 + r() * 0.8, r); }
@@ -224,7 +262,7 @@ export const BIOME = {
   foothills: {
     sky: ['#3fa7ff', '#dcf1ff'], hemi: ['#e0f3ff', '#4a7a3a'], ground: '#6cbf4a', track: '#c0603a', speck: '#a24c2c', edge: '#8e3f24', dust: '#c97a55',
     backdrop: { style: 'rolling', colors: ['#5f9f6e', '#7fb38a', '#a3c9ab'], amp: [34, 30, 26] },
-    obstacles: { low: ['crate', 'log'], tall: ['clothCart', 'boulder'] },
+    obstacles: { low: ['crate', 'log'], tall: ['clothCart', 'boulder'], over: ['banner', 'fallenTree'] },
     decor(b, z0, r, x) {
       for (let i = 0; i < 6; i++) { const s = r() < 0.5 ? -1 : 1; P.hill(b, s * (20 + r() * 25), z0 - r() * CHUNK, 14 + r() * 12, 4 + r() * 5, r() < 0.5 ? '#5aae46' : '#6cbf4a'); }
       for (let i = 0; i < 9; i++) { const s = r() < 0.5 ? -1 : 1; P.roundTree(b, s * (5.5 + r() * 12), z0 - r() * CHUNK, 0.8 + r() * 0.5, '#4caf50', r() < 0.7 ? '#ffab76' : null, r); }
@@ -237,7 +275,7 @@ export const BIOME = {
   sandhills: {
     sky: ['#4fb0ff', '#fff1cf'], hemi: ['#fff4d6', '#b89a5a'], ground: '#e6cc86', track: '#f3e2ad', speck: '#d9c27e', edge: '#cdb06a', dust: '#f0dca0',
     backdrop: { style: 'dunes', colors: ['#d8b26a', '#e3c58b', '#ecd8ae'], amp: [24, 20, 17] },
-    obstacles: { low: ['cactus', 'log'], tall: ['sandRock'] },
+    obstacles: { low: ['cactus', 'log'], tall: ['sandRock'], over: ['pipe'] },
     decor(b, z0, r, x) {
       for (let i = 0; i < 6; i++) { const s = r() < 0.5 ? -1 : 1; P.dune(b, s * (12 + r() * 30), z0 - r() * CHUNK, 9 + r() * 10, 2 + r() * 3, r() < 0.5 ? '#e8cf8a' : '#dfc078'); }
       for (let i = 0; i < 7; i++) { const s = r() < 0.5 ? -1 : 1; P.longleaf(b, s * (6 + r() * 16), z0 - r() * CHUNK, 0.8 + r() * 0.4); }
@@ -250,7 +288,7 @@ export const BIOME = {
   farmland: {
     sky: ['#38a4ff', '#e2f5ff'], hemi: ['#e8f7ff', '#5a8a3a'], ground: '#79c457', track: '#a67c52', speck: '#8c6640', edge: '#5aa043', dust: '#b38a5f',
     backdrop: { style: 'flat', colors: ['#4f8f4a', '#76ad6e', '#a1c99a'], amp: [10, 9, 8] },
-    obstacles: { low: ['hay'], tall: ['tractor', 'hayStack'] },
+    obstacles: { low: ['hay'], tall: ['tractor', 'hayStack'], over: ['boom'] },
     decor(b, z0, r, x) {
       const crops = [['#4f9e3a', '#5fae45', null], ['#6cbf4a', '#7fcc58', null], ['#3f8f3a', '#4f9e45', '#ffffff']];
       for (const s of [-1, 1]) {
@@ -271,7 +309,7 @@ export const BIOME = {
   swamp: {
     sky: ['#5f9f96', '#cfe1cf'], hemi: ['#d6eadb', '#2f4a30'], ground: '#4d6b44', track: '#8a6a48', edge: '#6a5038', dust: '#9fc6b0', water: '#4a6f4c', style: 'boardwalk',
     backdrop: { style: 'trees', colors: ['#365f45', '#557f62', '#7fa58b'], amp: [16, 14, 12] },
-    obstacles: { low: ['stump', 'log'], tall: ['logPile'] },
+    obstacles: { low: ['stump', 'log'], tall: ['logPile'], over: ['moss'] },
     decor(b, z0, r, x) {
       for (let i = 0; i < 9; i++) { const s = r() < 0.5 ? -1 : 1; P.cypress(b, s * (6 + r() * 20), z0 - r() * CHUNK, 0.8 + r() * 0.5, r); }
       for (let i = 0; i < 8; i++) { const s = r() < 0.5 ? -1 : 1; b.cone('#6a5440', [s * (5 + r() * 12), 0.2, z0 - r() * CHUNK], 0.18, 0.7, 5); }
@@ -291,7 +329,7 @@ export const BIOME = {
   beach: {
     sky: ['#26a6ff', '#e0f7ff'], hemi: ['#e8f9ff', '#b9a77a'], ground: '#f2dfa3', track: '#e0c98f', speck: '#cdb377', edge: '#ffffff', dust: '#ffffff', water: '#2fa2d8', style: 'surf',
     backdrop: { style: 'sea', colors: ['#2f98cf', '#5cb7de', '#8fd0ea'], amp: [3, 4, 5] },
-    obstacles: { low: ['sandcastle', 'cooler'], tall: ['lifeguard'] },
+    obstacles: { low: ['sandcastle', 'cooler'], tall: ['lifeguard'], over: ['net'] },
     decor(b, z0, r, x) {
       for (let i = 0; i < 5; i++) P.dune(b, -(10 + r() * 22), z0 - r() * CHUNK, 7 + r() * 6, 1.5 + r() * 1.5, '#f2dfa3');
       for (let i = 0; i < 6; i++) P.palmetto(b, -(6 + r() * 14), z0 - r() * CHUNK, 0.8 + r() * 0.4, r);
@@ -305,6 +343,9 @@ export const BIOME = {
     },
   },
 };
+const SHADOW_R = 34;
+const clampLane = l => Math.max(-1, Math.min(1, l));
+const _c = new THREE.Vector3(), _f = new THREE.Vector3(), _r = new THREE.Vector3(), _u = new THREE.Vector3(), _up = new THREE.Vector3(0, 1, 0);
 export const BIOME_ORDER = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach'];
 
 // Ground covering x from x0 to x1 for one chunk. Ground stops at the track edge rather than running under it,
@@ -332,28 +373,65 @@ const fallTex = stripeTexture();
 const fallMat = bend(new THREE.MeshBasicMaterial({ map: fallTex }));
 
 // ---------- sky and backdrop ----------
-const skyMat = new THREE.ShaderMaterial({
-  uniforms: { top: { value: new THREE.Color() }, bottom: { value: new THREE.Color() } },
-  vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+export const SUN_DIR = new THREE.Vector3(-0.21, 0.24, -0.95).normalize();
+const skyShader = ground => new THREE.ShaderMaterial({
+  uniforms: {
+    top: { value: new THREE.Color() }, bottom: { value: new THREE.Color() }, ground: { value: new THREE.Color() },
+    sunDir: { value: SUN_DIR }, sunCol: { value: new THREE.Color('#fff1c9') }, useGround: { value: ground ? 1 : 0 },
+  },
+  vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
   fragmentShader: `uniform vec3 top;
 uniform vec3 bottom;
+uniform vec3 ground;
+uniform vec3 sunDir;
+uniform vec3 sunCol;
+uniform float useGround;
 varying vec3 vP;
 void main() {
-  float h = smoothstep(-0.02, 0.45, vP.y);
-  gl_FragColor = vec4(mix(bottom, top, h), 1.0);
+  vec3 d = normalize(vP);
+  float h = d.y;
+  vec3 col = mix(bottom, top, smoothstep(-0.02, 0.55, h));
+  col += bottom * 0.12 * pow(1.0 - abs(h), 10.0);
+  float s = max(dot(d, sunDir), 0.0);
+  col += sunCol * (pow(s, 900.0) * 6.0 + pow(s, 60.0) * 0.5 + pow(s, 6.0) * 0.12);
+  col = mix(col, ground, useGround * smoothstep(0.0, -0.25, h));
+  gl_FragColor = vec4(col, 1.0);
   #include <colorspace_fragment>
 }`,
   side: THREE.BackSide, depthWrite: false, fog: false,
 });
+const skyMat = skyShader(false);
+const envSkyMat = skyShader(true);
+// Ridges fade into the horizon haze toward their base and toward the back, which gives the scene real depth.
+const hazeU = { value: new THREE.Color() };
+const ridgeMat = (color, amp, back, snow) => new THREE.ShaderMaterial({
+  uniforms: { color: { value: new THREE.Color(color) }, haze: hazeU, amp: { value: amp }, back: { value: back }, snow: { value: snow } },
+  vertexShader: 'varying float vY; void main(){ vY = position.y; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+  fragmentShader: `uniform vec3 color;
+uniform vec3 haze;
+uniform float amp;
+uniform float back;
+uniform float snow;
+varying float vY;
+void main() {
+  float t = clamp(vY / amp, 0.0, 1.0);
+  vec3 c = mix(color * 0.82, color * 1.06, t);
+  c = mix(c, vec3(0.96, 0.98, 1.0), snow * smoothstep(0.7, 0.8, t));
+  c = mix(c, haze, back + (1.0 - back) * 0.55 * (1.0 - smoothstep(-0.2, 0.55, t)));
+  gl_FragColor = vec4(c, 1.0);
+  #include <colorspace_fragment>
+}`,
+  fog: false,
+});
 
 function ridgeGeometry(style, amp, seed) {
   const r = mkRng(seed);
-  const W = 1400, N = 140, pts = [];
+  const W = 1400, N = style === 'peaks' ? 90 : 160, pts = [];
   const s1 = r() * 10, s2 = r() * 10;
   for (let i = 0; i <= N; i++) {
     const x = -W / 2 + (W * i) / N;
     let y;
-    if (style === 'peaks') y = amp * (i % 2 ? 0.35 + r() * 0.25 : 0.6 + r() * 0.4);
+    if (style === 'peaks') y = amp * (i % 2 ? 0.3 + r() * 0.25 : 0.62 + r() * 0.38);
     else if (style === 'rolling') y = amp * (0.55 + 0.25 * Math.sin(x * 0.013 + s1) + 0.18 * Math.sin(x * 0.037 + s2));
     else if (style === 'dunes') y = amp * (0.35 + 0.4 * Math.abs(Math.sin(x * 0.015 + s1)) + 0.1 * Math.sin(x * 0.05 + s2));
     else if (style === 'trees') y = amp * (0.55 + 0.35 * r() + 0.15 * Math.sin(x * 0.02 + s1));
@@ -368,27 +446,29 @@ function ridgeGeometry(style, amp, seed) {
   return new THREE.ShapeGeometry(shape);
 }
 
+const cloudMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, emissive: '#ffffff', emissiveIntensity: 0.42, fog: false, flatShading: true });
+
 class Backdrop {
   constructor(scene) {
     this.group = new THREE.Group();
-    this.sky = new THREE.Mesh(new THREE.SphereGeometry(800, 24, 16), skyMat);
+    this.sky = new THREE.Mesh(new THREE.SphereGeometry(800, 32, 20), skyMat);
     this.sky.renderOrder = -10;
     this.sky.frustumCulled = false;
     scene.add(this.sky);
     scene.add(this.group);
     this.layers = [];
-    const sun = new THREE.Mesh(new THREE.CircleGeometry(16, 24), new THREE.MeshBasicMaterial({ color: '#fff6c4', fog: false }));
-    sun.position.set(-120, 120, -520);
-    const halo = new THREE.Mesh(new THREE.CircleGeometry(30, 24), new THREE.MeshBasicMaterial({ color: '#fff6c4', transparent: true, opacity: 0.3, fog: false, depthWrite: false }));
-    halo.position.set(-120, 120, -521);
-    this.group.add(sun, halo);
     this.clouds = [];
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 11; i++) {
       const b = new Builder();
-      const n = 3 + (i % 3);
-      for (let k = 0; k < n; k++) b.ico('#ffffff', [k * 9 - n * 4, (k % 2) * 3, (k % 3) * 2], [14, 9, 10], [0, k, 0], 0.05);
-      const m = new THREE.Mesh(b.build(), new THREE.MeshBasicMaterial({ vertexColors: true, fog: false }));
-      m.position.set(-400 + i * 95 + Math.random() * 40, 70 + Math.random() * 60, -420 - Math.random() * 60);
+      const n = 4 + (i % 3);
+      for (let k = 0; k < n; k++) {
+        const big = 1 - Math.abs(k - (n - 1) / 2) / n;
+        b.ico(k % 2 ? '#ffffff' : '#f4f8ff', [k * 8 - n * 4, big * 5 + (k % 2) * 1.5, (k % 3) * 3], [12 + big * 10, 9 + big * 9, 12], [0, k, 0], 0.03, 1);
+      }
+      b.ico('#dfe8f5', [0, -2.5, 2], [n * 8, 4, 10], null, 0, 1);
+      const m = new THREE.Mesh(b.build(), cloudMat);
+      m.position.set(-500 + i * 95 + Math.random() * 40, 80 + Math.random() * 70, -430 - Math.random() * 80);
+      m.scale.setScalar(0.8 + Math.random() * 0.5);
       this.clouds.push(m);
       this.group.add(m);
     }
@@ -399,8 +479,12 @@ class Backdrop {
     this.key = biomeKey;
     const bd = BIOME[biomeKey].backdrop;
     this.layers.forEach(l => { this.group.remove(l); l.geometry.dispose(); l.material.dispose(); });
+    const n = bd.colors.length;
     this.layers = bd.colors.map((c, i) => {
-      const m = new THREE.Mesh(ridgeGeometry(bd.style, bd.amp[i], i * 17 + biomeKey.length * 31), new THREE.MeshBasicMaterial({ color: c, fog: false }));
+      const m = new THREE.Mesh(
+        ridgeGeometry(bd.style, bd.amp[i], i * 17 + biomeKey.length * 31),
+        ridgeMat(c, bd.amp[i], (i / Math.max(1, n - 1)) * 0.45, bd.style === 'peaks' && i < 2 ? 1 : 0),
+      );
       m.position.set(0, -10 - i * 2, -330 - i * 45);
       m.renderOrder = -5 - i;
       return m;
@@ -411,7 +495,7 @@ class Backdrop {
   update(camera, dt) {
     this.sky.position.copy(camera.position);
     this.group.position.set(camera.position.x * 0.9, camera.position.y * 0.5, camera.position.z);
-    for (const c of this.clouds) { c.position.x += dt * 2; if (c.position.x > 480) c.position.x = -480; }
+    for (const c of this.clouds) { c.position.x += dt * 2.5; if (c.position.x > 520) c.position.x = -520; }
   }
 }
 
@@ -423,7 +507,7 @@ const coinGeo = (() => {
   b.box('#ffc61a', [0, 0, 0], [0.08, 0.26, 0.14]);
   return b.build();
 })();
-const coinMat = bend(new THREE.MeshToonMaterial({ vertexColors: true, emissive: '#6a4a00' }));
+const coinMat = bend(new THREE.MeshStandardMaterial({ vertexColors: true, metalness: 0.55, roughness: 0.28, emissive: '#ffae00', emissiveIntensity: 0.45 }));
 
 function heartMesh() {
   const b = new Builder();
@@ -431,6 +515,7 @@ function heartMesh() {
   for (const [x, y] of px) b.box(y === 2 || (x === -1 && y === 1) ? '#ff7a8a' : '#ff2d55', [x * 0.17, y * 0.17, 0], [0.17, 0.17, 0.2]);
   const m = new THREE.Mesh(b.build(), M.glow);
   m.frustumCulled = false;
+  m.castShadow = true;
   return m;
 }
 
@@ -443,7 +528,7 @@ function archMesh(color, label, { checker = false } = {}) {
     b.box(color, [s * 4.2, 0.15, 0], [1.0, 0.3, 1.0]);
   }
   b.box(color, [0, 5.3, 0], [9.4, 0.6, 0.6]);
-  g.add(b.mesh());
+  g.add(b.mesh(M.solid, { cast: true, receive: true }));
   const tex = checker ? checkerTexture() : textTexture(label, { w: 512, h: 128, bg: '#ffffff', fg: '#222', border: color, size: 76 });
   const sign = new THREE.Mesh(new THREE.PlaneGeometry(checker ? 8.4 : 6, checker ? 1.2 : 1.5), bend(new THREE.MeshBasicMaterial({ map: tex, transparent: true })));
   sign.position.set(0, checker ? 5.3 : 6.3, 0.32);
@@ -463,7 +548,7 @@ function checkerTexture() {
 }
 function gateMesh(color) {
   const g = archMesh(color, '?');
-  const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.75, 0), bend(new THREE.MeshToonMaterial({ color: '#ffd23f', emissive: '#a06a00' })));
+  const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.75, 0), bend(new THREE.MeshStandardMaterial({ color: '#ffd23f', emissive: '#ffb000', emissiveIntensity: 1.3, roughness: 0.25, metalness: 0.2, flatShading: true })));
   crystal.position.set(0, 2.6, 0);
   crystal.frustumCulled = false;
   g.add(crystal);
@@ -475,19 +560,83 @@ function gateMesh(color) {
   return g;
 }
 
+// ---------- power-up crates ----------
+const crateTex = new Map(), crateMats = new Map();
+function crateTexture(icon, color) {
+  if (crateTex.has(icon)) return crateTex.get(icon);
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 128);
+  g.addColorStop(0, '#ffffff'); g.addColorStop(0.25, color); g.addColorStop(1, color);
+  x.fillStyle = '#ffffff'; x.fillRect(0, 0, 128, 128);
+  x.fillStyle = g; x.fillRect(8, 8, 112, 112);
+  x.font = '78px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(icon, 64, 70);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
+  crateTex.set(icon, t);
+  return t;
+}
+const crateGeo = new THREE.BoxGeometry(1.15, 1.15, 1.15);
+const crateEdge = (() => {
+  const b = new Builder();
+  const e = 0.6, t = 0.09;
+  for (const a of [-1, 1]) for (const c of [-1, 1]) {
+    b.box('#ffffff', [a * e, c * e, 0], [t, t, 1.25]);
+    b.box('#ffffff', [a * e, 0, c * e], [t, 1.25, t]);
+    b.box('#ffffff', [0, a * e, c * e], [1.25, t, t]);
+  }
+  return b.build();
+})();
+function crateMesh(power) {
+  const g = new THREE.Group();
+  let mat = crateMats.get(power.icon);
+  if (!mat) {
+    const tex = crateTexture(power.icon, power.color);
+    mat = bend(new THREE.MeshStandardMaterial({ map: tex, emissiveMap: tex, emissive: '#ffffff', emissiveIntensity: 0.55, roughness: 0.4 }));
+    crateMats.set(power.icon, mat);
+  }
+  const box = new THREE.Mesh(crateGeo, mat);
+  const edge = new THREE.Mesh(crateEdge, M.glow);
+  box.frustumCulled = edge.frustumCulled = false;
+  box.castShadow = true;
+  g.add(box, edge);
+  return g;
+}
+
 // ---------- world ----------
 export class World {
-  constructor(scene, fx) {
+  constructor(scene, fx, renderer) {
     this.scene = scene;
     this.fx = fx;
     this.backdrop = new Backdrop(scene);
-    this.hemi = new THREE.HemisphereLight('#ffffff', '#446644', 1.9);
-    this.sun = new THREE.DirectionalLight('#ffffff', 1.9);
-    this.sun.position.set(-4, 10, 6);
-    scene.add(this.hemi, this.sun);
-    scene.fog = new THREE.Fog('#d3e8ff', 40, 130);
+    this.renderer = renderer;
+    this.hemi = new THREE.HemisphereLight('#ffffff', '#446644', 1.15);
+    // The sun shines from behind the camera's left shoulder, so faces toward the player are lit and shadows
+    // fall forward onto the trail where they can be seen.
+    this.sun = new THREE.DirectionalLight('#fff3dc', 2.7);
+    this.sunOffset = new THREE.Vector3(-0.42, 0.8, 0.43).normalize().multiplyScalar(70);
+    this.sun.castShadow = true;
+    const sc = this.sun.shadow.camera;
+    sc.left = sc.bottom = -SHADOW_R; sc.right = sc.top = SHADOW_R; sc.near = 5; sc.far = 160;
+    this.sun.shadow.bias = -0.0006;
+    this.sun.shadow.normalBias = 0.03;
+    this.sun.shadow.radius = 3;
+    this.setShadowSize(1024);
+    scene.add(this.hemi, this.sun, this.sun.target);
+    scene.fog = new THREE.Fog('#d3e8ff', 45, 150);
+    if (renderer) {
+      this.pmrem = new THREE.PMREMGenerator(renderer);
+      this.envScene = new THREE.Scene();
+      this.envScene.add(new THREE.Mesh(new THREE.SphereGeometry(100, 32, 16), envSkyMat));
+      scene.environmentIntensity = 0.55;
+    }
     this.coins = new THREE.InstancedMesh(coinGeo, coinMat, 260);
     this.coins.frustumCulled = false;
+    this.coins.castShadow = true;
     this.coins.count = 0;
     scene.add(this.coins);
     this.skyNow = { top: new THREE.Color('#4a9cff'), bottom: new THREE.Color('#d3e8ff') };
@@ -506,6 +655,7 @@ export class World {
     this.calm = [];
     this.noObstaclesFrom = Infinity;
     this.r = mkRng(Math.floor(Math.random() * 1e9));
+    this.nextCrate = 110 + this.r() * 40;
     this.pending = [];
     this.queueEvents(this.genDist, this.genDist + CHUNK);
     this.applyBiome(cfg.biomeAt(0), true);
@@ -530,15 +680,48 @@ export class World {
     this.hemi.color.set(bi.hemi[0]);
     this.hemi.groundColor.set(bi.hemi[1]);
     if (instant) { this.skyNow.top.copy(this.skyTarget.top); this.skyNow.bottom.copy(this.skyTarget.bottom); }
+    this.updateEnv(bi);
+  }
+  // Image-based light from this biome's sky, so shiny things (coins, water, metal) reflect the right colors.
+  updateEnv(bi) {
+    if (!this.pmrem) return;
+    envSkyMat.uniforms.top.value.copy(this.skyTarget.top);
+    envSkyMat.uniforms.bottom.value.copy(this.skyTarget.bottom);
+    envSkyMat.uniforms.ground.value.set(bi.hemi[1]);
+    const old = this.envRT;
+    this.envRT = this.pmrem.fromScene(this.envScene, 0, 1, 200, { size: 64 });
+    this.scene.environment = this.envRT.texture;
+    if (old) old.dispose();
+  }
+  setShadowSize(n) {
+    const sh = this.sun.shadow;
+    if (sh.mapSize.x === n && sh.map) return;
+    sh.mapSize.set(n, n);
+    if (sh.map) { sh.map.dispose(); sh.map = null; }
+    this.sun.castShadow = n > 0;
+  }
+  // The shadow box follows the hero but snaps to whole shadow-map texels, so shadow edges don't crawl.
+  followSun(heroDist, heroX) {
+    const c = _c.set(heroX * 0.5, 0, -(heroDist + SHADOW_R * 0.55));
+    const f = _f.copy(this.sunOffset).negate().normalize();
+    const rt = _r.crossVectors(f, _up).normalize();
+    const up = _u.crossVectors(rt, f);
+    const texel = (SHADOW_R * 2) / this.sun.shadow.mapSize.x;
+    const a = Math.round(c.dot(rt) / texel) * texel, b = Math.round(c.dot(up) / texel) * texel, z = c.dot(f);
+    c.copy(rt).multiplyScalar(a).addScaledVector(up, b).addScaledVector(f, z);
+    this.sun.target.position.copy(c);
+    this.sun.position.copy(c).add(this.sunOffset);
   }
 
   get obstacles() { return this.chunks.flatMap(c => c.obstacles); }
   get gates() { return this.chunks.flatMap(c => c.gates); }
   get signs() { return this.chunks.flatMap(c => c.signs); }
   get hearts() { return this.chunks.flatMap(c => c.hearts); }
+  get crates() { return this.chunks.flatMap(c => c.crates); }
 
-  update(dt, heroDist, camera) {
+  update(dt, heroDist, camera, heroX = 0) {
     this.time += dt;
+    this.followSun(heroDist, heroX);
     U.uTime.value = this.time;
     fallTex.offset.y += dt * 1.6;
     while (this.genDist < heroDist + AHEAD) this.buildChunk();
@@ -552,6 +735,7 @@ export class World {
     skyMat.uniforms.top.value.copy(this.skyNow.top);
     skyMat.uniforms.bottom.value.copy(this.skyNow.bottom);
     this.scene.fog.color.copy(this.skyNow.bottom);
+    hazeU.value.copy(this.skyNow.bottom);
     this.backdrop.update(camera, dt);
     // coins
     let n = 0;
@@ -569,12 +753,24 @@ export class World {
     for (const c of this.chunks) {
       for (const g of c.gates) { const cr = g.mesh.userData.crystal; cr.rotation.y += dt * 2; cr.position.y = 2.6 + Math.sin(this.time * 3) * 0.2; }
       for (const h of c.hearts) { h.mesh.rotation.y += dt * 2.5; h.mesh.position.y = 1.2 + Math.sin(this.time * 4) * 0.15; }
+      for (const k of c.crates) {
+        if (k.taken) continue;
+        k.mesh.rotation.y += dt * 1.8;
+        k.mesh.rotation.x = Math.sin(this.time * 2 + k.dist) * 0.25;
+        k.mesh.position.y = 1.25 + Math.sin(this.time * 3 + k.dist) * 0.18;
+        k.spark -= dt;
+        if (k.spark <= 0 && Math.abs(k.dist - heroDist) < 70) {
+          k.spark = 0.06;
+          const a = Math.random() * TAU;
+          this.fx.spark({ x: k.x + Math.cos(a) * 0.9, y: k.mesh.position.y + (Math.random() - 0.5) * 1.2, z: -k.dist + Math.sin(a) * 0.9, vy: 0.8, life: 0.7, size: 0.4, color: Math.random() < 0.5 ? k.power.color : '#ffffff', glow: 2 });
+        }
+      }
       for (const em of c.emitters) {
         em.t -= dt;
         if (em.t > 0) continue;
-        if (em.type === 'smoke') { em.t = 0.35; this.fx.spawn({ x: em.x, y: em.y, z: em.z, vx: 0.6, vy: 2.2, vz: 0, life: 3, size: 1.4, color: '#e8e8e8', g: -0.2, grow: true }); }
-        if (em.type === 'mist') { em.t = 0.12; this.fx.spawn({ x: em.x + (Math.random() - 0.5) * em.w, y: 0.6, z: em.z + 0.6, vx: (Math.random() - 0.5), vy: 1.5, vz: 1, life: 1.2, size: 0.6, color: '#ffffff', g: 0, grow: true }); }
-        if (em.type === 'firefly') { em.t = 0.5; this.fx.spawn({ x: em.x + (Math.random() - 0.5) * 8, y: 1 + Math.random() * 2, z: em.z + (Math.random() - 0.5) * 20, vx: (Math.random() - 0.5) * 0.6, vy: 0.2, vz: (Math.random() - 0.5) * 0.6, life: 2.5, size: 0.14, color: '#fff27a', g: 0 }); }
+        if (em.type === 'smoke') { em.t = 0.35; this.fx.puff({ x: em.x, y: em.y, z: em.z, vx: 0.6, vy: 2.2, vz: 0, life: 3.2, size: 3.2, color: '#f2f2f2', alpha: 0.75, g: -0.1, grow: 2.2 }); }
+        if (em.type === 'mist') { em.t = 0.12; this.fx.puff({ x: em.x + (Math.random() - 0.5) * em.w, y: 0.6, z: em.z + 0.6, vx: (Math.random() - 0.5), vy: 1.5, vz: 1, life: 1.4, size: 2.2, color: '#ffffff', alpha: 0.55, grow: 1.6 }); }
+        if (em.type === 'firefly') { em.t = 0.5; this.fx.spark({ x: em.x + (Math.random() - 0.5) * 8, y: 1 + Math.random() * 2, z: em.z + (Math.random() - 0.5) * 20, vx: (Math.random() - 0.5) * 0.6, vy: 0.2, vz: (Math.random() - 0.5) * 0.6, life: 2.5, size: 0.5, color: '#fff27a', glow: 2.5 }); }
       }
     }
   }
@@ -586,7 +782,7 @@ export class World {
     const r = this.r;
     const key = this.cfg.biomeAt(d0 + CHUNK / 2);
     const bi = BIOME[key];
-    const chunk = { d0, d1, meshes: [], obstacles: [], gates: [], signs: [], hearts: [], emitters: [], extraGeos: [] };
+    const chunk = { d0, d1, meshes: [], obstacles: [], gates: [], signs: [], hearts: [], crates: [], emitters: [], extraGeos: [] };
     const b = new Builder(), w = new Builder();
     const extras = [];
 
@@ -657,7 +853,13 @@ export class World {
       if (pattern < 0.12 && d > 120) {
         placed.push(this.addObstacle(chunk, 'bigLog', 0, d, yBase));
         this.coinArc(0, d, yBase);
-      } else if (pattern < 0.42) {
+      } else if (pattern < 0.27 && d > 150 && bi.obstacles.over) {
+        // A bar to slide under, sometimes with a wall beside it so sliding is the way through.
+        const lane = pick(lanes);
+        placed.push(this.addObstacle(chunk, pick(bi.obstacles.over), lane, d, yBase));
+        this.coinLine(lane, d - 4, 6, yBase - 0.35);
+        if (r() < 0.5) placed.push(this.addObstacle(chunk, pick(bi.obstacles.tall), pick(lanes.filter(l => l !== lane)), d, yBase));
+      } else if (pattern < 0.45) {
         const lane = pick(lanes);
         placed.push(this.addObstacle(chunk, pick(bi.obstacles.low), lane, d, yBase));
         this.coinArc(lane, d, yBase);
@@ -674,10 +876,21 @@ export class World {
         this.coinLine(open, d - 5, 7, yBase);
       }
       if (this.cfg.wantsHeart() && r() < 0.18) this.addHeart(chunk, pick(lanes), d + gap * 0.5, yBase);
+      else if (d > this.nextCrate && this.cfg.pickPower && !this.inCalm(d + gap * 0.5)) {
+        const power = this.cfg.pickPower();
+        if (power) {
+          this.addCrate(chunk, pick(lanes), d + gap * 0.5, power);
+          this.nextCrate = d + 160 + r() * 80;
+        }
+      }
     }
 
-    if (!b.empty) { const m = b.mesh(); this.scene.add(m); chunk.meshes.push(m); chunk.extraGeos.push(m.geometry); }
-    if (!w.empty) { const m = w.mesh(M.water); m.renderOrder = 2; this.scene.add(m); chunk.meshes.push(m); chunk.extraGeos.push(m.geometry); }
+    // Only solid things near the trail cast shadows; ground planes and far scenery just receive them.
+    const [near, far] = b.split((p, x) => !p.flat && Math.abs(x) < 26);
+    const add = m => { this.scene.add(m); chunk.meshes.push(m); chunk.extraGeos.push(m.geometry); return m; };
+    if (!near.empty) add(near.mesh(M.solid, { cast: true, receive: true }));
+    if (!far.empty) add(far.mesh(M.solid, { cast: false, receive: true }));
+    if (!w.empty) add(w.mesh(M.water, { cast: false, receive: true })).renderOrder = 2;
     this.chunks.push(chunk);
     this.genDist = d1;
   }
@@ -717,7 +930,7 @@ export class World {
     mesh.position.set(x, y, -d);
     this.scene.add(mesh);
     chunk.meshes.push(mesh);
-    const o = { type, x, dist: d, w: def.w, d: def.d, h: def.h + y, low: def.low, mesh, hit: false };
+    const o = { type, x, dist: d, w: def.w, d: def.d, h: def.h + y, low: def.low, over: !!def.over, y0: (def.y0 || 0) + y, mesh, hit: false };
     chunk.obstacles.push(o);
     return o;
   }
@@ -728,6 +941,23 @@ export class World {
     this.scene.add(mesh);
     chunk.meshes.push(mesh);
     chunk.hearts.push({ x: lane * LANE, dist: d, mesh, taken: false });
+  }
+  addCrate(chunk, lane, d, powerId) {
+    const power = { id: powerId, ...this.cfg.powers[powerId] };
+    const mesh = crateMesh(power);
+    mesh.position.set(lane * LANE, 1.25, -d);
+    this.scene.add(mesh);
+    chunk.meshes.push(mesh);
+    chunk.crates.push({ x: lane * LANE, dist: d, mesh, power, taken: false, spark: 0 });
+  }
+  // A zig-zag line of coins up in the sky for the jetpack.
+  skyCoins(d0, d1, y) {
+    let lane = 0, d = d0;
+    while (d < d1) {
+      this.coinLine(lane, d, 6, y);
+      d += 6 * 1.5 + 4;
+      lane = clampLane(lane + (Math.random() < 0.5 ? -1 : 1));
+    }
   }
   coinLine(lane, d, n, y = 0) {
     for (let i = 0; i < n; i++) this.coinList.push({ x: lane * LANE, y: 0.9 + y, dist: d + i * 1.5, alive: true });
@@ -743,6 +973,7 @@ export class World {
     for (const c of this.chunks) {
       c.obstacles = c.obstacles.filter(o => { if (o.dist > dist - 40) { this.scene.remove(o.mesh); return false; } return true; });
       c.gates = c.gates.filter(g => { if (g.dist > dist - 40) { this.scene.remove(g.mesh); return false; } return true; });
+      c.crates = c.crates.filter(k => { if (k.dist > dist - 40) { this.scene.remove(k.mesh); return false; } return true; });
     }
     this.coinList = this.coinList.filter(c => c.dist < dist - 40);
     for (let i = 0; i < 4; i++) this.coinLine(i % 3 - 1, dist - 34 + i * 8, 5);

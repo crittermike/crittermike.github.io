@@ -1,36 +1,50 @@
-// Shared rendering helpers: curved-world shader, toon materials, and a voxel geometry builder.
+// Shared rendering helpers: curved-world shader, lit low-poly materials, and a voxel geometry builder.
 import * as THREE from 'three';
 
-// Uniforms shared by every bent material. uBend curves the world down with distance
-// (a rolling "tiny planet" horizon); uCurveX swings the trail gently left/right.
-export const U = { uBend: { value: 0.0017 }, uCurveX: { value: 0 }, uTime: { value: 0 } };
+// Uniforms shared by every bent material. uBend curves the world down with horizontal distance from the camera
+// (a rolling "tiny planet" horizon). uRim lights character edges so they pop off the background.
+export const U = { uBend: { value: 0.0017 }, uTime: { value: 0 }, uRim: { value: new THREE.Color('#fff4d6') } };
 
-export function bend(mat, { wave = false } = {}) {
+// The bend runs in view space but measures distance in the world's horizontal plane, so turning or tilting
+// the camera never changes how much a point sinks. That keeps the trail, the grass and the props in step.
+// Shadows are drawn unbent, which still lines up because the receiver looks up its shadow with its unbent
+// world position too.
+export function bend(mat, { wave = false, rim = 0 } = {}) {
   mat.onBeforeCompile = sh => {
     Object.assign(sh.uniforms, U);
-    sh.vertexShader = 'uniform float uBend;\nuniform float uCurveX;\nuniform float uTime;\n' + sh.vertexShader.replace(
+    sh.vertexShader = 'uniform float uBend;\nuniform float uTime;\n' + sh.vertexShader.replace(
       '#include <project_vertex>',
       `#include <project_vertex>
       ${wave ? `vec4 wpos = modelMatrix * vec4(transformed, 1.0);
       mvPosition.y += sin(wpos.x * 0.8 + uTime * 2.1) * 0.07 + sin(wpos.z * 0.6 + uTime * 1.6) * 0.07;` : ''}
-      float bz = min(mvPosition.z, 0.0);
-      mvPosition.y -= bz * bz * uBend;
-      mvPosition.x += bz * bz * uCurveX;
+      vec3 upV = viewMatrix[1].xyz;
+      float hgt = dot(upV, mvPosition.xyz);
+      float d2 = max(dot(mvPosition.xyz, mvPosition.xyz) - hgt * hgt, 0.0);
+      mvPosition.xyz -= upV * (d2 * uBend);
       gl_Position = projectionMatrix * mvPosition;`,
     );
+    if (rim && sh.fragmentShader.includes('#include <emissivemap_fragment>')) {
+      sh.fragmentShader = 'uniform vec3 uRim;\n' + sh.fragmentShader.replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+        float rimF = 1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0);
+        totalEmissiveRadiance += uRim * (pow(rimF, 3.0) * ${rim.toFixed(3)});`,
+      );
+    }
   };
-  mat.customProgramCacheKey = () => (wave ? 'bend-wave' : 'bend');
+  mat.customProgramCacheKey = () => `bend:${wave}:${rim}`;
   return mat;
 }
 
-const gradient = new THREE.DataTexture(new Uint8Array([120, 190, 255]), 3, 1, THREE.RedFormat);
-gradient.minFilter = gradient.magFilter = THREE.NearestFilter;
-gradient.needsUpdate = true;
+const solid = opts => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.86, metalness: 0, ...opts });
 
 export const M = {
-  solid: bend(new THREE.MeshToonMaterial({ vertexColors: true, gradientMap: gradient })),
-  glow: bend(new THREE.MeshBasicMaterial({ vertexColors: true })),
-  water: bend(new THREE.MeshToonMaterial({ vertexColors: true, gradientMap: gradient, transparent: true, opacity: 0.86, depthWrite: false }), { wave: true }),
+  solid: bend(solid()),
+  // Characters get a soft rim light so they read clearly against busy scenery.
+  actor: bend(solid({ roughness: 0.7 }), { rim: 0.55 }),
+  // Glow colors go above 1.0 so the bloom pass picks them up.
+  glow: bend(new THREE.MeshBasicMaterial({ vertexColors: true, color: new THREE.Color(1.5, 1.5, 1.5) })),
+  water: bend(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.12, metalness: 0.05, transparent: true, opacity: 0.84, depthWrite: false, envMapIntensity: 1.4 }), { wave: true }),
 };
 
 // ---------- voxel builder ----------
@@ -53,7 +67,7 @@ const shapes = {
   cyl: (seg, top) => base(`cyl${seg}:${top}`, () => new THREE.CylinderGeometry(0.5 * top, 0.5, 1, seg)),
   ico: detail => base('ico' + detail, () => new THREE.IcosahedronGeometry(0.5, detail)),
   oct: () => base('oct', () => new THREE.OctahedronGeometry(0.5, 0)),
-  plane: segX => base('plane' + segX, () => new THREE.PlaneGeometry(1, 1, segX, 1).rotateX(-Math.PI / 2)),
+  plane: (segX, segZ) => base(`plane${segX}:${segZ}`, () => new THREE.PlaneGeometry(1, 1, segX, segZ).rotateX(-Math.PI / 2)),
 };
 
 const _p = new THREE.Vector3(), _s = new THREE.Vector3(), _q = new THREE.Quaternion(), _e = new THREE.Euler();
@@ -78,10 +92,20 @@ export class Builder {
   cyl(color, pos, r, h, seg = 8, rot, top = 1, jitter) { return this.add(shapes.cyl(seg, top), color, pos, [r * 2, h, r * 2], rot, jitter); }
   ico(color, pos, size, rot, jitter, detail = 0) { return this.add(shapes.ico(detail), color, pos, size, rot, jitter); }
   oct(color, pos, size, rot) { return this.add(shapes.oct(), color, pos, size, rot); }
-  // Wide planes get a vertex every ~3 m across. The bend is per-vertex and depends on view depth, so when the
-  // camera turns, a single 260 m quad would bend only at its far corners and tilt through nearby surfaces.
-  plane(color, pos, size, rot) { return this.add(shapes.plane(Math.max(1, Math.ceil(size[0] / 3))), color, pos, [size[0], 1, size[1]], rot); }
+  // The bend is per-vertex, so big flat pieces need a vertex every few meters or they would tilt through
+  // nearby surfaces instead of curving with them.
+  plane(color, pos, size, rot) {
+    this.add(shapes.plane(Math.max(1, Math.ceil(size[0] / 3)), Math.max(1, Math.ceil(size[1] / 6))), color, pos, [size[0], 1, size[1]], rot);
+    this.parts[this.parts.length - 1].flat = true;
+    return this;
+  }
   get empty() { return this.parts.length === 0; }
+  // Splits parts into two builders, e.g. props near the trail that cast shadows versus ground and far scenery.
+  split(test) {
+    const a = new Builder(), b = new Builder();
+    for (const p of this.parts) (test(p, p.m.elements[12], p.m.elements[14]) ? a : b).parts.push(p);
+    return [a, b];
+  }
   build() {
     let n = 0;
     for (const p of this.parts) n += p.g.attributes.position.count;
@@ -105,17 +129,36 @@ export class Builder {
     geo.computeBoundingSphere();
     return geo;
   }
-  mesh(material = M.solid) {
+  mesh(material = M.solid, { cast = true, receive = true } = {}) {
     const mesh = new THREE.Mesh(this.build(), material);
     mesh.frustumCulled = false; // the bend shader moves vertices, so CPU culling would be wrong
+    mesh.castShadow = cast;
+    mesh.receiveShadow = receive;
     return mesh;
   }
 }
 
-export function mesh(fn, material = M.solid) {
+export function mesh(fn, material = M.solid, opts) {
   const b = new Builder();
   fn(b);
-  return b.mesh(material);
+  return b.mesh(material, opts);
+}
+
+// A soft round sprite used for glows, dust and sparkles.
+let softTex = null;
+export function softTexture() {
+  if (softTex) return softTex;
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.35, 'rgba(255,255,255,0.75)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  x.fillStyle = g;
+  x.fillRect(0, 0, 64, 64);
+  softTex = new THREE.CanvasTexture(c);
+  return softTex;
 }
 
 // ---------- text on a canvas ----------

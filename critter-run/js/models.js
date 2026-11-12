@@ -1,6 +1,9 @@
 // Voxel characters: the hero kid and the chasers. Everything faces -z (the running direction).
 import * as THREE from 'three';
-import { mesh, M, bend } from './gfx.js';
+import { mesh as gmesh, M, bend } from './gfx.js';
+
+// Character parts use the rim-lit material and cast real shadows.
+const mesh = (fn, mat = M.actor) => gmesh(fn, mat, { cast: true, receive: false });
 
 const TAU = Math.PI * 2;
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -16,7 +19,7 @@ function pivot(parent, x, y, z, fn, mat) {
 export function blobShadow(r = 0.55) {
   const m = new THREE.Mesh(
     new THREE.CircleGeometry(r, 20).rotateX(-Math.PI / 2),
-    bend(new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.22, depthWrite: false })),
+    bend(new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.16, depthWrite: false })),
   );
   m.position.y = 0.04;
   m.renderOrder = 1;
@@ -73,9 +76,11 @@ export function makeHero() {
 
   let phase = 0, stumbleT = 0, turn = 0;
   return {
-    root, body, head, shadow,
+    root, body, head, shadow, id: 'voxel',
     stumble() { stumbleT = 0.5; },
-    // mode: run | jump | idle | cheer | zap | fall
+    setWeapon() {}, showWeapon() {}, aimAt() {},
+    muzzle(out = new THREE.Vector3()) { return body.localToWorld(out.set(0, 1.25, 0.3)); },
+    // mode: run | jump | slide | idle | cheer | zap | fall
     animate(mode, dt, { speed = 10, jumpY = 0, t = 0 } = {}) {
       const k = Math.min(1, dt * 14);
       let lL = 0, lR = 0, aL = 0, aR = 0, aLz = 0, aRz = 0, lean = 0, bob = 0, hx = 0, turnTo = 0;
@@ -91,6 +96,8 @@ export function makeHero() {
         aLz = -2.7 + Math.sin(t * 14) * 0.25; aRz = 2.7 - Math.sin(t * 14) * 0.25;
       } else if (mode === 'zap') {
         turnTo = Math.PI; aR = -1.7; aL = 0.3; lL = 0.4; lR = -0.4; hx = 0.1;
+      } else if (mode === 'slide') {
+        lean = 1.05; lL = 0.55; lR = 0.4; aLz = -1.3; aRz = 1.3;
       } else if (mode === 'fall') {
         lean = 1.3; aLz = -2.8; aRz = 2.8; lL = -0.4; lR = 0.3;
       } else {
