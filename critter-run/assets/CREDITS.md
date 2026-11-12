@@ -26,16 +26,16 @@ The music was loudness-normalized and re-encoded.
 
 Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles), Freesound contributors (CC0 sounds only), Joseph Sardin (BigSoundBank.com), and HaelDB ("Point bell", OpenGameArt). Trimmed, normalized and re-encoded.
 
-## Characters (CC0)
+## Characters
+
+**CC0:**
 
 | File | Source | Author |
 |---|---|---|
-| `runners/kid.glb`, `ninja.glb`, `cowboy.glb`, `pirate.glb`, `zombie.glb`, `knight.glb`, `viking.glb`, `wizard.glb`, `pug.glb` | Ultimate Animated Character Pack | [Quaternius](https://quaternius.com) |
-| `runners/robot.glb` | RobotExpressive (from the three.js examples) | Tomás Laulhé ([Quaternius](https://quaternius.com)), modified by Don McCurdy |
-| `chasers/wolf.glb` | Ultimate Animated Animal Pack | [Quaternius](https://quaternius.com) |
-| `chasers/shark.glb` | Pirate Kit | [Quaternius](https://quaternius.com) |
-| `chasers/boar.glb`, `scorpion.glb` | Pixor library ([pixor.art/library](https://pixor.art/library/)), with extra run and attack animations added for this game | Frakassets |
-| `chasers/gator.glb`, `hurricane.glb` | Made for this game | Critter Run |
+| `runners/*.glb` (all but `anims.glb`) | Universal Base Characters and Modular Character Outfits - Fantasy, combined onto one skeleton per character | [Quaternius](https://quaternius.com) |
+| `runners/anims.glb` | Universal Animation Library 1 and 2, plus "Victory", "Dab" and "Power Up" from [Mesh2Motion](https://github.com/Mesh2Motion/mesh2motion-assets), retargeted to the same skeleton | [Quaternius](https://quaternius.com), Mesh2Motion |
+| `chasers/boar.glb` | Pixor library ([pixor.art/library](https://pixor.art/library/)), with extra run and attack animations added for this game | Frakassets |
+| `chasers/hurricane.glb` | Made for this game | Critter Run |
 | `blasters.glb` | Blaster Kit | [Kenney](https://kenney.nl) |
 
 **CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/):
@@ -43,10 +43,14 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 | File | Model | Author | Source |
 |---|---|---|---|
 | `chasers/bear.glb` | "Bear" | Nyilonelycompany | https://sketchfab.com/3d-models/bear-ce0d5eb86cf5459bb6bd20244cb44b27 |
+| `chasers/wolf.glb` | "Stylized Wolf" | ESO | https://sketchfab.com/3d-models/stylized-wolf-2b369cacbd3a4d19b39353f6cf60b8a9 |
+| `chasers/spider.glb` | "King Baboon Tarantula" | Auckland Museum | https://sketchfab.com/3d-models/king-baboon-tarantula-92c84c9dac9043ee81e87173e2ee0381 |
+| `chasers/gator.glb` | "fantasy crocodile animation" | blam (Blam577895) | https://sketchfab.com/3d-models/fantasy-crocodile-animation-0226417fd07e491a9d5464074f86104b |
+| `chasers/shark.glb` | "Animated Swimming Great White Shark Loop" | LasquetiSpice | https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1 |
 
-The bear was modified: new run, attack, roar, hit and death animations, and compressed.
+All five were modified: new or trimmed animations (run, attack, roar or howl, idle), simplified meshes, and compressed. The tarantula is a museum scan, rigged with the skeleton from [Morphazoid](https://github.com/blechdom/morphazoid) by Kristin Galvin (MIT License, see `chasers/LICENSE-morphazoid-MIT.txt`).
 
-The runner files were trimmed (unused animations removed, meshes quantized) and the seven blasters merged into one file with each weapon as a node named after its id in `js/items.js`. The chasers were compressed.
+The runners were compressed (WebP textures, quantized meshes), and the seven blasters merged into one file with each weapon as a node named after its id in `js/items.js`.
 
 ## World (`world.glb`)
 

@@ -80,7 +80,7 @@ Rules (checked by `levels.test.mjs`):
 - `beach`: sand, palmettos, boats and the ocean
 - `tour`: the final stage only. It runs through the earlier stages' biomes.
 
-**Chasers:** `bear`, `wolf`, `scorpion`, `boar`, `gator`, `shark`, `hurricane`.
+**Chasers:** `bear`, `wolf`, `spider` (a tarantula), `boar`, `gator`, `shark`, `hurricane`.
 
 To add a new biome or chaser:
 1. Add it to `js/catalog.js` (and give it an icon in `js/icons.js`).

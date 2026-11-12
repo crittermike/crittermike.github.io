@@ -17,10 +17,14 @@ export const CREDITS = [
     { text: 'Kenney (kenney.nl), Freesound contributors, and Joseph Sardin (BigSoundBank.com)', license: 'CC0', url: CC0 },
   ] },
   { title: 'Characters', items: [
-    { text: 'Runners, wolf and shark by Quaternius (quaternius.com)', license: 'CC0', url: CC0 },
-    { text: 'Robot by Tomas Laulhe, modified by Don McCurdy', license: 'CC0', url: CC0 },
-    { text: '"Bear" by Nyilonelycompany (modified: new animations)', link: 'https://sketchfab.com/3d-models/bear-ce0d5eb86cf5459bb6bd20244cb44b27', license: 'CC BY 4.0', url: CCBY4 },
-    { text: 'Boar and scorpion from the Pixor library by Frakassets', license: 'CC0', url: CC0 },
+    { text: 'Runners by Quaternius (quaternius.com), with animations from Quaternius and Mesh2Motion', license: 'CC0', url: CC0 },
+    { text: '"Bear" by Nyilonelycompany', link: 'https://sketchfab.com/3d-models/bear-ce0d5eb86cf5459bb6bd20244cb44b27', license: 'CC BY 4.0', url: CCBY4 },
+    { text: '"Stylized Wolf" by ESO', link: 'https://sketchfab.com/3d-models/stylized-wolf-2b369cacbd3a4d19b39353f6cf60b8a9', license: 'CC BY 4.0', url: CCBY4 },
+    { text: '"King Baboon Tarantula" by Auckland Museum, rigged with Morphazoid by Kristin Galvin (MIT License)', link: 'https://sketchfab.com/3d-models/king-baboon-tarantula-92c84c9dac9043ee81e87173e2ee0381', license: 'CC BY 4.0', url: CCBY4 },
+    { text: '"fantasy crocodile animation" by blam', link: 'https://sketchfab.com/3d-models/fantasy-crocodile-animation-0226417fd07e491a9d5464074f86104b', license: 'CC BY 4.0', url: CCBY4 },
+    { text: '"Animated Swimming Great White Shark Loop" by LasquetiSpice', link: 'https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1', license: 'CC BY 4.0', url: CCBY4 },
+    { text: 'All five animals above were modified: new animations, simplified and compressed.' },
+    { text: 'Boar from the Pixor library by Frakassets', license: 'CC0', url: CC0 },
     { text: 'Blasters from the Blaster Kit by Kenney (kenney.nl)', license: 'CC0', url: CC0 },
   ] },
   { title: 'World', items: [

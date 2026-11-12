@@ -1,5 +1,5 @@
-// Shop items must match their model files: a missing file or misspelled material silently breaks a purchase.
-// Run: node --test critter-run/
+// Shop items must match their model files: a missing file or node silently breaks a purchase.
+// Run: node --test critter-run/*.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -18,12 +18,9 @@ function glb(file) {
   return { json, nodes };
 }
 
-test('every runner has a model with the materials it recolors', () => {
-  for (const r of RUNNERS) {
-    const { json } = glb(`runners/${r.id}.glb`);
-    const mats = new Set((json.materials || []).map(m => m.name));
-    for (const name of Object.keys(r.tint || {})) assert.ok(mats.has(name), `${r.id}.glb has no material named ${name}`);
-  }
+test('every runner has a model, plus the shared animation file', () => {
+  for (const r of RUNNERS) glb(`runners/${r.id}.glb`);
+  glb('runners/anims.glb');
 });
 
 test('every blaster is in blasters.glb', () => {

@@ -30,10 +30,12 @@ function stage() {
   return { r, scene, cam };
 }
 
-function snap(st, obj, fit) {
+// top: the share of the model's height to show, from the top down (1 shows all of it).
+function snap(st, obj, fit, top = 1) {
   st.scene.add(obj);
   obj.updateMatrixWorld(true);
   const box = new THREE.Box3().setFromObject(obj, true);
+  box.min.y = box.max.y - (box.max.y - box.min.y) * top;
   const c = box.getCenter(new THREE.Vector3()), s = box.getSize(new THREE.Vector3());
   const d = (Math.max(s.y, s.x * 0.9) * fit) / (2 * Math.tan(THREE.MathUtils.degToRad(st.cam.fov / 2)));
   st.cam.position.set(c.x + d * 0.35, c.y + d * 0.12, c.z - d);
@@ -57,7 +59,7 @@ export function makeThumbs(onEach) {
           const runner = await loadRunner(def);
           runner.root.remove(runner.shadow);
           runner.animate('idle', 0.4, { t: 0 });
-          urls.set(`runners:${def.id}`, snap(st, runner.root, 1.08));
+          urls.set(`runners:${def.id}`, snap(st, runner.root, 1.0, 0.55));
           onEach('runners', def.id);
         } catch (e) { console.warn('Thumbnail failed', def.id, e); }
       }

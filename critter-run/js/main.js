@@ -1486,7 +1486,7 @@ async function boot() {
     progress(0.85);
     await Promise.all([useRunner(S.equip.runners), setChaser('bear')]);
     // A bought runner that won't load falls back to the default one. With no runner at all, show the error screen.
-    if (!hero && !(await useRunner('kid'))) throw new Error('The runner failed to load');
+    if (!hero && !(await useRunner(RUNNERS[0].id))) throw new Error('The runner failed to load');
     progress(0.95);
   } catch (e) {
     console.error(e);

@@ -20,13 +20,23 @@ export function blobShadow(r = 0.55) {
 // clips: game mode -> clip name. rate: run-cycle speed at the base running speed.
 const CHASERS = {
   bear: { len: 2.8, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'roar' }, rate: 1.0, rim: 0.2 },
-  wolf: { len: 2.7, clips: { run: 'Gallop', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 1.0, tint: { Main: '#6d6a66', Main_Light: '#c9c2b6' } },
-  scorpion: { len: 2.9, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.9 },
+  // The wolf's texture is cartoon blue, so it's pulled toward a natural grey.
+  wolf: { len: 2.6, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'howl' }, rate: 1.0, rim: 0.3, grade: { sat: 0.2, tint: '#e6dccd' } },
+  spider: { len: 3.0, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'attack' }, rate: 1.1, rim: 0.2 },
   boar: { len: 2.6, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.95 },
-  gator: { len: 4.4, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 1.0 },
-  shark: { len: 4.2, clips: { run: 'Swim_Fast', idle: 'Swim', attack: 'Swim_Bite', roar: 'Swim_Bite' }, rate: 1.2, y: -0.55, wake: true },
+  gator: { len: 4.6, clips: { run: 'run', idle: 'idle', attack: 'bite', roar: 'bite' }, rate: 1.2, rim: 0.2 },
+  shark: { len: 4.4, clips: { run: 'swim', idle: 'swim', attack: 'bite', roar: 'bite' }, rate: 1.3, rim: 0.2, y: -0.55, wake: true },
   hurricane: { height: 6.5, clips: { run: 'Spin', idle: 'Spin', attack: 'Attack', roar: 'Attack' }, rate: 1.0, keepMaterials: true },
 };
+// Recolors a chaser's texture in its shader: sat below 1 pulls colors toward grey, and tint multiplies.
+function grade(mat, { sat = 1, tint = '#ffffff' }) {
+  const prev = mat.onBeforeCompile, t = new THREE.Color(tint);
+  mat.onBeforeCompile = (sh, r) => {
+    prev(sh, r);
+    sh.fragmentShader = sh.fragmentShader.replace('#include <map_fragment>', `#include <map_fragment>
+      diffuseColor.rgb = mix(vec3(dot(diffuseColor.rgb, vec3(0.2126, 0.7152, 0.0722))), diffuseColor.rgb, ${sat.toFixed(3)}) * vec3(${t.r.toFixed(3)}, ${t.g.toFixed(3)}, ${t.b.toFixed(3)});`);
+  };
+}
 const LOOP_ONCE = new Set();
 const cache = new Map();
 
@@ -44,7 +54,9 @@ function buildChaser(type, gltf) {
       const c = m.clone();
       if (def.tint && def.tint[c.name]) c.color.set(def.tint[c.name]);
       if (!def.keepMaterials) { c.metalness = 0; c.roughness = Math.max(0.55, c.roughness); }
-      return bend(c, { rim: def.rim ?? 0.45, key: 'chaser' });
+      bend(c, { rim: def.rim ?? 0.45, key: def.grade ? `chaser-${type}` : 'chaser' });
+      if (def.grade) grade(c, def.grade);
+      return c;
     });
     o.material = Array.isArray(o.material) ? mats : mats[0];
     o.castShadow = true;

@@ -22,7 +22,7 @@ CritterRun.addLevel({
       { q: 'Cloth made in factories is called…?', a: 'Textiles', wrong: ['Timber', 'Indigo', 'Granite'], why: 'Textiles are cloth.', pic: 'factory' },
       { show: 'Peaches, waterfalls, foothills', q: 'Which region is this?', a: 'Piedmont', wrong: ['Sandhills', 'Coastal Zone', 'Inner Coastal Plain', 'Outer Coastal Plain'], why: 'That is the Piedmont.' },
     ] },
-    { name: 'Sandhills', biome: 'sandhills', chaser: 'scorpion', color: '#f5c518', questions: [
+    { name: 'Sandhills', biome: 'sandhills', chaser: 'spider', color: '#f5c518', questions: [
       { q: 'What do the Sandhills have lots of?', a: 'Sandy hills', wrong: ['Tall mountains', 'Swamps', 'Beaches'], why: 'Sandhills means sandy hills.' },
       { q: 'What is the fall line?', a: 'Where the land drops', wrong: ['A row of mountains', 'Where the ocean ends', 'A line of beaches'], why: 'The land drops down there.', pic: 'chart-down' },
       { q: 'Which region has the fall line?', a: 'Sandhills', wrong: ['Blue Ridge', 'Coastal Zone', 'Outer Coastal Plain'], why: 'Fall line is in Sandhills.' },

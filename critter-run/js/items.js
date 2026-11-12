@@ -15,21 +15,22 @@ export const MAX_UPGRADE = 4;
 export const UPGRADE_COST = [60, 150, 300, 500];
 export const powerTime = (id, level = 0) => POWERS[id].base + 2 * level;
 
-// Runners are animated models in assets/runners/<id>.glb. tint recolors materials by name (the source files have
-// near-black skin). rig 'robot' uses its own clips; every other runner borrows the kid's clips.
-const SKIN = { Skin: '#f2c29b', Face: '#1b1b1b' };
+// Runners are animated models in assets/runners/<id>.glb. They share one skeleton, so all of them use the clips
+// in assets/runners/anims.glb.
 export const RUNNERS = [
-  { id: 'kid', icon: 'runner', name: 'Runner', price: 0, tint: { ...SKIN, Shirt: '#ff5a36', Pants: '#2f5fd0', Belt: '#3a2a1e', Hair: '#6b3e1f' } },
-  { id: 'ninja', icon: 'runner', name: 'Ninja', price: 150, tint: { ...SKIN, Main: '#262636', Details: '#e53935', Grey: '#5a5a66' } },
-  { id: 'cowboy', icon: 'runner', name: 'Cowboy', price: 300, tint: { ...SKIN, Scarf: '#e53935' } },
-  { id: 'pirate', icon: 'runner', name: 'Pirate', price: 450, tint: { ...SKIN, Red: '#d63a2a', Gold: '#e8b23a', Clothes: '#24315e' } },
-  { id: 'zombie', icon: 'runner', name: 'Zombie', price: 600, tint: { Clothes: '#6b55b0' } },
-  { id: 'knight', icon: 'runner', name: 'Knight', price: 800, tint: { Skin: SKIN.Skin, Armor: '#e8b83a', Detail: '#8a2333', Red: '#c0392b' } },
-  { id: 'viking', icon: 'runner', name: 'Viking', price: 1000, tint: { ...SKIN } },
-  { id: 'wizard', icon: 'runner', name: 'Wizard', price: 1250, tint: { ...SKIN, Clothes: '#3b5ccc', Hat: '#2a3f99', Gold: '#e8b23a' } },
-  { id: 'pug', icon: 'paw', name: 'Pug', price: 1500, tint: { Skin: '#d8b07a' } },
-  { id: 'robot', icon: 'gear', name: 'Robot', price: 2000, rig: 'robot', height: 1.9 },
+  { id: 'ranger', icon: 'runner', name: 'Ranger', price: 0 },
+  { id: 'ranger_girl', icon: 'runner', name: 'Archer', price: 150 },
+  { id: 'knight', icon: 'runner', name: 'Knight', price: 300 },
+  { id: 'wizard', icon: 'runner', name: 'Wizard', price: 450 },
+  { id: 'shadow', icon: 'runner', name: 'Ninja', price: 600 },
+  { id: 'prince', icon: 'runner', name: 'Prince', price: 800 },
+  { id: 'princess', icon: 'runner', name: 'Princess', price: 1000 },
+  { id: 'sorceress', icon: 'runner', name: 'Sorceress', price: 1250 },
+  { id: 'knight_girl', icon: 'runner', name: 'Lady Knight', price: 1500 },
+  { id: 'knight_gold', icon: 'runner', name: 'Gold Knight', price: 2000 },
 ];
+// Runners from earlier versions of the shop and what they cost. Anyone who bought one gets the coins back.
+const RETIRED = { kid: 0, ninja: 150, cowboy: 300, pirate: 450, zombie: 600, viking: 1000, pug: 1500, robot: 2000 };
 
 // Blasters fire at the chaser after every right answer. Later ones knock it farther back.
 export const WEAPONS = [
@@ -64,12 +65,17 @@ export const byId = (list, id) => list.find(x => x.id === id) || list[0];
 
 // Fills in shop fields on an old save so existing coins carry over.
 export function initShopSave(S) {
-  S.owned = { runners: ['kid'], weapons: ['zap'], trails: ['none'], ...(S.owned || {}) };
+  S.owned = { runners: [RUNNERS[0].id], weapons: ['zap'], trails: ['none'], ...(S.owned || {}) };
+  if (Array.isArray(S.owned.runners)) {
+    for (const id of S.owned.runners) if (id in RETIRED) S.coins = (S.coins || 0) + RETIRED[id];
+    S.owned.runners = S.owned.runners.filter(id => !(id in RETIRED));
+  }
+  if (S.equip && !RUNNERS.some(r => r.id === S.equip.runners)) S.equip.runners = RUNNERS[0].id;
   for (const [tab, list] of [['runners', RUNNERS], ['weapons', WEAPONS], ['trails', TRAILS]]) {
     if (!Array.isArray(S.owned[tab])) S.owned[tab] = [];
     if (!S.owned[tab].includes(list[0].id)) S.owned[tab].unshift(list[0].id);
   }
-  S.equip = { runners: 'kid', weapons: 'zap', trails: 'none', ...(S.equip || {}) };
+  S.equip = { runners: RUNNERS[0].id, weapons: 'zap', trails: 'none', ...(S.equip || {}) };
   S.upgrades = { ...Object.fromEntries(TIMED_POWERS.map(k => [k, 0])), ...(S.upgrades || {}) };
   return S;
 }
