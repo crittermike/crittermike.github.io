@@ -34,6 +34,10 @@ export class Post {
     this.bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.5, 0.55, 1.2);
     const setBloomSize = this.bloom.setSize.bind(this.bloom);
     this.bloom.setSize = (w, h) => setBloomSize(Math.max(1, Math.round(w * this.bloomScale)), Math.max(1, Math.round(h * this.bloomScale)));
+    // The blur would smear a single NaN pixel from any shader over the whole screen and blank the frame, so bloom skips them.
+    const hp = this.bloom.materialHighPassFilter;
+    hp.fragmentShader = hp.fragmentShader.replace('vec4 texel = texture2D( tDiffuse, vUv );',
+      'vec4 texel = texture2D( tDiffuse, vUv );\n\t\t\tif ( any( isnan( texel ) ) || any( isinf( texel ) ) ) texel = vec4( 0.0 );');
     this.composer.addPass(this.bloom);
     this.output = new OutputPass();
     Object.assign(this.output.uniforms, this.uniforms);

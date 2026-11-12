@@ -282,7 +282,7 @@ void main() {
   vec3 d = normalize(vP);
   float h = d.y;
   vec3 col = mix(bottom, top, smoothstep(-0.02, 0.6, h));
-  col += bottom * 0.15 * pow(1.0 - abs(h), 12.0);
+  col += bottom * 0.15 * pow(clamp(1.0 - abs(h), 0.0, 1.0), 12.0);
   float s = max(dot(d, sunDir), 0.0);
   col += sunCol * (pow(s, 1400.0) * 8.0 + pow(s, 90.0) * 0.6 + pow(s, 8.0) * 0.14);
   col = mix(col, ground, useGround * smoothstep(0.0, -0.25, h));

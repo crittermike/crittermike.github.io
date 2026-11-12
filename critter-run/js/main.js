@@ -704,7 +704,7 @@ const shieldBubble = (() => {
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     uniforms: { uTime: { value: 0 }, uCol: { value: new THREE.Color(POWERS.shield.color) } },
     vertexShader: 'varying vec3 vN; varying vec3 vV; varying vec3 vP; void main(){ vP = position; vec4 mv = modelViewMatrix * vec4(position,1.); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }',
-    fragmentShader: 'uniform float uTime; uniform vec3 uCol; varying vec3 vN; varying vec3 vV; varying vec3 vP; void main(){ float f = pow(1. - abs(dot(vN, vV)), 2.2); float hex = step(.92, fract(vP.y * 4. + uTime * .6)) * .25; gl_FragColor = vec4(uCol * (f * 1.6 + hex + .06), 1.); }',
+    fragmentShader: 'uniform float uTime; uniform vec3 uCol; varying vec3 vN; varying vec3 vV; varying vec3 vP; void main(){ float x = clamp(1. - abs(dot(normalize(vN), normalize(vV))), 0., 1.); float f = x * x; float hex = step(.92, fract(vP.y * 4. + uTime * .6)) * .25; gl_FragColor = vec4(uCol * (f * 1.6 + hex + .06), 1.); }',
   }));
   m.visible = false;
   m.renderOrder = 5;
