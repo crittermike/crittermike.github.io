@@ -1,46 +1,37 @@
 // Critter Run: a 3D runner where each test is a level and each question is a gate on the trail.
 import * as THREE from 'three';
-import { makeHero, makeChaser } from './models.js';
-import { World, LANE } from './world.js';
+import { loadChaser } from './models.js';
+import { World, LANE, BIOME } from './world.js';
+import { loadProps, propGeometry } from './props.js';
 import { FX, additiveMat } from './fx.js';
 import { Sound } from './audio.js';
-import { icon, iconMarkup, hydrateIcons } from './icons.js';
-import { CREDITS } from './credits.js';
+import { CHASERS, CHASER_NAME } from './catalog.js';
+import { installIcons, icon, iconTexture } from './ui.js';
+import { renderCredits } from './credits.js';
 import { Post, TIERS } from './post.js';
-import { bend } from './gfx.js';
+import { M } from './gfx.js';
 import { loadRunner, loadBlasters } from './actors.js';
-import { loadChaser, makeHurricane, CHASER_DEFS } from './chasers.js';
 import { POWERS, TIMED_POWERS, RUNNERS, WEAPONS, TRAILS, byId, initShopSave, powerTime } from './items.js';
 import { fireWeapon, warmMaterials } from './weapons.js';
 import { Shop } from './shop.js';
-import { renderPortrait } from './portrait.js';
 
 const $ = s => document.querySelector(s);
+installIcons();
 const $$ = s => [...document.querySelectorAll(s)];
-const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-const again = (e, cls) => { e.classList.remove(cls); void e.offsetWidth; e.classList.add(cls); };
-// A row of level pictures (icon names), each in a tile of the stage's color.
-function pics(names, color) {
-  return [].concat(names || []).map(n => { const p = el('span', 'pic'); p.style.setProperty('--c', color); p.append(icon(n)); return p; });
-}
-hydrateIcons();
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-const shade = (hex, k = 0.35) => '#' + new THREE.Color(hex).multiplyScalar(k).getHexString();
 const damp = (a, b, rate, dt) => a + (b - a) * (1 - Math.exp(-rate * dt));
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-// A jump lasts about a second and clears roughly 9 m of trail, so a jump pressed a bit early still makes it.
-const BASE_SPEED = 11.2, SPEED_GAIN = 0.005, MAX_GAIN = 4.5;
-const GRAVITY = 22, JUMP_V = 10.4, SUPER_JUMP = 1.4;
-const SLIDE_TIME = 0.75, JUMP_BUFFER = 0.2;
+// Fast, with long floaty jumps: about 0.85 s in the air, so a jump started a little early still clears a log.
+const BASE_SPEED = 13.5, SPEED_GAIN = 0.006, MAX_GAIN = 5;
+const GRAVITY = 23, JUMP_V = 9.8, SUPER_JUMP = 1.4;
+const SLIDE_TIME = 0.72, JUMP_BUFFER = 0.18;
 const STAND_H = 1.7, SLIDE_H = 0.85;
-// Clipping a low obstacle with your feet while this high (as a fraction of its height) smashes it instead of hurting.
-const STOMP_K = 0.45;
 const JET_Y = 5.2, MAGNET_R = 5.5;
 const MAX_HEARTS = 5;
-const GATE_FIRST = 80, GATE_GAP = 122;
-const SEGMENT = 180; // length of each region in the final run
-const CHASE_D = 10; // how far behind the chaser normally runs (just behind the camera, so it never blocks the path)
+const GATE_FIRST = 100, GATE_GAP = 150;
+const SEGMENT = 230; // length of each region in the final run
+const CHASE_D = 10.5; // how far behind the chaser normally runs (just behind the camera, so it never blocks the path)
 
 // ---------- save ----------
 const SAVE_KEY = 'critter-run-v1';
@@ -66,7 +57,8 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 } catch (e) {
-  $('#loading').innerHTML = '<div class="nogl">This game needs WebGL.<br>Try Chrome or Safari.</div>';
+  $('#loading').classList.add('failed');
+  $('#loading .fail').textContent = 'This game needs WebGL. Try Chrome or Safari.';
   throw e;
 }
 renderer.toneMapping = THREE.NeutralToneMapping;
@@ -82,7 +74,7 @@ fill.position.set(1.5, 2, 0);
 fill.target.position.set(0, 0, -6);
 camera.add(fill, fill.target);
 scene.add(camera);
-const world = new World(scene, fx, renderer);
+let world = null; // made once the models have loaded
 const sound = new Sound(S.settings);
 const post = new Post(renderer, scene, camera);
 const QUALITY = ['low', 'mid', 'high'];
@@ -92,8 +84,7 @@ let quality = QUALITY.includes(forcedQ) ? forcedQ : QUALITY.includes(S.quality) 
 function setQuality(q) {
   quality = q;
   post.setTier(q);
-  world.setShadowSize(TIERS[q].shadow);
-  world.grassAmount = TIERS[q].grass;
+  if (world) { world.setShadowSize(TIERS[q].shadow); world.density = TIERS[q].grass; }
 }
 
 let baseFov = 60;
@@ -117,9 +108,7 @@ function shopView() {
 window.addEventListener('resize', resize);
 
 // ---------- actors ----------
-// The voxel kid stands in until the animated runner has loaded (or if it can't load).
-let hero = makeHero();
-scene.add(hero.root);
+let hero = null;
 const runnerCache = new Map();
 let runnerWant = null;
 async function useRunner(id) {
@@ -131,32 +120,18 @@ async function useRunner(id) {
   }
   if (runnerWant !== id) return false;
   if (r !== hero) {
-    r.root.position.copy(hero.root.position);
-    scene.remove(hero.root);
+    if (hero) { r.root.position.copy(hero.root.position); scene.remove(hero.root); }
     hero = r;
     scene.add(hero.root);
     hero.setWeapon(G.previewWeapon || S.equip.weapons);
   }
   return true;
 }
-// Real animal models load in the background. Until one arrives an invisible stand-in holds its place (and the
-// stage won't start); the old block animal only shows up if the model can't load at all.
-const chasers = {}, chaserLoads = {};
-const pending = type => ({ root: new THREE.Group(), animate() {}, height: CHASER_DEFS[type].length * 0.45, length: CHASER_DEFS[type].length, pending: true });
-function chaserModel(type) {
-  if (!chasers[type]) chasers[type] = type === 'hurricane' ? makeHurricane() : pending(type);
-  if (CHASER_DEFS[type] && !chaserLoads[type]) {
-    chaserLoads[type] = loadChaser(type).catch(e => {
-      console.warn('Chaser failed to load', type, e);
-      return makeChaser(type === 'spider' ? 'scorpion' : type);
-    }).then(m => {
-      chasers[type] = m;
-      if (G.c.type === type) setChaser(type);
-    });
-  }
+const chasers = {};
+async function chaserModel(type) {
+  if (!chasers[type]) chasers[type] = loadChaser(type).catch(e => { delete chasers[type]; throw e; });
   return chasers[type];
 }
-const chaserReady = type => !chasers[type]?.pending;
 
 // ---------- game state ----------
 const G = {
@@ -164,7 +139,7 @@ const G = {
   level: null, stageIdx: 0, stage: null, tour: false, segments: [],
   h: newHero(),
   c: { d: 4, x: 0, spin: -1, model: null, type: null, roarT: 0, frozen: 0, knock: 0 },
-  pow: {}, fbDur: 1.35, hitStop: 0, fovKick: 0, trailT: 0, previewWeapon: null,
+  pow: {}, fbDur: 1.35, hitStop: 0, fovKick: 0, trailT: 0, previewWeapon: null, coinHide: 0,
   hearts: MAX_HEARTS, coins: 0, wrong: 0, correct: 0, needed: 0,
   queue: [], extra: [], extraPlaced: 0, baseLeft: 0, nextGate: GATE_FIRST, planned: 0,
   current: null, fb: null, finished: false,
@@ -179,37 +154,28 @@ function newHero() {
   return { dist: 0, lane: 0, x: 0, y: 0, vy: 0, ground: true, slow: 1, inv: 0, safe: 0, dustT: 0, slide: 0, slideNext: false, jumpBuf: 0, jet: false };
 }
 
-function setChaser(type) {
+async function setChaser(type) {
+  G.c.want = type;
+  const m = await chaserModel(type);
+  if (G.c.want !== type) return;
   if (G.c.model) scene.remove(G.c.model.root);
-  G.c.model = chaserModel(type);
+  G.c.model = m;
   G.c.type = type;
-  G.c.model.root.rotation.set(0, 0, 0);
-  G.c.model.root.position.y = 0;
-  scene.add(G.c.model.root);
+  m.root.rotation.set(0, 0, 0);
+  m.root.position.y = 0;
+  scene.add(m.root);
 }
 
 // ---------- screens ----------
 function show(id) {
   $$('.screen').forEach(s => { s.hidden = s.id !== id; });
 }
-function setMode(m) { G.mode = m; G.t = 0; document.body.dataset.mode = m; }
-
-// Starts the world now, then once the regions' scenery models have loaded, rebuilds it with them
-// (only if nothing has moved on in the meantime).
-let worldToken = 0;
-function startWorld(cfg, biomes, { before = () => {}, after = () => {} } = {}) {
-  const token = ++worldToken;
-  const run = () => { before(); world.start(cfg); after(); };
-  run();
-  if (world.isPrepared(biomes)) return Promise.resolve();
-  return world.prepare(biomes).then(() => {
-    if (token !== worldToken || G.h.dist > 1) return;
-    run();
-  });
-}
+let modeGen = 0; // bumped on every screen change, so a slow stage load knows the player has moved on
+function setMode(m) { G.mode = m; G.t = 0; document.body.dataset.mode = m; modeGen++; }
 
 function sceneryOnly(biome) {
-  startWorld({ biomeAt: () => biome, onChunk: () => [], wantsHeart: () => false, color: '#ff4081' }, [biome], { after: () => { world.noObstaclesFrom = -Infinity; } });
+  world.start({ biomeAt: () => biome, onChunk: () => [], wantsHeart: () => false, color: '#ff4081' });
+  world.noObstaclesFrom = -Infinity;
   fx.clear();
   G.h = newHero();
   G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
@@ -246,57 +212,49 @@ function renderMap() {
   list.innerHTML = '';
   if (!LEVELS.length) return;
   for (const level of [...LEVELS].reverse()) {
-    const sec = el('div', 'm-level');
-    sec.append(el('div', 'm-title', level.name));
-    const path = el('div', 'm-path');
+    const sec = document.createElement('div');
+    sec.className = 'm-level';
+    const h = document.createElement('h2');
+    h.className = 'm-banner';
+    h.textContent = level.name;
+    const tp = document.createElement('div');
+    tp.className = 'm-topic';
+    tp.textContent = level.topic;
+    sec.append(h, tp);
+    const path = document.createElement('div');
+    path.className = 'm-path';
     level.stages.forEach((st, i) => {
       const stars = S.stars[stageKey(level, i)] || 0;
       const open = isOpen(level, i);
-      const b = el('button', 'stop' + (open ? '' : ' locked') + (open && !stars ? ' next' : '') + (st.biome === 'tour' ? ' final' : ''));
+      const b = document.createElement('button');
+      b.className = 'stop' + (open ? '' : ' locked') + (open && !stars ? ' next' : '') + (st.biome === 'tour' ? ' final' : '');
       b.style.setProperty('--c', st.color);
       b.style.setProperty('--off', [0, 1, 0, -1][i % 4]);
-      const medal = el('span', 'medal');
-      medal.append(icon(open ? st.chaser : 'lock'));
-      const sr = el('span', 'stars');
-      for (let k = 0; k < 3; k++) sr.append(icon(k < stars ? 'star-gold' : 'star-empty'));
-      b.append(medal, el('span', 'name', st.name), sr);
+      const md = document.createElement('span'); md.className = 'medal'; md.style.setProperty('--c', st.color);
+      md.append(icon(open ? st.chaser : 'lock'));
+      const nm = document.createElement('span'); nm.className = 's-name'; nm.textContent = st.name;
+      const sr = document.createElement('span'); sr.className = 'stars';
+      for (let k = 0; k < 3; k++) sr.append(icon('star', k < stars ? 'on' : ''));
+      b.append(md, nm, sr);
       b.setAttribute('aria-label', st.name + (open ? '' : ' (locked)'));
       if (open) b.addEventListener('click', () => { sound.sfx('click'); openStage(level, i); });
-      else b.addEventListener('click', () => { sound.sfx('nope'); again(b, 'nope'); });
+      else b.addEventListener('click', () => { sound.sfx('wrong'); b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope'); });
       path.append(b);
     });
     sec.append(path);
     list.append(sec);
-    requestAnimationFrame(() => drawTrail(path));
   }
   syncToggles();
 }
 
-// A dashed trail winds from medal to medal, like a board-game path.
-function drawTrail(path) {
-  path.querySelector('svg.trail')?.remove();
-  const box = path.getBoundingClientRect();
-  const pts = [...path.querySelectorAll('.medal')].map(m => {
-    const r = m.getBoundingClientRect();
-    return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
-  });
-  if (pts.length < 2) return;
-  let d = `M${pts[0][0]} ${pts[0][1]}`;
-  for (let i = 1; i < pts.length; i++) {
-    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], my = (y0 + y1) / 2;
-    d += ` C${x0} ${my} ${x1} ${my} ${x1} ${y1}`;
-  }
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'trail');
-  svg.innerHTML = `<path d="${d}" fill="none" stroke="rgba(10,16,48,.45)" stroke-width="16" stroke-linecap="round"/>`
-    + `<path d="${d}" fill="none" stroke="#fff6d8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 16"/>`;
-  path.prepend(svg);
-}
-window.addEventListener('resize', () => { if (G.mode === 'map') $$('.m-path').forEach(drawTrail); });
-
 // ---------- stage setup ----------
-function openStage(level, i) {
+let openSeq = 0;
+async function openStage(level, i) {
   const stage = level.stages[i];
+  const seq = ++openSeq, gen = modeGen;
+  await setChaser(stage.chaser).catch(e => console.warn('Chaser failed to load', e));
+  // Another stage was picked, or he left this screen, while the chaser loaded.
+  if (seq !== openSeq || gen !== modeGen) return;
   G.level = level; G.stageIdx = i; G.stage = stage;
   G.tour = stage.biome === 'tour';
   G.segments = G.tour ? level.stages.filter(s => s.biome !== 'tour') : [];
@@ -312,22 +270,11 @@ function openStage(level, i) {
     G.queue = shuffle(stage.questions);
     G.needed = G.queue.length;
   }
-  G.biomes = G.tour ? G.segments.map(s => s.biome) : [stage.biome];
-  G.goWhenReady = false;
-  $('#b-go').classList.remove('busy');
-  // Gates are planned as the track is built, so planning starts over whenever the world does.
-  const replan = () => { G.nextGate = GATE_FIRST; G.planned = 0; G.nextMore = 0; G.extraPlaced = 0; };
-  G.ready = startWorld({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower }, G.biomes, { before: replan })
-    .then(() => chaserLoads[stage.chaser])
-    .then(() => { $('#b-go').classList.remove('busy'); if (G.goWhenReady && G.mode === 'intro') go(); });
+  world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower, powerIcon: id => iconTexture(POWERS[id].icon, POWERS[id].color) });
   fx.clear();
   G.h = newHero();
   clearPowers();
-  setChaser(stage.chaser);
   G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
-  // Start fetching the next stage's chaser so it's ready when this one is cleared.
-  if (level.stages[i + 1]) chaserModel(level.stages[i + 1].chaser);
-  // The final run gets one big song of its own; every other stage plays its region's song.
   sound.play(G.tour ? 'tour' : stage.biome);
 
   setMode('intro');
@@ -336,10 +283,11 @@ function openStage(level, i) {
   sound.duck(false);
   $('#s-q').hidden = true;
   $('#hud').hidden = true;
-  $('#i-foe').replaceChildren(icon(stage.chaser));
   $('#i-name').textContent = stage.name;
-  $('#i-icons').replaceChildren(...pics(stage.icons, stage.color));
-  $('#s-intro .panel').style.setProperty('--c', stage.color);
+  $('#i-name').style.color = stage.color;
+  $('#i-badge').replaceChildren(icon(stage.chaser));
+  $('#i-badge').style.setProperty('--c', stage.color);
+  $('#i-chaser').textContent = 'Run from the ' + CHASER_NAME[stage.chaser].toLowerCase() + '!';
   setTimeout(() => { if (G.mode === 'intro') roar(); }, 500);
 }
 
@@ -364,16 +312,16 @@ function onChunk(d0, d1) {
   const n = G.segments.length, own = G.stage.questions;
   while (G.planned < n && G.planned * SEGMENT < d1) {
     const k = G.planned++, s = k * SEGMENT;
-    ev.push({ type: 'sign', at: s + 10, label: G.segments[k].name, color: G.segments[k].color });
-    ev.push({ type: 'gate', at: s + 60, kind: 'review', seg: k });
+    ev.push({ type: 'sign', at: s + 14, label: G.segments[k].name, color: G.segments[k].color });
+    ev.push({ type: 'gate', at: s + 80, kind: 'review', seg: k });
     // A slot for a missed question, only if one is waiting.
-    if (G.extra.length - G.extraPlaced > 0) { G.extraPlaced++; ev.push({ type: 'gate', at: s + 105, kind: 'extra' }); }
-    if (k < own.length) ev.push({ type: 'gate', at: s + 150, kind: 'order', idx: k });
+    if (G.extra.length - G.extraPlaced > 0) { G.extraPlaced++; ev.push({ type: 'gate', at: s + 137, kind: 'extra' }); }
+    if (k < own.length) ev.push({ type: 'gate', at: s + 195, kind: 'order', idx: k });
   }
   // Past the last region, keep offering gates for missed questions until they are all right.
   if (G.planned >= n) {
-    if (!G.nextMore) G.nextMore = n * SEGMENT + 45;
-    while (G.nextMore < d1) { ev.push({ type: 'gate', at: G.nextMore, kind: 'more' }); G.nextMore += 80; }
+    if (!G.nextMore) G.nextMore = n * SEGMENT + 60;
+    while (G.nextMore < d1) { ev.push({ type: 'gate', at: G.nextMore, kind: 'more' }); G.nextMore += 100; }
   }
   return ev.filter(e => e.at >= 0);
 }
@@ -393,51 +341,49 @@ function powerQuestion() {
   return pickWeighted(list);
 }
 
+// The chaser roars, the announcer counts in, and the run starts on "GO!".
 function go() {
   sound.unlock();
-  // Still fetching this region's scenery: spin the button and start as soon as it's ready.
-  if (!world.isPrepared(G.biomes || []) || !chaserReady(G.stage.chaser)) { G.goWhenReady = true; $('#b-go').classList.add('busy'); sound.sfx('click'); return; }
-  sound.sfx('voice-ready');
+  sound.sfx('click');
   show(null);
   setMode('start');
+  G.cue = 0;
   roar();
   $('#hud').hidden = false;
   updateHud();
 }
 
-function roar() {
+function roar(force = true) {
   G.c.roarT = 1.1;
-  sound.sfx('roar', G.c.type);
+  if (G.c.type) sound.roar(G.c.type, force);
   G.cam.shake = Math.max(G.cam.shake, 0.25);
 }
 
 // ---------- HUD ----------
 function updateHud() {
   const hearts = $('#hearts');
-  if (hearts.dataset.n !== String(G.hearts)) {
-    hearts.dataset.n = G.hearts;
-    hearts.replaceChildren(...Array.from({ length: MAX_HEARTS }, (_, i) => icon(i < G.hearts ? 'life' : 'life-empty')));
-  }
+  if (hearts.childElementCount !== MAX_HEARTS) hearts.replaceChildren(...Array.from({ length: MAX_HEARTS }, () => icon('heart')));
+  [...hearts.children].forEach((h, i) => h.classList.toggle('gone', i >= G.hearts));
   $('#coin-n').textContent = G.coins;
   const dots = $('#dots');
-  if (dots.childElementCount !== G.needed) { dots.innerHTML = ''; for (let i = 0; i < G.needed; i++) dots.append(document.createElement('i')); }
+  if (dots.childElementCount !== G.needed) dots.replaceChildren(...Array.from({ length: G.needed }, () => icon('star')));
   [...dots.children].forEach((d, i) => d.classList.toggle('on', i < G.correct));
   const mon = $('#c-mon');
   if (mon.dataset.type !== G.c.type) { mon.dataset.type = G.c.type; mon.replaceChildren(icon(G.c.type)); }
 }
 function bumpCoins() {
   $('#coin-n').textContent = G.coins;
-  again($('#coins'), 'bump');
+  const c = $('#coins');
+  c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
 }
 function flash(color = 'red') {
   const f = $('#flash');
   f.className = ''; void f.offsetWidth; f.className = color;
 }
 let toastTimer = 0;
-// A big pop-up word or picture in the middle of the screen. ico is an optional icon name shown before the text.
-function toast(text, color = '#fff', ico = null) {
+function toast(text, color = '#fff', ic = null) {
   const t = $('#toast');
-  t.replaceChildren(...(ico ? [icon(ico)] : []), ...(text ? [el('span', null, text)] : []));
+  t.replaceChildren(...(ic ? [icon(ic), ' '] : []), text);
   t.style.setProperty('--c', color);
   t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
   clearTimeout(toastTimer);
@@ -456,11 +402,35 @@ function jump() {
   if (G.mode !== 'run' || h.jet) return;
   if (!h.ground) { h.jumpBuf = JUMP_BUFFER; return; }
   h.vy = JUMP_V * (G.pow.jump ? SUPER_JUMP : 1);
+  h.g = GRAVITY;
+  if (!G.pow.jump) assistJump(h);
   h.ground = false;
   h.slide = 0;
   h.jumpBuf = 0;
   sound.sfx('jump');
   if (G.pow.jump) fx.ring(h.x, 0.15, -h.dist, POWERS.jump.color, 2.5, 0.4);
+}
+// Jump assist: a jump started too early for the low obstacle ahead stretches into a longer, slightly higher leap
+// that lands just past it, so an eager tap still clears it. A jump way too early is left alone.
+const LOW_CLEAR = 0.22; // a low obstacle is cleared once the feet are this close to its top
+function assistJump(h) {
+  const v = runSpeed() * h.slow, lx = h.lane * LANE;
+  let o = null;
+  for (const c of world.obstacles) {
+    if (c.hit || !c.low || c.dist < h.dist || (!c.wide && Math.abs(c.x - lx) > c.w / 2 + 0.3)) continue;
+    if (!o || c.dist < o.dist) o = c;
+  }
+  if (!o) return;
+  // Same box as collide(), plus a frame: the height is checked at the end of each frame.
+  const thr = o.h - LOW_CLEAR, d = o.dist - h.dist, r = o.d / 2 + 0.2;
+  const tIn = (d - r) / v, tOut = (d + r) / v + 0.05;
+  const y = (t, V, g) => V * t - (g * t * t) / 2;
+  if (tIn < 0 || (y(tIn, h.vy, h.g) >= thr && y(tOut, h.vy, h.g) >= thr)) return;
+  const T = tOut + 0.2;
+  if (T < (2 * h.vy) / h.g || T > 1.25) return;
+  const apex = Math.min(2.8, 2.1 + (T - 0.85) * 1.2);
+  h.vy = (4 * apex) / T;
+  h.g = (8 * apex) / (T * T);
 }
 // Down slides under bars. In the air it drops fast and slides on landing.
 function slide() {
@@ -528,6 +498,7 @@ function runStep(dt) {
   h.jumpBuf = Math.max(0, h.jumpBuf - dt);
   tickPowers(dt);
   const speed = runSpeed() * h.slow * (h.jet ? 1.25 : 1);
+  const prev = h.dist;
   h.dist += speed * dt;
   h.x = damp(h.x, h.lane * LANE, 18, dt);
   if (h.jet) {
@@ -535,10 +506,10 @@ function runStep(dt) {
     h.vy = 0;
     if (Math.random() < dt * 40) jetPuff();
   } else if (!h.ground) {
-    h.vy -= GRAVITY * dt;
+    h.vy -= (h.g || GRAVITY) * dt;
     h.y += h.vy * dt;
     if (h.y <= 0) {
-      h.y = 0; h.vy = 0; h.ground = true;
+      h.y = 0; h.vy = 0; h.ground = true; h.g = GRAVITY;
       sound.sfx('land');
       dust(6);
       if (h.jumpBuf > 0) jump();
@@ -562,13 +533,13 @@ function runStep(dt) {
   hero.animate(heroPose(), dt, { speed, jumpY: h.y });
   G.c.model.animate(G.c.roarT > 0 ? 'roar' : 'run', dt, G.clock);
   hero.root.visible = h.inv <= 0 || Math.floor(h.inv * 12) % 2 === 0;
-  G.fovKick = h.jet ? 6 : (speed - BASE_SPEED) * 1.2;
+  G.fovKick = h.jet ? 6 : (speed - BASE_SPEED) * 1.0;
 
-  collide();
+  collide(prev);
   if (G.mode !== 'run') return;
 
   for (const g of world.gates) {
-    if (!g.done && h.dist >= g.dist - 8.5) { g.done = true; ask(g); return; }
+    if (!g.done && h.dist >= g.dist - 10) { g.done = true; ask(g); return; }
     if (g.done && !g.passed && h.dist >= g.dist) { g.passed = true; fx.ring(0, 0.2, -g.dist, G.stage.color, 5); }
   }
   for (const s of world.signs) {
@@ -584,7 +555,7 @@ function runStep(dt) {
   if (!S.hinted && G.t > 5) { S.hinted = true; save(); $('#hint').hidden = true; }
   // The first time a bar shows up, point down so he knows to slide under it.
   if (!S.hintedSlide && G.hint !== 'slide') {
-    const bar = world.obstacles.find(o => o.over && !o.hit && o.dist - h.dist > 0 && o.dist - h.dist < 22);
+    const bar = world.obstacles.find(o => o.over && !o.hit && o.dist - h.dist > 0 && o.dist - h.dist < 30);
     if (bar) showHint('slide');
   }
 }
@@ -600,9 +571,10 @@ function heroPose() {
 
 function showHint(kind) {
   G.hint = kind;
-  $('#hint').innerHTML = kind === 'slide'
-    ? `<span class="hand down">${iconMarkup('hand')}</span><span class="arrows">${iconMarkup('down')}</span>`
-    : `<span class="hand">${iconMarkup('hand')}</span><span class="arrows">${iconMarkup('left')}${iconMarkup('up')}${iconMarkup('right')}</span>`;
+  const hint = $('#hint');
+  if (kind === 'slide') hint.replaceChildren(icon('hand', 'hand down'), Object.assign(document.createElement('div'), { className: 'arrows' }));
+  else hint.replaceChildren(icon('hand', 'hand'), Object.assign(document.createElement('div'), { className: 'arrows' }));
+  hint.lastChild.append(...(kind === 'slide' ? [icon('swipe-down')] : [icon('swipe-left'), icon('swipe-up'), icon('swipe-right')]));
   $('#hint').hidden = false;
 }
 function hintSeen(kind) {
@@ -631,7 +603,7 @@ function jetPuff() {
 
 // Streaks of wind rushing past when running fast or flying.
 function speedLines(dt, speed) {
-  const k = G.h.jet ? 1 : clamp((speed - 12.8) / 3, 0, 1);
+  const k = G.h.jet ? 1 : clamp((speed - 15) / 3, 0, 1);
   if (k <= 0 || Math.random() > dt * 45 * k) return;
   const h = G.h, a = Math.random() * Math.PI * 2, r = 2.5 + Math.random() * 3;
   fx.spark({ x: h.x + Math.cos(a) * r, y: 2.2 + h.y * 0.7 + Math.sin(a) * r * 0.6, z: -h.dist - 18, vz: speed * 2.6, life: 0.4, size: 0.12, color: '#ffffff', alpha: 0.35 * k, glow: 1 });
@@ -651,24 +623,23 @@ function magnet(dt) {
 }
 
 function dust(n) {
-  const b = world.biome && ({ mountains: '#b8946a', foothills: '#c97a55', sandhills: '#f0dca0', farmland: '#b38a5f', swamp: '#9fc6b0', beach: '#ffffff' })[world.biome];
+  const b = world.biome && BIOME[world.biome].dust;
   for (let i = 0; i < n; i++) fx.spawn({ x: G.h.x + (Math.random() - 0.5) * 0.5, y: 0.1, z: -G.h.dist + 0.3, vx: (Math.random() - 0.5) * 1.5, vy: 0.8 + Math.random(), vz: -6 - Math.random() * 2, life: 0.4, size: 0.1 + Math.random() * 0.08, color: b || '#ccc', g: -2 });
 }
 
-function collide() {
+// True when [a, b] (the distance covered this frame, widened by r) overlaps a thing at distance d.
+const swept = (a, b, d, r) => d >= a - r && d <= b + r;
+function collide(prev = G.h.dist) {
   const h = G.h;
   const top = h.y + (h.slide > 0 ? SLIDE_H : STAND_H);
   for (const o of world.obstacles) {
     if (o.hit) continue;
-    // Hit boxes are a little smaller than the models, so near misses count as misses.
-    if (Math.abs(o.dist - h.dist) > o.d / 2 + 0.12) continue;
-    if (Math.abs(o.x - h.x) > o.w / 2 + 0.18) continue;
+    if (!swept(prev, h.dist, o.dist, o.d / 2 + 0.2)) continue;
+    if (Math.abs(o.x - h.x) > o.w / 2 + 0.3) continue;
     // Bars have a gap underneath (o.y0). Everything else starts at the ground.
-    if (h.y >= o.h - 0.25 || top <= o.y0 + 0.05) continue;
+    if (h.y >= o.h - (o.low ? LOW_CLEAR : 0.1) || top <= o.y0 + 0.05) continue;
     o.hit = true;
     smash(o);
-    // A jump that was a bit early or late still clips the top of a low obstacle: it breaks, he bounces, no harm.
-    if (o.low && h.y > o.h * STOMP_K) { stomp(); continue; }
     if (h.inv > 0 || h.safe > 0) continue;
     if (G.pow.shield) {
       sound.sfx('shieldHit');
@@ -687,7 +658,7 @@ function collide() {
     if (G.hearts <= 0) { caught(); return; }
   }
   for (const c of world.coinList) {
-    if (!c.alive || Math.abs(c.dist - h.dist) > 0.9 || Math.abs(c.x - h.x) > 0.9 || Math.abs(c.y - (h.y + 0.9)) > 1.2) continue;
+    if (!c.alive || !swept(prev, h.dist, c.dist, 0.9) || Math.abs(c.x - h.x) > 0.95 || Math.abs(c.y - (h.y + 0.9)) > 1.25) continue;
     c.alive = false;
     G.coins += G.pow.double ? 2 : 1;
     bumpCoins();
@@ -695,7 +666,7 @@ function collide() {
     fx.burst(c.x, c.y, -c.dist, { n: 5, colors: G.pow.double ? ['#ffe066', '#ff9f1c', '#ffffff'] : ['#ffe066', '#ffffff'], speed: 2, up: 2, life: 0.4, size: 0.12, g: -4, floor: false, sparks: 3 });
   }
   for (const k of world.crates) {
-    if (k.taken || Math.abs(k.dist - h.dist) > 1.1 || Math.abs(k.x - h.x) > 1.1 || h.y > 2.2) continue;
+    if (k.taken || !swept(prev, h.dist, k.dist, 1.1) || Math.abs(k.x - h.x) > 1.1 || h.y > 2.4) continue;
     k.taken = true;
     k.mesh.visible = false;
     sound.sfx('crate');
@@ -706,39 +677,24 @@ function collide() {
     return;
   }
   for (const ht of world.hearts) {
-    if (ht.taken || Math.abs(ht.dist - h.dist) > 1 || Math.abs(ht.x - h.x) > 1) continue;
+    if (ht.taken || !swept(prev, h.dist, ht.dist, 1) || Math.abs(ht.x - h.x) > 1.05) continue;
     ht.taken = true;
     ht.mesh.visible = false;
     G.hearts = Math.min(MAX_HEARTS, G.hearts + 1);
     sound.sfx('heart');
     fx.burst(ht.x, 1.3, -ht.dist, { n: 16, colors: ['#ff2d55', '#ff9ab0', '#ffffff'], speed: 3, up: 3, life: 0.7, size: 0.15, g: -6 });
     updateHud();
-    toast('+1', '#d42f4f', 'life');
+    toast('+1', '#ff3b5c', 'heart');
   }
 }
 
-// Debris colors by what the obstacle is made of.
-const WOOD = ['#7a5232', '#a07040', '#5c3d22', '#c8975a'], ROCK = ['#7d838c', '#a3a8b0', '#5f656e', '#8e8a80'], SAND = ['#e2cc96', '#c9ae74', '#f0dcae'], HAY = ['#e5c15a', '#c9a23f', '#f2d98a'];
-const DEBRIS = {
-  log: WOOD, logPile: WOOD, bigLog: WOOD, crate: WOOD, crates: WOOD, barrels: WOOD, stump: WOOD, logStack: WOOD, logOver: WOOD, mossBranch: ['#6b5a3a', '#8a9a6a', '#a7b89d'],
-  boulder: ROCK, rockWall: ROCK, sandFlat: SAND, sandRocks: ['#c99a5b', '#ddb479', '#a87a4b'], sandBlock: ['#c99a5b', '#ddb479', '#a87a4b'], castle: SAND,
-  hay: HAY, hayStack: HAY, cooler: ['#2e86de', '#ffffff', '#dfe6ee'], tractor: ['#2f7d32', '#f1c40f', '#333333'], lifeguard: ['#c0392b', '#ecf0f1', '#8a6c48'],
-  banner: ['#e74c3c', '#f1c40f', '#3498db', '#2ecc71'], net: ['#ffffff', '#cccccc'], pipe: ['#c3c9d1', '#8a8f97', '#a65a3a'], boom: ['#c3c9d1', '#8a8f97'],
-};
+const ROCKY = /rock|boulder/i;
 function smash(o) {
   o.mesh.visible = false;
-  sound.sfx('smash');
+  sound.sfx(ROCKY.test(o.type) ? 'smashRock' : 'smash');
   const y = o.over ? o.y0 + 0.6 : 0.6;
-  fx.burst(o.x, y, -o.dist, { n: 26, colors: DEBRIS[o.type] || WOOD, speed: 5, up: 6, life: 1.2, size: 0.16 });
+  fx.burst(o.x, y, -o.dist, { n: 22, colors: ['#8a6c48', '#a3a8b0', '#c8975a', '#5a4a3a'], speed: 5, up: 6, life: 1.1, size: 0.25 });
   for (let i = 0; i < 6; i++) fx.puff({ x: o.x + (Math.random() - 0.5) * 1.5, y: y * 0.5, z: -o.dist, vx: (Math.random() - 0.5) * 3, vy: 1 + Math.random() * 2, life: 0.9, size: 1.3, color: '#cdbfa8', alpha: 0.5, grow: 1.5, drag: 2 });
-}
-
-// Coming down on top of a low obstacle bounces him back up; rising through it just carries on.
-function stomp() {
-  const h = G.h;
-  if (h.vy < 0) { h.vy = 7; h.ground = false; sound.sfx('stomp'); }
-  G.cam.shake = Math.max(G.cam.shake, 0.18);
-  fx.ring(h.x, 0.25, -h.dist, '#ffffff', 2.2, 0.35);
 }
 
 // ---------- power-ups ----------
@@ -756,29 +712,25 @@ const shieldBubble = (() => {
   return m;
 })();
 
-// A little rocket backpack shown while the jetpack power is on.
-const jetpack = (() => {
+// A rocket backpack made of two fuel tanks, shown while the jetpack power is on. Built once the models load.
+let jetpack = null;
+function makeJetpack() {
   const g = new THREE.Group();
-  const red = bend(new THREE.MeshStandardMaterial({ color: '#e63946', roughness: 0.45 }), { rim: 0.4 });
-  const metal = bend(new THREE.MeshStandardMaterial({ color: '#d9dee6', roughness: 0.3, metalness: 0.6 }), { rim: 0.3 });
-  const dark = bend(new THREE.MeshStandardMaterial({ color: '#333a44', roughness: 0.6 }));
-  const pack = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.5, 0.18), red);
-  g.add(pack);
+  const tank = propGeometry('fuelBarrel');
   for (const x of [-0.17, 0.17]) {
-    const tank = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.55, 14), metal);
-    tank.position.set(x, -0.02, 0.1);
-    const cap = new THREE.Mesh(new THREE.SphereGeometry(0.1, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), red);
-    cap.position.set(x, 0.255, 0.1);
-    const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.1, 0.12, 12), dark);
-    nozzle.position.set(x, -0.35, 0.1);
-    g.add(tank, cap, nozzle);
+    const m = new THREE.Mesh(tank, M.solid);
+    m.scale.set(0.27, 0.5, 0.27);
+    m.position.set(x, -0.27, 0.12);
+    m.castShadow = true;
+    m.frustumCulled = false;
+    g.add(m);
   }
-  g.traverse(o => { if (o.isMesh) o.castShadow = true; });
   g.visible = false;
   scene.add(g);
   return g;
-})();
+}
 function updateJetpack() {
+  if (!jetpack) return;
   const h = G.h;
   jetpack.visible = h.jet || (G.mode === 'shop' && G.shopPower === 'jetpack');
   if (jetpack.visible) jetpack.position.set(h.x, h.y + 1.05, -h.dist + 0.27);
@@ -794,12 +746,12 @@ function pickPower() {
 
 function activatePower(id) {
   const p = POWERS[id];
-  sound.sfx('powerOn');
-  setTimeout(() => sound.sfx('voice-power-up'), 350);
+  sound.stinger('powerup');
   post.flash(p.color, 0.25);
   fx.ring(G.h.x, 0.3, -G.h.dist, p.color, 4, 0.5);
   fx.burst(G.h.x, 1.2, -G.h.dist, { n: 30, colors: [p.color, '#ffffff'], speed: 5, up: 5, life: 0.9, size: 0.18, sparks: 40, glow: 2 });
-  toast(p.name, shade(p.color), p.icon);
+  toast(p.name.toUpperCase() + '!', p.color, p.icon);
+  sound.voice('powerUp');
   if (id === 'hearts') {
     G.hearts = Math.min(MAX_HEARTS, G.hearts + 2);
     updateHud();
@@ -807,10 +759,12 @@ function activatePower(id) {
   }
   G.pow[id] = { t: powerTime(id, S.upgrades[id] || 0) };
   G.pow[id].total = G.pow[id].t;
+  if (id === 'magnet') sound.loop('magnet', true);
   if (id === 'jetpack') {
     const h = G.h;
     h.jet = true; h.ground = false; h.slide = 0;
     sound.sfx('jet');
+    sound.loop('jetpack', true);
     const len = runSpeed() * 1.25 * G.pow[id].t;
     world.skyCoins(h.dist + 18, h.dist + len - 8, JET_Y - 0.9 + 0.2);
   }
@@ -820,6 +774,7 @@ function activatePower(id) {
 function endPower(id) {
   delete G.pow[id];
   sound.sfx('powerOff');
+  if (id === 'jetpack' || id === 'magnet') sound.loop(id, false);
   if (id === 'jetpack') {
     const h = G.h;
     h.jet = false;
@@ -832,6 +787,8 @@ function endPower(id) {
 function clearPowers() {
   G.pow = {};
   G.h.jet = false;
+  sound.loop('jetpack', false);
+  sound.loop('magnet', false);
   shieldBubble.visible = false;
   renderPowers();
 }
@@ -858,7 +815,8 @@ function renderPowers() {
   box.dataset.ids = ids.join();
   box.innerHTML = '';
   for (const id of ids) {
-    const b = el('div', 'pw');
+    const b = document.createElement('div');
+    b.className = 'pw';
     b.dataset.id = id;
     b.style.setProperty('--c', POWERS[id].color);
     b.append(icon(POWERS[id].icon));
@@ -893,11 +851,8 @@ function hurt() {
 // ---------- questions ----------
 function ask(gate) {
   let q = null;
-  if (!G.tour) {
-    // Don't repeat the question he just answered at a crate.
-    if (G.queue.length > 1 && G.queue[0] === G.current?.q) G.queue.splice(1, 0, G.queue.shift());
-    q = G.queue.shift();
-  } else if (gate.kind === 'review') q = pickReview(gate.seg);
+  if (!G.tour) q = G.queue.shift();
+  else if (gate.kind === 'review') q = pickReview(gate.seg);
   else if (gate.kind === 'order') q = G.stage.questions[gate.idx];
   else if (gate.kind === 'extra') { q = G.extra.shift(); G.extraPlaced = Math.max(0, G.extraPlaced - 1); }
   else q = G.extra.shift();
@@ -939,19 +894,19 @@ function showQuestion(q, extra) {
 
   const answers = shuffle([q.a, ...shuffle(q.wrong).slice(0, 3)]);
   G.current.answers = answers;
-  const tint = power ? power.color : G.stage.color;
-  $('#q-pics').replaceChildren(...pics(q.pic, tint));
-  $('#q-pics').hidden = !q.pic;
+  $('#q-pic').replaceChildren(...(q.pic ? [icon(q.pic)] : []));
+  $('#q-pic').hidden = !q.pic;
   $('#q-show').textContent = q.show || '';
   $('#q-show').hidden = !q.show;
   $('#q-text').textContent = q.q;
-  $('#q-card').style.setProperty('--c', tint);
+  $('#q-card').style.setProperty('--c', power ? power.color : G.stage.color);
   const box = $('#answers');
   box.innerHTML = '';
   answers.forEach((a, i) => {
-    const b = el('button', 'btn ans');
+    const b = document.createElement('button');
+    b.className = 'btn ans';
     b.dataset.i = i;
-    b.append(el('span', null, a));
+    b.textContent = a;
     b.addEventListener('click', () => answer(i));
     box.append(b);
   });
@@ -974,14 +929,6 @@ function readQuestion() {
   });
 }
 
-// Colors an answer button and pins a check or a cross to its corner.
-function mark(b, how) {
-  b.classList.add(how);
-  const m = el('span', 'mark');
-  m.append(icon(how === 'right' ? 'check' : 'close'));
-  b.append(m);
-}
-
 function answer(i) {
   if (G.mode !== 'question' || performance.now() < G.readyAt) return;
   const { q, answers } = G.current;
@@ -997,12 +944,11 @@ function answer(i) {
   G.fbDur = 1.35;
   if (G.current.base) G.baseLeft--;
   if (right) {
-    mark(btns[i], 'right');
+    btns[i].classList.add('right');
     btns.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
     if (!power) G.correct++;
     if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
     sound.sfx('correct');
-    if (G.correct % 3 === 0 && !power) setTimeout(() => sound.sfx('voice-great-job'), 500);
     G.coins += 5;
     bumpCoins();
     updateHud();
@@ -1011,8 +957,8 @@ function answer(i) {
     setTimeout(fire, 280);
     if (power) setTimeout(() => { if (G.mode === 'feedback') activatePower(power); }, 150);
   } else {
-    mark(btns[i], 'wrong');
-    btns.forEach((b, k) => { if (answers[k] === q.a) setTimeout(() => mark(b, 'right'), 350); else if (k !== i) b.classList.add('dim'); });
+    btns[i].classList.add('wrong');
+    btns.forEach((b, k) => { if (answers[k] === q.a) setTimeout(() => b.classList.add('right'), 350); else if (k !== i) b.classList.add('dim'); });
     S.missed[key] = (S.missed[key] || 0) + 1;
     sound.sfx('wrong');
     if (power) {
@@ -1079,7 +1025,7 @@ function afterAnswer() {
   if (done && !G.finished) {
     G.finished = true;
     world.placeFinish(G.h.dist + 45);
-    toast(null, '#c27a00', 'finish');
+    toast('FINISH!', '#ffd23f', 'flag');
   }
   setMode('run');
 }
@@ -1098,25 +1044,7 @@ $('#b-speak').addEventListener('click', () => {
 $('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.q.why]); });
 
 // ---------- shop ----------
-const shop = new Shop({ S, save, sound, preview: shopPreview, thumb });
-// Shop cards show real renders of the runners and blasters, made once and cached.
-const portraits = new Map();
-function thumb(tab, id) {
-  const k = tab + ':' + id;
-  if (portraits.has(k)) return portraits.get(k);
-  let p = null;
-  if (tab === 'runners') {
-    p = (runnerCache.has(id) ? Promise.resolve(runnerCache.get(id)) : loadRunner(byId(RUNNERS, id)).then(r => { runnerCache.set(id, r); return r; }))
-      .then(r => {
-        if (r !== hero) r.animate('idle', 0.5, { t: 0 });
-        return renderPortrait(renderer, r.root, { yaw: Math.PI - 0.45, pitch: 0.06, focus: 0.74, fill: 1.55, env: scene.environment });
-      });
-  } else if (tab === 'weapons') {
-    p = loadBlasters().then(set => (set[id] ? renderPortrait(renderer, set[id].clone(), { yaw: Math.PI / 2 + 0.35, pitch: 0.3, fill: 0.95, env: scene.environment }) : null));
-  }
-  if (p) portraits.set(k, p.catch(() => null));
-  return portraits.get(k) || null;
-}
+const shop = new Shop({ S, save, sound, preview: shopPreview });
 let shopFrom = 'title';
 function openShop() {
   sound.unlock();
@@ -1211,24 +1139,15 @@ $('#b-m-shop').addEventListener('click', openShop);
 $('#b-sh-back').addEventListener('click', closeShop);
 
 // ---------- endings ----------
-// Counts a coin total up from zero with a little tick, so the reward feels earned.
-function countUp(node, n) {
-  const t0 = performance.now(), dur = Math.min(1200, 300 + n * 12);
-  node.textContent = '+0';
-  const step = now => {
-    const k = Math.min(1, (now - t0) / dur);
-    node.textContent = '+' + Math.round(n * k * (2 - k));
-    if (k < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-
 function caught() {
   setMode('caught');
+  $('#s-q').hidden = true;
   G.c.spin = -1;
   $('#hint').hidden = true;
-  sound.sfx('roar', G.c.type);
-  setTimeout(() => sound.sfx('caught'), 500);
+  sound.roar(G.c.type, true);
+  sound.sfx('bite');
+  sound.stopMusic(0.5);
+  setTimeout(() => { if (G.mode === 'caught') sound.stinger('lose'); }, 650);
   flash('red');
   G.cam.shake = 0.8;
   S.coins += G.coins;
@@ -1237,13 +1156,15 @@ function caught() {
     if (G.mode !== 'caught') return;
     show('s-caught');
     $('#hud').hidden = true;
-    $('#k-foe').replaceChildren(icon(G.stage.chaser));
-    countUp($('#k-coins'), G.coins);
+    $('#k-ic').replaceChildren(icon(G.stage.chaser));
+    $('#k-ic').style.setProperty('--c', G.stage.color);
+    $('#k-coins').textContent = '+' + G.coins;
   }, 1700);
 }
 
 function clear() {
   setMode('clear');
+  $('#s-q').hidden = true;
   $('#hint').hidden = true;
   G.c.spin = -1;
   const stars = G.wrong === 0 ? 3 : G.wrong <= 2 ? 2 : 1;
@@ -1252,37 +1173,31 @@ function clear() {
   S.stars[key] = Math.max(S.stars[key] || 0, stars);
   S.coins += G.coins;
   save();
-  sound.sfx('fanfare');
-  const last = G.stageIdx + 1 >= G.level.stages.length;
-  setTimeout(() => sound.sfx(last ? 'voice-you-win' : 'voice-level-complete'), 900);
-  sound.play('map');
+  sound.stopMusic(0.4);
+  sound.stinger('win');
+  setTimeout(() => { if (G.mode === 'clear') sound.voice(stars === 3 ? 'congratulations' : 'youWin'); }, 900);
+  setTimeout(() => { if (G.mode === 'clear') sound.play('map'); }, 4200);
   fx.confetti(G.h.x, 2, -G.h.dist - 8, 160);
   setTimeout(() => {
     if (G.mode !== 'clear') return;
     show('s-clear');
     $('#hud').hidden = true;
-    $('#w-title').textContent = ['NICE!', 'NICE!', 'GREAT!', 'PERFECT!'][stars];
-    countUp($('#w-coins'), G.coins);
+    $('#w-coins').textContent = '+' + G.coins;
     const sr = $('#w-stars');
-    sr.replaceChildren(...[0, 1, 2].map(() => icon('star-empty')));
-    for (let k = 0; k < stars; k++) {
-      setTimeout(() => {
-        if (G.mode !== 'clear') return;
-        const st = icon('star-gold', 'on');
-        sr.children[k].replaceWith(st);
-        sound.sfx('star');
-      }, 450 + k * 380);
+    sr.innerHTML = '';
+    for (let k = 0; k < 3; k++) {
+      const x = icon('star');
+      sr.append(x);
+      if (k < stars) setTimeout(() => { x.classList.add('on'); sound.stinger('star'); }, 350 + k * 350);
     }
     const hasNext = G.stageIdx + 1 < G.level.stages.length;
     $('#b-w-next').hidden = !hasNext;
     $('#w-unlock').hidden = !(first && hasNext);
     if (first && hasNext) {
-      const foe = el('span', 'foe');
-      foe.append(icon(G.level.stages[G.stageIdx + 1].chaser));
-      $('#w-unlock').replaceChildren(icon('unlock'), foe);
-      setTimeout(() => { if (G.mode === 'clear') sound.sfx('unlock'); }, 450 + stars * 380 + 300);
+      const nx = G.level.stages[G.stageIdx + 1];
+      $('#w-unlock').replaceChildren(icon('unlock'), 'New: ' + nx.name);
     }
-    $('#w-trophy').hidden = hasNext;
+    $('#w-title').textContent = hasNext ? (stars === 3 ? 'PERFECT!' : 'YOU MADE IT!') : 'CHAMPION!';
   }, 1600);
 }
 
@@ -1313,15 +1228,8 @@ $('#b-w-next').addEventListener('click', () => { sound.sfx('click'); openStage(G
 $('#b-w-retry').addEventListener('click', () => { sound.sfx('click'); openStage(G.level, G.stageIdx); });
 $('#b-w-map').addEventListener('click', () => { sound.sfx('click'); showMap(); });
 $('#b-m-home').addEventListener('click', () => { sound.sfx('click'); showTitle(); });
-$('#b-credits').addEventListener('click', () => {
-  sound.unlock();
-  sound.sfx('click');
-  const body = $('#credits-body');
-  if (!body.childElementCount) for (const sec of CREDITS) body.append(el('h4', null, sec.title), ...sec.lines.map(l => el('p', null, l)));
-  show('s-credits');
-  body.scrollTop = 0;
-});
-$('#b-cr-back').addEventListener('click', () => { sound.sfx('click'); show('s-title'); });
+$('#b-credits').addEventListener('click', () => { sound.unlock(); sound.sfx('click'); renderCredits($('#credits-text')); $('#s-credits').hidden = false; });
+$('#b-credits-close').addEventListener('click', () => { sound.sfx('click'); $('#s-credits').hidden = true; });
 
 function syncToggles() {
   $$('[data-toggle]').forEach(b => b.classList.toggle('off', !S.settings[b.dataset.toggle]));
@@ -1340,6 +1248,8 @@ $$('[data-toggle]').forEach(b => b.addEventListener('click', () => {
 // ---------- per-frame update ----------
 function update(dt) {
   const h = G.h, c = G.c;
+  const windy = c.type === 'hurricane' && ['start', 'run', 'question', 'feedback', 'caught'].includes(G.mode);
+  if (windy !== G.windy) { G.windy = windy; sound.loop('wind', windy); }
   c.roarT = Math.max(0, c.roarT - dt);
   // A frozen chaser stops moving until the ice breaks.
   const cdt = c.frozen > 0 ? 0 : dt;
@@ -1354,9 +1264,11 @@ function update(dt) {
       break;
     }
     case 'start': {
-      hero.animate(G.t > 1.0 ? 'run' : 'idle', dt, { t: G.clock });
-      c.model.animate('roar', dt, G.clock);
-      if (G.t > 1.25) { setMode('run'); sound.sfx('go'); sound.sfx('voice-go'); }
+      if (G.cue === 0 && G.t > 0.35) { G.cue = 1; toast('READY?', '#ffffff'); sound.voice('ready'); }
+      if (G.cue === 1 && G.t > 1.25) { G.cue = 2; toast('GO!', '#7dff8a'); sound.voice('go'); sound.sfx('go'); }
+      hero.animate(G.t > 1.1 ? 'run' : 'idle', dt, { t: G.clock });
+      c.model.animate(G.t > 1.1 ? 'run' : 'roar', dt, G.clock);
+      if (G.t > 1.45) setMode('run');
       break;
     }
     case 'run': runStep(dt); break;
@@ -1442,7 +1354,13 @@ function updateCamera(dt) {
       rate = 2;
       break;
     }
-    case 'intro':
+    case 'intro': {
+      const cz = z + G.c.d, ch = G.c.model?.height || 1.5, big = ch > 3;
+      _pos.set(h.x + (portrait ? 2.2 : 3.4), big ? 2.8 : 1.8, z - (portrait ? 5.2 : 2.4));
+      _look.set(h.x + 0.2, big ? 2.6 : ch * 0.5, z + G.c.d * 0.6);
+      rate = 3;
+      break;
+    }
     case 'start':
     case 'question':
     case 'feedback':
@@ -1452,7 +1370,7 @@ function updateCamera(dt) {
       const lift = h.y * 0.7;
       _pos.set(h.x + side, (tall ? 3.0 : 2.4) + lift, z - (portrait ? 7.4 : 6.6));
       _look.set(h.x, (tall ? 2.1 : 1.3) + lift, z + 1.8);
-      if (G.mode === 'start' && G.t > 0.9) { _pos.set(h.x * 0.55, 3.55, z + 6.1); _look.set(h.x * 0.35, 1.35, z - 6); }
+      if (G.mode === 'start' && G.t > 0.9) { _pos.set(h.x * 0.5, portrait ? 5.0 : 4.5, z + (portrait ? 8.6 : 7.9)); _look.set(h.x * 0.3, 1.0, z - 10); }
       rate = G.mode === 'start' ? 3.5 : 6;
       break;
     }
@@ -1471,18 +1389,10 @@ function updateCamera(dt) {
     default: {
       // Flying keeps the usual framing, just lifted with the hero; a normal jump only nudges the camera up.
       const lift = h.y * (h.jet ? 0.85 : 0.25);
-      _pos.set(h.x * 0.55, 3.55 + lift, z + 6.1);
-      _look.set(h.x * 0.35, 1.35 + (h.jet ? lift : 0), z - 6);
+      _pos.set(h.x * 0.5, (portrait ? 5.0 : 4.5) + lift, z + (portrait ? 8.6 : 7.9));
+      _look.set(h.x * 0.3, 1.0 + (h.jet ? lift : 0), z - 10);
       rate = 7;
     }
-  }
-  // The hurricane is taller than the view. When it lunges in front of the run camera, it opens a window
-  // around him so he can still see what's coming.
-  if (G.c.model?.setNear) {
-    const runCam = G.mode === 'run' || G.mode === 'paused' || (G.mode === 'start' && G.t > 0.9);
-    const near = runCam ? 1 - clamp((G.c.d - 8.5) / 1.1, 0, 1) : 0;
-    G.c.near = damp(G.c.near || 0, near, 6, dt);
-    G.c.model.setNear(G.c.near);
   }
   if (G.mode === 'paused') return;
   // When swinging between the back and front views, arc out to the side and up instead of flying through the hero.
@@ -1549,29 +1459,51 @@ function frame(now) {
     G.t += sdt;
     G.clock += sdt;
     update(sdt);
+    const front = G.mode === 'start' || G.mode === 'question' || G.mode === 'feedback' || G.mode === 'caught';
+    G.coinHide = damp(G.coinHide, front ? 1 : 0, 8, dt);
+    world.coinGap = G.coinHide > 0.01 ? [G.h.dist - 1, G.h.dist + 9, G.coinHide] : null;
     world.update(sdt, G.h.dist, camera, G.h.x);
     fx.update(sdt);
   }
-  updateCamera(dt);
-  world.cull(camera, G.h.dist);
-  post.render(dt);
+  // Before rendering: a quality change resizes the canvas, which would blank a frame that's already drawn.
   if (G.mode === 'run') perf(dt);
+  updateCamera(dt);
+  post.render(dt);
 }
 
-showTitle();
-G.cam.pos.set(5, 2.6, -5);
-requestAnimationFrame(frame);
-loadBlasters().catch(() => {});
-const wait = ms => new Promise(r => setTimeout(r, ms));
-// The loading bar follows every file the loaders fetch (models, textures) plus the fonts.
-THREE.DefaultLoadingManager.onProgress = (url, done, total) => loadProgress(done / Math.max(1, total));
-function loadProgress(p) { $('#load-fill').style.setProperty('--p', Math.max(Number($('#load-fill').style.getPropertyValue('--p')) || 0, p).toFixed(3)); }
-Promise.race([Promise.all([document.fonts.ready, useRunner(S.equip.runners), chaserLoads.bear, world.prepare(['mountains'])]), wait(20000)])
-  .then(() => Promise.race([warmUp(), wait(4000)]))
-  .finally(() => {
-    loadProgress(1);
-    setTimeout(() => { $('#loading').classList.add('done'); setTimeout(() => { $('#loading').hidden = true; }, 600); }, 250);
-  });
+// Loads the world models, the runner and the first chaser, then starts the game loop.
+async function boot() {
+  const bar = $('#load-bar');
+  const progress = k => { if (bar) bar.style.setProperty('--k', Math.min(1, k).toFixed(3)); };
+  try {
+    const fonts = document.fonts ? Promise.all(['64px "Lilita One"', '600 32px Fredoka'].map(f => document.fonts.load(f))).catch(() => {}) : null;
+    await loadProps('./assets/world.glb', e => { if (e.total) progress(0.8 * e.loaded / e.total); });
+    await Promise.race([fonts, new Promise(r => setTimeout(r, 3000))]);
+    world = new World(scene, fx, renderer);
+    jetpack = makeJetpack();
+    world.setShadowSize(TIERS[quality].shadow);
+    world.density = TIERS[quality].grass;
+    progress(0.85);
+    await Promise.all([useRunner(S.equip.runners), setChaser('bear')]);
+    // A bought runner that won't load falls back to the default one. With no runner at all, show the error screen.
+    if (!hero && !(await useRunner('kid'))) throw new Error('The runner failed to load');
+    progress(0.95);
+  } catch (e) {
+    console.error(e);
+    $('#loading').classList.add('failed');
+    return;
+  }
+  loadBlasters().catch(() => {});
+  // The other chasers download in the background, so opening a stage doesn't wait on them.
+  (async () => { for (const t of CHASERS) await chaserModel(t).catch(() => {}); })();
+  showTitle();
+  G.cam.pos.set(5, 2.6, -5);
+  requestAnimationFrame(frame);
+  await Promise.race([warmUp(), new Promise(r => setTimeout(r, 4000))]);
+  progress(1);
+  $('#loading').hidden = true;
+}
+boot();
 
 // Compile every shader while the loading screen is up (hidden power-ups and one-shot effects too),
 // so the first shield, jetpack or blaster shot doesn't hitch mid-run.
@@ -1585,4 +1517,4 @@ async function warmUp() {
 }
 
 // Handy for testing in the console.
-window.__critterRun = { G, S, world, post, fx, camera, setQuality, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, caught, clear, get hero() { return hero; } };
+window.__critterRun = { G, S, get world() { return world; }, post, fx, camera, setQuality, scene, renderer, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, get hero() { return hero; }, debug: { clear, caught, pause, openShop, showMap, showTitle, ask: () => ask({ kind: 'review', seg: 0 }) } };

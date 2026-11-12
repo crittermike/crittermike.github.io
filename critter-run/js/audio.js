@@ -1,81 +1,76 @@
-// Music and sound effects. Real recordings live in assets/music and assets/sfx (see assets/CREDITS.md), listed in
-// music.json and sfx.json. Music streams from the files and loops with a short crossfade; effects are decoded once
-// and played with a little pitch variety. If a file is missing (or still loading), a small synth stands in so the
-// game is never silent. Questions are read aloud with speechSynthesis.
-import { rng } from './gfx.js';
+// Real music and sampled sound. Music streams from MP3s through two <audio> elements that crossfade; effects, stingers,
+// chaser roars, loops and announcer lines are short MP3s decoded into WebAudio buffers. Questions are read aloud with
+// speechSynthesis.
+const BASE = new URL('../assets/audio/', import.meta.url);
+const musicUrl = file => new URL(`music/${file}.mp3`, BASE).href;
+const sfxUrl = file => new URL(`sfx/${file}.mp3`, BASE).href;
 
-const MUSIC_DIR = './assets/music/';
-const SFX_DIR = './assets/sfx/';
-const XFADE = 1.6; // seconds of overlap when a song loops or changes
-const MUSIC_VOL = 0.55, MUSIC_DUCKED = 0.28, SFX_VOL = 0.8;
-// Loudness per effect, on top of the normalized files.
-const SFX_GAIN = { coin: 0.5, swoosh: 0.55, land: 0.45, click: 0.6, jump: 0.6, star: 0.9, fanfare: 1, caught: 0.9, powerOn: 0.8, unlock: 0.8 };
-const NO_PITCH = new Set(['fanfare', 'caught', 'powerOn', 'powerOff', 'star', 'buy', 'correct', 'wrong', 'gate', 'go', 'unlock']);
-const loadJSON = url => fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null);
+// The music files sit around -16 LUFS. The effects are peak-normalized, so the volumes below even them out.
+const MASTER = 0.9, MUSIC = 0.45, EFFECTS = 0.85, VOICE = 0.9;
+const DUCK = 0.6, XFADE = 0.8, LOOP_FADE = 0.3;
 
-const hz = n => 440 * Math.pow(2, (n - 69) / 12);
-
-// Each region gets its own key, tempo, groove, and lead sound. Melodies come from a seed so they stay the same every visit.
-const SONGS = {
-  title: { root: 60, tempo: 100, mode: 'major', groove: 'chill', lead: 'steel', seed: 5 },
-  map: { root: 65, tempo: 108, mode: 'major', groove: 'chill', lead: 'pluck', seed: 9 },
-  mountains: { root: 62, tempo: 134, mode: 'major', groove: 'rock', lead: 'square', seed: 11, arp: true },
-  foothills: { root: 55, tempo: 128, mode: 'major', groove: 'country', lead: 'pluck', seed: 23 },
-  sandhills: { root: 57, tempo: 122, mode: 'minor', groove: 'rock', lead: 'saw', seed: 31 },
-  farmland: { root: 60, tempo: 140, mode: 'major', groove: 'country', lead: 'square', seed: 43 },
-  swamp: { root: 52, tempo: 114, mode: 'minor', groove: 'swing', lead: 'triangle', seed: 57 },
-  beach: { root: 65, tempo: 124, mode: 'major', groove: 'calypso', lead: 'steel', seed: 61, arp: true },
+// Music keys -> files in music/. The title, map and shop share the menu theme, which is also the fallback.
+const TRACKS = {
+  title: 'menu', map: 'menu', shop: 'menu', tour: 'tour',
+  mountains: 'mountains', foothills: 'foothills', sandhills: 'sandhills', farmland: 'farmland', swamp: 'swamp', beach: 'beach',
 };
-const PROG = { major: [[0, 'M'], [7, 'M'], [9, 'm'], [5, 'M']], minor: [[0, 'm'], [8, 'M'], [3, 'M'], [10, 'M']] };
-const SCALE = { major: [0, 2, 4, 7, 9], minor: [0, 3, 5, 7, 10] };
-const triad = q => (q === 'M' ? [0, 4, 7] : [0, 3, 7]);
 
-function phrase(song, seed, lift) {
-  const r = rng(seed);
-  const scale = SCALE[song.mode];
-  const pitchOf = d => song.root + scale[((d % 5) + 5) % 5] + 12 * Math.floor(d / 5);
-  const rhythm = [true, ...Array.from({ length: 7 }, (_, i) => r() < (i % 2 ? 0.45 : 0.8))];
-  const notes = new Array(64).fill(null);
-  let d = 5 + lift;
-  for (let bar = 0; bar < 4; bar++) {
-    const [cr, cq] = PROG[song.mode][bar];
-    const tones = triad(cq).map(t => (t + cr) % 12);
-    const last = bar === 3;
-    for (let e = 0; e < 8; e++) {
-      if (last && e > 2) break;
-      if (!rhythm[e] && !(last && e === 2)) continue;
-      d += [-2, -1, -1, 0, 1, 1, 2][Math.floor(r() * 7)];
-      d = Math.max(2 + lift, Math.min(10 + lift, d));
-      if (e % 4 === 0 || (last && e === 2)) {
-        for (const off of [0, -1, 1, -2, 2]) {
-          if (tones.includes((pitchOf(d + off) % 12 + 12) % 12)) { d += off; break; }
-        }
-      }
-      notes[bar * 16 + e * 2] = pitchOf(d);
-    }
-  }
-  // Note lengths run until the next note (capped) so lines sound smooth.
-  return notes.map((n, i) => {
-    if (n == null) return null;
-    let len = 1;
-    while (i + len < 64 && notes[i + len] == null && len < 6) len++;
-    return { n, len };
-  });
+// Effect name -> [file in sfx/, volume]. Quiet things (land, swoosh, click) sit under coins, crashes and roars.
+const SFX = {
+  coin: ['coin', 0.6], jump: ['jump', 0.55], land: ['land', 0.6], swoosh: ['swoosh', 0.6], slide: ['slide', 0.4],
+  hit: ['hit', 1], heartLost: ['heart-lost', 0.9], heart: ['heart', 0.4], gate: ['gate', 1], crate: ['crate', 1],
+  correct: ['correct', 0.8], wrong: ['wrong', 0.5], whoosh: ['whoosh', 0.7], bite: ['bite', 1],
+  smash: ['smash', 1], smashRock: ['smash-rock', 1], click: ['click', 0.9], go: ['go', 0.45],
+  powerOn: ['power-on', 0.7], powerOff: ['power-off', 0.7], shieldHit: ['shield-hit', 0.8], jet: ['jet', 0.55],
+  zap: ['zap', 0.85], splash: ['splash', 1], splat: ['splat', 1], fire: ['fire', 0.75], freeze: ['freeze', 0.8],
+  shatter: ['shatter', 1], rocket: ['rocket', 0.6], boom: ['boom', 0.6], meteor: ['meteor', 0.65],
+  meteorBoom: ['meteor-boom', 0.8], rainbow: ['rainbow', 0.65], buy: ['buy', 0.85], equip: ['equip', 0.6], nope: ['nope', 0.15],
+};
+// UI sounds and tonal jingles keep their pitch. Everything else varies a little so repeats don't sound canned.
+const STEADY = new Set(['click', 'equip', 'nope', 'buy', 'go', 'correct', 'wrong', 'heart', 'powerOn', 'powerOff', 'rainbow']);
+// Older effect names that now play a stinger.
+const ALIAS = { fanfare: 'win', caught: 'lose', star: 'star' };
+const STINGERS = { win: ['win', 1], lose: ['lose', 0.9], powerup: ['powerup', 0.7], star: ['star', 0.6] };
+// Chaser calls as [file, volume, delay] layers. Unknown types get the generic monster growl.
+const ROARS = {
+  roar: [['roar', 1]],
+  bear: [['bear', 0.7]],
+  wolf: [['wolf', 1]],
+  scorpion: [['scorpion', 0.7]],
+  boar: [['boar', 1]],
+  gator: [['gator', 1]],
+  shark: [['shark-splash', 0.9], ['shark-chomp', 0.6, 0.45]],
+  hurricane: [['hurricane', 0.9]],
+};
+// Seamless loops: [file, volume, loop length in seconds].
+const LOOPS = { jetpack: ['loop-jetpack', 0.5, 5], magnet: ['loop-magnet', 0.25, 5], wind: ['loop-wind', 0.3, 6] };
+const VOICES = {
+  ready: 'voice-ready', go: 'voice-go', powerUp: 'voice-power-up', youWin: 'voice-you-win',
+  congratulations: 'voice-congratulations', correct: 'voice-correct', gameOver: 'voice-game-over', finalRound: 'voice-final-round',
+};
+const FILES = [...new Set([
+  ...Object.values(SFX), ...Object.values(STINGERS), ...Object.values(ROARS).flat(), ...Object.values(LOOPS),
+].map(s => s[0]).concat(Object.values(VOICES)))];
+
+const COIN_STEPS = [0, 1, 2, 3, 4, 5, 6, 7];
+const STAR_STEPS = [0, 4, 7, 12];
+const jitter = () => 1 + (Math.random() * 2 - 1) * 0.03;
+
+function ramp(param, to, t, sec) {
+  param.cancelScheduledValues(t);
+  param.setValueAtTime(param.value, t);
+  param.linearRampToValueAtTime(to, t + sec);
 }
 
-function buildSong(key) {
-  const s = SONGS[key] || SONGS.title;
-  const A = phrase(s, s.seed, 0), B = phrase(s, s.seed * 7 + 3, 2);
-  return { ...s, key, parts: [A, A, B, A] };
+// A decoder that ignores the MP3 gapless header keeps the encoder padding, which would put a gap in the loop.
+// In that case the loop starts after the leading silence.
+function loopStart(b, len) {
+  if (b.duration - len < 0.01) return 0;
+  const d = b.getChannelData(0), max = Math.min(d.length, Math.round(b.sampleRate * 0.06));
+  let i = 0;
+  while (i < max && Math.abs(d[i]) < 1e-4) i++;
+  return i < max ? i / b.sampleRate : 0;
 }
-
-const GROOVES = {
-  rock: { kick: [0, 8, 10], snare: [4, 12], hat: [0, 2, 4, 6, 8, 10, 12, 14], bass: { 0: 0, 2: 0, 4: 12, 6: 0, 8: 0, 10: 0, 12: 12, 14: 7 } },
-  country: { kick: [0, 8], snare: [4, 12], hat: [2, 6, 10, 14], bass: { 0: 0, 4: 7, 8: 0, 12: 7 } },
-  swing: { kick: [0, 10], snare: [4, 12], hat: [0, 3, 4, 7, 8, 11, 12, 15], bass: { 0: 0, 4: 4, 8: 7, 12: 9 } },
-  calypso: { kick: [0, 4, 8, 12], snare: [6, 14], hat: [2, 6, 10, 14], bass: { 0: 0, 3: 0, 6: 7, 8: 0, 11: 7, 14: 12 } },
-  chill: { kick: [0, 10], snare: [8], hat: [4, 12], bass: { 0: 0, 8: 7 } },
-};
 
 // ---------- speech ----------
 const synth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
@@ -92,370 +87,296 @@ export class Sound {
   constructor(settings) {
     this.settings = settings;
     this.ctx = null;
-    this.song = null;
-    this.wantSong = 'title';
+    this.want = 'title';
+    this.ducked = false;
     this.speechRun = 0;
-    this.track = null; // the music file playing now
-    this.buffers = new Map(); // sfx name -> decoded variations
-    this.musicMap = loadJSON(MUSIC_DIR + 'music.json').then(m => { this.musicMap = m || {}; if (this.ctx) this.play(this.wantSong, true); return this.musicMap; });
-    this.sfxMap = loadJSON(SFX_DIR + 'sfx.json').then(m => { this.sfxMap = m || {}; if (this.ctx) this.loadSfx(); return this.sfxMap; });
+    this.buf = {};
+    this.loops = {};
+    this.loopWant = {};
+    this.streaks = {};
+    this.roarEnd = 0;
+    this.roarShots = [];
+    // Samples download right away and are decoded once there is an AudioContext.
+    this.data = new Map(FILES.map(f => [f, fetch(sfxUrl(f)).then(r => (r.ok ? r.arrayBuffer() : null)).catch(() => null)]));
+    // Two <audio> elements take turns so tracks can crossfade.
+    this.els = [0, 1].map(() => Object.assign(new Audio(), { loop: true, preload: 'auto' }));
+    this.file = ['', ''];
+    this.cur = -1;
+    this.stopT = [0, 0];
+    // Resolves once every sample has been decoded (after the first unlock).
+    this.ready = new Promise(res => { this.readied = res; });
   }
 
   unlock() {
-    if (!this.ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      const c = (this.ctx = new AC());
-      this.master = c.createGain(); this.master.gain.value = 0.8; this.master.connect(c.destination);
-      this.comp = c.createDynamicsCompressor(); this.comp.connect(this.master);
-      this.musicFilter = c.createBiquadFilter(); this.musicFilter.type = 'lowpass'; this.musicFilter.frequency.value = 18000;
-      this.musicGain = c.createGain(); this.musicGain.gain.value = this.settings.music ? 0.32 : 0;
-      this.musicFilter.connect(this.musicGain); this.musicGain.connect(this.comp);
-      this.sfxGain = c.createGain(); this.sfxGain.gain.value = this.settings.sfx ? 0.6 : 0; this.sfxGain.connect(this.comp);
-      const len = c.sampleRate;
-      this.noise = c.createBuffer(1, len, c.sampleRate);
-      const d = this.noise.getChannelData(0);
-      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
-      // A shared room reverb gives the little synth band and the effects some space.
-      this.reverb = c.createConvolver();
-      this.reverb.buffer = this.impulse(2.4, 2.8);
-      const wet = c.createGain(); wet.gain.value = 0.5;
-      this.reverb.connect(wet); wet.connect(this.comp);
-      for (const [src, amt] of [[this.musicGain, 0.28], [this.sfxGain, 0.18]]) {
-        const send = c.createGain(); send.gain.value = amt;
-        src.connect(send); send.connect(this.reverb);
-      }
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) { c.suspend(); this.track?.els.forEach(e => e.pause()); } else { c.resume(); this.track?.els.forEach(e => { if (e.dataset.on) e.play().catch(() => {}); }); }
-      });
-      this.timer = setInterval(() => this.tick(), 25);
-      if (this.sfxMap && typeof this.sfxMap.then !== 'function') this.loadSfx();
+    if (!this.ctx) this.init();
+    const c = this.ctx;
+    if (c && c.state !== 'running') {
+      Promise.resolve(c.resume?.()).catch(() => {});
+      // Older iOS also wants a sound started inside the tap.
+      const s = c.createBufferSource();
+      s.buffer = c.createBuffer(1, 1, c.sampleRate);
+      s.connect(c.destination);
+      s.start();
     }
-    if (this.ctx.state === 'suspended') this.ctx.resume();
     // iOS only allows speech after a tap has spoken once.
     if (synth && !synth.speaking) { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; synth.speak(u); }
-    this.play(this.wantSong, true);
+    if (!c) return;
+    this.bless();
+    this.syncMusic();
   }
 
-  impulse(sec, decay) {
-    const c = this.ctx, n = Math.floor(c.sampleRate * sec);
-    const b = c.createBuffer(2, n, c.sampleRate);
-    for (let ch = 0; ch < 2; ch++) {
-      const d = b.getChannelData(ch);
-      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay);
+  init() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const c = (this.ctx = new AC());
+    // A fast limiter: it only catches pile-ups of loud effects (a crash, booms), so coins and music never pump.
+    const comp = (this.comp = c.createDynamicsCompressor());
+    comp.threshold.value = -6; comp.knee.value = 3; comp.ratio.value = 20; comp.attack.value = 0.001; comp.release.value = 0.15;
+    comp.connect(c.destination);
+    this.master = c.createGain(); this.master.gain.value = MASTER; this.master.connect(comp);
+    this.musicBus = c.createGain(); this.musicBus.gain.value = this.musicLevel(); this.musicBus.connect(this.master);
+    this.stingDuck = c.createGain(); this.stingDuck.connect(this.musicBus);
+    this.musicFilter = c.createBiquadFilter(); this.musicFilter.type = 'lowpass';
+    this.musicFilter.frequency.value = this.ducked ? 900 : 20000;
+    this.musicFilter.connect(this.stingDuck);
+    this.sfxBus = c.createGain(); this.sfxBus.gain.value = this.settings.sfx ? EFFECTS : 0; this.sfxBus.connect(this.master);
+    this.elGain = this.els.map(el => {
+      const g = c.createGain();
+      g.gain.value = 0;
+      c.createMediaElementSource(el).connect(g);
+      g.connect(this.musicFilter);
+      return g;
+    });
+    Promise.all(FILES.map(f => this.data.get(f)
+      .then(data => data && c.decodeAudioData(data))
+      .then(b => { if (b) this.buf[f] = b; })
+      .catch(() => {})))
+      .then(() => { Object.keys(this.loopWant).forEach(n => this.syncLoop(n)); this.readied(); });
+    document.addEventListener('visibilitychange', () => this.onVisibility());
+    // iOS can stop the context (a call, Siri, the lock screen) and only lets it restart in a tap, so any tap does that.
+    for (const type of ['touchend', 'click', 'keydown']) {
+      document.addEventListener(type, () => { if (c.state !== 'running' && !document.hidden) this.unlock(); }, true);
     }
-    return b;
+  }
+
+  musicLevel() { return this.settings.music ? MUSIC * (this.ducked ? DUCK : 1) : 0; }
+
+  // Effects only play while the context runs. Otherwise they would pile up and all fire on resume.
+  live() { return !!this.ctx && this.ctx.state === 'running' && !!this.settings.sfx; }
+
+  onVisibility() {
+    const c = this.ctx;
+    if (document.hidden) {
+      this.els.forEach(el => el.pause());
+      Promise.resolve(c.suspend?.()).catch(() => {});
+    } else {
+      Promise.resolve(c.resume?.()).catch(() => {});
+      this.syncMusic();
+    }
+  }
+
+  // iOS lets an <audio> element start later without a tap only if play() was first called during one.
+  bless() {
+    if (this.blessed || navigator.userActivation?.isActive === false) return;
+    this.blessed = true;
+    for (const el of this.els) {
+      if (!el.paused) continue;
+      el.play().catch(() => {});
+      el.pause();
+    }
   }
 
   applySettings() {
     if (!this.ctx) return;
-    const t = this.ctx.currentTime, file = !!this.track;
-    const vol = file ? (this.ducked ? MUSIC_DUCKED : MUSIC_VOL) : (this.ducked ? 0.2 : 0.32);
-    this.musicGain.gain.setTargetAtTime(this.settings.music ? vol : 0, t, 0.08);
-    this.sfxGain.gain.setTargetAtTime(this.settings.sfx ? SFX_VOL : 0, t, 0.05);
+    const t = this.ctx.currentTime;
+    this.musicBus.gain.setTargetAtTime(this.musicLevel(), t, 0.05);
+    this.sfxBus.gain.setTargetAtTime(this.settings.sfx ? EFFECTS : 0, t, 0.05);
+    this.syncMusic();
   }
 
   play(key, force = false) {
-    this.wantSong = key;
+    this.want = key;
+    if (this.ctx) this.syncMusic(force);
+    else if (this.settings.music) this.preload(TRACKS[key] || 'menu');
+  }
+
+  // Before the first tap, start downloading the wanted track. Desktop browsers do; iOS waits for the tap.
+  preload(file) {
+    if (this.file.includes(file)) return;
+    this.els[0].src = musicUrl(file);
+    this.file[0] = file;
+  }
+
+  stopMusic(fade = 0.6) {
+    this.want = null;
+    this.cur = -1;
     if (!this.ctx) return;
-    // The song list is still loading: start once it arrives (the constructor calls play again).
-    if (this.musicMap && typeof this.musicMap.then === 'function') return;
-    const def = this.musicMap && this.musicMap[key];
-    if (def) {
-      this.song = null;
-      if (!force && this.track && this.track.key === key) return;
-      this.playFile(key, def);
-      this.applySettings();
-      return;
-    }
-    this.stopFile();
-    if (!force && this.song && this.song.key === key) return;
-    this.song = buildSong(key);
-    this.step = 0;
-    this.nextTime = this.ctx.currentTime + 0.08;
-    this.applySettings();
-  }
-
-  // Streams a song through two audio elements. Near the loop end the second one starts at the loop start and
-  // the two crossfade, so the song never stops or clicks.
-  playFile(key, def) {
-    const c = this.ctx, t = c.currentTime;
-    this.stopFile();
-    const mk = () => {
-      const e = new Audio(MUSIC_DIR + def.file);
-      e.preload = 'auto';
-      e.crossOrigin = 'anonymous';
-      const src = c.createMediaElementSource(e), g = c.createGain();
-      g.gain.value = 0;
-      src.connect(g); g.connect(this.musicFilter);
-      e.dataset.on = '';
-      return { e, g };
-    };
-    const a = mk(), b = mk();
-    const tr = { key, def, els: [a.e, b.e], gains: [a.g, b.g], cur: 0, swapAt: Infinity };
-    this.track = tr;
-    this.startVoice(tr, 0, 0, t, true);
-  }
-  startVoice(tr, i, from, t, first = false) {
-    const e = tr.els[i], g = tr.gains[i];
-    e.currentTime = from;
-    e.dataset.on = '1';
-    e.play().catch(() => {});
-    g.gain.cancelScheduledValues(t);
-    g.gain.setValueAtTime(g.gain.value, t);
-    g.gain.linearRampToValueAtTime(1, t + (first ? 0.6 : XFADE));
-    tr.cur = i;
-  }
-  stopFile() {
-    const tr = this.track;
-    if (!tr) return;
-    this.track = null;
-    const t = this.ctx.currentTime;
-    tr.gains.forEach(g => { g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + 0.8); });
-    setTimeout(() => tr.els.forEach(e => { e.pause(); e.dataset.on = ''; e.removeAttribute('src'); e.load(); }), 900);
-  }
-  // Called every 25 ms. When the song is XFADE seconds from its loop end, the other copy starts XFADE seconds
-  // before the loop start: the two play the same bars in step while they crossfade, so the beat never stumbles.
-  tickFile() {
-    const tr = this.track;
-    if (!tr) return;
-    const e = tr.els[tr.cur];
-    const end = tr.def.loopEnd || e.duration;
-    if (!end || !isFinite(end) || e.paused) return;
-    if (e.currentTime >= end - XFADE) {
-      const t = this.ctx.currentTime, old = tr.cur, g = tr.gains[old];
-      this.startVoice(tr, 1 - old, Math.max(0, (tr.def.loopStart || 0) - XFADE), t);
-      g.gain.cancelScheduledValues(t);
-      g.gain.setValueAtTime(g.gain.value, t);
-      g.gain.linearRampToValueAtTime(0, t + XFADE);
-      setTimeout(() => { if (this.track === tr && tr.cur !== old) { tr.els[old].pause(); tr.els[old].dataset.on = ''; } }, XFADE * 1000 + 100);
-    }
-  }
-
-  // Decodes every effect listed in sfx.json in the background.
-  async loadSfx() {
-    if (this.sfxLoading || !this.ctx) return;
-    this.sfxLoading = true;
-    const map = this.sfxMap || {};
-    for (const [name, files] of Object.entries(map)) {
-      const list = [];
-      for (const f of [].concat(files)) {
-        try {
-          const buf = await fetch(SFX_DIR + f).then(r => r.arrayBuffer());
-          list.push(await this.ctx.decodeAudioData(buf));
-        } catch { /* missing file: the synth covers it */ }
-      }
-      if (list.length) this.buffers.set(name, list);
-    }
-  }
-  playSample(name, opts = {}) {
-    const list = this.buffers.get(name);
-    if (!list) return false;
-    const c = this.ctx, src = c.createBufferSource(), g = c.createGain();
-    src.buffer = list[Math.floor(Math.random() * list.length)];
-    if (!NO_PITCH.has(name) && !name.startsWith('voice') && !opts.exact) src.playbackRate.value = 0.94 + Math.random() * 0.12;
-    g.gain.value = (SFX_GAIN[name] ?? (name.startsWith('voice') ? 1 : 0.8)) * (opts.gain ?? 1);
-    src.connect(g); g.connect(this.sfxGain);
-    src.start(c.currentTime + 0.005);
-    return true;
+    // Both elements, since an old track keeps playing until a new one has loaded.
+    this.els.forEach((el, i) => { if (!el.paused) this.fadeOut(i, fade); });
   }
 
   duck(on) {
     this.ducked = on;
     if (!this.ctx) return;
-    const t = this.ctx.currentTime;
-    this.musicFilter.frequency.setTargetAtTime(on ? 1400 : 20000, t, 0.12);
+    this.musicFilter.frequency.setTargetAtTime(on ? 900 : 20000, this.ctx.currentTime, 0.12);
     this.applySettings();
   }
 
-  tick() {
-    const c = this.ctx;
-    if (!c || c.state !== 'running') return;
-    this.tickFile();
-    if (!this.song) return;
-    const stepDur = 60 / this.song.tempo / 4;
-    if (this.nextTime < c.currentTime - 0.05) this.nextTime = c.currentTime + 0.05;
-    while (this.nextTime < c.currentTime + 0.14) {
-      this.playStep(this.step, this.nextTime, stepDur);
-      this.nextTime += stepDur;
-      this.step++;
+  // Makes the music elements match the wanted track, the music setting and page visibility.
+  syncMusic(restart = false) {
+    if (!this.ctx) return;
+    clearTimeout(this.offT);
+    if (!this.settings.music || document.hidden) {
+      // Pause once the bus has faded out.
+      this.offT = setTimeout(() => {
+        if (!this.settings.music || document.hidden) this.els.forEach(el => el.pause());
+      }, 300);
+      return;
+    }
+    if (!this.want) return;
+    const file = TRACKS[this.want] || 'menu', i = this.cur;
+    if (!restart && i >= 0 && this.file[i] === file) {
+      if (this.els[i].paused) this.els[i].play().catch(() => {});
+      return;
+    }
+    this.switchTo(file, restart);
+  }
+
+  // Crossfades to a track on the other element. An element that already holds the track keeps its place if it is
+  // still fading out. Otherwise tracks start over, except the menu theme, which picks up where it left off.
+  switchTo(file, restart) {
+    const prev = this.cur;
+    let next = this.file.indexOf(file);
+    if (next < 0 || next === prev) next = prev === 0 ? 1 : 0;
+    const el = this.els[next];
+    if (this.file[next] !== file) {
+      el.src = musicUrl(file);
+      this.file[next] = file;
+    } else if (restart || (el.paused && file !== 'menu')) {
+      el.currentTime = 0;
+    }
+    clearTimeout(this.stopT[next]);
+    this.cur = next;
+    el.play().catch(() => {});
+    // Fade once the new track actually plays, so a slow download doesn't leave a gap.
+    const fade = () => {
+      if (this.cur !== next || this.file[next] !== file) return;
+      ramp(this.elGain[next].gain, 1, this.ctx.currentTime, XFADE);
+      if (prev >= 0 && prev !== next) this.fadeOut(prev, XFADE);
+    };
+    if (el.readyState >= 3) fade();
+    else el.addEventListener('playing', fade, { once: true });
+  }
+
+  fadeOut(i, sec) {
+    ramp(this.elGain[i].gain, 0, this.ctx.currentTime, sec);
+    clearTimeout(this.stopT[i]);
+    this.stopT[i] = setTimeout(() => { if (this.cur !== i) this.els[i].pause(); }, sec * 1000 + 100);
+  }
+
+  sfx(name, { rate, volume = 1 } = {}) {
+    if (ALIAS[name]) { this.stinger(ALIAS[name]); return; }
+    if (name === 'roar') { this.roar('roar'); return; }
+    const s = SFX[name];
+    if (!s || !this.live()) return;
+    let r = rate ?? (STEADY.has(name) ? 1 : jitter());
+    // Coins picked up in a quick run climb a semitone each, up to a fifth.
+    if (name === 'coin') r = (rate ?? 1) * this.streak('coin', 0.3, COIN_STEPS);
+    this.shot(s[0], { volume: s[1] * volume, rate: r });
+  }
+
+  stinger(name) {
+    const s = STINGERS[name];
+    if (!s || !this.live()) return;
+    // Stars revealed one after another step up an arpeggio.
+    const rate = name === 'star' ? this.streak('star', 0.8, STAR_STEPS) : 1;
+    const shot = this.shot(s[0], { volume: s[1], rate });
+    if (shot && (name === 'win' || name === 'lose')) this.duckFor(shot.dur);
+  }
+
+  // Dips the music under a win or lose stinger, then brings it back.
+  duckFor(sec) {
+    const g = this.stingDuck.gain, t = this.ctx.currentTime;
+    ramp(g, 0.3, t, 0.15);
+    g.setValueAtTime(0.3, t + Math.max(0.15, sec - 0.6));
+    g.linearRampToValueAtTime(1, t + sec + 0.6);
+  }
+
+  // One roar at a time: a new one is dropped while another plays, unless forced, which cuts the current one short.
+  roar(type, force = false) {
+    const layers = ROARS[type] || ROARS.roar;
+    if (!this.live() || !this.buf[layers[0][0]]) return;
+    const t = this.ctx.currentTime;
+    if (t < this.roarEnd) {
+      if (!force) return;
+      this.roarShots.forEach(s => this.stopShot(s, 0.08));
+    }
+    this.roarShots = layers.map(([f, v, delay = 0]) => this.shot(f, { volume: v, rate: jitter(), delay })).filter(Boolean);
+    this.roarEnd = t + Math.max(...this.roarShots.map(s => s.delay + s.dur));
+  }
+
+  loop(name, on) {
+    if (!LOOPS[name]) return;
+    this.loopWant[name] = !!on;
+    this.syncLoop(name);
+  }
+
+  syncLoop(name) {
+    const c = this.ctx, cur = this.loops[name];
+    if (!c) return;
+    const [file, vol, len] = LOOPS[name], b = this.buf[file], t = c.currentTime;
+    if (this.loopWant[name] && !cur && b) {
+      const src = c.createBufferSource(), gain = c.createGain(), start = loopStart(b, len);
+      src.buffer = b;
+      src.loop = true;
+      src.loopStart = start;
+      src.loopEnd = Math.min(b.duration, start + len);
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(vol, t + LOOP_FADE);
+      src.connect(gain);
+      gain.connect(this.sfxBus);
+      src.onended = () => gain.disconnect();
+      src.start(t, start);
+      this.loops[name] = { src, gain };
+    } else if (!this.loopWant[name] && cur) {
+      this.stopShot(cur, LOOP_FADE);
+      delete this.loops[name];
     }
   }
 
-  playStep(i, t, sd) {
-    const s = this.song, g = GROOVES[s.groove], out = this.musicFilter;
-    const s16 = i % 16, bar = Math.floor(i / 16) % 16;
-    const [cr, cq] = PROG[s.mode][bar % 4];
-    const chord = triad(cq).map(x => s.root + cr + x);
-    if (g.kick.includes(s16)) this.kick(t, out);
-    if (g.snare.includes(s16)) this.snare(t, out, s.groove === 'chill' ? 0.5 : 1);
-    if (g.hat.includes(s16)) this.hat(t, out, s16 % 4 === 2 ? 1 : 0.6);
-    if (g.bass[s16] !== undefined) this.tone(t, hz(s.root - 24 + cr + (g.bass[s16] === 4 && cq === 'm' ? 3 : g.bass[s16])), sd * 1.7, { type: 'triangle', gain: 0.5, release: 0.05, dest: out });
-    if (s16 === 0) {
-      // Soft pad: two slightly detuned saws per chord note through a gentle filter.
-      for (const n of chord) {
-        this.tone(t, hz(n - 12), sd * 15, { type: 'sine', gain: 0.06, attack: 0.08, release: 0.3, dest: out });
-        this.tone(t, hz(n - 12) * 1.004, sd * 15, { type: 'sawtooth', gain: 0.018, attack: 0.25, release: 0.4, filter: 1100, dest: out });
-      }
-    }
-    if (s.arp && s16 % 2 === 1) this.tone(t, hz(chord[(s16 >> 1) % 3] + 12), sd * 0.9, { type: 'square', gain: 0.025, release: 0.03, filter: 2500, dest: out });
-    const note = s.parts[Math.floor(bar / 4)][(bar % 4) * 16 + s16];
-    if (note) this.lead(t, hz(note.n + 12), note.len * sd, s.lead, out);
+  voice(line) {
+    const f = VOICES[line];
+    if (!f || !this.live()) return;
+    if (this.voiceShot) this.stopShot(this.voiceShot, 0.05);
+    this.voiceShot = this.shot(f, { volume: VOICE });
   }
 
-  lead(t, f, dur, kind, out) {
-    if (kind === 'steel') {
-      this.tone(t, f, 0.35, { type: 'sine', gain: 0.16, release: 0.25, dest: out });
-      this.tone(t, f * 2.01, 0.18, { type: 'sine', gain: 0.05, release: 0.12, dest: out });
-    } else if (kind === 'pluck') {
-      this.tone(t, f, Math.min(dur, 0.25), { type: 'triangle', gain: 0.2, release: 0.18, dest: out });
-      this.tone(t, f * 2, 0.08, { type: 'square', gain: 0.03, release: 0.05, filter: 3000, dest: out });
-    } else if (kind === 'saw') {
-      this.tone(t, f, dur * 0.9, { type: 'sawtooth', gain: 0.07, release: 0.08, filter: 1800, vibrato: true, dest: out });
-    } else if (kind === 'triangle') {
-      this.tone(t, f, dur * 0.9, { type: 'triangle', gain: 0.2, release: 0.1, vibrato: true, dest: out });
-    } else {
-      this.tone(t, f, dur * 0.85, { type: 'square', gain: 0.06, release: 0.06, filter: 3200, dest: out });
-    }
+  shot(file, { volume = 1, rate = 1, delay = 0 } = {}) {
+    const b = this.buf[file];
+    if (!b) return null;
+    const c = this.ctx, src = c.createBufferSource(), gain = c.createGain();
+    src.buffer = b;
+    src.playbackRate.value = rate;
+    gain.gain.value = volume;
+    src.connect(gain);
+    gain.connect(this.sfxBus);
+    src.onended = () => gain.disconnect();
+    src.start(c.currentTime + delay);
+    return { src, gain, delay, dur: b.duration / rate };
   }
 
-  tone(t, f, dur, { type = 'square', gain = 0.1, attack = 0.005, release = 0.08, filter = 0, slide = 0, vibrato = false, dest = this.sfxGain } = {}) {
-    const c = this.ctx;
-    const o = c.createOscillator(), e = c.createGain();
-    o.type = type;
-    o.frequency.setValueAtTime(f, t);
-    if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(20, slide), t + dur);
-    if (vibrato) {
-      const l = c.createOscillator(), lg = c.createGain();
-      l.frequency.value = 5.5; lg.gain.value = f * 0.012;
-      l.connect(lg); lg.connect(o.frequency);
-      l.start(t + 0.12); l.stop(t + dur + release);
-    }
-    e.gain.setValueAtTime(0, t);
-    e.gain.linearRampToValueAtTime(gain, t + attack);
-    e.gain.setValueAtTime(gain, t + Math.max(attack, dur - 0.01));
-    e.gain.exponentialRampToValueAtTime(0.0001, t + dur + release);
-    let n = o;
-    if (filter) { const fl = c.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = filter; o.connect(fl); n = fl; }
-    n.connect(e); e.connect(dest);
-    o.start(t); o.stop(t + dur + release + 0.02);
+  stopShot({ src, gain }, sec) {
+    const t = this.ctx.currentTime;
+    ramp(gain.gain, 0, t, sec);
+    try { src.stop(t + sec); } catch { /* already stopped */ }
   }
 
-  noiseHit(t, dur, { gain = 0.3, type = 'highpass', freq = 1000, q = 1, sweep = 0, dest = this.sfxGain } = {}) {
-    const c = this.ctx;
-    const src = c.createBufferSource(); src.buffer = this.noise;
-    const fl = c.createBiquadFilter(); fl.type = type; fl.frequency.setValueAtTime(freq, t); fl.Q.value = q;
-    if (sweep) fl.frequency.exponentialRampToValueAtTime(sweep, t + dur);
-    const e = c.createGain();
-    e.gain.setValueAtTime(gain, t);
-    e.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    src.connect(fl); fl.connect(e); e.connect(dest);
-    src.start(t, Math.random() * 0.5); src.stop(t + dur + 0.02);
-  }
-
-  kick(t, out) {
-    this.tone(t, 150, 0.12, { type: 'sine', gain: 0.9, slide: 42, release: 0.12, dest: out });
-    this.noiseHit(t, 0.02, { gain: 0.15, type: 'highpass', freq: 3000, dest: out });
-  }
-  snare(t, out, v = 1) { this.noiseHit(t, 0.16, { gain: 0.32 * v, freq: 1500, dest: out }); this.tone(t, 190, 0.05, { type: 'triangle', gain: 0.25 * v, release: 0.05, dest: out }); }
-  hat(t, out, v = 1) { this.noiseHit(t, 0.045, { gain: 0.11 * v, freq: 7500, dest: out }); }
-
-  // name: one of the effects in sfx.json. variant lets callers pick a specific recording (e.g. 'roar' + 'bear').
-  sfx(name, variant) {
-    const c = this.ctx;
-    if (!c || !this.settings.sfx) return;
-    if (variant && this.playSample(name + '-' + variant)) return;
-    if (this.playSample(name)) return;
-    const t = c.currentTime + 0.01;
-    const T = (...a) => this.tone(...a);
-    switch (name) {
-      case 'coin': T(t, 988, 0.05, { gain: 0.12 }); T(t + 0.05, 1319, 0.12, { gain: 0.12 }); break;
-      case 'jump': T(t, 320, 0.16, { type: 'triangle', gain: 0.3, slide: 720 }); break;
-      case 'land': this.noiseHit(t, 0.08, { gain: 0.2, type: 'lowpass', freq: 600 }); break;
-      case 'stomp': this.noiseHit(t, 0.18, { gain: 0.35, type: 'lowpass', freq: 900 }); T(t, 220, 0.14, { type: 'triangle', gain: 0.3, slide: 520 }); break;
-      case 'swoosh': this.noiseHit(t, 0.14, { gain: 0.16, type: 'bandpass', freq: 900, sweep: 3000, q: 2 }); break;
-      case 'hit':
-        this.noiseHit(t, 0.3, { gain: 0.5, type: 'lowpass', freq: 1500, sweep: 200 });
-        T(t, 160, 0.25, { type: 'sawtooth', gain: 0.25, slide: 50, filter: 900 });
-        break;
-      case 'heartLost': [523, 392, 262].forEach((f, i) => T(t + i * 0.1, f, 0.1, { type: 'triangle', gain: 0.3 })); break;
-      case 'heart': [523, 659, 784, 1047].forEach((f, i) => T(t + i * 0.06, f, 0.08, { type: 'triangle', gain: 0.25 })); break;
-      case 'gate':
-        [784, 988, 1175, 1568].forEach((f, i) => T(t + i * 0.05, f, 0.12, { type: 'sine', gain: 0.18 }));
-        this.noiseHit(t, 0.5, { gain: 0.12, type: 'bandpass', freq: 3000, sweep: 400, q: 3 });
-        break;
-      case 'zap':
-        T(t, 1400, 0.35, { type: 'sawtooth', gain: 0.18, slide: 180, filter: 4000 });
-        T(t, 2100, 0.3, { type: 'square', gain: 0.06, slide: 300 });
-        this.noiseHit(t, 0.4, { gain: 0.2, type: 'bandpass', freq: 5000, sweep: 800, q: 4 });
-        break;
-      case 'correct': [523, 659, 784, 1047].forEach((f, i) => T(t + i * 0.08, f, 0.14, { type: 'square', gain: 0.13, filter: 4000 })); break;
-      case 'wrong': T(t, 233, 0.22, { type: 'sawtooth', gain: 0.2, filter: 1200 }); T(t + 0.24, 196, 0.4, { type: 'sawtooth', gain: 0.2, filter: 1000, slide: 150 }); break;
-      case 'roar': {
-        this.noiseHit(t, 0.9, { gain: 0.55, type: 'lowpass', freq: 900, sweep: 250, q: 6 });
-        T(t, 95, 0.8, { type: 'sawtooth', gain: 0.35, slide: 55, filter: 700, vibrato: true });
-        T(t, 140, 0.6, { type: 'square', gain: 0.12, slide: 70, filter: 500 });
-        break;
-      }
-      case 'whoosh': this.noiseHit(t, 0.6, { gain: 0.25, type: 'bandpass', freq: 400, sweep: 2500, q: 1.5 }); break;
-      case 'smash':
-        this.noiseHit(t, 0.4, { gain: 0.6, type: 'lowpass', freq: 3000, sweep: 300 });
-        for (let i = 0; i < 4; i++) T(t + i * 0.04, 300 + Math.random() * 500, 0.05, { type: 'square', gain: 0.08 });
-        break;
-      case 'fanfare': [[523, 0], [659, 0.12], [784, 0.24], [1047, 0.36], [784, 0.56], [1047, 0.68]].forEach(([f, d], i) => T(t + d, f, i === 5 ? 0.6 : 0.11, { type: 'square', gain: 0.14, filter: 3500 })); break;
-      case 'caught': [392, 370, 349, 330].forEach((f, i) => T(t + i * 0.32, f, i === 3 ? 0.8 : 0.28, { type: 'sawtooth', gain: 0.18, filter: 900, vibrato: i === 3 })); break;
-      case 'star': T(t, 1568, 0.08, { type: 'sine', gain: 0.25 }); T(t + 0.07, 2093, 0.25, { type: 'sine', gain: 0.2 }); break;
-      case 'click': T(t, 660, 0.04, { type: 'triangle', gain: 0.2 }); break;
-      case 'go': T(t, 523, 0.12, { gain: 0.15 }); T(t + 0.14, 784, 0.3, { gain: 0.15 }); break;
-      case 'crate':
-        [659, 880, 1175, 1568, 2093].forEach((f, i) => T(t + i * 0.045, f, 0.1, { type: 'triangle', gain: 0.2 }));
-        this.noiseHit(t, 0.3, { gain: 0.15, type: 'bandpass', freq: 6000, sweep: 1500, q: 3 });
-        break;
-      case 'powerOn':
-        [392, 523, 659, 784, 1047, 1319].forEach((f, i) => T(t + i * 0.055, f, 0.16, { type: 'square', gain: 0.11, filter: 5000 }));
-        T(t, 200, 0.6, { type: 'sawtooth', gain: 0.12, slide: 1600, filter: 3000 });
-        break;
-      case 'powerOff': [784, 659, 523, 392].forEach((f, i) => T(t + i * 0.07, f, 0.1, { type: 'triangle', gain: 0.18 })); break;
-      case 'shieldHit':
-        T(t, 900, 0.3, { type: 'sine', gain: 0.3, slide: 300 });
-        T(t, 1350, 0.25, { type: 'sine', gain: 0.15, slide: 500 });
-        this.noiseHit(t, 0.25, { gain: 0.3, type: 'bandpass', freq: 2500, sweep: 600, q: 2 });
-        break;
-      case 'jet': this.noiseHit(t, 1.2, { gain: 0.4, type: 'bandpass', freq: 300, sweep: 2500, q: 1 }); T(t, 80, 1, { type: 'sawtooth', gain: 0.12, slide: 300, filter: 600 }); break;
-      case 'slide': this.noiseHit(t, 0.35, { gain: 0.28, type: 'bandpass', freq: 1800, sweep: 500, q: 1.5 }); break;
-      case 'splash': this.noiseHit(t, 0.3, { gain: 0.3, type: 'bandpass', freq: 1200, sweep: 3000, q: 1 }); T(t, 600, 0.15, { type: 'sine', gain: 0.2, slide: 1400 }); break;
-      case 'splat': this.noiseHit(t, 0.25, { gain: 0.35, type: 'lowpass', freq: 2500, sweep: 400 }); T(t, 300, 0.12, { type: 'sine', gain: 0.25, slide: 120 }); break;
-      case 'fire':
-        this.noiseHit(t, 0.7, { gain: 0.5, type: 'lowpass', freq: 600, sweep: 2400, q: 2 });
-        this.noiseHit(t + 0.1, 0.5, { gain: 0.2, type: 'highpass', freq: 3000 });
-        break;
-      case 'freeze':
-        [2093, 2637, 3136, 2637, 3520].forEach((f, i) => T(t + i * 0.05, f, 0.2, { type: 'sine', gain: 0.1 }));
-        this.noiseHit(t, 0.6, { gain: 0.2, type: 'highpass', freq: 6000 });
-        break;
-      case 'shatter':
-        this.noiseHit(t, 0.5, { gain: 0.5, type: 'highpass', freq: 3500 });
-        for (let i = 0; i < 8; i++) T(t + Math.random() * 0.2, 2000 + Math.random() * 3000, 0.06, { type: 'sine', gain: 0.1 });
-        break;
-      case 'rocket': this.noiseHit(t, 0.8, { gain: 0.35, type: 'bandpass', freq: 500, sweep: 4000, q: 2 }); T(t, 300, 0.7, { type: 'sine', gain: 0.1, slide: 1800 }); break;
-      case 'boom':
-        T(t, 120, 0.5, { type: 'sine', gain: 0.8, slide: 30, release: 0.3 });
-        this.noiseHit(t, 0.8, { gain: 0.6, type: 'lowpass', freq: 2000, sweep: 100 });
-        break;
-      case 'rainbow':
-        [523, 659, 784, 988, 1175, 1319, 1568, 2093].forEach((f, i) => T(t + i * 0.04, f, 0.3, { type: 'triangle', gain: 0.12 }));
-        T(t, 300, 0.8, { type: 'sawtooth', gain: 0.1, slide: 2000, filter: 3000, vibrato: true });
-        break;
-      case 'meteor': T(t, 2400, 0.75, { type: 'sine', gain: 0.18, slide: 300 }); this.noiseHit(t, 0.75, { gain: 0.3, type: 'bandpass', freq: 3000, sweep: 300, q: 2 }); break;
-      case 'buy':
-        T(t, 1319, 0.06, { type: 'square', gain: 0.12, filter: 5000 }); T(t + 0.06, 1760, 0.08, { type: 'square', gain: 0.12, filter: 5000 });
-        this.noiseHit(t + 0.12, 0.4, { gain: 0.25, type: 'highpass', freq: 5000 });
-        [1047, 1319, 1568, 2093].forEach((f, i) => T(t + 0.15 + i * 0.07, f, 0.18, { type: 'triangle', gain: 0.16 }));
-        break;
-      case 'equip': T(t, 784, 0.06, { type: 'triangle', gain: 0.22 }); T(t + 0.07, 1175, 0.12, { type: 'triangle', gain: 0.22 }); break;
-      case 'nope': T(t, 200, 0.12, { type: 'square', gain: 0.12, filter: 900 }); T(t + 0.13, 160, 0.18, { type: 'square', gain: 0.12, filter: 800 }); break;
-      default: break;
-    }
+  // Counts quick repeats (less than gap seconds apart) and returns the playback rate for this one.
+  streak(key, gap, steps) {
+    const now = performance.now() / 1000, s = this.streaks[key] || (this.streaks[key] = { t: -Infinity, n: 0 });
+    s.n = now - s.t < gap ? Math.min(s.n + 1, steps.length - 1) : 0;
+    s.t = now;
+    return 2 ** (steps[s.n] / 12);
   }
 
   // ---------- speech ----------
