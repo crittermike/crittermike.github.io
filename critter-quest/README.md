@@ -1,6 +1,6 @@
 # Critter Quest
 
-One continuous study game for Thomas (3rd grade). Every test becomes a new **island** on the map. Each island has 2–6 monster battles and a boss. Coins, heroes, pets, the monster book, and the review arena carry over from island to island.
+One continuous study game for Thomas (3rd grade). Every test becomes a new **island** on the map. Each island has 2–8 monster battles and a boss. Coins, heroes, pets, the monster book, and the review arena carry over from island to island.
 
 Play it at `/critter-quest/`.
 
@@ -46,7 +46,7 @@ CritterQuest.addLevel({
       { show: '3 + 4', q: 'What is the answer?', a: '7', wrong: ['6', '8', '34'], why: '3 plus 4 is 7.' },
       // ...3 to 6 questions per stage
     ] },
-    // ...2 to 6 stages; each monster must be different
+    // ...2 to 8 stages; each monster must be different
   ],
 });
 ```

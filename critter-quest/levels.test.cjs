@@ -65,7 +65,7 @@ for (const { file, level } of levels) {
     assert.ok(Array.isArray(level.decor) && level.decor.length >= 1 && level.decor.length <= 4, `${file}: decor needs 1-4 emoji`);
     level.decor.forEach(d => assert.ok(isOneEmoji(d), `${file}: decor "${d}" must be one emoji`));
 
-    assert.ok(Array.isArray(level.stages) && level.stages.length >= 2 && level.stages.length <= 6, `${file}: needs 2-6 stages`);
+    assert.ok(Array.isArray(level.stages) && level.stages.length >= 2 && level.stages.length <= 8, `${file}: needs 2-8 stages`);
     const monsters = level.stages.map(s => s.monster);
     assert.equal(new Set([...monsters, level.boss]).size, monsters.length + 1, `${file}: monsters and boss must all be different`);
 
