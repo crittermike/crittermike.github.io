@@ -4,28 +4,42 @@ import { makeHero, makeChaser } from './models.js';
 import { World, LANE } from './world.js';
 import { FX, additiveMat } from './fx.js';
 import { Sound } from './audio.js';
-import { CHASER_EMOJI } from './catalog.js';
+import { icon, iconMarkup, hydrateIcons } from './icons.js';
+import { CREDITS } from './credits.js';
 import { Post, TIERS } from './post.js';
 import { bend } from './gfx.js';
 import { loadRunner, loadBlasters } from './actors.js';
+import { loadChaser, makeHurricane, CHASER_DEFS } from './chasers.js';
 import { POWERS, TIMED_POWERS, RUNNERS, WEAPONS, TRAILS, byId, initShopSave, powerTime } from './items.js';
 import { fireWeapon, warmMaterials } from './weapons.js';
 import { Shop } from './shop.js';
+import { renderPortrait } from './portrait.js';
 
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const again = (e, cls) => { e.classList.remove(cls); void e.offsetWidth; e.classList.add(cls); };
+// A row of level pictures (icon names), each in a tile of the stage's color.
+function pics(names, color) {
+  return [].concat(names || []).map(n => { const p = el('span', 'pic'); p.style.setProperty('--c', color); p.append(icon(n)); return p; });
+}
+hydrateIcons();
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const shade = (hex, k = 0.35) => '#' + new THREE.Color(hex).multiplyScalar(k).getHexString();
 const damp = (a, b, rate, dt) => a + (b - a) * (1 - Math.exp(-rate * dt));
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-const BASE_SPEED = 9.5, SPEED_GAIN = 0.005, MAX_GAIN = 4;
-const GRAVITY = 26, JUMP_V = 9.4, SUPER_JUMP = 1.45;
-const SLIDE_TIME = 0.75, JUMP_BUFFER = 0.15;
+// A jump lasts about a second and clears roughly 9 m of trail, so a jump pressed a bit early still makes it.
+const BASE_SPEED = 11.2, SPEED_GAIN = 0.005, MAX_GAIN = 4.5;
+const GRAVITY = 22, JUMP_V = 10.4, SUPER_JUMP = 1.4;
+const SLIDE_TIME = 0.75, JUMP_BUFFER = 0.2;
 const STAND_H = 1.7, SLIDE_H = 0.85;
+// Clipping a low obstacle with your feet while this high (as a fraction of its height) smashes it instead of hurting.
+const STOMP_K = 0.45;
 const JET_Y = 5.2, MAGNET_R = 5.5;
 const MAX_HEARTS = 5;
-const GATE_FIRST = 70, GATE_GAP = 105;
-const SEGMENT = 160; // length of each region in the final run
+const GATE_FIRST = 80, GATE_GAP = 122;
+const SEGMENT = 180; // length of each region in the final run
 const CHASE_D = 10; // how far behind the chaser normally runs (just behind the camera, so it never blocks the path)
 
 // ---------- save ----------
@@ -52,7 +66,7 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 } catch (e) {
-  $('#loading').innerHTML = '<div class="nogl">😢<br>This game needs WebGL.<br>Try Chrome or Safari.</div>';
+  $('#loading').innerHTML = '<div class="nogl">This game needs WebGL.<br>Try Chrome or Safari.</div>';
   throw e;
 }
 renderer.toneMapping = THREE.NeutralToneMapping;
@@ -79,6 +93,7 @@ function setQuality(q) {
   quality = q;
   post.setTier(q);
   world.setShadowSize(TIERS[q].shadow);
+  world.grassAmount = TIERS[q].grass;
 }
 
 let baseFov = 60;
@@ -124,11 +139,24 @@ async function useRunner(id) {
   }
   return true;
 }
-const chasers = {};
+// Real animal models load in the background. Until one arrives an invisible stand-in holds its place (and the
+// stage won't start); the old block animal only shows up if the model can't load at all.
+const chasers = {}, chaserLoads = {};
+const pending = type => ({ root: new THREE.Group(), animate() {}, height: CHASER_DEFS[type].length * 0.45, length: CHASER_DEFS[type].length, pending: true });
 function chaserModel(type) {
-  if (!chasers[type]) chasers[type] = makeChaser(type);
+  if (!chasers[type]) chasers[type] = type === 'hurricane' ? makeHurricane() : pending(type);
+  if (CHASER_DEFS[type] && !chaserLoads[type]) {
+    chaserLoads[type] = loadChaser(type).catch(e => {
+      console.warn('Chaser failed to load', type, e);
+      return makeChaser(type === 'spider' ? 'scorpion' : type);
+    }).then(m => {
+      chasers[type] = m;
+      if (G.c.type === type) setChaser(type);
+    });
+  }
   return chasers[type];
 }
+const chaserReady = type => !chasers[type]?.pending;
 
 // ---------- game state ----------
 const G = {
@@ -166,9 +194,22 @@ function show(id) {
 }
 function setMode(m) { G.mode = m; G.t = 0; document.body.dataset.mode = m; }
 
+// Starts the world now, then once the regions' scenery models have loaded, rebuilds it with them
+// (only if nothing has moved on in the meantime).
+let worldToken = 0;
+function startWorld(cfg, biomes, { before = () => {}, after = () => {} } = {}) {
+  const token = ++worldToken;
+  const run = () => { before(); world.start(cfg); after(); };
+  run();
+  if (world.isPrepared(biomes)) return Promise.resolve();
+  return world.prepare(biomes).then(() => {
+    if (token !== worldToken || G.h.dist > 1) return;
+    run();
+  });
+}
+
 function sceneryOnly(biome) {
-  world.start({ biomeAt: () => biome, onChunk: () => [], wantsHeart: () => false, color: '#ff4081' });
-  world.noObstaclesFrom = -Infinity;
+  startWorld({ biomeAt: () => biome, onChunk: () => [], wantsHeart: () => false, color: '#ff4081' }, [biome], { after: () => { world.noObstaclesFrom = -Infinity; } });
   fx.clear();
   G.h = newHero();
   G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
@@ -203,37 +244,55 @@ function renderMap() {
   $('#m-coins').textContent = S.coins;
   const list = $('#map-list');
   list.innerHTML = '';
-  if (!LEVELS.length) { list.textContent = '🙈'; return; }
+  if (!LEVELS.length) return;
   for (const level of [...LEVELS].reverse()) {
-    const sec = document.createElement('div');
-    sec.className = 'm-level';
-    const h = document.createElement('h2');
-    h.textContent = level.name;
-    sec.append(h);
-    const path = document.createElement('div');
-    path.className = 'm-path';
+    const sec = el('div', 'm-level');
+    sec.append(el('div', 'm-title', level.name));
+    const path = el('div', 'm-path');
     level.stages.forEach((st, i) => {
       const stars = S.stars[stageKey(level, i)] || 0;
       const open = isOpen(level, i);
-      const b = document.createElement('button');
-      b.className = 'stop' + (open ? '' : ' locked') + (open && !stars ? ' next' : '') + (st.biome === 'tour' ? ' final' : '');
+      const b = el('button', 'stop' + (open ? '' : ' locked') + (open && !stars ? ' next' : '') + (st.biome === 'tour' ? ' final' : ''));
       b.style.setProperty('--c', st.color);
       b.style.setProperty('--off', [0, 1, 0, -1][i % 4]);
-      const em = document.createElement('span'); em.className = 's-emoji'; em.textContent = open ? CHASER_EMOJI[st.chaser] : '🔒';
-      const nm = document.createElement('span'); nm.className = 's-name'; nm.textContent = st.name;
-      const sr = document.createElement('span'); sr.className = 's-stars';
-      for (let k = 0; k < 3; k++) { const x = document.createElement('i'); x.textContent = '★'; if (k < stars) x.className = 'on'; sr.append(x); }
-      b.append(em, nm, sr);
+      const medal = el('span', 'medal');
+      medal.append(icon(open ? st.chaser : 'lock'));
+      const sr = el('span', 'stars');
+      for (let k = 0; k < 3; k++) sr.append(icon(k < stars ? 'star-gold' : 'star-empty'));
+      b.append(medal, el('span', 'name', st.name), sr);
       b.setAttribute('aria-label', st.name + (open ? '' : ' (locked)'));
       if (open) b.addEventListener('click', () => { sound.sfx('click'); openStage(level, i); });
-      else b.addEventListener('click', () => { sound.sfx('wrong'); b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope'); });
+      else b.addEventListener('click', () => { sound.sfx('nope'); again(b, 'nope'); });
       path.append(b);
     });
     sec.append(path);
     list.append(sec);
+    requestAnimationFrame(() => drawTrail(path));
   }
   syncToggles();
 }
+
+// A dashed trail winds from medal to medal, like a board-game path.
+function drawTrail(path) {
+  path.querySelector('svg.trail')?.remove();
+  const box = path.getBoundingClientRect();
+  const pts = [...path.querySelectorAll('.medal')].map(m => {
+    const r = m.getBoundingClientRect();
+    return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
+  });
+  if (pts.length < 2) return;
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], my = (y0 + y1) / 2;
+    d += ` C${x0} ${my} ${x1} ${my} ${x1} ${y1}`;
+  }
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'trail');
+  svg.innerHTML = `<path d="${d}" fill="none" stroke="rgba(10,16,48,.45)" stroke-width="16" stroke-linecap="round"/>`
+    + `<path d="${d}" fill="none" stroke="#fff6d8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 16"/>`;
+  path.prepend(svg);
+}
+window.addEventListener('resize', () => { if (G.mode === 'map') $$('.m-path').forEach(drawTrail); });
 
 // ---------- stage setup ----------
 function openStage(level, i) {
@@ -253,13 +312,23 @@ function openStage(level, i) {
     G.queue = shuffle(stage.questions);
     G.needed = G.queue.length;
   }
-  world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower });
+  G.biomes = G.tour ? G.segments.map(s => s.biome) : [stage.biome];
+  G.goWhenReady = false;
+  $('#b-go').classList.remove('busy');
+  // Gates are planned as the track is built, so planning starts over whenever the world does.
+  const replan = () => { G.nextGate = GATE_FIRST; G.planned = 0; G.nextMore = 0; G.extraPlaced = 0; };
+  G.ready = startWorld({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower }, G.biomes, { before: replan })
+    .then(() => chaserLoads[stage.chaser])
+    .then(() => { $('#b-go').classList.remove('busy'); if (G.goWhenReady && G.mode === 'intro') go(); });
   fx.clear();
   G.h = newHero();
   clearPowers();
   setChaser(stage.chaser);
   G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
-  sound.play(G.tour ? G.segments[0]?.biome || 'mountains' : stage.biome);
+  // Start fetching the next stage's chaser so it's ready when this one is cleared.
+  if (level.stages[i + 1]) chaserModel(level.stages[i + 1].chaser);
+  // The final run gets one big song of its own; every other stage plays its region's song.
+  sound.play(G.tour ? 'tour' : stage.biome);
 
   setMode('intro');
   show('s-intro');
@@ -267,10 +336,10 @@ function openStage(level, i) {
   sound.duck(false);
   $('#s-q').hidden = true;
   $('#hud').hidden = true;
-  $('#i-emoji').textContent = CHASER_EMOJI[stage.chaser];
+  $('#i-foe').replaceChildren(icon(stage.chaser));
   $('#i-name').textContent = stage.name;
-  $('#i-icons').textContent = (stage.icons || []).join(' ');
-  $('#s-intro .card').style.setProperty('--c', stage.color);
+  $('#i-icons').replaceChildren(...pics(stage.icons, stage.color));
+  $('#s-intro .panel').style.setProperty('--c', stage.color);
   setTimeout(() => { if (G.mode === 'intro') roar(); }, 500);
 }
 
@@ -296,15 +365,15 @@ function onChunk(d0, d1) {
   while (G.planned < n && G.planned * SEGMENT < d1) {
     const k = G.planned++, s = k * SEGMENT;
     ev.push({ type: 'sign', at: s + 10, label: G.segments[k].name, color: G.segments[k].color });
-    ev.push({ type: 'gate', at: s + 55, kind: 'review', seg: k });
+    ev.push({ type: 'gate', at: s + 60, kind: 'review', seg: k });
     // A slot for a missed question, only if one is waiting.
-    if (G.extra.length - G.extraPlaced > 0) { G.extraPlaced++; ev.push({ type: 'gate', at: s + 95, kind: 'extra' }); }
-    if (k < own.length) ev.push({ type: 'gate', at: s + 135, kind: 'order', idx: k });
+    if (G.extra.length - G.extraPlaced > 0) { G.extraPlaced++; ev.push({ type: 'gate', at: s + 105, kind: 'extra' }); }
+    if (k < own.length) ev.push({ type: 'gate', at: s + 150, kind: 'order', idx: k });
   }
   // Past the last region, keep offering gates for missed questions until they are all right.
   if (G.planned >= n) {
-    if (!G.nextMore) G.nextMore = n * SEGMENT + 40;
-    while (G.nextMore < d1) { ev.push({ type: 'gate', at: G.nextMore, kind: 'more' }); G.nextMore += 70; }
+    if (!G.nextMore) G.nextMore = n * SEGMENT + 45;
+    while (G.nextMore < d1) { ev.push({ type: 'gate', at: G.nextMore, kind: 'more' }); G.nextMore += 80; }
   }
   return ev.filter(e => e.at >= 0);
 }
@@ -326,7 +395,9 @@ function powerQuestion() {
 
 function go() {
   sound.unlock();
-  sound.sfx('go');
+  // Still fetching this region's scenery: spin the button and start as soon as it's ready.
+  if (!world.isPrepared(G.biomes || []) || !chaserReady(G.stage.chaser)) { G.goWhenReady = true; $('#b-go').classList.add('busy'); sound.sfx('click'); return; }
+  sound.sfx('voice-ready');
   show(null);
   setMode('start');
   roar();
@@ -336,34 +407,37 @@ function go() {
 
 function roar() {
   G.c.roarT = 1.1;
-  sound.sfx('roar');
+  sound.sfx('roar', G.c.type);
   G.cam.shake = Math.max(G.cam.shake, 0.25);
 }
 
 // ---------- HUD ----------
 function updateHud() {
   const hearts = $('#hearts');
-  hearts.innerHTML = '';
-  for (let i = 0; i < MAX_HEARTS; i++) { const s = document.createElement('span'); s.textContent = i < G.hearts ? '❤️' : '🖤'; if (i >= G.hearts) s.className = 'gone'; hearts.append(s); }
+  if (hearts.dataset.n !== String(G.hearts)) {
+    hearts.dataset.n = G.hearts;
+    hearts.replaceChildren(...Array.from({ length: MAX_HEARTS }, (_, i) => icon(i < G.hearts ? 'life' : 'life-empty')));
+  }
   $('#coin-n').textContent = G.coins;
   const dots = $('#dots');
   if (dots.childElementCount !== G.needed) { dots.innerHTML = ''; for (let i = 0; i < G.needed; i++) dots.append(document.createElement('i')); }
   [...dots.children].forEach((d, i) => d.classList.toggle('on', i < G.correct));
-  $('#c-mon').textContent = CHASER_EMOJI[G.c.type] || '👹';
+  const mon = $('#c-mon');
+  if (mon.dataset.type !== G.c.type) { mon.dataset.type = G.c.type; mon.replaceChildren(icon(G.c.type)); }
 }
 function bumpCoins() {
   $('#coin-n').textContent = G.coins;
-  const c = $('#coins');
-  c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+  again($('#coins'), 'bump');
 }
 function flash(color = 'red') {
   const f = $('#flash');
   f.className = ''; void f.offsetWidth; f.className = color;
 }
 let toastTimer = 0;
-function toast(text, color = '#fff') {
+// A big pop-up word or picture in the middle of the screen. ico is an optional icon name shown before the text.
+function toast(text, color = '#fff', ico = null) {
   const t = $('#toast');
-  t.textContent = text;
+  t.replaceChildren(...(ico ? [icon(ico)] : []), ...(text ? [el('span', null, text)] : []));
   t.style.setProperty('--c', color);
   t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
   clearTimeout(toastTimer);
@@ -502,7 +576,6 @@ function runStep(dt) {
       s.done = true;
       toast(s.label, s.color);
       sound.sfx('gate');
-      sound.play(biomeAt(s.dist + 5));
       if (S.settings.autoRead) sound.sayParts([s.label]);
     }
   }
@@ -527,7 +600,9 @@ function heroPose() {
 
 function showHint(kind) {
   G.hint = kind;
-  $('#hint').innerHTML = kind === 'slide' ? '<span class="hand down">👇</span>' : '<span class="hand">👆</span><br>⬅️ ⬆️ ➡️';
+  $('#hint').innerHTML = kind === 'slide'
+    ? `<span class="hand down">${iconMarkup('hand')}</span><span class="arrows">${iconMarkup('down')}</span>`
+    : `<span class="hand">${iconMarkup('hand')}</span><span class="arrows">${iconMarkup('left')}${iconMarkup('up')}${iconMarkup('right')}</span>`;
   $('#hint').hidden = false;
 }
 function hintSeen(kind) {
@@ -556,7 +631,7 @@ function jetPuff() {
 
 // Streaks of wind rushing past when running fast or flying.
 function speedLines(dt, speed) {
-  const k = G.h.jet ? 1 : clamp((speed - 11) / 3, 0, 1);
+  const k = G.h.jet ? 1 : clamp((speed - 12.8) / 3, 0, 1);
   if (k <= 0 || Math.random() > dt * 45 * k) return;
   const h = G.h, a = Math.random() * Math.PI * 2, r = 2.5 + Math.random() * 3;
   fx.spark({ x: h.x + Math.cos(a) * r, y: 2.2 + h.y * 0.7 + Math.sin(a) * r * 0.6, z: -h.dist - 18, vz: speed * 2.6, life: 0.4, size: 0.12, color: '#ffffff', alpha: 0.35 * k, glow: 1 });
@@ -585,12 +660,15 @@ function collide() {
   const top = h.y + (h.slide > 0 ? SLIDE_H : STAND_H);
   for (const o of world.obstacles) {
     if (o.hit) continue;
-    if (Math.abs(o.dist - h.dist) > o.d / 2 + 0.25) continue;
-    if (Math.abs(o.x - h.x) > o.w / 2 + 0.3) continue;
+    // Hit boxes are a little smaller than the models, so near misses count as misses.
+    if (Math.abs(o.dist - h.dist) > o.d / 2 + 0.12) continue;
+    if (Math.abs(o.x - h.x) > o.w / 2 + 0.18) continue;
     // Bars have a gap underneath (o.y0). Everything else starts at the ground.
-    if (h.y >= o.h - 0.1 || top <= o.y0 + 0.05) continue;
+    if (h.y >= o.h - 0.25 || top <= o.y0 + 0.05) continue;
     o.hit = true;
     smash(o);
+    // A jump that was a bit early or late still clips the top of a low obstacle: it breaks, he bounces, no harm.
+    if (o.low && h.y > o.h * STOMP_K) { stomp(); continue; }
     if (h.inv > 0 || h.safe > 0) continue;
     if (G.pow.shield) {
       sound.sfx('shieldHit');
@@ -635,16 +713,32 @@ function collide() {
     sound.sfx('heart');
     fx.burst(ht.x, 1.3, -ht.dist, { n: 16, colors: ['#ff2d55', '#ff9ab0', '#ffffff'], speed: 3, up: 3, life: 0.7, size: 0.15, g: -6 });
     updateHud();
-    toast('❤️ +1', '#ff2d55');
+    toast('+1', '#d42f4f', 'life');
   }
 }
 
+// Debris colors by what the obstacle is made of.
+const WOOD = ['#7a5232', '#a07040', '#5c3d22', '#c8975a'], ROCK = ['#7d838c', '#a3a8b0', '#5f656e', '#8e8a80'], SAND = ['#e2cc96', '#c9ae74', '#f0dcae'], HAY = ['#e5c15a', '#c9a23f', '#f2d98a'];
+const DEBRIS = {
+  log: WOOD, logPile: WOOD, bigLog: WOOD, crate: WOOD, crates: WOOD, barrels: WOOD, stump: WOOD, logStack: WOOD, logOver: WOOD, mossBranch: ['#6b5a3a', '#8a9a6a', '#a7b89d'],
+  boulder: ROCK, rockWall: ROCK, sandFlat: SAND, sandRocks: ['#c99a5b', '#ddb479', '#a87a4b'], sandBlock: ['#c99a5b', '#ddb479', '#a87a4b'], castle: SAND,
+  hay: HAY, hayStack: HAY, cooler: ['#2e86de', '#ffffff', '#dfe6ee'], tractor: ['#2f7d32', '#f1c40f', '#333333'], lifeguard: ['#c0392b', '#ecf0f1', '#8a6c48'],
+  banner: ['#e74c3c', '#f1c40f', '#3498db', '#2ecc71'], net: ['#ffffff', '#cccccc'], pipe: ['#c3c9d1', '#8a8f97', '#a65a3a'], boom: ['#c3c9d1', '#8a8f97'],
+};
 function smash(o) {
   o.mesh.visible = false;
   sound.sfx('smash');
   const y = o.over ? o.y0 + 0.6 : 0.6;
-  fx.burst(o.x, y, -o.dist, { n: 22, colors: ['#8a6c48', '#a3a8b0', '#c8975a', '#5a4a3a'], speed: 5, up: 6, life: 1.1, size: 0.25 });
+  fx.burst(o.x, y, -o.dist, { n: 26, colors: DEBRIS[o.type] || WOOD, speed: 5, up: 6, life: 1.2, size: 0.16 });
   for (let i = 0; i < 6; i++) fx.puff({ x: o.x + (Math.random() - 0.5) * 1.5, y: y * 0.5, z: -o.dist, vx: (Math.random() - 0.5) * 3, vy: 1 + Math.random() * 2, life: 0.9, size: 1.3, color: '#cdbfa8', alpha: 0.5, grow: 1.5, drag: 2 });
+}
+
+// Coming down on top of a low obstacle bounces him back up; rising through it just carries on.
+function stomp() {
+  const h = G.h;
+  if (h.vy < 0) { h.vy = 7; h.ground = false; sound.sfx('stomp'); }
+  G.cam.shake = Math.max(G.cam.shake, 0.18);
+  fx.ring(h.x, 0.25, -h.dist, '#ffffff', 2.2, 0.35);
 }
 
 // ---------- power-ups ----------
@@ -701,10 +795,11 @@ function pickPower() {
 function activatePower(id) {
   const p = POWERS[id];
   sound.sfx('powerOn');
+  setTimeout(() => sound.sfx('voice-power-up'), 350);
   post.flash(p.color, 0.25);
   fx.ring(G.h.x, 0.3, -G.h.dist, p.color, 4, 0.5);
   fx.burst(G.h.x, 1.2, -G.h.dist, { n: 30, colors: [p.color, '#ffffff'], speed: 5, up: 5, life: 0.9, size: 0.18, sparks: 40, glow: 2 });
-  toast(p.icon, p.color);
+  toast(p.name, shade(p.color), p.icon);
   if (id === 'hearts') {
     G.hearts = Math.min(MAX_HEARTS, G.hearts + 2);
     updateHud();
@@ -763,11 +858,10 @@ function renderPowers() {
   box.dataset.ids = ids.join();
   box.innerHTML = '';
   for (const id of ids) {
-    const b = document.createElement('div');
-    b.className = 'pw';
+    const b = el('div', 'pw');
     b.dataset.id = id;
     b.style.setProperty('--c', POWERS[id].color);
-    b.textContent = POWERS[id].icon;
+    b.append(icon(POWERS[id].icon));
     box.append(b);
   }
 }
@@ -799,8 +893,11 @@ function hurt() {
 // ---------- questions ----------
 function ask(gate) {
   let q = null;
-  if (!G.tour) q = G.queue.shift();
-  else if (gate.kind === 'review') q = pickReview(gate.seg);
+  if (!G.tour) {
+    // Don't repeat the question he just answered at a crate.
+    if (G.queue.length > 1 && G.queue[0] === G.current?.q) G.queue.splice(1, 0, G.queue.shift());
+    q = G.queue.shift();
+  } else if (gate.kind === 'review') q = pickReview(gate.seg);
   else if (gate.kind === 'order') q = G.stage.questions[gate.idx];
   else if (gate.kind === 'extra') { q = G.extra.shift(); G.extraPlaced = Math.max(0, G.extraPlaced - 1); }
   else q = G.extra.shift();
@@ -835,26 +932,26 @@ function showQuestion(q, extra) {
   const power = extra.power ? POWERS[extra.power] : null;
   $('#q-power').hidden = !power;
   if (power) {
-    $('#q-power').textContent = power.icon;
+    $('#q-power').replaceChildren(icon(power.icon));
     $('#q-power').style.setProperty('--pc', power.color);
   }
   $('#s-q').classList.toggle('power', !!power);
 
   const answers = shuffle([q.a, ...shuffle(q.wrong).slice(0, 3)]);
   G.current.answers = answers;
-  $('#q-pic').textContent = q.pic || '';
-  $('#q-pic').hidden = !q.pic;
+  const tint = power ? power.color : G.stage.color;
+  $('#q-pics').replaceChildren(...pics(q.pic, tint));
+  $('#q-pics').hidden = !q.pic;
   $('#q-show').textContent = q.show || '';
   $('#q-show').hidden = !q.show;
   $('#q-text').textContent = q.q;
-  $('#q-card').style.setProperty('--c', power ? power.color : G.stage.color);
+  $('#q-card').style.setProperty('--c', tint);
   const box = $('#answers');
   box.innerHTML = '';
   answers.forEach((a, i) => {
-    const b = document.createElement('button');
-    b.className = 'ans';
+    const b = el('button', 'btn ans');
     b.dataset.i = i;
-    b.textContent = a;
+    b.append(el('span', null, a));
     b.addEventListener('click', () => answer(i));
     box.append(b);
   });
@@ -877,6 +974,14 @@ function readQuestion() {
   });
 }
 
+// Colors an answer button and pins a check or a cross to its corner.
+function mark(b, how) {
+  b.classList.add(how);
+  const m = el('span', 'mark');
+  m.append(icon(how === 'right' ? 'check' : 'close'));
+  b.append(m);
+}
+
 function answer(i) {
   if (G.mode !== 'question' || performance.now() < G.readyAt) return;
   const { q, answers } = G.current;
@@ -892,11 +997,12 @@ function answer(i) {
   G.fbDur = 1.35;
   if (G.current.base) G.baseLeft--;
   if (right) {
-    btns[i].classList.add('right');
+    mark(btns[i], 'right');
     btns.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
     if (!power) G.correct++;
     if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
     sound.sfx('correct');
+    if (G.correct % 3 === 0 && !power) setTimeout(() => sound.sfx('voice-great-job'), 500);
     G.coins += 5;
     bumpCoins();
     updateHud();
@@ -905,8 +1011,8 @@ function answer(i) {
     setTimeout(fire, 280);
     if (power) setTimeout(() => { if (G.mode === 'feedback') activatePower(power); }, 150);
   } else {
-    btns[i].classList.add('wrong');
-    btns.forEach((b, k) => { if (answers[k] === q.a) setTimeout(() => b.classList.add('right'), 350); else if (k !== i) b.classList.add('dim'); });
+    mark(btns[i], 'wrong');
+    btns.forEach((b, k) => { if (answers[k] === q.a) setTimeout(() => mark(b, 'right'), 350); else if (k !== i) b.classList.add('dim'); });
     S.missed[key] = (S.missed[key] || 0) + 1;
     sound.sfx('wrong');
     if (power) {
@@ -973,7 +1079,7 @@ function afterAnswer() {
   if (done && !G.finished) {
     G.finished = true;
     world.placeFinish(G.h.dist + 45);
-    toast('🏁', '#ffd23f');
+    toast(null, '#c27a00', 'finish');
   }
   setMode('run');
 }
@@ -992,7 +1098,25 @@ $('#b-speak').addEventListener('click', () => {
 $('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.q.why]); });
 
 // ---------- shop ----------
-const shop = new Shop({ S, save, sound, preview: shopPreview });
+const shop = new Shop({ S, save, sound, preview: shopPreview, thumb });
+// Shop cards show real renders of the runners and blasters, made once and cached.
+const portraits = new Map();
+function thumb(tab, id) {
+  const k = tab + ':' + id;
+  if (portraits.has(k)) return portraits.get(k);
+  let p = null;
+  if (tab === 'runners') {
+    p = (runnerCache.has(id) ? Promise.resolve(runnerCache.get(id)) : loadRunner(byId(RUNNERS, id)).then(r => { runnerCache.set(id, r); return r; }))
+      .then(r => {
+        if (r !== hero) r.animate('idle', 0.5, { t: 0 });
+        return renderPortrait(renderer, r.root, { yaw: Math.PI - 0.45, pitch: 0.06, focus: 0.74, fill: 1.55, env: scene.environment });
+      });
+  } else if (tab === 'weapons') {
+    p = loadBlasters().then(set => (set[id] ? renderPortrait(renderer, set[id].clone(), { yaw: Math.PI / 2 + 0.35, pitch: 0.3, fill: 0.95, env: scene.environment }) : null));
+  }
+  if (p) portraits.set(k, p.catch(() => null));
+  return portraits.get(k) || null;
+}
 let shopFrom = 'title';
 function openShop() {
   sound.unlock();
@@ -1087,11 +1211,23 @@ $('#b-m-shop').addEventListener('click', openShop);
 $('#b-sh-back').addEventListener('click', closeShop);
 
 // ---------- endings ----------
+// Counts a coin total up from zero with a little tick, so the reward feels earned.
+function countUp(node, n) {
+  const t0 = performance.now(), dur = Math.min(1200, 300 + n * 12);
+  node.textContent = '+0';
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur);
+    node.textContent = '+' + Math.round(n * k * (2 - k));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
 function caught() {
   setMode('caught');
   G.c.spin = -1;
   $('#hint').hidden = true;
-  sound.sfx('roar');
+  sound.sfx('roar', G.c.type);
   setTimeout(() => sound.sfx('caught'), 500);
   flash('red');
   G.cam.shake = 0.8;
@@ -1101,8 +1237,8 @@ function caught() {
     if (G.mode !== 'caught') return;
     show('s-caught');
     $('#hud').hidden = true;
-    $('#k-emoji').textContent = CHASER_EMOJI[G.stage.chaser];
-    $('#k-coins').textContent = '+' + G.coins;
+    $('#k-foe').replaceChildren(icon(G.stage.chaser));
+    countUp($('#k-coins'), G.coins);
   }, 1700);
 }
 
@@ -1117,25 +1253,35 @@ function clear() {
   S.coins += G.coins;
   save();
   sound.sfx('fanfare');
+  const last = G.stageIdx + 1 >= G.level.stages.length;
+  setTimeout(() => sound.sfx(last ? 'voice-you-win' : 'voice-level-complete'), 900);
   sound.play('map');
   fx.confetti(G.h.x, 2, -G.h.dist - 8, 160);
   setTimeout(() => {
     if (G.mode !== 'clear') return;
     show('s-clear');
     $('#hud').hidden = true;
-    $('#w-coins').textContent = '+' + G.coins;
+    $('#w-title').textContent = ['NICE!', 'NICE!', 'GREAT!', 'PERFECT!'][stars];
+    countUp($('#w-coins'), G.coins);
     const sr = $('#w-stars');
-    sr.innerHTML = '';
-    for (let k = 0; k < 3; k++) {
-      const x = document.createElement('i');
-      x.textContent = '★';
-      sr.append(x);
-      if (k < stars) setTimeout(() => { x.className = 'on'; sound.sfx('star'); }, 350 + k * 350);
+    sr.replaceChildren(...[0, 1, 2].map(() => icon('star-empty')));
+    for (let k = 0; k < stars; k++) {
+      setTimeout(() => {
+        if (G.mode !== 'clear') return;
+        const st = icon('star-gold', 'on');
+        sr.children[k].replaceWith(st);
+        sound.sfx('star');
+      }, 450 + k * 380);
     }
     const hasNext = G.stageIdx + 1 < G.level.stages.length;
     $('#b-w-next').hidden = !hasNext;
     $('#w-unlock').hidden = !(first && hasNext);
-    if (first && hasNext) $('#w-unlock').textContent = '🔓 ' + CHASER_EMOJI[G.level.stages[G.stageIdx + 1].chaser];
+    if (first && hasNext) {
+      const foe = el('span', 'foe');
+      foe.append(icon(G.level.stages[G.stageIdx + 1].chaser));
+      $('#w-unlock').replaceChildren(icon('unlock'), foe);
+      setTimeout(() => { if (G.mode === 'clear') sound.sfx('unlock'); }, 450 + stars * 380 + 300);
+    }
     $('#w-trophy').hidden = hasNext;
   }, 1600);
 }
@@ -1167,6 +1313,15 @@ $('#b-w-next').addEventListener('click', () => { sound.sfx('click'); openStage(G
 $('#b-w-retry').addEventListener('click', () => { sound.sfx('click'); openStage(G.level, G.stageIdx); });
 $('#b-w-map').addEventListener('click', () => { sound.sfx('click'); showMap(); });
 $('#b-m-home').addEventListener('click', () => { sound.sfx('click'); showTitle(); });
+$('#b-credits').addEventListener('click', () => {
+  sound.unlock();
+  sound.sfx('click');
+  const body = $('#credits-body');
+  if (!body.childElementCount) for (const sec of CREDITS) body.append(el('h4', null, sec.title), ...sec.lines.map(l => el('p', null, l)));
+  show('s-credits');
+  body.scrollTop = 0;
+});
+$('#b-cr-back').addEventListener('click', () => { sound.sfx('click'); show('s-title'); });
 
 function syncToggles() {
   $$('[data-toggle]').forEach(b => b.classList.toggle('off', !S.settings[b.dataset.toggle]));
@@ -1201,7 +1356,7 @@ function update(dt) {
     case 'start': {
       hero.animate(G.t > 1.0 ? 'run' : 'idle', dt, { t: G.clock });
       c.model.animate('roar', dt, G.clock);
-      if (G.t > 1.25) setMode('run');
+      if (G.t > 1.25) { setMode('run'); sound.sfx('go'); sound.sfx('voice-go'); }
       break;
     }
     case 'run': runStep(dt); break;
@@ -1297,7 +1452,7 @@ function updateCamera(dt) {
       const lift = h.y * 0.7;
       _pos.set(h.x + side, (tall ? 3.0 : 2.4) + lift, z - (portrait ? 7.4 : 6.6));
       _look.set(h.x, (tall ? 2.1 : 1.3) + lift, z + 1.8);
-      if (G.mode === 'start' && G.t > 0.9) { _pos.set(h.x * 0.5, 4.2, z + 7.5); _look.set(h.x * 0.3, 1.2, z - 6); }
+      if (G.mode === 'start' && G.t > 0.9) { _pos.set(h.x * 0.55, 3.55, z + 6.1); _look.set(h.x * 0.35, 1.35, z - 6); }
       rate = G.mode === 'start' ? 3.5 : 6;
       break;
     }
@@ -1316,10 +1471,18 @@ function updateCamera(dt) {
     default: {
       // Flying keeps the usual framing, just lifted with the hero; a normal jump only nudges the camera up.
       const lift = h.y * (h.jet ? 0.85 : 0.25);
-      _pos.set(h.x * 0.5, 4.2 + lift, z + 7.5);
-      _look.set(h.x * 0.3, 1.2 + (h.jet ? lift : 0), z - 6);
+      _pos.set(h.x * 0.55, 3.55 + lift, z + 6.1);
+      _look.set(h.x * 0.35, 1.35 + (h.jet ? lift : 0), z - 6);
       rate = 7;
     }
+  }
+  // The hurricane is taller than the view. When it lunges in front of the run camera, it opens a window
+  // around him so he can still see what's coming.
+  if (G.c.model?.setNear) {
+    const runCam = G.mode === 'run' || G.mode === 'paused' || (G.mode === 'start' && G.t > 0.9);
+    const near = runCam ? 1 - clamp((G.c.d - 8.5) / 1.1, 0, 1) : 0;
+    G.c.near = damp(G.c.near || 0, near, 6, dt);
+    G.c.model.setNear(G.c.near);
   }
   if (G.mode === 'paused') return;
   // When swinging between the back and front views, arc out to the side and up instead of flying through the hero.
@@ -1390,6 +1553,7 @@ function frame(now) {
     fx.update(sdt);
   }
   updateCamera(dt);
+  world.cull(camera, G.h.dist);
   post.render(dt);
   if (G.mode === 'run') perf(dt);
 }
@@ -1399,9 +1563,15 @@ G.cam.pos.set(5, 2.6, -5);
 requestAnimationFrame(frame);
 loadBlasters().catch(() => {});
 const wait = ms => new Promise(r => setTimeout(r, ms));
-Promise.race([useRunner(S.equip.runners), wait(8000)])
+// The loading bar follows every file the loaders fetch (models, textures) plus the fonts.
+THREE.DefaultLoadingManager.onProgress = (url, done, total) => loadProgress(done / Math.max(1, total));
+function loadProgress(p) { $('#load-fill').style.setProperty('--p', Math.max(Number($('#load-fill').style.getPropertyValue('--p')) || 0, p).toFixed(3)); }
+Promise.race([Promise.all([document.fonts.ready, useRunner(S.equip.runners), chaserLoads.bear, world.prepare(['mountains'])]), wait(20000)])
   .then(() => Promise.race([warmUp(), wait(4000)]))
-  .finally(() => { $('#loading').hidden = true; });
+  .finally(() => {
+    loadProgress(1);
+    setTimeout(() => { $('#loading').classList.add('done'); setTimeout(() => { $('#loading').hidden = true; }, 600); }, 250);
+  });
 
 // Compile every shader while the loading screen is up (hidden power-ups and one-shot effects too),
 // so the first shield, jetpack or blaster shot doesn't hitch mid-run.
@@ -1415,4 +1585,4 @@ async function warmUp() {
 }
 
 // Handy for testing in the console.
-window.__critterRun = { G, S, world, post, fx, camera, setQuality, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, get hero() { return hero; } };
+window.__critterRun = { G, S, world, post, fx, camera, setQuality, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, caught, clear, get hero() { return hero; } };

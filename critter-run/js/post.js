@@ -32,6 +32,11 @@ export class Post {
     this.composer.addPass(new RenderPass(this.scene, this.camera));
     // The threshold sits above sunlit sand and white paint, so only truly glowing things bloom.
     this.bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.5, 0.55, 1.2);
+    // A sun glint off glossy water can be thousands of times brighter than white, and the blur would spread a
+    // single such pixel into a white haze over the whole screen. Cap what the bloom sees.
+    const hp = this.bloom.materialHighPassFilter;
+    hp.fragmentShader = hp.fragmentShader.replace('vec4 texel = texture2D( tDiffuse, vUv );', 'vec4 texel = min( texture2D( tDiffuse, vUv ), vec4( 6.0 ) );');
+    hp.needsUpdate = true;
     const setBloomSize = this.bloom.setSize.bind(this.bloom);
     this.bloom.setSize = (w, h) => setBloomSize(Math.max(1, Math.round(w * this.bloomScale)), Math.max(1, Math.round(h * this.bloomScale)));
     this.composer.addPass(this.bloom);

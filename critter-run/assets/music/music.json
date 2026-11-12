@@ -1,0 +1,65 @@
+{
+ "title": {
+  "file": "title.mp3",
+  "loopStart": 3.333,
+  "loopEnd": 128.333,
+  "title": "Monkeys Spinning Monkeys",
+  "artist": "Kevin MacLeod"
+ },
+ "map": {
+  "file": "map.mp3",
+  "loopStart": 8.491,
+  "loopEnd": 88.491,
+  "title": "Carefree",
+  "artist": "Kevin MacLeod"
+ },
+ "mountains": {
+  "file": "mountains.mp3",
+  "loopStart": 26.982,
+  "loopEnd": 82.145,
+  "title": "Fiddles McGinty",
+  "artist": "Kevin MacLeod"
+ },
+ "foothills": {
+  "file": "foothills.mp3",
+  "loopStart": 33.417,
+  "loopEnd": 135.818,
+  "title": "Meatball Parade",
+  "artist": "Kevin MacLeod"
+ },
+ "sandhills": {
+  "file": "sandhills.mp3",
+  "loopStart": 38.166,
+  "loopEnd": 95.766,
+  "title": "Hyperfun",
+  "artist": "Kevin MacLeod"
+ },
+ "farmland": {
+  "file": "farmland.mp3",
+  "loopStart": 15.163,
+  "loopEnd": 94.584,
+  "title": "Hillbilly Swing",
+  "artist": "Kevin MacLeod"
+ },
+ "swamp": {
+  "file": "swamp.mp3",
+  "loopStart": 6.599,
+  "loopEnd": 99.69,
+  "title": "DarxieLand",
+  "artist": "Kevin MacLeod"
+ },
+ "beach": {
+  "file": "beach.mp3",
+  "loopStart": 6.068,
+  "loopEnd": 121.268,
+  "title": "Island Meet and Greet",
+  "artist": "Kevin MacLeod"
+ },
+ "tour": {
+  "file": "tour.mp3",
+  "loopStart": 3.631,
+  "loopEnd": 130.69,
+  "title": "Adventures in Adventureland",
+  "artist": "Kevin MacLeod"
+ }
+}

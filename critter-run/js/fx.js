@@ -1,5 +1,5 @@
-// Particles and one-shot effects. Chunky cubes for debris and confetti, soft glowing points for sparks, glows,
-// dust and smoke, plus beams, shock rings and a generic timed-effect hook the weapons use.
+// Particles and one-shot effects. Lit rock-and-wood chips for debris, paper squares for confetti, soft glowing
+// points for sparks, glows, dust and smoke, plus beams, shock rings and a generic timed-effect hook the weapons use.
 import * as THREE from 'three';
 import { bend, softTexture, U } from './gfx.js';
 
@@ -87,11 +87,17 @@ export class FX {
   constructor(scene, max = 1400) {
     this.scene = scene;
     this.max = max;
-    this.mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), bend(new THREE.MeshBasicMaterial({ color: '#ffffff' })), max);
-    this.mesh.frustumCulled = false;
-    this.mesh.setColorAt(0, new THREE.Color('#ffffff'));
-    this.mesh.count = 0;
-    scene.add(this.mesh);
+    // Debris: small irregular chips that catch the light. Confetti: thin paper squares that glow a little.
+    const chip = new THREE.IcosahedronGeometry(0.55, 0).scale(1, 0.7, 0.85);
+    this.mesh = new THREE.InstancedMesh(chip, bend(new THREE.MeshStandardMaterial({ roughness: 0.75, metalness: 0.05, flatShading: true })), max);
+    this.paper = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 0.06, 0.7), bend(new THREE.MeshBasicMaterial({ color: '#ffffff' })), max);
+    for (const m of [this.mesh, this.paper]) {
+      m.frustumCulled = false;
+      m.setColorAt(0, new THREE.Color('#ffffff'));
+      m.count = 0;
+      m.castShadow = m === this.mesh;
+      scene.add(m);
+    }
     this.sparks = new PointPool(scene, 1600, THREE.AdditiveBlending);
     this.puffs = new PointPool(scene, 700, THREE.NormalBlending);
     this.ps = [];
@@ -106,9 +112,9 @@ export class FX {
   }
 
   // Chunky cube particle. g is gravity (negative pulls down). grow makes puffs swell instead of shrink.
-  spawn({ x, y, z, vx = 0, vy = 0, vz = 0, life = 1, size = 0.2, color = '#ffffff', g = -14, grow = false, floor = false, glow = 1 }) {
+  spawn({ x, y, z, vx = 0, vy = 0, vz = 0, life = 1, size = 0.2, color = '#ffffff', g = -14, grow = false, floor = false, glow = 1, paper = false }) {
     if (this.ps.length >= this.max) this.ps.shift();
-    this.ps.push({ x, y, z, vx, vy, vz, life, t: 0, size, color: new THREE.Color(color).multiplyScalar(glow), g, grow, floor, rx: Math.random() * 6, ry: Math.random() * 6, sp: (Math.random() - 0.5) * 12 });
+    this.ps.push({ x, y, z, vx, vy, vz, life, t: 0, size, color: new THREE.Color(color).multiplyScalar(glow), g, grow, floor, paper, rx: Math.random() * 6, ry: Math.random() * 6, sp: (Math.random() - 0.5) * 12 });
   }
   // Soft additive glow (sparks, magic, fire). Use glow > 1 to feed the bloom.
   spark(o) { this.sparks.spawn(o); }
@@ -141,7 +147,7 @@ export class FX {
     for (let i = 0; i < n; i++) this.spawn({
       x: x + (Math.random() - 0.5) * 8, y: y + Math.random() * 3, z: z + (Math.random() - 0.5) * 6,
       vx: (Math.random() - 0.5) * 6, vy: 6 + Math.random() * 8, vz: (Math.random() - 0.5) * 6,
-      life: 2.5 + Math.random(), size: 0.16 + Math.random() * 0.1, color: cs[i % cs.length], g: -7,
+      life: 2.5 + Math.random(), size: 0.16 + Math.random() * 0.1, color: cs[i % cs.length], g: -7, paper: true,
     });
   }
 
@@ -188,7 +194,7 @@ export class FX {
   }
 
   update(dt) {
-    let n = 0;
+    let n = 0, np = 0;
     const ps = this.ps;
     for (let i = ps.length - 1; i >= 0; i--) {
       const p = ps[i];
@@ -201,13 +207,14 @@ export class FX {
       const k = p.t / p.life;
       const s = p.grow ? p.size * (1 + k * 2.2) * (1 - k * k) : p.size * (1 - k * k);
       _m.compose(_p.set(p.x, p.y, p.z), _q.setFromEuler(_e.set(p.rx, p.ry, 0)), _s.set(s, s, s));
-      this.mesh.setMatrixAt(n, _m);
-      this.mesh.setColorAt(n, p.color);
-      n++;
+      if (p.paper) { this.paper.setMatrixAt(np, _m); this.paper.setColorAt(np, p.color); np++; }
+      else { this.mesh.setMatrixAt(n, _m); this.mesh.setColorAt(n, p.color); n++; }
     }
-    this.mesh.count = n;
-    this.mesh.instanceMatrix.needsUpdate = true;
-    if (this.mesh.instanceColor) this.mesh.instanceColor.needsUpdate = true;
+    for (const [m, c] of [[this.mesh, n], [this.paper, np]]) {
+      m.count = c;
+      m.instanceMatrix.needsUpdate = true;
+      if (m.instanceColor) m.instanceColor.needsUpdate = true;
+    }
     this.sparks.update(dt);
     this.puffs.update(dt);
 
@@ -244,6 +251,7 @@ export class FX {
   clear() {
     this.ps.length = 0;
     this.mesh.count = 0;
+    this.paper.count = 0;
     this.sparks.clear();
     this.puffs.clear();
     for (const o of this.oneShots) this.dispose(o.obj);

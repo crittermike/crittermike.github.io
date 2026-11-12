@@ -1,15 +1,23 @@
 // The coin shop: runners, blasters, power-up upgrades and trails. Tapping a card previews it on the 3D runner;
 // the big button underneath buys, equips or upgrades. Words are kept to one per button.
 import { SHOP_TABS, POWERS, TIMED_POWERS, MAX_UPGRADE, UPGRADE_COST, powerTime } from './items.js';
+import { icon } from './icons.js';
 
 const $ = s => document.querySelector(s);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const again = (e, cls) => { e.classList.remove(cls); void e.offsetWidth; e.classList.add(cls); };
+const TAB_COLOR = { runners: '#62bdff', weapons: '#bb8cff', powers: '#ffbd5c', trails: '#5ff0de' };
+function price(n, poor) {
+  const p = el('span', 'price' + (poor ? ' poor' : ''));
+  p.append(icon('coin'), el('span', null, n));
+  return p;
+}
 
 export class Shop {
   // preview(tab, id, how) shows the item on the 3D runner. how is 'look', 'buy' or 'use'.
-  constructor({ S, save, sound, preview }) {
-    Object.assign(this, { S, save, sound, preview });
+  // thumb(tab, id) may return a promise of an image URL (a rendered portrait) to show instead of the icon.
+  constructor({ S, save, sound, preview, thumb = () => null }) {
+    Object.assign(this, { S, save, sound, preview, thumb });
     this.tab = 'runners';
     this.sel = {};
     this.tabs = $('#sh-tabs');
@@ -17,7 +25,8 @@ export class Shop {
     this.act = $('#b-sh-act');
     this.info = $('#sh-info');
     for (const t of SHOP_TABS) {
-      const b = el('button', 'sh-tab', t.icon);
+      const b = el('button', 'btn gold sh-tab');
+      b.append(icon(t.icon));
       b.dataset.tab = t.id;
       b.setAttribute('aria-label', t.id);
       b.addEventListener('click', () => { if (this.tab !== t.id) { sound.sfx('click'); this.showTab(t.id); } });
@@ -54,18 +63,24 @@ export class Shop {
     for (const it of this.items()) {
       const b = el('button', 'sh-card');
       b.dataset.id = it.id;
-      b.style.setProperty('--ic', it.color || '#ffd23f');
-      b.append(el('span', 'i', it.icon), el('span', 'n', it.name));
+      b.style.setProperty('--ic', it.color || TAB_COLOR[tab]);
+      const th = el('span', 'thumb');
+      th.append(icon(it.icon));
+      const url = this.thumb(tab, it.id);
+      if (url) url.then(u => { if (u && th.isConnected) { const img = new Image(); img.alt = ''; img.src = u; th.replaceChildren(img); } }).catch(() => {});
+      b.append(th, el('span', 'n', it.name));
       if (tab === 'powers') {
         const lv = S.upgrades[it.id] || 0;
         const pips = el('span', 'pips');
         for (let k = 0; k < MAX_UPGRADE; k++) pips.append(el('i', k < lv ? 'on' : ''));
-        b.append(pips, el('span', 'tm', '⏱️ ' + powerTime(it.id, lv)));
+        const tm = el('span', 'tm');
+        tm.append(icon('timer'), el('span', null, powerTime(it.id, lv)));
+        b.append(pips, tm);
       } else if (!this.owned(tab, it.id)) {
-        b.append(el('span', 'p' + (S.coins < it.price ? ' poor' : ''), '🪙 ' + it.price));
+        b.append(price(it.price, S.coins < it.price));
         b.classList.add('locked');
       }
-      if (tab !== 'powers' && S.equip[tab] === it.id) b.classList.add('eq');
+      if (tab !== 'powers' && S.equip[tab] === it.id) { const eq = el('span', 'eq'); eq.append(icon('check')); b.append(eq); }
       b.addEventListener('click', () => this.select(it.id));
       this.grid.append(b);
     }
@@ -86,23 +101,24 @@ export class Shop {
   updateAction() {
     const { S, tab, act } = this, id = this.sel[tab];
     const it = this.items().find(x => x.id === id);
-    act.className = 'sh-act';
+    act.className = 'btn green sh-act';
     this.info.textContent = it.name;
+    const label = (...parts) => act.replaceChildren(...parts.map(p => (typeof p === 'string' && p.length > 1 && !/^\d/.test(p) ? icon(p) : el('span', null, p))));
     if (tab === 'powers') {
       const lv = S.upgrades[id] || 0;
-      if (lv >= MAX_UPGRADE) { act.textContent = '⭐'; act.classList.add('done'); return; }
-      act.textContent = '⬆️ 🪙 ' + UPGRADE_COST[lv];
+      if (lv >= MAX_UPGRADE) { label('star-gold', 'star-gold', 'star-gold'); act.classList.add('done'); return; }
+      label('upgrade', 'coin', String(UPGRADE_COST[lv]));
       if (S.coins < UPGRADE_COST[lv]) act.classList.add('poor');
       return;
     }
     if (!this.owned(tab, id)) {
-      act.textContent = '🪙 ' + it.price;
+      label('coin', String(it.price));
       if (S.coins < it.price) act.classList.add('poor');
     } else if (S.equip[tab] !== id) {
-      act.textContent = '👍';
-      act.classList.add('use');
+      label('check');
+      act.classList.replace('green', 'blue');
     } else {
-      act.textContent = '✅';
+      label('check');
       act.classList.add('done');
     }
   }

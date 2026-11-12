@@ -1,6 +1,17 @@
-// All sound is made live with WebAudio: a little procedural band per region, synth sound effects,
-// and speechSynthesis for reading questions aloud.
+// Music and sound effects. Real recordings live in assets/music and assets/sfx (see assets/CREDITS.md), listed in
+// music.json and sfx.json. Music streams from the files and loops with a short crossfade; effects are decoded once
+// and played with a little pitch variety. If a file is missing (or still loading), a small synth stands in so the
+// game is never silent. Questions are read aloud with speechSynthesis.
 import { rng } from './gfx.js';
+
+const MUSIC_DIR = './assets/music/';
+const SFX_DIR = './assets/sfx/';
+const XFADE = 1.6; // seconds of overlap when a song loops or changes
+const MUSIC_VOL = 0.55, MUSIC_DUCKED = 0.28, SFX_VOL = 0.8;
+// Loudness per effect, on top of the normalized files.
+const SFX_GAIN = { coin: 0.5, swoosh: 0.55, land: 0.45, click: 0.6, jump: 0.6, star: 0.9, fanfare: 1, caught: 0.9, powerOn: 0.8, unlock: 0.8 };
+const NO_PITCH = new Set(['fanfare', 'caught', 'powerOn', 'powerOff', 'star', 'buy', 'correct', 'wrong', 'gate', 'go', 'unlock']);
+const loadJSON = url => fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null);
 
 const hz = n => 440 * Math.pow(2, (n - 69) / 12);
 
@@ -84,6 +95,10 @@ export class Sound {
     this.song = null;
     this.wantSong = 'title';
     this.speechRun = 0;
+    this.track = null; // the music file playing now
+    this.buffers = new Map(); // sfx name -> decoded variations
+    this.musicMap = loadJSON(MUSIC_DIR + 'music.json').then(m => { this.musicMap = m || {}; if (this.ctx) this.play(this.wantSong, true); return this.musicMap; });
+    this.sfxMap = loadJSON(SFX_DIR + 'sfx.json').then(m => { this.sfxMap = m || {}; if (this.ctx) this.loadSfx(); return this.sfxMap; });
   }
 
   unlock() {
@@ -110,8 +125,11 @@ export class Sound {
         const send = c.createGain(); send.gain.value = amt;
         src.connect(send); send.connect(this.reverb);
       }
-      document.addEventListener('visibilitychange', () => (document.hidden ? c.suspend() : c.resume()));
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { c.suspend(); this.track?.els.forEach(e => e.pause()); } else { c.resume(); this.track?.els.forEach(e => { if (e.dataset.on) e.play().catch(() => {}); }); }
+      });
       this.timer = setInterval(() => this.tick(), 25);
+      if (this.sfxMap && typeof this.sfxMap.then !== 'function') this.loadSfx();
     }
     if (this.ctx.state === 'suspended') this.ctx.resume();
     // iOS only allows speech after a tap has spoken once.
@@ -131,31 +149,130 @@ export class Sound {
 
   applySettings() {
     if (!this.ctx) return;
-    const t = this.ctx.currentTime;
-    this.musicGain.gain.setTargetAtTime(this.settings.music ? (this.ducked ? 0.2 : 0.32) : 0, t, 0.05);
-    this.sfxGain.gain.setTargetAtTime(this.settings.sfx ? 0.6 : 0, t, 0.05);
+    const t = this.ctx.currentTime, file = !!this.track;
+    const vol = file ? (this.ducked ? MUSIC_DUCKED : MUSIC_VOL) : (this.ducked ? 0.2 : 0.32);
+    this.musicGain.gain.setTargetAtTime(this.settings.music ? vol : 0, t, 0.08);
+    this.sfxGain.gain.setTargetAtTime(this.settings.sfx ? SFX_VOL : 0, t, 0.05);
   }
 
   play(key, force = false) {
     this.wantSong = key;
     if (!this.ctx) return;
+    // The song list is still loading: start once it arrives (the constructor calls play again).
+    if (this.musicMap && typeof this.musicMap.then === 'function') return;
+    const def = this.musicMap && this.musicMap[key];
+    if (def) {
+      this.song = null;
+      if (!force && this.track && this.track.key === key) return;
+      this.playFile(key, def);
+      this.applySettings();
+      return;
+    }
+    this.stopFile();
     if (!force && this.song && this.song.key === key) return;
     this.song = buildSong(key);
     this.step = 0;
     this.nextTime = this.ctx.currentTime + 0.08;
+    this.applySettings();
+  }
+
+  // Streams a song through two audio elements. Near the loop end the second one starts at the loop start and
+  // the two crossfade, so the song never stops or clicks.
+  playFile(key, def) {
+    const c = this.ctx, t = c.currentTime;
+    this.stopFile();
+    const mk = () => {
+      const e = new Audio(MUSIC_DIR + def.file);
+      e.preload = 'auto';
+      e.crossOrigin = 'anonymous';
+      const src = c.createMediaElementSource(e), g = c.createGain();
+      g.gain.value = 0;
+      src.connect(g); g.connect(this.musicFilter);
+      e.dataset.on = '';
+      return { e, g };
+    };
+    const a = mk(), b = mk();
+    const tr = { key, def, els: [a.e, b.e], gains: [a.g, b.g], cur: 0, swapAt: Infinity };
+    this.track = tr;
+    this.startVoice(tr, 0, 0, t, true);
+  }
+  startVoice(tr, i, from, t, first = false) {
+    const e = tr.els[i], g = tr.gains[i];
+    e.currentTime = from;
+    e.dataset.on = '1';
+    e.play().catch(() => {});
+    g.gain.cancelScheduledValues(t);
+    g.gain.setValueAtTime(g.gain.value, t);
+    g.gain.linearRampToValueAtTime(1, t + (first ? 0.6 : XFADE));
+    tr.cur = i;
+  }
+  stopFile() {
+    const tr = this.track;
+    if (!tr) return;
+    this.track = null;
+    const t = this.ctx.currentTime;
+    tr.gains.forEach(g => { g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + 0.8); });
+    setTimeout(() => tr.els.forEach(e => { e.pause(); e.dataset.on = ''; e.removeAttribute('src'); e.load(); }), 900);
+  }
+  // Called every 25 ms. When the song is XFADE seconds from its loop end, the other copy starts XFADE seconds
+  // before the loop start: the two play the same bars in step while they crossfade, so the beat never stumbles.
+  tickFile() {
+    const tr = this.track;
+    if (!tr) return;
+    const e = tr.els[tr.cur];
+    const end = tr.def.loopEnd || e.duration;
+    if (!end || !isFinite(end) || e.paused) return;
+    if (e.currentTime >= end - XFADE) {
+      const t = this.ctx.currentTime, old = tr.cur, g = tr.gains[old];
+      this.startVoice(tr, 1 - old, Math.max(0, (tr.def.loopStart || 0) - XFADE), t);
+      g.gain.cancelScheduledValues(t);
+      g.gain.setValueAtTime(g.gain.value, t);
+      g.gain.linearRampToValueAtTime(0, t + XFADE);
+      setTimeout(() => { if (this.track === tr && tr.cur !== old) { tr.els[old].pause(); tr.els[old].dataset.on = ''; } }, XFADE * 1000 + 100);
+    }
+  }
+
+  // Decodes every effect listed in sfx.json in the background.
+  async loadSfx() {
+    if (this.sfxLoading || !this.ctx) return;
+    this.sfxLoading = true;
+    const map = this.sfxMap || {};
+    for (const [name, files] of Object.entries(map)) {
+      const list = [];
+      for (const f of [].concat(files)) {
+        try {
+          const buf = await fetch(SFX_DIR + f).then(r => r.arrayBuffer());
+          list.push(await this.ctx.decodeAudioData(buf));
+        } catch { /* missing file: the synth covers it */ }
+      }
+      if (list.length) this.buffers.set(name, list);
+    }
+  }
+  playSample(name, opts = {}) {
+    const list = this.buffers.get(name);
+    if (!list) return false;
+    const c = this.ctx, src = c.createBufferSource(), g = c.createGain();
+    src.buffer = list[Math.floor(Math.random() * list.length)];
+    if (!NO_PITCH.has(name) && !name.startsWith('voice') && !opts.exact) src.playbackRate.value = 0.94 + Math.random() * 0.12;
+    g.gain.value = (SFX_GAIN[name] ?? (name.startsWith('voice') ? 1 : 0.8)) * (opts.gain ?? 1);
+    src.connect(g); g.connect(this.sfxGain);
+    src.start(c.currentTime + 0.005);
+    return true;
   }
 
   duck(on) {
     this.ducked = on;
     if (!this.ctx) return;
     const t = this.ctx.currentTime;
-    this.musicFilter.frequency.setTargetAtTime(on ? 900 : 18000, t, 0.12);
+    this.musicFilter.frequency.setTargetAtTime(on ? 1400 : 20000, t, 0.12);
     this.applySettings();
   }
 
   tick() {
     const c = this.ctx;
-    if (!c || !this.song || c.state !== 'running') return;
+    if (!c || c.state !== 'running') return;
+    this.tickFile();
+    if (!this.song) return;
     const stepDur = 60 / this.song.tempo / 4;
     if (this.nextTime < c.currentTime - 0.05) this.nextTime = c.currentTime + 0.05;
     while (this.nextTime < c.currentTime + 0.14) {
@@ -243,15 +360,19 @@ export class Sound {
   snare(t, out, v = 1) { this.noiseHit(t, 0.16, { gain: 0.32 * v, freq: 1500, dest: out }); this.tone(t, 190, 0.05, { type: 'triangle', gain: 0.25 * v, release: 0.05, dest: out }); }
   hat(t, out, v = 1) { this.noiseHit(t, 0.045, { gain: 0.11 * v, freq: 7500, dest: out }); }
 
-  sfx(name) {
+  // name: one of the effects in sfx.json. variant lets callers pick a specific recording (e.g. 'roar' + 'bear').
+  sfx(name, variant) {
     const c = this.ctx;
     if (!c || !this.settings.sfx) return;
+    if (variant && this.playSample(name + '-' + variant)) return;
+    if (this.playSample(name)) return;
     const t = c.currentTime + 0.01;
     const T = (...a) => this.tone(...a);
     switch (name) {
       case 'coin': T(t, 988, 0.05, { gain: 0.12 }); T(t + 0.05, 1319, 0.12, { gain: 0.12 }); break;
       case 'jump': T(t, 320, 0.16, { type: 'triangle', gain: 0.3, slide: 720 }); break;
       case 'land': this.noiseHit(t, 0.08, { gain: 0.2, type: 'lowpass', freq: 600 }); break;
+      case 'stomp': this.noiseHit(t, 0.18, { gain: 0.35, type: 'lowpass', freq: 900 }); T(t, 220, 0.14, { type: 'triangle', gain: 0.3, slide: 520 }); break;
       case 'swoosh': this.noiseHit(t, 0.14, { gain: 0.16, type: 'bandpass', freq: 900, sweep: 3000, q: 2 }); break;
       case 'hit':
         this.noiseHit(t, 0.3, { gain: 0.5, type: 'lowpass', freq: 1500, sweep: 200 });

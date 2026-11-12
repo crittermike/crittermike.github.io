@@ -6,6 +6,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { BIOMES, CHASERS } from './js/catalog.js';
+import { hasIcon } from './js/icons.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dir = path.join(here, 'levels');
@@ -22,9 +23,10 @@ function loadLevel(file) {
 }
 const levels = files.map(file => ({ file, level: loadLevel(file) }));
 
-const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
-const isOneEmoji = s => typeof s === 'string' && [...segmenter.segment(s)].length === 1
-  && /\p{Extended_Pictographic}/u.test(s) && !/[\p{L}\p{N}]/u.test(s);
+// Emoji are banned everywhere in the game; pictures are icon names from js/icons.js.
+const EMOJI = /[\p{Extended_Pictographic}\u{FE0F}\u{20E3}\u{1F1E6}-\u{1F1FF}]/u;
+const isIcon = s => typeof s === 'string' && hasIcon(s);
+const noEmoji = (value, where) => assert.ok(!EMOJI.test(value), `${where}: "${value}" has an emoji (use icon names instead)`);
 const words = s => s.trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)).length;
 const text = s => typeof s === 'string' && s.trim().length > 0;
 
@@ -34,6 +36,7 @@ function checkKeys(obj, allowed, where) {
 }
 function checkShort(value, maxWords, maxChars, where) {
   assert.ok(text(value), `${where}: must be non-empty text`);
+  noEmoji(value, where);
   assert.ok(words(value) <= maxWords, `${where}: "${value}" has more than ${maxWords} words`);
   assert.ok(value.length <= maxChars, `${where}: "${value}" is longer than ${maxChars} characters`);
 }
@@ -71,8 +74,8 @@ for (const { file, level } of levels) {
       assert.ok(BIOMES.includes(stage.biome), `${where}: biome must be one of ${BIOMES.join(', ')}`);
       assert.ok(CHASERS.includes(stage.chaser), `${where}: chaser must be one of ${CHASERS.join(', ')}`);
       assert.match(stage.color, /^#[0-9a-f]{6}$/i, `${where}: color must be #rrggbb`);
-      assert.ok(Array.isArray(stage.icons) && stage.icons.length >= 1 && stage.icons.length <= 4, `${where}: icons needs 1-4 emoji`);
-      stage.icons.forEach(e => assert.ok(isOneEmoji(e), `${where}: icon "${e}" must be one emoji`));
+      assert.ok(Array.isArray(stage.icons) && stage.icons.length >= 1 && stage.icons.length <= 4, `${where}: icons needs 1-4 icon names`);
+      stage.icons.forEach(e => assert.ok(isIcon(e), `${where}: "${e}" is not an icon in js/icons.js`));
       if (stage.biome === 'tour') {
         // The final run passes through every earlier stage's scenery and reuses their questions.
         assert.equal(si, level.stages.length - 1, `${where}: the tour must be the last stage`);
@@ -85,8 +88,12 @@ for (const { file, level } of levels) {
         checkKeys(q, ['q', 'a', 'wrong', 'why', 'pic', 'show', 'say'], at);
         checkShort(q.q, 8, 48, `${at} q`);
         if (q.show !== undefined) checkShort(q.show, 8, 40, `${at} show`);
-        if (q.say !== undefined) assert.ok(text(q.say) && q.say.length <= 140, `${at}: say must be short text`);
-        if (q.pic !== undefined) assert.ok(isOneEmoji(q.pic), `${at}: pic must be one emoji`);
+        if (q.say !== undefined) { assert.ok(text(q.say) && q.say.length <= 140, `${at}: say must be short text`); noEmoji(q.say, at); }
+        if (q.pic !== undefined) {
+          const pics = [].concat(q.pic);
+          assert.ok(pics.length >= 1 && pics.length <= 3, `${at}: pic is one icon name or a list of up to 3`);
+          pics.forEach(e => assert.ok(isIcon(e), `${at}: "${e}" is not an icon in js/icons.js`));
+        }
         assert.ok(Array.isArray(q.wrong) && q.wrong.length >= 3, `${at}: needs at least 3 wrong answers`);
         [q.a, ...q.wrong].forEach(ans => checkShort(ans, 4, 24, `${at} answer`));
         const all = [q.a, ...q.wrong].map(s => s.trim().toLowerCase());
@@ -100,3 +107,18 @@ for (const { file, level } of levels) {
     assert.ok(level.stages.filter(s => s.biome === 'tour').length <= 1, `${file}: at most one tour stage`);
   });
 }
+
+test('no emoji anywhere in the game', () => {
+  const skip = new Set(['vendor', 'assets']);
+  const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => {
+    if (e.isDirectory()) return skip.has(e.name) ? [] : walk(path.join(d, e.name));
+    return /\.(js|mjs|html|md|css|json)$/.test(e.name) ? [path.join(d, e.name)] : [];
+  });
+  const files = [...walk(here), path.join(here, 'assets', 'CREDITS.md')].filter(f => fs.existsSync(f));
+  for (const f of files) {
+    fs.readFileSync(f, 'utf8').split('\n').forEach((line, i) => {
+      const m = line.match(EMOJI);
+      assert.ok(!m, `${path.relative(here, f)}:${i + 1} has an emoji (${m && m[0]}); use an icon from js/icons.js`);
+    });
+  }
+});

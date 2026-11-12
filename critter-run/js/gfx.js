@@ -9,9 +9,12 @@ export const U = { uBend: { value: 0.0017 }, uTime: { value: 0 }, uRim: { value:
 // the camera never changes how much a point sinks. That keeps the trail, the grass and the props in step.
 // Shadows are drawn unbent, which still lines up because the receiver looks up its shadow with its unbent
 // world position too.
-export function bend(mat, { wave = false, rim = 0 } = {}) {
+// patch(shader) lets a material add its own shader changes on top (terrain blending, grass wind, water), and
+// key names that variant so three.js compiles it once.
+export function bend(mat, { wave = false, rim = 0, patch = null, key = '' } = {}) {
   mat.onBeforeCompile = sh => {
     Object.assign(sh.uniforms, U);
+    if (patch) patch(sh);
     sh.vertexShader = 'uniform float uBend;\nuniform float uTime;\n' + sh.vertexShader.replace(
       '#include <project_vertex>',
       `#include <project_vertex>
@@ -32,7 +35,7 @@ export function bend(mat, { wave = false, rim = 0 } = {}) {
       );
     }
   };
-  mat.customProgramCacheKey = () => `bend:${wave}:${rim}`;
+  mat.customProgramCacheKey = () => `bend:${wave}:${rim}:${key}`;
   return mat;
 }
 
@@ -162,7 +165,7 @@ export function softTexture() {
 }
 
 // ---------- text on a canvas ----------
-export function textTexture(text, { w = 512, h = 128, bg = '#ffffff', fg = '#222', border = '#222', font = 700, size = 72 } = {}) {
+export function textTexture(text, { w = 512, h = 128, bg = '#ffffff', fg = '#222', border = '#222', size = 72 } = {}) {
   const c = document.createElement('canvas');
   c.width = w; c.height = h;
   const x = c.getContext('2d');
@@ -175,7 +178,7 @@ export function textTexture(text, { w = 512, h = 128, bg = '#ffffff', fg = '#222
   x.textAlign = 'center';
   x.textBaseline = 'middle';
   let s = size;
-  do { x.font = `${font} ${s}px Fredoka, "Arial Rounded MT Bold", system-ui, sans-serif`; s -= 4; } while (x.measureText(text).width > w - 40 && s > 20);
+  do { x.font = `${s}px "Lilita One", Fredoka, "Arial Rounded MT Bold", system-ui, sans-serif`; s -= 4; } while (x.measureText(text).width > w - 40 && s > 20);
   x.fillText(text, w / 2, h / 2 + 4);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
