@@ -34,7 +34,6 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 |---|---|---|
 | `runners/*.glb` (all but `anims.glb`) | Universal Base Characters and Modular Character Outfits - Fantasy, combined onto one skeleton per character | [Quaternius](https://quaternius.com) |
 | `runners/anims.glb` | Universal Animation Library 1 and 2, plus "Victory", "Dab" and "Power Up" from [Mesh2Motion](https://github.com/Mesh2Motion/mesh2motion-assets), retargeted to the same skeleton | [Quaternius](https://quaternius.com), Mesh2Motion |
-| `chasers/boar.glb` | Pixor library ([pixor.art/library](https://pixor.art/library/)), with extra run and attack animations added for this game | Frakassets |
 | `chasers/hurricane.glb` | Made for this game | Critter Run |
 | `blasters.glb` | Blaster Kit | [Kenney](https://kenney.nl) |
 
@@ -47,8 +46,9 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 | `chasers/spider.glb` | "King Baboon Tarantula" | Auckland Museum | https://sketchfab.com/3d-models/king-baboon-tarantula-92c84c9dac9043ee81e87173e2ee0381 |
 | `chasers/gator.glb` | "fantasy crocodile animation" | blam (Blam577895) | https://sketchfab.com/3d-models/fantasy-crocodile-animation-0226417fd07e491a9d5464074f86104b |
 | `chasers/shark.glb` | "Animated Swimming Great White Shark Loop" | LasquetiSpice | https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1 |
+| `chasers/panther.glb` | "black panther", based on "Panther 3D Model" (https://sketchfab.com/s/oQWsU) by ₦₥₵ ฿₵ | kenchoo | https://sketchfab.com/3d-models/black-panther-7fca11c89cca4362a525c891a8345112 |
 
-All five were modified: new or trimmed animations (run, attack, roar or howl, idle), simplified meshes, and compressed. The tarantula is a museum scan, rigged with the skeleton from [Morphazoid](https://github.com/blechdom/morphazoid) by Kristin Galvin (MIT License, see `chasers/LICENSE-morphazoid-MIT.txt`).
+All six were modified: new or trimmed animations (run, attack, roar or howl, idle), simplified meshes, and compressed. The panther's run, pounce and roar were made for this game; its idle comes from kenchoo's animation. The tarantula is a museum scan, rigged with the skeleton from [Morphazoid](https://github.com/blechdom/morphazoid) by Kristin Galvin (MIT License, see `chasers/LICENSE-morphazoid-MIT.txt`).
 
 The runners were compressed (WebP textures, quantized meshes), and the seven blasters merged into one file with each weapon as a node named after its id in `js/items.js`.
 

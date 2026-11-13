@@ -23,7 +23,7 @@ const CHASERS = {
   // The wolf's texture is cartoon blue, so it's pulled toward a natural grey.
   wolf: { len: 2.6, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'howl' }, rate: 1.0, rim: 0.3, grade: { sat: 0.2, tint: '#e6dccd' } },
   spider: { len: 3.0, clips: { run: 'run', idle: 'idle', attack: 'attack', roar: 'attack' }, rate: 1.1, rim: 0.2 },
-  boar: { len: 2.6, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Attack' }, rate: 0.95 },
+  panther: { len: 3.3, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Roar' }, rate: 1.0, rim: 0.4 },
   gator: { len: 4.6, clips: { run: 'run', idle: 'idle', attack: 'bite', roar: 'bite' }, rate: 1.2, rim: 0.2 },
   shark: { len: 4.4, clips: { run: 'swim', idle: 'swim', attack: 'bite', roar: 'bite' }, rate: 1.3, rim: 0.2, y: -0.55, wake: true },
   // The run camera ends up inside the hurricane's see-through funnel, so it fades out while the camera is behind the runner.

@@ -30,7 +30,7 @@ CritterRun.addLevel({
       { q: 'Where does rushing water make power?', a: 'At the fall line', wrong: ['At the beach', 'In the swamps', 'On barrier islands'], why: 'Falling water makes power.', pic: 'water' },
       { q: 'Why is farming hard in the Sandhills?', a: 'Dry, sandy soil', wrong: ['Too many mountains', 'Too much rain', 'Salty ocean water'], why: 'Sandy soil is too dry.', pic: 'sprout' },
     ] },
-    { name: 'Inner Coastal Plain', biome: 'farmland', chaser: 'boar', color: '#3cb44b', questions: [
+    { name: 'Inner Coastal Plain', biome: 'farmland', chaser: 'panther', color: '#3cb44b', questions: [
       { q: 'Which region is best for farming?', a: 'Inner Coastal Plain', wrong: ['Sandhills', 'Blue Ridge', 'Coastal Zone', 'Outer Coastal Plain'], why: 'It is the farming heart.', pic: 'tractor' },
       { show: 'Inner Coastal Plain', q: 'What is the land like?', a: 'Mostly flat', wrong: ['Tall mountains', 'Sandy hills', 'Swamps and marshes'], why: 'The land is mostly flat.' },
       { show: 'Inner Coastal Plain', q: 'Why do crops grow well there?', a: 'Rich, dark soil', wrong: ['Dry, sandy soil', 'Salty ocean water', 'Rocky mountain soil'], why: 'Rich soil that drains well.' },

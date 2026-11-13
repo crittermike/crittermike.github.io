@@ -23,8 +23,8 @@ export const CREDITS = [
     { text: '"King Baboon Tarantula" by Auckland Museum, rigged with Morphazoid by Kristin Galvin (MIT License)', link: 'https://sketchfab.com/3d-models/king-baboon-tarantula-92c84c9dac9043ee81e87173e2ee0381', license: 'CC BY 4.0', url: CCBY4 },
     { text: '"fantasy crocodile animation" by blam', link: 'https://sketchfab.com/3d-models/fantasy-crocodile-animation-0226417fd07e491a9d5464074f86104b', license: 'CC BY 4.0', url: CCBY4 },
     { text: '"Animated Swimming Great White Shark Loop" by LasquetiSpice', link: 'https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1', license: 'CC BY 4.0', url: CCBY4 },
-    { text: 'All five animals above were modified: new animations, simplified and compressed.' },
-    { text: 'Boar from the Pixor library by Frakassets', license: 'CC0', url: CC0 },
+    { text: '"black panther" by kenchoo, based on "Panther 3D Model" by ₦₥₵ ฿₵', link: 'https://sketchfab.com/3d-models/black-panther-7fca11c89cca4362a525c891a8345112', license: 'CC BY 4.0', url: CCBY4 },
+    { text: 'All six animals above were modified: new animations, simplified and compressed.' },
     { text: 'Blasters from the Blaster Kit by Kenney (kenney.nl)', license: 'CC0', url: CC0 },
   ] },
   { title: 'World', items: [

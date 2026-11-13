@@ -37,7 +37,7 @@ const ROARS = {
   bear: [['bear', 0.7]],
   wolf: [['wolf', 1]],
   spider: [['hiss', 0.7]],
-  boar: [['boar', 1]],
+  panther: [['panther', 1]],
   gator: [['gator', 1]],
   shark: [['shark-splash', 0.9], ['shark-chomp', 0.6, 0.45]],
   hurricane: [['hurricane', 0.9]],

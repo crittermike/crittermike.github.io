@@ -1,7 +1,7 @@
 // Names that level files may use. Kept free of imports so the content tests can load it.
 export const BIOMES = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach', 'tour'];
-export const CHASERS = ['bear', 'wolf', 'spider', 'boar', 'gator', 'shark', 'hurricane'];
-export const CHASER_NAME = { bear: 'Bear', wolf: 'Wolf', spider: 'Tarantula', boar: 'Wild Boar', gator: 'Gator', shark: 'Shark', hurricane: 'Hurricane' };
+export const CHASERS = ['bear', 'wolf', 'spider', 'panther', 'gator', 'shark', 'hurricane'];
+export const CHASER_NAME = { bear: 'Bear', wolf: 'Wolf', spider: 'Tarantula', panther: 'Panther', gator: 'Gator', shark: 'Shark', hurricane: 'Hurricane' };
 
 // Pictures a question can show next to its text (pic: 'name'). Each one is an icon in js/icons.js.
 export const PICS = [
@@ -11,5 +11,5 @@ export const PICS = [
   'music-note', 'paw', 'apple', 'peach', 'corn', 'wheat', 'cow', 'chicken', 'horse', 'fish', 'bird', 'bee', 'butterfly', 'leaf',
   'flower', 'cloud', 'rain', 'snow', 'moon', 'planet', 'rocket', 'magnifier', 'microscope', 'brain', 'eye', 'tooth', 'bone',
   'waterfall', 'river', 'volcano', 'desert', 'island', 'bridge', 'train', 'car', 'chimney', 'shrimp', 'crab', 'palm', 'swamp',
-  'hiking', 'tent', 'campfire', 'gator', 'shark', 'bear', 'wolf', 'spider', 'boar', 'hurricane', 'star', 'heart', 'question', 'trophy',
+  'hiking', 'tent', 'campfire', 'gator', 'shark', 'bear', 'wolf', 'spider', 'panther', 'hurricane', 'star', 'heart', 'question', 'trophy',
 ];
