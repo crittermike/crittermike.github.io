@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T04:45:13.582Z",
+  "generated_at": "2026-11-13T05:00:14.460Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -303,7 +303,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -311,8 +311,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -320,26 +320,19 @@
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 48,
-      "hi": 69,
-      "lo": 48,
+      "hi": 54,
+      "lo": 38,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 54,
-        "lo": 38,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "☀️",
@@ -367,24 +360,31 @@
         "hi": 57,
         "lo": 40,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "☀️",
+        "hi": 61,
+        "lo": 39,
+        "code": 0
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-12T07:00",
         "2026-11-13T07:01",
         "2026-11-14T07:02",
         "2026-11-15T07:03",
         "2026-11-16T07:04",
-        "2026-11-17T07:05"
+        "2026-11-17T07:05",
+        "2026-11-18T07:06"
       ],
       "sunsets": [
-        "2026-11-12T17:26",
         "2026-11-13T17:25",
         "2026-11-14T17:24",
         "2026-11-15T17:24",
         "2026-11-16T17:23",
-        "2026-11-17T17:22"
+        "2026-11-17T17:22",
+        "2026-11-18T17:22"
       ],
       "timezone": "America/New_York"
     }
@@ -2023,6 +2023,6 @@
     "creditDebt": 62501.05,
     "netLiquid": 84579.47,
     "source": "ynab",
-    "updatedAt": "2026-11-13T04:45:12.652Z"
+    "updatedAt": "2026-11-13T05:00:13.372Z"
   }
 }
