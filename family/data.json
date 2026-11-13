@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T23:45:13.335Z",
+  "generated_at": "2026-11-13T00:00:20.253Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -259,11 +259,11 @@
     ]
   },
   "dinner": {
-    "name": "Grilled hamburgers and hotdogs with corn",
-    "protein_g": 64,
-    "cal": 600,
-    "effort": "easy",
-    "note": "October 29: saved ingredient-only favorite with assistant-drafted quantities and a lean Mike portion. Shape beef into patties and grill or skillet-cook to 160 F. Heat hotdogs according to package instructions. Cook corn and serve buns, cheese and condiments separately. Mike: two patties totaling 9 oz raw 96% lean beef, one hamburger bun, 1/2 oz cheddar, one medium ear corn and modest ketchup/mustard; no hotdog or added butter in his estimate. Generic cal/protein assumptions: beef 315/54, bun 130/4, corn 80/3, cheese 55/3.5, condiments 20/0. Rounded estimate 600 cal/64 g protein. Other family members can choose burgers or hotdogs; quantities need not all be eaten.",
+    "name": "Takeout or dinner out",
+    "protein_g": null,
+    "cal": null,
+    "effort": "none",
+    "note": "October 30: flexible takeout night. Home calendar lists Sarah Kroger concert in Atlanta 7:00PM-10:00PM; attendance and travel are unknown. No home cooking assigned. Outside Lent. Restaurant, order and nutrition undecided; respect Nancy's dislikes. No order placed.",
     "recipe": null
   },
   "mealweek": [
@@ -326,7 +326,7 @@
   ],
   "weather": {
     "now": {
-      "temp": 55,
+      "temp": 54,
       "hi": 69,
       "lo": 46,
       "icon": "☀️",
@@ -1942,7 +1942,7 @@
   ],
   "finance": {
     "month": "November 2026",
-    "dayPct": 40,
+    "dayPct": 43.3,
     "totalSpend": 9865.71,
     "totalBudget": 0,
     "categories": [
@@ -2023,6 +2023,6 @@
     "creditDebt": 62831.27,
     "netLiquid": 84909.69,
     "source": "ynab",
-    "updatedAt": "2026-11-12T23:45:12.320Z"
+    "updatedAt": "2026-11-13T00:00:18.703Z"
   }
 }
