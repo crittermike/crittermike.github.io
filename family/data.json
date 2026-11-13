@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T14:15:45.975Z",
+  "generated_at": "2026-11-13T14:30:45.343Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -335,17 +335,17 @@
     "days": [
       {
         "d": "Sat",
-        "icon": "⛅",
-        "hi": 50,
-        "lo": 36,
-        "code": 3
+        "icon": "☀️",
+        "hi": 51,
+        "lo": 35,
+        "code": 0
       },
       {
         "d": "Sun",
-        "icon": "☀️",
+        "icon": "⛅",
         "hi": 56,
-        "lo": 37,
-        "code": 0
+        "lo": 33,
+        "code": 3
       },
       {
         "d": "Mon",
@@ -1940,89 +1940,5 @@
       "last_reviewed": null
     }
   ],
-  "finance": {
-    "month": "November 2026",
-    "dayPct": 43.3,
-    "totalSpend": 10195.93,
-    "totalBudget": 0,
-    "categories": [
-      {
-        "name": "🏝️ Vacation",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 5429.59,
-        "balance": -4981.71,
-        "pct": 0
-      },
-      {
-        "name": "🏠 Home",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 2255.09,
-        "balance": -2255.09,
-        "pct": 0
-      },
-      {
-        "name": "🛍️ Shopping",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 796.51,
-        "balance": -796.51,
-        "pct": 0
-      },
-      {
-        "name": "🛒 Groceries",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 705.28,
-        "balance": -705.28,
-        "pct": 0
-      },
-      {
-        "name": "🍽️ Dining out",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 684.9,
-        "balance": -684.9,
-        "pct": 0
-      },
-      {
-        "name": "🚗 Cars",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 129.12,
-        "balance": -129.12,
-        "pct": 0
-      },
-      {
-        "name": "📺 Subscriptions",
-        "group": "Bills",
-        "budgeted": 0,
-        "spent": 97.78,
-        "balance": -97.78,
-        "pct": 0
-      },
-      {
-        "name": "🍿 Entertainment",
-        "group": "Wants",
-        "budgeted": 0,
-        "spent": 85.66,
-        "balance": 821.77,
-        "pct": 0
-      },
-      {
-        "name": "📚 School",
-        "group": "Needs",
-        "budgeted": 0,
-        "spent": 12,
-        "balance": -12,
-        "pct": 0
-      }
-    ],
-    "liquidCash": 22078.42,
-    "creditDebt": 62501.05,
-    "netLiquid": 84579.47,
-    "source": "ynab",
-    "updatedAt": "2026-11-13T14:15:45.033Z"
-  }
+  "finance": null
 }
