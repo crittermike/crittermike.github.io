@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T04:45:44.528Z",
+  "generated_at": "2026-11-14T05:00:45.155Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -272,7 +272,7 @@
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -311,7 +311,7 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -319,27 +319,20 @@
       "dow": "Saturday",
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 39,
-      "hi": 55,
-      "lo": 39,
+      "hi": 52,
+      "lo": 33,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Sat",
-        "icon": "☀️",
-        "hi": 52,
-        "lo": 33,
-        "code": 0
-      },
       {
         "d": "Sun",
         "icon": "⛅",
@@ -367,24 +360,31 @@
         "hi": 62,
         "lo": 41,
         "code": 0
+      },
+      {
+        "d": "Thu",
+        "icon": "⛅",
+        "hi": 64,
+        "lo": 42,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-13T07:01",
         "2026-11-14T07:02",
         "2026-11-15T07:03",
         "2026-11-16T07:04",
         "2026-11-17T07:05",
-        "2026-11-18T07:06"
+        "2026-11-18T07:06",
+        "2026-11-19T07:07"
       ],
       "sunsets": [
-        "2026-11-13T17:25",
         "2026-11-14T17:24",
         "2026-11-15T17:24",
         "2026-11-16T17:23",
         "2026-11-17T17:22",
-        "2026-11-18T17:22"
+        "2026-11-18T17:22",
+        "2026-11-19T17:21"
       ],
       "timezone": "America/New_York"
     }
