@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T04:45:53.358Z",
+  "generated_at": "2026-11-16T05:00:53.620Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -43,13 +43,7 @@
         "balance_str": "$76.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-11-16-eba61ed1070f4f28013b2fed4a9be073d94b42949b0d2a925e656afb980917e5",
-          "label": "Spanish (Simon): IXL 3R",
-          "dueDate": "2026-11-16"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -277,7 +271,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -285,8 +279,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -294,7 +288,7 @@
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -332,20 +326,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 40,
-      "hi": 58,
-      "lo": 32,
+      "temp": 39,
+      "hi": 56,
+      "lo": 36,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "⛅",
-        "hi": 56,
-        "lo": 36,
-        "code": 3
-      },
       {
         "d": "Tue",
         "icon": "☀️",
@@ -373,24 +360,31 @@
         "hi": 65,
         "lo": 50,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "🌧",
+        "hi": 55,
+        "lo": 47,
+        "code": 63
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-15T07:03",
         "2026-11-16T07:04",
         "2026-11-17T07:05",
         "2026-11-18T07:06",
         "2026-11-19T07:07",
-        "2026-11-20T07:08"
+        "2026-11-20T07:08",
+        "2026-11-21T07:09"
       ],
       "sunsets": [
-        "2026-11-15T17:24",
         "2026-11-16T17:23",
         "2026-11-17T17:22",
         "2026-11-18T17:22",
         "2026-11-19T17:21",
-        "2026-11-20T17:21"
+        "2026-11-20T17:21",
+        "2026-11-21T17:21"
       ],
       "timezone": "America/New_York"
     }
