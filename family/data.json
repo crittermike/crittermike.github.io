@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T04:45:53.465Z",
+  "generated_at": "2026-11-18T05:00:54.187Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -287,7 +287,7 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -295,8 +295,8 @@
       "dow": "Wednesday",
       "dow_short": "Wed",
       "name": "Garlic-herb chicken with roasted potatoes and broccoli",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -304,7 +304,7 @@
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -327,19 +327,12 @@
   "weather": {
     "now": {
       "temp": 43,
-      "hi": 63,
-      "lo": 37,
+      "hi": 65,
+      "lo": 39,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Wed",
-        "icon": "🌤",
-        "hi": 65,
-        "lo": 39,
-        "code": 1
-      },
       {
         "d": "Thu",
         "icon": "⛅",
@@ -367,24 +360,31 @@
         "hi": 66,
         "lo": 52,
         "code": 61
+      },
+      {
+        "d": "Mon",
+        "icon": "⛅",
+        "hi": 72,
+        "lo": 51,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-17T07:05",
         "2026-11-18T07:06",
         "2026-11-19T07:07",
         "2026-11-20T07:08",
         "2026-11-21T07:09",
-        "2026-11-22T07:10"
+        "2026-11-22T07:10",
+        "2026-11-23T07:11"
       ],
       "sunsets": [
-        "2026-11-17T17:22",
         "2026-11-18T17:22",
         "2026-11-19T17:21",
         "2026-11-20T17:21",
         "2026-11-21T17:21",
-        "2026-11-22T17:20"
+        "2026-11-22T17:20",
+        "2026-11-23T17:20"
       ],
       "timezone": "America/New_York"
     }
