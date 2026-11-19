@@ -492,6 +492,68 @@ function signMesh(color, label) {
   return g;
 }
 
+// ---------- sky and catch stages ----------
+// Shiny KayKit Platformer hoops and gems, with an answer or a number painted on a board.
+const shinyMat = bend(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.3, metalness: 0.05 }), { key: 'shiny' });
+const boardMat = tex => bend(new THREE.MeshBasicMaterial({ map: tex, transparent: true }), { key: 'board' });
+// A hoop without its post: only triangles inside the ring are kept. Scaled to 1 m across, centered on the ring.
+const ringGeos = new Map();
+function ringGeometry(key) {
+  let g = ringGeos.get(key);
+  if (g) return g;
+  const src = propGeometry(key), pos = src.attributes.position, idx = src.index.array;
+  src.computeBoundingBox();
+  const { min, max } = src.boundingBox, d = max.x - min.x, cx = (min.x + max.x) / 2, cy = max.y - d / 2;
+  const inRing = i => Math.hypot(pos.getX(i) - cx, pos.getY(i) - cy) <= d / 2 + 0.03;
+  const keep = [];
+  for (let i = 0; i < idx.length; i += 3) if (inRing(idx[i]) && inRing(idx[i + 1]) && inRing(idx[i + 2])) keep.push(idx[i], idx[i + 1], idx[i + 2]);
+  g = src.clone();
+  g.setIndex(keep);
+  g.translate(-cx, -cy, -(min.z + max.z) / 2);
+  g.scale(1 / d, 1 / d, 1 / d);
+  ringGeos.set(key, g);
+  return g;
+}
+const label = (text, color, w, h, size) => textTexture(text, { w, h, bg: '#ffffff', fg: '#1b1f4a', border: color, size });
+
+// An answer hoop for the sky stage, 1 m across (scale it up), with the answer on a board in the middle.
+export function hoopMesh(key, color, text) {
+  const g = new THREE.Group();
+  const ring = new THREE.Mesh(ringGeometry(key), shinyMat);
+  ring.castShadow = true;
+  ring.frustumCulled = false;
+  const tex = label(text, color, 512, 288, 200);
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(0.72, 0.405), boardMat(tex));
+  board.frustumCulled = false;
+  g.add(ring, board);
+  g.userData = { ring, board, tex };
+  return g;
+}
+// A number gem for the catch stage: a spinning diamond with its number on a board above it.
+export function gemMesh(key, color, text) {
+  const g = new THREE.Group();
+  const spin = new THREE.Group();
+  const gem = new THREE.Mesh(propGeometry(key), shinyMat);
+  gem.scale.setScalar(1.35);
+  gem.castShadow = true;
+  gem.frustumCulled = false;
+  spin.add(gem);
+  const tex = label(text, color, 512, 256, 190);
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.0), boardMat(tex));
+  board.position.y = 1.55;
+  board.frustumCulled = false;
+  g.add(spin, board);
+  g.userData = { spin, board, tex };
+  return g;
+}
+// Frees a hoop's or gem's own board (the shared geometry and materials stay).
+export function disposeLabeled(g) {
+  const { board, tex } = g.userData;
+  tex.dispose();
+  board.material.dispose();
+  board.geometry.dispose();
+}
+
 // Waterfalls: a scrolling sheet of water down a cliff face, with a pool and mist at the bottom.
 function stripeTexture() {
   const c = document.createElement('canvas');
@@ -682,13 +744,13 @@ export class World {
     this.coins.instanceMatrix.needsUpdate = true;
     for (const c of this.chunks) {
       for (const g of c.gates) { const q = g.mesh.userData.badge; if (q) { q.position.y = 4.7 + Math.sin(this.time * 3) * 0.15; q.rotation.y = Math.sin(this.time * 1.5) * 0.35; } }
-      for (const h of c.hearts) { h.mesh.rotation.y += dt * 2.5; h.mesh.position.y = 1.25 + Math.sin(this.time * 4) * 0.15; }
+      for (const h of c.hearts) { h.mesh.rotation.y += dt * 2.5; h.mesh.position.y = h.y + Math.sin(this.time * 4) * 0.15; }
       for (const k of c.crates) {
         if (k.taken) continue;
         const sp = k.mesh.userData.spin;
         sp.rotation.y += dt * 1.6;
         sp.rotation.x = Math.sin(this.time * 2 + k.dist) * 0.2;
-        k.mesh.position.y = 1.2 + Math.sin(this.time * 3 + k.dist) * 0.15;
+        k.mesh.position.y = k.y + Math.sin(this.time * 3 + k.dist) * 0.15;
         if (k.mesh.userData.icon) k.mesh.userData.icon.position.y = 1.15 + Math.sin(this.time * 4) * 0.08;
         k.spark -= dt;
         if (k.spark <= 0 && Math.abs(k.dist - heroDist) < 70) {
@@ -703,6 +765,7 @@ export class World {
         if (em.t > 0) continue;
         if (em.type === 'smoke') { em.t = 0.4; this.fx.puff({ x: em.x, y: em.y, z: em.z, vx: 0.7, vy: 2.4, vz: 0, life: 3.4, size: 3.4, color: '#f4f4f4', alpha: 0.7, g: -0.1, grow: 2.2 }); }
         if (em.type === 'mist') { em.t = 0.12; this.fx.puff({ x: em.x + (Math.random() - 0.5) * em.w, y: em.y + 0.6, z: em.z + 0.6, vx: (Math.random() - 0.5), vy: 1.5, vz: 1, life: 1.4, size: 2.2, color: '#ffffff', alpha: 0.5, grow: 1.6 }); }
+        if (em.type === 'fuse') { em.t = 0.05; if (!em.o.hit) this.fx.spark({ x: em.x + (Math.random() - 0.5) * 0.1, y: em.y, z: em.z, vx: (Math.random() - 0.5) * 2, vy: 1.5 + Math.random(), vz: (Math.random() - 0.5) * 2, life: 0.3, size: 0.28, color: Math.random() < 0.5 ? '#ffd23f' : '#ff7a1a', glow: 2.5 }); }
         if (em.type === 'firefly') { em.t = 0.4; this.fx.spark({ x: em.x + (Math.random() - 0.5) * 10, y: 0.6 + Math.random() * 2.4, z: em.z + (Math.random() - 0.5) * 24, vx: (Math.random() - 0.5) * 0.6, vy: 0.2, vz: (Math.random() - 0.5) * 0.6, life: 2.6, size: 0.45, color: '#fff27a', glow: 2.5 }); }
       }
     }
@@ -822,6 +885,7 @@ export class World {
       dam(x, z) { self.dam(chunk, batch, x, z, H); },
     };
     bi.decor(s);
+    if (this.cfg.sky) this.skyDecor(batch, z0);
 
     // Scripted events (gates, region signs) are fetched one chunk early so their calm zones are known in time.
     this.queueEvents(d1, d1 + CHUNK);
@@ -848,6 +912,8 @@ export class World {
       const d = this.nextRow;
       const gap = Math.max(17, 26 - d / 160);
       this.nextRow += gap * (0.85 + r() * 0.3);
+      if (this.cfg.sky) { this.skyRow(chunk, d); continue; }
+      if (this.cfg.rows === false) continue;
       if (this.inCalm(d)) { if (!this.inCalm(d + 5)) this.coinLine(Math.floor(r() * 3) - 1, d + 2, 7); continue; }
       const lanes = [-1, 0, 1];
       const pick = arr => arr[Math.floor(r() * arr.length)];
@@ -964,21 +1030,77 @@ export class World {
     chunk.obstacles.push(o);
     return o;
   }
-  addHeart(chunk, lane, d) {
+  addHeart(chunk, lane, d, y = 1.25) {
     if (this.inCalm(d)) return;
     const mesh = heartMesh();
-    mesh.position.set(lane * LANE, 1.25, -d);
+    mesh.position.set(lane * LANE, y, -d);
     this.scene.add(mesh);
     chunk.meshes.push(mesh);
-    chunk.hearts.push({ x: lane * LANE, dist: d, mesh, taken: false });
+    chunk.hearts.push({ x: lane * LANE, y, dist: d, mesh, taken: false });
   }
-  addCrate(chunk, lane, d, powerId) {
+  addCrate(chunk, lane, d, powerId, y = 1.2) {
     const power = { id: powerId, ...this.cfg.powers[powerId] };
     const mesh = crateMesh(power, this.cfg.powerIcon ? this.cfg.powerIcon(powerId) : null);
-    mesh.position.set(lane * LANE, 1.2, -d);
+    mesh.position.set(lane * LANE, y, -d);
     this.scene.add(mesh);
     chunk.meshes.push(mesh);
-    chunk.crates.push({ x: lane * LANE, dist: d, mesh, power, taken: false, spark: 0 });
+    chunk.crates.push({ x: lane * LANE, y, dist: d, mesh, power, taken: false, spark: 0 });
+  }
+  // Sky stage (cfg.sky is the flying height): floating bombs to dodge, coins, and now and then a heart or a power box.
+  skyRow(chunk, d) {
+    const r = this.r, y = this.cfg.sky, lanes = [-1, 0, 1], pick = a => a[Math.floor(r() * a.length)];
+    if (this.inCalm(d)) { if (!this.inCalm(d + 5)) this.coinLine(pick(lanes), d + 2, 7, y - 0.7); return; }
+    if (r() < 0.55) {
+      const lane = pick(lanes);
+      this.addBomb(chunk, lane, d);
+      this.coinLine(pick(lanes.filter(l => l !== lane)), d - 6, 7, y - 0.7);
+    } else {
+      const open = pick(lanes);
+      for (const l of lanes) if (l !== open) this.addBomb(chunk, l, d);
+      this.coinLine(open, d - 7, 8, y - 0.7);
+    }
+    if (this.cfg.wantsHeart() && r() < 0.12) this.addHeart(chunk, pick(lanes), d + 10, y + 0.9);
+    else if (d > this.nextCrate && this.cfg.pickPower && !this.inCalm(d + 10)) {
+      const power = this.cfg.pickPower();
+      if (power) { this.addCrate(chunk, pick(lanes), d + 10, power, y + 0.9); this.nextCrate = d + 220 + r() * 120; }
+    }
+  }
+  addBomb(chunk, lane, d) {
+    const y = this.cfg.sky + 0.95, x = lane * LANE;
+    const mesh = new THREE.Mesh(propGeometry('bomb'), M.solid);
+    mesh.scale.setScalar(1.5);
+    mesh.position.set(x, y, -d);
+    mesh.rotation.y = this.r() * TAU;
+    mesh.castShadow = true;
+    mesh.frustumCulled = false;
+    this.scene.add(mesh);
+    chunk.meshes.push(mesh);
+    chunk.bobbers.push({ mesh, y, ph: this.r() * TAU });
+    const o = { type: 'bomb', x, dist: d, w: 1.2, d: 1.2, h: y + 0.75, y0: y - 0.65, low: false, over: false, wide: false, mesh, hit: false };
+    chunk.obstacles.push(o);
+    chunk.emitters.push({ type: 'fuse', x, y: y + 1.0, z: -d, t: 0, o });
+  }
+  // Clouds drifting past at flying height, off to the sides and down below.
+  skyDecor(batch, z0) {
+    const r = this.r;
+    for (let i = 0; i < 2; i++) {
+      const sx = r() < 0.5 ? -1 : 1, x = sx * (19 + r() * 50), y = -3 + r() * 9, z = z0 - r() * CHUNK;
+      batch.prop(r() < 0.5 ? 'cloudBig' : 'cloudSmall', x, y, z, { s: 0.45 + r() * 0.6, ry: r() * TAU, sway: false, shadow: false });
+    }
+  }
+  // Adds a question gate after the track is already built (the catch stage places gates as he goes).
+  addGate(dist) {
+    const c = this.chunks.find(ch => dist >= ch.d0 && dist < ch.d1) || this.chunks[this.chunks.length - 1];
+    const mesh = gateMesh(this.cfg.color);
+    mesh.position.set(0, 0, -dist);
+    this.scene.add(mesh);
+    c.meshes.push(mesh);
+    c.gates.push({ type: 'gate', at: dist, dist, mesh, done: false });
+  }
+  // Takes away the obstacles and power boxes in [d0, d1), so the way to a sky hoop is clear.
+  clearRange(d0, d1) {
+    for (const o of this.obstacles) if (!o.hit && o.dist >= d0 && o.dist < d1) { o.hit = true; o.mesh.visible = false; }
+    for (const k of this.crates) if (!k.taken && k.dist >= d0 && k.dist < d1) { k.taken = true; k.mesh.visible = false; }
   }
   // A zig-zag line of coins up in the sky for the jetpack.
   skyCoins(d0, d1, y) {

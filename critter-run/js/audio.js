@@ -45,6 +45,7 @@ const ROARS = {
   gator: [['gator', 1]],
   shark: [['shark-splash', 0.9], ['shark-chomp', 0.6, 0.45]],
   hurricane: [['hurricane', 0.9]],
+  dragon: [['roar', 0.9], ['fire', 0.6, 0.25]],
 };
 // Seamless loops: [file, volume, loop length in seconds].
 const LOOPS = { jetpack: ['loop-jetpack', 0.5, 5], magnet: ['loop-magnet', 0.25, 5], wind: ['loop-wind', 0.3, 6] };

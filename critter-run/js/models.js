@@ -1,5 +1,6 @@
 // The animated chasers, loaded from assets/chasers/<id>.glb (see assets/CREDITS.md). Every chaser faces -z
-// (the running direction) and answers animate(mode, dt, t) with mode: run | idle | roar | attack.
+// (the running direction) and answers animate(mode, dt, t) with mode: run | idle | roar | attack. A chaser that
+// flies (flies > 0) has its body lifted by the game.
 import * as THREE from 'three';
 import { cloneSkinned } from 'three/addons';
 import { gltfLoader } from './props.js';
@@ -26,6 +27,8 @@ const CHASERS = {
   panther: { len: 3.3, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Roar' }, rate: 1.0, rim: 0.4 },
   gator: { len: 4.6, clips: { run: 'run', idle: 'idle', attack: 'bite', roar: 'bite' }, rate: 1.2, rim: 0.2 },
   shark: { len: 4.4, clips: { run: 'swim', idle: 'swim', attack: 'bite', roar: 'bite' }, rate: 1.3, rim: 0.2, y: -0.55, wake: true },
+  // Flies: hovers this high, and keeps up with a flying hero.
+  dragon: { len: 3.4, clips: { run: 'Fast_Flying', idle: 'Flying_Idle', attack: 'Headbutt', roar: 'Punch' }, rate: 0.9, rim: 0.35, fly: 1.3 },
   // The run camera ends up inside the hurricane's see-through funnel, so it fades out while the camera is behind the runner.
   hurricane: { height: 6.5, clips: { run: 'Spin', idle: 'Spin', attack: 'Attack', roar: 'Attack' }, rate: 1.0, keepMaterials: true, fades: true },
 };
@@ -114,7 +117,7 @@ function buildChaser(type, gltf) {
     cur = a;
   };
   return {
-    root, body, type,
+    root, body, type, flies: def.fly || 0,
     height: size.y * k + (def.y || 0), length: Math.max(size.z, size.x) * k,
     animate(mode, dt) {
       play(mode);

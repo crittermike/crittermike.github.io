@@ -15,8 +15,9 @@ CritterRun.addLevel({
       { q: 'How many equal groups are there?', model: { kind: 'groups', groups: 5, each: 3 }, a: '5', wrong: ['3', '15', '8'], why: 'Count the circles: 5.' },
       { q: 'How many units are on this bar?', model: { kind: 'bars', bars: [6] }, a: '6', wrong: ['5', '7', '12'], why: 'Count the boxes: 6 units.' },
     ] },
-    { name: 'Times Tricks', biome: 'foothills', chaser: 'wolf', color: '#ff8c1a', music: 'jamboree', count: 9, questions: [
-      { gen: 'oneMore' }, { gen: 'breakApart' }, { gen: 'zeroOne' }, { gen: 'multFacts' }, { gen: 'oneMore' }, { gen: 'zeroOne' },
+    // Flown with a jetpack: each answer is a hoop to fly through.
+    { name: 'Times Tricks', biome: 'foothills', chaser: 'dragon', mode: 'sky', color: '#ff8c1a', music: 'jamboree', count: 10, questions: [
+      { gen: 'oneMore' }, { gen: 'breakApart' }, { gen: 'zeroOne' }, { gen: 'multFacts' }, { gen: 'oneMore' }, { gen: 'multFacts' },
       { show: '8 × 4 is __ more than 7 × 4', q: 'What number goes in the blank?', say: '8 times 4 is how much more than 7 times 4?', a: '4', wrong: ['1', '9', '8'], why: 'One more group of 4.' },
       { show: '3 × 5 + 6 × 5 = __ × 5', q: 'What number goes in the blank?', say: 'The sum of 3 times 5 and 6 times 5 is what times 5?', a: '9', wrong: ['10', '18', '15'], why: '3 + 6 = 9 fives.' },
     ] },
@@ -27,8 +28,9 @@ CritterRun.addLevel({
       { show: '27 __ 3 = 9', q: 'Which sign makes it true?', a: '÷', wrong: ['×', '+', '−'], why: '27 ÷ 3 = 9.' },
       { show: '9 __ 3 = 27', q: 'Which sign makes it true?', a: '×', wrong: ['÷', '+', '−'], why: '9 × 3 = 27.' },
     ] },
-    { name: 'Even or Odd', biome: 'beach', chaser: 'shark', color: '#a052ff', music: 'surfing', count: 8, questions: [
-      { gen: 'evenOdd' }, { gen: 'oddEvenProducts' }, { gen: 'evenOdd' }, { gen: 'oddEvenProducts' }, { gen: 'evenOdd' },
+    // Catch the numbers that fit the rule, with a question gate after each round.
+    { name: 'Even or Odd', biome: 'beach', chaser: 'shark', mode: 'grab', rules: ['even', 'odd', 'oddAnswer', 'evenAnswer'], color: '#a052ff', music: 'surfing', count: 5, questions: [
+      { gen: 'evenOdd' }, { gen: 'oddEvenProducts' }, { gen: 'evenOdd' },
       { q: 'Which one is not an even number?', a: '19', wrong: ['16', '6', '48'], why: '19 ends in 9: odd.' },
       { q: 'Which one gives an odd number?', a: '5 × 9', wrong: ['4 × 3', '6 × 2', '8 ÷ 2'], why: '5 × 9 = 45, odd.' },
     ] },

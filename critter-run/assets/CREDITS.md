@@ -42,6 +42,7 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 | `runners/*.glb` (all but `anims.glb`) | Universal Base Characters and Modular Character Outfits - Fantasy, combined onto one skeleton per character | [Quaternius](https://quaternius.com) |
 | `runners/anims.glb` | Universal Animation Library 1 and 2, plus "Victory", "Dab" and "Power Up" from [Mesh2Motion](https://github.com/Mesh2Motion/mesh2motion-assets), retargeted to the same skeleton | [Quaternius](https://quaternius.com), Mesh2Motion |
 | `chasers/hurricane.glb` | Made for this game | Critter Run |
+| `chasers/dragon.glb` | "Dragon Evolved" (https://poly.pizza/m/LlwD0QNUPj), compressed | [Quaternius](https://quaternius.com) |
 | `blasters.glb` | Blaster Kit | [Kenney](https://kenney.nl) |
 
 **CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/):

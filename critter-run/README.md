@@ -20,6 +20,8 @@ This is a separate game from [Critter Quest](../critter-quest/). The two don't s
 - **Power-up boxes:** running into one asks a quick question from the stage. Only a right answer turns the power on; a wrong one just poofs the box (no heart lost). Powers: magnet, shield, jetpack (fly over everything and grab sky coins), double coins, super jump, and +2 hearts. Badges on the left count down.
 - **Hearts:** 5 per run. Obstacles and wrong answers each cost one, and floating hearts give one back. At 0 hearts you're caught.
 - **Stars:** 3 for no mistakes, 2 for one or two, 1 otherwise. Each stage unlocks the next.
+- **Sky stage (`mode: 'sky'`):** he flies the whole stage with a jetpack, dodging floating bombs and grabbing sky coins. Each question shows at the top with three answers along the bottom, and three hoops come up ahead, one per lane in the same colors. Fly through the hoop with the right answer (swipe, or tap an answer to fly to its lane). The run slows down while a question is up.
+- **Catch stage (`mode: 'grab'`):** rows of number gems roll in, and a rule at the top says which ones to grab ("EVEN numbers", "Facts that make 24"). Grab 6 that fit; a wrong one costs a heart and says why. Each round ends with a question gate, then a new rule. No obstacles.
 - **Final stage (`tour`):** one long run through every earlier stage's scenery in order. Each region gets a review question (missed ones show up more often), and the stage's own questions are asked at the end of each region in order. That's handy for "what comes next?" questions.
 - **Shop (cart button on the title and map):** spend coins on runners, blasters (each has its own effect and knocks the chaser farther), trails, and longer-lasting power-ups. Tapping an item previews it on the runner.
 - **Saving:** progress is kept in `localStorage` under `critter-run-v1`.
@@ -96,7 +98,9 @@ Rules (checked by `levels.test.mjs`):
 - `beach`: sand, palmettos, boats and the ocean
 - `tour`: the final stage only. It runs through the earlier stages' biomes.
 
-**Chasers:** `bear`, `wolf`, `spider` (a tarantula), `panther`, `gator`, `shark`, `hurricane`.
+**Chasers:** `bear`, `wolf`, `spider` (a tarantula), `panther`, `gator`, `shark`, `dragon` (flies, good for sky stages), `hurricane`.
+
+**Modes** (stage `mode`, optional): `run` (the default), `sky` (every question is three hoops to fly through; answers must be 8 characters or less, and made questions need a skill with a short-answer form), or `grab` (catch stage; needs `rules`, the kind of number to grab each round: `even`, `odd`, `times`, `equals`, `oddAnswer`, `evenAnswer`, and `count` is the number of question gates).
 
 To add a new biome or chaser:
 1. Add it to `js/catalog.js` (and give it an icon in `js/icons.js`).

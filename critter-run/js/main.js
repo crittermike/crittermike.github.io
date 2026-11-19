@@ -1,7 +1,7 @@
 // Critter Run: a 3D runner where each test is a level and each question is a gate on the trail.
 import * as THREE from 'three';
 import { loadChaser } from './models.js';
-import { World, LANE, BIOME } from './world.js';
+import { World, LANE, BIOME, hoopMesh, gemMesh, disposeLabeled } from './world.js';
 import { loadProps, propGeometry } from './props.js';
 import { FX, additiveMat } from './fx.js';
 import { Sound } from './audio.js';
@@ -16,7 +16,7 @@ import { fireWeapon, warmMaterials } from './weapons.js';
 import { Shop } from './shop.js';
 import { mountAnswers } from './quiz.js';
 import { figure } from './figures.js';
-import { makeQuestion } from './mathgen.js';
+import { makeQuestion, grabRule } from './mathgen.js';
 
 const $ = s => document.querySelector(s);
 installIcons();
@@ -180,6 +180,7 @@ let modeGen = 0; // bumped on every screen change, so a slow stage load knows th
 function setMode(m) { G.mode = m; G.t = 0; document.body.dataset.mode = m; modeGen++; }
 
 function sceneryOnly(biome) {
+  clearModes();
   world.start({ biomeAt: () => biome, onChunk: () => [], wantsHeart: () => false, color: '#ff4081' });
   world.noObstaclesFrom = -Infinity;
   fx.clear();
@@ -263,6 +264,8 @@ async function openStage(level, i) {
   if (seq !== openSeq || gen !== modeGen) return;
   G.level = level; G.stageIdx = i; G.stage = stage;
   G.tour = stage.biome === 'tour';
+  clearModes();
+  G.play = G.tour ? 'run' : stage.mode || 'run';
   G.segments = G.tour ? level.stages.filter(s => s.biome !== 'tour') : [];
   G.hearts = MAX_HEARTS; G.coins = 0; G.wrong = 0; G.correct = 0;
   G.current = null; G.fb = null; G.finished = false; G.seen = new Set();
@@ -276,7 +279,13 @@ async function openStage(level, i) {
     G.queue = planQueue(stage);
     G.needed = G.queue.length;
   }
-  world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower, powerIcon: id => iconTexture(POWERS[id].icon, POWERS[id].color) });
+  if (G.play === 'sky') G.sky = { set: null, next: HOOP_FIRST, k: 1, lane: null };
+  if (G.play === 'grab') {
+    G.grab = { rules: stage.rules, ri: 0, rule: null, got: 0, gems: [], next: 0, phase: 'idle', last: null, wait: 0 };
+    G.needed += stage.rules.length;
+  }
+  world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower, powerIcon: id => iconTexture(POWERS[id].icon, POWERS[id].color),
+    sky: G.play === 'sky' ? JET_Y : 0, rows: G.play !== 'grab' });
   fx.clear();
   G.h = newHero();
   clearPowers();
@@ -293,7 +302,7 @@ async function openStage(level, i) {
   $('#i-name').style.color = stage.color;
   $('#i-badge').replaceChildren(icon(stage.chaser));
   $('#i-badge').style.setProperty('--c', stage.color);
-  $('#i-chaser').textContent = 'Run from the ' + CHASER_NAME[stage.chaser].toLowerCase() + '!';
+  $('#i-chaser').textContent = (G.play === 'sky' ? 'Fly from the ' : 'Run from the ') + CHASER_NAME[stage.chaser].toLowerCase() + '!';
   setTimeout(() => { if (G.mode === 'intro') roar(); }, 500);
 }
 
@@ -305,7 +314,7 @@ function biomeAt(d) {
 
 // Called by the world as track is built ahead. Returns gates and region signs for [d0, d1).
 function onChunk(d0, d1) {
-  if (G.finished) return [];
+  if (G.finished || G.play !== 'run') return [];
   const ev = [];
   if (!G.tour) {
     while (G.nextGate < d1) {
@@ -350,11 +359,11 @@ function planQueue(stage) {
 }
 // Turns an entry into the question to show. A made question that was already asked this run is made again.
 const sig = q => [q.show, q.q, q.a, ...(q.parts || q.options || q.slots || (q.items || []).map(i => i.label) || [])].join('|');
-function resolve(e) {
+function resolve(e, lane = false) {
   if (!e.gen) return e;
   let q;
   for (let tries = 0; tries < 12; tries++) {
-    q = { ...makeQuestion(e), entry: e };
+    q = { ...makeQuestion(lane ? { ...e, lane: true } : e), entry: e };
     if (!G.seen.has(sig(q))) break;
   }
   G.seen.add(sig(q));
@@ -479,6 +488,7 @@ window.addEventListener('keydown', e => {
     else if (k === 'ArrowUp' || k === 'w' || k === 'W' || k === ' ') jump();
     else if (k === 'ArrowDown' || k === 's' || k === 'S') slide();
     else if (k === 'Escape' || k === 'p' || k === 'P') pause();
+    else if (G.sky?.set && /^[1-3]$/.test(k)) steerTo(Number(k) - 1);
     else return;
     e.preventDefault();
   } else if (G.mode === 'question') {
@@ -524,7 +534,8 @@ function runStep(dt) {
   h.safe = Math.max(0, h.safe - dt);
   h.jumpBuf = Math.max(0, h.jumpBuf - dt);
   tickPowers(dt);
-  const speed = runSpeed() * h.slow * (h.jet ? 1.25 : 1);
+  if (G.sky) G.sky.k = damp(G.sky.k, G.sky.set && !G.sky.set.done ? SKY_SLOW : 1, 2.5, dt);
+  const speed = runSpeed() * h.slow * (h.jet ? 1.25 : 1) * (G.sky ? G.sky.k : 1) * (G.grab ? GRAB_SPEED : 1);
   const prev = h.dist;
   h.dist += speed * dt;
   h.x = damp(h.x, h.lane * LANE, 18, dt);
@@ -563,6 +574,9 @@ function runStep(dt) {
   G.fovKick = h.jet ? 6 : (speed - BASE_SPEED) * 1.0;
 
   collide(prev);
+  if (G.mode !== 'run') return;
+  if (G.sky) skyStep();
+  if (G.grab) grabStep(prev, dt);
   if (G.mode !== 'run') return;
 
   for (const g of world.gates) {
@@ -693,7 +707,7 @@ function collide(prev = G.h.dist) {
     fx.burst(c.x, c.y, -c.dist, { n: 5, colors: G.pow.double ? ['#ffe066', '#ff9f1c', '#ffffff'] : ['#ffe066', '#ffffff'], speed: 2, up: 2, life: 0.4, size: 0.12, g: -4, floor: false, sparks: 3 });
   }
   for (const k of world.crates) {
-    if (k.taken || !swept(prev, h.dist, k.dist, 1.1) || Math.abs(k.x - h.x) > 1.1 || h.y > 2.4) continue;
+    if (k.taken || !swept(prev, h.dist, k.dist, 1.1) || Math.abs(k.x - h.x) > 1.1 || Math.abs(k.y - (h.y + 0.9)) > 1.6) continue;
     k.taken = true;
     k.mesh.visible = false;
     sound.sfx('crate');
@@ -704,7 +718,7 @@ function collide(prev = G.h.dist) {
     return;
   }
   for (const ht of world.hearts) {
-    if (ht.taken || !swept(prev, h.dist, ht.dist, 1) || Math.abs(ht.x - h.x) > 1.05) continue;
+    if (ht.taken || !swept(prev, h.dist, ht.dist, 1) || Math.abs(ht.x - h.x) > 1.05 || Math.abs(ht.y - (h.y + 0.9)) > 1.6) continue;
     ht.taken = true;
     ht.mesh.visible = false;
     G.hearts = Math.min(MAX_HEARTS, G.hearts + 1);
@@ -718,6 +732,14 @@ function collide(prev = G.h.dist) {
 const ROCKY = /rock|boulder/i;
 function smash(o) {
   o.mesh.visible = false;
+  if (o.type === 'bomb') {
+    const y = o.mesh.position.y;
+    sound.sfx('boom');
+    fx.burst(o.x, y, -o.dist, { n: 30, colors: ['#ffd23f', '#ff7a1a', '#ff3b1a', '#ffffff'], speed: 7, up: 3, life: 0.7, size: 0.3, sparks: 40, glow: 2.5, floor: false, g: -2 });
+    for (let i = 0; i < 6; i++) fx.puff({ x: o.x + (Math.random() - 0.5) * 1.4, y: y + (Math.random() - 0.5), z: -o.dist, vx: (Math.random() - 0.5) * 3, vy: 1 + Math.random(), life: 1, size: 1.6, color: '#555555', alpha: 0.55, grow: 1.8, drag: 2 });
+    G.cam.shake = Math.max(G.cam.shake, 0.4);
+    return;
+  }
   sound.sfx(ROCKY.test(o.type) ? 'smashRock' : 'smash');
   const y = o.over ? o.y0 + 0.6 : 0.6;
   fx.burst(o.x, y, -o.dist, { n: 22, colors: ['#8a6c48', '#a3a8b0', '#c8975a', '#5a4a3a'], speed: 5, up: 6, life: 1.1, size: 0.25 });
@@ -764,7 +786,7 @@ function updateJetpack() {
 }
 
 function pickPower() {
-  const ids = [...TIMED_POWERS];
+  const ids = TIMED_POWERS.filter(id => !G.sky || (id !== 'jetpack' && id !== 'jump'));
   if (G.hearts < MAX_HEARTS - 1) ids.push('hearts', 'hearts');
   const free = ids.filter(id => !G.pow[id]);
   const list = free.length ? free : ids;
@@ -873,6 +895,274 @@ function hurt() {
   updateHud();
   const hs = $('#hearts');
   hs.classList.remove('hurt'); void hs.offsetWidth; hs.classList.add('hurt');
+}
+
+// ---------- sky stage ----------
+// He flies the whole stage with a jetpack. Each question comes with three answer hoops ahead, one per lane, and
+// flying through a hoop picks its answer. While a question is up the run slows and there are no bombs, so there's
+// time to read it; the bombs come between questions.
+const HOOP_FIRST = 60, HOOP_AHEAD = 100, HOOP_GAP = 35, SKY_SLOW = 0.8;
+const HOOPS = [['hoopRed', '#ff4b4b'], ['hoopYellow', '#ffb81a'], ['hoopBlue', '#2f8cff']]; // left, middle, right
+let skyToken = 0;
+
+function liftOff() {
+  const h = G.h;
+  h.jet = true; h.ground = false; h.slide = 0;
+  sound.sfx('jet');
+  sound.loop('jetpack', true);
+}
+function land() {
+  const h = G.h;
+  h.jet = false; h.vy = 0; h.g = GRAVITY; h.safe = 1.6;
+  sound.loop('jetpack', false);
+}
+
+function skyStep() {
+  const s = G.sky, h = G.h;
+  if (!s.set && !G.finished && h.dist >= s.next) {
+    if (G.queue.length) spawnHoops(h.dist + HOOP_AHEAD);
+    else finishRun();
+  }
+  // Land just before the finish line.
+  if (G.finished && h.jet && world.finish && world.finish.dist - h.dist < 32) land();
+  const set = s.set;
+  if (!set) return;
+  if (s.lane !== h.lane) {
+    s.lane = h.lane;
+    $$('#sky-ans .sky-a').forEach((b, k) => b.classList.toggle('here', k === h.lane + 1));
+  }
+  if (!set.done && h.dist >= set.dist) passHoops(set);
+  else if (set.done && h.dist > set.dist + 15) { dropHoops(set); s.set = null; s.next = h.dist + HOOP_GAP * (set.right ? 1 : 1.6); }
+}
+
+function spawnHoops(dist) {
+  const q = resolve(G.queue.shift(), true);
+  const answers = shuffle([q.a, ...shuffle(q.wrong).slice(0, 2)]);
+  world.clearRange(G.h.dist + 5, dist + 15);
+  const meshes = HOOPS.map(([key, color], i) => {
+    const m = hoopMesh(key, color, answers[i]);
+    m.scale.setScalar(2.05);
+    m.position.set((i - 1) * LANE, JET_Y + 0.95, -dist);
+    scene.add(m);
+    return m;
+  });
+  G.sky.set = { q, answers, meshes, dist, done: false, right: false };
+  G.sky.lane = null;
+  showSkyQuestion(q, answers);
+}
+
+function showSkyQuestion(q, answers) {
+  const token = ++skyToken;
+  $('#sky-show').textContent = q.show || '';
+  $('#sky-show').hidden = !q.show;
+  $('#sky-text').textContent = q.q;
+  $('#sky-card').style.setProperty('--c', G.stage.color);
+  $('#sky-tip').hidden = true;
+  $('#sky-ans').replaceChildren(...answers.map((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn sky-a';
+    b.style.setProperty('--lc', HOOPS[i][1]);
+    b.textContent = a;
+    b.addEventListener('click', () => steerTo(i));
+    return b;
+  }));
+  const box = $('#sky');
+  box.hidden = false;
+  box.classList.remove('in'); void box.offsetWidth; box.classList.add('in');
+  document.body.classList.add('sky-q');
+  sound.sfx('gate');
+  if (S.settings.autoRead) setTimeout(() => { if (token === skyToken) readSky(); }, 300);
+}
+function readSky() {
+  const set = G.sky?.set;
+  if (!set || set.done) return;
+  const q = set.q, chips = $$('#sky-ans .sky-a');
+  sound.sayParts([q.say || [q.show, q.q].filter(Boolean).join('. '), ...set.answers], i => chips.forEach((b, k) => b.classList.toggle('reading', k === i - 1)));
+}
+function hideSky(token) {
+  if (token !== skyToken) return;
+  $('#sky').hidden = true;
+  document.body.classList.remove('sky-q');
+}
+// Tapping an answer at the bottom flies to its lane.
+function steerTo(i) {
+  if (G.mode !== 'run' || !G.sky?.set || G.sky.set.done) return;
+  sound.unlock();
+  if (G.h.lane !== i - 1) { G.h.lane = i - 1; sound.sfx('swoosh'); }
+}
+
+function passHoops(set) {
+  set.done = true;
+  const h = G.h, i = h.lane + 1, q = set.q, right = set.answers[i] === q.a;
+  const hoop = set.meshes[i], at = hoop.position, color = HOOPS[i][1];
+  const chips = $$('#sky-ans .sky-a'), token = skyToken;
+  const key = qKey(G.level, entryOf(q));
+  set.right = right;
+  sound.stopSpeech();
+  chips.forEach(b => b.classList.remove('reading'));
+  hoop.userData.board.visible = false;
+  if (right) {
+    G.correct++;
+    if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
+    G.coins += 5;
+    bumpCoins();
+    updateHud();
+    sound.sfx('correct');
+    fx.burst(at.x, at.y, at.z, { n: 46, colors: [color, '#ffffff', '#ffd23f'], speed: 7, up: 2, life: 1.1, size: 0.24, sparks: 50, glow: 2, floor: false, g: -3 });
+    post.flash(color, 0.18);
+    chips[i].classList.add('right');
+    chips.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
+    // The right answer knocks the chaser back.
+    G.c.d = Math.max(G.c.d, CHASE_D) + 7;
+    G.c.spin = 0;
+    setTimeout(() => hideSky(token), 900);
+  } else {
+    S.missed[key] = (S.missed[key] || 0) + 1;
+    G.wrong++;
+    G.queue.push(entryOf(q));
+    sound.sfx('wrong');
+    hoop.visible = false;
+    fx.burst(at.x, at.y, at.z, { n: 26, colors: ['#888888', '#bbbbbb', color], speed: 5, up: 1, life: 0.9, size: 0.22, floor: false, g: -6 });
+    chips[i].classList.add('wrong');
+    chips.forEach((b, k) => { if (set.answers[k] === q.a) setTimeout(() => b.classList.add('right'), 300); else if (k !== i) b.classList.add('dim'); });
+    $('#sky-tip').textContent = q.why;
+    $('#sky-tip').hidden = false;
+    if (S.settings.autoRead) sound.sayParts([q.why]);
+    setTimeout(() => hideSky(token), 3600);
+    hurt();
+  }
+  save();
+  if (G.hearts <= 0) caught();
+}
+function dropHoops(set) {
+  for (const m of set.meshes) { scene.remove(m); disposeLabeled(m); }
+}
+
+// ---------- catch stage ----------
+// Rows of number gems roll in. A rule at the top says which ones to grab ("EVEN numbers"); a wrong grab costs a
+// heart. Each round of catching ends with a question gate, then a new rule.
+const GEM_GAP = 24, GEM_AHEAD = 85, GEM_NEED = 6, GRAB_SPEED = 0.85;
+const GEMS = [['gemBlue', '#2f8cff'], ['gemGreen', '#2fb84f'], ['gemRed', '#ff4b4b'], ['gemYellow', '#f0a800']];
+
+// Rounds and gates take turns until both run out. A missed gate question comes back as another gate.
+function nextPhase() {
+  const g = G.grab, rounds = g.ri < g.rules.length, gates = G.queue.length > 0;
+  const step = g.last === 'round' ? (gates ? 'gate' : rounds ? 'round' : null) : (rounds ? 'round' : gates ? 'gate' : null);
+  g.last = step;
+  if (step === 'round') startRound();
+  else if (step === 'gate') { g.phase = 'gate'; world.addGate(G.h.dist + 60); }
+  else { g.phase = 'done'; finishRun(); }
+}
+
+function startRound() {
+  const g = G.grab;
+  g.rule = grabRule(Math.random, g.rules[g.ri++]);
+  g.got = 0;
+  g.phase = 'round';
+  g.next = Math.max(g.next, G.h.dist + 45);
+  $('#catch-rule').textContent = g.rule.title;
+  $('#catch-pips').replaceChildren(...Array.from({ length: GEM_NEED }, () => document.createElement('i')));
+  $('#catch').style.setProperty('--c', G.stage.color);
+  $('#catch').hidden = false;
+  $('#catch').classList.remove('in'); void $('#catch').offsetWidth; $('#catch').classList.add('in');
+  toast(g.rule.title, '#ffffff', 'gem');
+  if (S.settings.autoRead) sound.sayParts([g.rule.say]);
+}
+
+function grabStep(prev, dt) {
+  const g = G.grab, h = G.h;
+  if (g.phase === 'idle') nextPhase();
+  if (g.phase === 'round') while (g.next < h.dist + GEM_AHEAD) { gemRow(g.next); g.next += GEM_GAP; }
+  if (g.phase === 'between' && h.dist >= g.wait) nextPhase();
+  for (const gem of g.gems) {
+    const sp = gem.mesh.userData.spin;
+    sp.rotation.y += dt * 2;
+    gem.mesh.position.y = 0.95 + Math.sin(G.clock * 3 + gem.ph) * 0.12;
+    if (gem.taken || !swept(prev, h.dist, gem.dist, 0.8) || Math.abs(gem.x - h.x) > 1.05 || h.y > 1.7) continue;
+    takeGem(gem);
+    if (G.mode !== 'run') return;
+  }
+  const gone = g.gems.filter(gem => gem.dist < h.dist - 12);
+  if (gone.length) { gone.forEach(dropGem); g.gems = g.gems.filter(gem => !gone.includes(gem)); }
+}
+
+// Two or three gems across the lanes, always at least one to grab and one to skip.
+function gemRow(d) {
+  const g = G.grab, lanes = shuffle([-1, 0, 1]).slice(0, Math.random() < 0.55 ? 3 : 2);
+  let items = [];
+  for (let t = 0; t < 30; t++) {
+    items = lanes.map(() => g.rule.next(Math.random));
+    if (items.some(it => it.good) && items.some(it => !it.good) && new Set(items.map(it => it.label)).size === items.length) break;
+  }
+  items.forEach((it, k) => {
+    const [key, color] = GEMS[Math.floor(Math.random() * GEMS.length)];
+    const mesh = gemMesh(key, color, it.label);
+    const x = lanes[k] * LANE;
+    mesh.position.set(x, 0.95, -d);
+    scene.add(mesh);
+    g.gems.push({ ...it, x, dist: d, mesh, color, ph: Math.random() * 6, taken: false });
+  });
+  const free = [-1, 0, 1].filter(l => !lanes.includes(l));
+  if (free.length && Math.random() < 0.6) world.coinLine(free[0], d - 9, 5);
+}
+
+function takeGem(gem) {
+  const g = G.grab, h = G.h, at = gem.mesh.position;
+  gem.taken = true;
+  gem.mesh.visible = false;
+  if (gem.good) {
+    g.got++;
+    G.coins += 2;
+    bumpCoins();
+    sound.sfx('coin');
+    sound.sfx('correct', { volume: 0.45 });
+    fx.burst(at.x, at.y + 0.4, at.z, { n: 26, colors: [gem.color, '#ffffff', '#ffd23f'], speed: 5, up: 4, life: 0.8, size: 0.2, sparks: 30, glow: 2 });
+    const pips = $('#catch-pips').children;
+    if (pips[g.got - 1]) pips[g.got - 1].classList.add('on');
+    if (g.got >= GEM_NEED) roundDone();
+    return;
+  }
+  G.wrong++;
+  sound.sfx('wrong');
+  fx.burst(at.x, at.y + 0.4, at.z, { n: 18, colors: ['#888888', '#bbbbbb', gem.color], speed: 4, up: 2, life: 0.7, size: 0.2 });
+  toast(gem.why, '#ff8a8a');
+  if (S.settings.autoRead) sound.sayParts([gem.why]);
+  hurt();
+  h.slow = 0.6;
+  hero.stumble();
+  if (G.hearts <= 0) caught();
+}
+
+function roundDone() {
+  const g = G.grab, h = G.h;
+  g.phase = 'between';
+  g.wait = h.dist + 25;
+  G.correct++;
+  updateHud();
+  sound.stinger('star');
+  toast('GREAT!', '#7dff8a', 'star');
+  fx.confetti(h.x, 2.5, -h.dist - 6, 70);
+  // Gems still ahead go away in a puff.
+  for (const gem of g.gems) {
+    if (gem.taken || gem.dist < h.dist) continue;
+    gem.taken = true;
+    gem.mesh.visible = false;
+    fx.puff({ x: gem.x, y: 1.2, z: -gem.dist, vy: 1, life: 0.7, size: 1.6, color: '#ffffff', alpha: 0.6, grow: 1.6 });
+  }
+  setTimeout(() => { if (G.grab === g && g.phase !== 'round') $('#catch').hidden = true; }, 1200);
+}
+function dropGem(gem) { scene.remove(gem.mesh); disposeLabeled(gem.mesh); }
+
+// Clears whatever the sky or catch stage left in the scene.
+function clearModes() {
+  if (G.sky?.set) dropHoops(G.sky.set);
+  if (G.grab) G.grab.gems.forEach(dropGem);
+  G.sky = null;
+  G.grab = null;
+  skyToken++;
+  $('#sky').hidden = true;
+  $('#catch').hidden = true;
+  document.body.classList.remove('sky-q');
 }
 
 // ---------- questions ----------
@@ -1042,13 +1332,19 @@ function afterAnswer() {
   hero.showWeapon(false);
   sound.stopSpeech();
   sound.duck(false);
-  const done = G.tour ? G.baseLeft <= 0 && G.extra.length === 0 : G.queue.length === 0;
-  if (done && !G.finished) {
-    G.finished = true;
-    world.placeFinish(G.h.dist + 45);
-    toast('FINISH!', '#ffd23f', 'flag');
-  }
+  const wasGate = !G.current?.power;
   setMode('run');
+  // The sky and catch stages finish on their own, after their last hoop or round.
+  if (G.sky) return;
+  if (G.grab) { if (wasGate && G.grab.phase === 'gate') nextPhase(); return; }
+  const done = G.tour ? G.baseLeft <= 0 && G.extra.length === 0 : G.queue.length === 0;
+  if (done) finishRun();
+}
+function finishRun() {
+  if (G.finished) return;
+  G.finished = true;
+  world.placeFinish(G.h.dist + 45);
+  toast('FINISH!', '#ffd23f', 'flag');
 }
 
 $('#b-next').addEventListener('click', () => {
@@ -1062,6 +1358,7 @@ $('#b-speak').addEventListener('click', () => {
   if (G.mode === 'feedback' && G.fb === 'wrong') sound.sayParts([G.current.why]);
   else readQuestion();
 });
+$('#b-sky-speak').addEventListener('click', () => { sound.unlock(); readSky(); });
 $('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.why || G.current.q.why]); });
 
 // ---------- shop ----------
@@ -1289,7 +1586,7 @@ function update(dt) {
       if (G.cue === 1 && G.t > 1.25) { G.cue = 2; toast('GO!', '#7dff8a'); sound.voice('go'); sound.sfx('go'); }
       hero.animate(G.t > 1.1 ? 'run' : 'idle', dt, { t: G.clock });
       c.model.animate(G.t > 1.1 ? 'run' : 'roar', dt, G.clock);
-      if (G.t > 1.45) setMode('run');
+      if (G.t > 1.45) { setMode('run'); if (G.sky) liftOff(); }
       break;
     }
     case 'run': runStep(dt); break;
@@ -1318,6 +1615,7 @@ function update(dt) {
       break;
     }
     case 'caught': {
+      if (h.y > 0) h.y = Math.max(0, h.y - dt * 7);
       hero.animate('fall', dt, { t: G.clock });
       c.model.animate('attack', dt, G.clock);
       c.d = damp(c.d, 1.2, 5, dt);
@@ -1350,6 +1648,8 @@ function update(dt) {
   if (G.mode !== 'run') hero.root.visible = true;
   c.model.root.position.x = c.x;
   c.model.root.position.z = -(h.dist - c.d);
+  // A flying chaser keeps up with a flying hero, and hovers low otherwise.
+  if (c.model.flies) c.model.body.position.y = damp(c.model.body.position.y, Math.max(c.model.flies, h.y + 0.3), 3, dt);
   // Chase meter: the monster emoji slides toward the runner as it closes in.
   const k = Math.round(clamp((12 - c.d) / 10, 0, 1) * 50) / 50;
   if (k !== G.meterK) {

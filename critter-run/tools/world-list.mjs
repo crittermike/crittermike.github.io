@@ -47,6 +47,10 @@ export const PROPS = {
   textiles: [RB + 'Textiles_Stack_Large_Colored.glb'], textilesB: [RB + 'Textiles_Stack_Large.glb'],   fuelBarrel: [RB + 'Fuel_A_Barrel.glb'],
 
   // ---------- KayKit platformer (pickups, gates, pipes) ----------
+  // Sky stage hoops and bombs, and the gems that carry numbers in the catch stage.
+  hoopBlue: [PF + 'hoop_blue.glb'], hoopRed: [PF + 'hoop_red.glb'], hoopYellow: [PF + 'hoop_yellow.glb'],
+  gemBlue: [PF + 'diamond_blue.glb'], gemGreen: [PF + 'diamond_green.glb'], gemRed: [PF + 'diamond_red.glb'], gemYellow: [PF + 'diamond_yellow.glb'],
+  bomb: [PF + 'bomb.glb'],
   heart: [PF + 'heart_red.glb'], arch: [PF + 'arch_wide_yellow.glb'],   finish: [PF + 'signage_finish_wide.glb'], pipeYellow: [PF + 'pipe_straight_A_yellow.glb'], pipeRed: [PF + 'pipe_straight_A_red.glb'],
   strut: [PF + 'strut_vertical.glb'],   flagRed: [PF + 'flag_A_red.glb'], flagBlue: [PF + 'flag_A_blue.glb'],     coin: ['kaykit-prototype-bits/Coin_A.glb'],
 

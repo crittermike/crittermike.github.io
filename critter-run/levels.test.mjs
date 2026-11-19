@@ -6,7 +6,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { BIOMES, CHASERS, PICS, MUSIC } from './js/catalog.js';
-import { SKILLS, VARIANTS, makeQuestion, rngFrom } from './js/mathgen.js';
+import { SKILLS, VARIANTS, makeQuestion, rngFrom, grabRule } from './js/mathgen.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dir = path.join(here, 'levels');
@@ -79,7 +79,15 @@ for (const { file, level } of levels) {
     const seen = new Set();
     level.stages.forEach((stage, si) => {
       const where = `${file} stage ${si + 1}`;
-      checkKeys(stage, ['name', 'biome', 'chaser', 'color', 'questions', 'count', 'music'], where);
+      checkKeys(stage, ['name', 'biome', 'chaser', 'color', 'questions', 'count', 'music', 'mode', 'rules'], where);
+      const mode = stage.mode ?? 'run';
+      assert.ok(['run', 'sky', 'grab'].includes(mode), `${where}: mode must be run, sky or grab`);
+      assert.ok(mode === 'run' || stage.biome !== 'tour', `${where}: the final stage is a run`);
+      // The catch stage needs its rules (rounds), one kind of number to grab per round.
+      if (mode === 'grab') {
+        assert.ok(Array.isArray(stage.rules) && stage.rules.length >= 1 && stage.rules.length <= 6, `${where}: a grab stage needs 1-6 rules`);
+        for (const kind of stage.rules) assert.doesNotThrow(() => grabRule(rngFrom(1), kind), `${where}: unknown rule "${kind}"`);
+      } else assert.equal(stage.rules, undefined, `${where}: rules are only for grab stages`);
       checkShort(stage.name, 3, 20, `${where} name`);
       assert.ok(BIOMES.includes(stage.biome), `${where}: biome must be one of ${BIOMES.join(', ')}`);
       assert.ok(CHASERS.includes(stage.chaser), `${where}: chaser must be one of ${CHASERS.join(', ')}`);
@@ -107,6 +115,8 @@ for (const { file, level } of levels) {
         if (q.gen !== undefined) {
           checkKeys(q, ['gen', 'variant'], at);
           assert.ok(SKILLS[q.gen], `${at}: gen "${q.gen}" must be a skill in js/mathgen.js (${Object.keys(SKILLS).join(', ')})`);
+          // Sky answers are painted on hoops, so sky skills need their short-answer (lane) form.
+          if (mode === 'sky') assert.ok(SKILLS[q.gen].lane, `${at}: "${q.gen}" can't make short answers for the sky stage`);
           if (q.variant !== undefined) assert.ok(VARIANTS[q.gen].includes(q.variant), `${at}: variant must be one of ${VARIANTS[q.gen].join(', ')}`);
           for (let seed = 1; seed <= 25; seed++) {
             const mq = makeQuestion(q, rngFrom(seed));
@@ -115,6 +125,7 @@ for (const { file, level } of levels) {
           return;
         }
         checkKeys(q, ['q', 'a', 'wrong', 'why', 'pic', 'show', 'say', 'model'], at);
+        if (mode === 'sky') for (const ans of [q.a, ...q.wrong]) assert.ok(ans.length <= 8, `${at}: sky answers are painted on hoops, so "${ans}" must be 8 characters or less`);
         if (q.model !== undefined) checkModel(q.model, at);
         checkShort(q.q, 8, 48, `${at} q`);
         if (q.show !== undefined) checkShort(q.show, 8, 40, `${at} show`);

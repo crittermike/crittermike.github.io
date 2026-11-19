@@ -28,6 +28,7 @@ export const CREDITS = [
     { text: '"Animated Swimming Great White Shark Loop" by LasquetiSpice', link: 'https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1', license: 'CC BY 4.0', url: CCBY4 },
     { text: '"black panther" by kenchoo, based on "Panther 3D Model" by ₦₥₵ ฿₵', link: 'https://sketchfab.com/3d-models/black-panther-7fca11c89cca4362a525c891a8345112', license: 'CC BY 4.0', url: CCBY4 },
     { text: 'All six animals above were modified: new animations, simplified and compressed.' },
+    { text: '"Dragon Evolved" by Quaternius (quaternius.com)', link: 'https://poly.pizza/m/LlwD0QNUPj', license: 'CC0', url: CC0 },
     { text: 'Blasters from the Blaster Kit by Kenney (kenney.nl)', license: 'CC0', url: CC0 },
   ] },
   { title: 'World', items: [

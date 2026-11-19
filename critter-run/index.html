@@ -175,6 +175,31 @@
   #powers .pw.ending { animation: blink .3s steps(2) infinite; }
   @keyframes blink { 50% { opacity: .35; } }
 
+  /* sky stage: the question up top, and its three answers along the bottom, one per lane like the hoops */
+  #sky { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: calc(var(--pad) + 62px) 10px max(14px, env(safe-area-inset-bottom)); }
+  #sky-card { --c: var(--blue); pointer-events: auto; width: min(640px, 100%); display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px 16px; color: var(--ink);
+    background: linear-gradient(180deg, #ffffff, #eef2fb); border-radius: 22px; border: 4px solid var(--ink); box-shadow: 0 0 0 4px var(--c), 0 0 0 8px var(--ink), 0 10px 20px rgba(0,0,0,.3); }
+  #sky.in #sky-card { animation: drop .45s cubic-bezier(.3,1.5,.6,1); }
+  #sky.in #sky-ans { animation: rise .45s cubic-bezier(.3,1.5,.6,1); }
+  #sky-show { font-family: var(--display); font-size: clamp(24px, 6vw, 36px); line-height: 1.05; color: color-mix(in srgb, var(--c) 70%, #000); }
+  #sky-text { font-weight: 700; font-size: clamp(20px, 5vw, 30px); line-height: 1.1; }
+  #sky-tip { margin: auto 0 14px; max-width: min(560px, 94vw); padding: 8px 16px; border-radius: 18px; color: var(--ink); background: #fff1f1; border: 4px solid var(--ink); box-shadow: 0 0 0 4px var(--red), 0 8px 18px rgba(0,0,0,.3);
+    font-weight: 700; font-size: clamp(20px, 5vw, 28px); text-align: center; animation: pop .35s; }
+  #sky-ans { width: min(760px, 100%); display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .sky-a { --c: var(--lc); --d: color-mix(in srgb, var(--c) 65%, #000); pointer-events: auto; min-height: clamp(64px, 11vh, 92px); font-size: clamp(26px, 7vw, 42px); padding: 4px 8px; transition: opacity .2s, transform .2s, filter .2s; }
+  .sky-a.here { transform: translateY(-8px) scale(1.06); box-shadow: inset 0 -6px 0 var(--d), inset 0 3px 0 rgba(255,255,255,.45), 0 6px 0 var(--ink), 0 0 0 5px #fff, 0 0 24px var(--c); }
+  .sky-a.reading { box-shadow: inset 0 -6px 0 var(--d), 0 6px 0 var(--ink), 0 0 0 6px #ffd23f; }
+  .sky-a.right { --c: #2fd24f; animation: pop .35s; }
+  .sky-a.wrong { --c: #8a93a6; animation: shake .45s; }
+  .sky-a.dim { opacity: .35; filter: saturate(.4); }
+  body.sky-q #chase, body.sky-q #dots, body.sky-q #powers { visibility: hidden; }
+  /* catch stage: the rule and how many are caught so far */
+  #catch { --c: var(--purple); position: absolute; top: calc(var(--pad) + 150px); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 14px; white-space: nowrap;
+    border-radius: 24px; background: rgba(15,18,48,.72); border: 3px solid var(--c); font-family: var(--display); font-size: clamp(24px, 6vw, 36px); }
+  #catch > .ic { width: 1.1em; height: 1.1em; color: var(--c); filter: drop-shadow(0 2px 0 rgba(0,0,0,.4)); }
+  #catch.in { animation: pop .4s; }
+  #catch .pips { background: none; padding: 0; gap: 5px; }
+  #catch .pips i { width: 18px; height: 18px; }
   /* question */
   #s-q { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: var(--pad) 12px max(14px, env(safe-area-inset-bottom)); pointer-events: none; }
   #s-q > * { pointer-events: auto; }
@@ -382,6 +407,15 @@
   <div id="powers"></div>
   <div id="toast" class="shout"></div>
   <div id="hint" hidden></div>
+  <div id="catch" hidden><svg class="ic"><use href="#i-gem"/></svg><span id="catch-rule"></span><div id="catch-pips" class="pips"></div></div>
+  <div id="sky" hidden>
+    <div id="sky-card">
+      <div class="q-body"><div id="sky-show"></div><div id="sky-text"></div></div>
+      <button id="b-sky-speak" class="btn yellow small square" aria-label="Read it to me"><svg class="ic"><use href="#i-sound"/></svg></button>
+    </div>
+    <div id="sky-tip" hidden></div>
+    <div id="sky-ans"></div>
+  </div>
 </div>
 
 <section id="s-title" class="screen">
