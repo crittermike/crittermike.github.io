@@ -70,9 +70,10 @@ vec3 waterWaves(vec2 p, float t) {
   return vec3(h, dx, dz);
 }
 `;
-export function waterMaterial({ deep = '#1f7fb0', shallow = '#4fc1d9', opacity = 0.92, ripple = 1, speed = 1, foam = 0 } = {}) {
+// glow > 0 makes it light up (lava), bright enough for bloom.
+export function waterMaterial({ deep = '#1f7fb0', shallow = '#4fc1d9', opacity = 0.92, ripple = 1, speed = 1, foam = 0, glow = 0 } = {}) {
   const mat = new THREE.MeshStandardMaterial({ color: '#ffffff', vertexColors: true, roughness: 0.08, metalness: 0, transparent: opacity < 1, opacity, depthWrite: opacity >= 1, envMapIntensity: 1.4 });
-  const uni = { uDeep: { value: new THREE.Color(deep) }, uShallow: { value: new THREE.Color(shallow) }, uRipple: { value: ripple }, uSpeed: { value: speed }, uFoam: { value: foam } };
+  const uni = { uDeep: { value: new THREE.Color(deep) }, uShallow: { value: new THREE.Color(shallow) }, uRipple: { value: ripple }, uSpeed: { value: speed }, uFoam: { value: foam }, uGlow: { value: glow } };
   mat.userData.uniforms = uni;
   mat.onBeforeCompile = sh => {
     Object.assign(sh.uniforms, U, uni);
@@ -83,13 +84,15 @@ export function waterMaterial({ deep = '#1f7fb0', shallow = '#4fc1d9', opacity =
       #include <project_vertex>
       ${BEND_GLSL}`,
     );
-    sh.fragmentShader = 'uniform float uTime;\nuniform vec3 uDeep;\nuniform vec3 uShallow;\nuniform float uRipple;\nuniform float uSpeed;\nuniform float uFoam;\nvarying vec3 vWPos;\n' + WAVES + sh.fragmentShader
+    sh.fragmentShader = 'uniform float uTime;\nuniform vec3 uDeep;\nuniform vec3 uShallow;\nuniform float uRipple;\nuniform float uSpeed;\nuniform float uFoam;\nuniform float uGlow;\nvarying vec3 vWPos;\n' + WAVES + sh.fragmentShader
       .replace('#include <color_fragment>', `
         vec3 wv = waterWaves(vWPos.xz, uTime * uSpeed);
         diffuseColor.rgb = mix(uDeep, uShallow, clamp(vColor.r + wv.x * 0.06, 0.0, 1.0));
         diffuseColor.rgb += vec3(smoothstep(0.55, 1.0, wv.x) * 0.06);
         float surf = vColor.g * smoothstep(0.35, 0.95, sin(vWPos.z * 0.35 + vWPos.x * 1.7 - uTime * 2.2) * 0.5 + 0.5);
         diffuseColor.rgb = mix(diffuseColor.rgb, vec3(1.0), clamp(surf * uFoam, 0.0, 0.85));`)
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        totalEmissiveRadiance += diffuseColor.rgb * uGlow * (0.75 + 0.25 * sin(uTime * 1.3 + vWPos.x * 0.2 + vWPos.z * 0.15));`)
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
         {
           vec3 nw = normalize(vec3(-wv.y * 0.16 * uRipple, 1.0, -wv.z * 0.16 * uRipple));

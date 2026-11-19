@@ -1,9 +1,9 @@
 // Names that level files may use. Kept free of imports so the content tests can load it.
-export const BIOMES = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach', 'tour'];
-export const CHASERS = ['bear', 'wolf', 'spider', 'panther', 'gator', 'shark', 'dragon', 'hurricane'];
+export const BIOMES = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach', 'jungle', 'volcano', 'canyon', 'lagoon', 'glacier', 'tour'];
+export const CHASERS = ['bear', 'wolf', 'spider', 'panther', 'gator', 'shark', 'dragon', 'trex', 'raptor', 'pterodactyl', 'spinosaurus', 'pistosaur', 'mammoth', 'triceratops', 'hurricane'];
 // Extra songs a stage can pick with music: 'name' (files in assets/audio/music/). Otherwise a stage plays its biome's song.
-export const MUSIC = ['breakdown', 'jamboree', 'western', 'surfing', 'pickin', 'bama', 'heroic'];
-export const CHASER_NAME = { bear: 'Bear', wolf: 'Wolf', spider: 'Tarantula', panther: 'Panther', gator: 'Gator', shark: 'Shark', dragon: 'Dragon', hurricane: 'Hurricane' };
+export const MUSIC = ['breakdown', 'jamboree', 'western', 'surfing', 'pickin', 'bama', 'heroic', 'eggs', 'boss', 'shoot'];
+export const CHASER_NAME = { bear: 'Bear', wolf: 'Wolf', spider: 'Tarantula', panther: 'Panther', gator: 'Gator', shark: 'Shark', dragon: 'Dragon', trex: 'T. rex', raptor: 'Raptor', pterodactyl: 'Pterodactyl', spinosaurus: 'Spinosaurus', pistosaur: 'Sea Lizard', mammoth: 'Mammoth', triceratops: 'Triceratops', hurricane: 'Hurricane' };
 
 // Pictures a question can show next to its text (pic: 'name'). Each one is an icon in js/icons.js.
 export const PICS = [

@@ -21,7 +21,9 @@ This is a separate game from [Critter Quest](../critter-quest/). The two don't s
 - **Hearts:** 5 per run. Obstacles and wrong answers each cost one, and floating hearts give one back. At 0 hearts you're caught.
 - **Stars:** 3 for no mistakes, 2 for one or two, 1 otherwise. Each stage unlocks the next.
 - **Sky stage (`mode: 'sky'`):** he flies the whole stage with a jetpack, dodging floating bombs and grabbing sky coins. Each question shows at the top with three answers along the bottom, and three hoops come up ahead, one per lane in the same colors. Fly through the hoop with the right answer (swipe, or tap an answer to fly to its lane). A question's hoops take 12 seconds to arrive (16 with read-aloud on), and tapping an answer locks it in and zooms through.
-- **Catch stage (`mode: 'grab'`):** rows of number gems roll in, and a rule at the top says which ones to grab ("EVEN numbers", "Facts that make 24"). Grab 6 that fit; a wrong one costs a heart and says why. Each round ends with a question gate, then a new rule. No obstacles.
+- **Catch stage (`mode: 'grab'`):** rows of number gems roll in, and a rule at the top says which ones to grab ("EVEN numbers", "Facts that make 24"). Grab 6 that fit; a wrong one costs a heart and says why. Each round ends with a question gate, then a new rule. No obstacles. In Dino Island the gems are eggs in nests.
+- **Blaster stage (`mode: 'shoot'`):** three pterodactyls swoop in carrying the answers. Tap the right one (or its answer button, or steer into its lane) to blast it. The run slows down while a question is up.
+- **Boss stage (`mode: 'boss'`):** the chaser runs ahead instead of behind and drops rocks to dodge. Every right answer at a gate is a blaster hit on its health bar; when it's empty, it tips over and the stage is won.
 - **Final stage (`tour`):** one long run through every earlier stage's scenery in order. Each region gets a review question (missed ones show up more often), and the stage's own questions are asked at the end of each region in order. That's handy for "what comes next?" questions.
 - **Shop (cart button on the title and map):** spend coins on runners, blasters (each has its own effect and knocks the chaser farther), trails, and longer-lasting power-ups. Tapping an item previews it on the runner.
 - **Saving:** progress is kept in `localStorage` under `critter-run-v1`.
@@ -96,11 +98,18 @@ Rules (checked by `levels.test.mjs`):
 - `farmland`: crop fields, barns, silos and tractors
 - `swamp`: a boardwalk over dark water with cypress trees and Spanish moss
 - `beach`: sand, palmettos, boats and the ocean
+- `jungle`: ferns, palms and giant trees
+- `volcano`: black rock and glowing lava, with a smoking volcano and embers
+- `glacier`: snow, ice and frosted pines, with falling snow
+- `lagoon`: a sandy path between turquoise shallows and palm islands
+- `canyon`: red rock, mesas and arches
 - `tour`: the final stage only. It runs through the earlier stages' biomes.
 
-**Chasers:** `bear`, `wolf`, `spider` (a tarantula), `panther`, `gator`, `shark`, `dragon` (flies, good for sky stages), `hurricane`.
+**Chasers:** `bear`, `wolf`, `spider` (a tarantula), `panther`, `gator`, `shark`, `dragon` (flies, good for sky stages), `hurricane`, and the Dino Island set: `trex` (best as a boss), `raptor`, `pterodactyl` (flies), `spinosaurus`, `pistosaur` (swims, like the shark), `mammoth`, `triceratops`.
 
-**Modes** (stage `mode`, optional): `run` (the default), `sky` (every question is three hoops to fly through; answers must be 8 characters or less, and made questions need a skill with a short-answer form), or `grab` (catch stage; needs `rules`, the kind of number to grab each round: `even`, `odd`, `times`, `equals`, `oddAnswer`, `evenAnswer`, and `count` is the number of question gates).
+**Modes** (stage `mode`, optional): `run` (the default), `sky` (every question is three hoops to fly through; answers must be 8 characters or less, and made questions need a skill with a short-answer form), `grab` (catch stage; needs `rules`, the kind of number to grab each round: `even`, `odd`, `times`, `equals`, `oddAnswer`, `evenAnswer`, and `count` is the number of question gates), `shoot` (blaster stage; same answer rules as `sky`), or `boss` (`count` is the boss's health, one hit per right answer).
+
+**Make each world feel different.** Give every test its own theme instead of reusing the last one: pick biomes and chasers that go together (Dino Island uses only dinosaurs and Ice Age animals), mix the modes so no two stages in a row play the same, and give a few stages their own `music`.
 
 To add a new biome or chaser:
 1. Add it to `js/catalog.js` (and give it an icon in `js/icons.js`).

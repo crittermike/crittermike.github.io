@@ -101,6 +101,55 @@ const STYLES = {
     blotches(x, r, 40, ['#5f4a33', '#b89470'], 10, 30, 0.15);
     lanes(x, 'rgba(30,20,10,0.12)');
   },
+  // Dino Island
+  mud: (x, r) => {
+    x.fillStyle = '#6e5236'; x.fillRect(0, 0, W, H);
+    blotches(x, r, 150, ['#5c4329', '#7d5e3d', '#4f3a24', '#86684a'], 10, 40, 0.5);
+    for (const u of [1 / 6, 0.5, 5 / 6]) { x.fillStyle = 'rgba(255,230,190,0.08)'; x.fillRect(u * W - 18, 0, 36, H); }
+    // fallen leaves
+    for (let i = 0; i < 70; i++) {
+      const px = r() * W, py = r() * H, s = 3 + r() * 4;
+      x.fillStyle = ['#4f8a2c', '#6f9a32', '#8a7a2a', '#3f7a2a'][Math.floor(r() * 4)];
+      for (const dy of [-H, 0, H]) { x.beginPath(); x.ellipse(px, py + dy, s, s * 0.45, r() * Math.PI, 0, Math.PI * 2); x.fill(); }
+    }
+    pebbles(x, r, 50, ['#7d6a55', '#8e939b'], 2.8);
+    edgeGrass(x, r, '#3f8a2a', 320);
+    lanes(x, 'rgba(30,18,8,0.22)');
+  },
+  ash: (x, r) => {
+    x.fillStyle = '#4a4442'; x.fillRect(0, 0, W, H);
+    blotches(x, r, 150, ['#3d3836', '#57504d', '#332f2e', '#5f5552'], 10, 40, 0.5);
+    // glowing cracks
+    x.lineCap = 'round';
+    for (let i = 0; i < 16; i++) {
+      let px = r() * W, py = r() * H;
+      const pts = [[px, py]];
+      for (let k = 0; k < 6; k++) { px += (r() - 0.5) * 30; py += 8 + r() * 14; pts.push([px, py]); }
+      for (const [w, c] of [[6, 'rgba(255,90,20,0.25)'], [2.5, '#ff7a1a'], [1, '#ffd23f']]) {
+        x.strokeStyle = c; x.lineWidth = w;
+        for (const dy of [-H, 0, H]) { x.beginPath(); pts.forEach(([a, b], k) => (k ? x.lineTo(a, b + dy) : x.moveTo(a, b + dy))); x.stroke(); }
+      }
+    }
+    pebbles(x, r, 70, ['#2a2626', '#5a5250', '#3a3433'], 3);
+    lanes(x, 'rgba(0,0,0,0.25)');
+  },
+  snow: (x, r) => {
+    x.fillStyle = '#eef5fb'; x.fillRect(0, 0, W, H);
+    blotches(x, r, 130, ['#dfe9f4', '#ffffff', '#d3e1ef', '#e8f0f8'], 10, 40, 0.5);
+    // packed tracks down each lane
+    for (const u of [1 / 6, 0.5, 5 / 6]) { x.fillStyle = 'rgba(150,175,205,0.16)'; x.fillRect(u * W - 16, 0, 32, H); }
+    pebbles(x, r, 30, ['#c9d7e6', '#ffffff', '#b7c6d8'], 2.4);
+    lanes(x, 'rgba(90,120,160,0.16)');
+  },
+  redsand: (x, r) => {
+    x.fillStyle = '#d4875a'; x.fillRect(0, 0, W, H);
+    blotches(x, r, 140, ['#c97a4c', '#e09a6c', '#be6f44', '#e8a77a'], 10, 40, 0.45);
+    x.strokeStyle = 'rgba(120,50,20,0.16)';
+    x.lineWidth = 2;
+    for (let i = 0; i < 30; i++) { const py = r() * H; x.beginPath(); x.moveTo(0, py); for (let px = 0; px <= W; px += 16) x.lineTo(px, py + Math.sin(px * 0.05 + i) * 4); x.stroke(); }
+    pebbles(x, r, 50, ['#a8552e', '#e8b08a', '#8c4a2c'], 2.6);
+    lanes(x, 'rgba(110,40,10,0.16)');
+  },
   beach: (x, r) => {
     x.fillStyle = '#e9d29c'; x.fillRect(0, 0, W, H);
     blotches(x, r, 120, ['#dfc68c', '#f2e1b2', '#d4b97c', '#c9ad73'], 10, 40, 0.45);

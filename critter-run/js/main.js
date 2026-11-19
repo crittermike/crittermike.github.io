@@ -1,7 +1,7 @@
 // Critter Run: a 3D runner where each test is a level and each question is a gate on the trail.
 import * as THREE from 'three';
 import { loadChaser } from './models.js';
-import { World, LANE, BIOME, hoopMesh, gemMesh, disposeLabeled } from './world.js';
+import { World, LANE, BIOME, hoopMesh, gemMesh, eggMesh, signBoard, disposeLabeled } from './world.js';
 import { loadProps, propGeometry } from './props.js';
 import { FX, additiveMat } from './fx.js';
 import { Sound } from './audio.js';
@@ -280,16 +280,20 @@ async function openStage(level, i) {
     G.needed = G.queue.length;
   }
   if (G.play === 'sky') G.sky = { set: null, next: HOOP_FIRST, v: SKY_SPEED, lane: null };
+  if (G.play === 'shoot') G.shoot = { set: null, next: SHOOT_FIRST, busy: false };
+  if (G.play === 'boss') G.boss = { hp: G.needed, max: G.needed, rockT: 3, down: -1, rock: BIOME[stage.biome].obstacles.low[0] };
   if (G.play === 'grab') {
     G.grab = { rules: stage.rules, ri: 0, rule: null, got: 0, gems: [], next: 0, phase: 'idle', last: null, wait: 0 };
     G.needed += stage.rules.length;
   }
   world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower, powerIcon: id => iconTexture(POWERS[id].icon, POWERS[id].color),
-    sky: G.play === 'sky' ? JET_Y : 0, rows: G.play !== 'grab' });
+    sky: G.play === 'sky' ? JET_Y : 0, rows: G.play === 'grab' ? false : G.play === 'shoot' ? 'coins' : true,
+    onRockLand: () => { sound.sfx('smashRock'); G.cam.shake = Math.max(G.cam.shake, 0.35); } });
   fx.clear();
   G.h = newHero();
   clearPowers();
-  G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
+  G.c.d = G.boss ? -BOSS_GAP : 4.2; G.c.x = 0; G.c.spin = -1;
+  updateBossBar();
   sound.play(stage.music || (G.tour ? 'tour' : stage.biome));
 
   setMode('intro');
@@ -302,7 +306,9 @@ async function openStage(level, i) {
   $('#i-name').style.color = stage.color;
   $('#i-badge').replaceChildren(icon(stage.chaser));
   $('#i-badge').style.setProperty('--c', stage.color);
-  $('#i-chaser').textContent = (G.play === 'sky' ? 'Fly from the ' : 'Run from the ') + CHASER_NAME[stage.chaser].toLowerCase() + '!';
+  const name = CHASER_NAME[stage.chaser];
+  const who = 'the ' + (name.includes('.') ? name : name.toLowerCase()); // "T. rex" keeps its capital
+  $('#i-chaser').textContent = { sky: `Fly from ${who}!`, shoot: 'Blast the right answer!', boss: `Catch ${who}!`, grab: 'Grab the right ones!' }[G.play] || `Run from ${who}!`;
   setTimeout(() => { if (G.mode === 'intro') roar(); }, 500);
 }
 
@@ -314,7 +320,7 @@ function biomeAt(d) {
 
 // Called by the world as track is built ahead. Returns gates and region signs for [d0, d1).
 function onChunk(d0, d1) {
-  if (G.finished || G.play !== 'run') return [];
+  if (G.finished || (G.play !== 'run' && G.play !== 'boss')) return [];
   const ev = [];
   if (!G.tour) {
     while (G.nextGate < d1) {
@@ -488,7 +494,7 @@ window.addEventListener('keydown', e => {
     else if (k === 'ArrowUp' || k === 'w' || k === 'W' || k === ' ') jump();
     else if (k === 'ArrowDown' || k === 's' || k === 'S') slide();
     else if (k === 'Escape' || k === 'p' || k === 'P') pause();
-    else if (G.sky?.set && /^[1-3]$/.test(k)) steerTo(Number(k) - 1);
+    else if (G.pick && !G.pick.done && /^[1-3]$/.test(k)) G.pick.onPick(Number(k) - 1);
     else return;
     e.preventDefault();
   } else if (G.mode === 'question') {
@@ -508,6 +514,8 @@ window.addEventListener('keydown', e => {
 let touch = null;
 window.addEventListener('pointerdown', e => {
   if (G.mode !== 'run' || e.target.closest('button')) return;
+  // In the shoot stage, a tap on a flyer fires at it.
+  if (G.shoot?.set) { const i = flyerAt(e.clientX, e.clientY); if (i >= 0) { shootFlyer(i); return; } }
   touch = { x: e.clientX, y: e.clientY, used: false, id: e.pointerId };
 }, { passive: true });
 window.addEventListener('pointermove', e => {
@@ -534,7 +542,8 @@ function runStep(dt) {
   h.safe = Math.max(0, h.safe - dt);
   h.jumpBuf = Math.max(0, h.jumpBuf - dt);
   tickPowers(dt);
-  const speed = G.sky ? skySpeed(dt) * h.slow : runSpeed() * h.slow * (h.jet ? 1.25 : 1) * (G.grab ? GRAB_SPEED : 1);
+  if (G.shoot) G.shoot.k = damp(G.shoot.k ?? 1, G.shoot.set && !G.shoot.set.done ? 0.55 : 1, 2, dt);
+  const speed = G.sky ? skySpeed(dt) * h.slow : runSpeed() * h.slow * (h.jet ? 1.25 : 1) * (G.grab ? GRAB_SPEED : 1) * (G.shoot ? G.shoot.k : 1);
   const prev = h.dist;
   h.dist += speed * dt;
   h.x = damp(h.x, h.lane * LANE, 18, dt);
@@ -563,12 +572,14 @@ function runStep(dt) {
   speedLines(dt, speed);
   if (G.pow.magnet) magnet(dt);
 
-  // Chaser drifts back to its usual spot after lunging or being knocked away.
-  G.c.d = damp(G.c.d, CHASE_D, G.c.d < CHASE_D ? 0.8 : 0.6, dt);
-  G.c.x = damp(G.c.x, h.x, 3, dt);
+  // Chaser drifts back to its usual spot after lunging or being knocked away. The boss runs ahead instead.
+  if (G.boss?.down >= 0) G.c.d = h.dist - G.boss.at;
+  else if (G.boss) G.c.d = damp(G.c.d, -bossGap(), 0.7, dt);
+  else G.c.d = damp(G.c.d, CHASE_D, G.c.d < CHASE_D ? 0.8 : 0.6, dt);
+  if (!(G.boss?.down >= 0)) G.c.x = damp(G.c.x, h.x, G.boss ? 1.2 : 3, dt);
 
   hero.animate(heroPose(), dt, { speed, jumpY: h.y });
-  G.c.model.animate(G.c.roarT > 0 ? 'roar' : 'run', dt, G.clock);
+  G.c.model.animate(G.boss?.down >= 0 ? 'idle' : G.c.roarT > 0 ? 'roar' : 'run', G.boss?.down >= 0 ? dt * 0.2 : dt, G.clock);
   hero.root.visible = h.inv <= 0 || Math.floor(h.inv * 12) % 2 === 0;
   G.fovKick = h.jet ? 6 : (speed - BASE_SPEED) * 1.0;
 
@@ -576,6 +587,8 @@ function runStep(dt) {
   if (G.mode !== 'run') return;
   if (G.sky) skyStep();
   if (G.grab) grabStep(prev, dt);
+  if (G.shoot) shootStep(dt);
+  if (G.boss) bossStep(dt);
   if (G.mode !== 'run') return;
 
   for (const g of world.gates) {
@@ -889,7 +902,7 @@ function hurt() {
   sound.sfx('heartLost');
   flash('red');
   G.cam.shake = 0.6;
-  G.c.d = Math.min(G.c.d, 2.4);
+  if (!G.boss) G.c.d = Math.min(G.c.d, 2.4);
   roar();
   updateHud();
   const hs = $('#hearts');
@@ -914,7 +927,6 @@ function skySpeed(dt) {
   return s.v;
 }
 const HOOPS = [['hoopRed', '#ff4b4b'], ['hoopYellow', '#ffb81a'], ['hoopBlue', '#2f8cff']]; // left, middle, right
-let skyToken = 0;
 
 function liftOff() {
   const h = G.h;
@@ -959,11 +971,15 @@ function spawnHoops(dist) {
   });
   G.sky.set = { q, answers, meshes, dist, done: false, right: false, locked: false, arrive: G.clock + (S.settings.autoRead ? HOOP_TIME_READ : HOOP_TIME) };
   G.sky.lane = null;
-  showSkyQuestion(q, answers);
+  showPick(q, answers, HOOPS.map(hp => hp[1]), steerTo);
 }
 
-function showSkyQuestion(q, answers) {
-  const token = ++skyToken;
+// The question card up top and its answer buttons along the bottom, shared by the sky and shoot stages.
+// onPick(i) runs when he taps answer i (or presses 1-3).
+let pickToken = 0;
+function showPick(q, answers, colors, onPick) {
+  const token = ++pickToken;
+  G.pick = { q, answers, onPick, done: false, token };
   $('#sky-show').textContent = q.show || '';
   $('#sky-show').hidden = !q.show;
   $('#sky-text').textContent = q.q;
@@ -972,9 +988,9 @@ function showSkyQuestion(q, answers) {
   $('#sky-ans').replaceChildren(...answers.map((a, i) => {
     const b = document.createElement('button');
     b.className = 'btn sky-a';
-    b.style.setProperty('--lc', HOOPS[i][1]);
+    b.style.setProperty('--lc', colors[i]);
     b.textContent = a;
-    b.addEventListener('click', () => steerTo(i));
+    b.addEventListener('click', () => onPick(i));
     return b;
   }));
   const box = $('#sky');
@@ -982,18 +998,51 @@ function showSkyQuestion(q, answers) {
   box.classList.remove('in'); void box.offsetWidth; box.classList.add('in');
   document.body.classList.add('sky-q');
   sound.sfx('gate');
-  if (S.settings.autoRead) setTimeout(() => { if (token === skyToken) readSky(); }, 300);
+  if (S.settings.autoRead) setTimeout(() => { if (token === pickToken) readPick(); }, 300);
 }
-function readSky() {
-  const set = G.sky?.set;
-  if (!set || set.done) return;
-  const q = set.q, chips = $$('#sky-ans .sky-a');
-  sound.sayParts([q.say || [q.show, q.q].filter(Boolean).join('. '), ...set.answers], i => chips.forEach((b, k) => b.classList.toggle('reading', k === i - 1)));
+function readPick() {
+  const p = G.pick;
+  if (!p || p.done) return;
+  const chips = $$('#sky-ans .sky-a');
+  sound.sayParts([p.q.say || [p.q.show, p.q.q].filter(Boolean).join('. '), ...p.answers], i => chips.forEach((b, k) => b.classList.toggle('reading', k === i - 1)));
 }
-function hideSky(token) {
-  if (token !== skyToken) return;
+function hidePick(token) {
+  if (token !== pickToken) return;
   $('#sky').hidden = true;
   document.body.classList.remove('sky-q');
+}
+// Scores a sky or shoot answer and marks the buttons. A wrong one shows the tip and costs a heart.
+function scorePick(i, right) {
+  const p = G.pick, q = p.q, chips = $$('#sky-ans .sky-a'), token = p.token;
+  const key = qKey(G.level, entryOf(q));
+  p.done = true;
+  sound.stopSpeech();
+  chips.forEach(b => b.classList.remove('reading'));
+  if (right) {
+    G.correct++;
+    if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
+    G.coins += 5;
+    bumpCoins();
+    updateHud();
+    sound.sfx('correct');
+    chips[i].classList.add('right');
+    chips.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
+    setTimeout(() => hidePick(token), 900);
+  } else {
+    S.missed[key] = (S.missed[key] || 0) + 1;
+    G.wrong++;
+    G.queue.push(entryOf(q));
+    sound.sfx('wrong');
+    chips[i].classList.add('wrong');
+    chips.forEach((b, k) => { if (p.answers[k] === q.a) setTimeout(() => b.classList.add('right'), 300); else if (k !== i) b.classList.add('dim'); });
+    $('#sky-tip').textContent = q.why;
+    $('#sky-tip').hidden = false;
+    if (S.settings.autoRead) sound.sayParts([q.why]);
+    setTimeout(() => hidePick(token), 3600);
+    hurt();
+  }
+  save();
+  if (G.hearts <= 0) caught();
 }
 // Tapping an answer at the bottom flies to its lane.
 function steerTo(i) {
@@ -1008,47 +1057,204 @@ function passHoops(set) {
   set.done = true;
   const h = G.h, i = h.lane + 1, q = set.q, right = set.answers[i] === q.a;
   const hoop = set.meshes[i], at = hoop.position, color = HOOPS[i][1];
-  const chips = $$('#sky-ans .sky-a'), token = skyToken;
-  const key = qKey(G.level, entryOf(q));
   set.right = right;
-  sound.stopSpeech();
-  chips.forEach(b => b.classList.remove('reading'));
   hoop.userData.board.visible = false;
   if (right) {
-    G.correct++;
-    if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
-    G.coins += 5;
-    bumpCoins();
-    updateHud();
-    sound.sfx('correct');
     fx.burst(at.x, at.y, at.z, { n: 46, colors: [color, '#ffffff', '#ffd23f'], speed: 7, up: 2, life: 1.1, size: 0.24, sparks: 50, glow: 2, floor: false, g: -3 });
     post.flash(color, 0.18);
-    chips[i].classList.add('right');
-    chips.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
     // The right answer knocks the chaser back.
     G.c.d = Math.max(G.c.d, CHASE_D) + 7;
     G.c.spin = 0;
-    setTimeout(() => hideSky(token), 900);
   } else {
-    S.missed[key] = (S.missed[key] || 0) + 1;
-    G.wrong++;
-    G.queue.push(entryOf(q));
-    sound.sfx('wrong');
     hoop.visible = false;
     fx.burst(at.x, at.y, at.z, { n: 26, colors: ['#888888', '#bbbbbb', color], speed: 5, up: 1, life: 0.9, size: 0.22, floor: false, g: -6 });
-    chips[i].classList.add('wrong');
-    chips.forEach((b, k) => { if (set.answers[k] === q.a) setTimeout(() => b.classList.add('right'), 300); else if (k !== i) b.classList.add('dim'); });
-    $('#sky-tip').textContent = q.why;
-    $('#sky-tip').hidden = false;
-    if (S.settings.autoRead) sound.sayParts([q.why]);
-    setTimeout(() => hideSky(token), 3600);
-    hurt();
   }
-  save();
-  if (G.hearts <= 0) caught();
+  scorePick(i, right);
 }
 function dropHoops(set) {
   for (const m of set.meshes) { scene.remove(m); disposeLabeled(m); }
+}
+
+// ---------- shoot stage ----------
+// Pterodactyls fly in carrying the answers and hover ahead of the runner. Tapping one (or its answer at the bottom)
+// fires the blaster at it. There are no obstacles, so he can keep his eyes on the question.
+const SHOOT_FIRST = 40, SHOOT_GAP = 22, FLYER_AHEAD = 13, FLYER_SIZE = 3.4;
+const FLYER_SLOTS = [[-3.4, 3.3], [0, 4.4], [3.4, 3.3]];
+const FLYER_COLORS = ['#ff4b4b', '#ffb81a', '#2f8cff'];
+const flyerModel = () => loadChaser('pterodactyl', { shadow: false }).catch(() => loadChaser('dragon', { shadow: false })).catch(() => null);
+
+async function spawnFlyers() {
+  const s = G.shoot;
+  s.busy = true;
+  const q = resolve(G.queue.shift(), true);
+  const answers = shuffle([q.a, ...shuffle(q.wrong).slice(0, 2)]);
+  const models = await Promise.all(answers.map(flyerModel));
+  s.busy = false;
+  // He left the stage while the models loaded.
+  if (G.shoot !== s) return;
+  const flyers = answers.map((a, i) => {
+    const g = new THREE.Group(), m = models[i];
+    if (m) {
+      m.root.scale.setScalar(FLYER_SIZE / Math.max(0.1, m.length));
+      m.root.rotation.y = Math.PI; // face the runner
+      g.add(m.root);
+    }
+    const sign = signBoard(a, FLYER_COLORS[i]);
+    sign.scale.setScalar(1.25);
+    sign.position.y = -1.5;
+    g.add(sign);
+    scene.add(g);
+    return { g, model: m, sign, i, t: 0, state: 'in', ph: Math.random() * 6, away: 0 };
+  });
+  s.set = { q, answers, flyers, done: false, t: 0, end: Infinity };
+  showPick(q, answers, FLYER_COLORS, shootFlyer);
+}
+
+function shootStep(dt) {
+  const s = G.shoot, h = G.h;
+  if (!s.set && !s.busy && !G.finished && h.dist >= s.next) {
+    if (G.queue.length) spawnFlyers();
+    else finishRun();
+  }
+  const set = s.set;
+  if (!set) return;
+  set.t += dt;
+  for (const f of set.flyers) {
+    f.t += dt;
+    const [sx, sy] = FLYER_SLOTS[f.i];
+    let x = sx + Math.sin(G.clock * 0.9 + f.ph) * 0.45, y = sy + Math.sin(G.clock * 2.2 + f.ph) * 0.3;
+    let d = h.dist + FLYER_AHEAD + Math.sin(G.clock * 0.7 + f.ph) * 1.2;
+    if (f.state === 'in') {
+      const k = Math.min(1, f.t / 1.5), e = 1 - (1 - k) ** 3;
+      d += (1 - e) * 70; y += (1 - e) * 12;
+      if (k >= 1) f.state = 'hover';
+    } else if (f.state === 'away') {
+      f.away += dt;
+      d += f.away * f.away * 40; y += f.away * 7; x += (sx || 1) * f.away * 3;
+    }
+    f.g.position.set(x, y, -d);
+    f.g.rotation.z = Math.sin(G.clock * 1.6 + f.ph) * 0.12;
+    f.sign.rotation.z = -f.g.rotation.z;
+    if (f.model) f.model.animate('run', dt);
+  }
+  if (set.done && set.t > set.end) {
+    dropFlyers(set);
+    s.set = null;
+    s.next = h.dist + SHOOT_GAP;
+  }
+}
+
+// The flyer under a tap, if any. Generous, so a quick tap near one counts.
+function flyerAt(px, py) {
+  const set = G.shoot?.set;
+  if (!set || set.done) return -1;
+  const r = Math.max(70, Math.min(window.innerWidth, window.innerHeight) * 0.11);
+  let best = -1, bestD = r;
+  for (const f of set.flyers) {
+    for (const part of [f.g, f.sign]) {
+      const v = part.getWorldPosition(_aim).project(camera);
+      const sx = (v.x + 1) / 2 * window.innerWidth, sy = (1 - v.y) / 2 * window.innerHeight;
+      const dd = Math.hypot(sx - px, sy - py);
+      if (dd < bestD) { bestD = dd; best = f.i; }
+    }
+  }
+  return best;
+}
+
+function shootFlyer(i) {
+  const set = G.shoot?.set;
+  if (G.mode !== 'run' || !set || set.done) return;
+  sound.unlock();
+  set.done = true;
+  const f = set.flyers[i], right = set.answers[i] === set.q.a;
+  const to = f.g.getWorldPosition(new THREE.Vector3());
+  hero.showWeapon(true);
+  hero.aimAt(to);
+  const w = byId(WEAPONS, S.equip.weapons);
+  const t = fireWeapon(w.id, {
+    fx, sound, to, from: hero.muzzle(new THREE.Vector3()),
+    chaser: { height: 1.2, length: 1.8 },
+    hit: () => flyerHit(set, f, right),
+    freeze: () => {},
+    flash: (c, a) => post.flash(c, a),
+    shake: a => { G.cam.shake = Math.max(G.cam.shake, a); },
+  });
+  setTimeout(() => { if (G.mode === 'run') hero.showWeapon(false); }, (t + 0.5) * 1000);
+  set.end = set.t + t + (right ? 1.6 : 3.6);
+  if (right) {
+    // The chaser behind gets knocked back too.
+    G.c.d = Math.max(G.c.d, CHASE_D) + 5;
+    G.c.spin = 0;
+  }
+  scorePick(i, right);
+}
+function flyerHit(set, f, right) {
+  const p = f.g.position;
+  sound.sfx('hit');
+  if (right) {
+    f.g.visible = false;
+    f.state = 'gone';
+    fx.burst(p.x, p.y, p.z, { n: 50, colors: [FLYER_COLORS[f.i], '#ffffff', '#ffd23f'], speed: 8, up: 3, life: 1.1, size: 0.26, sparks: 60, glow: 2, floor: false, g: -6 });
+    fx.ring(p.x, p.y, p.z, FLYER_COLORS[f.i], 3, 0.4);
+  } else {
+    fx.burst(p.x, p.y, p.z, { n: 16, colors: ['#888888', '#bbbbbb'], speed: 4, up: 1, life: 0.7, size: 0.2, floor: false, g: -6 });
+  }
+  for (const o of set.flyers) if (o.state !== 'gone') o.state = 'away';
+}
+function dropFlyers(set) {
+  for (const f of set.flyers) { scene.remove(f.g); disposeLabeled(f.sign); }
+}
+
+// ---------- boss stage ----------
+// The T. rex took an egg and runs ahead. It throws rocks into the lanes (jump them or switch lanes), and question
+// gates come up as in a normal run. Each right answer blasts it and brings it closer; the last one knocks it over.
+const BOSS_GAP = 19, BOSS_NEAR = 10, BOSS_ROCK_EVERY = 4.2;
+function bossStep(dt) {
+  const b = G.boss, h = G.h;
+  b.rockT -= dt;
+  if (b.rockT <= 0 && !G.finished && G.t > 3) {
+    b.rockT = BOSS_ROCK_EVERY * (0.7 + Math.random() * 0.6);
+    const lane = Math.random() < 0.5 ? h.lane : Math.floor(Math.random() * 3) - 1;
+    if (world.dropRock(lane, h.dist + 32, b.rock)) {
+      G.c.roarT = 0.9;
+      sound.roar(G.c.type, false);
+    }
+  }
+}
+// How far ahead the boss runs: closer as it gets weaker.
+const bossGap = () => BOSS_NEAR + (BOSS_GAP - BOSS_NEAR) * (G.boss.hp / G.boss.max);
+function bossHit() {
+  const b = G.boss;
+  b.hp = Math.max(0, b.hp - 1);
+  b.flash = 0.5;
+  G.hitStop = 0.08;
+  G.cam.shake = Math.max(G.cam.shake, 0.45);
+  sound.sfx('hit');
+  updateBossBar();
+}
+function updateBossBar() {
+  const b = G.boss;
+  $('#boss').hidden = !b;
+  document.body.classList.toggle('boss', !!b);
+  if (!b) return;
+  $('#boss-fill').style.setProperty('--k', (b.hp / b.max).toFixed(3));
+  if ($('#boss-ic').dataset.type !== G.c.type) { $('#boss-ic').dataset.type = G.c.type; $('#boss-ic').replaceChildren(icon(G.stage.chaser)); }
+}
+// The last hit: it stumbles off the trail and falls over, and he gets the egg back.
+function bossDown() {
+  const b = G.boss, h = G.h;
+  b.down = 0;
+  b.at = h.dist - G.c.d;
+  G.c.roarT = 1.2;
+  sound.roar(G.c.type, true);
+  G.cam.shake = 0.8;
+  finishRun();
+  setTimeout(() => {
+    if (G.boss !== b) return;
+    toast('YOU GOT THE EGG!', '#ffd23f', 'egg');
+    sound.stinger('star');
+    fx.confetti(h.x, 3, -h.dist - 8, 120);
+  }, 900);
 }
 
 // ---------- catch stage ----------
@@ -1076,9 +1282,10 @@ function startRound() {
   $('#catch-rule').textContent = g.rule.title;
   $('#catch-pips').replaceChildren(...Array.from({ length: GEM_NEED }, () => document.createElement('i')));
   $('#catch').style.setProperty('--c', G.stage.color);
+  $('#catch > .ic').replaceWith(icon(G.level.id === 'math-ch4' ? 'egg' : 'gem'));
   $('#catch').hidden = false;
   $('#catch').classList.remove('in'); void $('#catch').offsetWidth; $('#catch').classList.add('in');
-  toast(g.rule.title, '#ffffff', 'gem');
+  toast(g.rule.title, '#ffffff', G.level.id === 'math-ch4' ? 'egg' : 'gem');
   if (S.settings.autoRead) sound.sayParts([g.rule.say]);
 }
 
@@ -1090,6 +1297,7 @@ function grabStep(prev, dt) {
   for (const gem of g.gems) {
     const sp = gem.mesh.userData.spin;
     sp.rotation.y += dt * 2;
+    sp.rotation.z = Math.sin(G.clock * 4 + gem.ph) * 0.12;
     gem.mesh.position.y = 0.95 + Math.sin(G.clock * 3 + gem.ph) * 0.12;
     if (gem.taken || !swept(prev, h.dist, gem.dist, 0.8) || Math.abs(gem.x - h.x) > 1.05 || h.y > 1.7) continue;
     takeGem(gem);
@@ -1109,7 +1317,8 @@ function gemRow(d) {
   }
   items.forEach((it, k) => {
     const [key, color] = GEMS[Math.floor(Math.random() * GEMS.length)];
-    const mesh = gemMesh(key, color, it.label);
+    // Dino Island hunts eggs; other worlds catch gems.
+    const mesh = G.level.id === 'math-ch4' ? eggMesh(color, it.label) : gemMesh(key, color, it.label);
     const x = lanes[k] * LANE;
     mesh.position.set(x, 0.95, -d);
     scene.add(mesh);
@@ -1170,9 +1379,15 @@ function dropGem(gem) { scene.remove(gem.mesh); disposeLabeled(gem.mesh); }
 function clearModes() {
   if (G.sky?.set) dropHoops(G.sky.set);
   if (G.grab) G.grab.gems.forEach(dropGem);
+  if (G.shoot?.set) dropFlyers(G.shoot.set);
+  if (G.boss && G.c.model) { G.c.model.root.rotation.set(0, 0, 0); G.c.model.root.position.y = 0; }
   G.sky = null;
   G.grab = null;
-  skyToken++;
+  G.shoot = null;
+  G.boss = null;
+  updateBossBar();
+  pickToken++;
+  G.pick = null;
   $('#sky').hidden = true;
   $('#catch').hidden = true;
   document.body.classList.remove('sky-q');
@@ -1294,7 +1509,7 @@ function judge(right, why) {
       // It comes back later in the run. A made question comes back as a new one of the same kind.
       if (G.tour) G.extra.push(entryOf(q)); else G.queue.push(entryOf(q));
       hurt();
-      G.c.d = 1.9;
+      if (!G.boss) G.c.d = 1.9;
       hero.stumble();
     }
     $('#tip-text').textContent = G.current.why;
@@ -1308,9 +1523,14 @@ function judge(right, why) {
 }
 
 const _aim = new THREE.Vector3();
+// c.d is the gap to the chaser's nose, so a big one (like the spinosaurus) sits farther back and stays behind the camera.
+function chaserZ() {
+  const c = G.c, back = G.boss ? 0 : Math.max(0, (c.model.length || 2) / 2 - 2.3);
+  return -(G.h.dist - c.d - back);
+}
 function chaserTarget(out = _aim) {
   const c = G.c;
-  return out.set(c.x, (c.model.height || 1.5) * 0.55, -(G.h.dist - c.d));
+  return out.set(c.x, (c.model.height || 1.5) * 0.55, chaserZ());
 }
 function aimAtChaser() { hero.aimAt(chaserTarget()); }
 
@@ -1325,6 +1545,11 @@ function fire(weaponId = S.equip.weapons, done) {
     fx, sound, from, to,
     chaser: { height: c.model.height || 1.5, length: c.model.length || 2 },
     hit: () => {
+      if (G.boss) {
+        if (!G.current?.power) bossHit();
+        if (done) done();
+        return;
+      }
       c.spin = 0;
       c.knock = w.knock;
       G.hitStop = 0.07;
@@ -1348,8 +1573,9 @@ function afterAnswer() {
   const wasGate = !G.current?.power;
   setMode('run');
   // The sky and catch stages finish on their own, after their last hoop or round.
-  if (G.sky) return;
+  if (G.sky || G.shoot) return;
   if (G.grab) { if (wasGate && G.grab.phase === 'gate') nextPhase(); return; }
+  if (G.boss) { if (G.boss.hp <= 0 && !G.finished) bossDown(); return; }
   const done = G.tour ? G.baseLeft <= 0 && G.extra.length === 0 : G.queue.length === 0;
   if (done) finishRun();
 }
@@ -1371,7 +1597,7 @@ $('#b-speak').addEventListener('click', () => {
   if (G.mode === 'feedback' && G.fb === 'wrong') sound.sayParts([G.current.why]);
   else readQuestion();
 });
-$('#b-sky-speak').addEventListener('click', () => { sound.unlock(); readSky(); });
+$('#b-sky-speak').addEventListener('click', () => { sound.unlock(); readPick(); });
 $('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.why || G.current.q.why]); });
 
 // ---------- shop ----------
@@ -1607,19 +1833,24 @@ function update(dt) {
     case 'question': {
       hero.animate(h.ground ? 'run' : 'jump', dt * 0.06, { jumpY: h.y });
       c.model.animate(c.roarT > 0 ? 'roar' : 'run', dt * 0.3, G.clock);
-      c.d = damp(c.d, 3.2, 3, dt);
+      c.d = damp(c.d, G.boss ? -bossGap() : 3.2, 3, dt);
       break;
     }
     case 'feedback': {
       if (G.fb === 'right') {
         aimAtChaser();
-        hero.animate('zap', dt, { t: G.clock });
+        hero.animate('zap', dt, { t: G.clock, forward: !!G.boss });
         c.model.animate('roar', cdt, G.clock);
         if (c.spin >= 0) c.d = damp(c.d, 11 + 4 * (c.knock || 1), 3, dt);
         if (G.t > G.fbDur) afterAnswer();
       } else if (G.current?.power) {
         hero.animate('run', dt * 0.06, { jumpY: h.y });
         c.model.animate('run', dt * 0.3, G.clock);
+      } else if (G.boss) {
+        // A wrong answer: the boss roars and gets farther away.
+        hero.animate('run', dt * 0.06, { jumpY: h.y });
+        c.model.animate('roar', dt * 0.5, G.clock);
+        c.d = damp(c.d, -bossGap() - 6, 2, dt);
       } else {
         hero.animate('run', dt * 0.06, { jumpY: h.y });
         c.model.animate('attack', dt * 0.5, G.clock);
@@ -1630,8 +1861,9 @@ function update(dt) {
     case 'caught': {
       if (h.y > 0) h.y = Math.max(0, h.y - dt * 7);
       hero.animate('fall', dt, { t: G.clock });
-      c.model.animate('attack', dt, G.clock);
-      c.d = damp(c.d, 1.2, 5, dt);
+      c.model.animate(G.boss ? 'roar' : 'attack', dt, G.clock);
+      // The boss turns back and roars over him; the others pounce from behind.
+      c.d = damp(c.d, G.boss ? -6 : 1.2, G.boss ? 2 : 5, dt);
       c.x = damp(c.x, h.x, 5, dt);
       break;
     }
@@ -1646,6 +1878,14 @@ function update(dt) {
     }
     default: break;
   }
+  // The beaten boss tips over beside the trail and stays there.
+  if (G.boss?.down >= 0) {
+    c.d = h.dist - G.boss.at;
+    G.boss.down += cdt;
+    const k = Math.min(1, G.boss.down / 1.1);
+    c.x = damp(c.x, 5.5, 2.5, dt);
+    c.model.root.rotation.z = -k * k * Math.PI * 0.45;
+  }
   // Knocked-back chaser does a backflip.
   if (c.spin >= 0) {
     c.spin += cdt * 1.6;
@@ -1654,13 +1894,14 @@ function update(dt) {
     c.model.root.position.y = Math.sin(k * Math.PI) * 2.6;
     if (k >= 1) { c.spin = -1; c.model.root.rotation.x = 0; c.model.root.position.y = 0; }
   }
+  if (G.boss?.flash > 0) G.boss.flash -= dt;
   hero.root.position.set(h.x, 0, -h.dist);
   hero.root.rotation.z = G.mode === 'run' ? (h.x - h.lane * LANE) * 0.08 : 0;
   updatePowerFx(dt);
   updateJetpack();
   if (G.mode !== 'run') hero.root.visible = true;
   c.model.root.position.x = c.x;
-  c.model.root.position.z = -(h.dist - c.d);
+  c.model.root.position.z = chaserZ();
   // A flying chaser keeps up with a flying hero, and hovers low otherwise.
   if (c.model.flies) c.model.body.position.y = damp(c.model.body.position.y, Math.max(c.model.flies, h.y + 0.3), 3, dt);
   // Chase meter: the monster emoji slides toward the runner as it closes in.
@@ -1690,15 +1931,30 @@ function updateCamera(dt) {
     }
     case 'intro': {
       const cz = z + G.c.d, ch = G.c.model?.height || 1.5, big = ch > 3;
+      if (G.boss) {
+        // Behind the runner, looking ahead at the boss.
+        _pos.set(h.x + (portrait ? 1.6 : 3.0), 2.6, z + (portrait ? 7 : 5.5));
+        _look.set(h.x, ch * 0.45, cz);
+        rate = 3;
+        break;
+      }
       _pos.set(h.x + (portrait ? 2.2 : 3.4), big ? 2.8 : 1.8, z - (portrait ? 5.2 : 2.4));
       _look.set(h.x + 0.2, big ? 2.6 : ch * 0.5, z + G.c.d * 0.6);
       rate = 3;
       break;
     }
-    case 'start':
     case 'question':
     case 'feedback':
-    case 'caught': {
+    case 'caught':
+      if (G.boss) {
+        // Over the shoulder toward the boss, so a blaster shot can be seen hitting it.
+        _pos.set(h.x + (portrait ? 1.2 : 2.2), 4.2, z + (portrait ? 7 : 6));
+        _look.set(h.x * 0.5, 2.6, z + G.c.d);
+        rate = 4;
+        break;
+      }
+    // falls through
+    case 'start': {
       const side = portrait ? 1.1 : 2.6;
       // Lifted with a flying hero so he stays in the shot along with the chaser below.
       const lift = h.y * 0.7;
@@ -1806,6 +2062,8 @@ function frame(now) {
   // Before rendering: a quality change resizes the canvas, which would blank a frame that's already drawn.
   if (G.mode === 'run') perf(dt);
   updateCamera(dt);
+  // Snow is bright enough to trip the bloom, which would wash the whole picture out.
+  if (post.bloom) post.bloom.threshold = (world.biome && BIOME[world.biome].bloomAt) || 1.2;
   post.render(dt);
 }
 

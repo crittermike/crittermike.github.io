@@ -3,7 +3,7 @@
 // whole world draws in a handful of calls. Only the ground, trail surface, water and sky are generated.
 import * as THREE from 'three';
 import { Builder, M, U, bend, waterMaterial, textTexture, rng as mkRng, fbm, noise2 } from './gfx.js';
-import { prop, PROP_MATS, propGeometry, recolored } from './props.js';
+import { prop, PROP_MATS, propGeometry, recolored, variant } from './props.js';
 import { pathTexture, groundTexture, PATH_LEN } from './textures.js';
 
 export const LANE = 2.2;
@@ -18,7 +18,17 @@ const smooth = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a
 // Props that sway in the wind (drawn with the foliage material).
 const FOLIAGE = new Set(['treeRoundA', 'treeRoundB', 'treeRoundC', 'treeUmbrellaA', 'treeUmbrellaB',
   'pineA', 'pineB', 'pineC', 'pineOrange', 'pineYellow', 'pineClump', 'pineSingle', 'willow', 'treeAutumn', 'treeColumn', 'palm1', 'palm2', 'palm3',
-  'palmetto', 'palmettoLady', 'palmK', 'palmBendK', 'palmDetailK', 'peachTree', 'appleTree', 'longleafA', 'longleafB', 'longleafC', 'cornRow', 'corn']);
+  'palmetto', 'palmettoLady', 'palmK', 'palmBendK', 'palmDetailK', 'peachTree', 'appleTree', 'longleafA', 'longleafB', 'longleafC', 'cornRow', 'corn',
+  'jPalm', 'jCanopy', 'jTall', 'jFlat', 'roundPineA_snow', 'roundPineC_snow', 'roundPineE_snow']);
+
+// Snowy and burnt copies of props, made once the models load: snow settles on whatever faces up.
+const SNOW = new THREE.Color('#f4f8ff'), CHAR = new THREE.Color('#2a1c16');
+function makeVariants() {
+  const snow = (c, n) => c.lerp(SNOW, smooth(0.25, 0.7, n.y) * 0.92);
+  for (const k of ['roundPineA', 'roundPineC', 'roundPineE', 'pineA', 'pineB', 'pineC', 'logA', 'rockA', 'rockC', 'rockSlab', 'boulderH', 'bareA', 'bareB', 'stumpTall', 'iceLargeA', 'iceTallA']) variant(k + '_snow', k, snow);
+  const burnt = c => c.multiplyScalar(0.4).lerp(CHAR, 0.35);
+  for (const k of ['logA', 'deadTree', 'bareA', 'bareB', 'stumpTall']) variant(k + '_burnt', k, burnt);
+}
 
 const _m = new THREE.Matrix4(), _p = new THREE.Vector3(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), _s = new THREE.Vector3(), _tc = new THREE.Color();
 
@@ -107,6 +117,38 @@ const OB = {
   dock: { over: true, w: 2.2, d: 1.6, h: 2.6, y0: 1.22, build: b => {
     b.prop('dockPlatform', 0, 0, 0, { s: [0.92, 1.12, 0.6] });
     b.prop('barrel', -0.5, 1.45, 0, { s: 0.95 }).prop('crate', 0.45, 1.45, 0.05, { s: 0.9, ry: 0.3 });
+  } },
+  // Jungle
+  jLog: { low: true, w: 2.0, d: 0.85, h: 0.82, build: b => b.prop('logA', 0, 0.31, 0, { ry: R90, s: [1.15, 1.1, 1.5], tint: '#9fb07a' }).prop('jLeafs', 0.9, 0, 0.3, { s: 0.5 }) },
+  jRock: { low: true, w: 1.7, d: 1.1, h: 0.85, build: b => b.prop('rockA', 0, 0.45, 0, { s: [1.75, 1.0, 1.35], tint: '#a8c090' }).prop('jFlat', -0.7, 0, 0.3, { s: 0.5 }) },
+  jTrunk: { low: false, w: 1.8, d: 1.6, h: 2.8, build: b => b.prop('stumpTall', 0, 0, 0, { s: [1.7, 1.45, 1.5], tint: '#8a7a5a' }).prop('jBush', 0.6, 0, 0.6, { s: 0.7 }) },
+  jBoulder: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('boulderH', 0, 1.32, 0, { s: [1.05, 1.35, 1.0], tint: '#a9c29a' }).prop('jLeafs', -0.6, 0, 0.7, { s: 0.6 }) },
+  // Volcano
+  lavaRock: { low: true, w: 1.7, d: 1.1, h: 0.85, build: b => b.prop('vLargeA', 0, 0, 0, { s: [0.72, 1.06, 0.37] }) },
+  charLog: { low: true, w: 2.0, d: 0.85, h: 0.82, build: b => b.prop('logA_burnt', 0, 0.31, 0, { ry: R90, s: [1.15, 1.1, 1.5] }) },
+  basalt: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('vTallA', 0, 0, 0, { s: [0.69, 0.93, 0.85] }) },
+  basaltB: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('vTallB', 0, 0, 0, { s: [0.87, 1.04, 0.74] }) },
+  charArch: { over: true, w: 2.2, d: 0.8, h: 2.5, y0: 1.2, build: b => {
+    for (const sx of [-1, 1]) b.prop('vTallC', sx * 1.2, 0, 0, { s: [0.55, 0.95, 0.6], ry: sx > 0 ? 0 : Math.PI });
+    b.prop('logA_burnt', 0, 1.62, 0, { ry: R90, s: [0.85, 0.85, 1.75] });
+  } },
+  // Ice age
+  snowLog: { low: true, w: 2.0, d: 0.85, h: 0.82, build: b => b.prop('logA_snow', 0, 0.31, 0, { ry: R90, s: [1.15, 1.1, 1.5] }) },
+  iceRock: { low: true, w: 1.7, d: 1.1, h: 0.85, build: b => b.prop('iceLargeA_snow', 0, 0, 0, { s: [0.72, 1.06, 0.37] }) },
+  iceBlock: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('iceTallA_snow', 0, 0, 0, { s: [0.69, 0.93, 0.85] }) },
+  iceBlockB: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('iceTallB', 0, 0, 0, { s: [0.87, 1.04, 0.74] }) },
+  iceArch: { over: true, w: 2.2, d: 0.8, h: 2.5, y0: 1.2, build: b => {
+    for (const sx of [-1, 1]) b.prop('rockSlab_snow', sx * 1.15, 0, 0, { s: [1.0, 1.15, 0.9], ry: sx > 0 ? 0 : Math.PI });
+    b.prop('logA_snow', 0, 1.62, 0, { ry: R90, s: [0.85, 0.85, 1.75] });
+  } },
+  // Canyon
+  redRock: { low: true, w: 1.7, d: 1.1, h: 0.85, build: b => b.prop('cLargeA', 0, 0, 0, { s: [0.72, 1.06, 0.37] }) },
+  redRockB: { low: true, w: 1.8, d: 1.1, h: 0.85, build: b => b.prop('cTallE', 0, 0, 0, { s: [1.3, 0.65, 0.7] }) },
+  mesaRock: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('cTallA', 0, 0, 0, { s: [0.69, 0.93, 0.85] }) },
+  mesaRockB: { low: false, w: 2.0, d: 1.7, h: 2.8, build: b => b.prop('cTallB', 0, 0, 0, { s: [0.87, 1.04, 0.74] }) },
+  rockBridge: { over: true, w: 2.2, d: 0.9, h: 2.5, y0: 1.22, build: b => {
+    for (const sx of [-1, 1]) b.prop('cTallC', sx * 1.2, 0, 0, { s: [0.55, 0.62, 0.6], ry: sx > 0 ? 0 : Math.PI });
+    b.prop('cLargeC', 0, 1.3, 0, { s: [0.78, 1.2, 0.27] });
   } },
 };
 const obGeo = new Map();
@@ -261,6 +303,95 @@ export const BIOME = {
     },
   },
 };
+// ---------- Dino Island ----------
+Object.assign(BIOME, {
+  jungle: {
+    sky: ['#3f8fb0', '#cfe6c8'], hemi: ['#e0ffd8', '#284a22'], fog: [30, 135], path: 'mud', dust: '#7d6a4a',
+    backdrop: { style: 'trees', colors: ['#2a6235', '#46854f', '#72a97b'], amp: [28, 23, 19] },
+    obstacles: { low: ['jLog', 'jRock'], tall: ['jTrunk', 'jBoulder'], over: ['mossBranch'], wide: 'bigLog' },
+    height: (x, z) => { const a = Math.abs(x); return smooth(6, 40, a) * (2 + 9 * fbm(x * 0.03 + 21, z * 0.025)) + smooth(5, 10, a) * 0.5 * noise2(x * 0.25, z * 0.25); },
+    ground: (() => { const a = col('#2c6a26'), b = col('#4f8f2c'), m = col('#5a4a2c'); return (x, z, h, out) => { mix3(out, a, b, smooth(0.3, 0.75, fbm(x * 0.08, z * 0.08))); return out.lerp(m, smooth(0.62, 0.82, noise2(x * 0.05 + 4, z * 0.05)) * 0.45); }; })(),
+    decor(s) {
+      const { r } = s;
+      s.edge(['jLeafs', 'jFlat', 'grassTallC', 'jBush', 'jLeafs'], 16);
+      for (let i = 0; i < 9; i++) s.place(s.pick(['jBush', 'jBushBig', 'jFlat', 'jBushBig']), s.side() * (4.8 + r() * 8), s.z(), { s: 1 + r() * 1.2 });
+      for (let i = 0; i < 6; i++) s.place(s.pick(['jPalm', 'palmK', 'palmBendK', 'jPalm']), s.side() * (6.5 + r() * 12), s.z(), { s: 1 + r() * 0.6 });
+      for (let i = 0; i < 6; i++) s.place(s.pick(['jCanopy', 'jTall', 'jCanopy']), s.side() * (10 + r() * 14), s.z(), { s: 1.8 + r() * 1.2 });
+      for (let i = 0; i < 9; i++) s.place(s.pick(['jCanopy', 'jTall', 'jCanopy', 'treeUmbrellaA']), s.side() * (24 + r() * 45), s.z(), { s: 2 + r() * 1.6, tint: r() < 0.3 ? '#bfe0a0' : null });
+      if (r() < 0.5) s.place(s.pick(['logMoss', 'stumpMoss', 'mushrooms']), s.side() * (5.5 + r() * 4), s.z(), {});
+      if (r() < 0.35) s.waterfall(s.side() * (13 + r() * 6), s.z(0.3, 0.7), 7 + r() * 5);
+      if (r() < 0.4) s.place(s.pick(['cliffJ', 'cliffK']), s.side() * (18 + r() * 14), s.z(), { s: 1.4 + r() * 1.6, y: -0.5, tint: '#a8c098' });
+    },
+  },
+  volcano: {
+    sky: ['#3d2c46', '#f0965a'], hemi: ['#ffc08a', '#3a221c'], fog: [44, 175], path: 'ash', dust: '#5a5250', embers: true,
+    water: { deep: '#7a1405', shallow: '#ff8a1a', y: -0.35, opacity: 1, ripple: 0.3, speed: 0.25, glow: 1.25 },
+    backdrop: { style: 'volcano', colors: ['#3a2a2c', '#5c3d38', '#80564c'], amp: [100, 62, 46] },
+    obstacles: { low: ['lavaRock', 'charLog'], tall: ['basalt', 'basaltB'], over: ['charArch'] },
+    // Lava channels open up beside the trail where the ground dips below the lava.
+    height: (x, z) => { const a = Math.abs(x); return smooth(7, 45, a) * (1.5 + 11 * fbm(x * 0.025 + 31, z * 0.02)) + 0.35 - 1.5 * smooth(0.5, 0.66, fbm(x * 0.045 + 7, z * 0.035)) * smooth(4.5, 8, a); },
+    ground: (() => { const a = col('#3b3634'), b = col('#5a524e'), h0 = col('#6a3020'); return (x, z, h, out) => { mix3(out, a, b, fbm(x * 0.07, z * 0.07) * 0.8); return out.lerp(h0, smooth(0.1, -0.3, h) * 0.8); }; })(),
+    decor(s) {
+      const { r } = s;
+      s.edge(['vLargeA', 'rockC', 'vTallC'], 5, { s: 0.25, tint: '#9a9090' });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['vTallA', 'vTallB', 'vTallC', 'vLargeC']), s.side() * (6 + r() * 14), s.z(), { s: 0.6 + r() * 0.9 });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['deadTree_burnt', 'bareA_burnt', 'bareB_burnt']), s.side() * (6 + r() * 20), s.z(), { s: 0.9 + r() * 0.8 });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['vCliff', 'vTallA', 'vTallB']), s.side() * (24 + r() * 50), s.z(), { s: 2.5 + r() * 3, y: -1 });
+      for (let i = 0; i < 2; i++) if (r() < 0.6) { const x = s.side() * (12 + r() * 24), z = s.z(); s.place('vTallC', x, z, { s: 0.7, smoke: [[0, 2.2, 0]], smokeColor: '#6e6462', smokeSize: 2 }); }
+    },
+  },
+  glacier: {
+    sky: ['#5f9ee0', '#eef6ff'], hemi: ['#f2f8ff', '#9db4c9'], fog: [44, 175], path: 'snow', dust: '#ffffff', snow: true, bloomAt: 2.2,
+    water: { deep: '#6fa8cf', shallow: '#d6f1ff', y: -0.3, opacity: 0.96, ripple: 0.12, speed: 0.1 },
+    backdrop: { style: 'peaks', colors: ['#8ea8cc', '#b8cce6', '#dce8f6'], amp: [95, 76, 60] },
+    obstacles: { low: ['snowLog', 'iceRock'], tall: ['iceBlock', 'iceBlockB'], over: ['iceArch'] },
+    height: (x, z) => { const a = Math.abs(x); return smooth(6, 46, a) * (2.5 + 15 * fbm(x * 0.022 + 50, z * 0.018)) + 0.2 - 0.9 * smooth(0.56, 0.7, fbm(x * 0.03 + 2, z * 0.03)) * smooth(5, 9, a) * smooth(30, 12, a); },
+    ground: (() => { const a = col('#e4edf7'), b = col('#ffffff'), sh = col('#b9cbe0'); return (x, z, h, out) => { mix3(out, a, b, fbm(x * 0.06, z * 0.06)); return out.lerp(sh, smooth(0.6, 0.8, noise2(x * 0.05 + 2, z * 0.05)) * 0.35); }; })(),
+    decor(s) {
+      const { r } = s;
+      s.edge(['iceSmall', 'rockC_snow', 'rockA_snow'], 6, { s: 0.6 });
+      for (let i = 0; i < 6; i++) s.place(s.pick(['roundPineA_snow', 'roundPineC_snow', 'roundPineE_snow', 'pineB_snow']), s.side() * (6.5 + r() * 16), s.z(), { s: 0.9 + r() * 0.7 });
+      for (let i = 0; i < 9; i++) s.place(s.pick(['roundPineA_snow', 'pineB_snow', 'pineC_snow', 'roundPineE_snow']), s.side() * (22 + r() * 55), s.z(), { s: 1.2 + r() * 1.2 });
+      for (let i = 0; i < 3; i++) s.place(s.pick(['iceTallA', 'iceTallB', 'iceLargeB', 'iceLargeA']), s.side() * (6 + r() * 14), s.z(), { s: 0.6 + r() * 1.2, y: -0.2 });
+      if (r() < 0.5) s.place(s.pick(['iceTallA', 'iceTallB']), s.side() * (20 + r() * 20), s.z(), { s: 3 + r() * 3, y: -1 });
+      if (r() < 0.4) s.place(s.pick(['logA_snow', 'stumpTall_snow', 'bareA_snow']), s.side() * (5.5 + r() * 5), s.z(), {});
+    },
+  },
+  // A sandy path between warm turquoise shallows, with fern islands and palms.
+  lagoon: {
+    sky: ['#2aa2e8', '#e4f7f2'], hemi: ['#eafff8', '#4f8a5a'], fog: [55, 200], path: 'beach', dust: '#ffffff',
+    water: { deep: '#127a8a', shallow: '#4fd8cf', y: -0.3, opacity: 0.92, ripple: 0.9, speed: 0.8, foam: 0.6 },
+    backdrop: { style: 'peaks', colors: ['#3f7a5a', '#5f9c78', '#8cc2a2'], amp: [60, 46, 34] },
+    obstacles: { low: ['jRock', 'jLog'], tall: ['jBoulder', 'jTrunk'], over: ['mossBranch'] },
+    height: (x, z) => { const a = Math.abs(x); return -0.75 + 1.25 * smooth(0.5, 0.64, fbm(x * 0.03 + 17, z * 0.03)) * smooth(4.5, 8, a) + smooth(40, 100, a) * 2; },
+    ground: (() => { const s0 = col('#e8d39c'), g = col('#4f9a3a'), w = col('#cdb98a'); return (x, z, h, out) => { mix3(out, w, s0, smooth(-0.5, -0.1, h)); return out.lerp(g, smooth(0.15, 0.45, h) * 0.8); }; })(),
+    decor(s) {
+      const { r } = s;
+      for (let i = 0; i < 6; i++) s.place(s.pick(['jBush', 'jFlat', 'jLeafs', 'jBushBig']), s.side() * (5 + r() * 14), s.z(), { s: 0.8 + r() * 0.8 });
+      for (let i = 0; i < 9; i++) s.place(s.pick(['jPalm', 'palmK', 'palmBendK', 'palm2']), s.side() * (6 + r() * 30), s.z(), { s: 0.9 + r() * 0.6 });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['jCanopy', 'jTall']), s.side() * (40 + r() * 40), s.z(), { s: 1.8 + r() * 1.2, any: true });
+      for (let i = 0; i < 5; i++) s.water(s.pick(['lilyA', 'lilyB', 'lilyFlower']), s.side() * (4.6 + r() * 12), s.z(), { s: 0.8 + r() * 0.7 });
+      for (let i = 0; i < 3; i++) s.place(s.pick(['rockA', 'boulderE', 'rockC']), s.side() * (5 + r() * 15), s.z(), { s: 0.5 + r() * 0.8, any: true, y: -0.3, tint: '#b9c7a8' });
+      if (r() < 0.7) { const sx = s.side(), z = s.z(0.3, 0.7), x = sx * (13 + r() * 10); s.island(x, z, 6); s.place('jPalm', x, z, { s: 1.2, any: true, y: 0.15 }); s.place('jBushBig', x + 2, z + 1.5, { s: 1.2, any: true, y: 0.1 }); }
+      if (r() < 0.3) s.waterfall(s.side() * (16 + r() * 6), s.z(0.3, 0.7), 6 + r() * 4);
+    },
+  },
+  canyon: {
+    sky: ['#3f95e8', '#ffe0b5'], hemi: ['#fff2dc', '#a8583a'], fog: [70, 240], path: 'redsand', dust: '#e0a070',
+    backdrop: { style: 'mesas', colors: ['#b05a38', '#c97a52', '#dea383'], amp: [62, 50, 40] },
+    obstacles: { low: ['redRock', 'redRockB'], tall: ['mesaRock', 'mesaRockB'], over: ['rockBridge'] },
+    height: (x, z) => { const a = Math.abs(x); return smooth(6, 32, a) * (1 + 5 * fbm(x * 0.03 + 13, z * 0.025)); },
+    ground: (() => { const a = col('#c9794c'), b = col('#e0a172'), d = col('#a95a36'); return (x, z, h, out) => { mix3(out, a, b, fbm(x * 0.05, z * 0.05)); return out.lerp(d, smooth(0.6, 0.8, noise2(x * 0.03, z * 0.12)) * 0.5); }; })(),
+    decor(s) {
+      const { r } = s;
+      s.edge(['scrubA', 'rockC', 'cLargeA'], 5, { s: 0.5, tint: '#d9a070' });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['scrubA', 'scrubB', 'cactusRound', 'bareA']), s.side() * (5 + r() * 9), s.z(), { s: 0.7 + r() * 0.5, tint: '#e0c090' });
+      for (let i = 0; i < 7; i++) s.place(s.pick(['cTallA', 'cTallB', 'cTallC', 'cLargeC', 'cTallE']), s.side() * (6 + r() * 16), s.z(), { s: 0.8 + r() * 1.4 });
+      for (let i = 0; i < 4; i++) s.place(s.pick(['cTallA', 'cTallB', 'cCliffTop', 'cCliff']), s.side() * (26 + r() * 55), s.z(), { s: 3 + r() * 4, y: -1 });
+    },
+  },
+});
+
 export const BIOME_ORDER = ['mountains', 'foothills', 'sandhills', 'farmland', 'swamp', 'beach'];
 
 // ---------- sky ----------
@@ -313,6 +444,7 @@ void main() {
   fog: false,
 });
 
+const VOLCANO_X = -120;
 function ridgeGeometry(style, amp, seed) {
   const r = mkRng(seed);
   const W = 1500, N = 260, pts = [];
@@ -325,6 +457,12 @@ function ridgeGeometry(style, amp, seed) {
     if (style === 'peaks') y = amp * (0.35 + 0.42 * Math.abs(Math.sin(x * 0.006 + s1)) + 0.25 * Math.abs(Math.sin(x * 0.017 + s2)) + 0.06 * Math.sin(x * 0.09));
     else if (style === 'rolling') y = amp * (0.55 + 0.25 * Math.sin(x * 0.013 + s1) + 0.18 * Math.sin(x * 0.037 + s2));
     else if (style === 'dunes') y = amp * (0.35 + 0.4 * Math.abs(Math.sin(x * 0.015 + s1)) + 0.1 * Math.sin(x * 0.05 + s2));
+    else if (style === 'mesas') { const t = smooth(0.42, 0.5, 0.5 + 0.5 * Math.sin(x * 0.011 + s1) * Math.cos(x * 0.0047 + s2)); y = amp * (0.3 + 0.7 * t + 0.03 * Math.sin(x * 0.2)); }
+    else if (style === 'volcano') {
+      // Jagged ridges with one big cone, its crater flattened, near the middle of the view.
+      const cone = amp * 1.9 * Math.max(0, 1 - Math.abs(x - VOLCANO_X) / 330);
+      y = Math.max(amp * (0.25 + 0.2 * Math.abs(Math.sin(x * 0.009 + s1)) + 0.08 * Math.abs(Math.sin(x * 0.04 + s2))), Math.min(cone, amp * 1.55));
+    }
     else if (style === 'trees') { y = amp * 0.35; for (const [cx, k, rad] of crowns) { const d = Math.abs(x - cx); if (d < rad) y = Math.max(y, amp * k + Math.sqrt(rad * rad - d * d) * 0.6); } }
     else y = amp * 0.05;
     pts.push(new THREE.Vector2(x, y));
@@ -360,11 +498,20 @@ class Backdrop {
       this.clouds.push({ set: i % 2, i: i >> 1, pos: new THREE.Vector3(Math.sin(a) * d, 70 + Math.random() * 90, -Math.cos(a) * d), s: 2.4 + Math.random() * 2.2, ry: Math.random() * TAU });
     }
     this.key = null;
+    // A plume of smoke over the volcano backdrop.
+    this.plume = new THREE.InstancedMesh(propGeometry('cloudBig'), new THREE.MeshStandardMaterial({ vertexColors: true, color: '#6b5e5e', roughness: 1, emissive: '#ff6a2a', emissiveIntensity: 0.06, fog: false }), 7);
+    this.plume.frustumCulled = false;
+    this.plume.renderOrder = -4;
+    this.plume.visible = false;
+    this.group.add(this.plume);
+    this.puffT = Array.from({ length: 7 }, (_, i) => i / 7);
   }
   set(biomeKey) {
     if (this.key === biomeKey) return;
     this.key = biomeKey;
     const bd = BIOME[biomeKey].backdrop;
+    this.plume.visible = bd.style === 'volcano';
+    this.plumeAmp = bd.amp[0];
     this.layers.forEach(l => { this.group.remove(l); l.geometry.dispose(); l.material.dispose(); });
     const n = bd.colors.length;
     this.layers = bd.colors.map((c, i) => {
@@ -385,6 +532,15 @@ class Backdrop {
       this.cloudSets[c.set].setMatrixAt(c.i, _m);
     }
     for (const m of this.cloudSets) m.instanceMatrix.needsUpdate = true;
+    if (this.plume.visible) {
+      const top = -14 + this.plumeAmp * 1.55;
+      this.puffT.forEach((t, i) => {
+        t = this.puffT[i] = (t + dt * 0.035) % 1;
+        _m.compose(_p.set(VOLCANO_X + Math.sin(i * 2.1) * 12 + t * 60, top + t * 150, -360), _q.setFromEuler(_e.set(0, i * 1.3, 0)), _s.setScalar(3 + t * 9));
+        this.plume.setMatrixAt(i, _m);
+      });
+      this.plume.instanceMatrix.needsUpdate = true;
+    }
   }
 }
 
@@ -546,6 +702,57 @@ export function gemMesh(key, color, text) {
   g.userData = { spin, board, tex };
   return g;
 }
+// A speckled dinosaur egg in a straw nest, with its number on a board above it (the Dino Island catch stage).
+const eggGeo = (() => {
+  const g = new THREE.SphereGeometry(0.5, 28, 20);
+  const p = g.attributes.position, c = new Float32Array(p.count * 3), r = mkRng(77);
+  const spots = Array.from({ length: 26 }, () => new THREE.Vector3(r() - 0.5, r() - 0.5, r() - 0.5).normalize());
+  const v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    // Egg shape: narrower at the top.
+    const y = v.y, k = 1 - 0.18 * (y + 0.5);
+    p.setXYZ(i, v.x * k * 0.86, y * 1.18 + 0.59, v.z * k * 0.86);
+    const n = v.clone().normalize(), spot = spots.some(sp => n.distanceTo(sp) < 0.16);
+    c.set(spot ? [0.38, 0.27, 0.18] : [1, 1, 1], i * 3);
+  }
+  g.setAttribute('color', new THREE.BufferAttribute(c, 3));
+  g.computeVertexNormals();
+  return g;
+})();
+const eggMats = new Map();
+export function eggMesh(color, text) {
+  const g = new THREE.Group();
+  const spin = new THREE.Group();
+  if (!eggMats.has(color)) eggMats.set(color, bend(new THREE.MeshStandardMaterial({ vertexColors: true, color: new THREE.Color(color).lerp(new THREE.Color('#ffffff'), 0.45), roughness: 0.45, emissive: color, emissiveIntensity: 0.12 }), { key: 'egg' }));
+  const egg = new THREE.Mesh(eggGeo, eggMats.get(color));
+  egg.scale.setScalar(1.25);
+  egg.position.y = -0.5;
+  egg.castShadow = true;
+  egg.frustumCulled = false;
+  spin.add(egg);
+  const nest = new THREE.Mesh(propGeometry('haySheaf'), M.solid);
+  nest.scale.set(0.9, 0.22, 0.9);
+  nest.position.y = -0.95;
+  nest.frustumCulled = false;
+  const tex = label(text, color, 512, 256, 190);
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.0), boardMat(tex));
+  board.position.y = 1.55;
+  board.frustumCulled = false;
+  g.add(nest, spin, board);
+  g.userData = { spin, board, tex };
+  return g;
+}
+// An answer sign carried by a flyer in the shoot stage.
+export function signBoard(text, color) {
+  const g = new THREE.Group();
+  const tex = label(text, color, 512, 256, 190);
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.1), boardMat(tex));
+  board.frustumCulled = false;
+  g.add(board);
+  g.userData = { board, tex };
+  return g;
+}
 // Frees a hoop's or gem's own board (the shared geometry and materials stay).
 export function disposeLabeled(g) {
   const { board, tex } = g.userData;
@@ -578,6 +785,7 @@ let poolMat = null;
 // ---------- world ----------
 export class World {
   constructor(scene, fx, renderer) {
+    makeVariants();
     this.scene = scene;
     this.fx = fx;
     this.renderer = renderer;
@@ -640,6 +848,7 @@ export class World {
     this.coinList = [];
     this.finish = null;
     this.calm = [];
+    this.falling = [];
     this.noObstaclesFrom = Infinity;
     this.r = mkRng(Math.floor(Math.random() * 1e9));
     this.nextCrate = 150 + this.r() * 60;
@@ -727,6 +936,8 @@ export class World {
     this.scene.fog.color.copy(this.skyNow.bottom);
     hazeU.value.copy(this.skyNow.bottom);
     this.backdrop.update(camera, dt);
+    this.weather(dt, heroDist, heroX);
+    if (this.falling.length) this.updateFalling(dt);
     // coins
     // coinGap [from, to, k] shrinks coins between the hero and a camera in front of him, so they don't fill the shot.
     let n = 0;
@@ -763,10 +974,27 @@ export class World {
       for (const em of c.emitters) {
         em.t -= dt;
         if (em.t > 0) continue;
-        if (em.type === 'smoke') { em.t = 0.4; this.fx.puff({ x: em.x, y: em.y, z: em.z, vx: 0.7, vy: 2.4, vz: 0, life: 3.4, size: 3.4, color: '#f4f4f4', alpha: 0.7, g: -0.1, grow: 2.2 }); }
+        if (em.type === 'smoke') { em.t = 0.4; this.fx.puff({ x: em.x, y: em.y, z: em.z, vx: 0.7, vy: 2.4, vz: 0, life: 3.4, size: em.size || 3.4, color: em.color || '#f4f4f4', alpha: 0.7, g: -0.1, grow: 2.2 }); }
         if (em.type === 'mist') { em.t = 0.12; this.fx.puff({ x: em.x + (Math.random() - 0.5) * em.w, y: em.y + 0.6, z: em.z + 0.6, vx: (Math.random() - 0.5), vy: 1.5, vz: 1, life: 1.4, size: 2.2, color: '#ffffff', alpha: 0.5, grow: 1.6 }); }
         if (em.type === 'fuse') { em.t = 0.05; if (!em.o.hit) this.fx.spark({ x: em.x + (Math.random() - 0.5) * 0.1, y: em.y, z: em.z, vx: (Math.random() - 0.5) * 2, vy: 1.5 + Math.random(), vz: (Math.random() - 0.5) * 2, life: 0.3, size: 0.28, color: Math.random() < 0.5 ? '#ffd23f' : '#ff7a1a', glow: 2.5 }); }
         if (em.type === 'firefly') { em.t = 0.4; this.fx.spark({ x: em.x + (Math.random() - 0.5) * 10, y: 0.6 + Math.random() * 2.4, z: em.z + (Math.random() - 0.5) * 24, vx: (Math.random() - 0.5) * 0.6, vy: 0.2, vz: (Math.random() - 0.5) * 0.6, life: 2.6, size: 0.45, color: '#fff27a', glow: 2.5 }); }
+      }
+    }
+  }
+
+  // Falling snow and rising embers around the hero.
+  weather(dt, heroDist, heroX) {
+    const bi = BIOME[this.biome];
+    if (!bi.snow && !bi.embers) return;
+    this.weatherT = (this.weatherT || 0) - dt;
+    while (this.weatherT < 0) {
+      const x = heroX + (Math.random() - 0.5) * 44, z = -(heroDist - 6 + Math.random() * 50);
+      if (bi.snow) {
+        this.weatherT += 0.012;
+        this.fx.puff({ x, y: 2 + Math.random() * 13, z, vx: 0.7, vy: -1.3 - Math.random(), life: 4, size: 0.2 + Math.random() * 0.12, color: '#ffffff', alpha: 0.9 });
+      } else {
+        this.weatherT += 0.035;
+        this.fx.spark({ x, y: Math.random() * 2, z, vx: (Math.random() - 0.5) * 0.8, vy: 1.4 + Math.random() * 1.8, life: 2.4, size: 0.16 + Math.random() * 0.14, color: Math.random() < 0.6 ? '#ff7a1a' : '#ffd23f', glow: 2.2 });
       }
     }
   }
@@ -826,7 +1054,7 @@ export class World {
         batch.prop(k, x, h + (o.y || 0), z, { ry: o.ry ?? r() * TAU, ...o });
         if (o.smoke) for (const [sx, sy, sz] of o.smoke) {
           const c = Math.cos(o.ry || 0), n = Math.sin(o.ry || 0), sc = o.s || 1;
-          chunk.emitters.push({ type: 'smoke', x: x + (sx * c + sz * n) * sc, y: h + sy * sc, z: z + (-sx * n + sz * c) * sc, t: r() });
+          chunk.emitters.push({ type: 'smoke', x: x + (sx * c + sz * n) * sc, y: h + sy * sc, z: z + (-sx * n + sz * c) * sc, t: r(), color: o.smokeColor, size: o.smokeSize });
         }
       },
       water(k, x, z, o = {}) {
@@ -914,6 +1142,8 @@ export class World {
       this.nextRow += gap * (0.85 + r() * 0.3);
       if (this.cfg.sky) { this.skyRow(chunk, d); continue; }
       if (this.cfg.rows === false) continue;
+      // No obstacles, just coins to grab now and then.
+      if (this.cfg.rows === 'coins') { if (r() < 0.45) this.coinLine(Math.floor(r() * 3) - 1, d, 6); continue; }
       if (this.inCalm(d)) { if (!this.inCalm(d + 5)) this.coinLine(Math.floor(r() * 3) - 1, d + 2, 7); continue; }
       const lanes = [-1, 0, 1];
       const pick = arr => arr[Math.floor(r() * arr.length)];
@@ -1096,6 +1326,34 @@ export class World {
     this.scene.add(mesh);
     c.meshes.push(mesh);
     c.gates.push({ type: 'gate', at: dist, dist, mesh, done: false });
+  }
+  // A rock that drops out of the sky into a lane (thrown by the boss). It's a low obstacle, so it can be jumped.
+  // Returns false if something is already there, so the trail never gets blocked.
+  dropRock(lane, dist, type) {
+    if (this.inCalm(dist) || this.obstacles.some(o => !o.hit && Math.abs(o.dist - dist) < 6)) return false;
+    const c = this.chunks.find(ch => dist >= ch.d0 && dist < ch.d1);
+    if (!c) return false;
+    const o = this.addObstacle(c, type, lane, dist);
+    o.mesh.position.y = 16;
+    o.vy = 0;
+    this.falling.push(o);
+    // A glowing ring on the ground shows where it will land.
+    this.fx.ring(o.x, 0.1, -dist, '#ff5a2a', 1.6, 0.9);
+    return true;
+  }
+  updateFalling(dt) {
+    for (const o of this.falling) {
+      o.vy -= 40 * dt;
+      o.mesh.position.y = Math.max(0, o.mesh.position.y + o.vy * dt);
+      o.mesh.rotation.x += dt * 4;
+      if (o.mesh.position.y === 0) {
+        o.mesh.rotation.x = 0;
+        o.landed = true;
+        this.fx.burst(o.x, 0.4, -o.dist, { n: 18, colors: ['#5a4a3a', '#8a6c48', '#ff7a1a'], speed: 5, up: 4, life: 0.8, size: 0.22 });
+        if (this.cfg.onRockLand) this.cfg.onRockLand(o);
+      }
+    }
+    this.falling = this.falling.filter(o => !o.landed);
   }
   // Takes away the obstacles and power boxes in [d0, d1), so the way to a sky hoop is clear.
   clearRange(d0, d1) {

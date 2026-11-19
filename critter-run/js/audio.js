@@ -16,6 +16,7 @@ const DUCK = 0.6, XFADE = 0.8, LOOP_FADE = 0.3;
 const TRACKS = {
   title: 'menu', map: 'menu', shop: 'menu', tour: 'tour',
   mountains: 'mountains', foothills: 'foothills', sandhills: 'sandhills', farmland: 'farmland', swamp: 'swamp', beach: 'beach',
+  jungle: 'jungle', volcano: 'volcano', canyon: 'canyon', lagoon: 'surfing', glacier: 'glacier',
   ...Object.fromEntries(SONGS.map(k => [k, k])),
 };
 
@@ -35,7 +36,7 @@ const STEADY = new Set(['click', 'equip', 'nope', 'buy', 'go', 'correct', 'wrong
 // Older effect names that now play a stinger.
 const ALIAS = { fanfare: 'win', caught: 'lose', star: 'star' };
 const STINGERS = { win: ['win', 1], lose: ['lose', 0.9], powerup: ['powerup', 0.7], star: ['star', 0.6] };
-// Chaser calls as [file, volume, delay] layers. Unknown types get the generic monster growl.
+// Chaser calls as [file, volume, delay, pitch] layers. Unknown types get the generic monster growl.
 const ROARS = {
   roar: [['roar', 1]],
   bear: [['bear', 0.7]],
@@ -46,6 +47,13 @@ const ROARS = {
   shark: [['shark-splash', 0.9], ['shark-chomp', 0.6, 0.45]],
   hurricane: [['hurricane', 0.9]],
   dragon: [['roar', 0.9], ['fire', 0.6, 0.25]],
+  trex: [['roar', 1], ['bear', 0.6, 0.1]],
+  raptor: [['panther', 0.8, 0, 1.35], ['hiss', 0.4, 0.1]],
+  pterodactyl: [['panther', 0.7, 0, 1.6]],
+  spinosaurus: [['roar', 1, 0, 0.85], ['gator', 0.6, 0.1]],
+  pistosaur: [['shark-splash', 0.8], ['gator', 0.7, 0.3]],
+  mammoth: [['mammoth', 1], ['bear', 0.4, 0.2, 0.8]],
+  triceratops: [['bear', 0.8, 0, 0.75], ['roar', 0.5, 0.1, 0.7]],
 };
 // Seamless loops: [file, volume, loop length in seconds].
 const LOOPS = { jetpack: ['loop-jetpack', 0.5, 5], magnet: ['loop-magnet', 0.25, 5], wind: ['loop-wind', 0.3, 6] };
@@ -328,7 +336,7 @@ export class Sound {
       if (!force) return;
       this.roarShots.forEach(s => this.stopShot(s, 0.08));
     }
-    this.roarShots = layers.map(([f, v, delay = 0]) => this.shot(f, { volume: v, rate: jitter(), delay })).filter(Boolean);
+    this.roarShots = layers.map(([f, v, delay = 0, pitch = 1]) => this.shot(f, { volume: v, rate: pitch * jitter(), delay })).filter(Boolean);
     this.roarEnd = t + Math.max(...this.roarShots.map(s => s.delay + s.dur));
   }
 

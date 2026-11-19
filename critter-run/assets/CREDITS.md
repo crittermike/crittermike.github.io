@@ -22,10 +22,17 @@ Licensed under Creative Commons: By Attribution 4.0 License, https://creativecom
 | `audio/music/pickin.mp3` | "Still Pickin" (first 3:12, faded out) | Kevin MacLeod (incompetech.com) |
 | `audio/music/bama.mp3` | "Bama Country" | Kevin MacLeod (incompetech.com) |
 | `audio/music/heroic.mp3` | "Heroic Age" | Kevin MacLeod (incompetech.com) |
+| `audio/music/jungle.mp3` | "Sauropod Spotting" | Kevin MacLeod (incompetech.com) |
+| `audio/music/canyon.mp3` | "Dentaneosuchus Hunt" | Kevin MacLeod (incompetech.com) |
+| `audio/music/glacier.mp3` | "Cretaceous Dawn" | Kevin MacLeod (incompetech.com) |
+| `audio/music/volcano.mp3` | "Exhilarate" | Kevin MacLeod (incompetech.com) |
+| `audio/music/eggs.mp3` | "Monkeys Spinning Monkeys" | Kevin MacLeod (incompetech.com) |
+| `audio/music/boss.mp3` | "Five Armies" | Kevin MacLeod (incompetech.com) |
+| `audio/music/shoot.mp3` | "Le Grand Chase" | Kevin MacLeod (incompetech.com) |
 | `audio/music/jamboree.mp3` | "Jumping Jamboree" | tcarisland, https://opengameart.org/content/jumping-jamboree |
 | `audio/sfx/win.mp3`, `audio/sfx/lose.mp3` | "Win and lose melodies" (arranged) | Vircon32, arranged by Sebastian F. (@fraynvgm), https://opengameart.org/content/win-and-lose-melodies |
 
-The music was loudness-normalized and re-encoded.
+The music was loudness-normalized and re-encoded. Tracks longer than 3:00 were cut to 3:00 and faded out.
 
 CC0 music: `audio/music/western.mp3` is "Spaghetti Western" by Spring Spring (https://opengameart.org/content/spaghetti-western), and `audio/music/surfing.mp3` is "Surfing" by Komiku from "Poupi's incredible adventures !" (https://opengameart.org/content/poupis-incredible-adventures-full-album).
 
@@ -55,8 +62,17 @@ Kenney (kenney.nl: Impact, Interface, Sci-Fi and Voiceover packs, Music Jingles)
 | `chasers/gator.glb` | "fantasy crocodile animation" | blam (Blam577895) | https://sketchfab.com/3d-models/fantasy-crocodile-animation-0226417fd07e491a9d5464074f86104b |
 | `chasers/shark.glb` | "Animated Swimming Great White Shark Loop" | LasquetiSpice | https://sketchfab.com/3d-models/animated-swimming-great-white-shark-loop-297ed35c6a5f43749b0ae189d991a3f1 |
 | `chasers/panther.glb` | "black panther", based on "Panther 3D Model" (https://sketchfab.com/s/oQWsU) by ₦₥₵ ฿₵ | kenchoo | https://sketchfab.com/3d-models/black-panther-7fca11c89cca4362a525c891a8345112 |
+| `chasers/trex.glb` | "T. rex" | Bake3D | https://bake3d.ai/free-3d-models |
+| `chasers/raptor.glb` | "Velociraptor" | absol | https://sketchfab.com/3d-models/velociraptor-59910f5d62f74e558499c166738b0e6d |
+| `chasers/pterodactyl.glb` | "Quetzalcoatlus" | agusardwinata | https://sketchfab.com/3d-models/quetzalcoatlus-b18d073b06d545c78940964683e28959 |
+| `chasers/spinosaurus.glb` | "Spinosaurus_animation" | seirogan | https://sketchfab.com/3d-models/spinosaurus-animation-c11709dbf9e3472f9533343f1f342564 |
+| `chasers/pistosaur.glb` | "Pistosaur Animated" | ricksticky | https://sketchfab.com/3d-models/pistosaur-animated-773667575a264c7baa4ec404115a044b |
+| `chasers/mammoth.glb` | "3D High-poly Baby Woolly Mammoth", rig and idle by [prehistoric-animal-museum](https://github.com/s010s/prehistoric-animal-museum) | SDPM Esare | https://sketchfab.com/3d-models/3d-high-poly-baby-woolly-mammoth-fce1c86ccedf47a5b9627098be6719d5 |
+| `chasers/triceratops.glb` | "Triceratops dinosaur", rig and animations by [tuanluu-agilityio/dinosaur](https://github.com/tuanluu-agilityio/dinosaur) | wojciechmiedziocha | https://sketchfab.com/3d-models/triceratops-dinosaur-87527079bad44917ab1b98a456b46c7e |
 
-All six were modified: new or trimmed animations (run, attack, roar or howl, idle), simplified meshes, and compressed. The panther's run, pounce and roar were made for this game; its idle comes from kenchoo's animation. The tarantula is a museum scan, rigged with the skeleton from [Morphazoid](https://github.com/blechdom/morphazoid) by Kristin Galvin (MIT License, see `chasers/LICENSE-morphazoid-MIT.txt`).
+The first six were modified: new or trimmed animations (run, attack, roar or howl, idle), simplified meshes, and compressed. The panther's run, pounce and roar were made for this game; its idle comes from kenchoo's animation. The tarantula is a museum scan, rigged with the skeleton from [Morphazoid](https://github.com/blechdom/morphazoid) by Kristin Galvin (MIT License, see `chasers/LICENSE-morphazoid-MIT.txt`).
+
+The dinosaurs and the mammoth were simplified and compressed, and the pterodactyl's flight bob was toned down. The mammoth's run, roar and attack were made for this game.
 
 The runners were compressed (WebP textures, quantized meshes), and the seven blasters merged into one file with each weapon as a node named after its id in `js/items.js`.
 

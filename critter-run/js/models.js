@@ -27,8 +27,17 @@ const CHASERS = {
   panther: { len: 3.3, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Roar' }, rate: 1.0, rim: 0.4 },
   gator: { len: 4.6, clips: { run: 'run', idle: 'idle', attack: 'bite', roar: 'bite' }, rate: 1.2, rim: 0.2 },
   shark: { len: 4.4, clips: { run: 'swim', idle: 'swim', attack: 'bite', roar: 'bite' }, rate: 1.3, rim: 0.2, y: -0.55, wake: true },
+  // Dino Island. The T. rex, triceratops and spinosaurus only have walks, sped up into runs. The mammoth's run, roar
+  // and attack were made for this game.
+  trex: { len: 13, clips: { run: 'Walk', idle: 'Idle', attack: 'Intro', roar: 'Intro' }, rate: 2.4, rim: 0.3 },
+  raptor: { len: 3.6, clips: { run: 'run', idle: 'walk1', attack: 'roar', roar: 'roar' }, rate: 0.75, rim: 0.3 },
+  triceratops: { len: 6.5, clips: { run: 'walk', idle: 'idle', attack: 'eat', roar: 'eat' }, rate: 1.8, rim: 0.25 },
+  spinosaurus: { len: 5.5, clips: { run: 'Armature|ArmatureAction', idle: 'Armature|ArmatureAction', attack: 'Armature|ArmatureAction', roar: 'Armature|ArmatureAction' }, rate: 2.2, rim: 0.3 },
+  mammoth: { len: 4.6, clips: { run: 'Run', idle: 'Idle', attack: 'Attack', roar: 'Roar' }, rate: 0.9, rim: 0.35 },
+  pistosaur: { len: 5.2, clips: { run: 'SwimmingBiting', idle: 'SwimmingBiting', attack: 'SwimmingBiting', roar: 'SwimmingBiting' }, rate: 1.1, rim: 0.25, y: -0.5, wake: true },
   // Flies: hovers this high, and keeps up with a flying hero.
   dragon: { len: 3.4, clips: { run: 'Fast_Flying', idle: 'Flying_Idle', attack: 'Headbutt', roar: 'Punch' }, rate: 0.9, rim: 0.35, fly: 1.3 },
+  pterodactyl: { len: 4.2, clips: { run: 'Take 01', idle: 'Take 01', attack: 'Take 01', roar: 'Take 01' }, rate: 0.9, rim: 0.35, fly: 1.3 },
   // The run camera ends up inside the hurricane's see-through funnel, so it fades out while the camera is behind the runner.
   hurricane: { height: 6.5, clips: { run: 'Spin', idle: 'Spin', attack: 'Attack', roar: 'Attack' }, rate: 1.0, keepMaterials: true, fades: true },
 };
@@ -55,12 +64,13 @@ function dither(mat, uFade) {
 const LOOP_ONCE = new Set();
 const cache = new Map();
 
-export function loadChaser(type) {
+// opts.shadow: false for one that never touches the ground (the shoot stage's flyers).
+export function loadChaser(type, opts = {}) {
   if (!cache.has(type)) cache.set(type, gltfLoader.loadAsync(`./assets/chasers/${type}.glb`).catch(e => { cache.delete(type); throw e; }));
-  return cache.get(type).then(gltf => buildChaser(type, gltf));
+  return cache.get(type).then(gltf => buildChaser(type, gltf, opts));
 }
 
-function buildChaser(type, gltf) {
+function buildChaser(type, gltf, opts = {}) {
   const def = CHASERS[type];
   const model = cloneSkinned(gltf.scene);
   const uFade = { value: 1 };
@@ -94,7 +104,7 @@ function buildChaser(type, gltf) {
   const body = new THREE.Group();
   root.add(body);
   body.add(pivot);
-  root.add(blobShadow(Math.max(size.x, size.z) * k * 0.32));
+  if (opts.shadow !== false) root.add(blobShadow(Math.max(size.x, size.z) * k * 0.32));
   if (def.wake) root.add(wake(size.x * k));
 
   const mixer = new THREE.AnimationMixer(model);

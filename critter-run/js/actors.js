@@ -144,7 +144,8 @@ function buildRunner(def, source, clips) {
       return gunModel.localToWorld(out.copy(gunModel.userData.tip));
     },
     // mode: run | jump | slide | idle | cheer | zap | fall
-    animate(mode, dt, { speed = 13.5, jumpY = 0, t = 0 } = {}) {
+    // forward: fire at something ahead instead of turning around to the chaser.
+    animate(mode, dt, { speed = 13.5, jumpY = 0, t = 0, forward = false } = {}) {
       hitT -= dt;
       const pose = hitT > 0 && (mode === 'run' || mode === 'jump') && actions.hit ? 'hit' : mode;
       play(pose, pose === 'jump' ? 0.08 : pose === 'slide' ? 0.06 : 0.16);
@@ -157,7 +158,7 @@ function buildRunner(def, source, clips) {
 
       const k = Math.min(1, dt * 14);
       // Turn around to face the chaser when firing.
-      const turnTo = mode === 'zap' ? Math.PI : 0;
+      const turnTo = mode === 'zap' && !forward ? Math.PI : 0;
       turn = lerp(turn, turnTo, Math.min(1, dt * 12));
       body.rotation.y = turn;
       // Without a slide clip, squash down instead.

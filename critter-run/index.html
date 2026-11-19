@@ -193,6 +193,15 @@
   .sky-a.wrong { --c: #8a93a6; animation: shake .45s; }
   .sky-a.dim { opacity: .35; filter: saturate(.4); }
   body.sky-q #chase, body.sky-q #dots, body.sky-q #powers { visibility: hidden; }
+  /* boss stage: the boss's health; the egg it stole sits at the end */
+  #boss { position: absolute; top: calc(var(--pad) + 62px); left: 0; right: 0; margin: 0 auto; width: min(420px, 74vw); display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px;
+    border-radius: 26px; background: rgba(15,18,48,.62); }
+  #boss-ic { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 28px; color: #fff; background: var(--red); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--ink); }
+  #boss-bar { flex: 1; height: 20px; border-radius: 12px; background: rgba(255,255,255,.18); border: 3px solid var(--ink); overflow: hidden; }
+  #boss-fill { --k: 1; display: block; height: 100%; width: calc(var(--k) * 100%); background: linear-gradient(180deg, #ff8a6a, #e8232a); box-shadow: inset 0 3px 0 rgba(255,255,255,.35); transition: width .35s; }
+  #boss .egg { width: 34px; height: 34px; color: #fff1c4; filter: drop-shadow(0 2px 0 rgba(0,0,0,.4)); }
+  body.boss #chase { display: none; }
+  body.boss #dots { top: calc(var(--pad) + 116px); }
   /* catch stage: the rule and how many are caught so far */
   #catch { --c: var(--purple); position: absolute; top: calc(var(--pad) + 150px); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 14px; white-space: nowrap;
     border-radius: 24px; background: rgba(15,18,48,.72); border: 3px solid var(--c); font-family: var(--display); font-size: clamp(24px, 6vw, 36px); }
@@ -361,7 +370,7 @@
     .btn.big { font-size: 32px; min-height: 66px; }
     .result .big-ic { font-size: 70px; }
     .stars-big .ic { width: 60px; height: 60px; }
-    #chase { top: calc(var(--pad) + 4px); width: min(260px, 36vw); }
+    #chase, #boss { top: calc(var(--pad) + 4px); width: min(260px, 36vw); }
     #dots { top: calc(var(--pad) + 48px); }
     .ans { min-height: 60px; }
     #q-card { padding: 6px 12px 8px 8px; gap: 10px; }
@@ -407,6 +416,7 @@
   <div id="powers"></div>
   <div id="toast" class="shout"></div>
   <div id="hint" hidden></div>
+  <div id="boss" hidden><span id="boss-ic"></span><div id="boss-bar"><i id="boss-fill"></i></div><svg class="ic egg"><use href="#i-egg"/></svg></div>
   <div id="catch" hidden><svg class="ic"><use href="#i-gem"/></svg><span id="catch-rule"></span><div id="catch-pips" class="pips"></div></div>
   <div id="sky" hidden>
     <div id="sky-card">

@@ -81,8 +81,8 @@ for (const { file, level } of levels) {
       const where = `${file} stage ${si + 1}`;
       checkKeys(stage, ['name', 'biome', 'chaser', 'color', 'questions', 'count', 'music', 'mode', 'rules'], where);
       const mode = stage.mode ?? 'run';
-      assert.ok(['run', 'sky', 'grab'].includes(mode), `${where}: mode must be run, sky or grab`);
-      assert.ok(mode === 'run' || stage.biome !== 'tour', `${where}: the final stage is a run`);
+      assert.ok(['run', 'sky', 'grab', 'shoot', 'boss'].includes(mode), `${where}: mode must be run, sky, grab, shoot or boss`);
+      assert.ok(mode === 'run' || stage.biome !== 'tour', `${where}: a tour stage is a run`);
       // The catch stage needs its rules (rounds), one kind of number to grab per round.
       if (mode === 'grab') {
         assert.ok(Array.isArray(stage.rules) && stage.rules.length >= 1 && stage.rules.length <= 6, `${where}: a grab stage needs 1-6 rules`);
@@ -105,7 +105,7 @@ for (const { file, level } of levels) {
       // Made questions ({ gen }) can be asked more than once, so a stage with them can set how many it asks.
       const made = stage.questions.some(q => q.gen);
       if (stage.count !== undefined) {
-        assert.ok(made && stage.biome !== 'tour', `${where}: count is only for non-final stages with { gen } questions`);
+        assert.ok(made && stage.biome !== 'tour', `${where}: count is only for non-tour stages with { gen } questions`);
         assert.ok(Number.isInteger(stage.count) && stage.count >= stage.questions.length && stage.count <= 12, `${where}: count must be a whole number from the number of questions up to 12`);
       }
       const asked = stage.count || stage.questions.length;
@@ -116,7 +116,7 @@ for (const { file, level } of levels) {
           checkKeys(q, ['gen', 'variant'], at);
           assert.ok(SKILLS[q.gen], `${at}: gen "${q.gen}" must be a skill in js/mathgen.js (${Object.keys(SKILLS).join(', ')})`);
           // Sky answers are painted on hoops, so sky skills need their short-answer (lane) form.
-          if (mode === 'sky') assert.ok(SKILLS[q.gen].lane, `${at}: "${q.gen}" can't make short answers for the sky stage`);
+          if (mode === 'sky' || mode === 'shoot') assert.ok(SKILLS[q.gen].lane, `${at}: "${q.gen}" can't make short answers for a ${mode} stage`);
           if (q.variant !== undefined) assert.ok(VARIANTS[q.gen].includes(q.variant), `${at}: variant must be one of ${VARIANTS[q.gen].join(', ')}`);
           for (let seed = 1; seed <= 25; seed++) {
             const mq = makeQuestion(q, rngFrom(seed));
@@ -125,7 +125,7 @@ for (const { file, level } of levels) {
           return;
         }
         checkKeys(q, ['q', 'a', 'wrong', 'why', 'pic', 'show', 'say', 'model'], at);
-        if (mode === 'sky') for (const ans of [q.a, ...q.wrong]) assert.ok(ans.length <= 8, `${at}: sky answers are painted on hoops, so "${ans}" must be 8 characters or less`);
+        if (mode === 'sky' || mode === 'shoot') for (const ans of [q.a, ...q.wrong]) assert.ok(ans.length <= 8, `${at}: ${mode} answers are painted on signs, so "${ans}" must be 8 characters or less`);
         if (q.model !== undefined) checkModel(q.model, at);
         checkShort(q.q, 8, 48, `${at} q`);
         if (q.show !== undefined) checkShort(q.show, 8, 40, `${at} show`);

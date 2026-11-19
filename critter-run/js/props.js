@@ -95,6 +95,24 @@ export function propGeometry(key) {
   return out;
 }
 
+// A copy of a prop under a new name with its vertex colors changed: fn(color, normal) edits the color in place.
+// Used for snow on top of trees and rocks, and for burnt or icy versions.
+export function variant(name, key, fn) {
+  const p = PROPS.get(key);
+  if (!p || PROPS.has(name)) return;
+  const c = new THREE.Color(), n = new THREE.Vector3();
+  const parts = p.parts.map(({ geo, mat }) => {
+    const g = geo.clone(), col = g.attributes.color, nor = g.attributes.normal;
+    if (col && nor) for (let i = 0; i < col.count; i++) {
+      c.setRGB(col.getX(i), col.getY(i), col.getZ(i));
+      fn(c, n.set(nor.getX(i), nor.getY(i), nor.getZ(i)));
+      col.setXYZ(i, c.r, c.g, c.b);
+    }
+    return { geo: g, mat };
+  });
+  PROPS.set(name, { parts, box: p.box, size: p.size });
+}
+
 // Recolors a prop's saturated colors (for example a yellow arch or a green mystery box) to a new color,
 // keeping white and grey parts and the original shading.
 export function recolored(key, color) {

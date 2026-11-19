@@ -46,6 +46,31 @@ export const PROPS = {
   logA: [RB + 'Wood_Log_A.glb'], logB: [RB + 'Wood_Log_B.glb'], logStack: [RB + 'Wood_Log_Stack.glb'],
   textiles: [RB + 'Textiles_Stack_Large_Colored.glb'], textilesB: [RB + 'Textiles_Stack_Large.glb'],   fuelBarrel: [RB + 'Fuel_A_Barrel.glb'],
 
+  // ---------- Dino Island (Kenney Nature Kit, recolored per biome) ----------
+  // Jungle: broad leafy plants, tall palms and canopy trees.
+  jBush: [KN + 'plant_bushLarge.glb', { s: 3, tint: { grass: '#3f8f2e' } }], jBushBig: [KN + 'plant_bushDetailed.glb', { s: 3, tint: { grass: '#2f7a2a' } }],
+  jFlat: [KN + 'plant_flatTall.glb', { s: 3.4, tint: { leafsGreen: '#4a9a35' } }], jLeafs: [KN + 'grass_leafsLarge.glb', { s: 3, tint: { grass: '#3c8a30' } }],
+  jPalm: [KN + 'tree_palmDetailedTall.glb', { s: 3, tint: { woodBark: '#6b5038', leafsGreen: '#3d9a3a' } }],
+  jCanopy: [KN + 'tree_plateau.glb', { s: 3, tint: { woodBark: '#5e4632', leafsGreen: '#2f7f35' } }],
+  jTall: [KN + 'tree_tall.glb', { s: 3, tint: { woodBark: '#5e4632', leafsGreen: '#2a6b30' } }],
+  // Canyon: red sandstone towers, boulders and cliffs.
+  cTallA: [KN + 'rock_tallA.glb', { s: 3, tint: { dirt: '#c66a3e', grass: '#d8a463' } }], cTallB: [KN + 'rock_tallB.glb', { s: 3, tint: { dirt: '#b95c34', grass: '#d8a463' } }],
+  cTallC: [KN + 'rock_tallC.glb', { s: 3, tint: { dirt: '#c97446', grass: '#dcae70' } }], cTallE: [KN + 'rock_tallE.glb', { s: 3, tint: { dirt: '#bf6439', grass: '#d8a463' } }],
+  cLargeA: [KN + 'rock_largeA.glb', { s: 3, tint: { dirt: '#c46b40', grass: '#d8a463' } }], cLargeC: [KN + 'rock_largeC.glb', { s: 3, tint: { dirt: '#b85f38', grass: '#d8a463' } }],
+  cCliff: [KN + 'cliff_large_rock.glb', { s: 3, tint: { dirt: '#b65a33' } }], cCliffTop: [KN + 'cliff_top_rock.glb', { s: 3, tint: { dirt: '#b65a33', grass: '#d39a5a' } }],
+  // Ice age: pale blue ice and dark round pines (snow is added in the game).
+  iceTallA: [KN + 'stone_tallA.glb', { s: 3, tint: { stone: '#cdeeff' } }], iceTallB: [KN + 'stone_tallB.glb', { s: 3, tint: { stone: '#bfe6fb' } }],
+  iceLargeA: [KN + 'stone_largeA.glb', { s: 3, tint: { stone: '#d2f0ff' } }], iceLargeB: [KN + 'stone_largeB.glb', { s: 3, tint: { stone: '#c4e9fd' } }],
+  iceSmall: [KN + 'stone_smallA.glb', { s: 3, tint: { stone: '#d8f2ff' } }],
+  roundPineA: [KN + 'tree_pineRoundA.glb', { s: 3, tint: { leafsDark: '#2c5c4c', woodBarkDark: '#5a3f2e' } }],
+  roundPineC: [KN + 'tree_pineRoundC.glb', { s: 3, tint: { leafsDark: '#2f6250', woodBarkDark: '#5a3f2e' } }],
+  roundPineE: [KN + 'tree_pineRoundE.glb', { s: 3, tint: { leafsDark: '#285646', woodBarkDark: '#5a3f2e' } }],
+  // Volcano: black lava rock.
+  vTallA: [KN + 'rock_tallA.glb', { s: 3, tint: { dirt: '#3a3433', grass: '#4d2a20' } }], vTallB: [KN + 'rock_tallB.glb', { s: 3, tint: { dirt: '#34302f', grass: '#4d2a20' } }],
+  vTallC: [KN + 'rock_tallC.glb', { s: 3, tint: { dirt: '#3d3634', grass: '#55301f' } }], vLargeA: [KN + 'rock_largeA.glb', { s: 3, tint: { dirt: '#383231', grass: '#4d2a20' } }],
+  vLargeC: [KN + 'rock_largeC.glb', { s: 3, tint: { dirt: '#332e2d', grass: '#4d2a20' } }], vCliff: [KN + 'cliff_large_rock.glb', { s: 3, tint: { dirt: '#2f2a29' } }],
+  logBig: [KN + 'log_large.glb', { s: 3, tint: { woodBark: '#6d5038', woodInner: '#c9a271' } }],
+
   // ---------- KayKit platformer (pickups, gates, pipes) ----------
   // Sky stage hoops and bombs, and the gems that carry numbers in the catch stage.
   hoopBlue: [PF + 'hoop_blue.glb'], hoopRed: [PF + 'hoop_red.glb'], hoopYellow: [PF + 'hoop_yellow.glb'],
