@@ -279,7 +279,7 @@ async function openStage(level, i) {
     G.queue = planQueue(stage);
     G.needed = G.queue.length;
   }
-  if (G.play === 'sky') G.sky = { set: null, next: HOOP_FIRST, k: 1, lane: null };
+  if (G.play === 'sky') G.sky = { set: null, next: HOOP_FIRST, v: SKY_SPEED, lane: null };
   if (G.play === 'grab') {
     G.grab = { rules: stage.rules, ri: 0, rule: null, got: 0, gems: [], next: 0, phase: 'idle', last: null, wait: 0 };
     G.needed += stage.rules.length;
@@ -534,8 +534,7 @@ function runStep(dt) {
   h.safe = Math.max(0, h.safe - dt);
   h.jumpBuf = Math.max(0, h.jumpBuf - dt);
   tickPowers(dt);
-  if (G.sky) G.sky.k = damp(G.sky.k, G.sky.set && !G.sky.set.done ? SKY_SLOW : 1, 2.5, dt);
-  const speed = runSpeed() * h.slow * (h.jet ? 1.25 : 1) * (G.sky ? G.sky.k : 1) * (G.grab ? GRAB_SPEED : 1);
+  const speed = G.sky ? skySpeed(dt) * h.slow : runSpeed() * h.slow * (h.jet ? 1.25 : 1) * (G.grab ? GRAB_SPEED : 1);
   const prev = h.dist;
   h.dist += speed * dt;
   h.x = damp(h.x, h.lane * LANE, 18, dt);
@@ -901,7 +900,19 @@ function hurt() {
 // He flies the whole stage with a jetpack. Each question comes with three answer hoops ahead, one per lane, and
 // flying through a hoop picks its answer. While a question is up the run slows and there are no bombs, so there's
 // time to read it; the bombs come between questions.
-const HOOP_FIRST = 60, HOOP_AHEAD = 100, HOOP_GAP = 35, SKY_SLOW = 0.8;
+// A question's hoops arrive no sooner than HOOP_TIME seconds after it shows (more with read-aloud on), so there's
+// time to read and think. Tapping an answer at the bottom picks it: he flies to that lane and zooms through.
+const HOOP_FIRST = 60, HOOP_AHEAD = 90, HOOP_GAP = 40, HOOP_TIME = 12, HOOP_TIME_READ = 16, SKY_SPEED = 13;
+function skySpeed(dt) {
+  const s = G.sky, set = s.set;
+  let want = SKY_SPEED;
+  if (set && !set.done) {
+    if (set.locked) want = SKY_SPEED * 1.5;
+    else want = Math.min(SKY_SPEED, Math.max(2.5, (set.dist - G.h.dist) / Math.max(0.4, set.arrive - G.clock)));
+  }
+  s.v = damp(s.v, want, want < s.v ? 4 : 2, dt);
+  return s.v;
+}
 const HOOPS = [['hoopRed', '#ff4b4b'], ['hoopYellow', '#ffb81a'], ['hoopBlue', '#2f8cff']]; // left, middle, right
 let skyToken = 0;
 
@@ -946,7 +957,7 @@ function spawnHoops(dist) {
     scene.add(m);
     return m;
   });
-  G.sky.set = { q, answers, meshes, dist, done: false, right: false };
+  G.sky.set = { q, answers, meshes, dist, done: false, right: false, locked: false, arrive: G.clock + (S.settings.autoRead ? HOOP_TIME_READ : HOOP_TIME) };
   G.sky.lane = null;
   showSkyQuestion(q, answers);
 }
@@ -986,9 +997,11 @@ function hideSky(token) {
 }
 // Tapping an answer at the bottom flies to its lane.
 function steerTo(i) {
-  if (G.mode !== 'run' || !G.sky?.set || G.sky.set.done) return;
+  const set = G.sky?.set;
+  if (G.mode !== 'run' || !set || set.done) return;
   sound.unlock();
   if (G.h.lane !== i - 1) { G.h.lane = i - 1; sound.sfx('swoosh'); }
+  if (!set.locked) { set.locked = true; sound.sfx('whoosh'); }
 }
 
 function passHoops(set) {
