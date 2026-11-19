@@ -9,7 +9,10 @@ const pp = (title, author, id) => ({ text: `"${title}" by ${author}`, link: `htt
 export const CREDITS = [
   { title: 'Music', items: [
     mac('Voxel Revolution'), mac('Hillbilly Swing'), mac('Brightly Fancy'), mac('Enter the Party'), mac('Nano Hoedown'),
-    mac('Hustle'), mac('Surf Shimmy'), mac('Call to Adventure'),
+    mac('Hustle'), mac('Surf Shimmy'), mac('Call to Adventure'), mac('River Valley Breakdown'), mac('Still Pickin'),
+    mac('Bama Country'), mac('Heroic Age'),
+    { text: '"Jumping Jamboree" by tcarisland', link: 'https://opengameart.org/content/jumping-jamboree', license: 'CC BY 4.0', url: CCBY4 },
+    { text: '"Spaghetti Western" by Spring Spring and "Surfing" by Komiku', license: 'CC0', url: CC0 },
     { text: '"Win and lose melodies" by Vircon32, arranged by Sebastian F.', link: 'https://opengameart.org/content/win-and-lose-melodies', license: 'CC BY 4.0', url: CCBY4 },
     { text: 'Jingles by Kenney (kenney.nl) and "Point bell" by HaelDB', license: 'CC0', url: CC0 },
   ] },

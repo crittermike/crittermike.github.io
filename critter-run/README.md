@@ -12,11 +12,11 @@ This is a separate game from [Critter Quest](../critter-quest/). The two don't s
 
 ## How it plays
 
-- **Controls:** swipe left/right to change lanes, swipe up or tap to jump, and swipe down to slide under bars (or drop fast from a jump). On a keyboard: arrows or WASD, Space to jump, 1–4 to answer, and Esc to pause.
+- **Controls:** swipe left/right to change lanes, swipe up or tap to jump, and swipe down to slide under bars (or drop fast from a jump). On a keyboard: arrows or WASD, Space to jump, number keys to answer (or pick tiles), Enter to check a filled-in equation, Backspace to undo a tile, left/right to sort, and Esc to pause.
 - **Speed:** the run starts fast and speeds up. Jumps are long (about 0.85 s in the air), and a jump that starts too early stretches into a longer leap that still clears the next log or rock.
-- **Questions:** 4 big answer buttons. The speaker button reads the question and each answer aloud. Auto-read is off by default; the "read aloud" button on the map or pause screen turns it on.
+- **Questions:** most are 4 big answer buttons. Made math questions also come as equation tiles (tap the quotient), tap-all (tap the 2 odd ones), fill the blanks (build `40 ÷ 4 = 10` from tiles, then check), and sorting (even or odd, one card at a time). None need typing. Some show a picture: equal groups, an array, or a bar model. The speaker button reads the question and each answer aloud, with math read as words ("15 divided by 2 equals what"). Auto-read is off by default; the "read aloud" button on the map or pause screen turns it on.
 - **Right answer:** +5 coins, and the runner fires the equipped blaster at the chaser.
-- **Wrong answer:** a tip of 5 words or less, with a button to keep running. The question comes back later in the run.
+- **Wrong answer:** a short tip, with a button to keep running. The question comes back later in the run (a made question comes back as a new one of the same kind).
 - **Power-up boxes:** running into one asks a quick question from the stage. Only a right answer turns the power on; a wrong one just poofs the box (no heart lost). Powers: magnet, shield, jetpack (fly over everything and grab sky coins), double coins, super jump, and +2 hearts. Badges on the left count down.
 - **Hearts:** 5 per run. Obstacles and wrong answers each cost one, and floating hearts give one back. At 0 hearts you're caught.
 - **Stars:** 3 for no mistakes, 2 for one or two, 1 otherwise. Each stage unlocks the next.
@@ -62,6 +62,19 @@ CritterRun.addLevel({
 });
 ```
 
+### Made questions
+
+Instead of writing every question, a stage can list skills: `{ gen: 'remainders' }` makes a new question with new numbers each time it comes up, so no two runs are the same. The skills live in `js/mathgen.js` (multiplying and dividing for now; `node critter-run/tools/mathgen-samples.mjs` prints examples). Add `variant: 'name'` to pick one kind of question within a skill.
+
+A stage with made questions can set `count`: how many questions it asks. Each entry comes up once, then the rest are made ones that lean toward skills he has missed. Written questions and made ones mix well: the study guide's own questions written out, plus skills for variety.
+
+```js
+{ name: 'Remainder Swamp', biome: 'swamp', chaser: 'gator', color: '#14b8a6', music: 'pickin', count: 10, questions: [
+  { gen: 'remainders' }, { gen: 'remainderStory' },
+  { show: '15 ÷ 2 = ?', q: 'What is the answer?', a: '7 R1', wrong: ['7', '8 R1', '6 R3'], why: '2 × 7 = 14, 1 left.' },
+] },
+```
+
 Rules (checked by `levels.test.mjs`):
 - `q` and `show` are at most 8 words.
 - Answers are at most 4 words.
@@ -69,6 +82,9 @@ Rules (checked by `levels.test.mjs`):
 - At least 3 wrong answers (3 are picked at random each time).
 - `pic` is optional: a picture name from `PICS` in `js/catalog.js` (for example `'mountain'`, `'money'`, `'factory'`, `'wave'`). To add a new one, add the icon to `js/icons.js` and its name to `PICS`.
 - `say` is optional: what to read aloud instead of `show` + `q`.
+- `model` is optional: a picture on the card. `{ kind: 'groups', groups: 5, each: 3 }` (circles of dots), `{ kind: 'array', rows: 3, cols: 4 }`, or a bar model `{ kind: 'bars', bars: [3, 1], unit: '?', total: '40', names: ['Cards', 'Stickers'] }` (equal units, the label in each unit, a brace with the total).
+- `music` (stage) is optional: one of `MUSIC` in `js/catalog.js`, instead of the biome's song.
+- Math symbols: `×`, `÷`, `−` (minus), `+`, `=`, `?` for the unknown, `__` for a blank, and remainders like `7 R1`.
 - No emoji in any text.
 
 **Biomes:**
@@ -91,6 +107,10 @@ To add a new biome or chaser:
 
 - `index.html`: screens, HUD, styles, and the level list.
 - `js/main.js`: game loop, modes, controls, questions, power-ups, camera, and saving.
+- `js/quiz.js`: the answer area for each question type (choice, tap, tap-all, fill the blanks, sort).
+- `js/figures.js`: the math pictures on question cards (equal groups, arrays, bar models).
+- `js/mathgen.js`: made math questions, by skill. `mathgen.test.mjs` checks thousands of them, including the math.
+- `speech.test.mjs`: checks that math symbols are read aloud as words.
 - `js/world.js`: the endless track, biomes, obstacles, power-up boxes, coins, gates, sky and backdrop.
 - `js/props.js`: loads `assets/world.glb` and hands out its models by name.
 - `js/gfx.js`: the curved-world shader, water, and the geometry batcher that merges a chunk of scenery into a few draw calls.
