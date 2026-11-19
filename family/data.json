@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T11:15:53.784Z",
+  "generated_at": "2026-11-19T11:30:53.768Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -349,29 +349,29 @@
       {
         "d": "Sat",
         "icon": "⛅",
-        "hi": 65,
-        "lo": 49,
+        "hi": 64,
+        "lo": 48,
         "code": 3
       },
       {
         "d": "Sun",
-        "icon": "☀️",
+        "icon": "⛅",
         "hi": 71,
-        "lo": 49,
-        "code": 0
+        "lo": 53,
+        "code": 3
       },
       {
         "d": "Mon",
         "icon": "⛅",
-        "hi": 68,
-        "lo": 52,
+        "hi": 73,
+        "lo": 53,
         "code": 3
       },
       {
         "d": "Tue",
         "icon": "⛅",
         "hi": 59,
-        "lo": 50,
+        "lo": 48,
         "code": 3
       }
     ],
