@@ -67,11 +67,18 @@ function bars({ bars: list, unit, total, names }) {
 }
 
 const DRAW = { groups, array, bars };
+// What the picture shows, for screen readers.
+const DESCRIBE = {
+  groups: m => `${m.groups} circles with ${m.each} dots in each`,
+  array: m => `${m.rows} rows of ${m.cols} dots`,
+  bars: m => m.bars.map((n, i) => `${m.names?.[i] ? m.names[i] + ': ' : ''}a bar of ${n} units${m.unit !== undefined ? ` of ${m.unit}` : ''}`).join(', ')
+    + (m.total !== undefined ? `, ${m.total} in all` : ''),
+};
 
 export function figure(model) {
   const draw = DRAW[model?.kind];
   if (!draw) return null;
   const [g, w, h] = draw(model);
   const pad = 6;
-  return el('svg', { class: 'fig ' + model.kind, viewBox: `${-pad} ${-pad} ${w + pad * 2} ${h + pad * 2}`, role: 'img', 'aria-hidden': 'true' }, g);
+  return el('svg', { class: 'fig ' + model.kind, viewBox: `${-pad} ${-pad} ${w + pad * 2} ${h + pad * 2}`, role: 'img', 'aria-label': DESCRIBE[model.kind](model) }, g);
 }

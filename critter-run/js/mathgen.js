@@ -892,8 +892,8 @@ const zeroOne = {
           { q: 'Any number times 1 is what?', a: same, wrong: ['1', '0', 'Double it'], why: 'Times 1 keeps the number the same.' },
           { q: 'Any number times 0 is what?', a: '0', wrong: [same, '1', '10'], why: 'Zero groups of anything is 0.' },
           { q: 'Any number divided by 1 is what?', a: same, wrong: ['1', '0', 'Half of it'], why: 'All of it goes in 1 group.' },
-          { q: 'A number divided by itself is what?', a: '1', wrong: ['0', same, '2'], why: 'Like 8 ÷ 8 = 1.' },
-          { q: '0 divided by any number is what?', a: '0', wrong: ['No answer', '1', lane ? 'Divisor' : 'The divisor'], why: 'Nothing to share, so each gets 0.' },
+          { q: 'A number (not 0) ÷ itself is what?', a: '1', wrong: ['0', same, '2'], why: 'Like 8 ÷ 8 = 1.' },
+          { q: '0 ÷ any other number is what?', a: '0', wrong: ['No answer', '1', lane ? 'Divisor' : 'The divisor'], why: 'Nothing to share, so each gets 0.' },
           { show: '? × 0 = 0', q: 'Which numbers make this true?', a: 'Any number', wrong: ['Only 0', 'Only 1', 'No number'], why: 'Any number times 0 is 0.' },
         ], lane);
       },

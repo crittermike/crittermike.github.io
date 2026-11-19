@@ -114,7 +114,7 @@ const TERMS = {
   ],
   zeroOne: [
     [/times 1 is what/, SAME], [/times 0 is what/, '0'], [/divided by 1 is what/, SAME],
-    [/divided by itself/, '1'], [/\|0 divided by any number/, '0'], [/^\? × 0 = 0\|/, 'Any number'],
+    [/÷ itself/, '1'], [/\|0 ÷ any other number/, '0'], [/^\? × 0 = 0\|/, 'Any number'],
   ],
   evenOdd: [
     [/even number divided by 2 has what remainder/, 'No remainder'], [/odd number divided by 2 has what remainder/, 'A remainder of 1'],
