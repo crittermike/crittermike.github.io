@@ -123,11 +123,8 @@
   .stars { display: flex; gap: 2px; }
   .stars .ic { width: 30px; height: 30px; color: rgba(255,255,255,.22); filter: drop-shadow(0 2px 0 rgba(0,0,0,.5)); }
   .stars .ic.on { color: #ffd23f; }
-  .stop.locked .medal { --c: #7d869c !important; font-size: 46px; }
-  .stop.locked .s-name { opacity: .75; }
   .stop.next .medal { animation: pulse 1.1s ease-in-out infinite; box-shadow: 0 0 0 4px var(--ink), 0 9px 0 var(--ink), 0 0 0 14px rgba(255,210,63,.55), 0 14px 22px rgba(0,0,0,.4); }
   .stop.next::after { content: ''; position: absolute; top: -26px; left: 50%; margin-left: -14px; border: 14px solid transparent; border-top: 18px solid #ffd23f; filter: drop-shadow(0 3px 0 var(--ink)); animation: bob .8s ease-in-out infinite; }
-  .stop.nope { animation: shake .4s; }
 
   /* intro */
   #s-intro { justify-content: space-between; padding-top: max(5vh, var(--pad)); padding-bottom: max(5vh, env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(10,14,50,.45), transparent 32%, transparent 68%, rgba(10,14,50,.45)); }
@@ -309,8 +306,6 @@
   .stars-big .ic.on { color: #ffc61a; animation: pop .5s ease-out; }
   .coin-line { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 44px; color: #c98a00; }
   .coin-line .ic { width: 46px; height: 46px; color: #ffbf1a; }
-  .unlock { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; font-family: var(--display); font-size: 26px; color: var(--ink); background: #fff4c2; border-radius: 16px; padding: 6px 14px; border: 3px solid var(--ink); }
-  .unlock .ic { width: 34px; height: 34px; }
 
   /* shop */
   #s-shop { padding: 0; justify-content: space-between; align-items: stretch; }
@@ -514,7 +509,6 @@
     <div class="ribbon" id="w-title">YOU MADE IT!</div>
     <div class="stars-big" id="w-stars"></div>
     <div class="coin-line"><svg class="ic"><use href="#i-coin"/></svg><span id="w-coins">+0</span></div>
-    <div><span class="unlock" id="w-unlock" hidden></span></div>
     <div class="row">
       <button id="b-w-map" class="btn white square" aria-label="Map"><svg class="ic"><use href="#i-map"/></svg></button>
       <button id="b-w-retry" class="btn blue square" aria-label="Play again"><svg class="ic"><use href="#i-retry"/></svg></button>

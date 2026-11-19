@@ -55,7 +55,6 @@ const stageKey = (level, i) => `${level.id}:${i}`;
 // (js/mathgen.js). Misses are counted per written question, or per skill for made ones.
 const qKey = (level, e) => (e.gen ? `${level.id}|gen:${e.gen}` : `${level.id}|${e.show || ''}|${e.q}`);
 const entryOf = q => (q.entry ? { ...q.entry, variant: q.variant } : q);
-const isOpen = (level, i) => i === 0 || (S.stars[stageKey(level, i - 1)] || 0) > 0;
 
 // ---------- renderer ----------
 const canvas = $('#game');
@@ -209,7 +208,7 @@ function showMap() {
   $('#s-q').hidden = true;
   renderMap();
   sound.play('map');
-  const next = $('.stop.next') || $('.stop:not(.locked):last-of-type');
+  const next = $('.stop.next') || $('.stop:last-of-type');
   if (next) next.scrollIntoView({ block: 'center' });
 }
 
@@ -230,22 +229,22 @@ function renderMap() {
     sec.append(h, tp);
     const path = document.createElement('div');
     path.className = 'm-path';
+    // Every stage is open, so he can jump around. The first one he hasn't played yet gets the pulsing marker.
+    const nextIdx = level.stages.findIndex((_, i) => !S.stars[stageKey(level, i)]);
     level.stages.forEach((st, i) => {
       const stars = S.stars[stageKey(level, i)] || 0;
-      const open = isOpen(level, i);
       const b = document.createElement('button');
-      b.className = 'stop' + (open ? '' : ' locked') + (open && !stars ? ' next' : '') + (st.biome === 'tour' ? ' final' : '');
+      b.className = 'stop' + (i === nextIdx ? ' next' : '') + (st.biome === 'tour' ? ' final' : '');
       b.style.setProperty('--c', st.color);
       b.style.setProperty('--off', [0, 1, 0, -1][i % 4]);
       const md = document.createElement('span'); md.className = 'medal'; md.style.setProperty('--c', st.color);
-      md.append(icon(open ? st.chaser : 'lock'));
+      md.append(icon(st.chaser));
       const nm = document.createElement('span'); nm.className = 's-name'; nm.textContent = st.name;
       const sr = document.createElement('span'); sr.className = 'stars';
       for (let k = 0; k < 3; k++) sr.append(icon('star', k < stars ? 'on' : ''));
       b.append(md, nm, sr);
-      b.setAttribute('aria-label', st.name + (open ? '' : ' (locked)'));
-      if (open) b.addEventListener('click', () => { sound.sfx('click'); openStage(level, i); });
-      else b.addEventListener('click', () => { sound.sfx('wrong'); b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope'); });
+      b.setAttribute('aria-label', st.name);
+      b.addEventListener('click', () => { sound.sfx('click'); openStage(level, i); });
       path.append(b);
     });
     sec.append(path);
@@ -1726,7 +1725,6 @@ function clear() {
   G.c.spin = -1;
   const stars = G.wrong === 0 ? 3 : G.wrong <= 2 ? 2 : 1;
   const key = stageKey(G.level, G.stageIdx);
-  const first = !S.stars[key];
   S.stars[key] = Math.max(S.stars[key] || 0, stars);
   S.coins += G.coins;
   save();
@@ -1749,11 +1747,6 @@ function clear() {
     }
     const hasNext = G.stageIdx + 1 < G.level.stages.length;
     $('#b-w-next').hidden = !hasNext;
-    $('#w-unlock').hidden = !(first && hasNext);
-    if (first && hasNext) {
-      const nx = G.level.stages[G.stageIdx + 1];
-      $('#w-unlock').replaceChildren(icon('unlock'), 'New: ' + nx.name);
-    }
     $('#w-title').textContent = hasNext ? (stars === 3 ? 'PERFECT!' : 'YOU MADE IT!') : 'CHAMPION!';
   }, 1600);
 }
