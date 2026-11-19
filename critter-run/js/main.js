@@ -14,6 +14,9 @@ import { loadRunner, loadBlasters } from './actors.js';
 import { POWERS, TIMED_POWERS, RUNNERS, WEAPONS, TRAILS, byId, initShopSave, powerTime } from './items.js';
 import { fireWeapon, warmMaterials } from './weapons.js';
 import { Shop } from './shop.js';
+import { mountAnswers } from './quiz.js';
+import { figure } from './figures.js';
+import { makeQuestion } from './mathgen.js';
 
 const $ = s => document.querySelector(s);
 installIcons();
@@ -48,7 +51,10 @@ const ALL = (window.CritterRun && window.CritterRun.levels) || [];
 const only = new URLSearchParams(location.search).get('level');
 const LEVELS = only && ALL.some(l => l.id === only) ? ALL.filter(l => l.id === only) : ALL;
 const stageKey = (level, i) => `${level.id}:${i}`;
-const qKey = (level, q) => `${level.id}|${q.show || ''}|${q.q}`;
+// A level's questions are written out, or are { gen: 'skill' } entries that make a new question each time
+// (js/mathgen.js). Misses are counted per written question, or per skill for made ones.
+const qKey = (level, e) => (e.gen ? `${level.id}|gen:${e.gen}` : `${level.id}|${e.show || ''}|${e.q}`);
+const entryOf = q => (q.entry ? { ...q.entry, variant: q.variant } : q);
 const isOpen = (level, i) => i === 0 || (S.stars[stageKey(level, i - 1)] || 0) > 0;
 
 // ---------- renderer ----------
@@ -141,7 +147,7 @@ const G = {
   c: { d: 4, x: 0, spin: -1, model: null, type: null, roarT: 0, frozen: 0, knock: 0 },
   pow: {}, fbDur: 1.35, hitStop: 0, fovKick: 0, trailT: 0, previewWeapon: null, coinHide: 0,
   hearts: MAX_HEARTS, coins: 0, wrong: 0, correct: 0, needed: 0,
-  queue: [], extra: [], extraPlaced: 0, baseLeft: 0, nextGate: GATE_FIRST, planned: 0,
+  queue: [], extra: [], extraPlaced: 0, baseLeft: 0, nextGate: GATE_FIRST, planned: 0, seen: new Set(),
   current: null, fb: null, finished: false,
   cam: { pos: new THREE.Vector3(0, 4, 8), look: new THREE.Vector3(0, 1, -6), shake: 0, snap: true },
   pausedFrom: null,
@@ -259,7 +265,7 @@ async function openStage(level, i) {
   G.tour = stage.biome === 'tour';
   G.segments = G.tour ? level.stages.filter(s => s.biome !== 'tour') : [];
   G.hearts = MAX_HEARTS; G.coins = 0; G.wrong = 0; G.correct = 0;
-  G.current = null; G.fb = null; G.finished = false;
+  G.current = null; G.fb = null; G.finished = false; G.seen = new Set();
   G.queue = []; G.extra = []; G.extraPlaced = 0; G.planned = 0; G.nextMore = 0; G.nextGate = GATE_FIRST;
   if (G.tour) {
     const own = stage.questions;
@@ -267,7 +273,7 @@ async function openStage(level, i) {
     G.baseLeft = G.segments.length + Math.min(G.segments.length, own.length);
     G.needed = G.baseLeft + G.extra.length;
   } else {
-    G.queue = shuffle(stage.questions);
+    G.queue = planQueue(stage);
     G.needed = G.queue.length;
   }
   world.start({ biomeAt, onChunk, wantsHeart: () => G.hearts < MAX_HEARTS, color: stage.color, powers: POWERS, pickPower, powerIcon: id => iconTexture(POWERS[id].icon, POWERS[id].color) });
@@ -275,7 +281,7 @@ async function openStage(level, i) {
   G.h = newHero();
   clearPowers();
   G.c.d = 4.2; G.c.x = 0; G.c.spin = -1;
-  sound.play(G.tour ? 'tour' : stage.biome);
+  sound.play(stage.music || (G.tour ? 'tour' : stage.biome));
 
   setMode('intro');
   show('s-intro');
@@ -333,12 +339,33 @@ function pickWeighted(list) {
   for (let i = 0; i < w.length; i++) { r -= w[i]; if (r <= 0) return list[i]; }
   return list[0];
 }
+// A stage asks each of its questions once, in random order. A stage with made questions ({ gen }) can ask more (count):
+// every entry once, then extra made ones that lean toward what he has missed.
+function planQueue(stage) {
+  const list = stage.questions, made = list.filter(e => e.gen);
+  const n = made.length ? Math.max(stage.count || 0, list.length) : list.length;
+  const out = shuffle(list);
+  while (out.length < n) out.push(pickWeighted(made));
+  return shuffle(out);
+}
+// Turns an entry into the question to show. A made question that was already asked this run is made again.
+const sig = q => [q.show, q.q, q.a, ...(q.parts || q.options || q.slots || (q.items || []).map(i => i.label) || [])].join('|');
+function resolve(e) {
+  if (!e.gen) return e;
+  let q;
+  for (let tries = 0; tries < 12; tries++) {
+    q = { ...makeQuestion(e), entry: e };
+    if (!G.seen.has(sig(q))) break;
+  }
+  G.seen.add(sig(q));
+  return q;
+}
 function pickReview(seg) { return pickWeighted(G.segments[seg].questions); }
 function powerQuestion() {
   const pool = G.tour ? G.level.stages.flatMap(s => s.questions) : G.stage.questions;
   const last = G.current?.q;
-  const list = pool.length > 1 ? pool.filter(q => q !== last) : pool;
-  return pickWeighted(list);
+  const list = pool.length > 1 ? pool.filter(e => e !== last && e !== last?.entry) : pool;
+  return resolve(pickWeighted(list));
 }
 
 // The chaser roars, the announcer counts in, and the run starts on "GO!".
@@ -454,9 +481,9 @@ window.addEventListener('keydown', e => {
     else if (k === 'Escape' || k === 'p' || k === 'P') pause();
     else return;
     e.preventDefault();
-  } else if (G.mode === 'question' && /^[1-4]$/.test(k)) {
-    answer(Number(k) - 1);
-  } else if (G.mode === 'feedback' && G.fb === 'wrong' && (k === 'Enter' || k === ' ' || k === 'ArrowRight')) {
+  } else if (G.mode === 'question') {
+    if (G.current?.ui?.key(k)) e.preventDefault();
+  } else if (G.mode === 'feedback' && G.fb === 'wrong' && !$('#tip').hidden && (k === 'Enter' || k === ' ' || k === 'ArrowRight')) {
     e.preventDefault();
     $('#b-next').click();
   } else if (G.mode === 'intro' && (k === 'Enter' || k === ' ')) {
@@ -850,14 +877,14 @@ function hurt() {
 
 // ---------- questions ----------
 function ask(gate) {
-  let q = null;
-  if (!G.tour) q = G.queue.shift();
-  else if (gate.kind === 'review') q = pickReview(gate.seg);
-  else if (gate.kind === 'order') q = G.stage.questions[gate.idx];
-  else if (gate.kind === 'extra') { q = G.extra.shift(); G.extraPlaced = Math.max(0, G.extraPlaced - 1); }
-  else q = G.extra.shift();
-  if (!q) return;
-  showQuestion(q, { gate, base: G.tour && (gate.kind === 'review' || gate.kind === 'order') });
+  let e = null;
+  if (!G.tour) e = G.queue.shift();
+  else if (gate.kind === 'review') e = pickReview(gate.seg);
+  else if (gate.kind === 'order') e = G.stage.questions[gate.idx];
+  else if (gate.kind === 'extra') { e = G.extra.shift(); G.extraPlaced = Math.max(0, G.extraPlaced - 1); }
+  else e = G.extra.shift();
+  if (!e) return;
+  showQuestion(resolve(e), { gate, base: G.tour && (gate.kind === 'review' || gate.kind === 'order') });
   sound.sfx('gate');
   roar();
 }
@@ -892,23 +919,21 @@ function showQuestion(q, extra) {
   }
   $('#s-q').classList.toggle('power', !!power);
 
-  const answers = shuffle([q.a, ...shuffle(q.wrong).slice(0, 3)]);
-  G.current.answers = answers;
   $('#q-pic').replaceChildren(...(q.pic ? [icon(q.pic)] : []));
   $('#q-pic').hidden = !q.pic;
   $('#q-show').textContent = q.show || '';
   $('#q-show').hidden = !q.show;
   $('#q-text').textContent = q.q;
+  const fig = q.model ? figure(q.model) : null;
+  $('#q-fig').replaceChildren(...(fig ? [fig] : []));
+  $('#q-fig').hidden = !fig;
   $('#q-card').style.setProperty('--c', power ? power.color : G.stage.color);
-  const box = $('#answers');
-  box.innerHTML = '';
-  answers.forEach((a, i) => {
-    const b = document.createElement('button');
-    b.className = 'btn ans';
-    b.dataset.i = i;
-    b.textContent = a;
-    b.addEventListener('click', () => answer(i));
-    box.append(b);
+  G.current.ui = mountAnswers(q, $('#answers'), {
+    ready: () => G.mode === 'question' && performance.now() >= G.readyAt,
+    done: judge,
+    sfx: name => sound.sfx(name),
+    // Sorting shows one item at a time; each new one is read out when auto-read is on.
+    onItem: label => { if (S.settings.autoRead && G.mode === 'question') { $('#b-speak').classList.remove('talking'); sound.sayParts([label]); } },
   });
   $('#tip').hidden = true;
   $('#s-q').hidden = false;
@@ -918,34 +943,31 @@ function showQuestion(q, extra) {
 }
 
 function readQuestion() {
-  const q = G.current?.q;
+  const { q, ui } = G.current || {};
   if (!q) return;
-  const btns = $$('#answers .ans');
+  const els = ui.readEls || [];
   const intro = q.say || [q.show, q.q].filter(Boolean).join('. ');
   $('#b-speak').classList.add('talking');
-  sound.sayParts([intro, ...G.current.answers], i => {
-    btns.forEach((b, k) => b.classList.toggle('reading', k === i - 1));
+  sound.sayParts([intro, ...ui.read()], i => {
+    els.forEach((b, k) => b.classList.toggle('reading', k === i - 1));
     if (i < 0) $('#b-speak').classList.remove('talking');
   });
 }
 
-function answer(i) {
-  if (G.mode !== 'question' || performance.now() < G.readyAt) return;
-  const { q, answers } = G.current;
+// Called once per question by its answer area. why: a tip for this exact mistake (a sorted item has its own).
+function judge(right, why) {
+  const { q } = G.current;
   sound.stopSpeech();
   $('#b-speak').classList.remove('talking');
-  const btns = $$('#answers .ans');
-  btns.forEach(b => b.classList.remove('reading'));
-  const right = answers[i] === q.a;
-  const key = qKey(G.level, q);
+  $$('#answers .reading').forEach(b => b.classList.remove('reading'));
+  const key = qKey(G.level, entryOf(q));
   const power = G.current.power;
+  G.current.why = why || q.why;
   setMode('feedback');
   G.fb = right ? 'right' : 'wrong';
   G.fbDur = 1.35;
   if (G.current.base) G.baseLeft--;
   if (right) {
-    btns[i].classList.add('right');
-    btns.forEach((b, k) => { if (k !== i) b.classList.add('dim'); });
     if (!power) G.correct++;
     if (S.missed[key]) S.missed[key] = Math.max(0, S.missed[key] - 1);
     sound.sfx('correct');
@@ -957,8 +979,6 @@ function answer(i) {
     setTimeout(fire, 280);
     if (power) setTimeout(() => { if (G.mode === 'feedback') activatePower(power); }, 150);
   } else {
-    btns[i].classList.add('wrong');
-    btns.forEach((b, k) => { if (answers[k] === q.a) setTimeout(() => b.classList.add('right'), 350); else if (k !== i) b.classList.add('dim'); });
     S.missed[key] = (S.missed[key] || 0) + 1;
     sound.sfx('wrong');
     if (power) {
@@ -968,16 +988,17 @@ function answer(i) {
       for (let k = 0; k < 5; k++) fx.puff({ x: G.h.x + (Math.random() - 0.5), y: 1.4, z: -G.h.dist - 1, vy: 1, life: 0.8, size: 1.2, color: '#cccccc', alpha: 0.6, grow: 1.5 });
     } else {
       G.wrong++;
-      if (G.tour) G.extra.push(q); else G.queue.push(q);
+      // It comes back later in the run. A made question comes back as a new one of the same kind.
+      if (G.tour) G.extra.push(entryOf(q)); else G.queue.push(entryOf(q));
       hurt();
       G.c.d = 1.9;
       hero.stumble();
     }
-    $('#tip-text').textContent = q.why;
+    $('#tip-text').textContent = G.current.why;
     setTimeout(() => {
       if (G.fb !== 'wrong' || G.mode !== 'feedback') return;
       $('#tip').hidden = false;
-      if (S.settings.autoRead) sound.sayParts([q.why]);
+      if (S.settings.autoRead) sound.sayParts([G.current.why]);
     }, 600);
   }
   save();
@@ -1038,10 +1059,10 @@ $('#b-next').addEventListener('click', () => {
 });
 $('#b-speak').addEventListener('click', () => {
   sound.unlock();
-  if (G.mode === 'feedback' && G.fb === 'wrong') sound.sayParts([G.current.q.why]);
+  if (G.mode === 'feedback' && G.fb === 'wrong') sound.sayParts([G.current.why]);
   else readQuestion();
 });
-$('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.q.why]); });
+$('#b-tip-speak').addEventListener('click', () => { if (G.current) sound.sayParts([G.current.why || G.current.q.why]); });
 
 // ---------- shop ----------
 const shop = new Shop({ S, save, sound, preview: shopPreview });
@@ -1521,4 +1542,4 @@ async function warmUp() {
 }
 
 // Handy for testing in the console.
-window.__critterRun = { G, S, get world() { return world; }, post, fx, camera, setQuality, scene, renderer, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, get hero() { return hero; }, debug: { clear, caught, pause, openShop, showMap, showTitle, ask: () => ask({ kind: 'review', seg: 0 }) } };
+window.__critterRun = { G, S, get world() { return world; }, post, fx, camera, setQuality, scene, renderer, openStage: (i, lv = 0) => openStage(LEVELS[lv], i), save, activatePower, askPower, get hero() { return hero; }, debug: { clear, caught, pause, openShop, showMap, showTitle, ask: () => ask({ kind: 'review', seg: 0 }), show: q => showQuestion(q, {}) } };

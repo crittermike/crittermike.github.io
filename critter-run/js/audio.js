@@ -1,6 +1,8 @@
 // Real music and sampled sound. Music streams from MP3s through two <audio> elements that crossfade; effects, stingers,
 // chaser roars, loops and announcer lines are short MP3s decoded into WebAudio buffers. Questions are read aloud with
 // speechSynthesis.
+import { MUSIC as SONGS } from './catalog.js';
+
 const BASE = new URL('../assets/audio/', import.meta.url);
 const musicUrl = file => new URL(`music/${file}.mp3`, BASE).href;
 const sfxUrl = file => new URL(`sfx/${file}.mp3`, BASE).href;
@@ -10,9 +12,11 @@ const MASTER = 0.9, MUSIC = 0.45, EFFECTS = 0.85, VOICE = 0.9;
 const DUCK = 0.6, XFADE = 0.8, LOOP_FADE = 0.3;
 
 // Music keys -> files in music/. The title, map and shop share the menu theme, which is also the fallback.
+// Each biome has a song, and stages can pick one of the extra MUSIC songs instead.
 const TRACKS = {
   title: 'menu', map: 'menu', shop: 'menu', tour: 'tour',
   mountains: 'mountains', foothills: 'foothills', sandhills: 'sandhills', farmland: 'farmland', swamp: 'swamp', beach: 'beach',
+  ...Object.fromEntries(SONGS.map(k => [k, k])),
 };
 
 // Effect name -> [file in sfx/, volume]. Quiet things (land, swoosh, click) sit under coins, crashes and roars.
@@ -73,6 +77,18 @@ function loopStart(b, len) {
 }
 
 // ---------- speech ----------
+// Math is written with symbols, so they're turned into words: '15 ÷ 2 = ?' reads "15 divided by 2 equals what",
+// '7 R1' reads "7 remainder 1" and a blank '__' reads "blank".
+export function speakable(text) {
+  return String(text)
+    .replace(/→/g, ', ')
+    .replace(/(\d)\s?R(\d+)(?!\w)/g, '$1 remainder $2')
+    .replace(/×/g, ' times ').replace(/÷/g, ' divided by ').replace(/−/g, ' minus ').replace(/(\d) - (\d)/g, '$1 minus $2')
+    .replace(/\+/g, ' plus ').replace(/=/g, ' equals ')
+    .replace(/_{2,}/g, ' blank ')
+    .replace(/(^|\s)\?(?=[\s.,!]|$)/g, '$1what')
+    .replace(/\s{2,}/g, ' ').trim();
+}
 const synth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
 let voice = null;
 function pickVoice() {
@@ -385,7 +401,7 @@ export class Sound {
   say(text) {
     return new Promise(res => {
       if (!synth) { setTimeout(res, 300); return; }
-      const u = new SpeechSynthesisUtterance(String(text).replace(/→/g, ', ').replace(/\+/g, ' plus '));
+      const u = new SpeechSynthesisUtterance(speakable(text));
       if (voice) u.voice = voice;
       u.lang = 'en-US'; u.rate = 0.9; u.pitch = 1.1;
       let done = false;

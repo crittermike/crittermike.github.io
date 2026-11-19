@@ -18,9 +18,16 @@ Licensed under Creative Commons: By Attribution 4.0 License, https://creativecom
 | `audio/music/swamp.mp3` | "Hustle" | Kevin MacLeod (incompetech.com) |
 | `audio/music/beach.mp3` | "Surf Shimmy" | Kevin MacLeod (incompetech.com) |
 | `audio/music/tour.mp3` | "Call to Adventure" | Kevin MacLeod (incompetech.com) |
+| `audio/music/breakdown.mp3` | "River Valley Breakdown" (first 3:00, faded out) | Kevin MacLeod (incompetech.com) |
+| `audio/music/pickin.mp3` | "Still Pickin" (first 3:12, faded out) | Kevin MacLeod (incompetech.com) |
+| `audio/music/bama.mp3` | "Bama Country" | Kevin MacLeod (incompetech.com) |
+| `audio/music/heroic.mp3` | "Heroic Age" | Kevin MacLeod (incompetech.com) |
+| `audio/music/jamboree.mp3` | "Jumping Jamboree" | tcarisland, https://opengameart.org/content/jumping-jamboree |
 | `audio/sfx/win.mp3`, `audio/sfx/lose.mp3` | "Win and lose melodies" (arranged) | Vircon32, arranged by Sebastian F. (@fraynvgm), https://opengameart.org/content/win-and-lose-melodies |
 
 The music was loudness-normalized and re-encoded.
+
+CC0 music: `audio/music/western.mp3` is "Spaghetti Western" by Spring Spring (https://opengameart.org/content/spaghetti-western), and `audio/music/surfing.mp3` is "Surfing" by Komiku from "Poupi's incredible adventures !" (https://opengameart.org/content/poupis-incredible-adventures-full-album).
 
 ## Sound effects (CC0)
 

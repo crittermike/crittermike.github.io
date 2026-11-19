@@ -1,11 +1,12 @@
-// Content rules for Critter Run levels. Run: node --test critter-run/
+// Content rules for Critter Run levels. Run from the repo root: node --test critter-run/*.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { BIOMES, CHASERS, PICS } from './js/catalog.js';
+import { BIOMES, CHASERS, PICS, MUSIC } from './js/catalog.js';
+import { SKILLS, VARIANTS, makeQuestion, rngFrom } from './js/mathgen.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dir = path.join(here, 'levels');
@@ -27,6 +28,18 @@ const EMOJI = /\p{Extended_Pictographic}|\uFE0F|[\u{1F1E6}-\u{1F1FF}]/u;
 const strings = v => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(strings) : v && typeof v === 'object' ? Object.values(v).flatMap(strings) : []);
 const words = s => s.trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)).length;
 const text = s => typeof s === 'string' && s.trim().length > 0;
+
+// A picture on a question card (js/figures.js).
+function checkModel(m, where) {
+  const int = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi;
+  if (m.kind === 'groups') assert.ok(int(m.groups, 1, 8) && int(m.each, 1, 9), `${where}: groups needs 1-8 groups of 1-9`);
+  else if (m.kind === 'array') assert.ok(int(m.rows, 1, 6) && int(m.cols, 1, 10), `${where}: array needs 1-6 rows of 1-10`);
+  else if (m.kind === 'bars') {
+    assert.ok(Array.isArray(m.bars) && m.bars.length >= 1 && m.bars.length <= 3 && m.bars.every(n => int(n, 1, 10)), `${where}: bars needs 1-3 bars of 1-10 units`);
+    for (const k of ['unit', 'total']) if (m[k] !== undefined) assert.ok(text(m[k]) && m[k].length <= 4, `${where}: bars ${k} must be 1-4 characters`);
+    if (m.names !== undefined) assert.ok(m.names.length === m.bars.length && m.names.every(n => text(n) && n.length <= 10), `${where}: one name (10 characters or less) per bar`);
+  } else assert.fail(`${where}: model kind must be groups, array or bars`);
+}
 
 function checkKeys(obj, allowed, where) {
   const extra = Object.keys(obj).filter(k => !allowed.includes(k));
@@ -66,7 +79,7 @@ for (const { file, level } of levels) {
     const seen = new Set();
     level.stages.forEach((stage, si) => {
       const where = `${file} stage ${si + 1}`;
-      checkKeys(stage, ['name', 'biome', 'chaser', 'color', 'questions'], where);
+      checkKeys(stage, ['name', 'biome', 'chaser', 'color', 'questions', 'count', 'music'], where);
       checkShort(stage.name, 3, 20, `${where} name`);
       assert.ok(BIOMES.includes(stage.biome), `${where}: biome must be one of ${BIOMES.join(', ')}`);
       assert.ok(CHASERS.includes(stage.chaser), `${where}: chaser must be one of ${CHASERS.join(', ')}`);
@@ -76,11 +89,33 @@ for (const { file, level } of levels) {
         assert.equal(si, level.stages.length - 1, `${where}: the tour must be the last stage`);
         assert.ok(si >= 1, `${where}: the tour needs earlier stages to tour through`);
       }
-      const min = stage.biome === 'tour' ? 1 : 3;
-      assert.ok(Array.isArray(stage.questions) && stage.questions.length >= min && stage.questions.length <= 10, `${where}: needs ${min}-10 questions`);
+      if (stage.music !== undefined) {
+        assert.ok(MUSIC.includes(stage.music), `${where}: music must be one of ${MUSIC.join(', ')}`);
+        assert.ok(fs.existsSync(path.join(here, 'assets/audio/music', stage.music + '.mp3')), `${where}: assets/audio/music/${stage.music}.mp3 is missing`);
+      }
+      assert.ok(Array.isArray(stage.questions) && stage.questions.length >= 1 && stage.questions.length <= 10, `${where}: needs 1-10 questions`);
+      // Made questions ({ gen }) can be asked more than once, so a stage with them can set how many it asks.
+      const made = stage.questions.some(q => q.gen);
+      if (stage.count !== undefined) {
+        assert.ok(made && stage.biome !== 'tour', `${where}: count is only for non-final stages with { gen } questions`);
+        assert.ok(Number.isInteger(stage.count) && stage.count >= stage.questions.length && stage.count <= 12, `${where}: count must be a whole number from the number of questions up to 12`);
+      }
+      const asked = stage.count || stage.questions.length;
+      if (stage.biome !== 'tour') assert.ok(asked >= 3, `${where}: needs at least 3 questions`);
       stage.questions.forEach((q, qi) => {
         const at = `${where} question ${qi + 1}`;
-        checkKeys(q, ['q', 'a', 'wrong', 'why', 'pic', 'show', 'say'], at);
+        if (q.gen !== undefined) {
+          checkKeys(q, ['gen', 'variant'], at);
+          assert.ok(SKILLS[q.gen], `${at}: gen "${q.gen}" must be a skill in js/mathgen.js (${Object.keys(SKILLS).join(', ')})`);
+          if (q.variant !== undefined) assert.ok(VARIANTS[q.gen].includes(q.variant), `${at}: variant must be one of ${VARIANTS[q.gen].join(', ')}`);
+          for (let seed = 1; seed <= 25; seed++) {
+            const mq = makeQuestion(q, rngFrom(seed));
+            for (const str of strings(mq)) assert.ok(!EMOJI.test(str), `${at}: made "${str}", which has an emoji`);
+          }
+          return;
+        }
+        checkKeys(q, ['q', 'a', 'wrong', 'why', 'pic', 'show', 'say', 'model'], at);
+        if (q.model !== undefined) checkModel(q.model, at);
         checkShort(q.q, 8, 48, `${at} q`);
         if (q.show !== undefined) checkShort(q.show, 8, 40, `${at} show`);
         if (q.say !== undefined) assert.ok(text(q.say) && q.say.length <= 140, `${at}: say must be short text`);

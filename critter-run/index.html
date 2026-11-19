@@ -178,7 +178,7 @@
   /* question */
   #s-q { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: var(--pad) 12px max(14px, env(safe-area-inset-bottom)); pointer-events: none; }
   #s-q > * { pointer-events: auto; }
-  #q-card { --c: var(--blue); position: relative; width: min(760px, 100%); display: flex; align-items: center; gap: 14px; padding: 12px 16px 14px 12px; color: var(--ink); text-align: left;
+  #q-card { --c: var(--blue); position: relative; width: min(760px, 100%); display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 12px 16px 14px 12px; color: var(--ink); text-align: left;
     background: linear-gradient(180deg, #ffffff, #eef2fb); border-radius: 26px; border: 4px solid var(--ink); box-shadow: 0 0 0 5px var(--c), 0 0 0 9px var(--ink), 0 12px 24px rgba(0,0,0,.35); }
   #s-q.in #q-card { animation: drop .45s cubic-bezier(.3,1.5,.6,1); }
   #s-q.in #answers { animation: rise .45s cubic-bezier(.3,1.5,.6,1); }
@@ -198,9 +198,66 @@
   .ans.dim { opacity: .35; filter: saturate(.5); }
   .ans.right { --c: #2fd24f; --d: #15912c; opacity: 1; transform: scale(1.05); animation: pop .35s; box-shadow: inset 0 -6px 0 var(--d), 0 6px 0 var(--ink), 0 0 0 6px #fff, 0 0 30px #7dff8a; }
   .ans.wrong { --c: #ff4b4b; --d: #b8232a; animation: shake .45s; }
-  #tip { position: fixed; left: 0; right: 0; margin: 0 auto; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 2 * clamp(76px, 14vh, 112px) + 46px); width: min(600px, 94vw);
+  #tip { position: relative; margin: auto 0 22px; width: min(600px, 94vw);
     display: flex; align-items: center; gap: 12px; color: var(--ink); background: linear-gradient(180deg, #fff, #fff1f1); border-radius: 24px; border: 4px solid var(--ink); padding: 10px 10px 10px 12px;
     box-shadow: 0 0 0 5px var(--red), 0 0 0 9px var(--ink), 0 10px 24px rgba(0,0,0,.35); animation: pop .35s; }
+  /* the other answer types: equation tiles, tap-all, fill the blanks, and sorting into two bins */
+  #answers.k-tap, #answers.k-multi, #answers.k-build, #answers.k-sort { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  /* If a big question doesn't fit (a short phone held sideways), the question screen scrolls instead of cutting it off. */
+  #s-q { overflow-y: auto; touch-action: pan-y; }
+  #s-q > * { flex-shrink: 0; }
+  .eq { display: flex; align-items: center; justify-content: center; gap: clamp(6px, 1.8vw, 14px); max-width: 100%; }
+  .tile { position: relative; display: grid; place-items: center; min-width: clamp(58px, 15vw, 100px); height: clamp(68px, 15vw, 100px); padding: 0 clamp(6px, 1.6vw, 14px);
+    font-family: var(--display); font-size: clamp(34px, 9vw, 62px); line-height: 1; color: var(--ink); border-radius: 20px; white-space: nowrap; transition: transform .08s, opacity .2s, filter .2s; }
+  .tile.sign { min-width: 0; padding: 0 2px; color: #fff; -webkit-text-stroke: 7px var(--ink); paint-order: stroke fill; text-shadow: 0 5px 0 var(--ink); }
+  @media (max-width: 400px) { #answers .eq { gap: 4px; } #answers .tile:not(.sign) { min-width: 46px; padding: 0 4px; } }
+  .tile.num, .tile.given, .tile.blank { background: linear-gradient(180deg, #fff, #e6ecfa); border: 4px solid var(--ink); box-shadow: inset 0 -5px 0 #c9d3ea, 0 6px 0 var(--ink), 0 10px 18px rgba(0,0,0,.28); }
+  .tile.num:active, .tile.blank.filled:active { transform: translateY(4px); box-shadow: inset 0 -3px 0 #c9d3ea, 0 2px 0 var(--ink); }
+  .tile.blank { background: rgba(255,255,255,.6); border-style: dashed; box-shadow: 0 6px 0 rgba(27,31,74,.55); }
+  .tile.blank.next { border-color: #ffd23f; background: rgba(255,248,214,.95); animation: pulse 1s ease-in-out infinite; }
+  .tile.blank.filled { background: linear-gradient(180deg, #fff, #e6ecfa); border-style: solid; box-shadow: inset 0 -5px 0 #c9d3ea, 0 6px 0 var(--ink), 0 10px 18px rgba(0,0,0,.28); animation: pop .25s; }
+  .tile.right, .tile.blank.right { background: linear-gradient(180deg, #c6ffd1, #2fd24f); border-style: solid; animation: pop .35s; box-shadow: 0 6px 0 var(--ink), 0 0 0 5px #fff, 0 0 28px #7dff8a; }
+  .tile.wrong, .tile.blank.wrong { background: linear-gradient(180deg, #ffd6d6, #ff5b5b); border-style: solid; animation: shake .45s; }
+  .tile.dim { opacity: .4; filter: saturate(.4); }
+  .b-foot { width: min(760px, 100%); display: flex; align-items: stretch; gap: 12px; }
+  .tray { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tray .ans { min-height: clamp(58px, 9vh, 84px); padding: 0 4px; font-family: var(--display); font-size: clamp(28px, 7vw, 44px); }
+  .btn.check { width: clamp(80px, 20vw, 124px); min-height: 0; padding: 0; font-size: clamp(42px, 10vw, 62px); border-radius: 26px; opacity: .45; filter: grayscale(.8); transition: opacity .2s, filter .2s; }
+  .btn.check.ready { opacity: 1; filter: none; animation: pulse 1s ease-in-out infinite; }
+  #answers .pips { display: flex; gap: 8px; padding: 6px 12px; border-radius: 20px; background: rgba(15,18,48,.5); }
+  #answers .pips i { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.3); border: 3px solid var(--ink); }
+  #answers .pips i.on { background: #2fd24f; animation: pop .3s; }
+  #answers .grid { width: min(760px, 100%); display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #answers .grid .ans { min-height: clamp(64px, 11vh, 96px); }
+  @media (min-aspect-ratio: 1/1) { #answers .grid.n6, #answers .grid.n5 { grid-template-columns: repeat(3, 1fr); } }
+  .sort-row { width: min(760px, 100%); display: grid; grid-template-columns: minmax(76px, 1fr) minmax(120px, 1.6fr) minmax(76px, 1fr); gap: 10px; align-items: center; }
+  .bin { min-height: clamp(96px, 17vh, 150px); padding: 6px 8px; font-family: var(--display); font-size: clamp(24px, 6vw, 40px); }
+  /* Phones: the card goes above two wide bins, so labels like "No remainder" fit. */
+  @media (max-width: 600px) {
+    .sort-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sort-row .sort-card { grid-column: 1 / -1; grid-row: 1; }
+  }
+  .sort-card { display: grid; place-items: center; min-height: clamp(84px, 14vh, 130px); padding: 8px 12px; font-family: var(--display); font-size: clamp(36px, 10vw, 64px); line-height: 1.05; text-align: center;
+    color: var(--ink); background: linear-gradient(180deg, #fff, #e6ecfa); border: 4px solid var(--ink); border-radius: 24px; box-shadow: 0 6px 0 var(--ink), 0 12px 20px rgba(0,0,0,.3); }
+  .sort-card.long { font-size: clamp(22px, 5.4vw, 36px); }
+  .sort-card.in { animation: pop .3s ease-out; }
+  .sort-card.to-0, .sort-card.to-1 { transition: transform .25s ease-in, opacity .25s; opacity: 0; }
+  .sort-card.to-0 { transform: translateX(-90%) scale(.4); }
+  .sort-card.to-1 { transform: translateX(90%) scale(.4); }
+  .sort-card.wrong { background: linear-gradient(180deg, #ffe3e3, #ffb3b3); animation: shake .45s; }
+  /* math pictures on the question card */
+  #q-fig { flex: 1 0 100%; }
+  #q-fig .fig { display: block; width: 100%; height: clamp(84px, 18vh, 180px); }
+  .fig .f-group { fill: color-mix(in srgb, var(--c) 14%, #fff); stroke: var(--ink); stroke-width: 4; }
+  .fig .f-dot { fill: color-mix(in srgb, var(--c) 70%, #000); }
+  .fig .f-unit { fill: color-mix(in srgb, var(--c) 28%, #fff); stroke: var(--ink); stroke-width: 3.5; }
+  .fig .f-unit.alt { fill: color-mix(in srgb, var(--c) 50%, #fff); }
+  .fig .f-t { font-family: var(--display); font-size: 32px; fill: var(--ink); }
+  .fig .f-t.small { font-size: 22px; }
+  .fig .f-t.on { fill: #fff; stroke: var(--ink); stroke-width: 5px; paint-order: stroke fill; }
+  .fig .f-name { font-family: var(--body); font-weight: 700; font-size: 26px; fill: var(--ink); }
+  .fig .f-brace { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .fig .f-total { fill: var(--c); stroke: var(--ink); stroke-width: 3.5; }
   #tip-text { flex: 1; font-weight: 700; font-size: clamp(22px, 5.4vw, 30px); line-height: 1.1; }
   #b-next { font-size: 40px; width: 92px; }
   body[data-mode="question"] #chase, body[data-mode="question"] #dots, body[data-mode="feedback"] #chase, body[data-mode="feedback"] #dots { visibility: hidden; }
@@ -282,7 +339,19 @@
     #chase { top: calc(var(--pad) + 4px); width: min(260px, 36vw); }
     #dots { top: calc(var(--pad) + 48px); }
     .ans { min-height: 60px; }
-    #tip { bottom: calc(max(14px, env(safe-area-inset-bottom)) + 2 * 60px + 40px); }
+    #q-card { padding: 6px 12px 8px 8px; gap: 10px; }
+    #q-show, #q-text { font-size: 22px; }
+    #q-fig .fig { height: 78px; }
+    #answers.k-build, #answers.k-tap, #answers.k-sort, #answers.k-multi { gap: 8px; }
+    #answers .tile { height: 54px; min-width: 52px; font-size: 32px; border-radius: 14px; }
+    #answers .tile.sign { min-width: 0; }
+    .tray { grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); }
+    .tray .ans, #answers .grid .ans { min-height: 48px; font-size: 24px; }
+    .btn.check { font-size: 34px; }
+    .bin, .sort-card { min-height: 64px; }
+    #tip { margin-bottom: 10px; padding: 6px 8px; }
+    #tip-text { font-size: 20px; }
+    #b-next { font-size: 30px; width: 70px; min-height: 52px; }
     .logo b { font-size: 60px; } .logo span { font-size: 68px; }
   }
   /* Tablets: the main controls grow with the screen. */
@@ -359,6 +428,7 @@
       <div id="q-text"></div>
     </div>
     <button id="b-speak" class="btn yellow square" aria-label="Read it to me"><svg class="ic"><use href="#i-sound"/></svg></button>
+    <div id="q-fig" hidden></div>
   </div>
   <div id="tip" hidden>
     <button id="b-tip-speak" class="btn yellow small square" aria-label="Read it to me"><svg class="ic"><use href="#i-sound"/></svg></button>
@@ -442,6 +512,7 @@
 <script>window.CritterRun = { levels: [], addLevel(level) { this.levels.push(level); } };</script>
 <!-- Levels: one file per test, oldest first. -->
 <script src="levels/2026-11-sc-landforms.js"></script>
+<script src="levels/2026-11-math-ch4.js"></script>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>
