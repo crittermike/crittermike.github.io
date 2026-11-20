@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T16:30:54.162Z",
+  "generated_at": "2026-11-20T16:45:53.742Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -326,11 +326,11 @@
   ],
   "weather": {
     "now": {
-      "temp": 64,
+      "temp": 65,
       "hi": 69,
       "lo": 45,
-      "icon": "☀️",
-      "code": 0
+      "icon": "🌤",
+      "code": 1
     },
     "days": [
       {
