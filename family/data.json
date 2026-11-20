@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T04:45:53.426Z",
+  "generated_at": "2026-11-20T05:00:53.675Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -15,13 +15,7 @@
         "balance_str": "$116.09"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-11-20-34e6ae13f0ec642aeb12a3a217bf2256abcf489874c6cb8964301a372fc224e2",
-          "label": "Prepare: Religion: November Prayer Recitation, St. Gertrude Prayer",
-          "dueDate": "2026-11-20"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "william",
@@ -309,7 +303,7 @@
       "dow": "Thursday",
       "dow_short": "Thu",
       "name": "Grilled hamburgers and hotdogs with corn",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -317,8 +311,8 @@
       "dow": "Friday",
       "dow_short": "Fri",
       "name": "Takeout or dinner out",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -326,26 +320,19 @@
       "dow_short": "Sat",
       "name": "Pizza, flexible for Halloween",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     }
   ],
   "weather": {
     "now": {
       "temp": 53,
-      "hi": 68,
-      "lo": 43,
+      "hi": 71,
+      "lo": 49,
       "icon": "☀️",
       "code": 0
     },
     "days": [
-      {
-        "d": "Fri",
-        "icon": "⛅",
-        "hi": 71,
-        "lo": 49,
-        "code": 3
-      },
       {
         "d": "Sat",
         "icon": "⛅",
@@ -373,24 +360,31 @@
         "hi": 56,
         "lo": 51,
         "code": 3
+      },
+      {
+        "d": "Wed",
+        "icon": "🌧",
+        "hi": 51,
+        "lo": 37,
+        "code": 61
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-19T07:07",
         "2026-11-20T07:08",
         "2026-11-21T07:09",
         "2026-11-22T07:10",
         "2026-11-23T07:11",
-        "2026-11-24T07:12"
+        "2026-11-24T07:12",
+        "2026-11-25T07:13"
       ],
       "sunsets": [
-        "2026-11-19T17:21",
         "2026-11-20T17:21",
         "2026-11-21T17:21",
         "2026-11-22T17:20",
         "2026-11-23T17:20",
-        "2026-11-24T17:19"
+        "2026-11-24T17:19",
+        "2026-11-25T17:19"
       ],
       "timezone": "America/New_York"
     }
