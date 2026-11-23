@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T04:45:55.221Z",
+  "generated_at": "2026-11-23T05:00:55.274Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -29,7 +29,13 @@
         "balance_str": "$3.40"
       },
       "guineaPig": "$164.94",
-      "assignments": []
+      "assignments": [
+        {
+          "id": "sch-2026-11-24-e437090acf5ba9ca64e72f9ec9838efcb7cfa15ea4a78a69e63e732f499af5a3",
+          "label": "Prepare: Religion: November Prayer Recitation, Anima Christi",
+          "dueDate": "2026-11-24"
+        }
+      ]
     },
     {
       "key": "henry",
@@ -43,18 +49,7 @@
         "balance_str": "$76.63"
       },
       "guineaPig": null,
-      "assignments": [
-        {
-          "id": "sch-2026-11-23-dca7e62bfb359fd579679e3fb77fd69e68043e1fb0f0e078baae8396eaa1b065",
-          "label": "Spanish (Simon): IXL 3S",
-          "dueDate": "2026-11-23"
-        },
-        {
-          "id": "sch-2026-11-23-3fe2d584d2c02815d31c89acc0b15a6d32882d0cac00566191f09b0a2ae02f73",
-          "label": "Spanish (Simon): IXL 3U",
-          "dueDate": "2026-11-23"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "charlie",
@@ -282,7 +277,7 @@
       "dow": "Sunday",
       "dow_short": "Sun",
       "name": "Leftovers or whatever you can scrounge up",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -290,8 +285,8 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -299,7 +294,7 @@
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -338,19 +333,12 @@
   "weather": {
     "now": {
       "temp": 58,
-      "hi": 63,
-      "lo": 54,
+      "hi": 72,
+      "lo": 53,
       "icon": "🌤",
       "code": 1
     },
     "days": [
-      {
-        "d": "Mon",
-        "icon": "🌧",
-        "hi": 72,
-        "lo": 53,
-        "code": 61
-      },
       {
         "d": "Tue",
         "icon": "⛅",
@@ -378,24 +366,31 @@
         "hi": 58,
         "lo": 41,
         "code": 3
+      },
+      {
+        "d": "Sat",
+        "icon": "⛅",
+        "hi": 56,
+        "lo": 43,
+        "code": 3
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-22T07:10",
         "2026-11-23T07:11",
         "2026-11-24T07:12",
         "2026-11-25T07:13",
         "2026-11-26T07:14",
-        "2026-11-27T07:15"
+        "2026-11-27T07:15",
+        "2026-11-28T07:16"
       ],
       "sunsets": [
-        "2026-11-22T17:20",
         "2026-11-23T17:20",
         "2026-11-24T17:19",
         "2026-11-25T17:19",
         "2026-11-26T17:19",
-        "2026-11-27T17:18"
+        "2026-11-27T17:18",
+        "2026-11-28T17:18"
       ],
       "timezone": "America/New_York"
     }
