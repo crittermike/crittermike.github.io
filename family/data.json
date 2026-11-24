@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T04:45:55.581Z",
+  "generated_at": "2026-11-24T05:00:55.170Z",
   "generated_by": "crittermike.github.io/family build",
   "calendar": [],
   "kids": [
@@ -29,13 +29,7 @@
         "balance_str": "$3.40"
       },
       "guineaPig": "$164.94",
-      "assignments": [
-        {
-          "id": "sch-2026-11-24-e437090acf5ba9ca64e72f9ec9838efcb7cfa15ea4a78a69e63e732f499af5a3",
-          "label": "Prepare: Religion: November Prayer Recitation, Anima Christi",
-          "dueDate": "2026-11-24"
-        }
-      ]
+      "assignments": []
     },
     {
       "key": "henry",
@@ -285,7 +279,7 @@
       "dow": "Monday",
       "dow_short": "Mon",
       "name": "Meatloaf with mashed potatoes and cabbage",
-      "isToday": true,
+      "isToday": false,
       "isTomorrow": false,
       "recipe": null
     },
@@ -293,8 +287,8 @@
       "dow": "Tuesday",
       "dow_short": "Tue",
       "name": "Chicken and vegetable soup with French bread",
-      "isToday": false,
-      "isTomorrow": true,
+      "isToday": true,
+      "isTomorrow": false,
       "recipe": null
     },
     {
@@ -302,7 +296,7 @@
       "dow_short": "Wed",
       "name": "Garlic-herb chicken with roasted potatoes and broccoli",
       "isToday": false,
-      "isTomorrow": false,
+      "isTomorrow": true,
       "recipe": null
     },
     {
@@ -332,20 +326,13 @@
   ],
   "weather": {
     "now": {
-      "temp": 59,
-      "hi": 72,
-      "lo": 58,
+      "temp": 58,
+      "hi": 58,
+      "lo": 48,
       "icon": "⛅",
       "code": 3
     },
     "days": [
-      {
-        "d": "Tue",
-        "icon": "⛅",
-        "hi": 58,
-        "lo": 48,
-        "code": 3
-      },
       {
         "d": "Wed",
         "icon": "🌧",
@@ -373,24 +360,31 @@
         "hi": 60,
         "lo": 42,
         "code": 3
+      },
+      {
+        "d": "Sun",
+        "icon": "🌤",
+        "hi": 66,
+        "lo": 45,
+        "code": 2
       }
     ],
     "sun": {
       "sunrises": [
-        "2026-11-23T07:11",
         "2026-11-24T07:12",
         "2026-11-25T07:13",
         "2026-11-26T07:14",
         "2026-11-27T07:15",
-        "2026-11-28T07:16"
+        "2026-11-28T07:16",
+        "2026-11-29T07:17"
       ],
       "sunsets": [
-        "2026-11-23T17:20",
         "2026-11-24T17:19",
         "2026-11-25T17:19",
         "2026-11-26T17:19",
         "2026-11-27T17:18",
-        "2026-11-28T17:18"
+        "2026-11-28T17:18",
+        "2026-11-29T17:18"
       ],
       "timezone": "America/New_York"
     }
